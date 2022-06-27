@@ -68,9 +68,6 @@ export default {
     },
     isActive: Boolean,
   },
-  mounted() {
-    console.log(this.isActive)
-  },
   setup(props) {
     const {
       isOpen,

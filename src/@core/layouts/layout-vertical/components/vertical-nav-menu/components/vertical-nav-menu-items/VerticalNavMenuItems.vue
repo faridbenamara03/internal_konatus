@@ -8,6 +8,7 @@
       :is-active="isActive"
       @toggleChange="toggleChange"
     />
+    <VerticalNavUserMenu />
   </ul>
 </template>
 
@@ -18,6 +19,7 @@ import VerticalNavMenuHeader from '../vertical-nav-menu-header'
 import VerticalNavMenuLink from '../vertical-nav-menu-link/VerticalNavMenuLink.vue'
 import VerticalNavMenuSearch from '../vertical-nav-menu-search/VerticalNavMenuSearch.vue'
 import VerticalNavMenuGroup from '../vertical-nav-menu-group/VerticalNavMenuGroup.vue'
+import VerticalNavUserMenu from '../vertical-nav-user-menu/VerticalNavUserMenu.vue'
 
 export default {
   components: {
@@ -25,6 +27,7 @@ export default {
     VerticalNavMenuLink,
     VerticalNavMenuSearch,
     VerticalNavMenuGroup,
+    VerticalNavUserMenu,
   },
   props: {
     items: {
