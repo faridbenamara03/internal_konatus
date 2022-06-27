@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "serverURL": "https://konatus-be.quikfox-lab.com/parse",
+      "appId": "KONATUS-core-STAGE",
+      "masterKey": "F5d8nl7FvHZp",
+      "appName": "Konatus STAGE"
+    }
+  ]
+}
