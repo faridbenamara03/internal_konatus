@@ -13,6 +13,7 @@
           <b-table
             :items="items"
             :fields="fields"
+            borderless
             responsive
           >
             <template #cell(show_details)="row">
@@ -32,28 +33,16 @@
             </template>
 
             <template #row-details="row">
-              <b-card>
-                <b-row class="mb-2">
-                  <b-col
-                    md="4"
-                    class="mb-1"
-                  >
-                    <strong>Full Name : </strong>{{ row.item.priority }}
-                  </b-col>
-                  <b-col
-                    md="4"
-                    class="mb-1"
-                  >
-                    <strong>Email : </strong>{{ row.item.budget }}
-                  </b-col>
-                  <b-col
-                    md="4"
-                    class="mb-1"
-                  >
-                    <strong>City : </strong>{{ row.item.deadline }}
-                  </b-col>
-                </b-row>
-              </b-card>
+              <div
+                class="row-detail d-flex align-center"
+              >
+                <div class="mr-2">
+                  {{ row.item.priority }}
+                </div>
+                <div>
+                  {{ row.item.budget }}
+                </div>
+              </div>
             </template>
           </b-table>
         </b-tab>
@@ -84,7 +73,7 @@
 
 <script>
 import {
-  BButton, BCard, BCardText, BCardBody, BTable, BRow, BCol, BTabs, BTab,
+  BButton, BCard, BCardText, BCardBody, BTable, BTabs, BTab,
 } from 'bootstrap-vue'
 
 export default {
@@ -96,8 +85,6 @@ export default {
     BTabs,
     BTab,
     BTable,
-    BRow,
-    BCol,
   },
   props: {
     data: {
@@ -111,25 +98,25 @@ export default {
       items: [
         {
           name: 'Quadruped robot',
-          priority: "Korrie O'Crevy",
+          priority: 'highest',
           budget: '$23896.35',
           deadline: '09/23/2016',
         },
         {
           name: 'micro robot observation nbc',
-          priority: 'Bailie Coulman',
+          priority: 'high',
           budget: '$13633.69',
           deadline: '05/20/2018',
         },
         {
           name: 'handling robot',
-          priority: 'Stella Ganderton',
+          priority: 'low',
           budget: '$13076.28',
           deadline: '03/24/2018',
         },
         {
           name: 'power and programing station',
-          priority: 'Dorolice Crossman',
+          priority: 'lowest',
           budget: '$12336.17',
           deadline: '12/03/2017',
         }],
