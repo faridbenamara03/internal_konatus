@@ -1,0 +1,89 @@
+@import '~@core/scss/base/components/variables-dark';
+
+.card-portfolio {
+  .card-body {
+    padding: 0;
+    .tabs {
+      ul {
+        padding: 0 16px;
+        margin: 0;
+        li {
+          &.nav-item {
+            a {
+              color: #fff !important;
+              opacity: 0.6;
+              padding: 25px 14px;
+              &.active {
+                opacity: 1;
+              }
+              &::after {
+                background: $theme-dark-navigation-li-icon-color !important;
+              }
+            }
+          }
+        }
+      }
+      .tab-content {
+        border-top: 1px solid $theme-dark-tabs-border-color;
+        border-bottom: 1px solid $theme-dark-tabs-border-color;
+        table {
+          thead {
+            tr {
+              th {
+                background-color: transparent !important;
+                opacity: 0.5;
+              }
+            }
+          }
+          tbody {
+            tr {
+              background: $theme-dark-table-active-bg;
+              box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+              &.b-table-details {
+                background: $theme-dark-card-bg;
+              }
+              td {
+                color: #fff;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 24px;
+                .detail {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .card-footer {
+    border-radius: 0px 0px 4px 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px;
+    position: relative;
+    height: 55px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      right: 30px;
+      bottom: 10px;
+
+      box-shadow: 0px 4px 18px -4px rgba(115, 103, 240, 0.65);
+      border-radius: 28px;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
