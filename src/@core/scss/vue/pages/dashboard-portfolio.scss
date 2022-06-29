@@ -1,6 +1,7 @@
 @import '~@core/scss/base/components/variables-dark';
 
 .card-portfolio {
+  min-height: calc(100vh - 3.35rem);
   .card-body {
     padding: 0;
     .tabs {
