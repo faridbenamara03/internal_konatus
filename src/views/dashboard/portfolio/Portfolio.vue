@@ -32,6 +32,14 @@
               </div>
             </template>
 
+            <template #cell(budget)="row">
+              {{ formatCurrency(row.item.budget) }}
+            </template>
+
+            <template #cell(deadline)="row">
+              {{ dateFormat(row.item.deadline) }}
+            </template>
+
             <template #row-details="row">
               <div
                 v-for="detail in row.item.children"
@@ -53,11 +61,11 @@
 
                   <b-form-input
                     :dir="'rtl'"
-                    :value="detail.budget"
+                    :value="formatCurrency(detail.budget)"
                   />
                   <b-form-input
                     :dir="'rtl'"
-                    :value="detail.deadline"
+                    :value="dateFormat(detail.deadline)"
                   />
                   <div
                     class="d-flex align-items-center justify-content-end"
@@ -167,31 +175,31 @@ export default {
         {
           name: 'Quadruped robot',
           priority: 'highest',
-          budget: '$1100',
+          budget: '1100',
           deadline: '06/01/2021',
           children: [
             {
               name: 'New format',
               priority: 'high',
-              budget: '$350',
+              budget: '350',
               deadline: '06/01/2021',
             },
             {
               name: 'Enhanced motricity',
               priority: 'highest',
-              budget: '$240',
+              budget: '240',
               deadline: '03/28/2021',
             },
             {
               name: 'Enhanced authonomy',
               priority: 'highest',
-              budget: '$350',
+              budget: '350',
               deadline: '06/01/2021',
             },
             {
               name: 'Dual sourcing for Q',
               priority: 'lowest',
-              budget: '$150',
+              budget: '150',
               deadline: '12/31/2021',
             },
           ],
@@ -199,19 +207,19 @@ export default {
         {
           name: 'micro robot observation nbc',
           priority: 'high',
-          budget: '$13633.69',
+          budget: '13633.69',
           deadline: '05/20/2018',
         },
         {
           name: 'handling robot',
           priority: 'low',
-          budget: '$13076.28',
+          budget: '13076.28',
           deadline: '03/24/2018',
         },
         {
           name: 'power and programing station',
           priority: 'lowest',
-          budget: '$12336.17',
+          budget: '12336.17',
           deadline: '12/03/2017',
         }],
     }
@@ -219,6 +227,15 @@ export default {
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
+    },
+    dateFormat(date) {
+      return moment(new Date(date)).format('MM-DD-YYYY')
+    },
+    formatCurrency(value) {
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: 'USD',
+      }).format(value).replace(',', '.')
     },
   },
 }
