@@ -34,13 +34,44 @@
 
             <template #row-details="row">
               <div
-                class="row-detail d-flex align-center"
+                v-for="detail in row.item.children"
+                :key="detail.name"
+                class="row-detail d-flex align-items-center"
               >
-                <div class="mr-2">
-                  {{ row.item.priority }}
+                <div class="row-detail--name">
+                  <span>
+                    {{ detail.name }}
+                  </span>
                 </div>
-                <div>
-                  {{ row.item.budget }}
+                <div class="row-detail--form">
+                  <v-select
+                    v-model="detail.priority"
+                    :dir="'rtl'"
+                    :options="['highest', 'high', 'low', 'lowest']"
+                    outlined
+                  />
+
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="detail.budget"
+                  />
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="detail.deadline"
+                  />
+                  <div
+                    class="d-flex align-items-center justify-content-end"
+                  >
+                    <b-button variant="flat-primary">
+                      <feather-icon icon="Edit2Icon" />
+                    </b-button>
+                    <b-button variant="flat-primary">
+                      <feather-icon icon="DollarSignIcon" />
+                    </b-button>
+                    <b-button variant="flat-primary">
+                      <feather-icon icon="ChevronsRightIcon" />
+                    </b-button>
+                  </div>
                 </div>
               </div>
             </template>
@@ -106,9 +137,10 @@
 
 <script>
 import {
-  BButton, BCard, BCardText, BCardBody, BTable, BTabs, BTab,
+  BButton, BCard, BCardText, BCardBody, BFormInput, BTable, BTabs, BTab,
 } from 'bootstrap-vue'
 import moment from 'moment'
+import vSelect from 'vue-select'
 
 export default {
   components: {
@@ -116,9 +148,11 @@ export default {
     BCard,
     BCardText,
     BCardBody,
+    BFormInput,
     BTabs,
     BTab,
     BTable,
+    vSelect,
   },
   props: {
     data: {
@@ -128,13 +162,39 @@ export default {
   },
   data() {
     return {
-      fields: [{ key: 'show_details', thStyle: 'opacity: 0' }, { key: 'priority', thClass: 'text-right', tdClass: 'text-right' }, { key: 'budget', thClass: 'text-right', tdClass: 'text-right' }, { key: 'deadline', thClass: 'text-right', tdClass: 'text-right' }, { key: 'actions', thStyle: 'opacity: 0' }],
+      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'priority', thClass: 'text-right', tdClass: 'text-right' }, { key: 'budget', thClass: 'text-right', tdClass: 'text-right' }, { key: 'deadline', thClass: 'text-right', tdClass: 'text-right' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       items: [
         {
           name: 'Quadruped robot',
           priority: 'highest',
-          budget: '$23896.35',
-          deadline: '09/23/2016',
+          budget: '$1100',
+          deadline: '06/01/2021',
+          children: [
+            {
+              name: 'New format',
+              priority: 'high',
+              budget: '$350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Enhanced motricity',
+              priority: 'highest',
+              budget: '$240',
+              deadline: '03/28/2021',
+            },
+            {
+              name: 'Enhanced authonomy',
+              priority: 'highest',
+              budget: '$350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Dual sourcing for Q',
+              priority: 'lowest',
+              budget: '$150',
+              deadline: '12/31/2021',
+            },
+          ],
         },
         {
           name: 'micro robot observation nbc',
