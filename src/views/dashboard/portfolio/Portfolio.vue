@@ -13,6 +13,7 @@
           <b-table
             :items="items"
             :fields="fields"
+            :tbody-tr-class="rowClass"
             borderless
             responsive
           >
@@ -22,6 +23,7 @@
                 @click="row.toggleDetails"
               >
                 <feather-icon
+                  v-if="row.item.children"
                   :icon="row.detailsShowing ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                   size="16"
                   class="mr-1"
@@ -37,7 +39,7 @@
             </template>
 
             <template #cell(deadline)="row">
-              {{ dateFormat(row.item.deadline) }}
+              {{ row.item.deadline ? dateFormat(row.item.deadline) : '' }}
             </template>
 
             <template #row-details="row">
@@ -221,6 +223,10 @@ export default {
           priority: 'lowest',
           budget: '12336.17',
           deadline: '12/03/2017',
+        },
+        {
+          name: 'total',
+          budget: '40146.14',
         }],
     }
   },
@@ -236,6 +242,13 @@ export default {
         style: 'currency',
         currency: 'USD',
       }).format(value).replace(',', '.')
+    },
+    rowClass(item, type) {
+      const colorClass = 'table-success'
+      if (!item || type !== 'row') { return }
+
+      // eslint-disable-next-line consistent-return
+      if (item.name === 'total') { return colorClass }
     },
   },
 }

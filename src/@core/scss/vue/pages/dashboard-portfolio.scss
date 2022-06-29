@@ -67,6 +67,12 @@
                   padding: 0;
                 }
               }
+              &.table-success {
+                background: transparent;
+                td {
+                  color: $theme-dark-table-success-text;
+                }
+              }
               td {
                 color: #fff;
                 font-weight: 700;
