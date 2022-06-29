@@ -5,10 +5,9 @@
     class="card-portfolio"
   >
     <b-card-body>
-      <b-tabs>
+      <b-tabs v-model="tabIndex">
         <b-tab
           title="Demand"
-          active
         >
           <b-table
             :items="items"
@@ -112,14 +111,20 @@
               />
               <span>{{ getToday() }}</span>
             </div>
-            <b-button class="ml-1 edit">
+            <b-button
+              v-if="tabIndex === 0"
+              class="ml-1 edit"
+            >
               <feather-icon
                 icon="CheckIcon"
                 size="16"
               />
               <span>Finish editing</span>
             </b-button>
-            <b-button class="ml-1 load">
+            <b-button
+              v-if="tabIndex === 0"
+              class="ml-1 load"
+            >
               <feather-icon
                 icon="ArrowDownIcon"
                 size="16"
@@ -228,6 +233,7 @@ export default {
           name: 'total',
           budget: '40146.14',
         }],
+      tabIndex: 0,
     }
   },
   methods: {
