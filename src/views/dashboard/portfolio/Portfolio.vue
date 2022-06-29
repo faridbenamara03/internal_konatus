@@ -61,6 +61,39 @@
             Carrot cake dragée chocolate.
           </b-card-text>
         </b-tab>
+        <template #tabs-end>
+          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
+            <div class="d-flex align-items-center">
+              <feather-icon
+                icon="CalendarIcon"
+                size="16"
+                class="mr-1"
+              />
+              <span>{{ getToday() }}</span>
+            </div>
+            <b-button class="ml-1 edit">
+              <feather-icon
+                icon="CheckIcon"
+                size="16"
+              />
+              <span>Finish editing</span>
+            </b-button>
+            <b-button class="ml-1 load">
+              <feather-icon
+                icon="ArrowDownIcon"
+                size="16"
+              />
+              <span>Import</span>
+            </b-button>
+            <b-button class="ml-1 load">
+              <feather-icon
+                icon="UploadIcon"
+                size="16"
+              />
+              <span>Export</span>
+            </b-button>
+          </div>
+        </template>
       </b-tabs>
     </b-card-body>
     <template #footer>
@@ -75,6 +108,7 @@
 import {
   BButton, BCard, BCardText, BCardBody, BTable, BTabs, BTab,
 } from 'bootstrap-vue'
+import moment from 'moment'
 
 export default {
   components: {
@@ -121,6 +155,11 @@ export default {
           deadline: '12/03/2017',
         }],
     }
+  },
+  methods: {
+    getToday() {
+      return `Today, ${moment().format('DD, MMMM, YYYY')}`
+    },
   },
 }
 </script>

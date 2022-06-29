@@ -235,7 +235,7 @@ import { watch } from '@vue/composition-api'
 import { useResponsiveAppLeftSidebarVisibility } from '@core/comp-functions/ui/app'
 import ShopLeftFilterSidebar from './ECommerceShopLeftFilterSidebar.vue'
 import { useShopFiltersSortingAndPagination, useShopUi, useShopRemoteData } from './useECommerceShop'
-import { useEcommerceUi } from '../useEcommerce'
+// import { useEcommerceUi } from '../useEcommerce'
 
 export default {
   directives: {
@@ -268,7 +268,7 @@ export default {
       filters, filterOptions, sortBy, sortByOptions,
     } = useShopFiltersSortingAndPagination()
 
-    const { handleCartActionClick, toggleProductInWishlist } = useEcommerceUi()
+    // const { handleCartActionClick, toggleProductInWishlist } = useEcommerceUi()
 
     const {
       itemView, itemViewOptions, totalProducts,
@@ -311,8 +311,8 @@ export default {
       itemView,
       itemViewOptions,
       totalProducts,
-      toggleProductInWishlist,
-      handleCartActionClick,
+      // toggleProductInWishlist,
+      // handleCartActionClick,
 
       // useShopRemoteData
       products,
