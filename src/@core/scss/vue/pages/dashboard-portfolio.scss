@@ -139,6 +139,55 @@
           .reporting-content {
             background: $theme-dark-modal-header-bg;
             flex: 1;
+            position: relative;
+            overflow-x: scroll;
+            .reporting-content--header {
+              padding: 8px 16px;
+              position: sticky;
+              top: 0;
+              left: 0;
+              display: flex;
+              justify-content: space-between;
+              .reporting-content-header--badge {
+                display: flex;
+                button {
+                  font-weight: 500;
+                  font-size: 12px;
+                  line-height: 23px;
+                  color: $theme-dark-headings-color;
+                  padding: 0;
+                  margin-left: 16px;
+                  .badge {
+                    width: 6px;
+                    height: 12px;
+                    padding: 0;
+                    background: $theme-dark-navigation-li-icon-color;
+                    border-radius: 3px;
+                    display: block;
+                    margin-right: 4px;
+                  }
+                  &.badge-demand {
+                    svg {
+                      color: #D46D6D;
+                    }
+                  }
+                  &.badge-engage {
+                    svg {
+                      color: #5E9445;
+                    }
+                  }
+                  &.badge-estimate {
+                    svg {
+                      color: #3A7A9E;
+                    }
+                  }
+                }
+                .rotate-icon {
+                  transform: rotate(180deg);
+                  margin-left: 4px;
+                }
+              }
+            }
           }
         }
       }

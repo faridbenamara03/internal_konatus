@@ -117,7 +117,64 @@
                 </p>
               </div>
             </div>
-            <div class="reporting-content" />
+            <div class="reporting-content">
+              <div class="reporting-content--header">
+                <b-button variant="flat-primary">
+                  <feather-icon
+                    icon="RotateCwIcon"
+                  />
+                  Update
+                </b-button>
+                <div class="reporting-content-header--badge">
+                  <b-button
+                    variant="flat-dark"
+                    class="d-inline-flex align-items-center"
+                  >
+                    <span class="badge" />
+                    <span>Phase</span>
+                  </b-button>
+                  <b-button variant="flat-dark">
+                    <b-icon
+                      icon="diamond-fill"
+                      variant="success"
+                    />
+                    <b-icon
+                      icon="triangle-fill"
+                      class="rotate-icon"
+                      variant="success"
+                    />
+                    Milestones
+                  </b-button>
+                  <b-button
+                    variant="flat-dark"
+                    class="badge-demand"
+                  >
+                    <b-icon
+                      icon="circle-fill"
+                    />
+                    Demand
+                  </b-button>
+                  <b-button
+                    variant="flat-dark"
+                    class="badge-engage"
+                  >
+                    <b-icon
+                      icon="circle-fill"
+                    />
+                    Engaged
+                  </b-button>
+                  <b-button
+                    variant="flat-dark"
+                    class="badge-estimate"
+                  >
+                    <b-icon
+                      icon="circle-fill"
+                    />
+                    Real Estimated
+                  </b-button>
+                </div>
+              </div>
+            </div>
           </div>
         </b-tab>
         <b-tab
