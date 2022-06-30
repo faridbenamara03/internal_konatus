@@ -89,10 +89,36 @@
         <b-tab
           title="Reporting"
         >
-          <b-card-text>
-            Biscuit macaroon sugar plum sesame snaps oat cake halvah fruitcake pudding cotton candy. Cheesecake tart wafer soufflé. Chocolate marzipan donut pie soufflé dragée cheesecake. Gummi bears dessert croissant chocolate jujubes fruitcake. Pie cupcake halvah.
-          </b-card-text>
-          <b-card-text>Tiramisu carrot cake marzipan sugar plum powder marzipan sugar plum bonbon powder. Macaroon jujubes ice cream sugar plum lollipop wafer caramels. Cheesecake chocolate tart cake gingerbread fruitcake cake candy jelly-o. Candy cookie lollipop. Wafer lemon drops chocolate cake gummi bears.</b-card-text>
+          <div class="report">
+            <div class="reporting-side">
+              <div class="report-block--head">
+                <p class="m-0 text-uppercase">
+                  Boston Dynamics
+                </p>
+              </div>
+              <div class="report-block--head">
+                <feather-icon
+                  icon="ChevronRightIcon"
+                  size="16"
+                  class="mr-1"
+                />
+                <p class="m-0 text-uppercase">
+                  Consumer robots
+                </p>
+              </div>
+              <div class="report-block--head">
+                <feather-icon
+                  icon="ChevronRightIcon"
+                  size="16"
+                  class="mr-1"
+                />
+                <p class="m-0 text-uppercase">
+                  military robots
+                </p>
+              </div>
+            </div>
+            <div class="reporting-content" />
+          </div>
         </b-tab>
         <b-tab
           title="Control"
