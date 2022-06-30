@@ -143,9 +143,6 @@
             overflow-x: scroll;
             .reporting-content--header {
               padding: 8px 16px;
-              position: sticky;
-              top: 0;
-              left: 0;
               display: flex;
               justify-content: space-between;
               .reporting-content-header--badge {
@@ -185,6 +182,41 @@
                 .rotate-icon {
                   transform: rotate(180deg);
                   margin-left: 4px;
+                }
+              }
+            }
+            .reporting-content--body {
+              .timeline-list {
+                display: flex;
+                padding: 10px 8px;
+                .date {
+                  margin-right: 4px;
+                  padding: 4px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  &.active {
+                    background: #BD2020;
+                    border-radius: 2px;
+                    p {
+                      color: #fff !important;
+                    }
+                  }
+                  p {
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 18px;
+                    color: $theme-dark-headings-color;
+                    margin: 0;
+                    &:first-child {
+                      color: $theme-dark-card-bg;
+                      padding-bottom: 4px;
+                    }
+                    &:nth-child(2) {
+                      font-weight: 600;
+                    }
+                  }
                 }
               }
             }

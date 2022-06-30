@@ -174,6 +174,19 @@
                   </b-button>
                 </div>
               </div>
+              <div class="reporting-content--body">
+                <div class="timeline-list">
+                  <div
+                    v-for="(date, index) in reportingDates"
+                    :key="index"
+                    class="date"
+                    :class="{'active': isToday(date)}"
+                  >
+                    <p>{{ getWeek(date) }}</p>
+                    <p>{{ getDay(date) }}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </b-tab>
@@ -317,11 +330,29 @@ export default {
           budget: '40146.14',
         }],
       tabIndex: 0,
+      reportingDates: [],
+    }
+  },
+  mounted() {
+    const startDate = moment(moment()).subtract(15, 'days')
+    const endDate = moment(moment()).add(1, 'M')
+    this.reportingDates = [startDate.clone()]
+    while (startDate.add(1, 'days').diff(endDate) < 0) {
+      this.reportingDates.push(startDate.clone())
     }
   },
   methods: {
+    isToday(date) {
+      return moment().isSame(date, 'day')
+    },
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
+    },
+    getWeek(date) {
+      return date.format('dd').substring(0, 1)
+    },
+    getDay(date) {
+      return date.format('D')
     },
     dateFormat(date) {
       return moment(new Date(date)).format('MM-DD-YYYY')
