@@ -85,6 +85,20 @@
         </div>
       </div>
       <div class="reporting-content--body">
+        <!-- <div class="timeline-list">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            style="margin-right: 10px; padding: 0 5px;"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
+              class="text-uppercase m-0"
+            >
+              {{ getMonth(date) }}
+            </p>
+          </div>
+        </div> -->
         <div class="timeline-list">
           <div
             v-for="(date, index) in reportingDates"
@@ -92,8 +106,18 @@
             class="date"
             :class="{'active': isToday(date)}"
           >
-            <p>{{ getWeek(date) }}</p>
-            <p>{{ getDay(date) }}</p>
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
+              class="month"
+            >
+              {{ getMonth(date) }}
+            </p>
+            <p class="week">
+              {{ getWeek(date) }}
+            </p>
+            <p class="day">
+              {{ getDay(date) }}
+            </p>
           </div>
         </div>
       </div>
@@ -137,6 +161,9 @@ export default {
     },
     getDay(date) {
       return date.format('D')
+    },
+    getMonth(date) {
+      return date.format('MMM YYYY')
     },
   },
 }

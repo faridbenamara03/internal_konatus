@@ -188,7 +188,7 @@
             .reporting-content--body {
               .timeline-list {
                 display: flex;
-                padding: 10px 8px;
+                padding: 30px 8px 10px 8px;
                 .date {
                   margin-right: 4px;
                   padding: 4px;
@@ -196,6 +196,7 @@
                   flex-direction: column;
                   justify-content: center;
                   align-items: center;
+                  position: relative;
                   &.active {
                     background: #BD2020;
                     border-radius: 2px;
@@ -209,12 +210,24 @@
                     line-height: 18px;
                     color: $theme-dark-headings-color;
                     margin: 0;
-                    &:first-child {
+                    &.week {
                       color: $theme-dark-card-bg;
                       padding-bottom: 4px;
                     }
-                    &:nth-child(2) {
+                    &.day {
                       font-weight: 600;
+                    }
+                    &.month {
+                      position: absolute;
+                      top: -35px;
+                      width: max-content;
+                      left: 0;
+                      padding: 4px;
+                      text-transform: uppercase;
+                      font-weight: 500;
+                      font-size: 10px;
+                      line-height: 23px;
+                      color: rgba(208, 210, 214, 0.6) !important;                      
                     }
                   }
                 }
