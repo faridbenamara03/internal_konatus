@@ -85,20 +85,6 @@
         </div>
       </div>
       <div class="reporting-content--body">
-        <!-- <div class="timeline-list">
-          <div
-            v-for="(date, index) in reportingDates"
-            :key="index"
-            style="margin-right: 10px; padding: 0 5px;"
-          >
-            <p
-              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
-              class="text-uppercase m-0"
-            >
-              {{ getMonth(date) }}
-            </p>
-          </div>
-        </div> -->
         <div class="timeline-list">
           <div
             v-for="(date, index) in reportingDates"
