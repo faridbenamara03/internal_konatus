@@ -3,10 +3,17 @@
     <b-row class="auth-inner m-0">
 
       <!-- Brand logo-->
-      <b-link class="brand-logo">
-        <vuexy-logo />
+      <b-link class="brand-logo d-flex align-items-center">
+        <!-- <vuexy-logo />
         <h2 class="brand-text text-primary ml-1">
           Vuexy
+        </h2> -->
+        <b-img
+          :src="appLogoImage"
+          alt="logo"
+        />
+        <h2 class="brand-text text-primary m-0 ml-1 text-uppercase">
+          {{ appName }}
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -41,7 +48,7 @@
             class="mb-1 font-weight-bold"
             title-tag="h2"
           >
-            Welcome to Vuexy! 👋
+            Welcome to {{ appName }}! 👋
           </b-card-title>
           <b-card-text class="mb-2">
             Please sign-in to your account and start the adventure
@@ -212,7 +219,6 @@
 <script>
 /* eslint-disable global-require */
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import VuexyLogo from '@core/layouts/components/Logo.vue'
 import {
   BRow, BCol, BLink, BFormGroup, BFormInput, BInputGroupAppend, BInputGroup, BFormCheckbox, BCardText, BCardTitle, BImg, BForm, BButton, BAlert, VBTooltip,
 } from 'bootstrap-vue'
@@ -223,6 +229,7 @@ import store from '@/store/index'
 import { getHomeRouteForLoggedInUser } from '@/auth/utils'
 
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+import { $themeConfig } from '@themeConfig'
 
 export default {
   directives: {
@@ -243,7 +250,6 @@ export default {
     BForm,
     BButton,
     BAlert,
-    VuexyLogo,
     ValidationProvider,
     ValidationObserver,
   },
@@ -258,6 +264,14 @@ export default {
       // validation rules
       required,
       email,
+    }
+  },
+  setup() {
+    // App Name
+    const { appName, appLogoImage } = $themeConfig.app
+    return {
+      appName,
+      appLogoImage,
     }
   },
   computed: {
