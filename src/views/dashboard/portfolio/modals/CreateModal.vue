@@ -417,7 +417,7 @@
           <b-input-group-prepend>
             <v-select
               v-model="step6.currency"
-              :options="['unit']"
+              :options="['EUR', 'USD']"
               placeholder="unit"
               outlined
             />
