@@ -105,7 +105,10 @@
       class="select-group"
     >
       <div class="notice-box">
-        <feather-icon icon="KeyIcon" />
+        <feather-icon
+          icon="KeyIcon"
+          size="20"
+        />
         <h5>Key elements</h5>
       </div>
       <div class="select-group--sub">
@@ -181,7 +184,10 @@
       class="select-group"
     >
       <div class="notice-box">
-        <feather-icon icon="KeyIcon" />
+        <feather-icon
+          icon="KeyIcon"
+          size="20"
+        />
         <h5>RationalE</h5>
       </div>
       <div class="select-group--sub">
@@ -246,7 +252,10 @@
       class="select-group"
     >
       <div class="notice-box">
-        <feather-icon icon="FileTextIcon" />
+        <feather-icon
+          icon="FileTextIcon"
+          size="20"
+        />
         <h5>planning</h5>
       </div>
       <div class="select-group--sub">
@@ -281,7 +290,10 @@
       class="select-group"
     >
       <div class="notice-box">
-        <feather-icon icon="LayersIcon" />
+        <feather-icon
+          icon="LayersIcon"
+          size="20"
+        />
         <h5>Product line</h5>
       </div>
       <div class="select-group--sub">
@@ -342,7 +354,10 @@
       class="select-group"
     >
       <div class="notice-box">
-        <feather-icon icon="DollarSignIcon" />
+        <feather-icon
+          icon="DollarSignIcon"
+          size="20"
+        />
         <h5>budget</h5>
       </div>
       <div class="select-box">
@@ -456,7 +471,7 @@ export default {
   },
   data() {
     return {
-      curIndex: 6,
+      curIndex: 1,
       progressDescription: [
         'SELECT OR ADD A NEW PORTFOLIO',
         'fill the Key elements',
