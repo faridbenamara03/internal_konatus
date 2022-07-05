@@ -268,3 +268,90 @@
     }
   }
 }
+
+.modal-content {
+  box-shadow: none !important;
+  border: 1px solid $theme-dark-tabs-border-color !important;
+  border-radius: 5px;
+  header {
+    align-items: center;
+    background-color: transparent !important;
+    padding: 24px;
+    h5 {
+      font-weight: 700;
+      font-size: 21px;
+      line-height: 26px;
+    }
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      button {
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        &:nth-child(2) {
+          margin-left: 16px;
+        }
+        span {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+        }
+      }
+    }
+  }
+  .modal-body {
+    .progress-group {
+      .progress-group--bars {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .progress {
+          border-radius: 6px;
+          height: 6px;
+          flex: 1;
+          background: rgba(115, 103, 240, 0.12);
+          margin-right: 6px;
+          &.active {
+            background: $theme-dark-navigation-li-icon-color;
+          }
+        }
+      }
+      p {
+        color: $theme-dark-body-color;
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 24px;
+        margin-top: 5px;
+      }
+    }
+    .select-group {
+      padding: 27px 0;
+      .select-box {
+        label {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 18px;
+        }
+        .vs__dropdown-toggle {
+          background: $theme-dark-card-bg;
+          border-radius: 6px;
+        }
+        margin-bottom: 27px;
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+  footer {
+    border: none;
+    margin-bottom: 24px;
+    button {
+      flex: 1;
+    }
+  }
+}

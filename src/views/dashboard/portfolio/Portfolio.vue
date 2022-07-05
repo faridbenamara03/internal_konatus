@@ -65,10 +65,14 @@
       </b-tabs>
     </b-card-body>
     <template #footer>
-      <b-button variant="primary">
+      <b-button
+        v-b-modal.modal-create
+        variant="primary"
+      >
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
+    <create-modal />
   </b-card>
 </template>
 
@@ -79,6 +83,7 @@ import {
 import moment from 'moment'
 import Demand from './Demand.vue'
 import Reporting from './Reporting.vue'
+import CreateModal from './modals/CreateModal.vue'
 
 export default {
   components: {
@@ -88,6 +93,7 @@ export default {
     BCardBody,
     BTabs,
     BTab,
+    CreateModal,
     Demand,
     Reporting,
   },
