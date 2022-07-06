@@ -76,10 +76,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    checkedData: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      selected: ['priority', 'budget', 'deadline'],
+      selected: [],
       options: [
         { text: 'Priority', value: 'priority' },
         { text: 'Budget', value: 'budget' },
@@ -89,12 +93,15 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.selected = this.checkedData
+  },
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      console.log('save')
+      this.$emit('columnChange', this.selected)
       this.$refs['my-modal'].hide()
     },
   },

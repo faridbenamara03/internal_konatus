@@ -94,11 +94,10 @@ export default {
       type: Array,
       default: () => [],
     },
-  },
-  data() {
-    return {
-      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'priority', 'budget', 'deadline', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
-    }
+    fields: {
+      type: Array,
+      default: () => [],
+    },
   },
   methods: {
     dateFormat(date) {

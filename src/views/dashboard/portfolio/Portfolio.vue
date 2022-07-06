@@ -41,7 +41,10 @@
         <b-tab
           title="Demand"
         >
-          <Demand :data="items" />
+          <Demand
+            :data="items"
+            :fields="fields"
+          />
         </b-tab>
         <b-tab
           title="Reporting"
@@ -121,7 +124,10 @@
       </b-button>
     </template>
     <create-modal />
-    <edit-columns-modal />
+    <edit-columns-modal
+      :checked-data="activeColumns"
+      @columnChange="columnChange"
+    />
   </b-card>
 </template>
 
@@ -212,9 +218,18 @@ export default {
           name: 'total',
           budget: '40146.14',
         }],
+      activeColumns: ['priority', 'budget', 'deadline'],
+      defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
+      fields: [],
       tabIndex: 0,
       isChartView: false,
     }
+  },
+  mounted() {
+    this.fields = [...this.defaultFields]
+    this.activeColumns.forEach((column, idx) => {
+      this.fields.splice(idx + 1, 0, column)
+    })
   },
   methods: {
     getToday() {
@@ -222,6 +237,14 @@ export default {
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode
+    },
+    columnChange(columns) {
+      const temp = [...this.defaultFields]
+      columns.forEach((column, idx) => {
+        temp.splice(idx + 1, 0, column)
+      })
+      this.fields = temp
+      this.activeColumns = columns
     },
   },
 }
