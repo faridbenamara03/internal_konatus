@@ -30,16 +30,9 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 17px;
+            color: #fff;
             svg {
               margin-right: 10px;
-            }
-            &.edit {
-              background-color: rgba(240, 103, 235, 0.2) !important;
-              border: 2px solid #F067EB !important;
-            }
-            &.load {
-              opacity: 0.3;
-              border: 1px solid $theme-dark-navigation-li-icon-color !important;
             }
           }
         }
@@ -47,6 +40,26 @@
       .tab-content {
         border-top: 1px solid $theme-dark-tabs-border-color;
         border-bottom: 1px solid $theme-dark-tabs-border-color;
+        .action-bar {
+          padding: 10px;
+          background: $theme-dark-card-bg-secondary;
+          border-bottom: 1px solid $theme-dark-tabs-border-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          .btn-group {
+            &:last-child {
+              position: absolute;
+              right: 0;
+            }
+            button {
+              &.active {
+                color: $theme-dark-button-primary-hover-text;
+              }
+            }
+          }
+        }
         table {
           thead {
             tr {

@@ -27,6 +27,7 @@ $theme-dark-text-muted-color: #676d7d !default;
 
 //Card
 $theme-dark-card-bg: #283046 !default;
+$theme-dark-card-bg-secondary: #1A2239 !default;
 $theme-dark-box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.24);
 
 //Input
@@ -57,6 +58,7 @@ $theme-dark-widget-bg: #384056 !default;
 $theme-dark-button-primary-active-bg: #27294F !default;
 $theme-dark-button-primary-active-text: #fff !default;
 $theme-dark-button-primary-normal-text: rgba(255,255,255,.6) !default;
+$theme-dark-button-primary-hover-text: #BABDC4 !default;
 
 //Navigation
 $theme-dark-navigation-content-bg: linear-gradient(90deg, rgba(115, 103, 240, 0) 0%, rgba(115, 103, 240, 0.12) 100%)  !default;
@@ -65,4 +67,5 @@ $theme-dark-navigation-li-icon-color: #7367F0;
 $theme-dark-navigation-divider-color: #404656;
 // Tab
 $theme-dark-tabs-border-color: #595E71;
+
 

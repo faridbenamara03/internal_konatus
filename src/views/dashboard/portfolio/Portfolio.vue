@@ -6,6 +6,39 @@
   >
     <b-card-body>
       <b-tabs v-model="tabIndex">
+        <div class="action-bar">
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': isChartView}"
+              @click="handleChangeViewMode(true)"
+            >
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': !isChartView}"
+              @click="handleChangeViewMode(false)"
+            >
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+            >
+              <b-icon icon="pencil" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+            >
+              <feather-icon
+                icon="DollarSignIcon"
+                size="18"
+              />
+            </b-button>
+          </b-button-group>
+        </div>
         <b-tab
           title="Demand"
         >
@@ -34,18 +67,30 @@
               <span>{{ getToday() }}</span>
             </div>
             <b-button
-              v-if="tabIndex === 0"
-              class="ml-1 edit"
+              v-if="!isChartView && tabIndex === 0"
+              class="ml-1"
+              variant="outline-primary"
             >
               <feather-icon
-                icon="CheckIcon"
+                icon="EyeIcon"
                 size="16"
               />
-              <span>Finish editing</span>
+              <span>Edit Columns</span>
             </b-button>
             <b-button
-              v-if="tabIndex === 0"
-              class="ml-1 load"
+              v-if="isChartView && tabIndex === 0"
+              class="ml-1"
+              variant="outline-primary"
+            >
+              <feather-icon
+                icon="Edit2Icon"
+                size="16"
+              />
+              <span>Edit as table</span>
+            </b-button>
+            <b-button
+              class="ml-1"
+              variant="outline-primary"
             >
               <feather-icon
                 icon="ArrowDownIcon"
@@ -53,7 +98,10 @@
               />
               <span>Import</span>
             </b-button>
-            <b-button class="ml-1 load">
+            <b-button
+              class="ml-1"
+              variant="outline-primary"
+            >
               <feather-icon
                 icon="UploadIcon"
                 size="16"
@@ -78,7 +126,7 @@
 
 <script>
 import {
-  BButton, BCard, BCardText, BCardBody, BTabs, BTab,
+  BButton, BButtonGroup, BCard, BCardText, BCardBody, BTabs, BTab,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import Demand from './Demand.vue'
@@ -88,6 +136,7 @@ import CreateModal from './modals/CreateModal.vue'
 export default {
   components: {
     BButton,
+    BButtonGroup,
     BCard,
     BCardText,
     BCardBody,
@@ -161,11 +210,15 @@ export default {
           budget: '40146.14',
         }],
       tabIndex: 0,
+      isChartView: false,
     }
   },
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
+    },
+    handleChangeViewMode(mode) {
+      this.isChartView = mode
     },
   },
 }
