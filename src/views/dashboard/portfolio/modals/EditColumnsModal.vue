@@ -14,7 +14,7 @@
         Edit Columns
       </h5>
       <div class="modal-actions">
-        <b-button
+        <!-- <b-button
           variant="outline-primary"
         >
           <feather-icon
@@ -22,7 +22,7 @@
             size="18"
           />
           <span class="pl-1">Add New</span>
-        </b-button>
+        </b-button> !-->
         <b-button
           variant="outline-primary"
           @click="hideModal"

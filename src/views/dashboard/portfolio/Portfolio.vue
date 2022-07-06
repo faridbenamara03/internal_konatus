@@ -34,7 +34,6 @@
             >
               <feather-icon
                 icon="DollarSignIcon"
-                size="18"
               />
             </b-button>
           </b-button-group>

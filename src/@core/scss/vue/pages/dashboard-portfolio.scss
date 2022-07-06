@@ -49,13 +49,21 @@
           align-items: center;
           position: relative;
           .btn-group {
+            width: 76px;
+            height: 38px;
             &:last-child {
               position: absolute;
               right: 16px;
             }
             button {
+              padding: 10px;
               &.active {
                 color: $theme-dark-button-primary-hover-text;
+              }
+              svg {
+                width: 12px;
+                height: 12px;
+                font-size: 12px;
               }
             }
           }
