@@ -41,7 +41,7 @@
         border-top: 1px solid $theme-dark-tabs-border-color;
         border-bottom: 1px solid $theme-dark-tabs-border-color;
         .action-bar {
-          padding: 10px;
+          padding: 10px 16px;
           background: $theme-dark-card-bg-secondary;
           border-bottom: 1px solid $theme-dark-tabs-border-color;
           display: flex;
@@ -51,7 +51,7 @@
           .btn-group {
             &:last-child {
               position: absolute;
-              right: 0;
+              right: 16px;
             }
             button {
               &.active {
