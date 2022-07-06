@@ -97,7 +97,7 @@ export default {
   },
   data() {
     return {
-      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'priority', thClass: 'text-right', tdClass: 'text-right' }, { key: 'budget', thClass: 'text-right', tdClass: 'text-right' }, { key: 'deadline', thClass: 'text-right', tdClass: 'text-right' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
+      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'priority', 'budget', 'deadline', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
     }
   },
   methods: {
