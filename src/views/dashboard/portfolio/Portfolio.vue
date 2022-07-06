@@ -68,6 +68,7 @@
             </div>
             <b-button
               v-if="!isChartView && tabIndex === 0"
+              v-b-modal.modal-edit-column
               class="ml-1"
               variant="outline-primary"
             >
@@ -121,6 +122,7 @@
       </b-button>
     </template>
     <create-modal />
+    <edit-columns-modal />
   </b-card>
 </template>
 
@@ -132,6 +134,7 @@ import moment from 'moment'
 import Demand from './Demand.vue'
 import Reporting from './Reporting.vue'
 import CreateModal from './modals/CreateModal.vue'
+import EditColumnsModal from './modals/EditColumnsModal.vue'
 
 export default {
   components: {
@@ -144,6 +147,7 @@ export default {
     BTab,
     CreateModal,
     Demand,
+    EditColumnsModal,
     Reporting,
   },
   props: {
