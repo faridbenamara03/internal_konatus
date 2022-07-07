@@ -2,7 +2,7 @@
   <b-card
     no-body
     footer-tag="footer"
-    class="card-portfolio"
+    class="card-portfolio mb-0"
   >
     <b-card-body>
       <b-tabs v-model="tabIndex">
@@ -44,6 +44,7 @@
           <Demand
             :data="items"
             :fields="fields"
+            :is-chart-view="isChartView"
           />
         </b-tab>
         <b-tab

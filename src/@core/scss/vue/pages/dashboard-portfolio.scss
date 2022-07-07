@@ -68,70 +68,85 @@
             }
           }
         }
-        table {
-          thead {
-            tr {
-              th {
-                background-color: transparent !important;
-                opacity: 0.5;
-                padding-top: 8px;
-                padding-bottom: 8px;
-                text-align: right;
-              }
+        .demand-view {
+          height: calc(100vh - 16rem);
+          &.has-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 24px 24px 0px;
+            overflow-y: scroll;
+            background: $theme-dark-chart-parent-bg;
+            .chart-card {
+              padding: 24px;
+              border-radius: 4px;
             }
           }
-          tbody {
-            tr {
-              background: $theme-dark-table-active-bg;
-              box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
-              &.b-table-details {
-                background: $theme-dark-card-bg;
-                td {
-                  padding: 0;
+          table {
+            thead {
+              tr {
+                th {
+                  background-color: transparent !important;
+                  opacity: 0.5;
+                  padding-top: 8px;
+                  padding-bottom: 8px;
+                  text-align: right;
                 }
               }
-              &.table-success {
-                background: transparent;
-                td {
-                  color: $theme-dark-table-success-text;
-                }
-              }
-              td {
-                color: #fff;
-                font-weight: 700;
-                font-size: 14px;
-                line-height: 24px;
-                text-transform: capitalize;
-                padding-top: 16px;
-                padding-bottom: 16px;
-                text-align: right;
-                .detail {
-                  cursor: pointer;
-                }
-                .row-detail {
-                  padding: 16px;
-                  .row-detail--name {
-                    flex: 1;
-                    span {
-                      padding-left: 48px;
-                    }
+            }
+            tbody {
+              tr {
+                background: $theme-dark-table-active-bg;
+                box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+                &.b-table-details {
+                  background: $theme-dark-card-bg;
+                  td {
+                    padding: 0;
                   }
-                  .row-detail--form {
-                    flex: 2.2;
-                    display: flex;
-                    justify-content: space-between;
-                    .v-select, .form-control {
-                      width: 152px;
-                      .vs__dropdown-toggle {
-                        background: $theme-dark-input-bg;
-                        border: none;
+                }
+                &.table-success {
+                  background: transparent;
+                  td {
+                    color: $theme-dark-table-success-text;
+                  }
+                }
+                td {
+                  color: #fff;
+                  font-weight: 700;
+                  font-size: 14px;
+                  line-height: 24px;
+                  text-transform: capitalize;
+                  padding-top: 16px;
+                  padding-bottom: 16px;
+                  text-align: right;
+                  .detail {
+                    cursor: pointer;
+                  }
+                  .row-detail {
+                    padding: 16px;
+                    .row-detail--name {
+                      flex: 1;
+                      span {
+                        padding-left: 48px;
                       }
                     }
-                    .form-control {
-                      border-radius: 4px;
-                      border: none;
-                      padding: 4px 8px;
-                      color: rgba(255, 255, 255, 0.8);
+                    .row-detail--form {
+                      flex: 2.2;
+                      display: flex;
+                      justify-content: space-between;
+                      .v-select, .form-control {
+                        width: 152px;
+                        .vs__dropdown-toggle {
+                          background: $theme-dark-input-bg;
+                          border: none;
+                        }
+                      }
+                      .form-control {
+                        border-radius: 4px;
+                        border: none;
+                        padding: 4px 8px;
+                        color: rgba(255, 255, 255, 0.8);
+                      }
                     }
                   }
                 }
