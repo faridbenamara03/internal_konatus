@@ -10,6 +10,10 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    'vue/no-deprecated-slot-attribute': 'off',
+    'vue/no-deprecated-v-on-native-modifier': 'off',
+    'vue/no-deprecated-filter': 'off',
+    'vue/no-deprecated-v-bind-sync': 'off',
     semi: ["error", "never"],
     "max-len": "off",
     "linebreak-style": "off",
