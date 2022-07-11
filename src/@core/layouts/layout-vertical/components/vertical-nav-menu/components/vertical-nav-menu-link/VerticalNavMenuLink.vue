@@ -11,7 +11,7 @@
       v-bind="linkProps"
       class="d-flex align-items-center"
     >
-      <feather-icon :icon="item.icon || 'CircleIcon'" />
+      <nav-menu-icon :item="item" />
       <span class="menu-title text-truncate">{{ t(item.title) }}</span>
       <b-badge
         v-if="item.tag"
@@ -31,11 +31,13 @@ import { BLink, BBadge } from 'bootstrap-vue'
 import { useUtils as useI18nUtils } from '@core/libs/i18n'
 import useVerticalNavMenuLink from './useVerticalNavMenuLink'
 import mixinVerticalNavMenuLink from './mixinVerticalNavMenuLink'
+import NavMenuIcon from '../NavMenuIcon.vue'
 
 export default {
   components: {
     BLink,
     BBadge,
+    NavMenuIcon,
   },
   mixins: [mixinVerticalNavMenuLink],
   props: {

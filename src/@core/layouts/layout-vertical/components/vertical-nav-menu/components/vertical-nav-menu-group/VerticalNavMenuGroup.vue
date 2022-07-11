@@ -1,7 +1,7 @@
 <template>
   <li
     v-if="canViewVerticalNavMenuGroup(item) && (item.hasOwnProperty('isOperation') ? item.isOperation === isActive : true)"
-    class="nav-item has-sub"
+    class="nav-item"
     :class="{
       'open': isOpen,
       'disabled': item.disabled,
@@ -10,9 +10,10 @@
   >
     <b-link
       class="d-flex align-items-center"
+      :class="{'m-0': item.type === 'root'}"
       @click="() => updateGroupOpen(!isOpen)"
     >
-      <feather-icon :icon="item.icon || 'CircleIcon'" />
+      <nav-menu-icon :item="item" />
       <span class="menu-title text-truncate">{{ t(item.title) }}</span>
       <b-badge
         v-if="item.tag"
@@ -46,6 +47,7 @@ import { useUtils as useI18nUtils } from '@core/libs/i18n'
 import { useUtils as useAclUtils } from '@core/libs/acl'
 import VerticalNavMenuHeader from '../vertical-nav-menu-header'
 import VerticalNavMenuLink from '../vertical-nav-menu-link/VerticalNavMenuLink.vue'
+import NavMenuIcon from '../NavMenuIcon.vue'
 
 // Composition Function
 import useVerticalNavMenuGroup from './useVerticalNavMenuGroup'
@@ -59,6 +61,7 @@ export default {
     BLink,
     BBadge,
     BCollapse,
+    NavMenuIcon,
   },
   mixins: [mixinVerticalNavMenuGroup],
   props: {

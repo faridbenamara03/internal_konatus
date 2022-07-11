@@ -374,6 +374,9 @@
       li {
         a {
           color: $theme-dark-headings-color !important;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 24px;
         }
         ul {
           .open,
@@ -394,7 +397,6 @@
         &.open {
           > a {
             background: transparent !important;
-            margin-left: 0;
           }
         }
 
@@ -409,6 +411,7 @@
             &.open {
               > a {
                 background: $theme-dark-navigation-content-active-bg !important;
+                font-weight: 700;
               }
             }
           }
