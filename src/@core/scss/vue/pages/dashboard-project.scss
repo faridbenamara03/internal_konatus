@@ -1,0 +1,33 @@
+@import '~@core/scss/base/components/variables-dark';
+
+.card-project {
+  .card-body {
+    .tabs {
+      .tab-content {
+        .action-bar {
+          .action-group {
+            button {
+              color: $theme-dark-label-color;
+            }
+          }
+        }
+        .no-data {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          p {
+            margin: 1rem 0 0 0;
+            max-width: 505px;
+            text-align: center;
+            color: $theme-dark-text-muted-color;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
+}
