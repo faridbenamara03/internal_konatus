@@ -12,7 +12,7 @@
       class="d-flex align-items-center"
     >
       <nav-menu-icon :item="item" />
-      <span class="menu-title text-truncate">{{ t(item.title) }}</span>
+      <span class="menu-title text-truncate">{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
         pill

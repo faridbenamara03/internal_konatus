@@ -41,17 +41,16 @@ export default function useVerticalNavMenuGroup(item) {
   const openGroups = inject('openGroups')
 
   // Collapse other groups if one group is opened
-  watch(openGroups, currentOpenGroups => {
-    const clickedGroup = currentOpenGroups[currentOpenGroups.length - 1]
-
-    // If current group is not clicked group or current group is not active => Proceed with closing it
-    // eslint-disable-next-line no-use-before-define
-    if (clickedGroup !== item.title && !isGroupActive.value) {
-      // If clicked group is not child of current group
-      // eslint-disable-next-line no-use-before-define
-      if (!doesHaveChild(clickedGroup)) isOpen.value = false
-    }
-  })
+  // watch(openGroups, currentOpenGroups => {
+  //   const clickedGroup = currentOpenGroups[currentOpenGroups.length - 1]
+  //   // If current group is not clicked group or current group is not active => Proceed with closing it
+  //   // eslint-disable-next-line no-use-before-define
+  //   if (clickedGroup !== item.title && !isGroupActive.value) {
+  //     // If clicked group is not child of current group
+  //     // eslint-disable-next-line no-use-before-define
+  //     if (!doesHaveChild(clickedGroup)) isOpen.value = false
+  //   }
+  // })
 
   // ------------------------------------------------
   // isOpen
@@ -90,7 +89,7 @@ export default function useVerticalNavMenuGroup(item) {
   // Other Methods
   // ------------------------------------------------
 
-  const doesHaveChild = title => item.children.some(child => child.title === title)
+  // const doesHaveChild = title => item.children.some(child => child.title === title)
 
   return {
     isOpen,

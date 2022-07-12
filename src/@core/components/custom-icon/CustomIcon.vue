@@ -27,7 +27,6 @@ export default {
       },
     },
   },
-
   computed: {
     iconComponent() {
       return icons[this.name]

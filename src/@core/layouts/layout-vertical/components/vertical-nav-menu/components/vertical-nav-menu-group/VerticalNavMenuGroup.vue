@@ -11,10 +11,10 @@
     <b-link
       class="d-flex align-items-center"
       :class="{'m-0': item.type === 'root'}"
-      @click="() => updateGroupOpen(!isOpen)"
+      @click="handleNavItemClick"
     >
       <nav-menu-icon :item="item" />
-      <span class="menu-title text-truncate">{{ t(item.title) }}</span>
+      <span class="menu-title text-truncate">{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
         pill
@@ -95,6 +95,12 @@ export default {
       // i18n
       t,
     }
+  },
+  methods: {
+    handleNavItemClick() {
+      this.updateGroupOpen(!this.isOpen)
+      this.updateIsActive()
+    },
   },
 }
 </script>
