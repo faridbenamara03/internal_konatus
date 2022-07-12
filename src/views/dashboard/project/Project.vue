@@ -112,7 +112,10 @@
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
-    <modal-request-quote :data="teams" />
+    <modal-request-quote
+      :data="teams"
+      @onSubmit="handleRequestQuote"
+    />
   </b-card>
 </template>
 
@@ -182,6 +185,9 @@ export default {
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
+    },
+    handleRequestQuote(res) {
+      console.log(res)
     },
   },
 }

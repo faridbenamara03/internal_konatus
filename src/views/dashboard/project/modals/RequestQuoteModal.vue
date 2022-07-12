@@ -132,7 +132,7 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      this.$emit('columnChange', this.selected)
+      this.$emit('onSubmit', this.data)
       this.$refs['my-modal'].hide()
     },
   },
