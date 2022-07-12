@@ -4,7 +4,7 @@
     footer-tag="footer"
     class="card-portfolio mb-0"
   >
-    <b-card-body>
+    <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar">
           <b-button-group>
@@ -40,6 +40,7 @@
         </div>
         <b-tab
           title="Demand"
+          :class="{'has-default-card-bg': !isChartView}"
         >
           <Demand
             :data="items"
