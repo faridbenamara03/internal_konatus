@@ -31,3 +31,40 @@
     }
   }
 }
+
+.modal-content {
+  .collapse-zone {
+    margin-bottom: 24px;
+    .collapse-toggle-btn {
+      padding: 10px 10px 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      p {
+        margin: 0;
+        padding-left: 8px;
+        text-transform: uppercase;
+        color: $theme-dark-label-color;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 24px;
+      }
+      .muted-svg {
+        color: $theme-dark-text-muted-color;
+      }
+      &:hover, &:focus {
+        background-color: transparent;
+      }
+    }
+    .select-group {
+      padding: 20px 0 0 0;
+      .select-box {
+        margin-bottom: 20px;
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

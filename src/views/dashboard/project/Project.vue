@@ -112,6 +112,7 @@
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
+    <modal-request-quote :data="teams" />
   </b-card>
 </template>
 
@@ -120,6 +121,7 @@ import {
   BButton, BCard, BCardText, BCardBody, BTabs, BTab,
 } from 'bootstrap-vue'
 import moment from 'moment'
+import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 
 export default {
   components: {
@@ -129,6 +131,7 @@ export default {
     BCardBody,
     BTabs,
     BTab,
+    ModalRequestQuote,
   },
   props: {
     data: {
@@ -139,6 +142,40 @@ export default {
   data() {
     return {
       items: [],
+      teams: [
+        {
+          id: 1,
+          name: 'team a',
+          activities: null,
+          estimate: null,
+          demand: null,
+          deadline: null,
+        },
+        {
+          id: 2,
+          name: 'team b',
+          activities: null,
+          estimate: null,
+          demand: null,
+          deadline: null,
+        },
+        {
+          id: 3,
+          name: 'team c',
+          activities: null,
+          estimate: null,
+          demand: null,
+          deadline: null,
+        },
+        {
+          id: 4,
+          name: 'team d',
+          activities: null,
+          estimate: null,
+          demand: null,
+          deadline: null,
+        },
+      ],
       tabIndex: 0,
     }
   },
