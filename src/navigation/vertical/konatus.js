@@ -19,6 +19,13 @@ export default [
               {
                 title: 'New format',
                 type: 'project',
+                route: {
+                  name: 'project-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    projectId: 'new-format',
+                  },
+                },
               },
               {
                 title: 'Enhanced motricity',
