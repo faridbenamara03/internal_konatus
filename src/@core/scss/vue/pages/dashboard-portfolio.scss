@@ -1,4 +1,4 @@
-@import '~@core/scss/base/components/variables-dark';
+@import "~@core/scss/base/components/variables-dark";
 
 .card-portfolio {
   .card-body {
@@ -140,7 +140,8 @@
                       flex: 2.2;
                       display: flex;
                       justify-content: space-between;
-                      .v-select, .form-control {
+                      .v-select,
+                      .form-control {
                         width: 152px;
                         .vs__dropdown-toggle {
                           background: $theme-dark-input-bg;
@@ -167,7 +168,7 @@
             width: 314px;
             .report-block--head {
               &:first-child {
-                margin-top: 40px;
+                margin-top: 75px;
               }
               display: flex;
               align-items: center;
@@ -184,7 +185,7 @@
             background: $theme-dark-modal-header-bg;
             flex: 1;
             position: relative;
-            overflow-x: scroll;
+            overflow-x: auto;
             .reporting-content--header {
               padding: 8px 16px;
               display: flex;
@@ -209,17 +210,17 @@
                   }
                   &.badge-demand {
                     svg {
-                      color: #D46D6D;
+                      color: #d46d6d;
                     }
                   }
                   &.badge-engage {
                     svg {
-                      color: #5E9445;
+                      color: #5e9445;
                     }
                   }
                   &.badge-estimate {
                     svg {
-                      color: #3A7A9E;
+                      color: #3a7a9e;
                     }
                   }
                 }
@@ -242,7 +243,7 @@
                   align-items: center;
                   position: relative;
                   &.active {
-                    background: #BD2020;
+                    background: #bd2020;
                     border-radius: 2px;
                     p {
                       color: #fff !important;
@@ -271,8 +272,19 @@
                       font-weight: 500;
                       font-size: 10px;
                       line-height: 23px;
-                      color: rgba(208, 210, 214, 0.6) !important;                      
+                      color: rgba(208, 210, 214, 0.6) !important;
                     }
+                  }
+                }
+              }
+              .progress-wrapper {
+                padding: 3px 0 4px 0;
+                border-bottom: 1px solid #303952;
+                .card {
+                  padding: 0.2rem 1rem;
+                  margin-bottom: 0;
+                  .progress {
+                    margin-bottom: 0.15rem;
                   }
                 }
               }

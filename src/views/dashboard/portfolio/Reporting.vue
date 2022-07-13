@@ -30,9 +30,7 @@
     <div class="reporting-content">
       <div class="reporting-content--header">
         <b-button variant="flat-primary">
-          <feather-icon
-            icon="RotateCwIcon"
-          />
+          <feather-icon icon="RotateCwIcon" />
           Update
         </b-button>
         <div class="reporting-content-header--badge">
@@ -59,27 +57,21 @@
             variant="flat-dark"
             class="badge-demand"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Demand
           </b-button>
           <b-button
             variant="flat-dark"
             class="badge-engage"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Engaged
           </b-button>
           <b-button
             variant="flat-dark"
             class="badge-estimate"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
         </div>
@@ -106,18 +98,65 @@
             </p>
           </div>
         </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { BButton } from 'bootstrap-vue'
+import {
+  BButton, BProgress, BCard, BCardText,
+} from 'bootstrap-vue'
 import moment from 'moment'
 
 export default {
   components: {
     BButton,
+    BProgress,
+    BCard,
+    BCardText,
   },
   props: {
     data: {
@@ -128,6 +167,9 @@ export default {
   data() {
     return {
       reportingDates: [],
+      value1: 30,
+      value2: 40,
+      value3: 80,
     }
   },
   mounted() {
@@ -156,5 +198,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import "@core/scss/vue/pages/dashboard-portfolio.scss";
 </style>
