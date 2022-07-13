@@ -26,6 +26,17 @@
           military robots
         </p>
       </div>
+      <app-collapse accordion>
+        <app-collapse-item title="Accordion Item 1">
+          <b-list-group>
+            <b-list-group-item>Cras justo odio</b-list-group-item>
+            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
+            <b-list-group-item>Morbi leo risus</b-list-group-item>
+            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          </b-list-group>
+        </app-collapse-item>
+      </app-collapse>
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
@@ -168,9 +179,16 @@
 
 <script>
 import {
-  BButton, BProgress, BCard, BCardText,
+  BButton,
+  BProgress,
+  BCard,
+  BCardText,
+  BListGroup,
+  BListGroupItem,
 } from 'bootstrap-vue'
 import moment from 'moment'
+import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
+import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
 export default {
   components: {
@@ -178,6 +196,10 @@ export default {
     BProgress,
     BCard,
     BCardText,
+    AppCollapse,
+    AppCollapseItem,
+    BListGroup,
+    BListGroupItem,
   },
   props: {
     data: {
