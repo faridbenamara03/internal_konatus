@@ -40,7 +40,10 @@
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
-        <b-button variant="flat-primary">
+        <b-button
+          v-b-modal.modal-update
+          variant="flat-primary"
+        >
           <feather-icon icon="RotateCwIcon" />
           Update
         </b-button>
@@ -174,6 +177,36 @@
         </div>
       </div>
     </div>
+    <b-modal
+      id="modal-update"
+      ref="my-modal"
+      title="Create New"
+      centered
+      no-fade
+      hide-backdrop
+    >
+      <!-- Modal Header -->
+      <template #modal-header>
+        <h5 class="modal-title">
+          Update
+        </h5>
+        <div class="modal-actions">
+          <b-button variant="outline-primary">
+            <feather-icon
+              icon="XIcon"
+              size="18"
+            />
+          </b-button>
+        </div>
+      </template>
+      <div>Are you sure to update?</div>
+      <template #modal-footer>
+        <b-button variant="outline-primary">Cancel
+        </b-button>
+        <b-button variant="primary">Update
+        </b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -185,6 +218,7 @@ import {
   BCardText,
   BListGroup,
   BListGroupItem,
+  BModal,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
@@ -200,6 +234,7 @@ export default {
     AppCollapseItem,
     BListGroup,
     BListGroupItem,
+    BModal,
   },
   props: {
     data: {
