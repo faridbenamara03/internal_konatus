@@ -26,13 +26,22 @@
           military robots
         </p>
       </div>
+      <app-collapse accordion>
+        <app-collapse-item title="Accordion Item 1">
+          <b-list-group>
+            <b-list-group-item>Cras justo odio</b-list-group-item>
+            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
+            <b-list-group-item>Morbi leo risus</b-list-group-item>
+            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          </b-list-group>
+        </app-collapse-item>
+      </app-collapse>
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
         <b-button variant="flat-primary">
-          <feather-icon
-            icon="RotateCwIcon"
-          />
+          <feather-icon icon="RotateCwIcon" />
           Update
         </b-button>
         <div class="reporting-content-header--badge">
@@ -59,27 +68,21 @@
             variant="flat-dark"
             class="badge-demand"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Demand
           </b-button>
           <b-button
             variant="flat-dark"
             class="badge-engage"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Engaged
           </b-button>
           <b-button
             variant="flat-dark"
             class="badge-estimate"
           >
-            <b-icon
-              icon="circle-fill"
-            />
+            <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
         </div>
@@ -106,18 +109,97 @@
             </p>
           </div>
         </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { BButton } from 'bootstrap-vue'
+import {
+  BButton,
+  BProgress,
+  BCard,
+  BCardText,
+  BListGroup,
+  BListGroupItem,
+} from 'bootstrap-vue'
 import moment from 'moment'
+import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
+import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
 export default {
   components: {
     BButton,
+    BProgress,
+    BCard,
+    BCardText,
+    AppCollapse,
+    AppCollapseItem,
+    BListGroup,
+    BListGroupItem,
   },
   props: {
     data: {
@@ -128,6 +210,9 @@ export default {
   data() {
     return {
       reportingDates: [],
+      value1: 30,
+      value2: 40,
+      value3: 80,
     }
   },
   mounted() {
@@ -156,5 +241,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import "@core/scss/vue/pages/dashboard-portfolio.scss";
 </style>
