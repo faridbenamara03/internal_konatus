@@ -140,6 +140,27 @@
             />
           </b-card>
         </div>
+        <div class="progress-wrapper w-100">
+          <b-card no-body>
+            <b-card-text class="mb-0">
+              Reticulating splines… {{ value1+'%' }}
+            </b-card-text>
+            <b-progress
+              v-model="value1"
+              max="100"
+            />
+            <b-progress
+              v-model="value2"
+              max="100"
+              variant="success"
+            />
+            <b-progress
+              v-model="value3"
+              max="100"
+              variant="secondary"
+            />
+          </b-card>
+        </div>
       </div>
     </div>
   </div>
