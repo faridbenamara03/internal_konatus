@@ -43,7 +43,7 @@
           <p>{{ item.name }}</p>
         </div>
         <feather-icon
-          icon="ChevronDownIcon"
+          icon="ChevronUpIcon"
           size="24"
           class="muted-svg"
         />
