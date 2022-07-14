@@ -469,9 +469,12 @@
   footer {
     border: none;
     margin-bottom: 24px;
-    button {
+    .btn {
       flex: 1;
       color: #fff;
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 }

@@ -141,6 +141,7 @@
               <span>{{ getToday() }}</span>
             </div>
             <b-button
+              v-b-modal.modal-import
               class="ml-1"
               variant="outline-primary"
             >
@@ -187,6 +188,7 @@
       :data="teams"
       @onSubmit="handleRequestQuote"
     />
+    <import-modal />
   </b-card>
 </template>
 
@@ -198,6 +200,7 @@ import moment from 'moment'
 import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
+import ImportModal from './modals/ImportModal.vue'
 
 export default {
   components: {
@@ -209,6 +212,7 @@ export default {
     BCardBody,
     BTabs,
     BTab,
+    ImportModal,
     ModalRequestQuote,
   },
   props: {
