@@ -70,6 +70,7 @@
                   :key="phase.phaseV"
                   :title="'Phase ' + phase.phaseV"
                   class="collapse-card"
+                  is-visible
                 >
                   <div class="phase-box">
                     <div
