@@ -246,6 +246,20 @@ export default {
               gate: 3,
               version: '1.28.17.1.126',
             },
+            {
+              phaseV: 4,
+              name: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              version: '1.28.17.1.120',
+            },
+            {
+              phaseV: 5,
+              name: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              version: '1.28.17.1.126',
+            },
           ],
         },
         {

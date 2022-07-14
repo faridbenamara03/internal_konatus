@@ -28,14 +28,16 @@
           }
         }
         .tab-pane {
+          overflow: scroll;
+          max-height: calc(100vh - 16rem);
           .project-demand-view {
-            overflow: scroll;
-            display: flex;
+            display: table;
             .project-team {
               padding: 16px;
-              border-left: 1px solid $theme-dark-table-active-bg;
+              border-right: 1px solid $theme-dark-table-active-bg;
               min-width: 266px;
               max-width: 266px;
+              display: table-cell;
               .team-name--text {
                 font-weight: 600;
                 font-size: 12px;
@@ -69,7 +71,6 @@
                     min-height: 128px;
                     .bar {
                       width: 8px;
-                      height: 100%;
                       border-radius: 2px;
                       margin-right: 10px;
                     }
@@ -99,6 +100,9 @@
                     }
                   }
                 }
+              }
+              &:last-child {
+                border: none;
               }
             }
           }
