@@ -26,62 +26,70 @@
       </div>
     </template>
     <div
-      v-for="(item, idx) in data"
-      :key="idx"
-      class="collapse-zone"
+      class="accordion"
+      role="tablist"
     >
-      <b-button
-        v-b-toggle="'collapse-' + item.id"
-        variant="flat-primary"
-        class="collapse-toggle-btn"
+      <div
+        v-for="(item, idx) in data"
+        :key="idx"
+        class="collapse-zone"
       >
-        <div class="d-flex align-items-center">
+        <b-button
+          v-b-toggle="'collapse-' + item.id"
+          variant="flat-primary"
+          class="collapse-toggle-btn"
+        >
+          <div class="d-flex align-items-center">
+            <feather-icon
+              icon="UsersIcon"
+              size="24"
+            />
+            <p>{{ item.name }}</p>
+          </div>
           <feather-icon
-            icon="UsersIcon"
+            icon="ChevronUpIcon"
             size="24"
+            class="muted-svg"
           />
-          <p>{{ item.name }}</p>
-        </div>
-        <feather-icon
-          icon="ChevronUpIcon"
-          size="24"
-          class="muted-svg"
-        />
-      </b-button>
-      <b-collapse
-        :id="'collapse-' + item.id"
-      >
-        <div class="select-group">
-          <div class="select-box">
-            <label>Number of Elementary Activity</label>
-            <b-form-input
-              v-model="item.activities"
-              placeholder="0"
-            />
+        </b-button>
+        <b-collapse
+          :id="'collapse-' + item.id"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
+          <div class="select-group">
+            <div class="select-box">
+              <label>Number of Elementary Activity</label>
+              <b-form-input
+                v-model="item.activities"
+                placeholder="0"
+              />
+            </div>
+            <div class="select-box">
+              <label>Current Estimate</label>
+              <b-form-input
+                v-model="item.estimate"
+                placeholder="0"
+              />
+            </div>
+            <div class="select-box">
+              <label>Demand</label>
+              <b-form-input
+                v-model="item.demand"
+                placeholder="New Demand"
+              />
+            </div>
+            <div class="select-box">
+              <label>New Deadline</label>
+              <b-form-input
+                v-model="item.deadline"
+                placeholder="Deadline"
+              />
+            </div>
           </div>
-          <div class="select-box">
-            <label>Current Estimate</label>
-            <b-form-input
-              v-model="item.estimate"
-              placeholder="0"
-            />
-          </div>
-          <div class="select-box">
-            <label>Demand</label>
-            <b-form-input
-              v-model="item.demand"
-              placeholder="New Demand"
-            />
-          </div>
-          <div class="select-box">
-            <label>New Deadline</label>
-            <b-form-input
-              v-model="item.deadline"
-              placeholder="Deadline"
-            />
-          </div>
-        </div>
-      </b-collapse>
+        </b-collapse>
+      </div>
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
