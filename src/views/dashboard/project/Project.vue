@@ -74,7 +74,7 @@
                 >
                   <div class="phase-box">
                     <div
-                      class="bar h-100"
+                      class="bar"
                       :style="{ 'background': team.color}"
                     />
                     <div class="phase-box--content">
@@ -98,8 +98,23 @@
                       </div>
                     </div>
                   </div>
+                  <b-button
+                    variant="flat-secondary"
+                    class="mt-1 phase-btn"
+                  >
+                    <feather-icon icon="PlusIcon" />
+                    <span>New Elementary Activity</span>
+                  </b-button>
                 </app-collapse-item>
               </app-collapse>
+              <b-button
+                v-if="!team.phases.length"
+                variant="flat-secondary"
+                class="mt-1"
+              >
+                <feather-icon icon="PlusIcon" />
+                <span>New Elementary Activity</span>
+              </b-button>
             </div>
           </div>
         </b-tab>
