@@ -206,4 +206,64 @@
       cursor: pointer;
     }
   }
+  .form-group {
+    margin-bottom: 24px;
+    &.has-switch {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $theme-dark-border-color;
+      .detail-box {
+        border: none;
+      }
+      .custom-switch {
+        label {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 21px;
+          color: $theme-dark-button-primary-active-text;
+        }
+      }
+    }
+  }
+  .activity-modal--body {
+    .header {
+      label {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        text-transform: uppercase;
+      }
+      p {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: $theme-dark-button-primary-active-text;
+      }
+    }
+    .btn-group {
+      display: flex;
+      button {
+        flex: 1;
+        color: $theme-dark-button-primary-active-text;
+        &:first-child {
+          margin-right: 24px;
+        }
+      }
+    }
+    .detail-box {
+      padding: 10px 0;
+      border-bottom: 1px solid $theme-dark-border-color;
+      display: flex;
+      align-items: center;
+      svg {
+        color: $theme-dark-navigation-li-icon-color;
+      }
+      p {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 24px;
+      }
+    }
+  }
 }

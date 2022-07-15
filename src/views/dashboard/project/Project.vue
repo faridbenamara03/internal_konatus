@@ -72,7 +72,10 @@
                   class="collapse-card"
                   is-visible
                 >
-                  <div class="phase-box">
+                  <div
+                    class="phase-box"
+                    @click="() => handleActivityDetails(phase, team)"
+                  >
                     <div
                       class="bar"
                       :style="{ 'background': team.color}"
@@ -188,6 +191,11 @@
       :data="teams"
       @onSubmit="handleRequestQuote"
     />
+    <activity-detail-modal
+      :is-open="openActivityModal"
+      :data="selectedActivity"
+      @hideModal="hideModal"
+    />
     <import-modal />
   </b-card>
 </template>
@@ -201,6 +209,7 @@ import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
+import ActivityDetailModal from './modals/ActivityDetailModal.vue'
 
 export default {
   components: {
@@ -212,6 +221,7 @@ export default {
     BCardBody,
     BTabs,
     BTab,
+    ActivityDetailModal,
     ImportModal,
     ModalRequestQuote,
   },
@@ -225,6 +235,8 @@ export default {
     return {
       teams: [],
       tabIndex: 0,
+      openActivityModal: false,
+      selectedActivity: {},
     }
   },
   methods: {
@@ -411,6 +423,14 @@ export default {
           ],
         },
       ]
+    },
+    handleActivityDetails(phase, team) {
+      console.log(team)
+      this.selectedActivity = { team, phase }
+      this.openActivityModal = true
+    },
+    hideModal() {
+      this.openActivityModal = false
     },
   },
 }
