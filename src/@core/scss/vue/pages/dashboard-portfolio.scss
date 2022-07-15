@@ -23,7 +23,6 @@
         }
         .actions {
           button {
-            background-color: transparent !important;
             border-radius: 6px;
             font-weight: 500;
             font-size: 14px;
@@ -132,6 +131,7 @@
                     padding: 16px;
                     .row-detail--name {
                       flex: 1;
+                      text-align: left;
                       span {
                         padding-left: 48px;
                       }

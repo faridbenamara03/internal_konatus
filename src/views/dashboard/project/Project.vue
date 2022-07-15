@@ -164,7 +164,7 @@
             <b-button
               v-b-modal.modal-request-quote
               class="ml-1"
-              variant="outline-primary"
+              variant="primary"
               :disabled="!teams.length"
             >
               <feather-icon
