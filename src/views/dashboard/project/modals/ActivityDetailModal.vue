@@ -41,7 +41,10 @@
         </p>
       </div>
       <div class="form-group btn-group">
-        <b-button variant="outline-primary">
+        <b-button
+          v-b-modal.modal-activity-split
+          variant="outline-primary"
+        >
           <feather-icon
             icon="GitPullRequestIcon"
             size="18"
@@ -155,6 +158,7 @@
         Save
       </b-button>
     </template>
+    <activity-split-modal :data="data" />
   </b-modal>
 </template>
 
@@ -163,9 +167,11 @@ import {
   BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
+import ActivitySplitModal from './ActivitySplitModal.vue'
 
 export default {
   components: {
+    ActivitySplitModal,
     BButton,
     BFormCheckbox,
     BFormInput,
@@ -198,6 +204,11 @@ export default {
     },
     handleSave() {
       this.$emit('hideModal')
+    },
+    handleModal(type, mode) {
+      if (type === 'split') {
+        this.$emit('hideModal', type, mode)
+      }
     },
   },
 }

@@ -10,10 +10,12 @@
 <script>
 import RootIcon from './icons/RootIcon.vue'
 import ProgramIcon from './icons/ProgramIcon.vue'
+import HexahedronIcon from './icons/Hexahedron.vue'
 
 const icons = {
   root: RootIcon,
   program: ProgramIcon,
+  hexahedron: HexahedronIcon,
 }
 
 export default {
