@@ -160,14 +160,11 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal, VBToggle,
+  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
 export default {
-  directives: {
-    'b-toggle': VBToggle,
-  },
   components: {
     BButton,
     BFormCheckbox,
