@@ -51,7 +51,10 @@
           />
           <span class="pl-1">Split</span>
         </b-button>
-        <b-button variant="outline-primary">
+        <b-button
+          v-b-modal.modal-activity-merge
+          variant="outline-primary"
+        >
           <feather-icon
             icon="GitMergeIcon"
             size="18"
@@ -159,6 +162,7 @@
       </b-button>
     </template>
     <activity-split-modal :data="data" />
+    <activity-merge-modal :data="data" />
   </b-modal>
 </template>
 
@@ -168,9 +172,11 @@ import {
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ActivitySplitModal from './ActivitySplitModal.vue'
+import ActivityMergeModal from './ActivityMergeModal.vue'
 
 export default {
   components: {
+    ActivityMergeModal,
     ActivitySplitModal,
     BButton,
     BFormCheckbox,
@@ -204,11 +210,6 @@ export default {
     },
     handleSave() {
       this.$emit('hideModal')
-    },
-    handleModal(type, mode) {
-      if (type === 'split') {
-        this.$emit('hideModal', type, mode)
-      }
     },
   },
 }
