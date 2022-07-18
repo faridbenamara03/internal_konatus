@@ -99,6 +99,7 @@
               <span>Edit as table</span>
             </b-button>
             <b-button
+              v-if="tabIndex === 0"
               class="ml-1"
               variant="outline-primary"
             >
@@ -108,6 +109,21 @@
               />
               <span>Import</span>
             </b-button>
+            <b-button-group
+              v-if="tabIndex === 1"
+              class="ml-1"
+            >
+              <b-button
+                variant="outline-primary"
+              >
+                Cost
+              </b-button>
+              <b-button
+                variant="outline-primary"
+              >
+                Plan
+              </b-button>
+            </b-button-group>
             <b-button
               class="ml-1"
               variant="outline-primary"
@@ -117,6 +133,17 @@
                 size="16"
               />
               <span>Export</span>
+            </b-button>
+            <b-button
+              v-if="tabIndex === 2"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="ZapIcon"
+                size="16"
+              />
+              <span>Optimize</span>
             </b-button>
           </div>
         </template>

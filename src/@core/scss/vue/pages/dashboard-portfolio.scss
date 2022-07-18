@@ -32,6 +32,18 @@
               margin-right: 10px;
             }
           }
+          .btn-group {
+            .btn {
+              &:first-child {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+              }
+              &:last-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+              }
+            }
+          }
         }
       }
       .tab-content {
