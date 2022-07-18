@@ -136,6 +136,7 @@
             </b-button>
             <b-button
               v-if="tabIndex === 2"
+              v-b-modal.modal-optimize
               class="ml-1"
               variant="primary"
             >
@@ -162,6 +163,7 @@
       :checked-data="activeColumns"
       @columnChange="columnChange"
     />
+    <optimize-modal />
   </b-card>
 </template>
 
@@ -174,6 +176,7 @@ import Demand from './Demand.vue'
 import Reporting from './Reporting.vue'
 import CreateModal from './modals/CreateModal.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
+import OptimizeModal from './modals/OptimizeModal.vue'
 
 export default {
   components: {
@@ -188,6 +191,7 @@ export default {
     Demand,
     EditColumnsModal,
     Reporting,
+    OptimizeModal,
   },
   props: {
     data: {

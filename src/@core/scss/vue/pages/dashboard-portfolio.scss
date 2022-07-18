@@ -480,6 +480,21 @@
         margin-bottom: 24px;
       }
     }
+    .optimize-modal-body {
+      display: flex;
+      .flex-1 {
+        flex: 1;
+        &:first-child {
+          margin-right: 12px;
+        }
+        &:last-child {
+          margin-left: 12px;
+        }
+      }
+      .checkbox-slider-group {
+        margin-bottom: 24px;
+      }
+    }
   }
   footer {
     border: none;
