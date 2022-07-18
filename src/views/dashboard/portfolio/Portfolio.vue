@@ -61,10 +61,7 @@
           title="Control"
           class="no-action-bar"
         >
-          <Control
-            :data="items"
-            :fields="fields"
-          />
+          <Control :data="items" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
