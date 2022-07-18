@@ -172,8 +172,8 @@ import {
   BButton, BButtonGroup, BCard, BCardText, BCardBody, BTabs, BTab,
 } from 'bootstrap-vue'
 import moment from 'moment'
-import Demand from './Demand.vue'
-import Reporting from './Reporting.vue'
+import Demand from './components/Demand.vue'
+import Reporting from './components/Reporting.vue'
 import CreateModal from './modals/CreateModal.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
