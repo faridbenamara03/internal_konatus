@@ -124,7 +124,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Save
+        Start
       </b-button>
     </template>
   </b-modal>
