@@ -46,34 +46,12 @@
             </span>
           </div>
           <div class="row-detail--form">
-            <v-select
-              v-model="detail.priority"
-              :dir="'rtl'"
-              :options="['highest', 'high', 'low', 'lowest']"
-              outlined
-            />
-
-            <b-form-input
-              :dir="'rtl'"
-              :value="formatCurrency(detail.budget)"
-            />
-            <b-form-input
-              :dir="'rtl'"
-              :value="dateFormat(detail.deadline)"
-            />
-            <div
-              class="d-flex align-items-center justify-content-end"
-            >
-              <b-button variant="flat-primary">
-                <feather-icon icon="Edit2Icon" />
-              </b-button>
-              <b-button variant="flat-primary">
-                <feather-icon icon="DollarSignIcon" />
-              </b-button>
-              <b-button variant="flat-primary">
-                <feather-icon icon="ChevronsRightIcon" />
-              </b-button>
-            </div>
+            <span>{{ detail.priority }}</span>
+            <span>{{ detail.value }}</span>
+            <span>{{ formatCurrency(detail.budget) }}</span>
+            <span>{{ detail.quote ? formatCurrency(detail.quote) : "" }}</span>
+            <span>{{ dateFormat(detail.deadline) }}</span>
+            <span>{{ detail.mgt }}</span>
           </div>
         </div>
       </template>
@@ -82,33 +60,23 @@
 </template>
 
 <script>
-import { BButton, BFormInput, BTable } from 'bootstrap-vue'
+import { BTable } from 'bootstrap-vue'
 import moment from 'moment'
-import vSelect from 'vue-select'
 
 export default {
   components: {
-    BButton,
-    BFormInput,
     BTable,
-    vSelect,
   },
   props: {
     data: {
       type: Array,
       default: () => [],
     },
-    fields: {
-      type: Array,
-      default: () => [],
-    },
-    isChartView: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
-    return {}
+    return {
+      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'priority', 'value', 'budget', 'quote', 'deadline', 'mgt & study'],
+    }
   },
   methods: {
     dateFormat(date) {
