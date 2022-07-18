@@ -61,9 +61,10 @@
           title="Control"
           class="no-action-bar"
         >
-          <b-card-text>
-            Carrot cake dragée chocolate.
-          </b-card-text>
+          <Control
+            :data="items"
+            :fields="fields"
+          />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -169,11 +170,12 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardText, BCardBody, BTabs, BTab,
+  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
+import Control from './components/Control.vue'
 import CreateModal from './modals/CreateModal.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
@@ -183,14 +185,14 @@ export default {
     BButton,
     BButtonGroup,
     BCard,
-    BCardText,
     BCardBody,
     BTabs,
     BTab,
-    CreateModal,
     Demand,
-    EditColumnsModal,
     Reporting,
+    Control,
+    CreateModal,
+    EditColumnsModal,
     OptimizeModal,
   },
   props: {
