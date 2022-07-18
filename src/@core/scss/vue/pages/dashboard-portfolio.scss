@@ -72,6 +72,9 @@
           &.has-default-card-bg {
             background: $theme-dark-card-bg;
           }
+          &.no-action-bar {
+            min-height: calc(100vh - 11rem);
+          }
         }
         .demand-view {
           width: 100%;

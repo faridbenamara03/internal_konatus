@@ -6,7 +6,10 @@
   >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div class="action-bar">
+        <div
+          v-if="tabIndex === 0"
+          class="action-bar"
+        >
           <b-button-group>
             <b-button
               variant="outline-primary"
@@ -50,11 +53,13 @@
         </b-tab>
         <b-tab
           title="Reporting"
+          class="no-action-bar"
         >
           <Reporting />
         </b-tab>
         <b-tab
           title="Control"
+          class="no-action-bar"
         >
           <b-card-text>
             Carrot cake dragée chocolate.
