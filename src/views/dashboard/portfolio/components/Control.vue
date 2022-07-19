@@ -38,7 +38,7 @@
         <div
           v-for="detail in row.item.children"
           :key="detail.name"
-          class="row-detail d-flex align-items-center"
+          class="row-detail d-flex align-items-center control"
         >
           <div class="row-detail--name">
             <span>
@@ -46,12 +46,12 @@
             </span>
           </div>
           <div class="row-detail--form">
-            <span>{{ detail.priority }}</span>
-            <span>{{ detail.value }}</span>
-            <span>{{ formatCurrency(detail.budget) }}</span>
-            <span>{{ detail.quote ? formatCurrency(detail.quote) : "" }}</span>
-            <span>{{ dateFormat(detail.deadline) }}</span>
-            <span>{{ detail.mgt }}</span>
+            <div>{{ detail.priority }}</div>
+            <div>{{ detail.value }}</div>
+            <div>{{ formatCurrency(detail.budget) }}</div>
+            <div>{{ detail.quote ? formatCurrency(detail.quote) : "" }}</div>
+            <div>{{ dateFormat(detail.deadline) }}</div>
+            <div>{{ detail.mgt }}</div>
           </div>
         </div>
       </template>
@@ -75,7 +75,13 @@ export default {
   },
   data() {
     return {
-      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'priority', 'value', 'budget', 'quote', 'deadline', 'mgt & study'],
+      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' },
+        { key: 'priority', thStyle: 'width: 11.6%;' },
+        { key: 'value', thStyle: 'width: 11.6%;' },
+        { key: 'budget', thStyle: 'width: 11.6%;' },
+        { key: 'quote', thStyle: 'width: 11.6%;' },
+        { key: 'deadline', thStyle: 'width: 11.6%;' },
+        { key: 'mgt & study', thStyle: 'width: 12%;' }],
     }
   },
   methods: {

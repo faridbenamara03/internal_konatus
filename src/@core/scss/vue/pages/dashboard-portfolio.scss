@@ -170,6 +170,23 @@
                         color: rgba(255, 255, 255, 0.8);
                       }
                     }
+                    &.control {
+                      padding: 16px 0;
+                      .row-detail--name {
+                        width: 30%;
+                        flex: auto;
+                      }
+                      .row-detail--form {
+                        flex: auto;
+                        width: 70%;
+                        div {
+                          width: 11.6%;
+                          &:last-child {
+                            width: 12%;
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
