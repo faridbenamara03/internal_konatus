@@ -38,6 +38,9 @@ export default {
         case 'team':
           this.icon = 'UsersIcon'
           break
+        case 'user':
+          this.icon = 'UserIcon'
+          break
         default:
           break
       }

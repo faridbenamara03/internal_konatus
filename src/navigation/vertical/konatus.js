@@ -97,19 +97,19 @@ export default [
         children: [
           {
             title: 'Travis Roach',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'Ciaran Bradford',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'George Logan',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'Angelica Russo',
-            type: 'team',
+            type: 'user',
           },
         ],
       },
@@ -119,19 +119,19 @@ export default [
         children: [
           {
             title: 'Travis Roach',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'Ciaran Bradford',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'George Logan',
-            type: 'team',
+            type: 'user',
           },
           {
             title: 'Angelica Russo',
-            type: 'team',
+            type: 'user',
           },
         ],
       },
