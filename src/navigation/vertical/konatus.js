@@ -92,70 +92,46 @@ export default [
     type: 'root',
     children: [
       {
-        title: 'Consumer Robots',
-        type: 'portfolio',
+        title: 'Team A',
+        type: 'team',
         children: [
           {
-            title: 'Quadruped robot',
-            type: 'program',
-            children: [
-              {
-                title: 'New format',
-                type: 'project',
-              },
-              {
-                title: 'Enhanced motricity',
-                type: 'project',
-              },
-              {
-                title: 'Enhanced authono...',
-                type: 'project',
-              },
-              {
-                title: 'Dual sourcing for Quadruped',
-                type: 'project',
-              },
-            ],
+            title: 'Travis Roach',
+            type: 'team',
           },
           {
-            title: 'Hardened quadruped ...',
-            type: 'program',
+            title: 'Ciaran Bradford',
+            type: 'team',
           },
           {
-            title: 'Handling robot',
-            type: 'program',
+            title: 'George Logan',
+            type: 'team',
           },
           {
-            title: 'Power and programin...',
-            type: 'program',
+            title: 'Angelica Russo',
+            type: 'team',
           },
         ],
       },
       {
-        title: 'Military Robots',
-        type: 'portfolio',
+        title: 'Team B',
+        type: 'team',
         children: [
           {
-            title: 'Attacking robot',
-            type: 'program',
-            children: [
-              {
-                title: 'Rocket lancher',
-                type: 'project',
-              },
-              {
-                title: 'Enhanced motricity',
-                type: 'project',
-              },
-              {
-                title: 'Enhanced authono...',
-                type: 'project',
-              },
-              {
-                title: 'Dual sourcing for Quadruped',
-                type: 'project',
-              },
-            ],
+            title: 'Travis Roach',
+            type: 'team',
+          },
+          {
+            title: 'Ciaran Bradford',
+            type: 'team',
+          },
+          {
+            title: 'George Logan',
+            type: 'team',
+          },
+          {
+            title: 'Angelica Russo',
+            type: 'team',
           },
         ],
       },
