@@ -6,7 +6,10 @@
   >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div class="action-bar justify-content-between">
+        <div
+          v-if="tabIndex === 0"
+          class="action-bar justify-content-between"
+        >
           <b-button
             variant="flat-primary"
             @click="handleUpdate"
