@@ -1,7 +1,7 @@
 // eslint-disable-next-line object-curly-newline
 import { ref, watch, inject, computed } from '@vue/composition-api'
 import store from '@/store'
-import { isNavGroupActive } from '@core/layouts/utils'
+import { isNavGroupActive, navLinkProps } from '@core/layouts/utils'
 
 export default function useVerticalNavMenuGroup(item) {
   // ------------------------------------------------
@@ -85,6 +85,8 @@ export default function useVerticalNavMenuGroup(item) {
     isGroupActive.value = isNavGroupActive(item.children)
   }
 
+  const linkProps = navLinkProps(item)
+
   // ------------------------------------------------
   // Other Methods
   // ------------------------------------------------
@@ -94,6 +96,7 @@ export default function useVerticalNavMenuGroup(item) {
   return {
     isOpen,
     isGroupActive,
+    linkProps,
     updateGroupOpen,
     openGroups,
     isMouseHovered,

@@ -11,10 +11,23 @@ export default [
       {
         title: 'Consumer Robots',
         type: 'portfolio',
+        route: {
+          name: 'portfolio-view',
+          params: {
+            portfolioId: 'consumer-robots',
+          },
+        },
         children: [
           {
             title: 'Quadruped robot',
             type: 'program',
+            route: {
+              name: 'program-view',
+              params: {
+                portfolioId: 'consumer-robots',
+                programId: 'quadruped-robot',
+              },
+            },
             children: [
               {
                 title: 'New format',
@@ -23,6 +36,7 @@ export default [
                   name: 'project-view',
                   params: {
                     portfolioId: 'consumer-robots',
+                    programId: 'quadruped-robot',
                     projectId: 'new-format',
                   },
                 },
@@ -94,6 +108,12 @@ export default [
       {
         title: 'Team A',
         type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            teamId: 'team-a',
+          },
+        },
         children: [
           {
             title: 'Travis Roach',

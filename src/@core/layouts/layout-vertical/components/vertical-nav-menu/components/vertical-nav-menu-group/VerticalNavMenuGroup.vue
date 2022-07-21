@@ -9,6 +9,7 @@
     }"
   >
     <b-link
+      v-bind="linkProps"
       class="d-flex align-items-center"
       :class="{'m-0': item.type === 'root'}"
       @click="handleNavItemClick"
@@ -75,6 +76,7 @@ export default {
     const {
       isOpen,
       isGroupActive,
+      linkProps,
       updateGroupOpen,
       updateIsActive,
     } = useVerticalNavMenuGroup(props.item)
@@ -86,6 +88,7 @@ export default {
       resolveNavItemComponent,
       isOpen,
       isGroupActive,
+      linkProps,
       updateGroupOpen,
       updateIsActive,
 
