@@ -14,4 +14,9 @@ export default [
     name: 'portfolio-view',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
+  {
+    path: '/team/:teamId',
+    name: 'team-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
 ]
