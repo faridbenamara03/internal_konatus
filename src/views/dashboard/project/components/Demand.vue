@@ -3,7 +3,7 @@
     <div
       v-for="team in data"
       :key="team.id"
-      class="project-team"
+      class="project-team no-border"
     >
       <div class="d-flex justify-content-between align-items-center">
         <p class="text-capitalize m-0 team-name--text">

@@ -63,45 +63,6 @@
                 .card-body {
                   display: flex;
                   flex-direction: column;
-                  .phase-box {
-                    flex: 1;
-                    background: $theme-dark-card-bg-tertiary;
-                    padding: 8px;
-                    border-radius: 5px;
-                    display: flex;
-                    min-height: 128px;
-                    align-items: stretch;
-                    .bar {
-                      width: 8px;
-                      border-radius: 2px;
-                      margin-right: 10px;
-                    }
-                    .phase-box--content {
-                      flex: 1;
-                      padding: 2.5px 0;
-                      p {
-                        font-size: 12px;
-                        line-height: 125%;
-                        font-weight: 500;
-                        &.title {
-                          color: $theme-dark-button-primary-active-text;
-                          font-weight: 700;
-                        }
-                        &.muted {
-                          color: $theme-dark-text-muted-color;
-                        }
-                      }
-                      svg {
-                        margin-right: 4px;
-                        color: $theme-dark-button-primary-active-text;
-                      }
-                      span {
-                        font-weight: 500;
-                        font-size: 12px;
-                        line-height: 24px;
-                      }
-                    }
-                  }
                   .phase-btn {
                     color: $theme-dark-table-active-bg;
                     padding: 10px;
@@ -117,8 +78,49 @@
                   }
                 }
               }
-              &:last-child {
-                border: none;
+              &.no-border {
+                &:last-child {
+                  border: none;
+                }
+              }
+            }
+          }
+          .phase-box {
+            flex: 1;
+            background: $theme-dark-card-bg-tertiary;
+            padding: 8px;
+            border-radius: 5px;
+            display: flex;
+            min-height: 128px;
+            align-items: stretch;
+            .bar {
+              width: 8px;
+              border-radius: 2px;
+              margin-right: 10px;
+            }
+            .phase-box--content {
+              flex: 1;
+              padding: 2.5px 0;
+              p {
+                font-size: 12px;
+                line-height: 125%;
+                font-weight: 500;
+                &.title {
+                  color: $theme-dark-button-primary-active-text;
+                  font-weight: 700;
+                }
+                &.muted {
+                  color: $theme-dark-text-muted-color;
+                }
+              }
+              svg {
+                margin-right: 4px;
+                color: $theme-dark-button-primary-active-text;
+              }
+              span {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 24px;
               }
             }
           }

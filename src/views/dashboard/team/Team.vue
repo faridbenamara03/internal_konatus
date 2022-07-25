@@ -166,6 +166,28 @@ export default {
             priority: 'Highest',
             gate: 1,
             activityId: '1.28.17.1.55',
+            tasks: [
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.16.1.53',
+                priority: 'Lowest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+            ],
           },
           {
             phaseV: 2,
@@ -173,6 +195,18 @@ export default {
             priority: 'Highest',
             gate: 2,
             activityId: '1.28.17.1.120',
+            tasks: [
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.16.1.53',
+                priority: 'Lowest',
+                gate: 1,
+              },
+            ],
           },
           {
             phaseV: 3,
@@ -180,20 +214,23 @@ export default {
             priority: 'Highest',
             gate: 3,
             activityId: '1.28.17.1.126',
-          },
-          {
-            phaseV: 4,
-            name: 'Develop control software',
-            priority: 'Highest',
-            gate: 2,
-            activityId: '1.28.17.1.120',
-          },
-          {
-            phaseV: 5,
-            name: 'Develop control software...',
-            priority: 'Highest',
-            gate: 3,
-            activityId: '1.28.17.1.126',
+            tasks: [
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.16.1.53',
+                priority: 'Lowest',
+                gate: 1,
+              },
+              {
+                taskId: '1.28.17.1.55',
+                priority: 'Highest',
+                gate: 1,
+              },
+            ],
           },
         ],
       }

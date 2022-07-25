@@ -13,13 +13,44 @@
           Select All
         </b-button>
       </div>
+      <div class="collapse-card">
+        <div
+          v-for="(task, idx) in phase.tasks"
+          :key="idx"
+          class="phase-box my-2"
+        >
+          <div
+            class="bar"
+            :style="{ 'background': data.color}"
+          />
+          <div class="phase-box--content">
+            <p class="title">
+              Task {{ task.taskId }}
+            </p>
+            <p class="muted">
+              {{ task.taskId }}
+            </p>
+            <div class="d-flex">
+              <div class="d-flex w-50 align-items-center">
+                <feather-icon
+                  icon="BarChartIcon"
+                />
+                <span>{{ task.priority }}</span>
+              </div>
+              <div class="d-flex w-50 align-items-center">
+                <b-icon icon="door-closed" />
+                <span>{{ task.gate }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <b-button
-        v-if="!data.phases"
         variant="flat-secondary"
-        class="mt-1"
+        class="w-100"
       >
         <feather-icon icon="PlusIcon" />
-        <span>New Elementary Activity</span>
+        <span>Insert new task</span>
       </b-button>
     </div>
   </div>
@@ -51,10 +82,6 @@ export default {
     },
     handleRequestQuote(res) {
       console.log(res)
-    },
-    handleActivityDetails(phase, team) {
-      this.selectedActivity = { team, phase }
-      this.openActivityModal = true
     },
     hideModal() {
       this.openActivityModal = false
