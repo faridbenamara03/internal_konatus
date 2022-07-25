@@ -15,7 +15,12 @@ export default [
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
-    path: '/team/:teamId',
+    path: '/orgnization',
+    name: 'orgnization-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+  {
+    path: '/orgnization/team/:teamId',
     name: 'team-view',
     component: () => import('@/views/dashboard/team/Team.vue'),
   },

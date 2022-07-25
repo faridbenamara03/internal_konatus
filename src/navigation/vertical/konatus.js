@@ -104,6 +104,9 @@ export default [
     resource: 'konatus',
     isOperation: false,
     type: 'root',
+    route: {
+      name: 'orgnization-view',
+    },
     children: [
       {
         title: 'Team A',

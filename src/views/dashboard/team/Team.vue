@@ -68,6 +68,7 @@
               <span>{{ getToday() }}</span>
             </div>
             <b-button
+              v-if="tabIndex != 2"
               v-b-modal.modal-import
               class="ml-1"
               variant="outline-primary"
@@ -89,6 +90,7 @@
               <span>Export</span>
             </b-button>
             <b-button
+              v-if="tabIndex === 0"
               class="ml-1"
               variant="primary"
             >
@@ -97,6 +99,17 @@
                 size="16"
               />
               <span>Request Quote</span>
+            </b-button>
+            <b-button
+              v-if="tabIndex === 2"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="UserPlusIcon"
+                size="16"
+              />
+              <span>Add Resource</span>
             </b-button>
           </div>
         </template>
