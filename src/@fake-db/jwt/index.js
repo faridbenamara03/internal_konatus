@@ -5,12 +5,12 @@ const data = {
   users: [
     {
       id: 1,
-      fullName: 'John Doe',
-      username: 'johndoe',
-      password: 'admin',
+      fullName: 'Konatus',
+      username: 'konatus',
+      password: 'konatus4321',
       // eslint-disable-next-line global-require
       avatar: require('@/assets/images/avatars/13-small.png'),
-      email: 'admin@demo.com',
+      email: 'konatus.test@yopmail.com',
       role: 'admin',
       ability: [
         {

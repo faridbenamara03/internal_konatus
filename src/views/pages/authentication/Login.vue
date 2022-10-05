@@ -54,27 +54,6 @@
             Please sign-in to your account and start the adventure
           </b-card-text>
 
-          <b-alert
-            variant="primary"
-            show
-          >
-            <div class="alert-body font-small-2">
-              <p>
-                <small class="mr-50"><span class="font-weight-bold">Admin:</span> admin@demo.com | admin</small>
-              </p>
-              <p>
-                <small class="mr-50"><span class="font-weight-bold">Client:</span> client@demo.com | client</small>
-              </p>
-            </div>
-            <feather-icon
-              v-b-tooltip.hover.left="'This is just for ACL demo purpose'"
-              icon="HelpCircleIcon"
-              size="18"
-              class="position-absolute"
-              style="top: 10; right: 10;"
-            />
-          </b-alert>
-
           <!-- form -->
           <validation-observer
             ref="loginForm"
@@ -175,43 +154,9 @@
             </b-link>
           </b-card-text>
 
-          <!-- divider -->
-          <div class="divider my-2">
-            <div class="divider-text">
-              or
-            </div>
-          </div>
-
-          <!-- social buttons -->
-          <div class="auth-footer-btn d-flex justify-content-center">
-            <b-button
-              variant="facebook"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="FacebookIcon" />
-            </b-button>
-            <b-button
-              variant="twitter"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="TwitterIcon" />
-            </b-button>
-            <b-button
-              variant="google"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="MailIcon" />
-            </b-button>
-            <b-button
-              variant="github"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="GithubIcon" />
-            </b-button>
-          </div>
         </b-col>
       </b-col>
-    <!-- /Login-->
+      <!-- /Login-->
     </b-row>
   </div>
 </template>
@@ -220,7 +165,20 @@
 /* eslint-disable global-require */
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import {
-  BRow, BCol, BLink, BFormGroup, BFormInput, BInputGroupAppend, BInputGroup, BFormCheckbox, BCardText, BCardTitle, BImg, BForm, BButton, BAlert, VBTooltip,
+  BRow,
+  BCol,
+  BLink,
+  BFormGroup,
+  BFormInput,
+  BInputGroupAppend,
+  BInputGroup,
+  BFormCheckbox,
+  BCardText,
+  BCardTitle,
+  BImg,
+  BForm,
+  BButton,
+  VBTooltip,
 } from 'bootstrap-vue'
 import useJwt from '@/auth/jwt/useJwt'
 import { required, email } from '@validations'
@@ -249,7 +207,6 @@ export default {
     BImg,
     BForm,
     BButton,
-    BAlert,
     ValidationProvider,
     ValidationObserver,
   },
@@ -291,10 +248,11 @@ export default {
     login() {
       this.$refs.loginForm.validate().then(success => {
         if (success) {
-          useJwt.login({
-            email: this.userEmail,
-            password: this.password,
-          })
+          useJwt
+            .login({
+              email: this.userEmail,
+              password: this.password,
+            })
             .then(response => {
               const { userData } = response.data
               useJwt.setToken(response.data.accessToken)
@@ -304,16 +262,22 @@ export default {
 
               // ? This is just for demo purpose as well.
               // ? Because we are showing eCommerce app's cart items count in navbar
-              this.$store.commit('app-ecommerce/UPDATE_CART_ITEMS_COUNT', userData.extras.eCommerceCartItemsCount)
+              this.$store.commit(
+                'app-ecommerce/UPDATE_CART_ITEMS_COUNT',
+                userData.extras.eCommerceCartItemsCount,
+              )
 
               // ? This is just for demo purpose. Don't think CASL is role based in this case, we used role in if condition just for ease
-              this.$router.replace(getHomeRouteForLoggedInUser(userData.role))
+              this.$router
+                .replace(getHomeRouteForLoggedInUser(userData.role))
                 .then(() => {
                   this.$toast({
                     component: ToastificationContent,
                     position: 'top-right',
                     props: {
-                      title: `Welcome ${userData.fullName || userData.username}`,
+                      title: `Welcome ${
+                        userData.fullName || userData.username
+                      }`,
                       icon: 'CoffeeIcon',
                       variant: 'success',
                       text: `You have successfully logged in as ${userData.role}. Now you can start to explore!`,
@@ -332,5 +296,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/page-auth.scss';
+@import "@core/scss/vue/pages/page-auth.scss";
 </style>

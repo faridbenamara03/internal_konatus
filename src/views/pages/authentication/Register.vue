@@ -163,42 +163,9 @@
             </b-link>
           </p>
 
-          <!-- divider -->
-          <div class="divider my-2">
-            <div class="divider-text">
-              or
-            </div>
-          </div>
-
-          <div class="auth-footer-btn d-flex justify-content-center">
-            <b-button
-              variant="facebook"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="FacebookIcon" />
-            </b-button>
-            <b-button
-              variant="twitter"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="TwitterIcon" />
-            </b-button>
-            <b-button
-              variant="google"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="MailIcon" />
-            </b-button>
-            <b-button
-              variant="github"
-              href="javascript:void(0)"
-            >
-              <feather-icon icon="GithubIcon" />
-            </b-button>
-          </div>
         </b-col>
       </b-col>
-    <!-- /Register-->
+      <!-- /Register-->
     </b-row>
   </div>
 </template>
@@ -208,7 +175,19 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import VuexyLogo from '@core/layouts/components/Logo.vue'
 import {
-  BRow, BCol, BLink, BButton, BForm, BFormCheckbox, BFormGroup, BFormInput, BInputGroup, BInputGroupAppend, BImg, BCardTitle, BCardText,
+  BRow,
+  BCol,
+  BLink,
+  BButton,
+  BForm,
+  BFormCheckbox,
+  BFormGroup,
+  BFormInput,
+  BInputGroup,
+  BInputGroupAppend,
+  BImg,
+  BCardTitle,
+  BCardText,
 } from 'bootstrap-vue'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
@@ -265,15 +244,19 @@ export default {
     register() {
       this.$refs.registerForm.validate().then(success => {
         if (success) {
-          useJwt.register({
-            username: this.username,
-            email: this.userEmail,
-            password: this.password,
-          })
+          useJwt
+            .register({
+              username: this.username,
+              email: this.userEmail,
+              password: this.password,
+            })
             .then(response => {
               useJwt.setToken(response.data.accessToken)
               useJwt.setRefreshToken(response.data.refreshToken)
-              localStorage.setItem('userData', JSON.stringify(response.data.userData))
+              localStorage.setItem(
+                'userData',
+                JSON.stringify(response.data.userData),
+              )
               this.$ability.update(response.data.userData.ability)
               this.$router.push('/')
             })
@@ -289,5 +272,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/page-auth.scss';
+@import "@core/scss/vue/pages/page-auth.scss";
 </style>
