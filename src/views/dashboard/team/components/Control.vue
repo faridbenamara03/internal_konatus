@@ -1,57 +1,69 @@
 <template>
-  <b-card title="Data Science">
-    <app-echart-stacked-area
-      :option-data="option"
-    />
-  </b-card>
+  <div style="width:100%;">
+    <app-echart-stacked-area :option-data="option" :header-visible="false" style="width:100%;height:calc(100vh - 250px)" />
+  </div>
 </template>
 
 <script>
-import { BCard } from 'bootstrap-vue'
 import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
 
 export default {
   components: {
-    BCard,
     AppEchartStackedArea,
   },
   data() {
     return {
+      visible: false,
       option: {
-        xAxisData: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12', '14/12', '15/12', '16/12', '17/12', '18/12', '19/12', '20/12'],
+        xAxisData: ['W1', 'W2', 'W3', 'W4', 'W5'],
         series: [
           {
-            name: 'Point One',
+            name: 'ENGAGED',
             type: 'line',
             stack: 'Total',
             areaStyle: {},
             showSymbol: false,
+            color: '#9a4964',
             lineStyle: {
               width: 0,
             },
-            data: [220, 332, 281, 334, 290, 430, 310, 350, 510, 550, 720, 650, 760, 850],
+            data: [170, 170, 120, 90, 150],
           },
           {
-            name: 'Point Two',
+            name: 'QUOTED',
             type: 'line',
             stack: 'Total',
+            color: '#4f964d',
             showSymbol: false,
             areaStyle: {},
             lineStyle: {
               width: 0,
             },
-            data: [220, 282, 191, 534, 290, 430, 350, 300, 580, 463, 380, 600, 560, 840],
+            data: [180, 180, 130, 100, 160],
           },
           {
-            name: 'Point Three',
+            name: 'ESTIMATED',
             type: 'line',
             stack: 'Total',
+            color: '#186b83',
             showSymbol: false,
             areaStyle: {},
             lineStyle: {
               width: 0,
             },
-            data: [750, 232, 601, 154, 390, 330, 410, 510, 420, 320, 580, 690, 650, 800],
+            data: [160, 160, 110, 80, 140],
+          },
+          {
+            name: 'REQUESTED NOT ENGAGED',
+            type: 'line',
+            stack: 'Total',
+            showSymbol: false,
+            color: '#554bb8',
+            areaStyle: {},
+            lineStyle: {
+              width: 0,
+            },
+            data: [150, 150, 100, 70, 130],
           },
         ],
       },

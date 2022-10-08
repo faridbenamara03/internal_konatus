@@ -26,6 +26,10 @@ export default {
       type: Object,
       default: null,
     },
+    headerVisible: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {

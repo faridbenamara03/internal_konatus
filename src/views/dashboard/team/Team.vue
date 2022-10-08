@@ -38,6 +38,85 @@
             </b-button>
           </div>
         </div>
+        <div
+          v-if="tabIndex === 1"
+          class="action-bar"
+        >
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': isChartView}"
+              @click="handleChangeViewMode(true)"
+            >
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': !isChartView}"
+              @click="handleChangeViewMode(false)"
+            >
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+            >
+              <b-icon icon="pencil" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+            >
+              <feather-icon
+                icon="DollarSignIcon"
+              />
+            </b-button>
+          </b-button-group>
+        </div>
+        <div
+          v-if="tabIndex === 2"
+          class="action-bar justify-content-between"
+        >
+          <b-button
+            variant="flat-primary"
+            @click="handleUpdate"
+          >
+            <feather-icon
+              icon="RotateCwIcon"
+            />
+            Update
+          </b-button>
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': isChartView}"
+              @click="handleChangeViewMode(true)"
+            >
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': !isChartView}"
+              @click="handleChangeViewMode(false)"
+            >
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
+          <div class="d-flex action-group">
+            <b-button variant="flat-primary">
+              <circle-icon size="1x" class="custom-class"></circle-icon>
+              Real
+            </b-button>
+            <b-button variant="flat-primary">
+              <calendar-icon size="1x" class="custom-class"></calendar-icon>
+              Engaged
+            </b-button>
+            <b-button variant="flat-primary">
+              <layers-icon size="1x" class="custom-class"></layers-icon>
+              Estimated
+            </b-button>
+          </div>
+        </div>
         <b-tab
           title="Demand"
         >
@@ -53,9 +132,7 @@
         <b-tab
           title="Control"
         >
-          <b-card-text>
-            Carrot cake dragée chocolate.
-          </b-card-text>
+          <Control />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -127,13 +204,16 @@
 
 <script>
 import {
-  BButton, BCard, BCardText, BCardBody, BTabs, BTab,
+  BButton, BButtonGroup, BCard, BCardText, BCardBody, BTabs, BTab,
 } from 'bootstrap-vue'
+import { CalendarIcon, LayersIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
 import Demand from './components/Demand.vue'
+import Control from './components/Control.vue'
 
 export default {
   components: {
+    BButtonGroup,
     BButton,
     BCard,
     BCardText,
@@ -141,6 +221,10 @@ export default {
     BTabs,
     BTab,
     Demand,
+    CircleIcon,
+    CalendarIcon,
+    LayersIcon,
+    Control
   },
   props: {
     data: {

@@ -28,6 +28,6 @@ module.exports = {
     "multiline": "off",
     "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": "off",
-    "quotes": ["ignore", "double"]
+    "quotes": ["off", "double"]
   }
 }
