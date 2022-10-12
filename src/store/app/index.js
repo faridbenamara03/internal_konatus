@@ -5,6 +5,7 @@ export default {
   state: {
     windowWidth: 0,
     shallShowOverlay: false,
+    loaderModalShow: false,
     teamsstate: [
       {
         id: 1,
@@ -248,6 +249,7 @@ export default {
       if (windowWidth >= $themeBreakpoints.sm) return 'sm'
       return 'xs'
     },
+    loaderModalShow: state => state.loaderModalShow
   },
   mutations: {
     UPDATE_WINDOW_WIDTH(state, val) {
@@ -292,8 +294,14 @@ export default {
       const data1 = data.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(regex, '').replace(/'/g, '"')
       const parsedData = JSON.parse(data1)
       state.teamsstate = parsedData
+      state.loaderModalShow = !state.loaderModalShow
+      // commit('TOGGLE_IMPORT_LOADER_MODAL_V')
       // .todo axios request
-    }
+    },
+    TOGGLE_IMPORT_LOADER_MODAL_V(state) {
+      state.loaderModalShow = !state.loaderModalShow
+      // .todo axios request
+    },
   },
   actions: {},
 }

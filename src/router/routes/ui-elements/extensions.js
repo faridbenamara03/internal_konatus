@@ -153,21 +153,21 @@ export default [
       ],
     },
   },
-  // {
-  //   path: '/extensions/tree',
-  //   name: 'extensions-tree',
-  //   component: () => import('@/views/extensions/tree/Tree.vue'),
-  //   meta: {
-  //     pageTitle: 'Tree',
-  //     breadcrumb: [
-  //       {
-  //         text: 'Extensions',
-  //       },
-  //       {
-  //         text: 'Tree',
-  //         active: true,
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    path: '/extensions/tree',
+    name: 'extensions-tree',
+    component: () => import('@/views/extensions/tree/Tree.vue'),
+    meta: {
+      pageTitle: 'Tree',
+      breadcrumb: [
+        {
+          text: 'Extensions',
+        },
+        {
+          text: 'Tree',
+          active: true,
+        },
+      ],
+    },
+  },
 ]

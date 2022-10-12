@@ -56,6 +56,7 @@
 <script>
 import { BButton, BModal } from 'bootstrap-vue'
 import vue2Dropzone from 'vue2-dropzone'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
@@ -96,24 +97,41 @@ export default {
       },
       tempAttachments: [],
       attachments: [],
-      projectdata: []
     }
   },
   methods: {
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
+    },
     hideModal() {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      this.$emit('onSubmit', this.data)
-      this.$refs['my-modal'].hide()
-      this.$store.commit('app/IMPORT_WBS', this.projectdata)
+      if (this.attachments.length === 0) {
+        this.showToast('warning', 'Please select file.')
+        // this.$store.commit('app/IMPORT_WBS', this.attachments)
+      } else {
+        // this.$emit('onSubmit', this.data)
+        this.$refs['my-modal'].hide()
+        this.$store.commit('app/IMPORT_WBS', this.attachments)
+        this.$store.commit('app/TOGGLE_IMPORT_LOADER_MODAL_V')
+        this.showToast('success', 'Success import')
+      }
     },
     fileAdded(file) {
       console.log('File Dropped => ', file)
 
       const reader = new FileReader()
       reader.onload = e => {
-        this.projectdata = e.target.result
+        this.attachments = e.target.result
       }
       reader.readAsText(file)
 

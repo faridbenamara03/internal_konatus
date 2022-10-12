@@ -67,6 +67,7 @@
     </template>
     <modal-request-quote :data="teams" @onSubmit="handleRequestQuote" />
     <import-modal />
+    <import-loader-modal />
   </b-card>
 </template>
 
@@ -82,6 +83,7 @@ import {
 import moment from 'moment'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
+import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 
@@ -722,6 +724,7 @@ export default {
     Demand,
     Reporting,
     ImportModal,
+    ImportLoaderModal,
     ModalRequestQuote,
   },
   props: {
