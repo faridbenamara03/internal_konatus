@@ -41,6 +41,47 @@
             </b-button>
           </b-button-group>
         </div>
+        <div
+          v-if="tabIndex === 2"
+          class="action-bar justify-content-between"
+        >
+          <b-button
+            variant="flat-primary"
+            @click="handleUpdate"
+          >
+            <feather-icon
+              icon="RotateCwIcon"
+            />
+            Update
+          </b-button>
+          <b-button-group>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': isChartView}"
+              @click="handleChangeViewMode(false)"
+            >
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': !isChartView}"
+              @click="handleChangeViewMode(true)"
+            >
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
+          <div class="d-flex action-group">
+            <div class="d-flex">
+              <div class="rounded" style="background-color:#8b3b4e;height:15px;width:15px;margin-top:3px;margin-right: 3px;" /><div>ENGAGED</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded" style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" /><div>QUOTED</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded" style="background-color:#0a5666;height:15px;width:15px;margin-top:3px;margin-right: 3px;" /><div>ESTIMATED</div>
+            </div>
+          </div>
+        </div>
         <b-tab
           title="Demand"
           :class="{'has-default-card-bg': !isChartView}"
@@ -61,7 +102,7 @@
           title="Control"
           class="no-action-bar"
         >
-          <Control :data="items" />
+          <Control :data="items" :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">

@@ -140,7 +140,8 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      this.$emit('onSubmit', this.data)
+      this.$store.commit('app/SUBMIT_TEAM_REQUEST_QUOTE', this.data)
+      // this.$emit('onSubmit', this.data)
       this.$refs['my-modal'].hide()
     },
   },

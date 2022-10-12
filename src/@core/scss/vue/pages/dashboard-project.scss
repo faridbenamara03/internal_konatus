@@ -28,7 +28,7 @@
           }
         }
         .tab-pane {
-          overflow: scroll;
+          overflow: auto;
           max-height: calc(100vh - 16rem);
           .project-demand-view {
             display: table;

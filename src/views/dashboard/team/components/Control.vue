@@ -1,18 +1,50 @@
 <template>
-  <div style="width:100%;">
-    <app-echart-stacked-area :option-data="option" :header-visible="false" style="width:100%;height:calc(100vh - 250px)" />
+  <div style="width:100%;" :class="{'has-chart': isChartView}">
+    <app-echart-stacked-area v-if="!isChartView" :option-data="option" :header-visible="false"
+      style="width:100%;height:calc(100vh - 250px)" />
+    <div v-if="isChartView">
+      <TableComponent />
+    </div>
   </div>
 </template>
 
+<style scoped>
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .sub-main {
+    flex: 1;
+    text-align: center;
+  }
+</style>
+
 <script>
 import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
+import TableComponent from './sub-component/table.vue'
 
 export default {
   components: {
     AppEchartStackedArea,
+    TableComponent
+  },
+  props: {
+    isChartView: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
+      dark: true,
+      fields: ['first_name', 'last_name', 'age'],
+      items: [
+        { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+        { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+        { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+        { age: 38, first_name: 'Jami', last_name: 'Carney' }
+      ],
       visible: false,
       option: {
         xAxisData: ['W1', 'W2', 'W3', 'W4', 'W5'],

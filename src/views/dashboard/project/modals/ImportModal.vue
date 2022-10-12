@@ -1,40 +1,19 @@
 <template>
-  <b-modal
-    id="modal-import"
-    ref="my-modal"
-    title="Import file"
-    centered
-    no-fade
-    hide-backdrop
-    static
-  >
+  <b-modal id="modal-import" ref="my-modal" title="Import file" centered no-fade hide-backdrop static>
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
         Import file
       </h5>
       <div class="modal-actions">
-        <b-button
-          variant="outline-primary"
-          @click="hideModal"
-        >
-          <feather-icon
-            icon="XIcon"
-            size="18"
-          />
+        <b-button variant="outline-primary" @click="hideModal">
+          <feather-icon icon="XIcon" size="18" />
         </b-button>
       </div>
     </template>
-    <dropzone
-      id="dropzone"
-      ref="myVueDropzone"
-      :use-custom-slot="true"
-      :options="dropzoneOptions"
-      @vdropzone-upload-progress="uploadProgress"
-      @vdropzone-file-added="fileAdded"
-      @vdropzone-sending-multiple="sendingFiles"
-      @vdropzone-success-multiple="success"
-    >
+    <dropzone id="dropzone" ref="myVueDropzone" :use-custom-slot="true" :options="dropzoneOptions"
+      @vdropzone-upload-progress="uploadProgress" @vdropzone-file-added="fileAdded"
+      @vdropzone-sending-multiple="sendingFiles" @vdropzone-success-multiple="success">
       <div class="dropzone-container">
         <div class="file-selector">
           Drop files here or
@@ -42,57 +21,32 @@
             <span> click to import </span>
           </p>
           <figure>
-            <feather-icon
-              icon="UploadCloudIcon"
-              size="48"
-            />
+            <feather-icon icon="UploadCloudIcon" size="48" />
           </figure>
         </div>
       </div>
     </dropzone>
-    <div
-      v-if="tempAttachments.length > 0"
-      class="mt-1"
-    >
-      <div
-        v-for="tempAttachment in tempAttachments"
-        :key="tempAttachment.id"
-        class="file-details"
-      >
+    <div v-if="tempAttachments.length > 0" class="mt-1">
+      <div v-for="tempAttachment in tempAttachments" :key="tempAttachment.id" class="file-details">
         <div class="file-name">
           <figure>
-            <feather-icon
-              icon="CheckIcon"
-              class="text-success"
-            />
+            <feather-icon icon="CheckIcon" class="text-success" />
           </figure>
-          <p
-            ref="attachmentTitle"
-            class="pl-1"
-          >
+          <p ref="attachmentTitle" class="pl-1">
             {{ tempAttachment.title }} ({{ tempAttachment.size }} bytes)
           </p>
         </div>
         <figure @click="cancelUpload">
-          <feather-icon
-            icon="Trash2Icon"
-            class="text-danger"
-          />
+          <feather-icon icon="Trash2Icon" class="text-danger" />
         </figure>
       </div>
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button
-        variant="outline-primary"
-        @click="hideModal"
-      >
+      <b-button variant="outline-primary" @click="hideModal">
         Cancel
       </b-button>
-      <b-button
-        variant="primary"
-        @click="handleSave"
-      >
+      <b-button variant="primary" @click="handleSave">
         Upload
       </b-button>
     </template>
@@ -142,6 +96,7 @@ export default {
       },
       tempAttachments: [],
       attachments: [],
+      projectdata: []
     }
   },
   methods: {
@@ -151,9 +106,17 @@ export default {
     handleSave() {
       this.$emit('onSubmit', this.data)
       this.$refs['my-modal'].hide()
+      this.$store.commit('app/IMPORT_WBS', this.projectdata)
     },
     fileAdded(file) {
       console.log('File Dropped => ', file)
+
+      const reader = new FileReader()
+      reader.onload = e => {
+        this.projectdata = e.target.result
+      }
+      reader.readAsText(file)
+
       // Construct your file object to render in the UI
       const attachment = {}
       attachment.id = file.upload.uuid

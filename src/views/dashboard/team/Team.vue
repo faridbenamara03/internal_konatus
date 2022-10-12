@@ -90,29 +90,38 @@
             <b-button
               variant="outline-primary"
               :class="{'active': isChartView}"
-              @click="handleChangeViewMode(true)"
+              @click="handleChangeViewMode(false)"
             >
               <b-icon icon="bar-chart-line" />
             </b-button>
             <b-button
               variant="outline-primary"
               :class="{'active': !isChartView}"
-              @click="handleChangeViewMode(false)"
+              @click="handleChangeViewMode(true)"
             >
               <b-icon icon="table" />
             </b-button>
           </b-button-group>
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
-              <circle-icon size="1x" class="custom-class"></circle-icon>
+              <circle-icon
+                size="1x"
+                class="custom-class"
+              />
               Real
             </b-button>
             <b-button variant="flat-primary">
-              <calendar-icon size="1x" class="custom-class"></calendar-icon>
+              <calendar-icon
+                size="1x"
+                class="custom-class"
+              />
               Engaged
             </b-button>
             <b-button variant="flat-primary">
-              <layers-icon size="1x" class="custom-class"></layers-icon>
+              <layers-icon
+                size="1x"
+                class="custom-class"
+              />
               Estimated
             </b-button>
           </div>
@@ -132,7 +141,7 @@
         <b-tab
           title="Control"
         >
-          <Control />
+          <Control :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -238,14 +247,15 @@ export default {
       tabIndex: 0,
       openActivityModal: false,
       selectedActivity: {},
+      isChartView: false,
     }
   },
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
     },
-    handleRequestQuote(res) {
-      console.log(res)
+    handleChangeViewMode(mode) {
+      this.isChartView = mode
     },
     handleUpdate() {
       this.team = {
