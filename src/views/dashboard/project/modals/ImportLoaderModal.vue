@@ -93,12 +93,12 @@ export default {
   },
   // data() {
   //   return {
-  //     loadershow: this.$store.state.app.loaderModalShow,
+  //     loadershow: this.$store.state.teamState.loaderModalShow,
   //   }
   // },
   computed: {
     loadershow() {
-      return this.$store.state.app.loaderModalShow
+      return this.$store.state.teamState.loaderModalShow
     }
   },
   methods: {

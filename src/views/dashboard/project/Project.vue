@@ -741,6 +741,11 @@ export default {
       selectedActivity: {},
     }
   },
+  computed: {
+    selectedPhases() {
+      return []
+    }
+  },
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
@@ -753,7 +758,7 @@ export default {
       //   console.log(res)
       // })
       // console.log('workElement: ', workElement)
-      this.teams = this.$store.state.app.teamsstate // Populated state after "Update" from Vuex stroe
+      this.teams = this.$store.state.teamState.teamsstate // Populated state after "Update" from Vuex stroe
     },
   },
   // computed: {

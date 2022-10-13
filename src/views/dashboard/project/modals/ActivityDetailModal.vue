@@ -76,13 +76,14 @@
       <div class="form-group">
         <div class="select-box">
           <label>Title</label>
-          <b-form-input />
+          <b-form-input @input="handleInput('title', $event)"/>
         </div>
       </div>
       <div class="form-group">
         <div class="select-box">
           <label>Description</label>
           <b-form-textarea
+            @input="handleInput('description', $event)"
             rows="5"
           />
         </div>
@@ -102,8 +103,9 @@
         <div class="select-box">
           <label>Team Assigned</label>
           <v-select
+          @input="teamSelectHandle"
             v-model="selectedTeam"
-            :options="['Team A', 'Team B']"
+            :options="teamdata"
             placeholder="Select Team"
             outlined
           />
@@ -190,6 +192,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    teamdata: {
+      type: Array,
+      default: () => []
+    },
     isOpen: Boolean,
   },
   data() {
@@ -205,12 +211,21 @@ export default {
     },
   },
   methods: {
+    handleInput(field, value) {
+      this.data.phase[field] = value
+      console.log(field)
+      console.log(value)
+    },
     hideModal() {
       this.$emit('hideModal')
     },
     handleSave() {
-      this.$emit('hideModal')
+      console.log(this.data.phase)
+      // this.$emit('hideModal')
     },
+    teamSelectHandle(value) {
+      console.log(value)
+    }
   },
 }
 </script>

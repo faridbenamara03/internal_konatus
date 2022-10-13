@@ -113,6 +113,7 @@
 import {
   BButton, BCollapse, BFormInput, BModal, VBToggle,
 } from 'bootstrap-vue'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   directives: {
@@ -140,9 +141,21 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      this.$store.commit('app/SUBMIT_TEAM_REQUEST_QUOTE', this.data)
+      this.$store.commit('teamState/SUBMIT_TEAM_REQUEST_QUOTE', this.data)
+      this.showToast('success', 'Success Request Quote.')
       // this.$emit('onSubmit', this.data)
       this.$refs['my-modal'].hide()
+    },
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
     },
   },
 }

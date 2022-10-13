@@ -51,7 +51,7 @@
         <span>New Elementary Activity</span>
       </b-button>
     </div>
-    <activity-detail-modal :is-open="openActivityModal" :data="selectedActivity" @hideModal="hideModal" />
+    <activity-detail-modal :is-open="openActivityModal" :data="selectedActivity" @hideModal="hideModal" :teamdata="teamarr" />
   </div>
 </template>
 
@@ -82,6 +82,11 @@ export default {
       selectedActivity: {},
     }
   },
+  computed: {
+    teamarr() {
+      return this.data.map(team => team.name)
+    }
+  },
   methods: {
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
@@ -90,7 +95,7 @@ export default {
       console.log(res)
     },
     handleCheckAll(team) {
-      this.$store.commit('app/MUTATION_TEAM_PHASE_SELECT_ALL', team)
+      this.$store.commit('teamState/TEAM_PHASE_SELECT_ALL', team)
     },
     handleActivityDetails(phase, team) {
       this.selectedActivity = { team, phase }

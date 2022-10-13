@@ -117,12 +117,12 @@ export default {
     handleSave() {
       if (this.attachments.length === 0) {
         this.showToast('warning', 'Please select file.')
-        // this.$store.commit('app/IMPORT_WBS', this.attachments)
+        // this.$store.commit('teamState/IMPORT_WBS', this.attachments)
       } else {
         // this.$emit('onSubmit', this.data)
         this.$refs['my-modal'].hide()
-        this.$store.commit('app/IMPORT_WBS', this.attachments)
-        this.$store.commit('app/TOGGLE_IMPORT_LOADER_MODAL_V')
+        this.$store.commit('teamState/IMPORT_WBS', this.attachments)
+        this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V')
         this.showToast('success', 'Success import')
       }
     },
