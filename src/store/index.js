@@ -13,10 +13,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     app,
-    teamState,
     appConfig,
     verticalMenu,
     'app-ecommerce': ecommerceStoreModule,
+    teamState,
   },
   strict: process.env.DEV,
 })

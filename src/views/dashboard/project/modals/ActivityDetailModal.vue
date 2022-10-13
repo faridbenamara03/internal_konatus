@@ -76,7 +76,7 @@
       <div class="form-group">
         <div class="select-box">
           <label>Title</label>
-          <b-form-input @input="handleInput('title', $event)"/>
+          <b-form-input :value="data.phase.name" @input="handleInput('name', $event)"/>
         </div>
       </div>
       <div class="form-group">
