@@ -1,167 +1,118 @@
 <template>
-  <div
-    class="demand-view"
-    :class="{'has-chart': isChartView}"
-  >
-    <b-table
-      v-if="!isChartView"
-      :items="data"
-      :fields="fields"
-      :tbody-tr-class="rowClass"
-      borderless
-      responsive
-    >
-      <template #cell(show_details)="row">
-        <div
-          class="d-flex detail align-center"
-          @click="row.toggleDetails"
-        >
-          <feather-icon
-            v-if="row.item.children"
-            :icon="row.detailsShowing ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          <p class="m-0 text-uppercase">
-            {{ row.item.name }}
-          </p>
-        </div>
-      </template>
-
-      <template #cell(budget)="row">
-        {{ formatCurrency(row.item.budget) }}
-      </template>
-
-      <template #cell(deadline)="row">
-        {{ row.item.deadline ? dateFormat(row.item.deadline) : '' }}
-      </template>
-
-      <template #row-details="row">
-        <div
-          v-for="detail in row.item.children"
-          :key="detail.name"
-          class="row-detail d-flex align-items-center"
-        >
-          <div class="row-detail--name">
-            <span>
-              {{ detail.name }}
-            </span>
-          </div>
-          <div class="row-detail--form">
-            <v-select
-              v-model="detail.priority"
-              :dir="'rtl'"
-              :options="['highest', 'high', 'low', 'lowest']"
-              outlined
-            />
-
-            <b-form-input
-              :dir="'rtl'"
-              :value="formatCurrency(detail.budget)"
-            />
-            <b-form-input
-              :dir="'rtl'"
-              :value="dateFormat(detail.deadline)"
-            />
-            <div
-              class="d-flex align-items-center justify-content-end"
-            >
-              <b-button variant="flat-primary">
-                <feather-icon icon="Edit2Icon" />
-              </b-button>
-              <b-button variant="flat-primary">
-                <feather-icon icon="DollarSignIcon" />
-              </b-button>
-              <b-button variant="flat-primary">
-                <feather-icon icon="ChevronsRightIcon" />
-              </b-button>
-            </div>
-          </div>
-        </div>
-      </template>
-    </b-table>
-    <div
-      v-if="isChartView"
-      class="d-flex flex-column w-100"
-    >
-      <b-card
-        v-for="(serie, idx) in series"
-        :key="idx"
-        no-body
-        no-footer
-        class="chart-card"
-      >
-        <b-row>
-          <b-col>
-            <h2>Chart Title</h2>
-            <div class="d-flex justify-content-between align-center mt-1">
-              <p class="text-uppercase m-0">
-                Total
-              </p>
-              <p class="m-0">
-                {{ formatCurrency(getTotalValue(serie)) }}
-              </p>
-            </div>
-            <vue-apex-charts
-              type="bar"
-              height="248"
-              :options="chartOptions"
-              :series="serie"
-            />
-          </b-col>
-          <b-col>
-            <b-row cols="2">
-              <b-col
-                v-for="(color, index) in chartOptions.colors"
-                :key="index"
-                class="mb-1"
-              >
-                <div class="d-flex justify-content-between align-center mb-1">
-                  <p class="text-capitalize m-0">
-                    {{ chartOptions.xaxis.categories[index] }}
-                  </p>
-                  <p class="m-0">
-                    {{ getPercent(serie[0].data[index], getTotalValue(serie)) }}%
-                  </p>
+  <div class="demand-view">
+    <div class="p-1">
+      <b-button variant="flat-primary">
+        <feather-icon icon="RotateCwIcon" />
+        Update
+      </b-button>
+    </div>
+    <div class="border-top border-bottom">
+      <div v-for="(item, index) in data" :key="index" class="d-flex">
+        <div style="flex:4" class="border-right pr-2 pl-2">
+          <div class="border-bottom">
+            <div class="row-custom boldTxt">
+              <div class="dataitem dataTitleItem d-flex">
+                <div class="mr-1" style="cursor:pointer"
+                  v-on:click="onCollapseHandle(index, computedOpenState.openState)">
+                  <div v-if="index === computedOpenState.index && computedOpenState.openState === 'none'">
+                    <feather-icon icon="ChevronRightIcon" />
+                  </div>
+                  <div v-else>
+                    <feather-icon icon="ChevronDownIcon" />
+                  </div>
                 </div>
-                <b-progress :max="getTotalValue(serie)">
-                  <b-progress-bar
-                    :value="serie[0].data[index]"
-                    :style="{ 'background-color': color }"
-                  />
-                </b-progress>
-                <p class="mt-1">
-                  {{ formatCurrency(serie[0].data[index]) }}
-                </p>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-card>
+                {{ item.name }}
+              </div>
+            </div>
+            <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
+              :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+              <div class="dataitem dataSubTitleItem">{{ item1.name }}</div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:3" class="border-right">
+          <div v-if="index === 0" class="row-custom">
+            <div class="dataitem">{{ fields[0] }}</div>
+          </div>
+          <div v-else class="row-custom"></div>
+          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+            <div class="dataitem">{{ item1.budget_team }}</div>
+          </div>
+        </div>
+        <div style="flex:3" class="border-right">
+          <div v-if="index === 0" class="row-custom">
+            <div class="dataitem">{{ fields[1] }}</div>
+          </div>
+          <div v-else class="row-custom"></div>
+          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+            <div class="dataitem">{{ item1.budget_engaged }}</div>
+          </div>
+        </div>
+        <div style="flex:3">
+          <div v-if="index === 0" class="row-custom">
+            <div class="dataitem">{{ fields[2] }}</div>
+          </div>
+          <div v-else class="row-custom"></div>
+          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+            <div class="dataitem">{{ item1.real_estimated }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+.row-custom {
+  height: 50px;
+  width: 100%;
+  display: flex;
+}
+
+.dataTitleItem {
+  margin-left: 0px !important;
+}
+
+.dataSubTitleItem {
+  margin-left: 30px !important;
+}
+
+.boldTxt {
+  font-weight: bold;
+  color: white;
+}
+
+.dataitem {
+  margin: auto;
+}
+
+.border-top {
+  border-top: 1px solid grey;
+}
+
+.border-bottom {
+  border-bottom: 1px solid grey;
+}
+
+.border-right {
+  border-right: 1px solid grey;
+}
+
+.border-left {
+  border-left: 1px solid grey;
+}
+</style>
+
 <script>
-import {
-  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BTable,
-} from 'bootstrap-vue'
 import moment from 'moment'
-import VueApexCharts from 'vue-apexcharts'
-import vSelect from 'vue-select'
+import { BButton } from 'bootstrap-vue'
 
 export default {
   components: {
-    BButton,
-    BCard,
-    BFormInput,
-    BRow,
-    BCol,
-    BProgress,
-    BProgressBar,
-    BTable,
-    VueApexCharts,
-    vSelect,
+    BButton
   },
   props: {
     data: {
@@ -179,6 +130,7 @@ export default {
   },
   data() {
     return {
+      collapseOpen: { index: 0, openState: 'flex' },
       series: [[{
         data: [120, 240, 2040, 1920, 3960, 3720],
       }],
@@ -256,7 +208,16 @@ export default {
       },
     }
   },
+  computed: {
+    computedOpenState() {
+      return this.collapseOpen
+    }
+  },
   methods: {
+    onCollapseHandle(index, state) {
+      console.log(index, state)
+      this.collapseOpen = { index, openState: state === 'none' ? 'flex' : 'none' }
+    },
     dateFormat(date) {
       return moment(new Date(date)).format('MM-DD-YYYY')
     },

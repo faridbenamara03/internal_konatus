@@ -38,8 +38,8 @@
         </div>
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main pt-1 pb-1" v-for="item_child in item.data" v-bind:key="item_child"
-          :style="'margin: 0.5px; background-color:' + item_child.bg + '; color:' + item_child.clr">
+        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="item_child in item.data" v-bind:key="item_child"
+          :style="'margin: 0.5px; background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor: pointer'">
           {{ item_child.data }}
         </div>
       </div>
@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
+    <team-detail-modal />
   </div>
 </template>
 
@@ -80,7 +81,12 @@
 </style>
 
 <script>
+import TeamDetailModal from './teamDetailModal.vue'
+
 export default {
+  components: {
+    TeamDetailModal,
+  },
   data() {
     return {
       data_source: {

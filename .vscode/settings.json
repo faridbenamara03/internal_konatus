@@ -10,7 +10,7 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": false,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.formatOnSave": false
   },
   "[typescript]": {
@@ -20,5 +20,8 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Wscats.vue"
   }
 }

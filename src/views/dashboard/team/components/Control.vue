@@ -1,9 +1,14 @@
 <template>
   <div style="width:100%;" :class="{'has-chart': isChartView}">
-    <app-echart-stacked-area v-if="!isChartView" :option-data="option" :header-visible="false"
-      style="width:100%;height:calc(100vh - 250px)" />
-    <div v-if="isChartView">
-      <TableComponent />
+    <div v-if="!resourceAddedT" >
+      <app-echart-stacked-area v-if="!isChartView" :option-data="option" :header-visible="false"
+        style="width:100%;height:calc(100vh - 250px)" />
+      <div v-if="isChartView">
+        <TableComponent />
+      </div>
+    </div>
+    <div v-else >
+      <resource-added-result />
     </div>
   </div>
 </template>
@@ -22,18 +27,25 @@
 
 <script>
 import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
+import ResourceAddedResult from '@/views/dashboard/team/components/sub-component/resourceAddedResult.vue'
 import TableComponent from './sub-component/table.vue'
 
 export default {
   components: {
     AppEchartStackedArea,
-    TableComponent
+    TableComponent,
+    ResourceAddedResult
   },
   props: {
     isChartView: {
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    resourceAddedT() {
+      return this.$store.state.teamState.resourceAdded
+    }
   },
   data() {
     return {

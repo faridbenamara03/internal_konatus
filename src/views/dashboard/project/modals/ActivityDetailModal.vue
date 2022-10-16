@@ -1,14 +1,6 @@
 <template>
-  <b-modal
-    id="modal-activity-detail"
-    v-model="show"
-    title="Activity Details"
-    centered
-    no-fade
-    hide-backdrop
-    static
-    @hide="hideModal"
-  >
+  <b-modal id="modal-activity-detail" v-model="show" title="Activity Details" centered no-fade hide-backdrop static
+    ref="activity-detail-modal" @hide="hideModal">
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
@@ -16,20 +8,11 @@
       </h5>
       <div class="modal-actions">
         <b-button variant="outline-primary">
-          <feather-icon
-            icon="RefreshCwIcon"
-            size="18"
-          />
+          <feather-icon icon="RefreshCwIcon" size="18" />
           <span class="pl-1">External Sync</span>
         </b-button>
-        <b-button
-          variant="outline-primary"
-          @click="hideModal"
-        >
-          <feather-icon
-            icon="XIcon"
-            size="18"
-          />
+        <b-button variant="outline-primary" @click="hideModal">
+          <feather-icon icon="XIcon" size="18" />
         </b-button>
       </div>
     </template>
@@ -41,33 +24,18 @@
         </p>
       </div>
       <div class="form-group btn-group">
-        <b-button
-          v-b-modal.modal-activity-split
-          variant="outline-primary"
-        >
-          <feather-icon
-            icon="GitPullRequestIcon"
-            size="18"
-          />
+        <b-button v-b-modal.modal-activity-split variant="outline-primary">
+          <feather-icon icon="GitPullRequestIcon" size="18" />
           <span class="pl-1">Split</span>
         </b-button>
-        <b-button
-          v-b-modal.modal-activity-merge
-          variant="outline-primary"
-        >
-          <feather-icon
-            icon="GitMergeIcon"
-            size="18"
-          />
+        <b-button v-b-modal.modal-activity-merge variant="outline-primary">
+          <feather-icon icon="GitMergeIcon" size="18" />
           <span class="pl-1">Merge</span>
         </b-button>
       </div>
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon
-            icon="AlignLeftIcon"
-            size="18"
-          />
+          <feather-icon icon="AlignLeftIcon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
             Details
           </p>
@@ -76,24 +44,18 @@
       <div class="form-group">
         <div class="select-box">
           <label>Title</label>
-          <b-form-input :value="data.phase.name" @input="handleInput('name', $event)"/>
+          <b-form-input :value="data.phase.title" @input="handleInput('title', $event)" />
         </div>
       </div>
       <div class="form-group">
         <div class="select-box">
           <label>Description</label>
-          <b-form-textarea
-            @input="handleInput('description', $event)"
-            rows="5"
-          />
+          <b-form-textarea :value="data.phase.description" @input="handleInput('description', $event)" rows="5" />
         </div>
       </div>
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon
-            icon="UsersIcon"
-            size="18"
-          />
+          <feather-icon icon="UsersIcon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
             team
           </p>
@@ -102,30 +64,18 @@
       <div class="form-group">
         <div class="select-box">
           <label>Team Assigned</label>
-          <v-select
-          @input="teamSelectHandle"
-            v-model="selectedTeam"
-            :options="teamdata"
-            placeholder="Select Team"
-            outlined
-          />
+          <v-select @input="teamSelectHandle" v-model="selectedTeam" :options="teamdata" placeholder="Select Team"
+            outlined />
         </div>
       </div>
       <div class="form-group has-switch">
         <div class="detail-box">
-          <feather-icon
-            icon="BarChart2Icon"
-            size="18"
-          />
+          <feather-icon icon="BarChart2Icon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
             effort
           </p>
         </div>
-        <b-form-checkbox
-          checked="true"
-          switch
-          inline
-        >
+        <b-form-checkbox checked="true" switch inline>
           Show details
         </b-form-checkbox>
       </div>
@@ -134,32 +84,42 @@
           <div class="select-group--sub">
             <div class="select-box mb-0">
               <label>Load</label>
-              <b-form-input />
+              <b-form-input :value="data.phase.effort.load" />
             </div>
             <div class="select-box mb-0">
               <label>Duration</label>
-              <b-form-input />
+              <b-form-input :value="data.phase.effort.duration" />
             </div>
             <div class="select-box mb-0">
               <label>FTE</label>
-              <b-form-input />
+              <b-form-input :value="data.phase.effort.fte" />
             </div>
           </div>
+        </div>
+      </div>
+      <div class="d-flex" style="justify-content:end">
+        <div>
+          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;" toggle-class="text-decoration-none" no-caret>
+            <template #button-content>
+              <span style="color:#7367F0">
+                Effort per Skill
+                <feather-icon icon="ChevronDownIcon" class="ml-1" />
+              </span>
+            </template>
+            <b-dropdown-item>Skill 1</b-dropdown-item>
+            <b-dropdown-item>Skill 2</b-dropdown-item>
+            <b-dropdown-item active>Skill 3</b-dropdown-item>
+            <b-dropdown-item disabled>Skill 4</b-dropdown-item>
+          </b-dropdown>
         </div>
       </div>
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button
-        variant="outline-primary"
-        @click="hideModal"
-      >
+      <b-button variant="outline-primary" @click="hideModal">
         Cancel
       </b-button>
-      <b-button
-        variant="primary"
-        @click="handleSave"
-      >
+      <b-button variant="primary" @click="handleSave">
         Save
       </b-button>
     </template>
@@ -170,7 +130,7 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal,
+  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal, BDropdown, BDropdownItem
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ActivitySplitModal from './ActivitySplitModal.vue'
@@ -186,11 +146,13 @@ export default {
     BFormTextarea,
     BModal,
     vSelect,
+    BDropdown,
+    BDropdownItem
   },
   props: {
     data: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     teamdata: {
       type: Array,
@@ -213,15 +175,13 @@ export default {
   methods: {
     handleInput(field, value) {
       this.data.phase[field] = value
-      console.log(field)
-      console.log(value)
     },
     hideModal() {
       this.$emit('hideModal')
     },
     handleSave() {
-      console.log(this.data.phase)
-      // this.$emit('hideModal')
+      this.$store.commit('teamState/HANDLE_ACTIVITY_DETAIL_SAVE', this.data.phase)
+      this.$emit('hideModal')
     },
     teamSelectHandle(value) {
       console.log(value)

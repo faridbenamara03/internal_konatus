@@ -1,11 +1,12 @@
+import Vue from 'vue'
+
 export default {
   namespaced: true,
   state: {
-    loaderModalShow: false,
-    teamsstate: [
+    teamsStoreData: [
       {
         id: 1,
-        name: 'team a',
+        name: 'team a_updated',
         activities: null,
         estimate: null,
         demand: null,
@@ -17,67 +18,95 @@ export default {
               phaseV: 1,
               name: 'Install software',
               priority: 'Highest',
+              title: 'Escavate foundations',
               gate: 1,
-              isSelected: true,
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
               activityId: '1.28.17.1.55',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              dependency: [
+                'Epic 1',
+                'Epic 2',
+                'Epic 3',
+              ]
             }
           ],
           [
             {
               phaseV: 2,
               name: 'Develop control software',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              title: 'Find uranium',
+              activityId: '1.28.17.1.1320',
+              effort: {
+                load: 153,
+                duration: 226,
+                fte: 380
+              },
+              dependency: [
+                'Epic r',
+                'Epic d',
+                'Epic a',
+              ]
             }
           ],
           [
             {
               phaseV: 3,
               name: 'Develop control software...',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 3,
-              isSelected: true,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.1.1261',
             },
             {
               phaseV: 3,
               name: 'Develop control software...',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.1.127',
             },
             {
               phaseV: 3,
               name: 'Develop control software...',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.1.128',
             }
           ],
           [
             {
               phaseV: 4,
               name: 'Develop control software',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              activityId: '1.28.17.2.120',
             },
             {
               phaseV: 4,
               name: 'Develop control software',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              activityId: '1.28.17.2.121',
             },
           ],
           [
             {
               phaseV: 5,
               name: 'Develop control software...',
+              description: 'Develop control software Description',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.3.126',
             }
           ],
         ],
@@ -95,15 +124,17 @@ export default {
             {
               phaseV: 1,
               name: 'Debugging',
+              description: 'Debugging Description',
               priority: 'Highest',
               gate: 1,
-              activityId: '1.28.17.1.55',
+              activityId: '1.28.17.1.58',
             }
           ],
           [
             {
               phaseV: 2,
               name: 'Improve generator comp...',
+              description: 'Improve generator comp Description',
               priority: 'Highest',
               gate: 2,
               activityId: '1.28.17.1.120',
@@ -135,7 +166,7 @@ export default {
               name: 'Electricity market AI',
               priority: 'Highest',
               gate: 1,
-              activityId: '1.28.17.1.55',
+              activityId: '1.28.17.1.59',
             }
           ],
           [
@@ -144,7 +175,7 @@ export default {
               name: 'Electricity market AI II',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              activityId: '1.28.17.4.120',
             }
           ],
           [
@@ -153,7 +184,7 @@ export default {
               name: 'Electricity market AI III',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.4.126',
             }
           ],
         ],
@@ -173,7 +204,7 @@ export default {
               name: 'Activity Element 58',
               priority: 'Highest',
               gate: 1,
-              activityId: '1.28.17.1.55',
+              activityId: '1.28.17.1.590',
             }
           ],
           [
@@ -182,7 +213,7 @@ export default {
               name: 'Activity Element 123',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              activityId: '1.28.17.5.120',
             }
           ],
           [
@@ -191,7 +222,7 @@ export default {
               name: 'Activity Element 129',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.5.126',
             }
           ],
         ],
@@ -211,7 +242,7 @@ export default {
               name: 'Activity Element 58',
               priority: 'Highest',
               gate: 1,
-              activityId: '1.28.17.1.55',
+              activityId: '1.28.17.6.534',
             }
           ],
           [
@@ -220,7 +251,7 @@ export default {
               name: 'Activity Element 123',
               priority: 'Highest',
               gate: 2,
-              activityId: '1.28.17.1.120',
+              activityId: '1.28.17.6.120',
             }
           ],
           [
@@ -229,19 +260,21 @@ export default {
               name: 'Activity Element 129',
               priority: 'Highest',
               gate: 3,
-              activityId: '1.28.17.1.126',
+              activityId: '1.28.17.7.126',
             }
           ],
         ],
       },
-    ]
+    ],
+    loaderModalShow: false,
+    teamsstate: [],
+    resourceAdded: false
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
   },
   mutations: {
     TEAM_PHASE_SELECT_ALL(state, team) {
-      console.log(team)
       let allselected = true
       team.phases.forEach(element => {
         element.forEach(phase => {
@@ -273,19 +306,70 @@ export default {
       // .todo axios request
     },
     IMPORT_WBS(state, data) {
-      console.log(data)
-      const regex = /,(?!\s*?[{["'\w])/g
-      const data1 = data.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(regex, '').replace(/'/g, '"')
-      const parsedData = JSON.parse(data1)
-      state.teamsstate = parsedData
-      state.loaderModalShow = !state.loaderModalShow
-      // commit('TOGGLE_IMPORT_LOADER_MODAL_V')
+      setTimeout(() => {
+        const regex = /,(?!\s*?[{["'\w])/g
+        const data1 = data.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(regex, '').replace(/'/g, '"')
+        const parsedData = JSON.parse(data1)
+        state.teamsstate = parsedData
+        state.loaderModalShow = !state.loaderModalShow
+        Vue.$toast.success("Imported Successfully!")
+      }, 1000)
       // .todo axios request
     },
     TOGGLE_IMPORT_LOADER_MODAL_V(state) {
       state.loaderModalShow = !state.loaderModalShow
       // .todo axios request
     },
+    RESOURCE_ADD(state) {
+      state.resourceAdded = true
+    },
+    HANDLE_UPDATE(state) {
+      state.teamsstate = state.teamsStoreData
+    },
+    HANDLE_ACTIVITY_DETAIL_SAVE(state, activity) {
+      console.log(state)
+      console.log(activity)
+      // todo: post save request
+      Vue.$toast.success("Saved Successfully!")
+    },
+    HANDLE_ACTIVITY_SPLIT(state, data) {
+      const filteredTeamState = state.teamsstate.map(t => {
+        const temp1 = t.phases.map(t1 => {
+          const temp2 = t1.map(t2 => {
+            if (t2.activityId === data.phase.activityId) {
+              return [data.newA1, data.newA2]
+            }
+            return t2
+          })
+          return temp2.flat()
+        })
+        const tmp3 = { ...t, phases: temp1 }
+        return tmp3
+      })
+      state.teamsstate = filteredTeamState
+      Vue.$toast.success('Splitted Successfully!')
+    },
+    HANDLE_ACTIVITY_MERGE(state, data) {
+      let pushed = false
+      const filteredTeamState = state.teamsstate.map(t => {
+        const temp1 = t.phases.map(t1 => {
+          const temp2 = []
+          t1.forEach(t2 => {
+            if (t2.activityId === data.toMergeId1 || t2.activityId === data.toMergeId2) {
+              if (!pushed) temp2.push(data.merged)
+              pushed = true
+            } else {
+              temp2.push(t2)
+            }
+          })
+          return temp2
+        })
+        const tmp3 = { ...t, phases: temp1 }
+        return tmp3
+      })
+      state.teamsstate = filteredTeamState
+      Vue.$toast.success('Merged Successfully!')
+    }
   },
   actions: {},
 }

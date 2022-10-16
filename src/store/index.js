@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import "vue-toastification/dist/index.css"
 // Modules
 import ecommerceStoreModule from '@/views/apps/e-commerce/eCommerceStoreModule'
 import app from './app'

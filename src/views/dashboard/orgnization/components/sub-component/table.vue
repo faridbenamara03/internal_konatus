@@ -29,7 +29,7 @@
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
         <div class="sub-main pt-1 pb-1" v-for="item_child in item.data" v-bind:key="item_child"
-          :style="'background-color:' + item_child.bg + '; color:' + item_child.clr">
+          :style="'background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor:pointer'">
           {{ item_child.data }}
         </div>
       </div>

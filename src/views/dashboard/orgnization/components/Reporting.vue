@@ -1,280 +1,231 @@
 <template>
-  <div class="report">
-    <div class="reporting-side">
-      <div class="report-block--head">
-        <p class="m-0 text-uppercase">
-          Boston Dynamics
-        </p>
-      </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          Consumer robots
-        </p>
-      </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          military robots
-        </p>
-      </div>
-      <app-collapse accordion>
-        <app-collapse-item title="Accordion Item 1">
-          <b-list-group>
-            <b-list-group-item>Cras justo odio</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Morbi leo risus</b-list-group-item>
-            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
-          </b-list-group>
-        </app-collapse-item>
-      </app-collapse>
-    </div>
-    <div class="reporting-content">
-      <div class="reporting-content--header">
-        <b-button
-          v-b-modal.modal-update
-          variant="flat-primary"
-        >
-          <feather-icon icon="RotateCwIcon" />
-          Update
-        </b-button>
-        <div class="reporting-content-header--badge">
-          <b-button
-            variant="flat-dark"
-            class="d-inline-flex align-items-center"
-          >
-            <span class="badge" />
-            <span>Phase</span>
-          </b-button>
-          <b-button variant="flat-dark">
-            <b-icon
-              icon="diamond-fill"
-              variant="success"
-            />
-            <b-icon
-              icon="triangle-fill"
-              class="rotate-icon"
-              variant="success"
-            />
-            Milestones
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-demand"
-          >
-            <b-icon icon="circle-fill" />
-            Demand
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-engage"
-          >
-            <b-icon icon="circle-fill" />
-            Engaged
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-estimate"
-          >
-            <b-icon icon="circle-fill" />
-            Real Estimated
-          </b-button>
+  <div class="demand-view" :class="{'has-chart': isChartView}">
+    <b-table v-if="!isChartView" :items="data" :fields="fields" :tbody-tr-class="rowClass" responsive>
+      <template #cell(show_details)="row">
+        <div class="d-flex detail align-center" @click="row.toggleDetails">
+          <feather-icon v-if="row.item.children" :icon="row.detailsShowing ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16" class="mr-1" />
+          <p class="m-0 text-uppercase" v-if="row.item.name==='SPACE HOLDER FOR AN OTHER BU'">
+            <feather-icon class="mr-1" icon="PlusIcon" /> {{ row.item.name }}
+          </p>
+          <p class="m-0 text-uppercase" v-else>
+            {{ row.item.name }}
+          </p>
         </div>
-      </div>
-      <div class="reporting-content--body">
-        <div class="timeline-list">
-          <div
-            v-for="(date, index) in reportingDates"
-            :key="index"
-            class="date"
-            :class="{'active': isToday(date)}"
-          >
-            <p
-              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
-              class="month"
-            >
-              {{ getMonth(date) }}
-            </p>
-            <p class="week">
-              {{ getWeek(date) }}
-            </p>
-            <p class="day">
-              {{ getDay(date) }}
-            </p>
+      </template>
+
+      <template #cell(budget_team)="row">
+        {{ row.item.budget_team }}
+      </template>
+
+      <template #cell(budget_engaged)="row">
+        {{ row.item.budget_engaged ? row.item.budget_engaged : '' }}
+      </template>
+
+      <template #row-details="row">
+        <div v-for="detail in row.item.children" :key="detail.name" class="row-detail d-flex">
+          <div style="flex:32;padding:5px 28px;text-align:start;" >
+            <span>
+              <feather-icon icon="ArrowUpIcon" class="mr-1" style="color:green" />{{ detail.name }}
+            </span>
+          </div>
+          <div style="flex:16;padding:5px 28px;text-align:end;">
+            {{ detail.budget_team }}
+          </div>
+          <div style="flex:20;padding:5px 28px;text-align:end;">
+            {{ detail.budget_engaged }}
+          </div>
+          <div style="flex:18;padding:5px 28px;text-align:end;">
+            {{ detail.real_estimated }}
+          </div>
+          <div style="flex:16;padding:5px 28px;">
+
           </div>
         </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
-      </div>
+      </template>
+    </b-table>
+    <div v-if="isChartView" class="d-flex flex-column w-100">
+      <b-card v-for="(serie, idx) in series" :key="idx" no-body no-footer class="chart-card">
+        <b-row>
+          <b-col>
+            <h2>Chart Title</h2>
+            <div class="d-flex justify-content-between align-center mt-1">
+              <p class="text-uppercase m-0">
+                Total
+              </p>
+              <p class="m-0">
+                {{ formatCurrency(getTotalValue(serie)) }}
+              </p>
+            </div>
+            <vue-apex-charts type="bar" height="248" :options="chartOptions" :series="serie" />
+          </b-col>
+          <b-col>
+            <b-row cols="2">
+              <b-col v-for="(color, index) in chartOptions.colors" :key="index" class="mb-1">
+                <div class="d-flex justify-content-between align-center mb-1">
+                  <p class="text-capitalize m-0">
+                    {{ chartOptions.xaxis.categories[index] }}
+                  </p>
+                  <p class="m-0">
+                    {{ getPercent(serie[0].data[index], getTotalValue(serie)) }}%
+                  </p>
+                </div>
+                <b-progress :max="getTotalValue(serie)">
+                  <b-progress-bar :value="serie[0].data[index]" :style="{ 'background-color': color }" />
+                </b-progress>
+                <p class="mt-1">
+                  {{ formatCurrency(serie[0].data[index]) }}
+                </p>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+      </b-card>
     </div>
-    <b-modal
-      id="modal-update"
-      ref="my-modal"
-      title="Create New"
-      centered
-      no-fade
-      hide-backdrop
-    >
-      <!-- Modal Header -->
-      <template #modal-header>
-        <h5 class="modal-title">
-          Update
-        </h5>
-        <div class="modal-actions">
-          <b-button variant="outline-primary">
-            <feather-icon
-              icon="XIcon"
-              size="18"
-            />
-          </b-button>
-        </div>
-      </template>
-      <div>Are you sure to update?</div>
-      <template #modal-footer>
-        <b-button variant="outline-primary">Cancel
-        </b-button>
-        <b-button variant="primary">Update
-        </b-button>
-      </template>
-    </b-modal>
   </div>
 </template>
 
 <script>
 import {
-  BButton,
-  BProgress,
-  BCard,
-  BCardText,
-  BListGroup,
-  BListGroupItem,
-  BModal,
+  BCard, BProgress, BProgressBar, BTable, BRow, BCol
 } from 'bootstrap-vue'
 import moment from 'moment'
-import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
-import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
+import VueApexCharts from 'vue-apexcharts'
 
 export default {
   components: {
-    BButton,
-    BProgress,
     BCard,
-    BCardText,
-    AppCollapse,
-    AppCollapseItem,
-    BListGroup,
-    BListGroupItem,
-    BModal,
+    BRow,
+    BCol,
+    BProgress,
+    BProgressBar,
+    BTable,
+    VueApexCharts,
   },
   props: {
     data: {
       type: Array,
       default: () => [],
     },
+    fields: {
+      type: Array,
+      default: () => [],
+    },
+    isChartView: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      reportingDates: [],
-      value1: 30,
-      value2: 40,
-      value3: 80,
-    }
-  },
-  mounted() {
-    const startDate = moment(moment()).subtract(15, 'days')
-    const endDate = moment(moment()).add(1, 'M')
-    this.reportingDates = [startDate.clone()]
-    while (startDate.add(1, 'days').diff(endDate) < 0) {
-      this.reportingDates.push(startDate.clone())
+      series: [[{
+        data: [120, 240, 2040, 1920, 3960, 3720],
+      }],
+      [{
+        data: [120, 240, 2040, 1920, 3960, 3720],
+      }],
+      [{
+        data: [120, 240, 2040, 1920, 3960, 3720],
+      }],
+      [{
+        data: [400, 430, 448, 470, 540, 580],
+      }],
+      ],
+      chartOptions: {
+        chart: {
+          type: 'bar',
+          foreColor: 'rgba(255, 255, 255, 0.8)',
+          toolbar: {
+            show: false,
+          },
+        },
+        grid: {
+          borderColor: '#595E71',
+          padding: {
+            left: 50,
+          },
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          yaxis: {
+            lines: {
+              show: false,
+            },
+          },
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: '0px 2px 2px 0px',
+            horizontal: true,
+            distributed: true,
+          },
+        },
+        colors: ['#7367F0', '#D46D6D', '#FF9F43', '#00CFE8', '#0D6EFD', '#28C76F'],
+        dataLabels: {
+          enabled: false,
+        },
+        legend: {
+          show: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        xaxis: {
+          categories: ['spend', 'authorized', 'real estimated', 'budget engaged', 'budget demand spend', 'portfolio budget',
+          ],
+          labels: {
+            formatter: value => Intl.NumberFormat('en-US', {
+              notation: 'compact',
+              maximumFractionDigits: 1,
+            }).format(value),
+          },
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            align: 'left',
+            offsetX: '-20',
+            style: {
+              cssClass: 'text-uppercase',
+            },
+          },
+        },
+      },
     }
   },
   methods: {
-    isToday(date) {
-      return moment().isSame(date, 'day')
+    dateFormat(date) {
+      return moment(new Date(date)).format('MM-DD-YYYY')
     },
-    getWeek(date) {
-      return date.format('dd').substring(0, 1)
+    formatCurrency(value) {
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: 'USD',
+      }).format(value).replace(',', '.')
     },
-    getDay(date) {
-      return date.format('D')
+    rowClass(item, type) {
+      const colorClass = 'table-success'
+      if (!item || type !== 'row') { return }
+
+      // eslint-disable-next-line consistent-return
+      if (item.name === 'total') { return colorClass }
     },
-    getMonth(date) {
-      return date.format('MMM YYYY')
+    getTotalValue(data) {
+      let totalValue = 0
+      data[0].data.forEach(val => {
+        totalValue += val
+      })
+      return totalValue
+    },
+    getPercent(val, total) {
+      return Math.round((val / total) * 100)
     },
   },
 }
 </script>
 
 <style lang="scss">
-@import "@core/scss/vue/pages/dashboard-portfolio.scss";
+@import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>
