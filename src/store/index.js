@@ -7,6 +7,7 @@ import app from './app'
 import appConfig from './app-config'
 import verticalMenu from './vertical-menu'
 import teamState from './team-state'
+import projectState from './project'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     verticalMenu,
     'app-ecommerce': ecommerceStoreModule,
     teamState,
+    projectState,
   },
   strict: process.env.DEV,
 })

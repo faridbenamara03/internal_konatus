@@ -1,5 +1,204 @@
 @import '~@core/scss/base/components/variables-dark';
 
+.report-custom {
+  display: flex;
+  width: 100%;
+  .reporting-side-custom {
+    width: 314px;
+    display: block;
+    background: $theme-dark-table-active-bg;
+    .program-title {
+      display: flex;
+      height: 88px;
+      font-weight: bold;
+      background-color: $theme-dark-widget-bg;
+      margin-top:36.3px;
+      box-shadow: 0px -3px 10px 0px rgb(22, 22, 22);
+      .program-title-child {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 16px;
+        text-transform: uppercase;
+        color: white;
+      }
+    }
+    .program-collapse-header {
+      display: flex;
+      height: 84px;
+      background-color: $theme-dark-table-active-bg;
+      box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+      .header-child {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-left: 40px;
+        padding-right: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .child1 {
+          .title {
+            color: $theme-dark-label-color;
+            font-size: 15px;
+            line-height: 24px;
+          }
+          .id {
+            font-size: 12px;
+            color: $theme-dark-text-muted-color;
+          }
+        }
+        .child2 {
+          display: flex;
+          .content {
+            margin: auto;
+          }
+        }
+      }
+    }
+    .program-collapse-sub-project {
+      display: flex;
+      height: 46px;
+      background-color: $theme-dark-input-bg;
+      border-bottom: $theme-dark-input-placeholder-color 1px solid;
+      .sub-project {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-left: 40px;
+        padding-right: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .child1 {
+          color: $theme-dark-label-color;
+          font-size: 12px;
+        }
+        .child2 {
+          display: flex;
+          color: white;
+          font-weight: bold;
+          .content {
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+  .reporting-content-custom {
+    background: $theme-dark-modal-header-bg;
+    width: calc(100% - 314px);
+    overflow-x: auto;
+    position: relative;
+    .reporting-content--header {
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      .first-child {
+        color: $theme-dark-navigation-li-icon-color;
+      }
+      .reporting-content-header--badge {
+        display: flex;
+        justify-content: space-between;
+        .phase {
+          display: flex;
+          margin-right:15px;
+          .flag {
+            margin-top:auto;
+            margin-bottom:auto;
+            width:7px;
+            height:14px;
+            background-color:$theme-dark-navigation-li-icon-color;
+            margin-right:4px;
+            border-radius:3px
+          }
+        }
+        .milestones {
+          margin-right:15px;
+        }
+        .demand {
+          margin-right:15px;
+          .flag {
+            color: #d46d6d;
+          }
+        }
+        .engaged {
+          margin-right:15px;
+          .flag {
+            color: #5e9445;
+          }
+        }
+        .real-estimated {
+          .flag {
+            color: #3a7a9e;
+          }
+        }
+        .rotate-icon {
+          transform: rotate(180deg);
+          margin-left: 4px;
+        }
+      }
+    }
+    .reporting-content--body-custom {
+      .timeline-list {
+        display: inline-flex;
+        padding: 30px 8px 10px 8px;
+        .date {
+          width: 30px;
+          padding: 4px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          &.active {
+            background: #bd2020;
+            border-radius: 2px;
+            p {
+              color: #fff !important;
+            }
+          }
+          p {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            color: $theme-dark-headings-color;
+            margin: 0;
+            &.week {
+              color: $theme-dark-card-bg;
+              padding-bottom: 4px;
+            }
+            &.day {
+              font-weight: 600;
+            }
+            &.month {
+              position: absolute;
+              top: -35px;
+              width: max-content;
+              left: 0;
+              padding: 4px;
+              text-transform: uppercase;
+              font-weight: 500;
+              font-size: 10px;
+              line-height: 23px;
+              color: rgba(208, 210, 214, 0.6) !important;
+            }
+          }
+        }
+      }
+      .progress-wrapper {
+        padding: 2px 0 1px 0;
+        border-bottom: 1px solid #303952;
+        height: 84px;
+        position: relative;
+      }
+      .progress-wrapper-child {
+        padding: 2px 0 1px 0;
+        border-bottom: 1px solid #303952;
+        height: 46px;
+        position: relative;
+      }
+    }
+  }
+}
+
 .card-project {
   .card-body {
     .tabs {
@@ -29,7 +228,7 @@
         }
         .tab-pane {
           overflow: auto;
-          max-height: calc(100vh - 16rem);
+          // max-height: calc(100vh - 16rem);
           .project-demand-view {
             display: table;
             .project-team {

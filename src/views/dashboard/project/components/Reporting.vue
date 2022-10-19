@@ -1,61 +1,62 @@
 <template>
-  <div class="report">
-    <div class="reporting-side">
-      <div class="report-block--head">
-        <p class="m-0 text-uppercase">
-          Boston Dynamics
-        </p>
+  <div class="report-custom">
+    <div class="reporting-side-custom" v-for="(item, index) in datt" :key="index">
+      <div class="program-title">
+        <div class="program-title-child">
+          <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
+          <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
+          {{ item.title }}
+        </div>
       </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          Consumer robots
-        </p>
+      <div v-if="!collapsed">
+        <div v-for="(item1, index1) in item.children" :key="index1">
+          <div class="program-collapse-header">
+            <div class="header-child">
+              <div class="child1">
+                <div class="title">
+                  {{ item1.child_title }}
+                </div>
+                <div class="id">
+                  {{ item1.id }}
+                </div>
+              </div>
+              <div class="child2">
+                <div class="content">
+                  <feather-icon icon="XIcon" style="cursor:pointer" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.sub_project" :key="index2">
+            <div class="sub-project">
+              <div class="child1">
+                {{ item2.id }}
+              </div>
+              <div class="child2">
+                ({{ item2.data.progress ? item2.data.progress : 0 }}%)
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          military robots
-        </p>
-      </div>
-      <app-collapse accordion>
-        <app-collapse-item title="Accordion Item 1">
-          <b-list-group>
-            <b-list-group-item>Cras justo odio</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Morbi leo risus</b-list-group-item>
-            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
-          </b-list-group>
-        </app-collapse-item>
-      </app-collapse>
     </div>
-    <div class="reporting-content">
+    <div class="reporting-content-custom">
+      <div :style="'position:absolute;height:-webkit-fill-available;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
+        <div class="rounded-circle" style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+      </div>
       <div class="reporting-content--header">
-        <b-button
-          v-b-modal.modal-update
-          variant="flat-primary"
-        >
-          <feather-icon icon="RotateCwIcon" />
-          Update
-        </b-button>
+        <div class="first-child">
+          <div v-b-modal.modal-update >
+            <feather-icon icon="RotateCwIcon" style="margin-bottom:3px" />
+            Update
+          </div>
+        </div>
         <div class="reporting-content-header--badge">
-          <b-button
-            variant="flat-dark"
-            class="d-inline-flex align-items-center"
-          >
-            <span class="badge" />
-            <span>Phase</span>
-          </b-button>
-          <b-button variant="flat-dark">
+          <div class="phase">
+            <div class="flag" />
+            Phase
+          </div>
+          <div class="milestones">
             <b-icon
               icon="diamond-fill"
               variant="success"
@@ -66,31 +67,22 @@
               variant="success"
             />
             Milestones
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-demand"
-          >
-            <b-icon icon="circle-fill" />
+          </div>
+          <div class="demand">
+            <b-icon icon="circle-fill" class="flag" />
             Demand
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-engage"
-          >
-            <b-icon icon="circle-fill" />
+          </div>
+          <div class="engaged">
+            <b-icon icon="circle-fill" class="flag" />
             Engaged
-          </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-estimate"
-          >
-            <b-icon icon="circle-fill" />
+          </div>
+          <div class="real-estimated">
+            <b-icon icon="circle-fill" class="flag" />
             Real Estimated
-          </b-button>
+          </div>
         </div>
       </div>
-      <div class="reporting-content--body">
+      <div class="reporting-content--body-custom">
         <div class="timeline-list">
           <div
             v-for="(date, index) in reportingDates"
@@ -112,68 +104,21 @@
             </p>
           </div>
         </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
+        <div v-if="!collapsed">
+          <div v-for="(item, index) in datt" :key="index">
+            <div v-for="(item1, index1) in item.children" :key="index1">
+              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
+                <div :style="'position:absolute;left:' + (getLength(lineStartDate, item1.start_date) + 8) + 'px;width:' + getLength(item1.start_date, item1.end_date) + 'px'">
+                  <progress-component :exist="'2022.11.11'" :value="getLength(item1.start_date, todate) - 4" :title="`${item1.id} (${item1.progress}%)`" :isSub="false" />
+                </div>
+              </div>
+              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.sub_project" :key="index2" >
+                <div :style="'position:absolute;left:' + (getLength(lineStartDate, item2.data.start_date) + 8) + 'px;width:' + getLength(item2.data.start_date, item2.data.end_date) + 'px'">
+                  <progress-component :exist="item2.data.start_date" :value="getLength(item2.data.start_date, todate) - 4" :title="`${item2.id} (${item2.data.progress}%)`" :isSub="true" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -187,24 +132,17 @@
     >
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">
-          Update
-        </h5>
+        <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
           <b-button variant="outline-primary">
-            <feather-icon
-              icon="XIcon"
-              size="18"
-            />
+            <feather-icon icon="XIcon" size="18" v-on:click="hideModal()" />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary">Cancel
-        </b-button>
-        <b-button variant="primary">Update
-        </b-button>
+        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
+        <b-button variant="primary" @click="onUpdate">Update</b-button>
       </template>
     </b-modal>
   </div>
@@ -212,29 +150,16 @@
 
 <script>
 import {
-  BButton,
-  BProgress,
-  BCard,
-  BCardText,
-  BListGroup,
-  BListGroupItem,
-  BModal,
-} from 'bootstrap-vue'
-import moment from 'moment'
-import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
-import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
+  BModal, BButton
+} from "bootstrap-vue"
+import moment from "moment"
+import ProgressComponent from '@/views/dashboard/project/components/ProgressComponent.vue'
 
 export default {
   components: {
-    BButton,
-    BProgress,
-    BCard,
-    BCardText,
-    AppCollapse,
-    AppCollapseItem,
-    BListGroup,
-    BListGroupItem,
     BModal,
+    BButton,
+    ProgressComponent
   },
   props: {
     data: {
@@ -248,33 +173,62 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
+      projectData: this.$store.state.projectState.projectData,
+      leftP: 15 * 30 + 8,
+      lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
+      todate: moment().format('YYYY.MM.DD'),
+      timelineWinWidth: 76 * 30 + 8 * 2,
+      collapsed: false
+    }
+  },
+  computed: {
+    datt() {
+      return this.$store.state.projectState.projectData
     }
   },
   mounted() {
-    const startDate = moment(moment()).subtract(15, 'days')
-    const endDate = moment(moment()).add(1, 'M')
+    const startDate = moment(moment()).subtract(15, "days")
+    const endDate = moment(moment()).add(2, "M")
     this.reportingDates = [startDate.clone()]
-    while (startDate.add(1, 'days').diff(endDate) < 0) {
+    while (startDate.add(1, "days").diff(endDate) < 0) {
       this.reportingDates.push(startDate.clone())
     }
   },
   methods: {
     isToday(date) {
-      return moment().isSame(date, 'day')
+      return moment().isSame(date, "day")
     },
     getWeek(date) {
-      return date.format('dd').substring(0, 1)
+      return date.format("dd").substring(0, 1)
     },
     getDay(date) {
-      return date.format('D')
+      return date.format("D")
     },
     getMonth(date) {
-      return date.format('MMM YYYY')
+      return date.format("MMM YYYY")
     },
+    getLength(startDate, endDate) {
+      const date1 = new Date(startDate)
+      const date2 = new Date(endDate)
+      const differenceInTime = date2.getTime() - date1.getTime()
+      const differenceInDays = differenceInTime / (1000 * 3600 * 24)
+      const ret = differenceInDays * 30 > 0 ? differenceInDays * 30 : 0
+      return ret
+    },
+    onCollapse() {
+      this.collapsed = !this.collapsed
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    },
+    onUpdate() {
+      this.$store.commit('projectState/UPDATE_PROJECT_DATA')
+      this.$refs['my-modal'].hide()
+    }
   },
 }
 </script>
 
 <style lang="scss">
-@import "@core/scss/vue/pages/dashboard-portfolio.scss";
+@import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
