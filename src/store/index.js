@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Faker from 'vue-faker'
 import "vue-toastification/dist/index.css"
 // Modules
 import ecommerceStoreModule from '@/views/apps/e-commerce/eCommerceStoreModule'
 import app from './app'
 import appConfig from './app-config'
 import verticalMenu from './vertical-menu'
-import teamState from './team-state'
+import teamState from './team'
 import projectState from './project'
+import orgnizationState from './orgnization'
 
 Vue.use(Vuex)
+Vue.use(Faker)
 
 export default new Vuex.Store({
   modules: {
@@ -19,6 +22,7 @@ export default new Vuex.Store({
     'app-ecommerce': ecommerceStoreModule,
     teamState,
     projectState,
+    orgnizationState,
   },
   strict: process.env.DEV,
 })

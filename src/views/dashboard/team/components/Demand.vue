@@ -9,7 +9,7 @@
         <p class="text-capitalize m-0 team-name--text">
           Phase {{ phase.phaseV }}
         </p>
-        <b-button variant="flat-primary">
+        <b-button variant="flat-primary" @click="() => handleSelectAll(phase.phaseV)">
           Select All
         </b-button>
       </div>
@@ -24,9 +24,16 @@
             :style="{ 'background': data.color}"
           />
           <div class="phase-box--content">
-            <p class="title">
-              Task {{ task.taskId }}
-            </p>
+            <div class="d-flex">
+              <div style="width:calc(100% - 20px);cursor:pointer;" >
+                <p class="title">
+                  Task {{ task.taskId }}
+                </p>
+              </div>
+              <div style="width:20px;">
+                <b-form-checkbox v-model="task.isSelected" />
+              </div>
+            </div>
             <p class="muted">
               {{ task.taskId }}
             </p>
@@ -48,21 +55,27 @@
       <b-button
         variant="flat-secondary"
         class="w-100"
+        v-b-modal.modal-add-new-task
+        @click="onInsertClick(phase.phaseV)"
       >
         <feather-icon icon="PlusIcon" />
         <span>Insert new task</span>
       </b-button>
     </div>
+    <insert-new-task-modal :phaseV="phaseVToInsert" />
   </div>
 </template>
 
 <script>
-import { BButton } from 'bootstrap-vue'
+import { BButton, BFormCheckbox } from 'bootstrap-vue'
 import moment from 'moment'
+import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
 
 export default {
   components: {
     BButton,
+    BFormCheckbox,
+    InsertNewTaskModal
   },
   props: {
     data: {
@@ -74,6 +87,7 @@ export default {
     return {
       openActivityModal: false,
       selectedActivity: {},
+      phaseVToInsert: null,
     }
   },
   methods: {
@@ -86,6 +100,12 @@ export default {
     hideModal() {
       this.openActivityModal = false
     },
+    handleSelectAll(dt) {
+      this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)
+    },
+    onInsertClick(phaseV) {
+      this.phaseVToInsert = phaseV
+    }
   },
 }
 </script>

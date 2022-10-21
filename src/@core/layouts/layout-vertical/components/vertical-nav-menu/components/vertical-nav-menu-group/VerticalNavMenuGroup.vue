@@ -12,10 +12,11 @@
       v-bind="linkProps"
       class="d-flex align-items-center"
       :class="{'m-0': item.type === 'root'}"
-      @click="handleNavItemClick"
+      @click="handleNavItemClick(item)"
+      @dblclick="handleNavItemDblClick"
     >
       <nav-menu-icon :item="item" />
-      <span class="menu-title text-truncate">{{ item.title }}</span>
+      <span class="menu-title text-truncate" >{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
         pill
@@ -100,9 +101,14 @@ export default {
     }
   },
   methods: {
-    handleNavItemClick() {
+    handleNavItemDblClick() {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
+    },
+    handleNavItemClick(data) {
+      if (data.type === 'team') {
+        this.$store.commit('teamState/HANDLE_NAV_TEAM_SELECT', data)
+      }
     },
   },
 }

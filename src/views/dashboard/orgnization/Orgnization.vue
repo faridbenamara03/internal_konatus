@@ -20,6 +20,10 @@
             </b-button>
           </b-button-group>
         </div>
+        <b-button v-if="tabIndex === 0" variant="flat-primary" @click="handleDemandUpdate" style="margin:10px">
+          <feather-icon icon="RotateCwIcon" />
+          Update
+        </b-button>
         <div v-if="tabIndex === 2" class="action-bar justify-content-between">
           <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />
@@ -52,7 +56,7 @@
           </div>
         </div>
         <b-tab title="Demand" :class="{'has-default-card-bg': !isChartView}">
-          <Demand :data="itemsForDemand" :fields="fieldForDemand" />
+          <Demand :data="itemsForReport" :fields="fieldsForReport" />
         </b-tab>
         <b-tab title="Reporting" class="no-action-bar">
           <Reporting :data="itemsForReport" :fields="fieldsForReport" :is-chart-view="isChartView" />
@@ -74,24 +78,24 @@
                 Plan
               </b-button>
             </b-button-group>
-            <b-button v-if="!isChartView && (tabIndex === 0 || tabIndex === 1)" v-b-modal.modal-edit-column class="ml-1"
+            <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="outline-primary">
               <feather-icon icon="EyeIcon" size="16" />
               <span>Edit Columns</span>
             </b-button>
-            <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
+            <!-- <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
               <feather-icon icon="Edit2Icon" size="16" />
               <span>Edit as table</span>
-            </b-button>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="outline-primary">
+            </b-button> -->
+            <!-- <b-button v-if="tabIndex === 0" class="ml-1" variant="outline-primary">
               <feather-icon icon="ArrowDownIcon" size="16" />
               <span>Import</span>
-            </b-button>
+            </b-button> -->
             <b-button class="ml-1" variant="outline-primary">
               <feather-icon icon="UploadIcon" size="16" />
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 2" v-b-modal.modal-optimize class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 2 || tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>
             </b-button>
@@ -334,6 +338,9 @@ export default {
       this.fields = temp
       this.activeColumns = columns
     },
+    handleDemandUpdate() {
+      this.$store.commit('orgnizationState/UPDATE_DATA')
+    }
   },
 }
 </script>

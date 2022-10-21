@@ -3,7 +3,7 @@
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
-          <b-button variant="flat-primary" @click="handleUpdate">
+          <b-button variant="flat-primary" @click="handleUpdateDemand">
             <feather-icon icon="RotateCwIcon" />
             Update
           </b-button>
@@ -46,7 +46,7 @@
             Update
           </b-button>
           <b-button-group>
-            <div v-if="resourceAddedT  === false">
+            <div v-if="resourceAddedT === false">
               <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(false)">
                 <b-icon icon="bar-chart-line" />
               </b-button>
@@ -71,7 +71,7 @@
           </div>
         </div>
         <b-tab title="Demand">
-          <Demand :data="team" />
+          <Demand :data="c_demand_team_data" />
         </b-tab>
         <b-tab title="Reporting">
           <b-card-text>
@@ -153,7 +153,6 @@ export default {
   },
   data() {
     return {
-      team: {},
       tabIndex: 0,
       openActivityModal: false,
       selectedActivity: {},
@@ -163,6 +162,9 @@ export default {
   computed: {
     resourceAddedT() {
       return this.$store.state.teamState.resourceAdded
+    },
+    c_demand_team_data() {
+      return this.$store.state.teamState.demandTeamData
     }
   },
   methods: {
@@ -172,90 +174,8 @@ export default {
     handleChangeViewMode(mode) {
       this.isChartView = mode
     },
-    handleUpdate() {
-      this.team = {
-        id: 1,
-        name: 'team a',
-        activities: null,
-        estimate: null,
-        demand: null,
-        deadline: null,
-        color: '#D68232',
-        phases: [
-          {
-            phaseV: 1,
-            name: 'Install software',
-            priority: 'Highest',
-            gate: 1,
-            activityId: '1.28.17.1.55',
-            tasks: [
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.16.1.53',
-                priority: 'Lowest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-            ],
-          },
-          {
-            phaseV: 2,
-            name: 'Develop control software',
-            priority: 'Highest',
-            gate: 2,
-            activityId: '1.28.17.1.120',
-            tasks: [
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.16.1.53',
-                priority: 'Lowest',
-                gate: 1,
-              },
-            ],
-          },
-          {
-            phaseV: 3,
-            name: 'Develop control software...',
-            priority: 'Highest',
-            gate: 3,
-            activityId: '1.28.17.1.126',
-            tasks: [
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.16.1.53',
-                priority: 'Lowest',
-                gate: 1,
-              },
-              {
-                taskId: '1.28.17.1.55',
-                priority: 'Highest',
-                gate: 1,
-              },
-            ],
-          },
-        ],
-      }
+    handleUpdateDemand() {
+      this.$store.commit('teamState/HANDLE_TEAM_DEMAND_UPDATE')
     },
   },
 }
