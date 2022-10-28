@@ -1,231 +1,283 @@
 <template>
-  <div class="demand-view" :class="{'has-chart': isChartView}">
-    <b-table v-if="!isChartView" :items="data" :fields="fields" :tbody-tr-class="rowClass" responsive>
-      <template #cell(show_details)="row">
-        <div class="d-flex detail align-center" @click="row.toggleDetails">
-          <feather-icon v-if="row.item.children" :icon="row.detailsShowing ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16" class="mr-1" />
-          <p class="m-0 text-uppercase" v-if="row.item.name==='SPACE HOLDER FOR AN OTHER BU'">
-            <feather-icon class="mr-1" icon="PlusIcon" /> {{ row.item.name }}
-          </p>
-          <p class="m-0 text-uppercase" v-else>
-            {{ row.item.name }}
-          </p>
-        </div>
-      </template>
-
-      <template #cell(budget_team)="row">
-        {{ row.item.budget_team }}
-      </template>
-
-      <template #cell(budget_engaged)="row">
-        {{ row.item.budget_engaged ? row.item.budget_engaged : '' }}
-      </template>
-
-      <template #row-details="row">
-        <div v-for="detail in row.item.children" :key="detail.name" class="row-detail d-flex">
-          <div style="flex:32;padding:5px 28px;text-align:start;" >
-            <span>
-              <feather-icon icon="ArrowUpIcon" class="mr-1" style="color:green" />{{ detail.name }}
-            </span>
-          </div>
-          <div style="flex:16;padding:5px 28px;text-align:end;">
-            {{ detail.budget_team }}
-          </div>
-          <div style="flex:20;padding:5px 28px;text-align:end;">
-            {{ detail.budget_engaged }}
-          </div>
-          <div style="flex:18;padding:5px 28px;text-align:end;">
-            {{ detail.real_estimated }}
-          </div>
-          <div style="flex:16;padding:5px 28px;">
-
+  <div class="report-custom">
+    <div class="reporting-side-custom" v-for="(item, index) in datt" :key="index">
+      <div class="program-title">
+        <div class="program-title-child">
+          <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
+          <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
+          {{ item.title }}
+          <span class="ml-3 mr-1">type:</span>
+          <div style="display:inline-block">
+            <b-form-select v-model="selected" :options="options" size="sm" />
           </div>
         </div>
-      </template>
-    </b-table>
-    <div v-if="isChartView" class="d-flex flex-column w-100">
-      <b-card v-for="(serie, idx) in series" :key="idx" no-body no-footer class="chart-card">
-        <b-row>
-          <b-col>
-            <h2>Chart Title</h2>
-            <div class="d-flex justify-content-between align-center mt-1">
-              <p class="text-uppercase m-0">
-                Total
-              </p>
-              <p class="m-0">
-                {{ formatCurrency(getTotalValue(serie)) }}
-              </p>
-            </div>
-            <vue-apex-charts type="bar" height="248" :options="chartOptions" :series="serie" />
-          </b-col>
-          <b-col>
-            <b-row cols="2">
-              <b-col v-for="(color, index) in chartOptions.colors" :key="index" class="mb-1">
-                <div class="d-flex justify-content-between align-center mb-1">
-                  <p class="text-capitalize m-0">
-                    {{ chartOptions.xaxis.categories[index] }}
-                  </p>
-                  <p class="m-0">
-                    {{ getPercent(serie[0].data[index], getTotalValue(serie)) }}%
-                  </p>
+      </div>
+      <div v-if="!collapsed">
+        <div v-for="(item1, index1) in item.children" :key="index1">
+          <div class="program-collapse-header">
+            <div class="header-child">
+              <div class="child1">
+                <div class="title">
+                  {{ item1.child_title }}
                 </div>
-                <b-progress :max="getTotalValue(serie)">
-                  <b-progress-bar :value="serie[0].data[index]" :style="{ 'background-color': color }" />
-                </b-progress>
-                <p class="mt-1">
-                  {{ formatCurrency(serie[0].data[index]) }}
-                </p>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-card>
+                <div class="id">
+                  {{ item1.id }}
+                </div>
+              </div>
+              <div class="child2">
+                <div class="content">
+                  <feather-icon icon="XIcon" style="cursor:pointer" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.sub_project" :key="index2">
+            <div class="sub-project">
+              <div class="child1">
+                {{ item2.id }}
+              </div>
+              <div class="child2">
+                ({{ item2.progress ? item2.progress : 0 }}%)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="reporting-content-custom">
+      <div :style="'position:absolute;height:-webkit-fill-available;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
+        <div class="rounded-circle" style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+      </div>
+      <div class="reporting-content--header">
+        <div class="first-child">
+          <div v-b-modal.modal-update style="display:inline-block">
+            <feather-icon icon="RotateCwIcon" style="margin-bottom:3px" />
+            Update
+          </div>
+        </div>
+        <div class="reporting-content-header--badge">
+          <div class="phase">
+            <div class="flag" />
+            Phase
+          </div>
+          <div class="milestones">
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
+            Milestones
+          </div>
+          <div class="demand">
+            <b-icon icon="circle-fill" class="flag" />
+            Demand
+          </div>
+          <div class="engaged">
+            <b-icon icon="circle-fill" class="flag" />
+            Engaged
+          </div>
+          <div class="real-estimated">
+            <b-icon icon="circle-fill" class="flag" />
+            Real Estimated
+          </div>
+        </div>
+      </div>
+      <div v-if="this.selected === 1" class="reporting-content--body-custom">
+        <div class="timeline-list">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            class="date"
+            :class="{'active': isToday(date)}"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
+              class="month"
+            >
+              {{ getMonth(date) }}
+            </p>
+            <p class="week">
+              {{ getWeek(date) }}
+            </p>
+            <p class="day">
+              {{ getDay(date) }}
+            </p>
+          </div>
+        </div>
+        <div v-if="!collapsed">
+          <div v-for="(item, index) in datt" :key="index">
+            <div v-for="(item1, index1) in item.children" :key="index1">
+              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
+                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
+                  :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
+                  :title="`${item1.id} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
+              </div>
+              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.sub_project" :key="index2" >
+                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
+                  :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
+                  :title="`${item2.id} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="this.selected === 2" class="reporting-content--body-custom">
+        <div class="timeline-list">
+          <div
+            v-for="(date, index) in reportingDates1"
+            :key="index"
+            class="date"
+            :class="{'active': isToday(date)}"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates1[index-1]) : true"
+              class="month"
+            >
+              {{ getMonth(date) }}
+            </p>
+            <p class="week">
+              {{ getWeek(date) }}
+            </p>
+            <p class="day">
+              {{ getDay(date) }}
+            </p>
+          </div>
+        </div>
+        <div v-if="!collapsed">
+          <div v-for="(item, index) in datt" :key="index">
+            <div v-for="(item1, index1) in item.children" :key="index1">
+              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
+                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
+                  :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
+                  :title="`${item1.id} (${item1.progress}%)`" :isSub="false" :offsetBase="75" />
+              </div>
+              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.sub_project" :key="index2" >
+                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
+                  :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
+                  :title="`${item2.id} (${item2.progress}%)`" :isSub="true" :offsetBase="75" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <b-modal
+      id="modal-update"
+      ref="my-modal"
+      title="Create New"
+      centered
+      no-fade
+      hide-backdrop
+    >
+      <!-- Modal Header -->
+      <template #modal-header>
+        <h5 class="modal-title">Update</h5>
+        <div class="modal-actions">
+          <b-button variant="outline-primary">
+            <feather-icon icon="XIcon" size="18" v-on:click="hideModal()" />
+          </b-button>
+        </div>
+      </template>
+      <div>Are you sure to update?</div>
+      <template #modal-footer>
+        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
+        <b-button variant="primary" @click="onUpdate">Update</b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import {
-  BCard, BProgress, BProgressBar, BTable, BRow, BCol
-} from 'bootstrap-vue'
-import moment from 'moment'
-import VueApexCharts from 'vue-apexcharts'
+  BModal, BButton, BFormSelect
+} from "bootstrap-vue"
+import moment from "moment"
+import ProgressComponent from '@/views/dashboard/orgnization/components/ProgressComponent.vue'
 
 export default {
   components: {
-    BCard,
-    BRow,
-    BCol,
-    BProgress,
-    BProgressBar,
-    BTable,
-    VueApexCharts,
+    BModal,
+    BButton,
+    ProgressComponent,
+    BFormSelect
   },
   props: {
     data: {
       type: Array,
       default: () => [],
     },
-    fields: {
-      type: Array,
-      default: () => [],
-    },
-    isChartView: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
-      series: [[{
-        data: [120, 240, 2040, 1920, 3960, 3720],
-      }],
-      [{
-        data: [120, 240, 2040, 1920, 3960, 3720],
-      }],
-      [{
-        data: [120, 240, 2040, 1920, 3960, 3720],
-      }],
-      [{
-        data: [400, 430, 448, 470, 540, 580],
-      }],
+      reportingDates: [],
+      reportingDates1: [],
+      value1: 30,
+      value2: 40,
+      value3: 80,
+      reportingData: this.$store.state.orgnizationState.reportingData,
+      leftP: 15 * 30 + 8,
+      lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
+      todate: moment().format('YYYY.MM.DD'),
+      timelineWinWidth: 76 * 30 + 8 * 2,
+      collapsed: false,
+      selected: 1,
+      options: [
+        { value: 1, text: 1 },
+        { value: 2, text: 2 },
       ],
-      chartOptions: {
-        chart: {
-          type: 'bar',
-          foreColor: 'rgba(255, 255, 255, 0.8)',
-          toolbar: {
-            show: false,
-          },
-        },
-        grid: {
-          borderColor: '#595E71',
-          padding: {
-            left: 50,
-          },
-          xaxis: {
-            lines: {
-              show: true,
-            },
-          },
-          yaxis: {
-            lines: {
-              show: false,
-            },
-          },
-        },
-        plotOptions: {
-          bar: {
-            borderRadius: '0px 2px 2px 0px',
-            horizontal: true,
-            distributed: true,
-          },
-        },
-        colors: ['#7367F0', '#D46D6D', '#FF9F43', '#00CFE8', '#0D6EFD', '#28C76F'],
-        dataLabels: {
-          enabled: false,
-        },
-        legend: {
-          show: false,
-        },
-        tooltip: {
-          enabled: false,
-        },
-        xaxis: {
-          categories: ['spend', 'authorized', 'real estimated', 'budget engaged', 'budget demand spend', 'portfolio budget',
-          ],
-          labels: {
-            formatter: value => Intl.NumberFormat('en-US', {
-              notation: 'compact',
-              maximumFractionDigits: 1,
-            }).format(value),
-          },
-        },
-        yaxis: {
-          labels: {
-            show: true,
-            align: 'left',
-            offsetX: '-20',
-            style: {
-              cssClass: 'text-uppercase',
-            },
-          },
-        },
-      },
+      updatedd: false
+    }
+  },
+  computed: {
+    datt() {
+      return this.$store.state.orgnizationState.reportingData
+    }
+  },
+  mounted() {
+    const startDate = moment(moment()).subtract(15, "days")
+    const endDate = moment(moment()).add(2, "M")
+    this.reportingDates = [startDate.clone()]
+    while (startDate.add(1, "days").diff(endDate) < 0) {
+      this.reportingDates.push(startDate.clone())
+    }
+    const startDate1 = moment(moment()).subtract(75, "days")
+    const endDate1 = moment(moment()).add(5, "M")
+    this.reportingDates1 = [startDate1.clone()]
+    while (startDate1.add(5, "days").diff(endDate1) < 0) {
+      this.reportingDates1.push(startDate1.clone())
     }
   },
   methods: {
-    dateFormat(date) {
-      return moment(new Date(date)).format('MM-DD-YYYY')
+    isToday(date) {
+      return moment().isSame(date, "day")
     },
-    formatCurrency(value) {
-      return new Intl.NumberFormat(undefined, {
-        style: 'currency',
-        currency: 'USD',
-      }).format(value).replace(',', '.')
+    getWeek(date) {
+      return date.format("dd").substring(0, 1)
     },
-    rowClass(item, type) {
-      const colorClass = 'table-success'
-      if (!item || type !== 'row') { return }
-
-      // eslint-disable-next-line consistent-return
-      if (item.name === 'total') { return colorClass }
+    getDay(date) {
+      return date.format("D")
     },
-    getTotalValue(data) {
-      let totalValue = 0
-      data[0].data.forEach(val => {
-        totalValue += val
-      })
-      return totalValue
+    getMonth(date) {
+      return date.format("MMM YYYY")
     },
-    getPercent(val, total) {
-      return Math.round((val / total) * 100)
+    onCollapse() {
+      this.collapsed = !this.collapsed
     },
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    },
+    onUpdate() {
+      this.$store.commit('orgnizationState/UPDATE_REPORTING_DATA')
+      this.$refs['my-modal'].hide()
+    }
   },
 }
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import "@core/scss/vue/pages/dashboard-project.scss";
 </style>

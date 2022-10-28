@@ -8,6 +8,9 @@
       <div class="d-flex justify-content-between align-items-center">
         <p class="text-capitalize m-0 team-name--text">
           Phase {{ phase.phaseV }}
+          <span style="color:#303952;margin-left:4px">
+            ({{ phase.hours ? phase.hours : 0 }} hours)
+          </span>
         </p>
         <b-button variant="flat-primary" @click="() => handleSelectAll(phase.phaseV)">
           Select All
@@ -26,8 +29,11 @@
           <div class="phase-box--content">
             <div class="d-flex">
               <div style="width:calc(100% - 20px);cursor:pointer;" >
-                <p class="title">
+                <p v-if="isUN(task.taskName)" class="title">
                   Task {{ task.taskId }}
+                </p>
+                <p v-else class="title">
+                  {{ task.taskName }}
                 </p>
               </div>
               <div style="width:20px;">
@@ -69,13 +75,14 @@
 <script>
 import { BButton, BFormCheckbox } from 'bootstrap-vue'
 import moment from 'moment'
+import { isEmpty } from '@/views/utils'
 import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
 
 export default {
   components: {
     BButton,
     BFormCheckbox,
-    InsertNewTaskModal
+    InsertNewTaskModal,
   },
   props: {
     data: {
@@ -91,6 +98,9 @@ export default {
     }
   },
   methods: {
+    isUN(data) {
+      return isEmpty(data)
+    },
     getToday() {
       return `Today, ${moment().format('DD, MMMM, YYYY')}`
     },

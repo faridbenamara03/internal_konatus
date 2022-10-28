@@ -2,7 +2,7 @@
   <b-card no-body footer-tag="footer" class="card-portfolio mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div v-if="tabIndex === 1" class="action-bar">
+        <!-- <div v-if="tabIndex === 1" class="action-bar">
           <b-button-group>
             <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="bar-chart-line" />
@@ -19,7 +19,7 @@
               <feather-icon icon="DollarSignIcon" />
             </b-button>
           </b-button-group>
-        </div>
+        </div> -->
         <b-button v-if="tabIndex === 0" variant="flat-primary" @click="handleDemandUpdate" style="margin:10px">
           <feather-icon icon="RotateCwIcon" />
           Update
@@ -70,19 +70,19 @@
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
             </div>
-            <b-button-group v-if="tabIndex === 1" class="ml-1">
+            <!-- <b-button-group v-if="tabIndex === 1" class="ml-1">
               <b-button variant="outline-primary">
                 Cost
               </b-button>
               <b-button variant="outline-primary">
                 Plan
               </b-button>
-            </b-button-group>
-            <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
+            </b-button-group> -->
+            <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="outline-primary">
               <feather-icon icon="EyeIcon" size="16" />
               <span>Edit Columns</span>
-            </b-button>
+            </b-button> -->
             <!-- <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
               <feather-icon icon="Edit2Icon" size="16" />
               <span>Edit as table</span>

@@ -1,5 +1,6 @@
 import Vue from "vue"
 import dateFormat from "dateformat"
+import moment from "moment"
 
 export default {
   namespaced: true,
@@ -107,6 +108,138 @@ export default {
               },
             ]
           },
+        ]
+      }
+    ],
+    reportingData: [
+      {
+        title: 'Program 29',
+        children: [
+          {
+            child_title: 'Next gen platform',
+            progress: 60,
+            start_date: '2022.10.14',
+            end_date: '2022.12.2',
+            start_date1: '2022.10.14',
+            end_date1: '2022.12.2',
+            start_date2: '2022.10.14',
+            end_date2: '2022.12.2',
+            start_date3: '2022.10.14',
+            end_date3: '2022.12.2',
+            id: '2.29.18.1',
+            sub_project: [
+              {
+                id: '2.29.18.1.10',
+                progress: 0,
+                start_date: '2022.10.16',
+                end_date: '2022.11.30',
+                start_date1: '2022.10.16',
+                end_date1: '2022.10.28',
+              },
+              {
+                id: '2.29.18.1.11',
+                progress: 0,
+                start_date: '2022.10.14',
+                end_date: '2022.10.31',
+                start_date1: '2022.10.14',
+                end_date1: '2022.10.28',
+                start_date2: '2022.10.16',
+                end_date2: '2022.10.31',
+                start_date3: '2022.10.16',
+                end_date3: '2022.10.31',
+              },
+              {
+                id: '2.29.18.1.110',
+                progress: 100,
+                start_date: '2022.10.13',
+                end_date: '2022.10.16',
+                start_date1: '2022.10.13',
+                end_date1: '2022.10.16',
+                start_date2: '2022.10.13',
+                end_date2: '2022.10.16',
+                start_date3: '2022.10.13',
+                end_date3: '2022.10.16',
+              },
+              {
+                id: '2.29.18.1.111',
+                progress: 100,
+                start_date: '2022.10.13',
+                end_date: '2022.10.16',
+                start_date1: '2022.10.13',
+                end_date1: '2022.10.16',
+                start_date2: '2022.10.13',
+                end_date2: '2022.10.16',
+                start_date3: '2022.10.13',
+                end_date3: '2022.10.16',
+              },
+              {
+                id: '2.29.18.1.112',
+                progress: 100,
+                start_date: '2022.10.13',
+                end_date: '2022.10.16',
+                start_date1: '2022.10.13',
+                end_date1: '2022.10.16',
+                start_date2: '2022.10.13',
+                end_date2: '2022.10.16',
+                start_date3: '2022.10.13',
+                end_date3: '2022.10.16',
+              },
+              {
+                id: '2.29.18.1.12',
+                progress: 0,
+                start_date: '2022.10.15',
+                end_date: '2022.11.30',
+                start_date1: '2022.10.15',
+                end_date1: '2022.10.28',
+                start_date2: '2022.11.5',
+                end_date2: '2022.11.30',
+                start_date3: '2022.11.5',
+                end_date3: '2022.11.30',
+              },
+              {
+                id: '2.29.18.1.13',
+                progress: 0,
+                start_date: '2022.10.15',
+                end_date: '2022.10.31',
+                start_date1: '2022.10.15',
+                end_date1: '2022.10.28',
+                start_date2: '2022.10.17',
+                end_date2: '2022.10.31',
+                start_date3: '2022.10.17',
+                end_date3: '2022.10.31',
+              },
+              {
+                id: '2.29.18.1.14',
+                progress: 0,
+                start_date: '2022.10.15',
+                end_date: '2022.11.30',
+                start_date1: '2022.10.15',
+                end_date1: '2022.10.28',
+                start_date2: '2022.10.31',
+                end_date2: '2022.11.30',
+                start_date3: '2022.10.31',
+                end_date3: '2022.11.30',
+              },
+              {
+                id: '2.29.18.1.15',
+                progress: 0,
+                start_date: '2022.10.15',
+                end_date: '2022.10.25',
+                start_date1: '2022.10.15',
+                end_date1: '2022.10.25',
+                start_date2: '2022.10.15',
+                end_date2: '2022.10.25',
+                start_date3: '2022.10.15',
+                end_date3: '2022.10.25',
+              },
+              {
+                id: '2.29.18.1.16',
+              },
+              {
+                id: '2.29.18.1.17',
+              },
+            ]
+          }
         ]
       }
     ]
@@ -250,6 +383,159 @@ export default {
       ]
       state.data = data
       state.total_data = vt
+    },
+    UPDATE_REPORTING_DATA(state) {
+      const st = parseInt(Math.random() * 7 + 15, 10)
+      const st1 = parseInt(Math.random() * 5 + 2, 10)
+      const st20 = parseInt(Math.random() * 7 + 18, 10)
+      const st21 = parseInt(Math.random() * 4 + 1, 10)
+      const st30 = parseInt(Math.random() * 7 + 18, 10)
+      const st31 = parseInt(Math.random() * 15 + 3, 10)
+      const st40 = parseInt(Math.random() * 3 + 14, 10)
+      const st41 = parseInt(Math.random() * 3 + 20, 10)
+      const st50 = parseInt(Math.random() * 7 + 15, 10)
+      const st51 = parseInt(Math.random() * 7 + 22, 10)
+      const st52 = parseInt(Math.random() * 10 + 2, 10)
+      const st60 = parseInt(Math.random() * 7 + 15, 10)
+      const st61 = parseInt(Math.random() * 7 + 10, 10)
+      const st62 = parseInt(Math.random() * 8 + 18, 10)
+      const st70 = parseInt(Math.random() * 7 + 15, 10)
+      const st71 = parseInt(Math.random() * 7 + 2, 10)
+      const st72 = parseInt(Math.random() * 8 + 18, 10)
+      const reportingData2Update = [
+        {
+          title: 'Program 29',
+          children: [
+            {
+              child_title: 'Next gen platform',
+              progress: 60,
+              start_date: `2022.10.${st}`,
+              end_date: `2022.12.${st1}`,
+              start_date1: `2022.10.${st}`,
+              end_date1: `2022.12.${st1}`,
+              start_date2: `2022.10.${st}`,
+              end_date2: `2022.12.${st1}`,
+              start_date3: `2022.10.${st}`,
+              end_date3: `2022.12.${st1}`,
+              id: '2.29.18.1',
+              sub_project: [
+                {
+                  id: '2.29.18.1.10',
+                  progress: 0,
+                  start_date: `2022.10.${st20}`,
+                  end_date: `2022.12.${st21}`,
+                  start_date1: `2022.10.${st20}`,
+                  end_date1: moment().format('YYYY.MM.DD'),
+                },
+                {
+                  id: '2.29.18.1.11',
+                  progress: 0,
+                  start_date: `2022.10.${st30}`,
+                  end_date: `2022.11.${st31}`,
+                  start_date1: `2022.10.${st30}`,
+                  end_date1: moment().format('YYYY.MM.DD'),
+                  start_date2: `2022.10.${st30}`,
+                  end_date2: `2022.11.${st31}`,
+                  start_date3: `2022.10.${st30}`,
+                  end_date3: `2022.11.${st31}`,
+                },
+                {
+                  id: '2.29.18.1.110',
+                  progress: 100,
+                  start_date: `2022.10.${st40}`,
+                  end_date: `2022.10.${st41}`,
+                  start_date1: `2022.10.${st40}`,
+                  end_date1: `2022.10.${st41}`,
+                  start_date2: `2022.10.${st40}`,
+                  end_date2: `2022.10.${st41}`,
+                  start_date3: `2022.10.${st40}`,
+                  end_date3: `2022.10.${st41}`,
+                },
+                {
+                  id: '2.29.18.1.111',
+                  progress: 100,
+                  start_date: `2022.10.${st40}`,
+                  end_date: `2022.10.${st41}`,
+                  start_date1: `2022.10.${st40}`,
+                  end_date1: `2022.10.${st41}`,
+                  start_date2: `2022.10.${st40}`,
+                  end_date2: `2022.10.${st41}`,
+                  start_date3: `2022.10.${st40}`,
+                  end_date3: `2022.10.${st41}`,
+                },
+                {
+                  id: '2.29.18.1.112',
+                  progress: 100,
+                  start_date: `2022.10.${st40}`,
+                  end_date: `2022.10.${st41}`,
+                  start_date1: `2022.10.${st40}`,
+                  end_date1: `2022.10.${st41}`,
+                  start_date2: `2022.10.${st40}`,
+                  end_date2: `2022.10.${st41}`,
+                  start_date3: `2022.10.${st40}`,
+                  end_date3: `2022.10.${st41}`,
+                },
+                {
+                  id: '2.29.18.1.12',
+                  progress: 0,
+                  start_date: `2022.10.${st50}`,
+                  end_date: `2022.11.${st51}`,
+                  start_date1: `2022.10.${st50}`,
+                  end_date1: moment().format('YYYY.MM.DD'),
+                  start_date2: `2022.11.${st52}`,
+                  end_date2: `2022.11.${st51}`,
+                  start_date3: `2022.11.${st52}`,
+                  end_date3: `2022.11.${st51}`,
+                },
+                {
+                  id: '2.29.18.1.13',
+                  progress: 0,
+                  start_date: `2022.10.${st60}`,
+                  end_date: `2022.11.${st61}`,
+                  start_date1: `2022.10.${st60}`,
+                  end_date1: moment().format('YYYY.MM.DD'),
+                  start_date2: `2022.10.${st62}`,
+                  end_date2: `2022.11.${st61}`,
+                  start_date3: `2022.10.${st62}`,
+                  end_date3: `2022.11.${st61}`,
+                },
+                {
+                  id: '2.29.18.1.14',
+                  progress: 0,
+                  start_date: `2022.10.${st70}`,
+                  end_date: `2022.11.${st72}`,
+                  start_date1: `2022.10.${st70}`,
+                  end_date1: moment().format('YYYY.MM.DD'),
+                  start_date2: `2022.11.${st71}`,
+                  end_date2: `2022.11.${st72}`,
+                  start_date3: `2022.11.${st71}`,
+                  end_date3: `2022.11.${st72}`,
+                },
+                {
+                  id: '2.29.18.1.15',
+                  progress: 0,
+                  start_date: '2022.10.15',
+                  end_date: '2022.10.25',
+                  start_date1: '2022.10.15',
+                  end_date1: '2022.10.25',
+                  start_date2: '2022.10.15',
+                  end_date2: '2022.10.25',
+                  start_date3: '2022.10.15',
+                  end_date3: '2022.10.25',
+                },
+                {
+                  id: '2.29.18.1.16',
+                },
+                {
+                  id: '2.29.18.1.17',
+                },
+              ]
+            }
+          ]
+        }
+      ]
+      state.reportingData = reportingData2Update
+      Vue.$toast.success('Updated Successfully.')
     }
   },
 }

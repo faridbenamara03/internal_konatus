@@ -22,12 +22,12 @@
             </b-button>
           </div>
         </div>
-        <div v-if="tabIndex === 1" class="action-bar">
+        <!-- <div v-if="tabIndex === 1" class="action-bar">
           <b-button-group>
-            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
               <b-icon icon="bar-chart-line" />
             </b-button>
-            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="table" />
             </b-button>
           </b-button-group>
@@ -39,22 +39,12 @@
               <feather-icon icon="DollarSignIcon" />
             </b-button>
           </b-button-group>
-        </div>
+        </div> -->
         <div v-if="tabIndex === 2" class="action-bar justify-content-between">
           <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />
             Update
           </b-button>
-          <b-button-group>
-            <div v-if="resourceAddedT === false">
-              <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(false)">
-                <b-icon icon="bar-chart-line" />
-              </b-button>
-              <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(true)">
-                <b-icon icon="table" />
-              </b-button>
-            </div>
-          </b-button-group>
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
               <circle-icon size="1x" class="custom-class" />
@@ -65,7 +55,10 @@
               Engaged
             </b-button>
             <b-button variant="flat-primary">
-              <layers-icon size="1x" class="custom-class" />
+              <span style="font-size:12px;" >
+                <b-icon icon="diamond-fill" />
+              </span>
+              <!-- <layers-icon size="1x" class="custom-class" /> -->
               Estimated
             </b-button>
           </div>
@@ -74,9 +67,10 @@
           <Demand :data="c_demand_team_data" />
         </b-tab>
         <b-tab title="Reporting">
-          <b-card-text>
+          <Reporting :is-chart-view="isChartView" />
+          <!-- <b-card-text>
             Carrot cake dragée chocolate.
-          </b-card-text>
+          </b-card-text> -->
         </b-tab>
         <b-tab title="Control">
           <Control :is-chart-view="isChartView" />
@@ -119,31 +113,31 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardText, BCardBody, BTabs, BTab,
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon
 } from 'bootstrap-vue'
-import { CalendarIcon, LayersIcon, CircleIcon } from 'vue-feather-icons'
+import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
+import Reporting from './components/Reporting.vue'
 import CreateModal from './modals/CreateModal.vue'
 import AddResourceModal from './modals/AddResourceModal.vue'
 
 export default {
   components: {
-    BButtonGroup,
     BButton,
     BCard,
-    BCardText,
     BCardBody,
     BTabs,
     BTab,
     Demand,
     CircleIcon,
     CalendarIcon,
-    LayersIcon,
     Control,
     CreateModal,
-    AddResourceModal
+    AddResourceModal,
+    Reporting,
+    BIcon
   },
   props: {
     data: {

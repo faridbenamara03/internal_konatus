@@ -442,7 +442,7 @@ export default [
         route: {
           name: 'team-view',
           params: {
-            teamId: 'team-b',
+            teamId: 'team-c',
           },
         },
         children: [

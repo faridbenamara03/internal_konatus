@@ -81,7 +81,8 @@
 </template>
 
 <script>
-import navMenuItems from '@/navigation/vertical'
+import store from '@/store'
+// import navMenuItems from '@/navigation/vertical'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import { BLink, BImg } from 'bootstrap-vue'
 import { provide, computed, ref } from '@vue/composition-api'
@@ -132,9 +133,8 @@ export default {
 
     // App Name
     const { appName, appLogoImage } = $themeConfig.app
-
     return {
-      navMenuItems,
+      navMenuItems: store.state.teamState.navMenuItems,
       perfectScrollbarSettings,
       isVerticalMenuCollapsed,
       collapseTogglerIcon,

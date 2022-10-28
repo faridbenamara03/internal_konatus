@@ -3,19 +3,19 @@
     <b-card-text>
       <div class="d-flex mb-1">
         <div style="width:100px">
-          <b-avatar size="100" variant="primary" text="BV" />
+          <b-avatar size="100" variant="warning" text="PM" />
         </div>
         <div style="width:calc(100% - 100px);display:flex">
           <div style="margin-top:auto;margin-bottom:auto;margin-left:16px">
             <div style="margin-bottom:6px;">
-              <b>Paul Michel</b>
+              <b>{{ data.name }}</b>
             </div>
             <div style="margin-bottom:6px;">
               TEAMS
             </div>
             <div>
-              <b-badge pill variant="light-success">
-                Paid
+              <b-badge pill style="color:#FD7E14;background:#FD7E1420">
+                {{ data.team }}
               </b-badge>
             </div>
           </div>
@@ -25,13 +25,13 @@
         <div class="mb-1">
           <div><b style="color:#20C997">PRIMARY</b></div>
           <div>
-            Developer
+            {{ data.primary }}
           </div>
         </div>
         <div class="mb-1">
           <div><b style="color:#00BBF5">SECONDARY</b></div>
           <div>
-            Internal Test
+            {{ data.primary }}
           </div>
         </div>
         <div>
@@ -43,7 +43,7 @@
       </div>
       <div>
         <div class="mb-1">
-          <b-button block variant="primary" @click="updateResourceAssignState">Assign</b-button>
+          <b-button block variant="primary" @click="updateResourceAssignState(data)">Assign</b-button>
         </div>
         <div>
           <b-button block variant="outline-danger">Delete</b-button>
@@ -88,15 +88,21 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: {
+        name: 'Paul Michel',
+        team: 'Team B',
+        primary: 'Developer',
+        secondary: 'Internal Test'
+      }
     }
   },
   methods: {
     hideModal() {
       this.$refs['add-resource-modal'].hide()
     },
-    updateResourceAssignState() {
-      this.$store.commit('teamState/RESOURCE_ADD')
+    updateResourceAssignState(data) {
+      this.$store.commit('teamState/RESOURCE_ADD', data)
+      this.$refs['add-resource-modal'].hide()
     }
   }
 }
