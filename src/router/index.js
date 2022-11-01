@@ -32,7 +32,7 @@ const router = new VueRouter({
     ...others,
     ...konatus,
     {
-      path: '*',
+      path: '/404',
       redirect: 'error-404',
     },
   ],
