@@ -93,7 +93,7 @@
       >
         <b-row>
           <b-col>
-            <h2>Chart Title</h2>
+            <h2>{{serie[0].title}}</h2>
             <div class="d-flex justify-content-between align-center mt-1">
               <p class="text-uppercase m-0">
                 Total
@@ -180,16 +180,16 @@ export default {
   data() {
     return {
       series: [[{
-        data: [120, 240, 2040, 1920, 3960, 3720],
+        title: 'Consumer Robots',
+        data: [120, 80, 2040, 1920, 3500, 3720],
       }],
       [{
-        data: [120, 240, 2040, 1920, 3960, 3720],
+        title: 'Military Robots',
+        data: [220, 240, 2040, 1920, 3960, 3400],
       }],
       [{
-        data: [120, 240, 2040, 1920, 3960, 3720],
-      }],
-      [{
-        data: [400, 430, 448, 470, 540, 580],
+        title: 'Project automation',
+        data: [120, 600, 2040, 2320, 3960, 3720],
       }],
       ],
       chartOptions: {
@@ -234,7 +234,7 @@ export default {
           enabled: false,
         },
         xaxis: {
-          categories: ['spend', 'authorized', 'real estimated', 'budget engaged', 'budget demand spend', 'portfolio budget',
+          categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget',
           ],
           labels: {
             formatter: value => Intl.NumberFormat('en-US', {
