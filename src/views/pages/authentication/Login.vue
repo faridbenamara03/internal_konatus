@@ -72,7 +72,7 @@
                   #default="{ errors }"
                   name="Email"
                   vid="email"
-                  rules="required|email"
+                  rules="required"
                 >
                   <b-form-input
                     id="login-email"
@@ -147,12 +147,12 @@
             </b-form>
           </validation-observer>
 
-          <b-card-text class="text-center mt-2">
+          <!-- <b-card-text class="text-center mt-2">
             <span>New on our platform? </span>
             <b-link :to="{name:'auth-register'}">
               <span>&nbsp;Create an account</span>
             </b-link>
-          </b-card-text>
+          </b-card-text> -->
 
         </b-col>
       </b-col>
@@ -214,8 +214,8 @@ export default {
   data() {
     return {
       status: '',
-      password: '',
-      userEmail: '',
+      password: 'konatus4321',
+      userEmail: 'konatus.test@yopmail.com',
       sideImg: require('@/assets/images/pages/login-v2.svg'),
 
       // validation rules
@@ -286,6 +286,7 @@ export default {
                 })
             })
             .catch(error => {
+              this.$toast.warning('Email or Password is Invalid')
               this.$refs.loginForm.setErrors(error.response.data.error)
             })
         }

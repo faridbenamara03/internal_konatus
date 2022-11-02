@@ -24,6 +24,25 @@ const data = {
     },
     {
       id: 2,
+      fullName: 'Konatus',
+      username: 'konatus',
+      password: 'konatus4321',
+      // eslint-disable-next-line global-require
+      avatar: require('@/assets/images/avatars/13-small.png'),
+      email: 'demo@konatus.site',
+      role: 'admin',
+      ability: [
+        {
+          action: 'manage',
+          subject: 'all',
+        },
+      ],
+      extras: {
+        eCommerceCartItemsCount: 5,
+      },
+    },
+    {
+      id: 3,
       fullName: 'Jane Doe',
       username: 'janedoe',
       password: 'client',
@@ -63,7 +82,7 @@ mock.onPost('/jwt/login').reply(request => {
     email: ['Something went wrong'],
   }
 
-  const user = data.users.find(u => u.email === email && u.password === password)
+  const user = data.users.find(u => (u.email === email || u.username === email) && u.password === password)
 
   if (user) {
     try {
