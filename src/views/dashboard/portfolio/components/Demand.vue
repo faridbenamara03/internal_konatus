@@ -3,6 +3,9 @@
     class="demand-view"
     :class="{'has-chart': isChartView}"
   >
+    <div style="position:relative;top:8px;left:32px;height:0px;font-weight:bold;">
+      Customer Robots
+    </div>
     <b-table
       v-if="!isChartView"
       :items="data"
@@ -48,21 +51,41 @@
             </span>
           </div>
           <div class="row-detail--form">
-            <v-select
-              v-model="detail.priority"
-              :dir="'rtl'"
-              :options="['highest', 'high', 'low', 'lowest']"
-              outlined
-            />
-
-            <b-form-input
-              :dir="'rtl'"
-              :value="formatCurrency(detail.budget)"
-            />
-            <b-form-input
-              :dir="'rtl'"
-              :value="dateFormat(detail.deadline)"
-            />
+            <div class="d-flex w-100">
+              <template v-for="(item, index) in fields">
+                <div class="d-flex" :key="index" v-if="item === 'priority'" :style="`width:${100 / (fields.length - 2)}%;text-align:end;justify-content:center`">
+                  <v-select
+                    v-model="detail.priority"
+                    :options="['highest', 'high', 'low', 'lowest']"
+                    outlined
+                  />
+                </div>
+                <div class="d-flex" :key="index" v-if="item === 'deadline'" :style="`width:${100 / (fields.length - 2)}%;text-align:end;justify-content:center`">
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="dateFormat(detail.deadline)"
+                  />
+                </div>
+                <div class="d-flex" :key="index" v-if="item === 'budget'" :style="`width:${100 / (fields.length - 2)}%;text-align:end;justify-content:center`">
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="formatCurrency(detail.budget)"
+                  />
+                </div>
+                <div class="d-flex" :key="index" v-if="item === 'quoted'" :style="`width:${100 / (fields.length - 2)}%;text-align:end;justify-content:center`">
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="formatCurrency(detail.quoted)"
+                  />
+                </div>
+                <div class="d-flex" :key="index" v-if="item === 'engaged'" :style="`width:${100 / (fields.length - 2)}%;text-align:end;justify-content:center`">
+                  <b-form-input
+                    :dir="'rtl'"
+                    :value="formatCurrency(detail.engaged)"
+                  />
+                </div>
+              </template>
+            </div>
             <div
               class="d-flex align-items-center justify-content-end"
             >
@@ -83,6 +106,7 @@
     <div
       v-if="isChartView"
       class="d-flex flex-column w-100"
+      style
     >
       <b-card
         v-for="(serie, idx) in series"
@@ -247,7 +271,7 @@ export default {
           labels: {
             show: true,
             align: 'left',
-            offsetX: '-20',
+            offsetX: '0',
             style: {
               cssClass: 'text-uppercase',
             },

@@ -10,7 +10,7 @@ const data = {
       password: 'konatus4321',
       // eslint-disable-next-line global-require
       avatar: require('@/assets/images/avatars/13-small.png'),
-      email: 'konatus.test@yopmail.com',
+      email: 'konatus.demo@yopmail.com',
       role: 'admin',
       ability: [
         {

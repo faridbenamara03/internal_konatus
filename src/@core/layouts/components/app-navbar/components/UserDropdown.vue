@@ -27,7 +27,7 @@
       </b-avatar>
     </template>
 
-    <b-dropdown-item
+    <!-- <b-dropdown-item
       :to="{ name: 'pages-profile'}"
       link-class="d-flex align-items-center"
     >
@@ -106,7 +106,7 @@
         class="mr-50"
       />
       <span>FAQ</span>
-    </b-dropdown-item>
+    </b-dropdown-item> -->
     <b-dropdown-item
       link-class="d-flex align-items-center"
       @click="logout"
@@ -122,7 +122,7 @@
 
 <script>
 import {
-  BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
+  BNavItemDropdown, BDropdownItem, BAvatar,
 } from 'bootstrap-vue'
 import { initialAbility } from '@/libs/acl/config'
 import useJwt from '@/auth/jwt/useJwt'
@@ -132,7 +132,7 @@ export default {
   components: {
     BNavItemDropdown,
     BDropdownItem,
-    BDropdownDivider,
+    // BDropdownDivider,
     BAvatar,
   },
   data() {

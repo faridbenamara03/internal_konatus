@@ -51,7 +51,7 @@ export default {
                     type: 'project',
                   },
                   {
-                    title: 'Enhanced authono...',
+                    title: 'Enhanced authonomy',
                     type: 'project',
                   },
                   {
@@ -61,7 +61,7 @@ export default {
                 ],
               },
               {
-                title: 'Hardened quadruped ...',
+                title: 'Hardened quadruped observation',
                 type: 'program',
               },
               {
@@ -69,7 +69,7 @@ export default {
                 type: 'program',
               },
               {
-                title: 'Power and programin...',
+                title: 'power and programing station',
                 type: 'program',
               },
             ],

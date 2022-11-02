@@ -215,7 +215,7 @@ export default {
     return {
       status: '',
       password: 'konatus4321',
-      userEmail: 'konatus.test@yopmail.com',
+      userEmail: 'konatus.demo@yopmail.com',
       sideImg: require('@/assets/images/pages/login-v2.svg'),
 
       // validation rules
