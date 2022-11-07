@@ -15,6 +15,11 @@
       @click="handleNavItemClick(item)"
       @dblclick="handleNavItemDblClick"
     >
+      <feather-icon
+        :icon="isOpen ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+        size="16"
+        @click="handleNavItemDblClick"
+      />
       <nav-menu-icon :item="item" />
       <span class="menu-title text-truncate" >{{ item.title }}</span>
       <b-badge

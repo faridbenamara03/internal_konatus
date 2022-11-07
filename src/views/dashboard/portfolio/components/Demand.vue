@@ -88,6 +88,7 @@
             </div>
             <div
               class="d-flex align-items-center justify-content-end"
+              style="width:270px"
             >
               <b-button variant="flat-primary">
                 <feather-icon icon="Edit2Icon" />
