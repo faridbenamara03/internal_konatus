@@ -58,17 +58,16 @@
     }
     .part2 {
       display: flex;
-      width: 60%;
+      width: 65%;
       .data-child {
         text-align: end;
-        width: 20%;
       }
     }
     .part3 {
       display: flex;
-      width: 20%;
+      justify-content: end;
+      width: 15%;
       .data-child {
-        justify-content: space-around;
         width: 30%;
       }
     }

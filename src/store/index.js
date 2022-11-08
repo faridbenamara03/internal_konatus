@@ -8,7 +8,6 @@ import app from './app'
 import appConfig from './app-config'
 import verticalMenu from './vertical-menu'
 import teamState from './team'
-import projectState from './project'
 import orgnizationState from './orgnization'
 import globalState from './global'
 
@@ -22,7 +21,6 @@ export default new Vuex.Store({
     verticalMenu,
     'app-ecommerce': ecommerceStoreModule,
     teamState,
-    projectState,
     orgnizationState,
     globalState,
   },

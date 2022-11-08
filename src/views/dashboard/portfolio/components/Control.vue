@@ -2,71 +2,58 @@
   <div
     class="demand-view"
   >
-    <b-table
-      :items="data"
-      :fields="fields"
-      :tbody-tr-class="rowClass"
-      borderless
-      responsive
-    >
-      <template #cell(show_details)="row">
-        <div
-          class="d-flex detail align-center"
-          @click="row.toggleDetails"
-        >
-          <feather-icon
-            v-if="row.item.children"
-            :icon="row.detailsShowing ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          <p class="m-0 text-uppercase">
-            {{ row.item.title }}
-          </p>
+    <div
+      v-if="!isChartView"
+      class="portf-demand-view">
+      <div class="portf-row portf-bold portf-table-header portf-uppercase">
+        <div class="part1" style="width:35%">
+          Consumer Robots
         </div>
-      </template>
-
-      <template #cell(budget)="row">
-        {{ formatCurrency(row.item.budget) }}
-      </template>
-
-      <template #cell(deadline)="row">
-        {{ row.item.deadline ? dateFormat(row.item.deadline) : '' }}
-      </template>
-
-      <template #row-details="row">
-        <div
-          v-for="detail in row.item.children"
-          :key="detail.title"
-          class="row-detail d-flex align-items-center control"
-        >
-          <div class="row-detail--name">
-            <span>
-              {{ detail.title }}
-            </span>
-          </div>
-          <div class="row-detail--form ml-4 mr-2">
-            <div>{{ detail.priority }}</div>
-            <div>{{ detail.value }}</div>
-            <div>{{ formatCurrency(detail.budget) }}</div>
-            <div>{{ detail.quote ? formatCurrency(detail.quote) : "" }}</div>
-            <div>{{ dateFormat(detail.deadline) }}</div>
-            <div>{{ detail.mgt }}</div>
+        <div class="part2" >
+          <div class="data-child mr-1 portf-uppercase" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
+            {{ ft }}
           </div>
         </div>
-      </template>
-    </b-table>
+      </div>
+      <div v-for="(item, index) in this.data" :key="index">
+        <div class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt" :class="{'inner-sdw': index === 0}">
+          <div class="part1 portf-uppercase" style="cursor:pointer;width:35%" v-on:click="onCollapseCLick(index)">
+            <feather-icon :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'" v-if="item.children" size="16" class="mr-1" />
+            {{ item.title }}
+          </div>
+          <div class="part2">
+            <div class="data-child mr-1" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
+              <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+              <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
+              <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
+            </div>
+          </div>
+        </div>
+        <div v-if="opened === index">
+          <div v-for="(item1, index1) in item.children" :key="index1">
+            <div class="portf-row portf-table-row font-14 border-bottom-dm"  :class="{'inner-sdw': index1 === 0}">
+              <div class="part1 portf-bold pl-2" style="padding-top:7px;width:35%">
+                {{ item1.title }}
+              </div>
+              <div class="part2">
+                <div class="data-child mr-1" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
+                  <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+                  <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
+                  <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { BTable } from 'bootstrap-vue'
 import moment from 'moment'
 
 export default {
-  components: {
-    BTable,
-  },
   props: {
     data: {
       type: Array,
@@ -75,16 +62,18 @@ export default {
   },
   data() {
     return {
-      fields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' },
-        { key: 'priority', thStyle: 'width: 11.6%;' },
-        { key: 'value', thStyle: 'width: 11.6%;' },
-        { key: 'budget', thStyle: 'width: 11.6%;' },
-        { key: 'quote', thStyle: 'width: 11.6%;' },
-        { key: 'deadline', thStyle: 'width: 11.6%;' },
-        { key: 'mgt & study', thStyle: 'width: 12%;' }],
+      opened: 0,
+      c_fields: ['priority', 'value', 'budget', 'quote', 'deadline', 'mgt & study']
     }
   },
   methods: {
+    onCollapseCLick(index) {
+      if (index === this.opened) {
+        this.opened = -1
+      } else {
+        this.opened = index
+      }
+    },
     dateFormat(date) {
       return moment(new Date(date)).format('MM-DD-YYYY')
     },
@@ -104,7 +93,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-@import '@core/scss/vue/pages/dashboard-portfolio.scss';
-</style>

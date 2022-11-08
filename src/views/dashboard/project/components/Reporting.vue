@@ -1,20 +1,20 @@
 <template>
   <div class="report-custom">
-    <div class="reporting-side-custom" v-for="(item, index) in datt" :key="index">
+    <div class="reporting-side-custom" >
       <div class="program-title">
         <div class="program-title-child">
           <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
           <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
-          {{ item.title }}
+          {{ datt.title }}
         </div>
       </div>
       <div v-if="!collapsed">
-        <div v-for="(item1, index1) in item.children" :key="index1">
+        <div v-for="(item1, index1) in datt.children" :key="index1">
           <div class="program-collapse-header">
             <div class="header-child">
               <div class="child1">
                 <div class="title">
-                  {{ item1.child_title }}
+                  {{ item1.title }}
                 </div>
                 <div class="id">
                   {{ item1.id }}
@@ -105,8 +105,8 @@
           </div>
         </div>
         <div v-if="!collapsed">
-          <div v-for="(item, index) in datt" :key="index">
-            <div v-for="(item1, index1) in item.children" :key="index1">
+          <div v-for="(item1, index1) in datt.children" :key="index1">
+            <div v-if="!isUN(item1.start_date)">
               <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
                 <div :style="'position:absolute;left:' + (getLength(lineStartDate, item1.start_date) + 8) + 'px;width:' + getLength(item1.start_date, item1.end_date) + 'px'">
                   <progress-component :exist="'2022.11.11'" :value="getLength(item1.start_date, todate) - 4" :title="`${item1.id} (${item1.progress}%)`" :isSub="false" />
@@ -154,12 +154,13 @@ import {
 } from "bootstrap-vue"
 import moment from "moment"
 import ProgressComponent from '@/views/dashboard/project/components/ProgressComponent.vue'
+import { isEmpty } from "@/views/utils"
 
 export default {
   components: {
     BModal,
     BButton,
-    ProgressComponent
+    ProgressComponent,
   },
   props: {
     data: {
@@ -173,7 +174,6 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      projectData: this.$store.state.projectState.projectData,
       leftP: 15 * 30 + 8,
       lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
       todate: moment().format('YYYY.MM.DD'),
@@ -183,7 +183,7 @@ export default {
   },
   computed: {
     datt() {
-      return this.$store.state.projectState.projectData
+      return this.$store.state.globalState.projectReportingData
     }
   },
   mounted() {
@@ -195,6 +195,9 @@ export default {
     }
   },
   methods: {
+    isUN(data) {
+      return isEmpty(data)
+    },
     isToday(date) {
       return moment().isSame(date, "day")
     },
@@ -222,7 +225,7 @@ export default {
       this.$refs['my-modal'].hide()
     },
     onUpdate() {
-      this.$store.commit('projectState/UPDATE_PROJECT_DATA')
+      this.$store.commit('globalState/UPDATE_PROJECT_REPORTING_DATA')
       this.$refs['my-modal'].hide()
     }
   },
