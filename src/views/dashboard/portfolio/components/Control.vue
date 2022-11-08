@@ -21,7 +21,7 @@
             class="mr-1"
           />
           <p class="m-0 text-uppercase">
-            {{ row.item.name }}
+            {{ row.item.title }}
           </p>
         </div>
       </template>
@@ -37,15 +37,15 @@
       <template #row-details="row">
         <div
           v-for="detail in row.item.children"
-          :key="detail.name"
+          :key="detail.title"
           class="row-detail d-flex align-items-center control"
         >
           <div class="row-detail--name">
             <span>
-              {{ detail.name }}
+              {{ detail.title }}
             </span>
           </div>
-          <div class="row-detail--form">
+          <div class="row-detail--form ml-4 mr-2">
             <div>{{ detail.priority }}</div>
             <div>{{ detail.value }}</div>
             <div>{{ formatCurrency(detail.budget) }}</div>
@@ -99,7 +99,7 @@ export default {
       if (!item || type !== 'row') { return }
 
       // eslint-disable-next-line consistent-return
-      if (item.name === 'total') { return colorClass }
+      if (item.title === 'total') { return colorClass }
     },
   },
 }

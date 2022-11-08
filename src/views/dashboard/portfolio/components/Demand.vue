@@ -3,9 +3,110 @@
     class="demand-view"
     :class="{'has-chart': isChartView}"
   >
-    <div style="position:relative;top:8px;left:32px;height:0px;font-weight:bold;">
-      Customer Robots
-    </div>
+    <!-- <div
+      v-if="!isChartView"
+      class="portf-demand-view">
+      <div class="portf-row portf-bold portf-table-header portf-uppercase">
+        <div class="part1">
+          Consumer Robots
+        </div>
+        <div class="part2">
+          <div class="data-child mr-1 portf-uppercase">
+            priority
+          </div>
+          <div class="data-child mr-1 portf-uppercase">
+            budget
+          </div>
+          <div class="data-child mr-1 portf-uppercase">
+            deadline
+          </div>
+          <div class="data-child mr-1 portf-uppercase">
+            engaged
+          </div>
+          <div class="data-child mr-1 portf-uppercase">
+            quoted
+          </div>
+        </div>
+      </div>
+      <div v-for="(item, index) in c_data_a" :key="index">
+        <div class="portf-row portf-sub-header portf-bold portf-table-row portf-uppercase color-white header-shadow-btm row-header-bg">
+          asdw
+        </div>
+        <div v-for="(item1, index1) in item.projects" :key="index1">
+          <div class="portf-row portf-bold portf-sub-header portf-table-row portf-uppercase color-white row-header-bg border-btm-lgt" :class="{'inner-sdw': index1 === 0}">
+            <div class="part1">
+              <div class="header mr-1" v-on:click="onCollapseCLick(index1)" style="cursor:pointer">
+                <feather-icon :icon="c_opened === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
+                {{ item1.title }}
+              </div>
+              <div class="child1 mr-1">
+                {{ item1.gate }}
+              </div>
+              <div class="child2 mr-1">
+                {{ item1.next_gate }}
+              </div>
+            </div>
+            <div class="part2">
+              <div v-for="(item2, index2) in item1.data" :key="index2" class="data-child mr-1">
+                {{ item2 }}
+              </div>
+            </div>
+          </div>
+          <div v-if="index1 === c_opened">
+            <div v-for="(item3, index3) in item1.phases" :key="index3" class="portf-row portf-table-row font-14 border-bottom-dm">
+              <div class="part1">
+                <div class="header mr-1 pl-4 portf-bold">
+                  {{ item3.title }}
+                </div>
+                <div class="child1 mr-1">
+                  {{ item3.gate }}
+                </div>
+                <div class="child2 mr-1">
+                  {{ item3.next_gate }}
+                </div>
+              </div>
+              <div class="part2">
+                <div v-for="(item4, index4) in item3.data" :key="index4" class="data-child mr-1">
+                  {{ item4 }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portf-row portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt color-cyan">
+        <div class="part1">
+          <div class="header mr-1 portf-uppercase">
+            Total Team capacity
+          </div>
+          <div class="child1 mr-1">
+            <div class="d-flex" style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;">
+              <div style="font-size:12px;color:#FFFFFF80;padding:2px 8px;">
+                Info
+              </div>
+              <div>
+                <feather-icon icon="PlusIcon" style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;" />
+              </div>
+            </div>
+          </div>
+          <div class="child2 mr-1">
+            <div class="d-flex" style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;">
+              <div style="font-size:12px;color:#FFFFFF80;padding:2px 8px;">
+                Info
+              </div>
+              <div>
+                <feather-icon icon="PlusIcon" style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part2">
+          <div v-for="(item5, index5) in c_total_data" :key="index5" class="data-child mr-1">
+            {{ item5 }}
+          </div>
+        </div>
+      </div>
+    </div> -->
     <b-table
       v-if="!isChartView"
       :items="data"
@@ -26,7 +127,7 @@
             class="mr-1"
           />
           <p class="m-0 text-uppercase">
-            {{ row.item.name }}
+            {{ row.item.title }}
           </p>
         </div>
       </template>
@@ -39,15 +140,23 @@
         {{ row.item.deadline ? dateFormat(row.item.deadline) : '' }}
       </template>
 
+      <template #cell(quoted)="row">
+        {{ row.item.deadline ? formatCurrency(row.item.quoted) : '' }}
+      </template>
+
+      <template #cell(engaged)="row">
+        {{ row.item.deadline ? formatCurrency(row.item.engaged) : '' }}
+      </template>
+
       <template #row-details="row">
         <div
           v-for="detail in row.item.children"
-          :key="detail.name"
+          :key="detail.title"
           class="row-detail d-flex align-items-center"
         >
           <div class="row-detail--name">
             <span>
-              {{ detail.name }}
+              {{ detail.title }}
             </span>
           </div>
           <div class="row-detail--form">
@@ -241,32 +350,24 @@ export default {
             },
           },
         },
-        plotOptions: {
-          bar: {
-            borderRadius: '0px 2px 2px 0px',
-            horizontal: true,
-            distributed: true,
-          },
-        },
-        colors: ['#7367F0', '#D46D6D', '#FF9F43', '#00CFE8', '#0D6EFD', '#28C76F'],
+        colors: ['#7367F0', '#D46D6D', '#BC00F9', '#00CFE8', '#0D6EFD', '#28C76F'],
         dataLabels: {
-          enabled: false,
+          enabled: true,
         },
         legend: {
-          show: false,
+          show: true,
         },
         tooltip: {
-          enabled: false,
+          enabled: true,
+        },
+        plotOptions: {
+          bar: {
+            distributed: true, // this line is mandatory
+            horizontal: true,
+          },
         },
         xaxis: {
-          categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget',
-          ],
-          labels: {
-            formatter: value => Intl.NumberFormat('en-US', {
-              notation: 'compact',
-              maximumFractionDigits: 1,
-            }).format(value),
-          },
+          categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget']
         },
         yaxis: {
           labels: {
@@ -283,6 +384,8 @@ export default {
   },
   methods: {
     dateFormat(date) {
+      // console.log(data)
+      // console.log(fileds)
       return moment(new Date(date)).format('MM-DD-YYYY')
     },
     formatCurrency(value) {
@@ -296,7 +399,7 @@ export default {
       if (!item || type !== 'row') { return }
 
       // eslint-disable-next-line consistent-return
-      if (item.name === 'total') { return colorClass }
+      if (item.title === 'total') { return colorClass }
     },
     getTotalValue(data) {
       let totalValue = 0
@@ -314,4 +417,5 @@ export default {
 
 <style lang="scss">
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import '@core/scss/vue/pages/dashboard-portfolio-demand.scss';
 </style>

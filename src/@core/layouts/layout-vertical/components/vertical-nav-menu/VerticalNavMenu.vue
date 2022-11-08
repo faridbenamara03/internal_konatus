@@ -72,7 +72,7 @@
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
       <vertical-nav-menu-items
-        :items="navMenuItems"
+        :items="comptNavMenuItems"
         class="navigation navigation-main"
       />
     </vue-perfect-scrollbar>
@@ -108,6 +108,13 @@ export default {
       required: true,
     },
   },
+  computed: {
+    comptNavMenuItems() {
+      const data = [{ search: true }]
+      data.push(...store.state.globalState.globalData)
+      return data
+    }
+  },
   setup(props) {
     const {
       isMouseHovered,
@@ -134,7 +141,7 @@ export default {
     // App Name
     const { appName, appLogoImage } = $themeConfig.app
     return {
-      navMenuItems: store.state.teamState.navMenuItems,
+      navMenuItems: store.state.globalState.globalData,
       perfectScrollbarSettings,
       isVerticalMenuCollapsed,
       collapseTogglerIcon,

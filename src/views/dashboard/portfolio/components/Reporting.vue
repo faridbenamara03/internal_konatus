@@ -1,30 +1,22 @@
 <template>
   <div class="report">
     <div class="reporting-side">
-      <div class="report-block--head">
-        <p class="m-0 text-uppercase">
-          Boston Dynamics
-        </p>
-      </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          Consumer robots
-        </p>
-      </div>
-      <div class="report-block--head">
-        <feather-icon
-          icon="ChevronRightIcon"
-          size="16"
-          class="mr-1"
-        />
-        <p class="m-0 text-uppercase">
-          military robots
-        </p>
+      <div>
+        <div class="report-block--head">
+          <p class="m-0 text-uppercase">
+            {{ item.title }}
+          </p>
+        </div>
+        <div v-for="(item1, index1) in item.children" :key="index1" class="report-block--head">
+          <feather-icon
+            icon="ChevronRightIcon"
+            size="16"
+            class="mr-1"
+          />
+          <p class="m-0 text-uppercase">
+            {{ item1.title }}
+          </p>
+        </div>
       </div>
       <app-collapse accordion>
         <app-collapse-item title="Accordion Item 1">
@@ -154,27 +146,6 @@
             />
           </b-card>
         </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="secondary"
-            />
-          </b-card>
-        </div>
       </div>
     </div>
     <b-modal
@@ -248,6 +219,7 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
+      item: this.$store.state.globalState.globalData[0]
     }
   },
   mounted() {
