@@ -3,6 +3,7 @@ export const codeBasic = `
   <div>
     <label for="example-datepicker">Choose a date</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="example-datepicker"
       v-model="value"
       class="mb-1"
@@ -40,6 +41,7 @@ export const codeButtonOnly = `
       />
       <b-input-group-append>
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           v-model="value"
           show-decade-nav
           button-only
@@ -92,6 +94,7 @@ export const codeDisableDate = `
 <template>
   <div>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       v-model="value"
       :date-disabled-fn="dateDisabled"
       locale="en"
@@ -162,6 +165,7 @@ export const codeInternationalization = `
 
     <label for="example-i18n-picker">Date picker:</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="example-i18n-picker"
       v-model="value"
       v-bind="labels[locale] || {}"
@@ -260,6 +264,7 @@ export const codeOptional = `
   <div>
     <label for="datepicker-buttons">Date picker with optional footer buttons</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-buttons"
       today-button
       reset-button
@@ -285,6 +290,7 @@ export const codePlaceholder = `
   <div>
     <label for="datepicker-placeholder">Date picker with placeholder</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-placeholder"
       placeholder="Choose a date"
       local="en"
@@ -308,6 +314,7 @@ export const codeMinMax = `
 <template>
   <div>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       v-model="value"
       :min="min"
       :max="max"
@@ -350,6 +357,7 @@ export const codeSize = `
   <div>
     <label for="datepicker-sm">Small date picker</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-sm"
       size="sm"
       local="en"
@@ -358,6 +366,7 @@ export const codeSize = `
     />
     <label for="datepicker-default">Default date picker</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-default"
       local="en"
       class="mb-2"
@@ -365,6 +374,7 @@ export const codeSize = `
     />
     <label for="datepicker-lg">Large date picker</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-lg"
       size="lg"
       local="en"
@@ -417,6 +427,7 @@ export const codeState = `
       </b-form-radio-group>
     </b-form-group>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="ex-disabled-readonly"
       :disabled="disabled"
       :readonly="readonly"
@@ -490,12 +501,14 @@ export const codeValidation = `
   <div>
     <label for="datepicker-invalid">Choose a date (invalid style)</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-invalid"
       :state="false"
       class="mb-2"
     />
     <label for="datepicker-valid">Choose a date (valid style)</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-valid"
       :state="true"
     />
@@ -518,6 +531,7 @@ export const codeVariant = `
   <b-row>
     <b-col md="4">
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         local="en"
         placeholder="Primary Variant"
         class="mb-1"
@@ -526,6 +540,7 @@ export const codeVariant = `
     </b-col>
     <b-col md="4">
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         local="en"
         placeholder="Secondary Variant"
         class="mb-1"
@@ -535,6 +550,7 @@ export const codeVariant = `
     <b-col md="4">
       <b-form-datepicker
         local="en"
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         placeholder="Success Variant"
         class="mb-1"
         selected-variant="success"
@@ -542,6 +558,7 @@ export const codeVariant = `
     </b-col>
     <b-col md="4">
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         local="en"
         placeholder="Warning Variant"
         class="mb-1"
@@ -550,6 +567,7 @@ export const codeVariant = `
     </b-col>
     <b-col md="4">
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         local="en"
         placeholder="Danger Variant"
         class="mb-1"
@@ -558,6 +576,7 @@ export const codeVariant = `
     </b-col>
     <b-col md="4">
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         local="en"
         placeholder="Info Variant"
         class="mb-1"

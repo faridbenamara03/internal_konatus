@@ -7,6 +7,7 @@
     </b-card-text>
 
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       v-model="value"
       :date-disabled-fn="dateDisabled"
       locale="en"

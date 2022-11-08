@@ -11,6 +11,7 @@
 
     <label for="datepicker-placeholder">Date picker with placeholder</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-placeholder"
       placeholder="Choose a date"
       local="en"

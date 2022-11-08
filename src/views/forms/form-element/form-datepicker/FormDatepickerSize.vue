@@ -15,6 +15,7 @@
     <div>
       <label for="datepicker-sm">Small date picker</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="datepicker-sm"
         size="sm"
         local="en"
@@ -23,6 +24,7 @@
       />
       <label for="datepicker-default">Default date picker</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="datepicker-default"
         local="en"
         class="mb-2"
@@ -30,6 +32,7 @@
       />
       <label for="datepicker-lg">Large date picker</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="datepicker-lg"
         size="lg"
         local="en"

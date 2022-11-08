@@ -30,6 +30,7 @@
 
       <!-- date picker -->
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="ex-disabled-readonly"
         :disabled="disabled"
         :readonly="readonly"

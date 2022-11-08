@@ -89,7 +89,7 @@
       <div class="flex-1">
         <v-select
           v-model="selectedPriority"
-          :options="['soft']"
+          :options="['highest', 'high', 'low', 'lowest']"
           placeholder="Select Priority"
           outlined
           class="mb-2"

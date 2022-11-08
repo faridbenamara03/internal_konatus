@@ -16,6 +16,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Primary Variant"
           class="mb-1"
@@ -27,6 +28,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Secondary Variant"
           class="mb-1"
@@ -38,6 +40,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Success Variant"
           class="mb-1"
@@ -49,6 +52,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Warning Variant"
           class="mb-1"
@@ -60,6 +64,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Danger Variant"
           class="mb-1"
@@ -71,6 +76,7 @@
         lg="4"
       >
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           local="en"
           placeholder="Info Variant"
           class="mb-1"

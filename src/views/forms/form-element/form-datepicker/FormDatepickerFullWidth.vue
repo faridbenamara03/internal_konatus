@@ -10,6 +10,7 @@
 
     <label for="datepicker-full-width">Choose a date</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-full-width"
       v-model="value"
       menu-class="w-100"

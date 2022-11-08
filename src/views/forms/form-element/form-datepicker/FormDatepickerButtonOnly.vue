@@ -23,6 +23,7 @@
       />
       <b-input-group-append>
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           v-model="value"
           show-decade-nav
           button-only

@@ -12,6 +12,7 @@
 
     <label for="example-datepicker">Choose a date</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="example-datepicker"
       v-model="value"
       class="mb-1"

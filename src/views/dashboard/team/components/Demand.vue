@@ -28,7 +28,7 @@
           />
           <div class="phase-box--content">
             <div class="d-flex">
-              <div style="width:calc(100% - 20px);cursor:pointer;" >
+              <div style="width:calc(100% - 20px);cursor:pointer;" v-b-modal.task-detail-modal @click="taskDetailMethod(task)">
                 <p v-if="isUN(task.taskName)" class="title">
                   Task {{ task.taskId }}
                 </p>
@@ -69,20 +69,63 @@
       </b-button>
     </div>
     <insert-new-task-modal :phaseV="phaseVToInsert" />
+    <b-modal
+      :visible="c_openDetailModal"
+      ref="t-d-modal"
+      id="task-detail-modal"
+      title="Task Detail"
+      centered
+      no-fade
+    >
+      <template #modal-header>
+        <h5 class="modal-title">Task Detail</h5>
+      </template>
+      <div class="d-flex mb-1">
+        <div style="width:120px;font-weight:bold;padding-top:9px">TASK ID</div>
+        <div>
+          <b-form-input
+            v-model="taskDetail.taskId"
+            style="width:170px"
+          />
+        </div>
+      </div>
+      <div class="d-flex mb-1">
+        <div style="width:120px;font-weight:bold;padding-top:9px">PRIORITY</div>
+        <div >
+          <v-select v-model="taskDetail.priority" :options="['highest', 'high', 'low', 'lowest']" style="width:170px" outlined />
+        </div>
+      </div>
+      <div class="d-flex mb-1">
+        <div style="width:120px;font-weight:bold;padding-top:9px">GATE</div>
+        <div>
+          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:170px" outlined />
+        </div>
+      </div>
+      <template #modal-footer>
+        <b-button variant="outline-primary" @click="hideDetailModal">Cancel</b-button>
+        <b-button variant="primary" @click="hideDetailModal">Update</b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import { BButton, BFormCheckbox } from 'bootstrap-vue'
+import {
+  BButton, BFormCheckbox, BModal, BFormInput
+} from 'bootstrap-vue'
 import moment from 'moment'
+import vSelect from 'vue-select'
 import { isEmpty } from '@/views/utils'
 import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
 
 export default {
   components: {
+    BModal,
     BButton,
     BFormCheckbox,
     InsertNewTaskModal,
+    vSelect,
+    BFormInput
   },
   props: {
     data: {
@@ -95,6 +138,13 @@ export default {
       openActivityModal: false,
       selectedActivity: {},
       phaseVToInsert: null,
+      openDetailModal: false,
+      taskDetail: {}
+    }
+  },
+  computed: {
+    c_openDetailModal() {
+      return this.openDetailModal
     }
   },
   methods: {
@@ -115,6 +165,12 @@ export default {
     },
     onInsertClick(phaseV) {
       this.phaseVToInsert = phaseV
+    },
+    hideDetailModal() {
+      this.$refs['t-d-modal'].hide()
+    },
+    taskDetailMethod(task) {
+      this.taskDetail = task
     }
   },
 }

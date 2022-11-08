@@ -174,6 +174,7 @@
       <div class="select-box">
         <label>Date Production Deadline</label>
         <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           id="example-datepicker"
           v-model="step2.date"
         />
@@ -194,17 +195,17 @@
         <div class="select-box">
           <label>Date Production Deadline</label>
           <b-form-datepicker
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="production-datepicker"
             v-model="step3.p_deadline"
           />
         </div>
         <div class="select-box">
           <label>Nature of deadline</label>
-          <v-select
+          <b-form-datepicker
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            id="production-datepicker1"
             v-model="step3.n_deadline"
-            :options="['soft']"
-            placeholder="Soft"
-            outlined
           />
         </div>
       </div>
@@ -262,14 +263,16 @@
         <div class="select-box">
           <label>Date Next Gate Demand</label>
           <b-form-datepicker
-            id="date_next_gate-datepicker"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            id="date_next_gate-datepicker1"
             v-model="step4.date_next_gate"
           />
         </div>
         <div class="select-box">
           <label>Date Ready for Test Demand</label>
           <b-form-datepicker
-            id="date_next_gate-datepicker"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            id="date_next_gate-datepicker2"
             v-model="step4.date_ready_test"
           />
         </div>
@@ -278,7 +281,8 @@
         <div class="select-box mb-0">
           <label>Date Production Demand</label>
           <b-form-datepicker
-            id="date_next_gate-datepicker"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            id="date_next_gate-datepicker3"
             v-model="step4.date_production"
           />
         </div>
@@ -524,7 +528,7 @@ export default {
         budget: 0,
         currency: 'unit',
       },
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decemeber'],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023'],
     }
   },

@@ -52,6 +52,7 @@
       <!-- datapicker -->
       <label for="example-i18n-picker">Date picker:</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="example-i18n-picker"
         v-model="value"
         v-bind="labels[locale] || {}"

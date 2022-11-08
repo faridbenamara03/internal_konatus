@@ -12,6 +12,7 @@
 
     <label for="datepicker-buttons">Date picker with optional footer buttons</label>
     <b-form-datepicker
+      :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
       id="datepicker-buttons"
       today-button
       reset-button

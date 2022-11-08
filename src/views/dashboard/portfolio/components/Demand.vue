@@ -247,6 +247,9 @@ export default {
     }
   },
   methods: {
+    onInputChange(e) {
+      console.log(11111, e)
+    },
     onCollapseCLick(index) {
       if (index === this.opened) {
         this.opened = -1

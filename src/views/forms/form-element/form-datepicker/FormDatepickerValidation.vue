@@ -10,12 +10,14 @@
     <div>
       <label for="datepicker-invalid">Choose a date (invalid style)</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="datepicker-invalid"
         :state="false"
         class="mb-2"
       />
       <label for="datepicker-valid">Choose a date (valid style)</label>
       <b-form-datepicker
+        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         id="datepicker-valid"
         :state="true"
       />

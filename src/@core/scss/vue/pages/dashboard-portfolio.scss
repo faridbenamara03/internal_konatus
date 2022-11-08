@@ -1,5 +1,9 @@
 @import "~@core/scss/base/components/variables-dark";
 
+.v-select{
+  text-transform: uppercase;
+}
+
 .card-portfolio {
   .card-body {
     .tabs {
