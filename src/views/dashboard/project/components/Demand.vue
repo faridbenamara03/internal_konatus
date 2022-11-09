@@ -10,7 +10,7 @@
         </b-button>
       </div>
       <app-collapse class="my-2">
-        <app-collapse-item v-for="(phaseArr, index) in team.phases" :key="index" :title="'Phase ' + phaseArr[0].phaseV + ' (' + phaseArr.length + ' task)'"
+        <app-collapse-item v-for="(phaseArr, index) in team.phases" :key="index" :title="'Phase ' + phaseArr[0].phaseV + ' (' + phaseArr.length + ' work element)'"
           class="collapse-card mb-0" is-visible>
           <div v-for="(phase, jndex) in phaseArr" :key="jndex" class="phase-box mb-1" >
             <div class="bar" :style="{'background': team.color}" />

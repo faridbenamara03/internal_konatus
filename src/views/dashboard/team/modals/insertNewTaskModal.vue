@@ -3,7 +3,7 @@
     <div class="mb-2">
       <b>Phase Number {{ phaseV }}</b>
     </div>
-    <b-form-input id="input-taskId" v-model="taskId" placeholder="TaskId" class="mb-1" />
+    <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" />
     <b-form-input id="input-gate" v-model="gate" placeholder="Gate" class="mb-1" />
     <b-form-select v-model="priority" :options="['highest', 'high', 'low', 'lowest']" />
   </b-modal>

@@ -10,7 +10,7 @@
               block
               @click="$emit('update:is-task-handler-sidebar-active', true); $emit('close-left-sidebar')"
             >
-              Add Task
+              Add Work Element
             </b-button>
           </div>
           <vue-perfect-scrollbar
@@ -94,7 +94,7 @@ export default {
     }
 
     const taskFilters = [
-      { title: 'My Task', icon: 'MailIcon', route: { name: 'apps-todo' } },
+      { title: 'My Work Element', icon: 'MailIcon', route: { name: 'apps-todo' } },
       { title: 'Important', icon: 'StarIcon', route: { name: 'apps-todo-filter', params: { filter: 'important' } } },
       { title: 'Completed', icon: 'CheckIcon', route: { name: 'apps-todo-filter', params: { filter: 'completed' } } },
       { title: 'Deleted', icon: 'TrashIcon', route: { name: 'apps-todo-filter', params: { filter: 'deleted' } } },

@@ -46,14 +46,21 @@
                   />
                   <b-form-input
                     v-else-if="ft === 'deadline'"
-                    :dir="'rtl'"
+                    style="text-align:end"
                     :value="dateFormat(item1[ft])"
                   />
-                  <b-form-input
-                    v-else
-                    :dir="'rtl'"
-                    :value="formatCurrency(item1[ft])"
-                  />
+                  <b-input-group v-else>
+                    <b-form-input
+                      type="number"
+                      style="text-align:end"
+                      :value="item1[ft]"
+                    />
+                    <b-input-group-append>
+                      <b-input-group-text class="bg-transparent font-weight-bold">
+                        US$
+                      </b-input-group-text>
+                    </b-input-group-append>
+                  </b-input-group>
                 </div>
               </div>
               <div class="part3">
@@ -137,7 +144,7 @@
 
 <script>
 import {
-  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar,
+  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BInputGroup, BInputGroupAppend, BInputGroupText
 } from 'bootstrap-vue'
 import moment from 'moment'
 import VueApexCharts from 'vue-apexcharts'
@@ -153,6 +160,9 @@ export default {
     BProgress,
     BProgressBar,
     VueApexCharts,
+    BInputGroup,
+    BInputGroupAppend,
+    BInputGroupText,
     vSelect,
   },
   props: {
@@ -247,9 +257,6 @@ export default {
     }
   },
   methods: {
-    onInputChange(e) {
-      console.log(11111, e)
-    },
     onCollapseCLick(index) {
       if (index === this.opened) {
         this.opened = -1
@@ -261,10 +268,9 @@ export default {
       return moment(new Date(date)).format('MM-DD-YYYY')
     },
     formatCurrency(value) {
-      return new Intl.NumberFormat(undefined, {
-        style: 'currency',
-        currency: 'USD',
-      }).format(value).replace(',', '.')
+      return new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }).format(value).concat(' US$')
     },
     rowClass(item, type) {
       const colorClass = 'table-success'

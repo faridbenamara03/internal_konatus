@@ -4,7 +4,7 @@
     class="card-employee-task"
   >
     <b-card-header>
-      <b-card-title>Employee Task</b-card-title>
+      <b-card-title>Employee Work Element</b-card-title>
       <feather-icon
         icon="MoreVerticalIcon"
         size="18"

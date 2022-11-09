@@ -27,7 +27,7 @@
             v-else
             class="mb-0"
           >
-            Add Task
+            Add Work Element
           </h5>
           <div>
             <feather-icon
@@ -81,7 +81,7 @@
                   autofocus
                   :state="getValidationState(validationContext)"
                   trim
-                  placeholder="Task Title"
+                  placeholder="Work Element Title"
                 />
 
                 <b-form-invalid-feedback>

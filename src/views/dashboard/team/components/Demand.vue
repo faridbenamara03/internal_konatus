@@ -30,7 +30,7 @@
             <div class="d-flex">
               <div style="width:calc(100% - 20px);cursor:pointer;" v-b-modal.task-detail-modal @click="taskDetailMethod(task)">
                 <p v-if="isUN(task.taskName)" class="title">
-                  Task {{ task.taskId }}
+                  {{ task.taskId }}
                 </p>
                 <p v-else class="title">
                   {{ task.taskName }}
@@ -65,7 +65,7 @@
         @click="onInsertClick(phase.phaseV)"
       >
         <feather-icon icon="PlusIcon" />
-        <span>Insert new task</span>
+        <span>Insert new work element</span>
       </b-button>
     </div>
     <insert-new-task-modal :phaseV="phaseVToInsert" />
@@ -73,32 +73,32 @@
       :visible="c_openDetailModal"
       ref="t-d-modal"
       id="task-detail-modal"
-      title="Task Detail"
+      title="Work Element Detail"
       centered
       no-fade
     >
       <template #modal-header>
-        <h5 class="modal-title">Task Detail</h5>
+        <h5 class="modal-title">Work Element Detail</h5>
       </template>
       <div class="d-flex mb-1">
-        <div style="width:120px;font-weight:bold;padding-top:9px">TASK ID</div>
+        <div style="width:150px;font-weight:bold;padding-top:9px">Work Element ID</div>
         <div>
           <b-form-input
             v-model="taskDetail.taskId"
-            style="width:170px"
+            style="width:200px"
           />
         </div>
       </div>
       <div class="d-flex mb-1">
-        <div style="width:120px;font-weight:bold;padding-top:9px">PRIORITY</div>
+        <div style="width:150px;font-weight:bold;padding-top:9px">PRIORITY</div>
         <div >
-          <v-select v-model="taskDetail.priority" :options="['highest', 'high', 'low', 'lowest']" style="width:170px" outlined />
+          <v-select v-model="taskDetail.priority" :options="['highest', 'high', 'low', 'lowest']" style="width:200px" outlined />
         </div>
       </div>
       <div class="d-flex mb-1">
-        <div style="width:120px;font-weight:bold;padding-top:9px">GATE</div>
+        <div style="width:150px;font-weight:bold;padding-top:9px">GATE</div>
         <div>
-          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:170px" outlined />
+          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:200px" outlined />
         </div>
       </div>
       <template #modal-footer>
