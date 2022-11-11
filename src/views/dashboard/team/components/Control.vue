@@ -146,7 +146,7 @@ export default {
   },
   computed: {
     teamTitle() {
-      return this.$store.state.teamState.demandTeamData.title
+      return this.$store.state.globalState.demandTeamData.title
     },
   },
   data() {

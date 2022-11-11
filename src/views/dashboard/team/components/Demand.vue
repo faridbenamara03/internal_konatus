@@ -161,7 +161,7 @@ export default {
       this.openActivityModal = false
     },
     handleSelectAll(dt) {
-      this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)
+      this.$store.commit('globalState/SELECT_ALL_PHASE_ACTS', dt)
     },
     onInsertClick(phaseV) {
       this.phaseVToInsert = phaseV

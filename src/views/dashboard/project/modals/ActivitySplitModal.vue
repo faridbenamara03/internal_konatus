@@ -32,8 +32,8 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
-                {{ data.phase.activityId }}
+              <p v-if="selectedActivityData.phase">
+                {{ selectedActivityData.phase.activityId }}
               </p>
             </div>
             <b-badge variant="danger">
@@ -54,14 +54,14 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="data.phase.title" />
+              <b-form-input :value="selectedActivityData.phase.title" />
             </div>
           </div>
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
               <b-form-textarea
-                :value="data.phase.description"
+                :value="selectedActivityData.phase.description"
                 rows="5"
               />
             </div>
@@ -82,15 +82,15 @@
               <div class="select-group--sub">
                 <div class="select-box mb-0">
                   <label>Load</label>
-                  <b-form-input :value="data.phase.effort.load" />
+                  <b-form-input :value="selectedActivityData.phase.effort.load" />
                 </div>
                 <div class="select-box mb-0">
                   <label>Duration</label>
-                  <b-form-input :value="data.phase.effort.duration" />
+                  <b-form-input :value="selectedActivityData.phase.effort.duration" />
                 </div>
                 <div class="select-box mb-0">
                   <label>FTE</label>
-                  <b-form-input :value="data.phase.effort.fte" />
+                  <b-form-input :value="selectedActivityData.phase.effort.fte" />
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@
               </p>
             </div>
           </div>
-          <div v-for="(item, index) in data.phase.dependency" :key="index" class="shadow rounded d-flex" style="padding:10px;justify-content:space-between;">
+          <div v-for="(item, index) in selectedActivityData.phase.dependency" :key="index" class="shadow rounded d-flex" style="padding:10px;justify-content:space-between;">
             <div class="d-flex">
               <div class="bg-warning" style="width:8px;height:22px;border-radius:2px;margin-right:8px" />
               <feather-icon icon="LinkIcon" style="margin-top:4px;margin-right:8px" />
@@ -139,7 +139,7 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
+              <p v-if="selectedActivityData.phase">
                 {{ newActivityId1 }}
               </p>
             </div>
@@ -241,7 +241,7 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
+              <p v-if="selectedActivityData.phase">
                 {{ newActivityId2 }}
               </p>
             </div>
@@ -360,6 +360,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import {
   BBadge, BButton, BFormInput, BFormTextarea, BModal, BFormInvalidFeedback
 } from 'bootstrap-vue'
@@ -376,14 +377,14 @@ export default {
     vSelect,
   },
   props: {
-    data: {
+    selectedActivityData: {
       type: Object,
       default: () => {},
     },
     isOpen: Boolean,
   },
   data() {
-    const { load, duration, fte } = this.data.phase.effort
+    const { load, duration, fte } = this.selectedActivityData.phase.effort
     const load1 = parseInt(load / 2, 10)
     const duration1 = parseInt(duration / 2, 10)
     const fte1 = parseInt(fte / 2, 10)
@@ -403,7 +404,9 @@ export default {
       fte1,
       load2,
       duration2,
-      fte2
+      fte2,
+      newActivityId1: Vue.faker().internet.ip(),
+      newActivityId2: Vue.faker().internet.ip(),
     }
   },
   watch: {
@@ -424,48 +427,56 @@ export default {
     description2Valid() {
       return this.description2.length > 0
     },
-    newActivityId1() {
-      return '1.28.17.1.225'
-    },
-    newActivityId2() {
-      return '1.28.17.1.226'
+    c_TeamTitle() {
+      return this.selectedActivityData.team.title
     }
   },
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
+      this.newActivityId1 = Vue.faker().internet.ip()
+      this.newActivityId2 = Vue.faker().internet.ip()
     },
     handleSave() {
+      const parN = Vue.faker().random.uuid
       if (this.title1Valid && this.description1Valid && this.title2Valid && this.description2Valid) {
-        this.$refs['my-modal'].hide()
-        const newA1 = { ...this.data.phase }
-        const newA2 = { ...this.data.phase }
+        const newA1 = { ...this.selectedActivityData.phase }
+        const newA2 = { ...this.selectedActivityData.phase }
         newA1.title = this.title1
-        newA1.name = 'splited phase1'
+        newA1.parent = parN
         newA1.description = this.description1
         newA1.effort = {
           load: this.load1, duration: this.duration1, fte: this.fte1
         }
         newA1.activityId = this.newActivityId1
         newA2.title = this.title2
-        newA2.name = 'splited phase2'
         newA2.description = this.description2
+        newA2.parent = parN
         newA2.effort = {
           load: this.load2, duration: this.duration2, fte: this.fte2
         }
         newA2.activityId = this.newActivityId2
         const data = {
-          phase: this.data.phase,
+          teamTitle: this.c_TeamTitle,
+          phase: this.selectedActivityData.phase,
           newA1,
           newA2
         }
-        this.$store.commit('teamState/HANDLE_ACTIVITY_SPLIT', data)
+        this.$store.commit('globalState/HANDLE_ACTIVITY_SPLIT', data)
+        this.$refs['my-modal'].hide()
+        this.description1 = ''
+        this.title1 = ''
+        this.description2 = ''
+        this.title2 = ''
+        this.newActivityId1 = Vue.faker().internet.ip()
+        this.newActivityId2 = Vue.faker().internet.ip()
+        this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
       } else {
         this.$toast.warning('Input invalid!')
       }
     },
     handleDependencyDelete(index) {
-      const dt = this.data.phase.dependency
+      const dt = this.selectedActivityData.phase.dependency
       dt.splice(index, 1)
     }
   },

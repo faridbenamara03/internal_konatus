@@ -212,7 +212,7 @@ export default {
     },
     onUpdate() {
       this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V')
-      this.$store.commit('teamState/UPDATE_TEAM_REPORT_DATA')
+      this.$store.commit('globalState/UPDATE_TEAM_REPORT_DATA')
       this.$refs['my-modal'].hide()
     },
     isUN(data) {

@@ -126,7 +126,7 @@ export default {
       return []
     },
     teams_computed() {
-      return this.$store.state.teamState.teamsstate
+      return this.$store.state.globalState.teamsstate
     }
   },
   methods: {
@@ -137,7 +137,7 @@ export default {
       console.log(res)
     },
     handleUpdate() {
-      this.$store.commit('teamState/HANDLE_UPDATE')
+      this.$store.commit('globalState/HANDLE_UPDATE')
     },
   },
   // computed: {

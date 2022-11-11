@@ -97,12 +97,8 @@ export default {
     }
   },
   methods: {
-    hideModal() {
-      this.$refs['add-resource-modal'].hide()
-    },
     updateResourceAssignState(data) {
       this.$store.commit('teamState/RESOURCE_ADD', data)
-      this.$refs['add-resource-modal'].hide()
     }
   }
 }

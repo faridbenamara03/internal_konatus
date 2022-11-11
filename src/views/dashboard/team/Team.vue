@@ -154,11 +154,8 @@ export default {
     }
   },
   computed: {
-    resourceAddedT() {
-      return this.$store.state.teamState.resourceAdded
-    },
     c_demand_team_data() {
-      return this.$store.state.teamState.demandTeamData
+      return this.$store.state.globalState.demandTeamData
     }
   },
   methods: {
@@ -169,7 +166,7 @@ export default {
       this.isChartView = mode
     },
     handleUpdateDemand() {
-      this.$store.commit('teamState/HANDLE_TEAM_DEMAND_UPDATE')
+      this.$store.commit('globalState/HANDLE_TEAM_DEMAND_UPDATE')
     },
   },
 }

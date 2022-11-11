@@ -19,8 +19,8 @@
     <div class="activity-modal--body">
       <div class="form-group header">
         <label>ACTIVITY ID</label>
-        <p v-if="data.phase">
-          {{ data.phase.activityId }}
+        <p v-if="selectedActivityData.phase">
+          {{ selectedActivityData.phase.activityId }}
         </p>
       </div>
       <div class="form-group btn-group">
@@ -44,13 +44,13 @@
       <div class="form-group">
         <div class="select-box">
           <label>Title</label>
-          <b-form-input :value="data.phase.title" @input="handleInput('title', $event)" />
+          <b-form-input v-model="selectedActivityData.phase.title" />
         </div>
       </div>
       <div class="form-group">
         <div class="select-box">
           <label>Description</label>
-          <b-form-textarea :value="data.phase.description" @input="handleInput('description', $event)" rows="5" />
+          <b-form-textarea v-model="selectedActivityData.phase.description" rows="5" />
         </div>
       </div>
       <div class="form-group">
@@ -84,15 +84,15 @@
           <div class="select-group--sub">
             <div class="select-box mb-0">
               <label>Load</label>
-              <b-form-input :value="data.phase.effort.load" />
+              <b-form-input :value="selectedActivityData.phase.effort.load" />
             </div>
             <div class="select-box mb-0">
               <label>Duration</label>
-              <b-form-input :value="data.phase.effort.duration" />
+              <b-form-input :value="selectedActivityData.phase.effort.duration" />
             </div>
             <div class="select-box mb-0">
               <label>FTE</label>
-              <b-form-input :value="data.phase.effort.fte" />
+              <b-form-input :value="selectedActivityData.phase.effort.fte" />
             </div>
           </div>
         </div>
@@ -123,8 +123,8 @@
         Save
       </b-button>
     </template>
-    <activity-split-modal :data="data" />
-    <activity-merge-modal :data="data" />
+    <activity-split-modal :selectedActivityData="c_SelectedActivity" />
+    <activity-merge-modal :selectedActivityData="c_SelectedActivity" />
   </b-modal>
 </template>
 
@@ -150,7 +150,7 @@ export default {
     BDropdownItem
   },
   props: {
-    data: {
+    selectedActivityData: {
       type: Object,
       default: () => { },
     },
@@ -167,20 +167,22 @@ export default {
       selectedTeam: null,
     }
   },
+  computed: {
+    c_SelectedActivity() {
+      return this.selectedActivityData
+    }
+  },
   watch: {
     isOpen(val) {
       this.show = val
     },
   },
   methods: {
-    handleInput(field, value) {
-      this.data.phase[field] = value
-    },
     hideModal() {
       this.$emit('hideModal')
     },
     handleSave() {
-      this.$store.commit('teamState/HANDLE_ACTIVITY_DETAIL_SAVE', this.data.phase)
+      this.$store.commit('globalState/HANDLE_ACTIVITY_DETAIL_SAVE', this.selectedActivityData.phase)
       this.$emit('hideModal')
     },
     teamSelectHandle(value) {

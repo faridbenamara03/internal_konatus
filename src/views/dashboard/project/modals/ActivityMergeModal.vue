@@ -32,8 +32,8 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
-                {{ data.phase.activityId }}
+              <p v-if="selectedActivityData.phase">
+                {{ selectedActivityData.phase.activityId }}
               </p>
             </div>
             <b-badge variant="danger">
@@ -54,13 +54,13 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="data.phase.title" />
+              <b-form-input :value="selectedActivityData.phase.title" />
             </div>
           </div>
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea :value="data.phase.description" rows="5" />
+              <b-form-textarea :value="selectedActivityData.phase.description" rows="5" />
             </div>
           </div>
           <div class="form-group has-switch">
@@ -79,15 +79,15 @@
               <div class="select-group--sub">
                 <div class="select-box mb-0">
                   <label>Load</label>
-                  <b-form-input :value="data.phase.effort.load" />
+                  <b-form-input :value="selectedActivityData.phase.effort.load" />
                 </div>
                 <div class="select-box mb-0">
                   <label>Duration</label>
-                  <b-form-input :value="data.phase.effort.duration" />
+                  <b-form-input :value="selectedActivityData.phase.effort.duration" />
                 </div>
                 <div class="select-box mb-0">
                   <label>FTE</label>
-                  <b-form-input :value="data.phase.effort.fte" />
+                  <b-form-input :value="selectedActivityData.phase.effort.fte" />
                 </div>
               </div>
             </div>
@@ -126,8 +126,8 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
-                {{ toMerge ? toMerge.activityId : '0.00.00.0.0' }}
+              <p v-if="selectedActivityData.phase">
+                {{ toMerge ? toMerge.activityId : '' }}
               </p>
             </div>
             <b-badge variant="danger">
@@ -237,7 +237,7 @@
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
-              <p v-if="data.phase">
+              <p v-if="selectedActivityData.phase">
                 {{ merged.activityId }}
               </p>
             </div>
@@ -351,6 +351,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import {
   BBadge, BButton, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
@@ -366,7 +367,7 @@ export default {
     vSelect,
   },
   props: {
-    data: {
+    selectedActivityData: {
       type: Object,
       default: () => {},
     },
@@ -377,14 +378,12 @@ export default {
     }
   },
   data() {
-    const merged = { ...this.data.phase, activityId: '38763876' }
     return {
       activity: {},
       show: false,
       selectedActivity: null,
       selectedEpic: null,
       toMerge: null,
-      merged
     }
   },
   watch: {
@@ -393,45 +392,57 @@ export default {
     },
   },
   computed: {
+    merged() {
+      return { ...this.selectedActivityData.phase, activityId: Vue.faker().internet.ip() }
+    },
     toMergeList() {
       const arr = []
-      this.data.team.phases.flat().forEach(t => {
-        if (this.data.phase.activityId !== t.activityId) {
+      this.selectedActivityData.team.phases.flat().forEach(t => {
+        if (this.selectedActivityData.phase.activityId !== t.activityId) {
           arr.push(t.activityId)
         }
       })
       return arr
     },
+    c_TeamTitle() {
+      return this.selectedActivityData.team.title
+    }
   },
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
+      this.toMerge = null
+      this.merged.activityId = Vue.faker().internet.ip()
     },
     handleSave() {
       if (this.toMerge === null) {
         this.$toast.warning('Please Select toMerge Activity!')
       } else {
         const data = {
-          toMergeId1: this.data.phase.activityId,
+          toMergeId1: this.selectedActivityData.phase.activityId,
           toMergeId2: this.toMerge.activityId,
-          merged: this.merged
+          merged: this.merged,
+          teamTitle: this.c_TeamTitle
         }
-        this.$store.commit('teamState/HANDLE_ACTIVITY_MERGE', data)
+        this.$store.commit('globalState/HANDLE_ACTIVITY_MERGE', data)
+        this.toMerge = null
+        this.merged.activityId = Vue.faker().internet.ip()
         this.$refs['my-modal'].hide()
+        this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
       }
     },
     onActivitySelect(selectedActivityId) {
-      const selectedActivity = this.data.team.phases.flat().find(t => t.activityId === selectedActivityId)
+      const selectedActivity = this.selectedActivityData.team.phases.flat().find(t => t.activityId === selectedActivityId)
+      this.toMerge = selectedActivity
 
       const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
       const mergedDuration = this.merged.effort.duration + selectedActivity.effort.duration
       const mergedFte = this.merged.effort.fte + selectedActivity.effort.fte
       const effort = { load: mergedLoad, duration: mergedDuration, fte: mergedFte }
       this.merged.effort = effort
-      this.merged.title = this.data.phase.title.concat(' - ') + selectedActivity.title
-      this.merged.description = this.data.phase.description.concat(' - ') + selectedActivity.description
-
-      this.toMerge = selectedActivity
+      // this.merged.title = ''
+      this.merged.title = this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
+      this.merged.description = this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
     }
   },
 }

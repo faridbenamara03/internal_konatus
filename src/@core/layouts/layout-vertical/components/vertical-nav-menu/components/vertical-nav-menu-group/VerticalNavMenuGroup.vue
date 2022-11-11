@@ -112,7 +112,7 @@ export default {
     },
     handleNavItemClick(data) {
       if (data.type === 'team') {
-        this.$store.commit('teamState/HANDLE_NAV_TEAM_SELECT', data)
+        this.$store.commit('globalState/HANDLE_NAV_TEAM_SELECT', data)
       }
     },
   },

@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     resourceAddedT() {
-      return this.$store.state.teamState.resourceAdded
+      return this.$store.state.globalState.resourceAdded
     }
   },
   data() {
