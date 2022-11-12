@@ -10,6 +10,7 @@ import verticalMenu from './vertical-menu'
 import teamState from './team'
 import orgnizationState from './orgnization'
 import globalState from './global'
+import portfolioState from './portfolio'
 
 Vue.use(Vuex)
 Vue.use(Faker)
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     teamState,
     orgnizationState,
     globalState,
+    portfolioState,
   },
   strict: process.env.DEV,
 })

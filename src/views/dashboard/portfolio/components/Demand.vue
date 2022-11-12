@@ -38,29 +38,42 @@
               </div>
               <div class="part2">
                 <div class="data-child mr-1" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
-                  <v-select
-                    v-if="ft === 'priority'"
-                    v-model="item1[ft]"
-                    :options="['highest', 'high', 'low', 'lowest']"
-                    outlined
-                  />
-                  <b-form-input
-                    v-else-if="ft === 'deadline'"
-                    style="text-align:end"
-                    :value="dateFormat(item1[ft])"
-                  />
-                  <b-input-group v-else>
-                    <b-form-input
-                      type="number"
-                      style="text-align:end"
-                      :value="item1[ft]"
+                  <div v-if="demandTableEditable">
+                    <v-select
+                      v-if="ft === 'priority'"
+                      v-model="item1[ft]"
+                      :options="['highest', 'high', 'low', 'lowest']"
+                      outlined
                     />
-                    <b-input-group-append>
-                      <b-input-group-text class="bg-transparent font-weight-bold">
-                        US$
-                      </b-input-group-text>
-                    </b-input-group-append>
-                  </b-input-group>
+                    <b-form-input
+                      v-else-if="ft === 'deadline'"
+                      v-model="item1[ft]"
+                      style="text-align:end"
+                    />
+                    <b-input-group v-else>
+                      <b-form-input
+                        type="number"
+                        style="text-align:end"
+                        v-model="item1[ft]"
+                      />
+                      <b-input-group-append>
+                        <b-input-group-text class="bg-transparent font-weight-bold">
+                          US$
+                        </b-input-group-text>
+                      </b-input-group-append>
+                    </b-input-group>
+                  </div>
+                  <div v-else>
+                    <div v-if="ft === 'priority'" class="mr-1" style="margin-top:6px;">
+                      {{ item1[ft] }}
+                    </div>
+                    <div v-else-if="ft === 'deadline'" class="mr-1" style="margin-top:6px;">
+                      {{ dateFormat(item1[ft]) }}
+                    </div>
+                    <div v-else class="mr-1" style="margin-top:6px;">
+                      {{ formatCurrency(item1[ft]) }}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="part3">
@@ -254,6 +267,9 @@ export default {
   computed: {
     c_fields() {
       return this.fields.slice(1, this.fields.length - 1)
+    },
+    demandTableEditable() {
+      return this.$store.state.portfolioState.demandTableEditable
     }
   },
   methods: {

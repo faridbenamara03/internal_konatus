@@ -26,20 +26,34 @@
               <b-icon icon="table" />
             </b-button>
           </b-button-group>
-          <b-button-group>
+          <div style="position:absolute;right:16px">
             <b-button
-              variant="outline-primary"
-            >
-              <b-icon icon="pencil" />
-            </b-button>
-            <b-button
+              @click="onDemandTableEditableClick"
+              v-if="tabIndex === 0"
+              class="mr-1"
               variant="outline-primary"
             >
               <feather-icon
-                icon="DollarSignIcon"
+                icon="Edit2Icon"
+                size="16"
               />
+              <span>Edit as table</span>
             </b-button>
-          </b-button-group>
+            <b-button-group>
+              <b-button
+                variant="outline-primary"
+              >
+                <b-icon icon="pencil" />
+              </b-button>
+              <b-button
+                variant="outline-primary"
+              >
+                <feather-icon
+                  icon="DollarSignIcon"
+                />
+              </b-button>
+            </b-button-group>
+          </div>
         </div>
         <b-tab
           title="Demand"
@@ -84,17 +98,6 @@
                 size="16"
               />
               <span>Edit Columns</span>
-            </b-button>
-            <b-button
-              v-if="isChartView && tabIndex === 0"
-              class="ml-1"
-              variant="outline-primary"
-            >
-              <feather-icon
-                icon="Edit2Icon"
-                size="16"
-              />
-              <span>Edit as table</span>
             </b-button>
             <b-button
               v-if="tabIndex === 0"
@@ -229,6 +232,9 @@ export default {
       this.fields = temp
       this.activeColumns = columns
     },
+    onDemandTableEditableClick() {
+      this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
+    }
   },
 }
 </script>

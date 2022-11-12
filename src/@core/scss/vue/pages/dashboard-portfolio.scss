@@ -63,10 +63,10 @@
           .btn-group {
             width: 76px;
             height: 38px;
-            &:last-child {
-              position: absolute;
-              right: 16px;
-            }
+            // &:last-child {
+            //   position: absolute;
+            //   right: 16px;
+            // }
             button {
               padding: 10px;
               &.active {
