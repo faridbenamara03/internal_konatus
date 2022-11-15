@@ -10,8 +10,10 @@
     <b-link
       v-bind="linkProps"
       class="d-flex align-items-center"
+      :style="`background-color:${c_SelectedNavId === item.id ? '#9100ff57' : '#0000'};`"
+      @click="onnavitemclick(item)"
     >
-      <nav-menu-icon :item="item" />
+      <nav-menu-icon style="margin-left:23px" :item="item" />
       <span class="menu-title text-truncate">{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
@@ -46,6 +48,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    c_SelectedNavId() {
+      return this.$store.state.globalState.selectedNavId
+    }
+  },
   setup(props) {
     const { isActive, linkProps, updateIsActive } = useVerticalNavMenuLink(props.item)
     const { t } = useI18nUtils()
@@ -63,6 +70,10 @@ export default {
       t,
     }
   },
-
+  methods: {
+    onnavitemclick(data) {
+      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data.id)
+    }
+  }
 }
 </script>

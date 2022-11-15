@@ -136,14 +136,14 @@ const gData = [
                 ],
 
                 type: 'project',
-                route: {
-                  name: 'project-view',
-                  params: {
-                    portfolioId: 'consumer-robots',
-                    programId: 'quadruped-robot',
-                    projectId: 'new-format',
-                  },
-                },
+                // route: {
+                //   name: 'project-view',
+                //   params: {
+                //     portfolioId: 'consumer-robots',
+                //     programId: 'quadruped-robot',
+                //     projectId: 'new-format',
+                //   },
+                // },
               },
               {
                 id: '1.28.11.1.2',
