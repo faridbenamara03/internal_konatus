@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div v-for="(item, index) in this.data" :key="index">
+      <div v-for="(item, index) in this.c_data" :key="index">
         <div class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt" :class="{'inner-sdw': index === 0}">
           <div class="part1 portf-uppercase" style="cursor:pointer" v-on:click="onCollapseCLick(index)">
             <feather-icon :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'" v-if="item.children" size="16" class="mr-1" />
@@ -301,6 +301,39 @@ export default {
     },
     demandTableEditable() {
       return this.$store.state.portfolioState.demandTableEditable
+    },
+    c_data() {
+      const ndt = this.data.map(t => {
+        let budget = 0
+        let engaged = 0
+        let quoted = 0
+        let demand = 0
+        let realEstimated = 0
+        let authorised = 0
+        let spent = 0
+        if (t.children) {
+          t.children.map(t1 => {
+            budget += parseInt(t1.budget, 10)
+            engaged += parseInt(t1.engaged, 10)
+            quoted += parseInt(t1.quoted, 10)
+            demand += parseInt(t1.demand, 10)
+            realEstimated += parseInt(t1.realEstimated, 10)
+            authorised += parseInt(t1.authorised, 10)
+            spent += parseInt(t1.spent, 10)
+            return null
+          })
+        }
+        const nd = { ...t }
+        nd.budget = budget
+        nd.engaged = engaged
+        nd.quoted = quoted
+        nd.demand = demand
+        nd.realEstimated = realEstimated
+        nd.authorised = authorised
+        nd.spent = spent
+        return nd
+      })
+      return ndt
     },
     c_totalBudget() {
       let bd = 0
