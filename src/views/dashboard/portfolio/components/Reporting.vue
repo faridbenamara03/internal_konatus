@@ -112,6 +112,7 @@
             <b-progress
               v-model="value1"
               max="100"
+              variant="danger"
             />
             <b-progress
               v-model="value2"
@@ -121,7 +122,7 @@
             <b-progress
               v-model="value3"
               max="100"
-              variant="secondary"
+              variant="info"
             />
           </b-card>
         </div>
@@ -132,6 +133,7 @@
             </b-card-text>
             <b-progress
               v-model="value1"
+              variant="danger"
               max="100"
             />
             <b-progress
@@ -142,7 +144,7 @@
             <b-progress
               v-model="value3"
               max="100"
-              variant="secondary"
+              variant="info"
             />
           </b-card>
         </div>

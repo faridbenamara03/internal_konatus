@@ -13,12 +13,10 @@
       class="d-flex align-items-center"
       :class="{'m-0': item.type === 'root'}"
       @click="handleNavItemClick(item)"
-      @dblclick="handleNavItemDblClick"
     >
       <feather-icon
         :icon="isOpen ? 'ChevronDownIcon' : 'ChevronRightIcon'"
         size="16"
-        @click="handleNavItemDblClick"
       />
       <nav-menu-icon :item="item" />
       <span class="menu-title text-truncate" >{{ item.title }}</span>
@@ -78,6 +76,11 @@ export default {
     },
     isActive: Boolean,
   },
+  computed: {
+    c_SelectedNavId() {
+      return this.$store.state.globalState.selectedNavId
+    }
+  },
   setup(props) {
     const {
       isOpen,
@@ -106,11 +109,14 @@ export default {
     }
   },
   methods: {
-    handleNavItemDblClick() {
+    // handleNavItemDblClick() {
+    //   this.updateGroupOpen(!this.isOpen)
+    //   this.updateIsActive()
+    // },
+    handleNavItemClick(data) {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
-    },
-    handleNavItemClick(data) {
+      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data.id)
       if (data.type === 'team') {
         this.$store.commit('globalState/HANDLE_NAV_TEAM_SELECT', data)
       }

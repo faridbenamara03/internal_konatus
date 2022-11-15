@@ -3,10 +3,11 @@
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
-          <b-button variant="flat-primary" @click="handleUpdateDemand">
+          <div></div>
+          <!-- <b-button variant="flat-primary" @click="handleUpdateDemand">
             <feather-icon icon="RotateCwIcon" />
             Update
-          </b-button>
+          </b-button> -->
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
               <feather-icon icon="BarChartIcon" />
@@ -77,6 +78,16 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
+            <b-button-group v-if="tabIndex === 1" class="ml-1">
+              <b-button variant="outline-primary">
+                Cost
+              </b-button>
+              <b-button variant="outline-primary" >
+                Plan
+              </b-button>
+            </b-button-group>
+          </div>
+          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
@@ -91,7 +102,7 @@
             </b-button>
             <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
               <feather-icon icon="MapIcon" size="16" />
-              <span>Request Quote</span>
+              <span>Show Work Element To Quote</span>
             </b-button>
             <b-button v-if="tabIndex === 2" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
               <feather-icon icon="UserPlusIcon" size="16" />
@@ -113,7 +124,7 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
@@ -125,6 +136,7 @@ import AddResourceModal from './modals/AddResourceModal.vue'
 
 export default {
   components: {
+    BButtonGroup,
     BButton,
     BCard,
     BCardBody,

@@ -90,6 +90,10 @@ export default {
         { text: 'Deadline', value: 'deadline' },
         { text: 'Engaged', value: 'engaged' },
         { text: 'Quoted', value: 'quoted' },
+        { text: 'Demand', value: 'demand' },
+        { text: 'Real_Estimated', value: 'realEstimated' },
+        { text: 'Authorised', value: 'authorised' },
+        { text: 'Spent', value: 'spent' },
       ],
     }
   },

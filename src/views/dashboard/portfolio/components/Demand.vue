@@ -91,6 +91,36 @@
           </div>
         </div>
       </div>
+      <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
+        <div class="part1 portf-uppercase">
+          Total
+        </div>
+        <div class="part2" >
+          <div class="data-child mr-1 portf-uppercase pr-1" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
+            <div v-if="ft === 'budget'">
+              {{ formatCurrency(c_totalBudget) }}
+            </div>
+            <div v-else-if="ft === 'engaged'">
+              {{ formatCurrency(c_totalEngaged) }}
+            </div>
+            <div v-else-if="ft === 'quoted'">
+              {{ formatCurrency(c_totalQuoted) }}
+            </div>
+            <div v-else-if="ft === 'demand'">
+              {{ formatCurrency(c_totalDemand) }}
+            </div>
+            <div v-else-if="ft === 'realEstimated'">
+              {{ formatCurrency(c_totalReal) }}
+            </div>
+            <div v-else-if="ft === 'authorised'">
+              {{ formatCurrency(c_totalAuthor) }}
+            </div>
+            <div v-else-if="ft === 'spent'">
+              {{ formatCurrency(c_totalSpent) }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       v-if="isChartView"
@@ -109,7 +139,7 @@
             <h2>{{serie[0].title}}</h2>
             <div class="d-flex justify-content-between align-center mt-1">
               <p class="text-uppercase m-0">
-                Total
+                Budget Portfolio
               </p>
               <p class="m-0">
                 {{ formatCurrency(getTotalValue(serie)) }}
@@ -197,15 +227,15 @@ export default {
       opened: 0,
       series: [[{
         title: 'Consumer Robots',
-        data: [120, 80, 2040, 1920, 3500, 3720],
+        data: [3720, 3500, 1920, 2040, 80, 120, 150],
       }],
       [{
         title: 'Military Robots',
-        data: [220, 240, 2040, 1920, 3960, 3400],
+        data: [3400, 3960, 1920, 2040, 240, 220, 250],
       }],
       [{
         title: 'Project automation',
-        data: [120, 600, 2040, 2320, 3960, 3720],
+        data: [3720, 3960, 2320, 2040, 600, 120, 190],
       }],
       ],
       chartOptions: {
@@ -249,7 +279,8 @@ export default {
           },
         },
         xaxis: {
-          categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget']
+          categories: ['demand', 'engaged + quoted', 'engaged (to add)', 'engaged', 'real estimated', 'authorised', 'spent']
+          // categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget']
         },
         yaxis: {
           labels: {
@@ -270,7 +301,56 @@ export default {
     },
     demandTableEditable() {
       return this.$store.state.portfolioState.demandTableEditable
-    }
+    },
+    c_totalBudget() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.budget, 10)
+      })
+      return bd
+    },
+    c_totalEngaged() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.engaged, 10)
+      })
+      return bd
+    },
+    c_totalQuoted() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.quoted, 10)
+      })
+      return bd
+    },
+    c_totalDemand() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.demand, 10)
+      })
+      return bd
+    },
+    c_totalReal() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.realEstimated, 10)
+      })
+      return bd
+    },
+    c_totalSpent() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.spent, 10)
+      })
+      return bd
+    },
+    c_totalAuthor() {
+      let bd = 0
+      this.data.forEach(t => {
+        bd += parseInt(t.authorised, 10)
+      })
+      return bd
+    },
   },
   methods: {
     onCollapseCLick(index) {

@@ -25,10 +25,14 @@ const gData = [
             type: 'program',
 
             priority: 'highest',
-            budget: '1100',
+            budget: '10000',
             deadline: '06/01/2021',
-            engaged: '450',
-            quoted: '550',
+            engaged: '1800',
+            quoted: '2200',
+            demand: '9200',
+            realEstimated: '10100',
+            authorised: '4500',
+            spent: '1600',
 
             route: {
               name: 'program-view',
@@ -43,10 +47,14 @@ const gData = [
                 title: 'New format',
 
                 priority: 'high',
-                budget: '350',
+                budget: '2500',
                 deadline: '06/01/2021',
                 engaged: '450',
                 quoted: '550',
+                demand: '2800',
+                realEstimated: '5200',
+                authorised: '2100',
+                spent: '800',
 
                 progress: 0,
                 start_date: '2022.11.6',
@@ -143,10 +151,14 @@ const gData = [
                 type: 'project',
 
                 priority: 'highest',
-                budget: '240',
+                budget: '2500',
                 deadline: '03/28/2021',
                 engaged: '450',
                 quoted: '550',
+                demand: '2500',
+                realEstimated: '1700',
+                authorised: '600',
+                spent: '400',
               },
               {
                 id: '1.28.11.1.3',
@@ -154,10 +166,14 @@ const gData = [
                 type: 'project',
 
                 priority: 'highest',
-                budget: '350',
+                budget: '2500',
                 deadline: '06/01/2021',
                 engaged: '450',
                 quoted: '550',
+                demand: '2400',
+                realEstimated: '2000',
+                authorised: '1000',
+                spent: '300',
               },
               {
                 id: '1.28.11.1.4',
@@ -165,10 +181,14 @@ const gData = [
                 type: 'project',
 
                 priority: 'lowest',
-                budget: '150',
+                budget: '2500',
                 deadline: '12/31/2021',
                 engaged: '450',
-                quoted: '550'
+                quoted: '550',
+                demand: '1500',
+                realEstimated: '1200',
+                authorised: '800',
+                spent: '100',
               },
             ],
           },
@@ -178,10 +198,14 @@ const gData = [
             type: 'program',
 
             priority: 'high',
-            budget: '13633.69',
+            budget: '5000',
             deadline: '05/20/2018',
             engaged: '450',
             quoted: '550',
+            demand: '1300',
+            realEstimated: '1200',
+            authorised: '1000',
+            spent: '100',
           },
           {
             id: '1.28.11.3',
@@ -189,10 +213,14 @@ const gData = [
             type: 'program',
 
             priority: 'low',
-            budget: '13076.28',
+            budget: '1200',
             deadline: '03/24/2018',
             engaged: '450',
             quoted: '550',
+            demand: '1500',
+            realEstimated: '1800',
+            authorised: '900',
+            spent: '100',
           },
           {
             id: '1.28.11.4',
@@ -200,10 +228,14 @@ const gData = [
             type: 'program',
 
             priority: 'lowest',
-            budget: '12336.17',
+            budget: '2000',
             deadline: '12/03/2017',
             engaged: '450',
             quoted: '550',
+            demand: '2100',
+            realEstimated: '1600',
+            authorised: '800',
+            spent: '100',
           },
         ],
       },
@@ -1498,6 +1530,7 @@ export default {
     globalData: gData,
     demandTeamData: {},
     activityDetailModalOpen: false,
+    selectedNavId: '',
   },
   mutations: {
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
@@ -1641,8 +1674,6 @@ export default {
       Vue.$toast.success("Saved Successfully!")
     },
     HANDLE_ACTIVITY_SPLIT(state, data) {
-      console.log(state)
-      console.log(data)
       let index = -1
       state.teamsstate.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
@@ -1664,7 +1695,6 @@ export default {
       state.teamsstate.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
       })
-      console.log(index)
       const sate = { ...state.teamsstate[index] }
       const newPhases = [data.merged]
       sate.phases.forEach(t => {
@@ -1672,7 +1702,6 @@ export default {
           newPhases.push(t)
         }
       })
-      console.log(newPhases)
       state.teamsstate[index].phases = newPhases
       // const filteredTeamState = state.teamsstate.map(t => {
       //   const newPhases = [data.merged]
@@ -1813,6 +1842,10 @@ export default {
       })
       state.teamsstate = teamsstate
     },
+    SAVE_SELECTED_NAV_ID(state, id) {
+      console.info('11232', state.selectedNavId)
+      state.selectedNavId = id
+    }
   },
   actions: {},
 }

@@ -74,8 +74,8 @@ export default {
             {
               child_title: '1.28.12.1',
               progress: 0,
-              start_date: '2022.10.14 ',
-              end_date: '2022.11.26',
+              start_date: '2022.11.14 ',
+              end_date: '2022.12.26',
               id: '1.28.12.1',
             },
             {
@@ -96,15 +96,15 @@ export default {
         {
           title: 'Program 1.32',
           progress: 0,
-          start_date: '2022.10.14',
-          end_date: '2022.11.26',
+          start_date: '2022.11.14',
+          end_date: '2022.12.26',
           id: '1.32',
           children: [
             {
               child_title: '1.32.27.1',
               progress: 0,
-              start_date: '2022.10.14',
-              end_date: '2022.11.26',
+              start_date: '2022.11.14',
+              end_date: '2022.12.26',
               id: '1.32.27.1',
             },
           ]

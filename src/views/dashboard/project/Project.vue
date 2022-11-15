@@ -3,10 +3,11 @@
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
-          <b-button variant="flat-primary" @click="handleUpdate">
+          <div></div>
+          <!-- <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />
-            Update
-          </b-button>
+            Update2
+          </b-button> -->
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
               <feather-icon icon="BarChartIcon" />

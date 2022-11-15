@@ -76,13 +76,13 @@
           </div>
           <b-button variant="flat-secondary" class="phase-btn">
             <feather-icon icon="PlusIcon" />
-            <span>New Elementary Activity</span>
+            <span>Insert New Work Element</span>
           </b-button>
         </app-collapse-item>
       </app-collapse>
       <b-button v-if="!data.phases" variant="flat-secondary" class="mt-1">
         <feather-icon icon="PlusIcon" />
-        <span>New Elementary Activity</span>
+        <span>Insert New Work Element</span>
       </b-button>
     </div>
     <activity-detail-modal :is-open="openActivityModal" :selectedActivityData="c_SelectedActivity" @hideModal="hideModal" :teamdata="teamarr" />

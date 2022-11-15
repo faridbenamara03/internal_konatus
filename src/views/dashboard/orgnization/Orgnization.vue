@@ -66,18 +66,20 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
+            <b-button-group v-if="tabIndex === 1" class="ml-1">
+              <b-button variant="outline-primary">
+                Cost
+              </b-button>
+              <b-button variant="outline-primary" disabled style="background: grey">
+                Plan
+              </b-button>
+            </b-button-group>
+          </div>
+          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
             </div>
-            <!-- <b-button-group v-if="tabIndex === 1" class="ml-1">
-              <b-button variant="outline-primary">
-                Cost
-              </b-button>
-              <b-button variant="outline-primary">
-                Plan
-              </b-button>
-            </b-button-group> -->
             <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="outline-primary">
               <feather-icon icon="EyeIcon" size="16" />
