@@ -337,49 +337,49 @@ export default {
     },
     c_totalBudget() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.budget, 10)
       })
       return bd
     },
     c_totalEngaged() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.engaged, 10)
       })
       return bd
     },
     c_totalQuoted() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.quoted, 10)
       })
       return bd
     },
     c_totalDemand() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.demand, 10)
       })
       return bd
     },
     c_totalReal() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.realEstimated, 10)
       })
       return bd
     },
     c_totalSpent() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.spent, 10)
       })
       return bd
     },
     c_totalAuthor() {
       let bd = 0
-      this.data.forEach(t => {
+      this.c_data.forEach(t => {
         bd += parseInt(t.authorised, 10)
       })
       return bd
