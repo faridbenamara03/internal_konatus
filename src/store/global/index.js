@@ -136,14 +136,14 @@ const gData = [
                 ],
 
                 type: 'project',
-                // route: {
-                //   name: 'project-view',
-                //   params: {
-                //     portfolioId: 'consumer-robots',
-                //     programId: 'quadruped-robot',
-                //     projectId: 'new-format',
-                //   },
-                // },
+                route: {
+                  name: 'project-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    programId: 'quadruped-robot',
+                    projectId: 'new-format',
+                  },
+                },
               },
               {
                 id: '1.28.11.1.2',
@@ -1531,6 +1531,7 @@ export default {
     demandTeamData: {},
     activityDetailModalOpen: false,
     selectedNavId: '',
+    selectedNavObj: undefined,
   },
   mutations: {
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
@@ -1842,9 +1843,9 @@ export default {
       })
       state.teamsstate = teamsstate
     },
-    SAVE_SELECTED_NAV_ID(state, id) {
-      console.info('11232', state.selectedNavId)
-      state.selectedNavId = id
+    SAVE_SELECTED_NAV_ID(state, data) {
+      state.selectedNavId = data.id
+      state.selectedNavObj = data
     }
   },
   actions: {},

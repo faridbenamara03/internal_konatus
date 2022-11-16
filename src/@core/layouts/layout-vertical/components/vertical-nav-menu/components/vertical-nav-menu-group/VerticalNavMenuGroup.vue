@@ -111,14 +111,10 @@ export default {
     }
   },
   methods: {
-    // handleNavItemDblClick() {
-    //   this.updateGroupOpen(!this.isOpen)
-    //   this.updateIsActive()
-    // },
     handleNavItemClick(data) {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
-      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data.id)
+      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
       if (data.type === 'team') {
         this.$store.commit('globalState/HANDLE_NAV_TEAM_SELECT', data)
       }

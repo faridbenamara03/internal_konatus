@@ -11,7 +11,7 @@
       v-bind="linkProps"
       class="d-flex align-items-center"
       :style="`background-color:${c_SelectedNavId === item.id ? '#9100ff57' : '#0000'};`"
-      @click="onnavitemclick(item)"
+      @click="onNavItemClick(item)"
     >
       <nav-menu-icon style="margin-left:23px" :item="item" />
       <span class="menu-title text-truncate">{{ item.title }}</span>
@@ -71,8 +71,8 @@ export default {
     }
   },
   methods: {
-    onnavitemclick(data) {
-      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data.id)
+    onNavItemClick(data) {
+      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
     }
   }
 }
