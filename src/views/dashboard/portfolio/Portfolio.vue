@@ -10,6 +10,9 @@
           v-if="tabIndex === 0"
           class="action-bar"
         >
+          <div style="position:absolute;left:20px" class="portf-bold portf-uppercase color-white">
+            {{ tableTtle }}
+          </div>
           <b-button-group>
             <b-button
               variant="outline-primary"
@@ -75,7 +78,7 @@
           title="Control"
           class="no-action-bar"
         >
-          <Control :data="items" />
+          <Control :data="items" :tableTitle="tableTtle" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -203,12 +206,21 @@ export default {
   },
   data() {
     return {
-      items: this.$store.state.globalState.globalData[0].children[0].children,
+      // items: this.$store.state.globalState.globalData[0].children[0].children,
+      // items: this.$store.state.globalState.selectedNavObj,
       activeColumns: ['priority', 'budget', 'deadline'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
       tabIndex: 0,
       isChartView: false,
+    }
+  },
+  computed: {
+    items() {
+      return this.$store.state.globalState.selectedNavObj ? this.$store.state.globalState.selectedNavObj.children : []
+    },
+    tableTtle() {
+      return this.$store.state.globalState.selectedNavObj ? this.$store.state.globalState.selectedNavObj.title : ''
     }
   },
   mounted() {

@@ -8,7 +8,7 @@
       class="portf-demand-view">
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
-          Consumer Robots
+          <!-- Consumer Robots -->
         </div>
         <div class="part2" >
           <div class="data-child mr-1 portf-uppercase pr-1" v-for="(ft, fi) in c_fields" :key="fi" :style="`width:${100 / c_fields.length}%`">
