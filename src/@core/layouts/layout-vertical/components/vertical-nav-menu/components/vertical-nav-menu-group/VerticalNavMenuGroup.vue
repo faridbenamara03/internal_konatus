@@ -14,8 +14,7 @@
       :class="{'m-0': item.type === 'root'}"
       @click="handleNavItemClick(item)"
     >
-      <div @click="handleNavItemClick(item)"
-        :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
+      <div :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
       <feather-icon
         :icon="isOpen ? 'ChevronDownIcon' : 'ChevronRightIcon'"
         size="16"

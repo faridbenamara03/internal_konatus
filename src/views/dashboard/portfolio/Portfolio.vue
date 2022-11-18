@@ -63,6 +63,7 @@
           :class="{'has-default-card-bg': !isChartView}"
         >
           <Demand
+            v-if="tableTtle"
             :data="items"
             :fields="fields"
             :is-chart-view="isChartView"
