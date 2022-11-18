@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     teams: ['team a', 'team b', 'team c', 'team d', 'team e'],
-    fields: ['programs', 'gate', 'next gate'],
+    fields: ['programs', 'gate', 'next_gate'],
     total_data: [24, 45, 101, 117, 12],
     data: [
       {
@@ -15,7 +15,7 @@ export default {
           {
             title: 'Quadruped robot',
             gate: '3',
-            next_gate: '',
+            next_gate: '02/03/2022',
             data: ['21', '37', '88', '114', '9'],
             phases: [
               {

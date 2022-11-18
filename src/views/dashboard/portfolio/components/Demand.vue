@@ -313,13 +313,13 @@ export default {
         let spent = 0
         if (t.children) {
           t.children.map(t1 => {
-            budget += parseInt(t1.budget, 10)
-            engaged += parseInt(t1.engaged, 10)
-            quoted += parseInt(t1.quoted, 10)
-            demand += parseInt(t1.demand, 10)
-            realEstimated += parseInt(t1.realEstimated, 10)
-            authorised += parseInt(t1.authorised, 10)
-            spent += parseInt(t1.spent, 10)
+            budget += parseInt(t1.budget ? t1.budget : 0, 10)
+            engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+            quoted += parseInt(t1.quoted ? t1.quoted : 0, 10)
+            demand += parseInt(t1.demand ? t1.demand : 0, 10)
+            realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+            authorised += parseInt(t1.authorised ? t1.authorised : 0, 10)
+            spent += parseInt(t1.spent ? t1.spent : 0, 10)
             return null
           })
         }
@@ -338,49 +338,49 @@ export default {
     c_totalBudget() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.budget, 10)
+        bd += t.budget ? parseInt(t.budget, 10) : 0
       })
       return bd
     },
     c_totalEngaged() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.engaged, 10)
+        bd += t.engaged ? parseInt(t.engaged, 10) : 0
       })
       return bd
     },
     c_totalQuoted() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.quoted, 10)
+        bd += t.quoted ? parseInt(t.quoted, 10) : 0
       })
       return bd
     },
     c_totalDemand() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.demand, 10)
+        bd += t.demand ? parseInt(t.demand, 10) : 0
       })
       return bd
     },
     c_totalReal() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.realEstimated, 10)
+        bd += t.realEstimated ? parseInt(t.realEstimated, 10) : 0
       })
       return bd
     },
     c_totalSpent() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.spent, 10)
+        bd += t.spent ? parseInt(t.spent, 10) : 0
       })
       return bd
     },
     c_totalAuthor() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += parseInt(t.authorised, 10)
+        bd += t.authorised ? parseInt(t.authorised, 10) : 0
       })
       return bd
     },
@@ -394,12 +394,16 @@ export default {
       }
     },
     dateFormat(date) {
-      return moment(new Date(date)).format('MM-DD-YYYY')
+      if (date) return moment(new Date(date)).format('MM-DD-YYYY')
+      return null
     },
     formatCurrency(value) {
-      return new Intl.NumberFormat("en-US", {
-        style: "decimal",
-      }).format(value).concat(' US$')
+      if (value) {
+        return new Intl.NumberFormat("en-US", {
+          style: "decimal",
+        }).format(value).concat(' US$')
+      }
+      return null
     },
     rowClass(item, type) {
       const colorClass = 'table-success'
