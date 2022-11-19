@@ -5,7 +5,7 @@ const globalOperationData = {
   title: 'Boston Dynamics',
   resource: 'konatus',
   isOperation: true,
-  type: 'organization',
+  type: 'root',
   children: [
     {
       id: '1.1.1',
@@ -33,7 +33,7 @@ const globalOperationData = {
       children: [
         {
           id: '1.1.1.1',
-          title: 'Quadruped robot',
+          title: 'New Quadruped robot',
           type: 'program',
 
           priority: 'Highest',
@@ -212,11 +212,28 @@ const globalOperationData = {
               value: '3',
               spent: '100',
             },
+            {
+              id: '1.28.11.1.15',
+              title: 'Precise movement & control',
+              type: 'project',
+
+              priority: 'Lowest',
+              budget: '2500',
+              deadline: '12/31/2021',
+              engaged: '450',
+              quoted: '550',
+              next_gate: '06/02/2022',
+              demand: '1500',
+              realEstimated: '1200',
+              authorised: '800',
+              value: '100',
+              spent: '100',
+            },
           ],
         },
         {
           id: '1.28.11.2',
-          title: 'Hardened quadruped observation',
+          title: 'New Hardened quadruped observation',
           type: 'program',
 
           priority: 'High',
@@ -354,7 +371,7 @@ const globalOrganizationData = {
   title: 'Organization Dynamics',
   resource: 'konatus',
   isOperation: false,
-  type: 'organization',
+  type: 'root',
   route: {
     name: 'orgnization-view',
   },
@@ -1612,7 +1629,7 @@ export default {
     //   title: 'Konatus Industries',
     //   resource: 'konatus',
     //   isOperation: true,
-    //   type: 'organization',
+    //   type: 'root',
     //   route: {
     //     name: 'portfolio-view',
     //   },
@@ -1811,54 +1828,9 @@ export default {
       })
       state.teamsstate = teamsstate
     },
-    SAVE_SELECTED_NAV_ID(state, navObj) {
-      state.selectedNavId = navObj.id
-      state.selectedNavObj = navObj
-    },
-
-    OPERATION_NEW_SAVE(state, data) {
-      console.log(state, data)
-
-      // {
-      //   id: '1.28.11.1.15',
-      //   title: 'Precise movement & control',
-      //   type: 'project',
-
-      //   priority: 'Lowest',
-      //   budget: '2500',
-      //   deadline: '12/31/2021',
-      //   engaged: '450',
-      //   quoted: '550',
-      //   next_gate: '06/02/2022',
-      //   demand: '1500',
-      //   realEstimated: '1200',
-      //   authorised: '800',
-      //   value: '100',
-      //   spent: '100',
-      // },
-      // const portfolioD = {
-      //   id: Vue.faker().random.number(50),
-      //   title: 'Consumer Robots',
-      //   type: 'portfolio',
-
-      //   priority: 'Highest',
-      //   budget: '10000',
-      //   deadline: '06/01/2021',
-      //   engaged: '1800',
-      //   quoted: '2200',
-      //   demand: '9200',
-      //   realEstimated: '10100',
-      //   authorised: '4500',
-      //   spent: '1600',
-
-      //   route: {
-      //     name: 'portfolio-view',
-      //     params: {
-      //       portfolioId: 'consumer-robots',
-      //     },
-      //   },
-      // }
-      state.globalOperationData.children.push()
+    SAVE_SELECTED_NAV_ID(state, data) {
+      state.selectedNavId = data.id
+      state.selectedNavObj = data
     }
   },
   actions: {},

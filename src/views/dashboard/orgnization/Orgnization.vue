@@ -154,31 +154,31 @@ export default {
       items: [
         {
           name: 'Quadruped robot',
-          priority: 'highest',
+          priority: 'Highest',
           budget: '1100',
           deadline: '06/01/2021',
           children: [
             {
               name: 'New format',
-              priority: 'high',
+              priority: 'High',
               budget: '350',
               deadline: '06/01/2021',
             },
             {
               name: 'Enhanced motricity',
-              priority: 'highest',
+              priority: 'Highest',
               budget: '240',
               deadline: '03/28/2021',
             },
             {
               name: 'Enhanced authonomy',
-              priority: 'highest',
+              priority: 'Highest',
               budget: '350',
               deadline: '06/01/2021',
             },
             {
               name: 'Dual sourcing for Q',
-              priority: 'lowest',
+              priority: 'Lowest',
               budget: '150',
               deadline: '12/31/2021',
             },
@@ -186,19 +186,19 @@ export default {
         },
         {
           name: 'micro robot observation nbc',
-          priority: 'high',
+          priority: 'High',
           budget: '13633.69',
           deadline: '05/20/2018',
         },
         {
           name: 'handling robot',
-          priority: 'low',
+          priority: 'Low',
           budget: '13076.28',
           deadline: '03/24/2018',
         },
         {
           name: 'power and programing station',
-          priority: 'lowest',
+          priority: 'Lowest',
           budget: '12336.17',
           deadline: '12/03/2017',
         },

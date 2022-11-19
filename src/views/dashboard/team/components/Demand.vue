@@ -92,7 +92,7 @@
       <div class="d-flex mb-1">
         <div style="width:150px;font-weight:bold;padding-top:9px">PRIORITY</div>
         <div >
-          <v-select v-model="taskDetail.priority" :options="['highest', 'high', 'low', 'lowest']" style="width:200px" outlined />
+          <v-select v-model="taskDetail.priority" :options="['Highest', 'High', 'Low', 'Lowest']" style="width:200px" outlined />
         </div>
       </div>
       <div class="d-flex mb-1">

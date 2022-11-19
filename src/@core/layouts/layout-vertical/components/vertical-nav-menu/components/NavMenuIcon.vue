@@ -29,7 +29,7 @@ export default {
   mounted() {
     if (this.item.type) {
       switch (this.item.type) {
-        case 'root':
+        case 'organization':
           this.icon = 'ArchiveIcon'
           break
         case 'portfolio':

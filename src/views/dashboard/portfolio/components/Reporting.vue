@@ -221,7 +221,7 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      item: this.$store.state.globalState.globalData[0]
+      item: this.$store.state.globalState.globalOperationData
     }
   },
   mounted() {

@@ -42,7 +42,7 @@
                     <v-select
                       v-if="ft === 'priority'"
                       v-model="item1[ft]"
-                      :options="['highest', 'high', 'low', 'lowest']"
+                      :options="['Highest', 'High', 'Low', 'Lowest']"
                       outlined
                     />
                     <b-form-input

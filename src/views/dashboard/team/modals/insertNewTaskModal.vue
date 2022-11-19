@@ -5,7 +5,7 @@
     </div>
     <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" />
     <b-form-input id="input-gate" v-model="gate" placeholder="Gate" class="mb-1" />
-    <b-form-select v-model="priority" :options="['highest', 'high', 'low', 'lowest']" />
+    <b-form-select v-model="priority" :options="['Highest', 'High', 'Low', 'Lowest']" />
   </b-modal>
 </template>
 
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       taskId: '',
-      priority: 'high',
+      priority: 'High',
       gate: ''
     }
   },

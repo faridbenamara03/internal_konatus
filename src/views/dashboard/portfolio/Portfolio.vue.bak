@@ -207,7 +207,7 @@ export default {
   },
   data() {
     return {
-      // items: this.$store.state.globalState.globalOperationData.children[0].children,
+      // items: this.$store.state.globalState.globalData[0].children[0].children,
       // items: this.$store.state.globalState.selectedNavObj,
       activeColumns: ['priority', 'budget', 'deadline'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
@@ -218,12 +218,10 @@ export default {
   },
   computed: {
     items() {
-      const { selectedNavObj } = this.$store.state.globalState
-      return selectedNavObj ? selectedNavObj.children : []
+      return this.$store.state.globalState.selectedNavObj ? this.$store.state.globalState.selectedNavObj.children : []
     },
     tableTtle() {
-      const { selectedNavObj } = this.$store.state.globalState
-      return selectedNavObj ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
+      return this.$store.state.globalState.selectedNavObj ? this.$store.state.globalState.selectedNavObj.title : ''
     }
   },
   mounted() {
@@ -249,7 +247,7 @@ export default {
     },
     onDemandTableEditableClick() {
       this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
-    },
+    }
   },
 }
 </script>

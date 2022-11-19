@@ -7,6 +7,7 @@
     no-fade
     hide-backdrop
     static
+    size="lg"
   >
     <!-- Modal Header -->
     <template #modal-header>
@@ -14,7 +15,8 @@
         Create New
       </h5>
       <div class="modal-actions">
-        <!-- <b-button
+        <b-button
+          style="width: 200px"
           variant="outline-primary"
         >
           <feather-icon
@@ -22,7 +24,7 @@
             size="18"
           />
           <span class="pl-1">Select Fields</span>
-        </b-button> -->
+        </b-button>
         <b-button
           variant="outline-primary"
           @click="hideModal"
@@ -53,51 +55,76 @@
     >
       <div class="select-box">
         <label>Nomenclature System</label>
-        <v-select
+        <InputSelect
+          placeholder="Select System"
+          :options="['SAP', 'Jira', 'Konatus']"
+          :value="step1.system"
+          @customChange="e => handleCustomChange(e, 'system')" />
+        <!-- <v-select
           v-model="step1.system"
           :options="['SAP', 'Jira', 'Konatus']"
           placeholder="Select System"
           outlined
-        />
+        /> -->
       </div>
       <div class="select-box">
         <label>Portfolio</label>
-        <v-select
+        <InputSelect
+          placeholder="Select Portfolio"
+          :options="['Consumer Robots', 'Military Robots']"
+          :value="step1.portfolio"
+          @customChange="e => handleCustomChange(e, 'portfolio')" />
+        <!-- <v-select
           v-model="step1.portfolio"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Portfolio"
           outlined
-        />
+        /> -->
       </div>
       <div class="select-box">
         <label>Program</label>
-        <v-select
+        <InputSelect
+          placeholder="Select Program"
+          :options="['New Quadruped robot', 'New Hardened quadruped observation', 'Handling robot', 'power and programing station', 'Attacking robot']"
+          :value="step1.program"
+          @customChange="e => handleCustomChange(e, 'program')" />
+        <!-- <v-select
           v-model="step1.program"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Program"
           outlined
-        />
+        /> -->
       </div>
       <div class="select-box">
         <label>Project</label>
-        <v-select
+        <InputSelect
+          placeholder="Select Project"
+          :options="['New format', 'New Enhanced motricity', 'New Enhanced authonomy', 'New Dual sourcing for Quadruped']"
+          :value="step1.project"
+          @customChange="e => handleCustomChange(e, 'project')" />
+        <!-- <v-select
           v-model="step1.project"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Project"
           outlined
-        />
+        /> -->
       </div>
       <div class="select-box">
         <div class="d-flex justify-content-between">
           <label>Sub Project</label>
           <label>(Optional)</label>
         </div>
-        <v-select
+        <InputSelect
+          placeholder="Select Sub Project"
+          :options="[]"
+          :value="step1.subProject"
+          @customChange="e => handleCustomChange(e, 'subProject')" />
+        <!-- <v-select
           v-model="step1.subProject"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Sub Project"
           outlined
-        />
+        /> -->
       </div>
     </div>
     <div
@@ -116,7 +143,7 @@
           <label>Priority</label>
           <v-select
             v-model="step2.priority"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Highest"
             outlined
           />
@@ -314,7 +341,7 @@
           <label>Product Manager</label>
           <v-select
             v-model="step5.product_manager"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -334,7 +361,7 @@
           <label>Head of Program Direction</label>
           <v-select
             v-model="step5.head_program_direction"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -345,7 +372,7 @@
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -368,7 +395,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step6.portfolio"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Portfolio"
           outlined
         />
@@ -420,6 +447,7 @@
         <b-input-group>
           <b-input-group-prepend>
             <v-select
+              style="width:120px"
               v-model="step6.currency"
               :options="['EUR', 'USD']"
               placeholder="unit"
@@ -456,6 +484,7 @@ import {
   BButton, BFormDatepicker, BFormInput, BInputGroup, BInputGroupPrepend, BModal,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
+import InputSelect from './InputSelect.vue'
 
 export default {
   components: {
@@ -466,12 +495,23 @@ export default {
     BInputGroupPrepend,
     BModal,
     vSelect,
+    InputSelect
   },
   props: {
     data: {
       type: Array,
       default: () => [],
     },
+  },
+  computed: {
+    option1() {
+      const { globalOperationData } = this.$store.state.globalState
+      const opt = []
+      globalOperationData.children.forEach(element => {
+        if (element.title && element.title.indexOf(this.step1.system) > -1) opt.push(element.title)
+      })
+      return opt
+    }
   },
   data() {
     return {
@@ -485,11 +525,11 @@ export default {
         'Almost finished! Fill the budget',
       ],
       step1: {
-        system: null,
-        portfolio: null,
-        program: null,
-        project: null,
-        subProject: null,
+        system: '',
+        portfolio: '',
+        program: '',
+        project: '',
+        subProject: '',
       },
       step2: {
         priority: null,
@@ -546,7 +586,20 @@ export default {
     handleNext() {
       if (this.curIndex < 6) {
         this.curIndex += 1
+      } else {
+        const data = {
+          step1: this.step1,
+          step2: this.step2,
+          step3: this.step3,
+          step4: this.step4,
+          step5: this.step5,
+          step6: this.step6
+        }
+        this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
       }
+    },
+    handleCustomChange(e, field) {
+      this.step1[field] = e
     },
   },
 }

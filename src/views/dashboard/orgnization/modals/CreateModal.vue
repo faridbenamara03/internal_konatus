@@ -55,7 +55,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step1.portfolio"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Portfolio"
           outlined
         />
@@ -64,7 +64,7 @@
         <label>Program</label>
         <v-select
           v-model="step1.program"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Program"
           outlined
         />
@@ -73,7 +73,7 @@
         <label>Project</label>
         <v-select
           v-model="step1.project"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Project"
           outlined
         />
@@ -85,7 +85,7 @@
         </div>
         <v-select
           v-model="step1.subProject"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Sub Project"
           outlined
         />
@@ -107,7 +107,7 @@
           <label>Priority</label>
           <v-select
             v-model="step2.priority"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Highest"
             outlined
           />
@@ -305,7 +305,7 @@
           <label>Product Manager</label>
           <v-select
             v-model="step5.product_manager"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -325,7 +325,7 @@
           <label>Head of Program Direction</label>
           <v-select
             v-model="step5.head_program_direction"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -336,7 +336,7 @@
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
-            :options="['highest', 'high', 'low', 'lowest']"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           />
@@ -359,7 +359,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step6.portfolio"
-          :options="['highest', 'high', 'low', 'lowest']"
+          :options="['Highest', 'High', 'Low', 'Lowest']"
           placeholder="Select Portfolio"
           outlined
         />

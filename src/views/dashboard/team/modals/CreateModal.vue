@@ -53,7 +53,7 @@
       <div class="d-flex">
         <div style="flex:1;padding-right:3px;">
           <label>Management & Study</label>
-          <v-select v-model="step2.priority" :options="['highest', 'high', 'low', 'lowest']" placeholder="Highest"
+          <v-select v-model="step2.priority" :options="['Highest', 'High', 'Low', 'Lowest']" placeholder="Highest"
             outlined />
         </div>
         <div style="flex:1;padding-left:3px;">
