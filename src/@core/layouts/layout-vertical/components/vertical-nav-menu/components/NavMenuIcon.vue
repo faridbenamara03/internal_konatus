@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex justify-content-center">
     <feather-icon
-      v-if="item.type !== 'root' && item.type !== 'program'"
+      v-if="item.type !== 'program'"
       :icon="icon"
     />
-    <custom-icon
+    <feather-icon
       v-else
-      :name="item.type"
+      icon="BookIcon"
     />
   </div>
 </template>
@@ -29,6 +29,9 @@ export default {
   mounted() {
     if (this.item.type) {
       switch (this.item.type) {
+        case 'root':
+          this.icon = 'ArchiveIcon'
+          break
         case 'portfolio':
           this.icon = 'HomeIcon'
           break
