@@ -7,7 +7,7 @@ export default [
   {
     path: '/portfolio/:portfolioId/program/:programId',
     name: 'program-view',
-    component: () => import('@/views/dashboard/project/Project.vue'),
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     path: '/portfolio/:portfolioId',

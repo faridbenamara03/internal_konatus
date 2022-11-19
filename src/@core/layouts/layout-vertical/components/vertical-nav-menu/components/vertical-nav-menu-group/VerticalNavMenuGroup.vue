@@ -5,13 +5,13 @@
     :class="{
       'open': isOpen,
       'disabled': item.disabled,
-      'sidebar-group-active': isGroupActive,
+      /*'sidebar-group-active': isGroupActive,  // nav correction */
     }"
   >
     <b-link
       v-bind="linkProps"
       class="d-flex align-items-center"
-      :class="{'m-0': item.type === 'root'}"
+      :class="{'m-0': item.type === 'organization'}"
       @click="handleNavItemClick(item)"
     >
       <div :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
