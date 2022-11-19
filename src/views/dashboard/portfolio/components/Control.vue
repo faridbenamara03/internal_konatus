@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       opened: 0,
-      c_fields: ['priority', 'value', 'budget', 'quoted', 'next_gate'],
+      c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
       teams: ['A', 'B', 'C', 'D', 'E', 'F'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],

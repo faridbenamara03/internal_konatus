@@ -50,7 +50,7 @@
                       v-model="item1[ft]"
                       style="text-align:end"
                     />
-                    <b-input-group v-else>
+                    <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
                       <b-form-input
                         type="number"
                         style="text-align:end"
@@ -62,6 +62,9 @@
                         </b-input-group-text>
                       </b-input-group-append>
                     </b-input-group>
+                    <div v-else class="mr-1" style="margin-top:6px;">
+                      {{ formatCurrency(item1[ft]) }}
+                    </div>
                   </div>
                   <div v-else>
                     <div v-if="ft === 'priority'" class="mr-1" style="margin-top:6px;">
@@ -103,7 +106,7 @@
             <div v-else-if="ft === 'engaged'">
               {{ formatCurrency(c_totalEngaged) }}
             </div>
-            <div v-else-if="ft === 'quoted'">
+            <div v-else-if="ft === 'quote'">
               {{ formatCurrency(c_totalQuoted) }}
             </div>
             <div v-else-if="ft === 'demand'">
@@ -279,7 +282,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['demand', 'engaged + quoted', 'engaged (to add)', 'engaged', 'real estimated', 'authorised', 'spent']
+          categories: ['demand', 'engaged + quote', 'engaged (to add)', 'engaged', 'real estimated', 'authorised', 'spent']
           // categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget']
         },
         yaxis: {
@@ -306,7 +309,7 @@ export default {
       const ndt = this.data.map(t => {
         let budget = 0
         let engaged = 0
-        let quoted = 0
+        let quote = 0
         let demand = 0
         let realEstimated = 0
         let authorised = 0
@@ -315,7 +318,7 @@ export default {
           t.children.map(t1 => {
             budget += parseInt(t1.budget ? t1.budget : 0, 10)
             engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-            quoted += parseInt(t1.quoted ? t1.quoted : 0, 10)
+            quote += parseInt(t1.quote ? t1.quote : 0, 10)
             demand += parseInt(t1.demand ? t1.demand : 0, 10)
             realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
             authorised += parseInt(t1.authorised ? t1.authorised : 0, 10)
@@ -326,7 +329,7 @@ export default {
         const nd = { ...t }
         nd.budget = budget
         nd.engaged = engaged
-        nd.quoted = quoted
+        nd.quote = quote
         nd.demand = demand
         nd.realEstimated = realEstimated
         nd.authorised = authorised
@@ -352,7 +355,7 @@ export default {
     c_totalQuoted() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += t.quoted ? parseInt(t.quoted, 10) : 0
+        bd += t.quote ? parseInt(t.quote, 10) : 0
       })
       return bd
     },

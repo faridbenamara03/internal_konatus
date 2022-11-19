@@ -89,7 +89,7 @@ export default {
         { text: 'Budget', value: 'budget' },
         { text: 'Deadline', value: 'deadline' },
         { text: 'Engaged', value: 'engaged' },
-        { text: 'Quoted', value: 'quoted' },
+        { text: 'Quote', value: 'quote' },
       ],
     }
   },
