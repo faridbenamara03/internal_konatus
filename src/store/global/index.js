@@ -15,12 +15,12 @@ const globalOperationData = {
       priority: 'Highest',
       budget: '2150000',
       deadline: '06/01/2021',
-      engaged: '5800',
+      engaged: '215800',
       quote: '1210000',
-      demand: '9200',
-      realEstimated: '10100',
-      authorised: '4500',
-      spent: '1600',
+      demand: '319200',
+      realEstimated: '210100',
+      authorised: '124500',
+      spent: '21600',
       value: '331',
       next_gate: '03/01/2022',
 
@@ -39,12 +39,12 @@ const globalOperationData = {
           priority: 'Highest',
           budget: '1150000',
           deadline: '06/01/2021',
-          engaged: '1800',
+          engaged: '21800',
           quote: '1340000',
-          demand: '9200',
+          demand: '19200',
           realEstimated: '10100',
-          authorised: '4500',
-          spent: '1600',
+          authorised: '14500',
+          spent: '11600',
           value: '331',
           next_gate: '03/01/2022',
 
@@ -63,12 +63,12 @@ const globalOperationData = {
               priority: 'High',
               budget: '350000',
               deadline: '06/01/2021',
-              engaged: '450',
+              engaged: '22450',
               quote: '601900',
-              demand: '2800',
-              realEstimated: '5200',
-              authorised: '2100',
-              spent: '800',
+              demand: '212800',
+              realEstimated: '235200',
+              authorised: '232100',
+              spent: '41800',
               value: '64',
               next_gate: '03/01/2022',
 
@@ -168,12 +168,12 @@ const globalOperationData = {
               priority: 'Highest',
               budget: '350000',
               deadline: '03/28/2021',
-              engaged: '450',
-              quote: '354900',
-              demand: '2500',
-              realEstimated: '1700',
-              authorised: '600',
-              spent: '400',
+              engaged: '46450',
+              quote: '54900',
+              demand: '732500',
+              realEstimated: '831700',
+              authorised: '39600',
+              spent: '61400',
               next_gate: '06/02/2022',
               value: '84',
             },
@@ -186,12 +186,12 @@ const globalOperationData = {
               budget: '150000',
               deadline: '06/01/2021',
               engaged: '450',
-              quote: '245900',
-              demand: '2400',
-              realEstimated: '2000',
-              authorised: '1000',
+              quote: '45900',
+              demand: '72400',
+              realEstimated: '82000',
+              authorised: '31000',
               next_gate: '07/01/2022',
-              spent: '300',
+              spent: '21300',
               value: '31',
             },
             {
@@ -203,13 +203,13 @@ const globalOperationData = {
               budget: '300000',
               deadline: '12/31/2021',
               engaged: '450',
-              quote: '550',
-              demand: '1500',
+              quote: '41550',
+              demand: '691500',
               next_gate: '08/02/2022',
-              realEstimated: '1200',
-              authorised: '800',
+              realEstimated: '211200',
+              authorised: '18800',
               value: '3',
-              spent: '100',
+              spent: '31100',
             },
           ],
         },
@@ -1594,11 +1594,192 @@ const globalOrganizationData = {
   ],
 }
 
+const phaseState = [
+  {
+    teams: [
+      {
+        title: 'Team B',
+        activities: [
+          {
+            title: 'Install software',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team C',
+        activities: [
+          {
+            title: 'Debugging',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team D',
+        activities: [
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team E',
+        activities: [
+          {
+            title: 'Activity Element 58',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+          {
+            title: 'Activity Element 58-1',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team F',
+        activities: []
+      },
+    ]
+  },
+  {
+    teams: [
+      {
+        title: 'Team B',
+        activities: [
+          {
+            title: 'Develop control software',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team C',
+        activities: [
+          {
+            title: 'Improve generator component',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team D',
+        activities: [
+          {
+            title: 'Electricity market AI II',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team E',
+        activities: [
+          {
+            title: 'Activity Element 123',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Team F',
+        activities: [
+          {
+            title: 'Activity Element F1',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+    ]
+  }
+]
+
 export default {
   namespaced: true,
   state: {
     projectReportingData: globalOperationData.children[0].children[0],
-    teamsstate: globalOrganizationData.children,
+    teamsState: globalOrganizationData.children,
+    phaseState,
     globalData: [globalOperationData, globalOrganizationData],
     demandTeamData: {},
     activityDetailModalOpen: false,
@@ -1628,7 +1809,7 @@ export default {
     },
     HANDLE_UPDATE(state) {
       const data = []
-      state.teamsstate = data
+      state.teamsState = data
     },
     UPDATE_PROJECT_REPORTING_DATA() {
       // const data2Update = {}
@@ -1643,10 +1824,10 @@ export default {
     },
     HANDLE_ACTIVITY_SPLIT(state, data) {
       let index = -1
-      state.teamsstate.forEach((t, i) => {
+      state.teamsState.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
       })
-      const sate = { ...state.teamsstate[index] }
+      const sate = { ...state.teamsState[index] }
       const newPhases = []
       sate.phases.forEach(t => {
         if (t.activityId === data.phase.activityId) {
@@ -1655,23 +1836,23 @@ export default {
           newPhases.push(t)
         }
       })
-      state.teamsstate[index].phases = newPhases
+      state.teamsState[index].phases = newPhases
       Vue.$toast.success('Splitted Successfully!')
     },
     HANDLE_ACTIVITY_MERGE(state, data) {
       let index = -1
-      state.teamsstate.forEach((t, i) => {
+      state.teamsState.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
       })
-      const sate = { ...state.teamsstate[index] }
+      const sate = { ...state.teamsState[index] }
       const newPhases = [data.merged]
       sate.phases.forEach(t => {
         if (t.activityId !== data.toMergeId1 && t.activityId !== data.toMergeId2) {
           newPhases.push(t)
         }
       })
-      state.teamsstate[index].phases = newPhases
-      // const filteredTeamState = state.teamsstate.map(t => {
+      state.teamsState[index].phases = newPhases
+      // const filteredTeamState = state.teamsState.map(t => {
       //   const newPhases = [data.merged]
       //   t.phases.forEach(t1 => {
       //     if (t1.activityId !== data.toMergeId1 && t1.activityId !== data.toMergeId2) {
@@ -1681,7 +1862,7 @@ export default {
       //   const tmp3 = { ...t, phases: newPhases }
       //   return tmp3
       // })
-      // state.teamsstate = filteredTeamState
+      // state.teamsState = filteredTeamState
       Vue.$toast.success('Merged Successfully!')
     },
     HANDLE_TEAM_DEMAND_UPDATE() {
@@ -1800,15 +1981,15 @@ export default {
         b.isSelected = !allselected
         phases.push(b)
       })
-      const teamsstate = []
-      state.teamsstate.forEach(t => {
+      const teamsState = []
+      state.teamsState.forEach(t => {
         const mapteam = t
         if (mapteam.id === team.id) {
           mapteam.phases = phases
         }
-        teamsstate.push(mapteam)
+        teamsState.push(mapteam)
       })
-      state.teamsstate = teamsstate
+      state.teamsState = teamsState
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id

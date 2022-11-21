@@ -62,7 +62,7 @@ export default {
             data: [170, 170, 120, 90, 150],
           },
           {
-            name: 'QUOTED',
+            name: 'QUOTE',
             type: 'line',
             stack: 'Total',
             color: '#4f964d',

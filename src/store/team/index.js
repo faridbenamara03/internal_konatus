@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: {
     loaderModalShow: false,
-    teamsstate: [],
+    teamsState: [],
     resourceAdded: false,
     teamReportUpdated: false,
     demandTeamData: {},
@@ -133,18 +133,18 @@ export default {
     //     })
     //     phases.push(arr)
     //   })
-    //   const teamsstate = []
-    //   state.teamsstate.forEach(t => {
+    //   const teamsState = []
+    //   state.teamsState.forEach(t => {
     //     const mapteam = t
     //     if (mapteam.id === team.id) {
     //       mapteam.phases = phases
     //     }
-    //     teamsstate.push(mapteam)
+    //     teamsState.push(mapteam)
     //   })
-    //   state.teamsstate = teamsstate
+    //   state.teamsState = teamsState
     // },
     SUBMIT_TEAM_REQUEST_QUOTE(state, data) {
-      state.teamsstate = data
+      state.teamsState = data
       // .todo axios request
     },
     IMPORT_WBS(state, data) {
@@ -152,7 +152,7 @@ export default {
         const regex = /,(?!\s*?[{["'\w])/g
         const data1 = data.replace(/(['"])?([a-zA-Z0-9]+)(['"])?:/g, '"$2":').replace(regex, '').replace(/'/g, '"')
         const parsedData = JSON.parse(data1)
-        state.teamsstate = parsedData
+        state.teamsState = parsedData
         state.loaderModalShow = !state.loaderModalShow
         Vue.$toast.success("Imported Successfully!")
       }, 1000)
@@ -455,7 +455,7 @@ export default {
     //     //   ],
     //     // },
     //   ]
-    //   state.teamsstate = data
+    //   state.teamsState = data
     // },
     // HANDLE_ACTIVITY_DETAIL_SAVE(state, activity) {
     //   console.log(state)
@@ -464,7 +464,7 @@ export default {
     //   Vue.$toast.success("Saved Successfully!")
     // },
     // HANDLE_ACTIVITY_SPLIT(state, data) {
-    //   const filteredTeamState = state.teamsstate.map(t => {
+    //   const filteredTeamState = state.teamsState.map(t => {
     //     const temp1 = t.phases.map(t1 => {
     //       const temp2 = t1.map(t2 => {
     //         if (t2.activityId === data.phase.activityId) {
@@ -477,12 +477,12 @@ export default {
     //     const tmp3 = { ...t, phases: temp1 }
     //     return tmp3
     //   })
-    //   state.teamsstate = filteredTeamState
+    //   state.teamsState = filteredTeamState
     //   Vue.$toast.success('Splitted Successfully!')
     // },
     // HANDLE_ACTIVITY_MERGE(state, data) {
     //   let pushed = false
-    //   const filteredTeamState = state.teamsstate.map(t => {
+    //   const filteredTeamState = state.teamsState.map(t => {
     //     const temp1 = t.phases.map(t1 => {
     //       const temp2 = []
     //       t1.forEach(t2 => {
@@ -498,7 +498,7 @@ export default {
     //     const tmp3 = { ...t, phases: temp1 }
     //     return tmp3
     //   })
-    //   state.teamsstate = filteredTeamState
+    //   state.teamsState = filteredTeamState
     //   Vue.$toast.success('Merged Successfully!')
     // },
     // HANDLE_TEAM_DEMAND_UPDATE() {

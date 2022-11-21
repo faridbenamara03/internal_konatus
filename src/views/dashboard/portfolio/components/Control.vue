@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="demand-view"
-    style="overflow-x:auto"
-  >
-    <div class="portf-demand-view">
+  <div style="overflow-x:auto">
+    <div class="portf-control-view">
       <div style="width:100%;background-color:#1A2239;height:40px">
         <b-button variant="flat-primary">
           <feather-icon icon="RotateCwIcon" />

@@ -4,10 +4,14 @@
       <b-tabs v-model="tabIndex">
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
           <div></div>
-          <!-- <b-button variant="flat-primary" @click="handleUpdate">
-            <feather-icon icon="RotateCwIcon" />
-            Update2
-          </b-button> -->
+          <b-button-group v-if="tabIndex === 0" class="ml-1">
+            <b-button :variant="demandTabState === 'team' ? null : 'outline-primary'" @click="handleDemandState('team')">
+              Team
+            </b-button>
+            <b-button :variant="demandTabState === 'phase' ? null : 'outline-primary'" @click="handleDemandState('phase')">
+              Phase
+            </b-button>
+          </b-button-group>
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
               <feather-icon icon="BarChartIcon" />
@@ -23,13 +27,13 @@
             </b-button>
           </div>
         </div>
-        <b-tab title="Demand" :class="{'border-0': !teams_computed.length}">
-          <div v-if="!teams_computed.length" class="no-data">
+        <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}">
+          <div v-if="!projectElementTeamData.length" class="no-data">
             <feather-icon icon="FileIcon" size="48" />
             <p>No activities for this project yet.<br>
               Finish setting up the project by creating a elementary activity or importing your data in .wbs format</p>
           </div>
-          <Demand :data="teams_computed" />
+          <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
         </b-tab>
         <b-tab title="Reporting">
           <Reporting />
@@ -70,7 +74,7 @@
       </b-button>
     </template>
     <create-modal />
-    <modal-request-quote :data="teams_computed" @onSubmit="handleRequestQuote" />
+    <modal-request-quote :data="projectElementTeamData" @onSubmit="handleRequestQuote" />
     <import-modal />
     <import-loader-modal />
   </b-card>
@@ -84,6 +88,7 @@ import {
   BCardBody,
   BTabs,
   BTab,
+  BButtonGroup,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
@@ -95,6 +100,7 @@ import Reporting from './components/Reporting.vue'
 
 export default {
   components: {
+    BButtonGroup,
     BButton,
     BCard,
     BCardText,
@@ -120,14 +126,9 @@ export default {
       tabIndex: 0,
       openActivityModal: false,
       selectedActivity: {},
-    }
-  },
-  computed: {
-    selectedPhases() {
-      return []
-    },
-    teams_computed() {
-      return this.$store.state.globalState.teamsstate
+      demandTabState: 'team',
+      projectElementTeamData: this.$store.state.globalState.teamsState,
+      projectElementPhaseData: this.$store.state.globalState.phaseState
     }
   },
   methods: {
@@ -140,6 +141,9 @@ export default {
     handleUpdate() {
       this.$store.commit('globalState/HANDLE_UPDATE')
     },
+    handleDemandState(tabState) {
+      this.demandTabState = tabState
+    }
   },
   // computed: {
   //   filteredTeam() {

@@ -1616,7 +1616,7 @@ export default {
   namespaced: true,
   state: {
     projectReportingData: globalOperationData.children[0].children[0],
-    teamsstate: globalOrganizationData.children,
+    teamsState: globalOrganizationData.children,
     globalData: [globalOperationData, globalOrganizationData],
     demandTeamData: {},
     activityDetailModalOpen: false,
@@ -1646,7 +1646,7 @@ export default {
     },
     HANDLE_UPDATE(state) {
       const data = []
-      state.teamsstate = data
+      state.teamsState = data
     },
     UPDATE_PROJECT_REPORTING_DATA() {
       // const data2Update = {}
@@ -1661,10 +1661,10 @@ export default {
     },
     HANDLE_ACTIVITY_SPLIT(state, data) {
       let index = -1
-      state.teamsstate.forEach((t, i) => {
+      state.teamsState.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
       })
-      const sate = { ...state.teamsstate[index] }
+      const sate = { ...state.teamsState[index] }
       const newPhases = []
       sate.phases.forEach(t => {
         if (t.activityId === data.phase.activityId) {
@@ -1673,23 +1673,23 @@ export default {
           newPhases.push(t)
         }
       })
-      state.teamsstate[index].phases = newPhases
+      state.teamsState[index].phases = newPhases
       Vue.$toast.success('Splitted Successfully!')
     },
     HANDLE_ACTIVITY_MERGE(state, data) {
       let index = -1
-      state.teamsstate.forEach((t, i) => {
+      state.teamsState.forEach((t, i) => {
         if (t.title === data.teamTitle) index = i
       })
-      const sate = { ...state.teamsstate[index] }
+      const sate = { ...state.teamsState[index] }
       const newPhases = [data.merged]
       sate.phases.forEach(t => {
         if (t.activityId !== data.toMergeId1 && t.activityId !== data.toMergeId2) {
           newPhases.push(t)
         }
       })
-      state.teamsstate[index].phases = newPhases
-      // const filteredTeamState = state.teamsstate.map(t => {
+      state.teamsState[index].phases = newPhases
+      // const filteredTeamState = state.teamsState.map(t => {
       //   const newPhases = [data.merged]
       //   t.phases.forEach(t1 => {
       //     if (t1.activityId !== data.toMergeId1 && t1.activityId !== data.toMergeId2) {
@@ -1699,7 +1699,7 @@ export default {
       //   const tmp3 = { ...t, phases: newPhases }
       //   return tmp3
       // })
-      // state.teamsstate = filteredTeamState
+      // state.teamsState = filteredTeamState
       Vue.$toast.success('Merged Successfully!')
     },
     HANDLE_TEAM_DEMAND_UPDATE() {
@@ -1818,15 +1818,15 @@ export default {
         b.isSelected = !allselected
         phases.push(b)
       })
-      const teamsstate = []
-      state.teamsstate.forEach(t => {
+      const teamsState = []
+      state.teamsState.forEach(t => {
         const mapteam = t
         if (mapteam.id === team.id) {
           mapteam.phases = phases
         }
-        teamsstate.push(mapteam)
+        teamsState.push(mapteam)
       })
-      state.teamsstate = teamsstate
+      state.teamsState = teamsState
     },
     SAVE_SELECTED_NAV_ID(state, data) {
       state.selectedNavId = data.id

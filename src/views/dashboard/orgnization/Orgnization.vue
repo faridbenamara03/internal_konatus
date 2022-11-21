@@ -46,7 +46,7 @@
             <div class="d-flex">
               <div class="ml-2 rounded"
                 style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
-              <div>QUOTED</div>
+              <div>QUOTE</div>
             </div>
             <div class="d-flex">
               <div class="ml-2 rounded"

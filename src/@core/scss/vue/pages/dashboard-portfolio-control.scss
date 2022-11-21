@@ -41,8 +41,7 @@
 .border-btm-lgt {
   border-bottom: 1px solid $theme-dark-table-bg;
 }
-.portf-demand-view {
-  overflow-x: auto;
+.portf-control-view {
   display: inline-table;
   background-color: $theme-dark-table-bg;
   .portf-row {

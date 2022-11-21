@@ -30,7 +30,7 @@ export default {
     if (this.item.type) {
       switch (this.item.type) {
         case 'organization':
-          this.icon = 'ArchiveIcon'
+          this.icon = 'GlobeIcon'
           break
         case 'portfolio':
           this.icon = 'HomeIcon'

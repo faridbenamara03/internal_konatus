@@ -107,7 +107,7 @@
               {{ formatCurrency(c_totalEngaged) }}
             </div>
             <div v-else-if="ft === 'quote'">
-              {{ formatCurrency(c_totalQuoted) }}
+              {{ formatCurrency(c_totalQuote) }}
             </div>
             <div v-else-if="ft === 'demand'">
               {{ formatCurrency(c_totalDemand) }}
@@ -131,7 +131,7 @@
       style
     >
       <b-card
-        v-for="(serie, idx) in series"
+        v-for="(serie, idx) in c_series"
         :key="idx"
         no-body
         no-footer
@@ -228,19 +228,6 @@ export default {
   data() {
     return {
       opened: 0,
-      series: [[{
-        title: 'Consumer Robots',
-        data: [3720, 3500, 1920, 2040, 80, 120, 150],
-      }],
-      [{
-        title: 'Military Robots',
-        data: [3400, 3960, 1920, 2040, 240, 220, 250],
-      }],
-      [{
-        title: 'Project automation',
-        data: [3720, 3960, 2320, 2040, 600, 120, 190],
-      }],
-      ],
       chartOptions: {
         chart: {
           type: 'bar',
@@ -282,8 +269,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['demand', 'engaged + quote', 'engaged (to add)', 'engaged', 'real estimated', 'authorised', 'spent']
-          // categories: ['spent', 'authorized', 'real estimated', 'budget engaged', ' budget spent', 'portfolio budget']
+          categories: ['budget', 'demand', 'quote', 'engaged', 'real estimated', 'authorised', 'spent']
         },
         yaxis: {
           labels: {
@@ -325,6 +311,14 @@ export default {
             spent += parseInt(t1.spent ? t1.spent : 0, 10)
             return null
           })
+        } else {
+          budget = t.budget
+          engaged = t.engaged
+          quote = t.quote
+          demand = t.demand
+          realEstimated = t.realEstimated
+          authorised = t.authorised
+          spent = t.spent
         }
         const nd = { ...t }
         nd.budget = budget
@@ -352,7 +346,7 @@ export default {
       })
       return bd
     },
-    c_totalQuoted() {
+    c_totalQuote() {
       let bd = 0
       this.c_data.forEach(t => {
         bd += t.quote ? parseInt(t.quote, 10) : 0
@@ -387,6 +381,14 @@ export default {
       })
       return bd
     },
+    c_series() {
+      return [
+        [{
+          title: 'Consumer Robots',
+          data: [this.c_totalBudget, this.c_totalDemand, this.c_totalQuote, this.c_totalEngaged, this.c_totalReal, this.c_totalAuthor, this.c_totalSpent],
+        }]
+      ]
+    }
   },
   methods: {
     onCollapseCLick(index) {
