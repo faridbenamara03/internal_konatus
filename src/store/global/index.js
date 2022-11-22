@@ -2,7 +2,7 @@ import Vue from "vue"
 
 const globalOperationData = {
   id: '1.1',
-  title: 'Boston Dynamics',
+  title: 'Konatus Industries',
   resource: 'konatus',
   isOperation: true,
   type: 'organization',
@@ -58,7 +58,7 @@ const globalOperationData = {
           children: [
             {
               id: '1.28.11.1.1',
-              title: 'New format',
+              title: 'Full Model Design',
 
               priority: 'High',
               budget: '350000',
@@ -1946,7 +1946,7 @@ export default {
               title: 'Quardruped Robot',
               children: [
                 {
-                  child_title: 'New Format',
+                  child_title: 'Full Model Design',
                   id: '1.28.11',
                 },
                 {

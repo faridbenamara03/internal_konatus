@@ -62,7 +62,7 @@ export default {
       ],
     },
     reportingData: {
-      title: 'Boston dynamics',
+      title: 'Konatus Industries',
       children: [
         {
           title: 'Quardruped Robot',
