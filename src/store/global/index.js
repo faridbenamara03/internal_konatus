@@ -1645,7 +1645,31 @@ const phaseState = [
               duration: 26,
               fte: 80
             },
-          }
+          },
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
         ]
       },
       {

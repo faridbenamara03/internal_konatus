@@ -97,7 +97,7 @@
             class="mr-1" />
           phase {{ index + 1 }}
         </div>
-        <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
+        <!-- <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
           <div v-for="(team, index1) in phase.teams" :key="index1" class="project-team no-border">
             <div class="d-flex justify-content-between align-items-center">
               <p class="text-capitalize m-0 team-name--text">
@@ -145,6 +145,11 @@
               </app-collapse-item>
             </app-collapse>
           </div>
+        </div> -->
+        <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
+          <div v-for="(item1, index1) in phase.teams" :key="index1" class="project-team no-border">
+            <CustomCollapse :team="item1" :index="index1" />
+          </div>
         </div>
       </div>
     </div>
@@ -159,6 +164,7 @@ import { isEmpty } from "@/views/utils"
 import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 import ActivityDetailModal from '../modals/ActivityDetailModal.vue'
+import CustomCollapse from './CustomCollapse.vue'
 
 export default {
   components: {
@@ -166,7 +172,8 @@ export default {
     AppCollapseItem,
     BButton,
     ActivityDetailModal,
-    BFormCheckbox
+    BFormCheckbox,
+    CustomCollapse
   },
   props: {
     teamData: {
