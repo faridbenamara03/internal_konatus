@@ -201,7 +201,7 @@ export default {
       const date2 = new Date(endDate.split('.')[0], endDate.split('.')[1], endDate.split('.')[2])
       const differenceInTime = date2.getTime() - date1.getTime()
       const differenceInDays = differenceInTime / (1000 * 3600 * 24)
-      const ret = differenceInDays * 30 > 0 ? differenceInDays * 30 : 0
+      const ret = differenceInDays * 30 > 0 ? (differenceInDays + 1) * 30 + 5 : 0
       return ret
     },
     onCollapse() {

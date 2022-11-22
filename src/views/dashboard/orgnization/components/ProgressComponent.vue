@@ -1,6 +1,6 @@
 <template>
   <div :style="'position:absolute;left:' + offSet + 'px;width:' + gWidth + 'px'">
-    <div v-if="exist !== undefined" class="progress-container-cst" style="height:100%">
+    <div v-if="exist !== undefined" class="progress-container-cst" :style="`height:${isSub ? 40 : 77}px`">
       <div class="cld">
         <div v-if="!isSub" style="margin-bottom:8px;color:white;font-size:12px"> {{ title }} </div>
         <div class="d-flex">
