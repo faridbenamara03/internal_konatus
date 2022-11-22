@@ -3,7 +3,7 @@ export default [
     search: true,
   },
   {
-    title: 'Boston Dynamics',
+    title: 'Konatus Industries',
     resource: 'konatus',
     isOperation: true,
     type: 'root',

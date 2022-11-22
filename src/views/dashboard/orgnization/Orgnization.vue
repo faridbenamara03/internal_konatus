@@ -212,7 +212,7 @@ export default {
       fields: ['priority', 'budget', 'deadline'],
       itemsForDemand: [
         {
-          name: 'Boston Dynamics',
+          name: 'Konatus Industries',
           budget_team: '2540',
           budget_engaged: '1132.3',
           real_estimated: '1132.3',
@@ -272,7 +272,7 @@ export default {
       ],
       itemsForReport: [
         {
-          name: 'Boston Dynamics',
+          name: 'Konatus Industries',
           budget_team: '2540',
           budget_engaged: '1132.3',
           real_estimated: '1132.3',
