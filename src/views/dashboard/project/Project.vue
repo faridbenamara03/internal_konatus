@@ -5,10 +5,10 @@
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
           <div></div>
           <b-button-group v-if="tabIndex === 0" class="ml-1">
-            <b-button :variant="demandTabState === 'team' ? null : 'outline-primary'" @click="handleDemandState('team')">
+            <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('team')">
               Team
             </b-button>
-            <b-button :variant="demandTabState === 'phase' ? null : 'outline-primary'" @click="handleDemandState('phase')">
+            <b-button variant="outline-primary" :style="`background:${demandTabState === 'phase' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('phase')">
               Phase
             </b-button>
           </b-button-group>
