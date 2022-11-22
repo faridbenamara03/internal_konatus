@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%;" :class="{'has-chart': isChartView}" class="m-1" >
     <div class="mb-3" style="position: relative">
-      <div :style="`position:absolute;top:35px;left:${sWidth}px;width:-webkit-fill-available;border-bottom:3px #D92163 solid;display: ${collapsed ? 'none' : 'block'}`">
+      <div :style="`position:absolute;top:35px;left:${sWidth}px;width:${bndWidth}px;border-bottom:3px #D92163 solid;display: ${collapsed ? 'none' : 'block'}`">
         <progress-circle-inner-icon style="position:absolute;top:-19px;left:-36px"/>
         <b-icon icon="diamond-fill" style="position:absolute;top:-5px;right:-7px;color:#D92163;"/>
       </div>
@@ -127,6 +127,7 @@ export default {
     setOffset() {
       const cwidth = document.getElementsByClassName('content-wrapper')[0].clientWidth
       this.sWidth = 350 + 17 + (cwidth - 28 - 350) / 3.5
+      this.bndWidth = (cwidth * 5 - 28 * 5 - 350 * 5) / 7 - 16
     },
     onCollapse() {
       this.collapsed = !this.collapsed
@@ -159,6 +160,7 @@ export default {
 
       data_source: this.$store.state.teamState.teamControlData,
       sWidth: 0,
+      bndWidth: 0,
       collapsed: false
     }
   },
