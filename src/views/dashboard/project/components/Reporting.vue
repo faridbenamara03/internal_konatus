@@ -211,8 +211,8 @@ export default {
       return date.format("MMM YYYY")
     },
     getLength(startDate, endDate) {
-      const date1 = new Date(startDate)
-      const date2 = new Date(endDate)
+      const date1 = new Date(startDate.split('.')[0], startDate.split('.')[1], startDate.split('.')[2])
+      const date2 = new Date(endDate.split('.')[0], endDate.split('.')[1], endDate.split('.')[2])
       const differenceInTime = date2.getTime() - date1.getTime()
       const differenceInDays = differenceInTime / (1000 * 3600 * 24)
       const ret = differenceInDays * 30 > 0 ? differenceInDays * 30 : 0

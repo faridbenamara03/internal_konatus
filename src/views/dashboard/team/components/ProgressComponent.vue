@@ -2,7 +2,7 @@
   <div v-if="exist !== undefined" class="progress-container-cst" style="height:100%">
     <div class="cld">
       <div v-if="!isSub" style="margin-bottom:8px;color:white;font-size:12px;margin-left:6px;"> {{ title }} </div>
-      <div class="bar1" :style="'height:' + this.progressHeight + ';width:' + valueF + 'px;background-color:' + bgClr + ';'" />
+      <div class="bar1" :style="`height:${this.progressHeight};width:200px;background-color:${bgClr}`" />
       <!-- <div class="d-flex">
         <div class="bar2" :style="'height:' + this.progressHeight + ';width:' + valueD + 'px;'" />
         <div class="bar2-1" :style="'height:' + this.progressHeight + ';width:calc(100% - ' + valueD + 'px)'"></div>
@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~@core/scss/base/components/variables-dark";
 .progress-container-cst {
   padding: 4px;
@@ -85,7 +85,6 @@ export default {
     }
   },
   data() {
-    console.log(this.value)
     return {
       progressHeight: this.isSub ? '8px' : '12px'
     }

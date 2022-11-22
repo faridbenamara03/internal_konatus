@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="reporting-content-custom">
-      <div :style="'position:absolute;height:-webkit-fill-available;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
+      <div :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
         <div class="rounded-circle" style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
       </div>
       <div class="reporting-content--header">
@@ -197,8 +197,8 @@ export default {
       return date.format("MMM YYYY")
     },
     getLength(startDate, endDate) {
-      const date1 = new Date(startDate)
-      const date2 = new Date(endDate)
+      const date1 = new Date(startDate.split('.')[0], startDate.split('.')[1], startDate.split('.')[2])
+      const date2 = new Date(endDate.split('.')[0], endDate.split('.')[1], endDate.split('.')[2])
       const differenceInTime = date2.getTime() - date1.getTime()
       const differenceInDays = differenceInTime / (1000 * 3600 * 24)
       const ret = differenceInDays * 30 > 0 ? differenceInDays * 30 : 0
