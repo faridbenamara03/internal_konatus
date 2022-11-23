@@ -85,9 +85,23 @@
         </div>
       </div>
       <div v-else>
+        <div class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
+          :class="{'inner-sdw': index === 0}">
+          <div class="part1 portf-uppercase" >
+            {{ data.title }}
+          </div>
+          <div class="part2">
+            <div class="data-child mr-1 pr-1" v-for="(ft, fi) in c_fields" :key="fi"
+              :style="`width:${100 / c_fields.length}%`">
+              <span v-if="ft === 'priority'">{{ data[ft] }}</span>
+              <span v-else-if="ft === 'deadline'">{{ dateFormat(data[ft]) }}</span>
+              <span v-else>{{ formatCurrency(data[ft]) }}</span>
+            </div>
+          </div>
+        </div>
         <div v-for="(item, index) in this.c_data" :key="index">
           <div class="portf-row portf-table-row font-14 border-bottom-dm" :class="{'inner-sdw': index === 0}">
-            <div class="part1 portf-bold" style="padding-top:7px">
+            <div class="part1 portf-bold pl-2" style="padding-top:7px">
               {{ item.title }}
             </div>
             <div class="part2">
@@ -125,7 +139,7 @@
           </div>
         </div>
       </div>
-      <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
+      <!-- <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
         <div class="part1 portf-uppercase">
           Total
         </div>
@@ -155,7 +169,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div v-if="isChartView" class="d-flex flex-column w-100" style>
       <b-card v-for="(serie, idx) in c_series" :key="idx" no-body no-footer class="chart-card">
@@ -305,45 +319,48 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     c_data() {
-      const ndt = this.data.map(t => {
-        let budget = 0
-        let engaged = 0
-        let quote = 0
-        let demand = 0
-        let realEstimated = 0
-        let authorised = 0
-        let spent = 0
-        if (t.children) {
-          t.children.map(t1 => {
-            budget += parseInt(t1.budget ? t1.budget : 0, 10)
-            engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-            quote += parseInt(t1.quote ? t1.quote : 0, 10)
-            demand += parseInt(t1.demand ? t1.demand : 0, 10)
-            realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-            authorised += parseInt(t1.authorised ? t1.authorised : 0, 10)
-            spent += parseInt(t1.spent ? t1.spent : 0, 10)
-            return null
-          })
-        } else {
-          budget = t.budget
-          engaged = t.engaged
-          quote = t.quote
-          demand = t.demand
-          realEstimated = t.realEstimated
-          authorised = t.authorised
-          spent = t.spent
-        }
-        const nd = { ...t }
-        nd.budget = budget
-        nd.engaged = engaged
-        nd.quote = quote
-        nd.demand = demand
-        nd.realEstimated = realEstimated
-        nd.authorised = authorised
-        nd.spent = spent
-        return nd
-      })
-      return ndt
+      if (this.data.children) {
+        const ndt = this.data.children.map(t => {
+          let budget = 0
+          let engaged = 0
+          let quote = 0
+          let demand = 0
+          let realEstimated = 0
+          let authorised = 0
+          let spent = 0
+          if (t.children) {
+            t.children.map(t1 => {
+              budget += parseInt(t1.budget ? t1.budget : 0, 10)
+              engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+              quote += parseInt(t1.quote ? t1.quote : 0, 10)
+              demand += parseInt(t1.demand ? t1.demand : 0, 10)
+              realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+              authorised += parseInt(t1.authorised ? t1.authorised : 0, 10)
+              spent += parseInt(t1.spent ? t1.spent : 0, 10)
+              return null
+            })
+          } else {
+            budget = t.budget
+            engaged = t.engaged
+            quote = t.quote
+            demand = t.demand
+            realEstimated = t.realEstimated
+            authorised = t.authorised
+            spent = t.spent
+          }
+          const nd = { ...t }
+          nd.budget = budget
+          nd.engaged = engaged
+          nd.quote = quote
+          nd.demand = demand
+          nd.realEstimated = realEstimated
+          nd.authorised = authorised
+          nd.spent = spent
+          return nd
+        })
+        return ndt
+      }
+      return []
     },
     c_totalBudget() {
       let bd = 0
