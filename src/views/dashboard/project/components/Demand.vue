@@ -148,7 +148,7 @@
         </div> -->
         <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
           <div v-for="(item1, index1) in phase.teams" :key="index1" class="project-team no-border">
-            <CustomCollapse :team="item1" :index="index1" />
+            <CustomCollapse :team="item1" :index="index1" @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)" />
           </div>
         </div>
       </div>

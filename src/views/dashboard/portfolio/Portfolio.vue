@@ -64,6 +64,7 @@
         >
           <Demand
             v-if="tableTtle"
+            :otype="selectedNavType"
             :data="items"
             :fields="fields"
             :is-chart-view="isChartView"
@@ -224,6 +225,9 @@ export default {
     tableTtle() {
       const { selectedNavObj } = this.$store.state.globalState
       return selectedNavObj ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
+    },
+    selectedNavType() {
+      return this.$store.state.globalState.selectedNavObj.type
     }
   },
   mounted() {

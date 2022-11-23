@@ -118,7 +118,10 @@ export default {
     },
     toggleOpen() {
       this.isOpen = !this.isOpen
-    }
+    },
+    handleActivityDetails(phase, team) {
+      this.$emit('openDetailActivity', phase, team)
+    },
   },
 }
 </script>
