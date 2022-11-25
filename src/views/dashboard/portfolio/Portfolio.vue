@@ -80,7 +80,7 @@
           title="Control"
           class="no-action-bar"
         >
-          <Control :data="items" :tableTitle="tableTtle" />
+          <Control :data="items.children" :tableTitle="tableTtle" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -220,6 +220,7 @@ export default {
   computed: {
     items() {
       const { selectedNavObj } = this.$store.state.globalState
+      console.log('111111111111111', selectedNavObj)
       return selectedNavObj
     },
     tableTtle() {
