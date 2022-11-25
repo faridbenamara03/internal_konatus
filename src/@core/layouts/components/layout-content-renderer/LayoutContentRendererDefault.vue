@@ -13,6 +13,12 @@
         <app-breadcrumb />
       </slot>
       <div class="content-body">
+        <b-input-group class="mb-1">
+          <b-form-input placeholder="Search" />
+          <b-input-group-append is-text>
+            <feather-icon icon="SearchIcon" />
+          </b-input-group-append>
+        </b-input-group>
         <transition
           :name="routerTransition"
           mode="out-in"
@@ -25,12 +31,18 @@
 </template>
 
 <script>
+import {
+  BInputGroup, BFormInput, BInputGroupAppend
+} from 'bootstrap-vue'
 import AppBreadcrumb from '@core/layouts/components/AppBreadcrumb.vue'
 import useAppConfig from '@core/app-config/useAppConfig'
 
 export default {
   components: {
     AppBreadcrumb,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend
   },
   setup() {
     const { routerTransition, contentWidth } = useAppConfig()

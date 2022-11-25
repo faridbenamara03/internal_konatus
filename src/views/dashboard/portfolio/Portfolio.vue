@@ -220,7 +220,6 @@ export default {
   computed: {
     items() {
       const { selectedNavObj } = this.$store.state.globalState
-      console.log('111111111111111', selectedNavObj)
       return selectedNavObj
     },
     tableTtle() {
