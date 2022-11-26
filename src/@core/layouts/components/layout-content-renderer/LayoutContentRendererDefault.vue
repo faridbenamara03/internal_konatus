@@ -13,11 +13,14 @@
         <app-breadcrumb />
       </slot>
       <div class="content-body">
-        <b-input-group class="mb-1">
-          <b-form-input placeholder="Search" />
-          <b-input-group-append is-text>
-            <feather-icon icon="SearchIcon" />
-          </b-input-group-append>
+        <b-input-group class="input-group mb-1">
+          <b-form-input
+            v-model="searchQuery"
+            placeholder="Search"
+          />
+          <b-input-group-prepend class="input-prepend">
+            <b-icon icon="search" />
+          </b-input-group-prepend>
         </b-input-group>
         <transition
           :name="routerTransition"
@@ -32,7 +35,7 @@
 
 <script>
 import {
-  BInputGroup, BFormInput, BInputGroupAppend
+  BInputGroup, BFormInput, BInputGroupPrepend
 } from 'bootstrap-vue'
 import AppBreadcrumb from '@core/layouts/components/AppBreadcrumb.vue'
 import useAppConfig from '@core/app-config/useAppConfig'
@@ -42,7 +45,7 @@ export default {
     AppBreadcrumb,
     BInputGroup,
     BFormInput,
-    BInputGroupAppend
+    BInputGroupPrepend
   },
   setup() {
     const { routerTransition, contentWidth } = useAppConfig()
@@ -54,6 +57,24 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+@import '~@core/scss/base/components/variables-dark';
+.input-group {
+  border: 1px solid $theme-dark-input-border-color;
+  border-radius: 5px;
+  height: 40px;
+  input {
+    padding: 10px;
+    background: transparent;
+    border: none;
+    height: 100%;
+  }
+  .input-prepend {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px;
+  }
+}
 </style>

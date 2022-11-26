@@ -1,135 +1,39 @@
 <template>
-  <div class="user-nav-group">
-    <div class="d-flex">
-      <b-avatar
-        size="40"
-        :src="userData.avatar"
-        variant="light-primary"
-        badge
-        class="badge-minimal"
-        badge-variant="success"
-      >
-        <feather-icon
-          v-if="!userData.fullName"
-          icon="UserIcon"
-          size="22"
-        />
-      </b-avatar>
-      <div class="user-nav">
-        <p class="user-name font-weight-bolder mb-0">
-          {{ userData.fullName || userData.username }}
-        </p>
-        <span class="user-status">{{ userData.role }}</span>
+  <b-nav>
+    <b-nav-item-dropdown style="position:relative" no-caret>
+      <div class="mt-1 mb-1">
+        <div class="d-flex" style="justify-content:center">
+          <p class="user-name font-weight-bolder mb-0" style="color:white">
+            {{ userData.fullName || userData.username }}
+          </p>
+        </div>
+        <div class="d-flex" style="justify-content:center;color:grey">
+          <span class="user-status">{{ userData.role }}</span>
+        </div>
       </div>
-    </div>
-    <b-nav-item-dropdown
-      right
-      no-caret
-    >
       <template #button-content>
-        <feather-icon
-          icon="MoreHorizontalIcon"
-          size="22"
-        />
+        <div class="d-flex">
+          <b-avatar size="40" :src="userData.avatar" variant="light-primary" badge class="badge-minimal"
+            badge-variant="success">
+            <feather-icon v-if="!userData.fullName" icon="UserIcon" size="22" />
+          </b-avatar>
+        </div>
       </template>
-      <b-dropdown-item
-        :to="{ name: 'pages-profile'}"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="UserIcon"
-          class="mr-50"
-        />
+      <b-dropdown-item :to="{ name: 'pages-profile' }" link-class="d-flex align-items-center">
+        <feather-icon size="16" icon="UserIcon" class="mr-50" />
         <span>Profile</span>
       </b-dropdown-item>
-      <!-- <b-dropdown-item
-        :to="{ name: 'apps-email' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="MailIcon"
-          class="mr-50"
-        />
-        <span>Inbox</span>
-      </b-dropdown-item>
-      <b-dropdown-item
-        :to="{ name: 'apps-todo' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="CheckSquareIcon"
-          class="mr-50"
-        />
-        <span>Task</span>
-      </b-dropdown-item>
-      <b-dropdown-item
-        :to="{ name: 'apps-chat' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="MessageSquareIcon"
-          class="mr-50"
-        />
-        <span>Chat</span>
-      </b-dropdown-item>
-
-      <b-dropdown-divider />
-
-      <b-dropdown-item
-        :to="{ name: 'pages-account-setting' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="SettingsIcon"
-          class="mr-50"
-        />
-        <span>Settings</span>
-      </b-dropdown-item>
-      <b-dropdown-item
-        :to="{ name: 'pages-pricing' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="CreditCardIcon"
-          class="mr-50"
-        />
-        <span>Pricing</span>
-      </b-dropdown-item>
-      <b-dropdown-item
-        :to="{ name: 'pages-faq' }"
-        link-class="d-flex align-items-center"
-      >
-        <feather-icon
-          size="16"
-          icon="HelpCircleIcon"
-          class="mr-50"
-        />
-        <span>FAQ</span>
-      </b-dropdown-item> -->
-      <b-dropdown-item
-        link-class="d-flex align-items-center"
-        @click="logout"
-      >
-        <feather-icon
-          size="16"
-          icon="LogOutIcon"
-          class="mr-50"
-        />
+      <b-dropdown-item link-class="d-flex align-items-center" @click="logout">
+        <feather-icon size="16" icon="LogOutIcon" class="mr-50" />
         <span>Logout</span>
       </b-dropdown-item>
     </b-nav-item-dropdown>
-  </div>
+  </b-nav>
 </template>
 
 <script>
 import {
-  BNavItemDropdown, BDropdownItem, BAvatar,
+  BNavItemDropdown, BDropdownItem, BAvatar, BNav
 } from 'bootstrap-vue'
 import { initialAbility } from '@/libs/acl/config'
 import useJwt from '@/auth/jwt/useJwt'
@@ -141,6 +45,7 @@ export default {
     BDropdownItem,
     // BDropdownDivider,
     BAvatar,
+    BNav
   },
   data() {
     return {
@@ -170,34 +75,39 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@core/scss/base/components/variables-dark';
-  .user-nav-group {
-    padding: 16px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid $theme-dark-navigation-divider-color;
-    .user-nav {
-      padding-left: 16px;
-      .user-name {
-        color: #B4B7BD;
-      }
-      .user-status {
-        color: #B9B9C3;
-      }
+
+.user-nav-group {
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid $theme-dark-navigation-divider-color;
+
+  .user-nav {
+    padding-left: 16px;
+
+    .user-name {
+      color: #B4B7BD;
     }
-    .dropdown {
-      a {
-        svg {
-          width: 16px;
-          height: 16px;
-          font-size: 16px;
-          color: #B4B7BD !important;
-          margin: 0;
-        }
+
+    .user-status {
+      color: #B9B9C3;
+    }
+  }
+
+  .dropdown {
+    a {
+      svg {
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        color: #B4B7BD !important;
+        margin: 0;
       }
     }
   }
+}
 </style>

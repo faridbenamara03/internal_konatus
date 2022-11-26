@@ -8,6 +8,41 @@
     @mouseenter="updateMouseHovered(true)"
     @mouseleave="updateMouseHovered(false)"
   >
+    <div class="nav-left-menu-1" style="height:100%;width:50px;position:absolute;left:0;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+          <feather-icon
+            style="color:white"
+            icon="FileTextIcon"
+            size="25"
+          />
+        </div>
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+          <feather-icon
+            style="color:white"
+            icon="CalendarIcon"
+            size="25"
+          />
+        </div>
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+          <feather-icon
+            style="color:white"
+            icon="BarChart2Icon"
+            size="25"
+          />
+        </div>
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+          <feather-icon
+            style="color:white"
+            icon="PlusCircleIcon"
+            size="25"
+          />
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center" class="mb-2">
+        <VerticalNavUserMenu />
+      </div>
+    </div>
     <!-- main menu header-->
     <div class="navbar-header expanded">
       <slot
@@ -90,6 +125,7 @@ import useAppConfig from '@core/app-config/useAppConfig'
 import { $themeConfig } from '@themeConfig'
 import VerticalNavMenuItems from './components/vertical-nav-menu-items/VerticalNavMenuItems.vue'
 import useVerticalNavMenu from './useVerticalNavMenu'
+import VerticalNavUserMenu from './components/vertical-nav-user-menu/VerticalNavUserMenu.vue'
 
 export default {
   components: {
@@ -97,6 +133,7 @@ export default {
     VerticalNavMenuItems,
     BLink,
     BImg,
+    VerticalNavUserMenu
   },
   props: {
     isVerticalMenuActive: {
@@ -166,4 +203,8 @@ export default {
 
 <style lang="scss">
 @import "~@core/scss/base/core/menu/menu-types/vertical-menu.scss";
+@import "~@core/scss/base/components/variables-dark";
+.nav-left-menu-1 {
+  background-color: #7267f065;
+}
 </style>

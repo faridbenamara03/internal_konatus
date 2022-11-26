@@ -5,7 +5,6 @@
     <div class="cws-content">
       <slot />
     </div>
-
     <!-- Sidebar -->
     <div class="cws-sidebar">
       <slot name="sidebar" />

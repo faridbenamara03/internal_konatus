@@ -363,7 +363,7 @@ const globalOrganizationData = {
       title: 'Team A',
       type: 'team',
       color: '#D68232',
-      phases: [
+      phases1: [
         {
           phaseV: 1,
           title: 'Install software',
@@ -1594,6 +1594,212 @@ const globalOrganizationData = {
   ],
 }
 
+const teamsState = [
+  {
+    title: 'Team A',
+    phases: [
+      {
+        title: 'Phase 1',
+        activities: [
+          {
+            title: 'Install software',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 2',
+        activities: [
+          {
+            title: 'Debugging',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 3',
+        activities: [
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+          {
+            title: 'Electricity market AI',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+        ]
+      },
+      {
+        title: 'Phase 4',
+        activities: [
+          {
+            title: 'Activity Element 58',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          },
+          {
+            title: 'Activity Element 58-1',
+            priority: 'Highest',
+            gate: 1,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 5',
+        activities: []
+      },
+    ]
+  },
+  {
+    title: 'Team B',
+    phases: [
+      {
+        title: 'Phase 1',
+        activities: [
+          {
+            title: 'Develop control software',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 2',
+        activities: [
+          {
+            title: 'Improve generator component',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 3',
+        activities: [
+          {
+            title: 'Electricity market AI II',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 4',
+        activities: [
+          {
+            title: 'Activity Element 123',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+      {
+        title: 'Phase 5',
+        activities: [
+          {
+            title: 'Activity Element F1',
+            priority: 'Highest',
+            gate: 2,
+            activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        ]
+      },
+    ]
+  }
+]
+
 const phaseState = [
   {
     teams: [
@@ -1802,7 +2008,7 @@ export default {
   namespaced: true,
   state: {
     projectReportingData: globalOperationData.children[0].children[0],
-    teamsState: globalOrganizationData.children,
+    teamsState,
     phaseState,
     globalData: [globalOperationData, globalOrganizationData],
     demandTeamData: {},
@@ -1830,10 +2036,6 @@ export default {
     },
     OPEN_ACTIVITY_DETAIL_MODAL(state) {
       state.activityDetailModalOpen = true
-    },
-    HANDLE_UPDATE(state) {
-      const data = []
-      state.teamsState = data
     },
     UPDATE_PROJECT_REPORTING_DATA() {
       // const data2Update = {}
@@ -1995,25 +2197,26 @@ export default {
       }, 600)
     },
     TEAM_PHASE_SELECT_ALL(state, team) {
-      let allselected = true
-      team.phases.forEach(phase => {
-        allselected = Boolean(phase.isSelected) && allselected
-      })
-      const phases = []
-      team.phases.forEach(phase => {
-        const b = { ...phase }
-        b.isSelected = !allselected
-        phases.push(b)
-      })
-      const teamsState = []
-      state.teamsState.forEach(t => {
-        const mapteam = t
-        if (mapteam.id === team.id) {
-          mapteam.phases = phases
-        }
-        teamsState.push(mapteam)
-      })
-      state.teamsState = teamsState
+      console.log(state, team)
+      // let allselected = true
+      // team.phases.forEach(phase => {
+      //   allselected = Boolean(phase.isSelected) && allselected
+      // })
+      // const phases = []
+      // team.phases.forEach(phase => {
+      //   const b = { ...phase }
+      //   b.isSelected = !allselected
+      //   phases.push(b)
+      // })
+      // const teamsState = []
+      // state.teamsState.forEach(t => {
+      //   const mapteam = t
+      //   if (mapteam.id === team.id) {
+      //     mapteam.phases = phases
+      //   }
+      //   teamsState.push(mapteam)
+      // })
+      // state.teamsState = teamsState
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id

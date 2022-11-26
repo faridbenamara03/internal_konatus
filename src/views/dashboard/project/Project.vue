@@ -138,9 +138,6 @@ export default {
     handleRequestQuote(res) {
       console.log(res)
     },
-    handleUpdate() {
-      this.$store.commit('globalState/HANDLE_UPDATE')
-    },
     handleDemandState(tabState) {
       this.demandTabState = tabState
     }
