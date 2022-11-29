@@ -359,1237 +359,1249 @@ const globalOrganizationData = {
   },
   children: [
     {
-      id: '1.2.1',
-      title: 'Team A',
-      type: 'team',
-      color: '#D68232',
-      phases1: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-a',
-        },
-      },
+      id: '2.1.1',
+      title: 'Paris',
       children: [
         {
-          id: '2.3.1.22',
-          title: 'Travis Roach',
-          type: 'user',
+          id: '1.2.1',
+          title: 'Team A',
+          type: 'team',
+          color: '#D68232',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-a',
+            },
+          },
+          children: [
+            {
+              id: '2.3.1.22',
+              title: 'Travis Roach',
+              type: 'user',
+            },
+            {
+              id: '2.3.1.23',
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              id: '2.3.1.25',
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              id: '2.3.1.27',
+              title: 'Angelica Russo',
+              type: 'user',
+            },
+          ],
         },
         {
-          id: '2.3.1.23',
-          title: 'Ciaran Bradford',
-          type: 'user',
+          id: '122.1.23.1',
+          title: 'Team B',
+          type: 'team',
+          color: '#32d6c7',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 5,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-b',
+            },
+          },
+          children: [
+            {
+              id: '2.21.6.25',
+              title: 'Travis Roach',
+              type: 'user',
+            },
+            {
+              id: '2.21.6.225',
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              id: '2.21.6.29',
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              id: '2.21.6.204',
+              title: 'Angelica Russo',
+              type: 'user',
+            },
+          ],
         },
         {
-          id: '2.3.1.25',
-          title: 'George Logan',
-          type: 'user',
+          id: '122.12.15.11',
+          title: 'Team C',
+          type: 'team',
+          color: '#d63232',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-c',
+            },
+          },
+          children: [
+            {
+              title: 'Travis Roach',
+              type: 'user',
+            },
+            {
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              title: 'Angelica Russo',
+              type: 'user',
+            },
+          ],
         },
         {
-          id: '2.3.1.27',
-          title: 'Angelica Russo',
-          type: 'user',
+          id: '112.62.155.111',
+          title: 'Team D',
+          type: 'team',
+          color: '#ccd632',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 5,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-d',
+            },
+          },
+          children: [
+            {
+              title: 'Travis Roach',
+              type: 'user',
+            },
+            {
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              title: 'Angelica Russo',
+              type: 'user',
+            },
+          ],
         },
-      ],
+      ]
     },
     {
-      id: '122.1.23.1',
-      title: 'Team B',
-      type: 'team',
-      color: '#32d6c7',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 5,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-b',
-        },
-      },
+      id: '2.2.1',
+      title: 'Sofia',
       children: [
         {
-          id: '2.21.6.25',
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          id: '2.21.6.225',
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          id: '2.21.6.29',
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          id: '2.21.6.204',
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '122.12.15.11',
-      title: 'Team C',
-      type: 'team',
-      color: '#d63232',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
+          id: '82.12.65.91',
+          title: 'Team E',
+          type: 'team',
+          color: '#53d632',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 5,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-e',
+            },
           },
-          tasks: [
+          children: [
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Travis Roach',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Ciaran Bradford',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              title: 'Angelica Russo',
+              type: 'user',
             },
           ],
         },
         {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
+          id: '282.122.65.901',
+          title: 'Team F',
+          type: 'team',
+          color: '#6610F2',
+          phases: [
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              phaseV: 1,
+              hours: 0,
+              title: 'Install software',
               priority: 'Highest',
               gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [],
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              phaseV: 2,
+              hours: 0,
+              title: 'Develop control software',
               priority: 'Highest',
-              gate: 1,
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [],
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              phaseV: 3,
+              hours: 0,
+              title: 'Develop control software...',
               priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [],
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-c',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '112.62.155.111',
-      title: 'Team D',
-      type: 'team',
-      color: '#ccd632',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 5,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-d',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '82.12.65.91',
-      title: 'Team E',
-      type: 'team',
-      color: '#53d632',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 5,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-e',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '282.122.65.901',
-      title: 'Team F',
-      type: 'team',
-      color: '#6610F2',
-      phases: [
-        {
-          phaseV: 1,
-          hours: 0,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [],
-        },
-        {
-          phaseV: 2,
-          hours: 0,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [],
-        },
-        {
-          phaseV: 3,
-          hours: 0,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [],
-        },
-        {
-          phaseV: 4,
-          hours: 16,
-          // name: 'Develop control software...',
-          priority: 'Highest',
-          gate: 4,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskName: 'Activity Element 16',
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              phaseV: 4,
+              hours: 16,
+              // name: 'Develop control software...',
               priority: 'Highest',
               gate: 4,
-            },
-            {
-              taskName: 'Activity Element 17',
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 4,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskName: 'Activity Element 16',
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 4,
+                },
+                {
+                  taskName: 'Activity Element 17',
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 4,
+                },
+              ],
             },
           ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-f',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '102.52.15.711',
-      title: 'Team G',
-      type: 'team',
-      color: '#324ed6',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-f',
+            },
           },
-          tasks: [
+          children: [
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Travis Roach',
+              type: 'user',
+            },
+            {
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              title: 'Angelica Russo',
+              type: 'user',
             },
           ],
         },
         {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
+          id: '102.52.15.711',
+          title: 'Team G',
+          type: 'team',
+          color: '#324ed6',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 5,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-g',
+            },
           },
-          tasks: [
+          children: [
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Travis Roach',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
+              title: 'Ciaran Bradford',
+              type: 'user',
+            },
+            {
+              title: 'George Logan',
+              type: 'user',
+            },
+            {
+              title: 'Angelica Russo',
+              type: 'user',
             },
           ],
         },
         {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
+          id: '92.52.165.701',
+          title: 'Team H',
+          type: 'team',
+          color: '#d6328d',
+          phases: [
+            {
+              phaseV: 1,
+              title: 'Install software',
+              priority: 'Highest',
+              gate: 1,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 2,
+              title: 'Develop control software',
+              priority: 'Highest',
+              gate: 2,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 3,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Lowest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 4,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+            {
+              phaseV: 5,
+              title: 'Develop control software...',
+              priority: 'Highest',
+              gate: 3,
+              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+              // title: 'Escavate foundations',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+              tasks: [
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+                {
+                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  priority: 'Highest',
+                  gate: 1,
+                },
+              ],
+            },
+          ],
+          route: {
+            name: 'team-view',
+            params: {
+              teamId: 'team-h',
+            },
           },
-          tasks: [
+          children: [
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Travis Roach',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
+              title: 'Ciaran Bradford',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'George Logan',
+              type: 'user',
             },
             {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
+              title: 'Angelica Russo',
+              type: 'user',
             },
           ],
-        },
-        {
-          phaseV: 5,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-g',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
-    },
-    {
-      id: '92.52.165.701',
-      title: 'Team H',
-      type: 'team',
-      color: '#d6328d',
-      phases: [
-        {
-          phaseV: 1,
-          title: 'Install software',
-          priority: 'Highest',
-          gate: 1,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 2,
-          title: 'Develop control software',
-          priority: 'Highest',
-          gate: 2,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 3,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Lowest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 4,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-        {
-          phaseV: 5,
-          title: 'Develop control software...',
-          priority: 'Highest',
-          gate: 3,
-          activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-          // title: 'Escavate foundations',
-          description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-          effort: {
-            load: 53,
-            duration: 26,
-            fte: 80
-          },
-          tasks: [
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-            {
-              taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              priority: 'Highest',
-              gate: 1,
-            },
-          ],
-        },
-      ],
-      route: {
-        name: 'team-view',
-        params: {
-          teamId: 'team-h',
-        },
-      },
-      children: [
-        {
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ],
+        }
+      ]
     }
   ],
 }
