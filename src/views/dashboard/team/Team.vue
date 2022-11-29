@@ -89,6 +89,13 @@
           </div>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
+              <b-form-datepicker
+                class="mr-1"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                id="example-datepicker"
+                style="width:200px"
+                placeholder="Select Date"
+              />
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
             </div>
@@ -124,7 +131,7 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BFormDatepicker
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
@@ -136,6 +143,7 @@ import AddResourceModal from './modals/AddResourceModal.vue'
 
 export default {
   components: {
+    BFormDatepicker,
     BButtonGroup,
     BButton,
     BCard,
