@@ -45,16 +45,26 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
+            <b-button-group class="ml-1">
+              <b-button variant="outline-primary">
+                Cost
+              </b-button>
+              <b-button variant="outline-primary">
+                Plan
+              </b-button>
+            </b-button-group>
+          </div>
+          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
-              <b-form-datepicker
-                class="mr-1"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="example-datepicker"
-                style="width:200px"
-                placeholder="Select Date"
-              />
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
+              <b-form-datepicker
+                class="ml-1"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                id="example-datepicker"
+                style="width:140px"
+                placeholder="Select Date"
+              />
             </div>
             <b-button v-b-modal.modal-import class="ml-1" variant="outline-primary">
               <feather-icon icon="ArrowDownIcon" size="16" />

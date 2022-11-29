@@ -77,15 +77,15 @@
           </div>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
-              <b-form-datepicker
-                class="mr-1"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="example-datepicker"
-                style="width:200px"
-                placeholder="Select Date"
-              />
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
+              <b-form-datepicker
+                class="ml-1"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                id="example-datepicker"
+                style="width:140px"
+                placeholder="Select Date"
+              />
             </div>
             <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="outline-primary">
@@ -96,10 +96,10 @@
               <feather-icon icon="Edit2Icon" size="16" />
               <span>Edit as table</span>
             </b-button> -->
-            <!-- <b-button v-if="tabIndex === 0" class="ml-1" variant="outline-primary">
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="outline-primary">
               <feather-icon icon="ArrowDownIcon" size="16" />
               <span>Import</span>
-            </b-button> -->
+            </b-button>
             <b-button class="ml-1" variant="outline-primary">
               <feather-icon icon="UploadIcon" size="16" />
               <span>Export</span>
