@@ -104,7 +104,11 @@
               <feather-icon icon="UploadIcon" size="16" />
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 2 || tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
+              <feather-icon icon="ZapIcon" size="16" />
+              <span>Configure</span>
+            </b-button>
+            <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>
             </b-button>
