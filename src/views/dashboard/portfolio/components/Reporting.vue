@@ -2,23 +2,33 @@
   <div class="report">
     <div class="reporting-side">
       <div>
-        <div class="report-block--head">
+        <div class="report-block--head" style="margin-top:64px;">
           <p class="m-0 text-uppercase">
-            {{ item.title }}
+            {{ data.title }}
           </p>
         </div>
-        <div v-for="(item1, index1) in item.children" :key="index1" class="report-block--head">
-          <feather-icon
-            icon="ChevronRightIcon"
-            size="16"
-            class="mr-1"
-          />
-          <p class="m-0 text-uppercase">
-            {{ item1.title }}
-          </p>
+        <div v-for="(item1, index1) in data.children" :key="index1">
+          <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
+            <feather-icon
+              v-if="item1.children"
+              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
+            />
+            <p class="m-0 text-uppercase text-overflow-ellipse">
+              {{ item1.title }}
+            </p>
+          </div>
+          <template v-if="item1.children && openedCollapse === index1">
+            <div v-for="(item2, index2) in item1.children" :key="index2" class="report-block-child">
+              <p class="m-0 text-uppercase text-overflow-ellipse">
+                {{ item2.title }}
+              </p>
+            </div>
+          </template>
         </div>
       </div>
-      <app-collapse accordion>
+      <!-- <app-collapse accordion>
         <app-collapse-item title="Accordion Item 1">
           <b-list-group>
             <b-list-group-item>Cras justo odio</b-list-group-item>
@@ -28,7 +38,7 @@
             <b-list-group-item>Vestibulum at eros</b-list-group-item>
           </b-list-group>
         </app-collapse-item>
-      </app-collapse>
+      </app-collapse> -->
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
@@ -40,13 +50,13 @@
           Update
         </b-button>
         <div class="reporting-content-header--badge">
-          <b-button
+          <!-- <b-button
             variant="flat-dark"
             class="d-inline-flex align-items-center"
           >
             <span class="badge" />
             <span>Phase</span>
-          </b-button>
+          </b-button> -->
           <b-button variant="flat-dark">
             <b-icon
               icon="diamond-fill"
@@ -104,7 +114,379 @@
             </p>
           </div>
         </div>
-        <div class="progress-wrapper w-100">
+        <div v-for="(item1, index1) in data.children" :key="index1">
+          <div class="progress-wrapper w-100">
+            <b-card no-body>
+              <b-card-text class="mb-0">
+                Reticulating splines… {{ value1+'%' }}
+              </b-card-text>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 250}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+              </div>
+            </b-card>
+          </div>
+          <template v-if="item1.children && openedCollapse === index1">
+            <div v-for="(item2, index2) in item1.children" :key="index2" class="progress-wrapper w-100">
+              <b-card no-body>
+              <b-card-text class="mb-0">
+                Reticulating splines… {{ value1+'%' }}
+              </b-card-text>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="danger"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="danger"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="danger"
+                  />
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="success"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="success"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="success"
+                  />
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 250}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+                <div class="d-flex">
+                  <b-icon
+                    style="padding-bottom:2px"
+                    icon="diamond-fill"
+                    variant="info"
+                  />
+                  <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <b-progress
+                      value="100%"
+                      max="100"
+                      variant="info"
+                    />
+                  </div>
+                  <b-icon
+                    icon="triangle-fill"
+                    class="rotate-icon"
+                    variant="info"
+                  />
+                </div>
+              </div>
+            </b-card>
+            </div>
+          </template>
+        </div>
+        <!-- <div class="progress-wrapper w-100">
           <b-card no-body>
             <b-card-text class="mb-0">
               Reticulating splines… {{ value1+'%' }}
@@ -147,7 +529,7 @@
               variant="info"
             />
           </b-card>
-        </div>
+        </div> -->
       </div>
     </div>
     <b-modal
@@ -189,13 +571,13 @@ import {
   BProgress,
   BCard,
   BCardText,
-  BListGroup,
-  BListGroupItem,
+  // BListGroup,
+  // BListGroupItem,
   BModal,
 } from 'bootstrap-vue'
 import moment from 'moment'
-import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
-import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
+// import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
+// import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
 export default {
   components: {
@@ -203,10 +585,10 @@ export default {
     BProgress,
     BCard,
     BCardText,
-    AppCollapse,
-    AppCollapseItem,
-    BListGroup,
-    BListGroupItem,
+    // AppCollapse,
+    // AppCollapseItem,
+    // BListGroup,
+    // BListGroupItem,
     BModal,
   },
   props: {
@@ -214,6 +596,9 @@ export default {
       type: Array,
       default: () => [],
     },
+    otype: {
+      type: String
+    }
   },
   data() {
     return {
@@ -221,7 +606,7 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      item: this.$store.state.globalState.globalOperationData
+      openedCollapse: 0
     }
   },
   mounted() {
@@ -233,6 +618,10 @@ export default {
     }
   },
   methods: {
+    onCollapseClick(index) {
+      if (this.openedCollapse === index) this.openedCollapse = -1
+      else this.openedCollapse = index
+    },
     isToday(date) {
       return moment().isSame(date, 'day')
     },
@@ -251,4 +640,7 @@ export default {
 
 <style lang="scss">
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
+.rotate-icon {
+  transform: rotate(180deg);
+}
 </style>

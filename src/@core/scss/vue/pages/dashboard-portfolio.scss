@@ -1,5 +1,11 @@
 @import "~@core/scss/base/components/variables-dark";
 
+.text-overflow-ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .card-portfolio {
   .card-body {
     .tabs {
@@ -199,9 +205,6 @@
           .reporting-side {
             width: 314px;
             .report-block--head {
-              &:first-child {
-                margin-top: 64px;
-              }
               display: flex;
               align-items: center;
               background: $theme-dark-table-active-bg;
@@ -210,6 +213,18 @@
               color: #fff;
               font-weight: 700;
               font-size: 15px;
+              line-height: 24px;
+            }
+            .report-block-child {
+              display: flex;
+              align-items: center;
+              background: $theme-dark-switch-bg-disabled;
+              // border-bottom: 1px solid $theme-dark-tabs-border-color;
+              box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+              padding: 28px 16px;
+              color: #fff;
+              font-weight: 700;
+              font-size: 13px;
               line-height: 24px;
             }
           }

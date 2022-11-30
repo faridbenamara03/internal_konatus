@@ -74,7 +74,7 @@
           title="Reporting"
           class="no-action-bar"
         >
-          <Reporting />
+          <Reporting :data="items" :otype="selectedNavType" />
         </b-tab>
         <b-tab
           title="Control"
