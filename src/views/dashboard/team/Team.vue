@@ -78,16 +78,6 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <b-button-group class="ml-1">
-              <b-button variant="outline-primary">
-                Cost
-              </b-button>
-              <b-button variant="outline-primary" >
-                Plan
-              </b-button>
-            </b-button-group>
-          </div>
-          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <span>{{ getToday() }}</span>
@@ -99,6 +89,14 @@
                 placeholder="Select Date"
               />
             </div>
+            <b-button-group v-if="(tabIndex === 1)" class="ml-1">
+              <b-button variant="outline-primary">
+                Cost
+              </b-button>
+              <b-button variant="outline-primary" >
+                Plan
+              </b-button>
+            </b-button-group>
             <b-button v-if="tabIndex != 2" v-b-modal.modal-import class="ml-1" variant="outline-primary">
               <feather-icon icon="ArrowDownIcon" size="16" />
               <span>Import</span>
@@ -107,10 +105,14 @@
               <feather-icon icon="UploadIcon" size="16" />
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+            <b-button class="ml-1" variant="primary">
+              <feather-icon icon="ZapIcon" size="16" />
+              <span>Configure</span>
+            </b-button>
+            <!-- <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
               <feather-icon icon="MapIcon" size="16" />
               <span>Show Work Element To Quote</span>
-            </b-button>
+            </b-button> -->
             <b-button v-if="tabIndex === 2" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
               <feather-icon icon="UserPlusIcon" size="16" />
               <span>Add Resource</span>
@@ -180,7 +182,7 @@ export default {
   },
   methods: {
     getToday() {
-      return `Today, ${moment().format('DD, MMMM, YYYY')}`
+      return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode

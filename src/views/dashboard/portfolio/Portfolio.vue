@@ -84,16 +84,6 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <b-button-group class="ml-1">
-              <b-button variant="outline-primary">
-                Cost
-              </b-button>
-              <b-button variant="outline-primary">
-                Plan
-              </b-button>
-            </b-button-group>
-          </div>
-          <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon
                 icon="CalendarIcon"
@@ -256,7 +246,7 @@ export default {
   },
   methods: {
     getToday() {
-      return `Today, ${moment().format('DD, MMMM, YYYY')}`
+      return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode

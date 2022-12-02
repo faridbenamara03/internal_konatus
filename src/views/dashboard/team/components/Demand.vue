@@ -152,7 +152,7 @@ export default {
       return isEmpty(data)
     },
     getToday() {
-      return `Today, ${moment().format('DD, MMMM, YYYY')}`
+      return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleRequestQuote(res) {
       console.log(res)

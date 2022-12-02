@@ -29757,7 +29757,7 @@
 [32m+[m[32m  },[m
 [32m+[m[32m  methods: {[m
 [32m+[m[32m    getToday() {[m
-[32m+[m[32m      return `Today, ${moment().format('DD, MMMM, YYYY')}`[m
+[32m+[m[32m      return `Today ${moment().format('MM/DD/YYYY')}`[m
 [32m+[m[32m    },[m
 [32m+[m[32m    handleChangeViewMode(mode) {[m
 [32m+[m[32m      this.isChartView = mode[m

@@ -91,19 +91,42 @@
           </div>
         </div>
       </div>
+      <b-pagination
+        :total-rows="140"
+        :per-page="10"
+        first-number
+        last-number
+        class="mb-1 mt-2"
+        prev-class="prev-item"
+        next-class="next-item"
+      >
+        <template #prev-text>
+          <feather-icon
+            icon="ChevronLeftIcon"
+            size="18"
+          />
+        </template>
+        <template #next-text>
+          <feather-icon
+            icon="ChevronRightIcon"
+            size="18"
+          />
+        </template>
+      </b-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import {
-  BButton
+  BButton, BPagination
 } from 'bootstrap-vue'
 import moment from 'moment'
 
 export default {
   components: {
-    BButton
+    BButton,
+    BPagination
   },
   props: {
     data: {
