@@ -2,10 +2,6 @@
   <div style="overflow-x:auto">
     <div class="portf-control-view">
       <div style="width:100%;background-color:#1A2239;height:40px">
-        <b-button variant="flat-primary">
-          <feather-icon icon="RotateCwIcon" />
-          Update
-        </b-button>
       </div>
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
@@ -119,13 +115,12 @@
 
 <script>
 import {
-  BButton, BPagination
+  BPagination
 } from 'bootstrap-vue'
 import moment from 'moment'
 
 export default {
   components: {
-    BButton,
     BPagination
   },
   props: {

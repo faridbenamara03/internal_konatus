@@ -52,7 +52,7 @@
                 class="ml-1"
                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                 id="example-datepicker"
-                style="width:140px"
+                style="width:160px"
                 placeholder="Select Date"
               />
             </div>
@@ -64,15 +64,19 @@
                 Plan
               </b-button>
             </b-button-group>
-            <b-button v-b-modal.modal-import class="ml-1" variant="outline-primary">
+            <b-button v-if="(tabIndex !== 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
               <feather-icon icon="ArrowDownIcon" size="16" />
               <span>Import</span>
+            </b-button>
+            <b-button v-if="(tabIndex === 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
+              <feather-icon icon="RotateCwIcon" size="16" />
+              <span>Update</span>
             </b-button>
             <b-button class="ml-1" variant="outline-primary">
               <feather-icon icon="UploadIcon" size="16" />
               <span>Export</span>
             </b-button>
-            <b-button v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
+            <b-button v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
               <feather-icon icon="MapIcon" size="16" />
               <span>Request Quote</span>
             </b-button>
