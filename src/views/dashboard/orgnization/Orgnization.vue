@@ -68,12 +68,11 @@
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
-              <span>{{ getToday() }}</span>
-              <b-form-datepicker
-                class="ml-1"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="example-datepicker"
-                style="width:160px"
+              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <flat-pickr
+                v-model="rangeDate"
+                class="form-control ml-1"
+                :config="{ mode: 'range'}"
                 placeholder="Select Date"
               />
             </div>
@@ -131,9 +130,11 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab, BFormDatepicker
+  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab
 } from 'bootstrap-vue'
 import moment from 'moment'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/themes/dark.css'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
@@ -143,7 +144,6 @@ import OptimizeModal from './modals/OptimizeModal.vue'
 
 export default {
   components: {
-    BFormDatepicker,
     BButton,
     BButtonGroup,
     BCard,
@@ -156,6 +156,7 @@ export default {
     CreateModal,
     EditColumnsModal,
     OptimizeModal,
+    flatPickr
   },
   props: {
     data: {
@@ -165,6 +166,7 @@ export default {
   },
   data() {
     return {
+      rangeDate: [],
       items: [
         {
           name: 'Quadruped robot',

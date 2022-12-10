@@ -47,12 +47,11 @@
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
-              <span>{{ getToday() }}</span>
-              <b-form-datepicker
-                class="ml-1"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="example-datepicker"
-                style="width:160px"
+              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <flat-pickr
+                v-model="rangeDate"
+                class="form-control ml-1"
+                :config="{ mode: 'range'}"
                 placeholder="Select Date"
               />
             </div>
@@ -107,10 +106,11 @@ import {
   BCardBody,
   BTabs,
   BTab,
-  BButtonGroup,
-  BFormDatepicker
+  BButtonGroup
 } from 'bootstrap-vue'
 import moment from 'moment'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/themes/dark.css'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
@@ -133,7 +133,7 @@ export default {
     ImportLoaderModal,
     ModalRequestQuote,
     CreateModal,
-    BFormDatepicker
+    flatPickr
   },
   props: {
     data: {

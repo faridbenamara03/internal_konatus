@@ -80,12 +80,11 @@
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
-              <span>{{ getToday() }}</span>
-              <b-form-datepicker
-                class="ml-1"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="example-datepicker"
-                style="width:160px"
+              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <flat-pickr
+                v-model="rangeDate"
+                class="form-control ml-1"
+                :config="{ mode: 'range'}"
                 placeholder="Select Date"
               />
             </div>
@@ -137,10 +136,12 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BFormDatepicker
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/themes/dark.css'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
@@ -149,7 +150,7 @@ import AddResourceModal from './modals/AddResourceModal.vue'
 
 export default {
   components: {
-    BFormDatepicker,
+    flatPickr,
     BButtonGroup,
     BButton,
     BCard,
