@@ -92,7 +92,7 @@
               />
               <div style="white-space:nowrap">{{ getToday() }}</div>
               <flat-pickr
-                v-model="rangeDate"
+                @on-change="onRangeChange"
                 class="form-control ml-1"
                 :config="{ mode: 'range'}"
                 placeholder="Select Date"
@@ -250,6 +250,9 @@ export default {
     })
   },
   methods: {
+    onRangeChange(value, rangeString) {
+      if (value.length === 2) this.$store.commit('globalState/ON_RANGE_CHANGE', rangeString)
+    },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },

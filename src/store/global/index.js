@@ -13,10 +13,10 @@ const globalOperationData = {
       type: 'portfolio',
 
       priority: 'Highest',
-      budget: '2150000',
+      budget: '210000',
       deadline: '06/01/2021',
       engaged: '215800',
-      quote: '1210000',
+      quote: '210000',
       demand: '319200',
       realEstimated: '210100',
       authorised: '124500',
@@ -37,10 +37,10 @@ const globalOperationData = {
           type: 'program',
 
           priority: 'Highest',
-          budget: '1150000',
+          budget: '91001',
           deadline: '06/01/2021',
           engaged: '21800',
-          quote: '1340000',
+          quote: '89000',
           demand: '19200',
           realEstimated: '10100',
           authorised: '14500',
@@ -64,8 +64,8 @@ const globalOperationData = {
               budget: '350000',
               deadline: '06/01/2021',
               engaged: '22450',
-              quote: '601900',
-              demand: '212800',
+              quote: '61900',
+              demand: '91800',
               realEstimated: '235200',
               authorised: '232100',
               spent: '41800',
@@ -166,12 +166,12 @@ const globalOperationData = {
               type: 'project',
 
               priority: 'Highest',
-              budget: '350000',
+              budget: '82000',
               deadline: '03/28/2021',
               engaged: '46450',
               quote: '54900',
-              demand: '732500',
-              realEstimated: '831700',
+              demand: '98500',
+              realEstimated: '431700',
               authorised: '39600',
               spent: '61400',
               next_gate: '06/02/2022',
@@ -183,7 +183,7 @@ const globalOperationData = {
               type: 'project',
 
               priority: 'Highest',
-              budget: '150000',
+              budget: '98000',
               deadline: '06/01/2021',
               engaged: '450',
               quote: '45900',
@@ -200,11 +200,11 @@ const globalOperationData = {
               type: 'project',
 
               priority: 'Lowest',
-              budget: '300000',
+              budget: '80000',
               deadline: '12/31/2021',
               engaged: '450',
               quote: '41550',
-              demand: '691500',
+              demand: '91500',
               next_gate: '08/02/2022',
               realEstimated: '211200',
               authorised: '18800',
@@ -272,14 +272,14 @@ const globalOperationData = {
       type: 'portfolio',
 
       priority: 'Highest',
-      budget: '211000',
+      budget: '21000',
       deadline: '06/01/2021',
-      engaged: '2800',
-      quote: '2340000',
+      engaged: '12800',
+      quote: '21000',
       demand: '19200',
       realEstimated: '10100',
-      authorised: '4500',
-      spent: '1600',
+      authorised: '14500',
+      spent: '16000',
       value: '331',
       next_gate: '03/01/2022',
 
@@ -288,14 +288,14 @@ const globalOperationData = {
           id: '1.1.2.1',
           title: 'Attacking robot',
           priority: 'Highest',
-          budget: '211000',
+          budget: '21000',
           deadline: '06/01/2021',
-          engaged: '2800',
-          quote: '2340000',
+          engaged: '12800',
+          quote: '11000',
           demand: '19200',
           realEstimated: '10100',
           authorised: '4500',
-          spent: '1600',
+          spent: '8600',
           value: '331',
           next_gate: '03/01/2022',
           type: 'program',
@@ -307,12 +307,12 @@ const globalOperationData = {
               priority: 'Highest',
               budget: '11000',
               deadline: '06/01/2021',
-              engaged: '2800',
-              quote: '232000',
+              engaged: '12800',
+              quote: '22000',
               demand: '19200',
               realEstimated: '10100',
-              authorised: '4500',
-              spent: '1600',
+              authorised: '14500',
+              spent: '11600',
               value: '331',
               next_gate: '03/01/2022',
             },
@@ -322,12 +322,12 @@ const globalOperationData = {
               type: 'project',
               priority: 'Highest',
               budget: '21000',
-              engaged: '2800',
-              quote: '232000',
+              engaged: '9800',
+              quote: '22000',
               demand: '19200',
               realEstimated: '10100',
-              authorised: '4500',
-              spent: '1600',
+              authorised: '14500',
+              spent: '11600',
               value: '331',
               next_gate: '03/01/2022',
             },
@@ -2234,10 +2234,57 @@ export default {
       state.selectedNavId = navObj.id
       state.selectedNavObj = navObj
     },
-
+    ON_RANGE_CHANGE(state) {
+      if (state.selectedNavObj.children) {
+        const ndt = state.selectedNavObj.children.map(t => {
+          let budget = 0
+          let engaged = 0
+          let quote = 0
+          let demand = 0
+          let realEstimated = 0
+          let authorised = 0
+          let spent = 0
+          const children1 = []
+          if (t.children) {
+            t.children.map(t1 => {
+              const t2 = { ...t1 }
+              t2.budget = parseInt(t1.budget ? t1.budget : 0, 10) + Math.random() * (t1.budget ? t1.budget : 0)
+              t2.engaged = parseInt(t1.engaged ? t1.engaged : 0, 10) + Math.random() * (t1.engaged ? t1.engaged : 0)
+              t2.quote = parseInt(t1.quote ? t1.quote : 0, 10) + Math.random() * (t1.quote ? t1.quote : 0)
+              t2.demand = parseInt(t1.demand ? t1.demand : 0, 10) + Math.random() * (t1.demand ? t1.demand : 0)
+              t2.realEstimated = parseInt(t1.realEstimated ? t1.realEstimated : 0, 10) + Math.random() * (t1.realEstimated ? t1.realEstimated : 0)
+              t2.authorised = parseInt(t1.authorised ? t1.authorised : 0, 10) + Math.random() * (t1.authorised ? t1.authorised : 0)
+              t2.spent = parseInt(t1.spent ? t1.spent : 0, 10) + Math.random() * (t1.spent ? t1.spent : 0)
+              children1.push(t2)
+              return null
+            })
+          } else {
+            budget = parseInt(t.budget, 10) + Math.random() * t.budget
+            engaged = parseInt(t.engaged, 10) + Math.random() * t.engaged
+            quote = parseInt(t.quote, 10) + Math.random() * t.quote
+            demand = parseInt(t.demand, 10) + Math.random() * t.demand
+            realEstimated = parseInt(t.realEstimated, 10) + Math.random() * t.realEstimated
+            authorised = parseInt(t.authorised, 10) + Math.random() * t.authorised
+            spent = parseInt(t.spent, 10) + Math.random() * t.spent
+          }
+          const nd = { ...t }
+          nd.budget = budget
+          nd.engaged = engaged
+          nd.quote = quote
+          nd.demand = demand
+          nd.realEstimated = realEstimated
+          nd.authorised = authorised
+          nd.spent = spent
+          if (children1.length > 0) nd.children = children1
+          return nd
+        })
+        const modifiedSelectedNavObj = { ...state.selectedNavObj }
+        modifiedSelectedNavObj.children = ndt
+        state.selectedNavObj = modifiedSelectedNavObj
+      }
+    },
     OPERATION_NEW_SAVE(state, data) {
       console.log(state, data)
-
       // {
       //   id: '1.28.11.1.15',
       //   title: 'Precise movement & control',
