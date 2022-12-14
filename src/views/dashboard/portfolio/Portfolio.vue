@@ -91,12 +91,17 @@
                 class="mr-1"
               />
               <div style="white-space:nowrap">{{ getToday() }}</div>
-              <flat-pickr
-                @on-change="onRangeChange"
-                class="form-control ml-1"
-                :config="{ mode: 'range'}"
-                placeholder="Select Date"
-              />
+              <div class="ml-1">
+                <b-form-input style="width:100px" id="popover-manual-1" readonly v-model="selectedMonth"/>
+                <b-popover
+                  placement="bottom"
+                  target="popover-manual-1"
+                  ref="popover"
+                  :show.sync="popoverShow"
+                >
+                  <month-picker v-click-outside="onClose" v-model="selectedMonth" variant="dark" @input="onRangeChange"></month-picker>
+                </b-popover>
+              </div>
             </div>
             <b-button
               v-if="!isChartView && tabIndex === 0"
@@ -185,10 +190,11 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab
+  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
-import flatPickr from 'vue-flatpickr-component'
+import ClickOutside from 'vue-click-outside'
+import { MonthPicker } from 'vue-month-picker'
 import 'flatpickr/dist/themes/dark.css'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
@@ -211,7 +217,9 @@ export default {
     CreateModal,
     EditColumnsModal,
     OptimizeModal,
-    flatPickr
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -228,6 +236,8 @@ export default {
       fields: [],
       tabIndex: 0,
       isChartView: false,
+      popoverShow: false,
+      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()}`,
     }
   },
   computed: {
@@ -250,8 +260,10 @@ export default {
     })
   },
   methods: {
-    onRangeChange(value, rangeString) {
-      if (value.length === 2) this.$store.commit('globalState/ON_RANGE_CHANGE', rangeString)
+    onRangeChange(value) {
+      this.popoverShow = false
+      this.selectedMonth = `${value.monthIndex} / ${value.year}`
+      this.$store.commit('globalState/ON_RANGE_CHANGE', value)
     },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
@@ -270,10 +282,19 @@ export default {
     onDemandTableEditableClick() {
       this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
     },
+    onClose() {
+      this.popoverShow = false
+    },
   },
+  directives: {
+    ClickOutside
+  }
 }
 </script>
 
 <style lang="scss">
+.popover-body {
+  width: 435px !important;
+}
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

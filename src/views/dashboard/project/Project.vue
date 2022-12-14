@@ -48,12 +48,17 @@
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
-              <flat-pickr
-                v-model="rangeDate"
-                class="form-control ml-1"
-                :config="{ mode: 'range'}"
-                placeholder="Select Date"
-              />
+              <div class="ml-1">
+                <b-form-input style="width:100px" id="popover-manual-1" readonly v-model="selectedMonth"/>
+                <b-popover
+                  placement="bottom"
+                  target="popover-manual-1"
+                  ref="popover"
+                  :show.sync="popoverShow"
+                >
+                  <month-picker v-click-outside="onClose" v-model="selectedMonth" variant="dark" @input="onRangeChange"></month-picker>
+                </b-popover>
+              </div>
             </div>
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button variant="outline-primary">
@@ -106,11 +111,13 @@ import {
   BCardBody,
   BTabs,
   BTab,
-  BButtonGroup
+  BButtonGroup,
+  BFormInput,
+  BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/themes/dark.css'
+import ClickOutside from 'vue-click-outside'
+import { MonthPicker } from 'vue-month-picker'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
@@ -133,7 +140,9 @@ export default {
     ImportLoaderModal,
     ModalRequestQuote,
     CreateModal,
-    flatPickr
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -149,10 +158,20 @@ export default {
       selectedActivity: {},
       demandTabState: 'team',
       projectElementTeamData: this.$store.state.globalState.teamsState,
-      projectElementPhaseData: this.$store.state.globalState.phaseState
+      projectElementPhaseData: this.$store.state.globalState.phaseState,
+      popoverShow: false,
+      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()}`,
     }
   },
   methods: {
+    onRangeChange(value) {
+      this.popoverShow = false
+      this.selectedMonth = `${value.monthIndex} / ${value.year}`
+      this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+    },
+    onClose() {
+      this.popoverShow = false
+    },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
@@ -163,6 +182,9 @@ export default {
       this.demandTabState = tabState
     }
   },
+  directives: {
+    ClickOutside
+  }
   // computed: {
   //   filteredTeam() {
   //     const filteredTeams = this.teams

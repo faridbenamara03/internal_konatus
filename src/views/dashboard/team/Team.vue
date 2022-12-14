@@ -81,12 +81,17 @@
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
-              <flat-pickr
-                v-model="rangeDate"
-                class="form-control ml-1"
-                :config="{ mode: 'range'}"
-                placeholder="Select Date"
-              />
+              <div class="ml-1">
+                <b-form-input style="width:100px" id="popover-manual-1" readonly v-model="selectedMonth"/>
+                <b-popover
+                  placement="bottom"
+                  target="popover-manual-1"
+                  ref="popover"
+                  :show.sync="popoverShow"
+                >
+                  <month-picker v-click-outside="onClose" v-model="selectedMonth" variant="dark" @input="onRangeChange"></month-picker>
+                </b-popover>
+              </div>
             </div>
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button variant="outline-primary">
@@ -136,12 +141,12 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BFormInput, BPopover
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/themes/dark.css'
+import ClickOutside from 'vue-click-outside'
+import { MonthPicker } from 'vue-month-picker'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
@@ -150,7 +155,6 @@ import AddResourceModal from './modals/AddResourceModal.vue'
 
 export default {
   components: {
-    flatPickr,
     BButtonGroup,
     BButton,
     BCard,
@@ -164,7 +168,10 @@ export default {
     CreateModal,
     AddResourceModal,
     Reporting,
-    BIcon
+    BIcon,
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -178,6 +185,8 @@ export default {
       openActivityModal: false,
       selectedActivity: {},
       isChartView: false,
+      popoverShow: false,
+      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()}`,
     }
   },
   computed: {
@@ -186,6 +195,14 @@ export default {
     }
   },
   methods: {
+    onRangeChange(value) {
+      this.popoverShow = false
+      this.selectedMonth = `${value.monthIndex} / ${value.year}`
+      this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+    },
+    onClose() {
+      this.popoverShow = false
+    },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
@@ -196,6 +213,9 @@ export default {
       this.$store.commit('globalState/HANDLE_TEAM_DEMAND_UPDATE')
     },
   },
+  directives: {
+    ClickOutside
+  }
 }
 </script>
 

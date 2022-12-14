@@ -69,12 +69,17 @@
             <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
-              <flat-pickr
-                v-model="rangeDate"
-                class="form-control ml-1"
-                :config="{ mode: 'range'}"
-                placeholder="Select Date"
-              />
+              <div class="ml-1">
+                <b-form-input style="width:100px" id="popover-manual-1" readonly v-model="selectedMonth"/>
+                <b-popover
+                  placement="bottom"
+                  target="popover-manual-1"
+                  ref="popover"
+                  :show.sync="popoverShow"
+                >
+                  <month-picker v-click-outside="onClose" v-model="selectedMonth" variant="dark" @input="onRangeChange"></month-picker>
+                </b-popover>
+              </div>
             </div>
             <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="outline-primary">
@@ -130,11 +135,11 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab
+  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/themes/dark.css'
+import ClickOutside from 'vue-click-outside'
+import { MonthPicker } from 'vue-month-picker'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
@@ -156,7 +161,9 @@ export default {
     CreateModal,
     EditColumnsModal,
     OptimizeModal,
-    flatPickr
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -333,6 +340,8 @@ export default {
       fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
       tabIndex: 0,
       isChartView: false,
+      popoverShow: false,
+      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()}`,
     }
   },
   mounted() {
@@ -342,6 +351,14 @@ export default {
     })
   },
   methods: {
+    onRangeChange(value) {
+      this.popoverShow = false
+      this.selectedMonth = `${value.monthIndex} / ${value.year}`
+      this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+    },
+    onClose() {
+      this.popoverShow = false
+    },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
@@ -360,6 +377,9 @@ export default {
       this.$store.commit('orgnizationState/UPDATE_DATA')
     }
   },
+  directives: {
+    ClickOutside
+  }
 }
 </script>
 
