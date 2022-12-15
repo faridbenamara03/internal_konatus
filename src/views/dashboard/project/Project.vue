@@ -27,6 +27,37 @@
             </b-button>
           </div>
         </div>
+        <div v-if="tabIndex === 2" class="action-bar justify-content-between">
+          <b-button variant="flat-primary" @click="handleUpdate">
+            <feather-icon icon="RotateCwIcon" />
+            Update
+          </b-button>
+          <b-button-group>
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
+          <div class="d-flex action-group">
+            <div class="d-flex">
+              <div class="rounded"
+                style="background-color:#8b3b4e;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>ENGAGED</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded"
+                style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>QUOTE</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded"
+                style="background-color:#0a5666;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>ESTIMATED</div>
+            </div>
+          </div>
+        </div>
         <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}">
           <div v-if="!projectElementTeamData.length" class="no-data">
             <feather-icon icon="FileIcon" size="48" />
@@ -39,9 +70,7 @@
           <Reporting />
         </b-tab>
         <b-tab title="Control">
-          <b-card-text>
-            Carrot cake dragée chocolate.
-          </b-card-text>
+          <Control :data="items" :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -114,7 +143,6 @@
 import {
   BButton,
   BCard,
-  BCardText,
   BCardBody,
   BTabs,
   BTab,
@@ -131,18 +159,19 @@ import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
+import Control from './components/Control.vue'
 
 export default {
   components: {
     BButtonGroup,
     BButton,
     BCard,
-    BCardText,
     BCardBody,
     BTabs,
     BTab,
     Demand,
     Reporting,
+    Control,
     ImportModal,
     ImportLoaderModal,
     ModalRequestQuote,
@@ -168,7 +197,64 @@ export default {
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
       selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
-      rangeArray: []
+      rangeArray: [],
+      isChartView: false,
+      items: [
+        {
+          name: 'Quadruped robot',
+          priority: 'Highest',
+          budget: '1100',
+          deadline: '06/01/2021',
+          children: [
+            {
+              name: 'New format',
+              priority: 'High',
+              budget: '350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Enhanced motricity',
+              priority: 'Highest',
+              budget: '240',
+              deadline: '03/28/2021',
+            },
+            {
+              name: 'Enhanced authonomy',
+              priority: 'Highest',
+              budget: '350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Dual sourcing for Q',
+              priority: 'Lowest',
+              budget: '150',
+              deadline: '12/31/2021',
+            },
+          ],
+        },
+        {
+          name: 'micro robot observation nbc',
+          priority: 'High',
+          budget: '13633.69',
+          deadline: '05/20/2018',
+        },
+        {
+          name: 'handling robot',
+          priority: 'Low',
+          budget: '13076.28',
+          deadline: '03/24/2018',
+        },
+        {
+          name: 'power and programing station',
+          priority: 'Lowest',
+          budget: '12336.17',
+          deadline: '12/03/2017',
+        },
+        {
+          name: 'total',
+          budget: '40146.14',
+        }
+      ],
     }
   },
   methods: {
@@ -181,6 +267,9 @@ export default {
         this.popoverShow = false
         this.$store.commit('globalState/ON_RANGE_CHANGE', value)
       }
+    },
+    handleChangeViewMode(mode) {
+      this.isChartView = mode
     },
     onClose() {
       this.popoverShow = false

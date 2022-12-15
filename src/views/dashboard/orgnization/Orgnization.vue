@@ -30,10 +30,10 @@
             Update
           </b-button>
           <b-button-group>
-            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(false)">
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
               <b-icon icon="bar-chart-line" />
             </b-button>
-            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(true)">
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="table" />
             </b-button>
           </b-button-group>
