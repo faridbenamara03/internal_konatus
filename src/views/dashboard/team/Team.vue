@@ -78,7 +78,7 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
               <div class="ml-1">
@@ -99,7 +99,7 @@
                   </div>
                 </b-popover>
               </div>
-            </div>
+            </div> -->
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button variant="outline-primary">
                 Cost
@@ -148,12 +148,12 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BFormInput, BPopover
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
-import { MonthPicker } from 'vue-month-picker'
+// import { MonthPicker } from 'vue-month-picker'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
@@ -176,9 +176,9 @@ export default {
     AddResourceModal,
     Reporting,
     BIcon,
-    MonthPicker,
-    BFormInput,
-    BPopover,
+    // MonthPicker,
+    // BFormInput,
+    // BPopover,
   },
   props: {
     data: {
