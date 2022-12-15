@@ -2248,24 +2248,24 @@ export default {
           if (t.children) {
             t.children.map(t1 => {
               const t2 = { ...t1 }
-              t2.budget = parseInt(t1.budget ? t1.budget : 0, 10) + Math.random() * (t1.budget ? t1.budget : 0)
-              t2.engaged = parseInt(t1.engaged ? t1.engaged : 0, 10) + Math.random() * (t1.engaged ? t1.engaged : 0)
-              t2.quote = parseInt(t1.quote ? t1.quote : 0, 10) + Math.random() * (t1.quote ? t1.quote : 0)
-              t2.demand = parseInt(t1.demand ? t1.demand : 0, 10) + Math.random() * (t1.demand ? t1.demand : 0)
-              t2.realEstimated = parseInt(t1.realEstimated ? t1.realEstimated : 0, 10) + Math.random() * (t1.realEstimated ? t1.realEstimated : 0)
-              t2.authorised = parseInt(t1.authorised ? t1.authorised : 0, 10) + Math.random() * (t1.authorised ? t1.authorised : 0)
-              t2.spent = parseInt(t1.spent ? t1.spent : 0, 10) + Math.random() * (t1.spent ? t1.spent : 0)
+              t2.budget = parseInt(t1.budget ? t1.budget : 0, 10) + parseInt(Math.random() * (t1.budget ? t1.budget : 0), 10)
+              t2.engaged = parseInt(t1.engaged ? t1.engaged : 0, 10) + parseInt(Math.random() * (t1.engaged ? t1.engaged : 0), 10)
+              t2.quote = parseInt(t1.quote ? t1.quote : 0, 10) + parseInt(Math.random() * (t1.quote ? t1.quote : 0), 10)
+              t2.demand = parseInt(t1.demand ? t1.demand : 0, 10) + parseInt(Math.random() * (t1.demand ? t1.demand : 0), 10)
+              t2.realEstimated = parseInt(t1.realEstimated ? t1.realEstimated : 0, 10) + parseInt(Math.random() * (t1.realEstimated ? t1.realEstimated : 0), 10)
+              t2.authorised = parseInt(t1.authorised ? t1.authorised : 0, 10) + parseInt(Math.random() * (t1.authorised ? t1.authorised : 0), 10)
+              t2.spent = parseInt(t1.spent ? t1.spent : 0, 10) + parseInt(Math.random() * (t1.spent ? t1.spent : 0), 10)
               children1.push(t2)
               return null
             })
           } else {
-            budget = parseInt(t.budget, 10) + Math.random() * t.budget
-            engaged = parseInt(t.engaged, 10) + Math.random() * t.engaged
-            quote = parseInt(t.quote, 10) + Math.random() * t.quote
-            demand = parseInt(t.demand, 10) + Math.random() * t.demand
-            realEstimated = parseInt(t.realEstimated, 10) + Math.random() * t.realEstimated
-            authorised = parseInt(t.authorised, 10) + Math.random() * t.authorised
-            spent = parseInt(t.spent, 10) + Math.random() * t.spent
+            budget = parseInt(t.budget, 10) + parseInt(Math.random() * t.budget, 10)
+            engaged = parseInt(t.engaged, 10) + parseInt(Math.random() * t.engaged, 10)
+            quote = parseInt(t.quote, 10) + parseInt(Math.random() * t.quote, 10)
+            demand = parseInt(t.demand, 10) + parseInt(Math.random() * t.demand, 10)
+            realEstimated = parseInt(t.realEstimated, 10) + parseInt(Math.random() * t.realEstimated, 10)
+            authorised = parseInt(t.authorised, 10) + parseInt(Math.random() * t.authorised, 10)
+            spent = parseInt(t.spent, 10) + parseInt(Math.random() * t.spent, 10)
           }
           const nd = { ...t }
           nd.budget = budget

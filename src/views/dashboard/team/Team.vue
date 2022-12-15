@@ -82,14 +82,21 @@
               <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
               <div class="ml-1">
-                <b-form-input style="width:100px" id="popover-manual-1" readonly v-model="selectedMonth"/>
+                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
                 <b-popover
-                  placement="bottom"
+                  placement="bottomleft"
                   target="popover-manual-1"
                   ref="popover"
                   :show.sync="popoverShow"
                 >
-                  <month-picker v-click-outside="onClose" v-model="selectedMonth" variant="dark" @input="onRangeChange"></month-picker>
+                  <div v-click-outside="onClose" style="display:flex;">
+                    <div class="mr-1">
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                    </div>
+                    <div>
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                    </div>
+                  </div>
                 </b-popover>
               </div>
             </div>
@@ -186,7 +193,8 @@ export default {
       selectedActivity: {},
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
+      rangeArray: []
     }
   },
   computed: {
@@ -196,9 +204,14 @@ export default {
   },
   methods: {
     onRangeChange(value) {
-      this.popoverShow = false
-      this.selectedMonth = `${value.monthIndex} / ${value.year}`
-      this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+      if (this.rangeArray.length === 2) this.rangeArray = []
+      const v = `${value.monthIndex} / ${value.year}`
+      this.rangeArray.push(v)
+      this.selectedMonth = this.rangeArray.join(' - ')
+      if (this.rangeArray.length === 2) {
+        this.popoverShow = false
+        this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+      }
     },
     onClose() {
       this.popoverShow = false
