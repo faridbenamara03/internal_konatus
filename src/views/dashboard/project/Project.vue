@@ -46,9 +46,9 @@
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
-              <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
+              <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <div style="white-space:nowrap">{{ getToday() }}</div>
-              <div class="ml-1">
+              <!-- <div class="ml-1">
                 <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
                 <b-popover
                   placement="bottomleft"
@@ -65,7 +65,7 @@
                     </div>
                   </div>
                 </b-popover>
-              </div>
+              </div> -->
             </div>
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button variant="outline-primary">
@@ -119,12 +119,12 @@ import {
   BTabs,
   BTab,
   BButtonGroup,
-  BFormInput,
-  BPopover
+  // BFormInput,
+  // BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
-import { MonthPicker } from 'vue-month-picker'
+// import { MonthPicker } from 'vue-month-picker'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
@@ -147,9 +147,9 @@ export default {
     ImportLoaderModal,
     ModalRequestQuote,
     CreateModal,
-    MonthPicker,
-    BFormInput,
-    BPopover,
+    // MonthPicker,
+    // BFormInput,
+    // BPopover,
   },
   props: {
     data: {

@@ -88,9 +88,9 @@
               <feather-icon
                 icon="CalendarIcon"
                 size="16"
-                class="mr-1"
+                style="margin-right:3px"
               />
-              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <div style="white-space:nowrap">Period</div>
               <div class="ml-1">
                 <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
                 <b-popover
