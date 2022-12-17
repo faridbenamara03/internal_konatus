@@ -397,5 +397,8 @@ export default {
 </script>
 
 <style lang="scss">
+.popover-body {
+  width: 649px !important;
+}
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

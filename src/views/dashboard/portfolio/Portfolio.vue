@@ -60,6 +60,7 @@
         </div>
         <b-tab
           title="Demand"
+          @click="ontabchange"
           :class="{'has-default-card-bg': !isChartView}"
         >
           <Demand
@@ -72,12 +73,14 @@
         </b-tab>
         <b-tab
           title="Reporting"
+          @click="ontabchange"
           class="no-action-bar"
         >
           <Reporting :data="items" :otype="selectedNavType" />
         </b-tab>
         <b-tab
           title="Control"
+          @click="onClickCPSelectBtn('control')"
           class="no-action-bar"
         >
           <Control :data="items.children" :tableTitle="tableTtle" />
@@ -139,11 +142,13 @@
             >
               <b-button
                 variant="outline-primary"
+                @click="onClickCPSelectBtn('reporting-cost')"
               >
                 Cost
               </b-button>
               <b-button
                 variant="outline-primary"
+                @click="onClickCPSelectBtn('reporting-plan')"
               >
                 Plan
               </b-button>
@@ -282,6 +287,14 @@ export default {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleChangeViewMode(mode) {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(mode ? '/demand-chart' : '/demand-table') })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(mode ? '/demand-chart' : '/demand-table') })
+      }
       this.isChartView = mode
     },
     columnChange(columns) {
@@ -298,6 +311,24 @@ export default {
     onClose() {
       this.popoverShow = false
     },
+    ontabchange() {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/') })
+      }
+    },
+    onClickCPSelectBtn(url) {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+      }
+    }
   },
   directives: {
     ClickOutside
