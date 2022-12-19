@@ -80,7 +80,7 @@ export default [
   {
     path: '/orgnization',
     name: 'orgnization-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    // component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
   },
   {
     path: '/orgnization/unit/:unitId',

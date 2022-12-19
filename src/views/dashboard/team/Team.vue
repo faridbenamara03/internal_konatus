@@ -75,7 +75,7 @@
         <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
           <Demand :data="c_demand_team_data" />
         </b-tab>
-        <b-tab title="Reporting" @click="ontabchange">
+        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :is-chart-view="isChartView" />
           <!-- <b-card-text>
             Carrot cake dragée chocolate.
@@ -109,10 +109,12 @@
               </div>
             </div> -->
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
-              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')">
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')"
+                :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`">
                 Cost
               </b-button>
-              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')">
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`">
                 Plan
               </b-button>
             </b-button-group>
@@ -202,7 +204,8 @@ export default {
       isChartView: false,
       popoverShow: false,
       selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
-      rangeArray: []
+      rangeArray: [],
+      reportingState: 'cost',
     }
   },
   computed: {
@@ -211,7 +214,8 @@ export default {
     }
   },
   methods: {
-    onClickCPSelectBtn(url) {
+    onClickCPSelectBtn(url, value) {
+      if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
       const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
@@ -221,14 +225,14 @@ export default {
         this.$router.push({ path: this.$route.path.concat(`/${url}`) })
       }
     },
-    ontabchange() {
-      const urlArr = this.$route.path.split('/')
-      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
-      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-        urlArr.pop()
-        this.$router.push({ path: urlArr.join('/') })
-      }
-    },
+    // ontabchange() {
+    //   const urlArr = this.$route.path.split('/')
+    //   const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
+    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+    //     urlArr.pop()
+    //     this.$router.push({ path: urlArr.join('/') })
+    //   }
+    // },
     onRangeChange(value) {
       if (this.rangeArray.length === 2) this.rangeArray = []
       const v = `${value.monthIndex} / ${value.year}`

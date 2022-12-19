@@ -33,8 +33,8 @@
             <b-button
               @click="onDemandTableEditableClick"
               v-if="tabIndex === 0"
-              class="mr-1"
               variant="outline-primary"
+              style="margin-right:100px"
             >
               <feather-icon
                 icon="Edit2Icon"
@@ -60,7 +60,7 @@
         </div>
         <b-tab
           title="Demand"
-          @click="ontabchange"
+          @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
           :class="{'has-default-card-bg': !isChartView}"
         >
           <Demand
@@ -73,7 +73,7 @@
         </b-tab>
         <b-tab
           title="Reporting"
-          @click="ontabchange"
+          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
           class="no-action-bar"
         >
           <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" />
@@ -142,12 +142,14 @@
             >
               <b-button
                 variant="outline-primary"
+                :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
                 @click="onClickCPSelectBtn('reporting-cost', 'cost')"
               >
                 Cost
               </b-button>
               <b-button
                 variant="outline-primary"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
                 @click="onClickCPSelectBtn('reporting-plan', 'plan')"
               >
                 Plan
@@ -312,16 +314,16 @@ export default {
     onClose() {
       this.popoverShow = false
     },
-    ontabchange() {
-      const urlArr = this.$route.path.split('/')
-      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
-      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-        urlArr.pop()
-        this.$router.push({ path: urlArr.join('/') })
-      }
-    },
+    // ontabchange() {
+    //   const urlArr = this.$route.path.split('/')
+    //   const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+    //     urlArr.pop()
+    //     this.$router.push({ path: urlArr.join('/') })
+    //   }
+    // },
     onClickCPSelectBtn(url, value) {
-      this.reportingState = value
+      if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {

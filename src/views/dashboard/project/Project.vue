@@ -58,7 +58,11 @@
             </div>
           </div>
         </div>
-        <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}">
+        <b-tab
+          title="Demand"
+          :class="{'border-0': !projectElementTeamData.length}"
+          @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-team')"
+        >
           <div v-if="!projectElementTeamData.length" class="no-data">
             <feather-icon icon="FileIcon" size="48" />
             <p>No activities for this project yet.<br>
@@ -66,12 +70,12 @@
           </div>
           <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
         </b-tab>
-        <b-tab title="Reporting">
+        <!-- <b-tab title="Reporting">
           <Reporting />
         </b-tab>
         <b-tab title="Control">
           <Control :data="items" :is-chart-view="isChartView" />
-        </b-tab>
+        </b-tab> -->
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <!-- <div class="d-flex align-items-center">
@@ -158,8 +162,8 @@ import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
-import Reporting from './components/Reporting.vue'
-import Control from './components/Control.vue'
+// import Reporting from './components/Reporting.vue'
+// import Control from './components/Control.vue'
 
 export default {
   components: {
@@ -170,8 +174,8 @@ export default {
     BTabs,
     BTab,
     Demand,
-    Reporting,
-    Control,
+    // Reporting,
+    // Control,
     ImportModal,
     ImportLoaderModal,
     ModalRequestQuote,
@@ -290,7 +294,18 @@ export default {
       } else {
         this.$router.push({ path: this.$route.path.concat(`/demand-${tabState}`) })
       }
-    }
+    },
+    onClickCPSelectBtn(url, value) {
+      if (value) this.reportingState = value
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-team', 'demand-phase']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+      }
+    },
   },
   directives: {
     ClickOutside

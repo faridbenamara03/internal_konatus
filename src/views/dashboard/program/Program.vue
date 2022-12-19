@@ -74,7 +74,11 @@
             </div>
           </div>
         </div>
-        <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}" @click="ontabchange">
+        <b-tab
+          title="Demand"
+          @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
+          :class="{'border-0': !projectElementTeamData.length}"
+        >
           <div v-if="!projectElementTeamData.length" class="no-data">
             <feather-icon icon="FileIcon" size="48" />
             <p>No activities for this project yet.<br>
@@ -82,7 +86,7 @@
           </div>
           <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
         </b-tab>
-        <b-tab title="Reporting" @click="ontabchange">
+        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :data="c_items" :otype="selectedNavType" :reportingState="reportingState" />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control')">
@@ -113,10 +117,18 @@
               </div>
             </div> -->
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
-              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
+                @click="onClickCPSelectBtn('reporting-cost', 'cost')"
+              >
                 Cost
               </b-button>
-              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
+                @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+              >
                 Plan
               </b-button>
             </b-button-group>
@@ -285,16 +297,16 @@ export default {
         this.$store.commit('globalState/ON_RANGE_CHANGE', value)
       }
     },
-    ontabchange() {
-      const urlArr = this.$route.path.split('/')
-      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
-      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-        urlArr.pop()
-        this.$router.push({ path: urlArr.join('/') })
-      }
-    },
+    // ontabchange() {
+    //   const urlArr = this.$route.path.split('/')
+    //   const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+    //     urlArr.pop()
+    //     this.$router.push({ path: urlArr.join('/') })
+    //   }
+    // },
     onClickCPSelectBtn(url, value) {
-      this.reportingState = value
+      if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
