@@ -4,7 +4,8 @@
       <div>
         <div class="report-block--head" style="margin-top:64px;">
           <p class="m-0 text-uppercase">
-            {{ data.title }}
+            <!-- {{ data.title }} -->
+            asdasd
           </p>
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">

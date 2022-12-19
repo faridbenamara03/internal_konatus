@@ -199,9 +199,9 @@
           .reporting-side {
             width: 314px;
             .report-block--head {
-              &:first-child {
-                margin-top: 75px;
-              }
+              // &:first-child {
+              //   margin-top: 75px;
+              // }
               display: flex;
               align-items: center;
               background: $theme-dark-table-active-bg;
