@@ -64,16 +64,16 @@
             </b-button>
           </div>
         </div>
-        <b-tab title="Demand">
+        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
           <Demand :data="c_demand_team_data" />
         </b-tab>
-        <b-tab title="Reporting">
+        <b-tab title="Reporting" @click="ontabchange">
           <Reporting :is-chart-view="isChartView" />
           <!-- <b-card-text>
             Carrot cake dragée chocolate.
           </b-card-text> -->
         </b-tab>
-        <b-tab title="Control">
+        <b-tab title="Control" @click="onClickCPSelectBtn('control-table')">
           <Control :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
@@ -101,10 +101,10 @@
               </div>
             </div> -->
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
-              <b-button variant="outline-primary">
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')">
                 Cost
               </b-button>
-              <b-button variant="outline-primary" >
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')">
                 Plan
               </b-button>
             </b-button-group>
@@ -203,6 +203,24 @@ export default {
     }
   },
   methods: {
+    onClickCPSelectBtn(url) {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+      }
+    },
+    ontabchange() {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/') })
+      }
+    },
     onRangeChange(value) {
       if (this.rangeArray.length === 2) this.rangeArray = []
       const v = `${value.monthIndex} / ${value.year}`
