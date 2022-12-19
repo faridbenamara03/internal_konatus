@@ -24,7 +24,7 @@
           <feather-icon icon="RotateCwIcon" />
           Update
         </b-button>
-        <div v-if="tabIndex === 2" class="action-bar justify-content-between">
+        <!-- <div v-if="tabIndex === 2" class="action-bar justify-content-between">
           <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />
             Update
@@ -54,7 +54,7 @@
               <div>ESTIMATED</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{'has-default-card-bg': !isChartView}">
           <Demand :data="itemsForReport" :fields="fieldsForReport" />
         </b-tab>

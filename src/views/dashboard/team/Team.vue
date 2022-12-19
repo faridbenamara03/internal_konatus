@@ -46,6 +46,14 @@
             <feather-icon icon="RotateCwIcon" />
             Update
           </b-button>
+          <b-button-group>
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
+              <b-icon icon="table" />
+            </b-button>
+          </b-button-group>
           <div class="d-flex action-group">
             <b-button variant="flat-primary">
               <circle-icon size="1x" class="custom-class" />
@@ -239,6 +247,14 @@ export default {
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control-chart', 'control-table']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(mode ? '/control-chart' : '/control-table') })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(mode ? '/control-chart' : '/control-table') })
+      }
     },
     handleUpdateDemand() {
       this.$store.commit('globalState/HANDLE_TEAM_DEMAND_UPDATE')
