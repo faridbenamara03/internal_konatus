@@ -1,5 +1,5 @@
 <template>
-  <div class="demand-view">
+  <div class="demand-view" >
     <div class="p-1">
       <b-button variant="flat-primary">
         <feather-icon icon="RotateCwIcon" />
@@ -99,10 +99,6 @@
 
 .border-right {
   border-right: 1px solid grey;
-}
-
-.border-left {
-  border-left: 1px solid grey;
 }
 </style>
 
@@ -245,5 +241,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import '@core/scss/vue/pages/dashboard-portfolio-reporting-plan.scss';
 </style>

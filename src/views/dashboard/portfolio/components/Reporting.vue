@@ -9,12 +9,8 @@
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
-            <feather-icon
-              v-if="item1.children"
-              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-              size="16"
-              class="mr-1"
-            />
+            <feather-icon v-if="item1.children"
+              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
             <p class="m-0 text-uppercase text-overflow-ellipse">
               {{ item1.title }}
             </p>
@@ -42,10 +38,7 @@
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
-        <b-button
-          v-b-modal.modal-update
-          variant="flat-primary"
-        >
+        <b-button v-b-modal.modal-update variant="flat-primary">
           <feather-icon icon="RotateCwIcon" />
           Update
         </b-button>
@@ -58,35 +51,19 @@
             <span>Phase</span>
           </b-button> -->
           <b-button variant="flat-dark">
-            <b-icon
-              icon="diamond-fill"
-              variant="success"
-            />
-            <b-icon
-              icon="triangle-fill"
-              class="rotate-icon"
-              variant="success"
-            />
+            <b-icon icon="diamond-fill" variant="success" />
+            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
             Milestones
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-demand"
-          >
+          <b-button variant="flat-dark" class="badge-demand">
             <b-icon icon="circle-fill" />
             Demand
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-engage"
-          >
+          <b-button variant="flat-dark" class="badge-engage">
             <b-icon icon="circle-fill" />
             Engaged
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-estimate"
-          >
+          <b-button variant="flat-dark" class="badge-estimate">
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
@@ -94,16 +71,8 @@
       </div>
       <div class="reporting-content--body">
         <div class="timeline-list">
-          <div
-            v-for="(date, index) in reportingDates"
-            :key="index"
-            class="date"
-            :class="{'active': isToday(date)}"
-          >
-            <p
-              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
-              class="month"
-            >
+          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
+            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -118,183 +87,75 @@
           <div class="progress-wrapper w-100">
             <b-card no-body>
               <b-card-text class="mb-0">
-                Reticulating splines… {{ value1+'%' }}
+                Reticulating splines… {{ value1 + '%' }}
               </b-card-text>
               <div class="d-flex">
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
                   <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                    <b-progress value="100%" max="100" variant="danger" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
                   <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                    <b-progress value="100%" max="100" variant="danger" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
                   <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                    <b-progress value="100%" max="100" variant="danger" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                 </div>
               </div>
               <div class="d-flex">
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
                   <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
+                    <b-progress value="100%" max="100" variant="success" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
                   <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
+                    <b-progress value="100%" max="100" variant="success" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
                   <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
+                    <b-progress value="100%" max="100" variant="success" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                 </div>
               </div>
               <div class="d-flex">
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
                   <div :style="`width:${Math.random() * 100 + 250}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
+                    <b-progress value="100%" max="100" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
                   <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
+                    <b-progress value="100%" max="100" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
                   <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
+                    <b-progress value="100%" max="100" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                 </div>
               </div>
             </b-card>
@@ -302,187 +163,79 @@
           <template v-if="item1.children && openedCollapse === index1">
             <div v-for="(item2, index2) in item1.children" :key="index2" class="progress-wrapper w-100">
               <b-card no-body>
-              <b-card-text class="mb-0">
-                Reticulating splines… {{ value1+'%' }}
-              </b-card-text>
-              <div class="d-flex">
+                <b-card-text class="mb-0">
+                  Reticulating splines… {{ value1 + '%' }}
+                </b-card-text>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  </div>
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  </div>
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                  </div>
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                  </div>
                 </div>
                 <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="danger"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="danger"
-                    />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${Math.random() * 100 + 250}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="danger"
-                  />
-                </div>
-              </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${Math.random() * 100 + 300}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
-                </div>
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${Math.random() * 100 + 300}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
                 </div>
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="success"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="success"
-                    />
-                  </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="success"
-                  />
-                </div>
-              </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 250}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
-                  </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
-                </div>
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
-                  </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
-                </div>
-                <div class="d-flex">
-                  <b-icon
-                    style="padding-bottom:2px"
-                    icon="diamond-fill"
-                    variant="info"
-                  />
-                  <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress
-                      value="100%"
-                      max="100"
-                      variant="info"
-                    />
-                  </div>
-                  <b-icon
-                    icon="triangle-fill"
-                    class="rotate-icon"
-                    variant="info"
-                  />
-                </div>
-              </div>
-            </b-card>
+              </b-card>
             </div>
           </template>
         </div>
@@ -532,14 +285,7 @@
         </div> -->
       </div>
     </div>
-    <b-modal
-      id="modal-update"
-      ref="my-modal"
-      title="Create New"
-      centered
-      no-fade
-      hide-backdrop
-    >
+    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">
@@ -547,10 +293,7 @@
         </h5>
         <div class="modal-actions">
           <b-button variant="outline-primary">
-            <feather-icon
-              icon="XIcon"
-              size="18"
-            />
+            <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
@@ -563,7 +306,7 @@
       </template>
     </b-modal>
   </div>
-  <div v-else-if="reportingState === 'plan'">
+  <div style="width: 100%" v-else-if="reportingState === 'plan'">
     <ReportingCostVue :data="itemsForDemand" :fields="fieldForDemand" />
   </div>
 </template>
@@ -617,49 +360,25 @@ export default {
       openedCollapse: 0,
       itemsForDemand: [
         {
-          name: 'Konatus Industries',
+          name: 'Consumer ROBOTS',
           budget_team: '2540',
           budget_engaged: '1132.3',
           real_estimated: '1132.3',
           children: [
             {
-              name: 'TEAM A',
+              name: 'quadruped robot',
               budget_team: '228k',
               budget_engaged: '320k',
               real_estimated: '58',
             },
             {
-              name: 'TEAM B',
+              name: 'handling robot',
               budget_team: '228k',
               budget_engaged: '320k',
               real_estimated: '58',
             },
             {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM D',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM E',
+              name: 'power & programming station',
               budget_team: '228k',
               budget_engaged: '320k',
               real_estimated: '58',
@@ -667,15 +386,27 @@ export default {
           ],
         },
         {
-          name: 'SPACE HOLDER FOR AN OTHER BU',
+          name: 'MILITARY ROBOTS',
           budget_team: '2540',
           budget_engaged: '1132.3',
           real_estimated: '1132.3',
           children: [
+            {
+              name: 'hardened quadruped robot',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'microrobot observation NBC',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
           ],
         },
       ],
-      fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
+      fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
     }
   },
   mounted() {
@@ -709,6 +440,7 @@ export default {
 
 <style lang="scss">
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
+
 .rotate-icon {
   transform: rotate(180deg);
 }
