@@ -4,12 +4,28 @@
       <b-tabs v-model="tabIndex">
         <div v-if="tabIndex === 0" class="action-bar justify-content-between">
           <div></div>
-          <b-button-group v-if="tabIndex === 0" class="ml-1">
+          <!-- <b-button-group v-if="tabIndex === 0" class="ml-1">
             <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('team')">
               Team
             </b-button>
             <b-button variant="outline-primary" :style="`background:${demandTabState === 'phase' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('phase')">
               Phase
+            </b-button>
+          </b-button-group> -->
+          <b-button-group v-if="tabIndex === 0" class="ml-1">
+            <b-button
+              variant="outline-primary"
+              :class="{'active': isChartView}"
+              @click="handleChangeViewMode(true)"
+            >
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button
+              variant="outline-primary"
+              :class="{'active': !isChartView}"
+              @click="handleChangeViewMode(false)"
+            >
+              <b-icon icon="table" />
             </b-button>
           </b-button-group>
           <div class="d-flex action-group">
@@ -58,7 +74,7 @@
             </div>
           </div>
         </div>
-        <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}">
+        <b-tab title="Demand" :class="{'border-0': !projectElementTeamData.length}" @click="ontabchange">
           <div v-if="!projectElementTeamData.length" class="no-data">
             <feather-icon icon="FileIcon" size="48" />
             <p>No activities for this project yet.<br>
@@ -66,10 +82,10 @@
           </div>
           <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
         </b-tab>
-        <b-tab title="Reporting">
-          <Reporting />
+        <b-tab title="Reporting" @click="ontabchange">
+          <Reporting :data="c_items" :otype="selectedNavType" :reportingState="reportingState" />
         </b-tab>
-        <b-tab title="Control">
+        <b-tab title="Control" @click="onClickCPSelectBtn('control')">
           <Control :data="items" :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
@@ -97,10 +113,10 @@
               </div>
             </div> -->
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
-              <b-button variant="outline-primary">
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')">
                 Cost
               </b-button>
-              <b-button variant="outline-primary">
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')">
                 Plan
               </b-button>
             </b-button-group>
@@ -158,7 +174,7 @@ import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
-import Reporting from './components/Reporting.vue'
+import Reporting from '../portfolio/components/Reporting.vue'
 import Control from './components/Control.vue'
 
 export default {
@@ -188,6 +204,7 @@ export default {
   },
   data() {
     return {
+      reportingState: 'cost',
       teams: [], // initial state is empty
       tabIndex: 0,
       openActivityModal: false,
@@ -268,7 +285,34 @@ export default {
         this.$store.commit('globalState/ON_RANGE_CHANGE', value)
       }
     },
+    ontabchange() {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/') })
+      }
+    },
+    onClickCPSelectBtn(url, value) {
+      this.reportingState = value
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+      }
+    },
     handleChangeViewMode(mode) {
+      const urlArr = this.$route.path.split('/')
+      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
+      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
+        urlArr.pop()
+        this.$router.push({ path: urlArr.join('/').concat(mode ? '/demand-chart' : '/demand-table') })
+      } else {
+        this.$router.push({ path: this.$route.path.concat(mode ? '/demand-chart' : '/demand-table') })
+      }
       this.isChartView = mode
     },
     onClose() {
@@ -282,18 +326,19 @@ export default {
     },
     handleDemandState(tabState) {
       this.demandTabState = tabState
-      const urlArr = this.$route.path.split('/')
-      const urls = ['demand-team', 'demand-phase']
-      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-        urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(`/demand-${tabState}`) })
-      } else {
-        this.$router.push({ path: this.$route.path.concat(`/demand-${tabState}`) })
-      }
     }
   },
   directives: {
     ClickOutside
+  },
+  computed: {
+    selectedNavType() {
+      return this.$store.state.globalState.selectedNavObj.type
+    },
+    c_items() {
+      const { selectedNavObj } = this.$store.state.globalState
+      return selectedNavObj
+    },
   }
   // computed: {
   //   filteredTeam() {

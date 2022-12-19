@@ -4,36 +4,46 @@ export default [
     name: 'project-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
+  {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/demand-team',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
+  {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/demand-phase',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
 
   {
     path: '/operation/portfolio/:portfolioId/program/:programId',
     name: 'program-view',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
   {
     path: '/operation/portfolio/:portfolioId/program/:programId/demand-table',
     name: 'demand-table-view',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
   {
     path: '/operation/portfolio/:portfolioId/program/:programId/demand-chart',
     name: 'demand-chart-view',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
   {
     path: '/operation/portfolio/:portfolioId/program/:programId/reporting-cost',
     name: 'demand-reporting-cost',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
   {
     path: '/operation/portfolio/:portfolioId/program/:programId/reporting-plan',
     name: 'demand-reporting-plan',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
   {
     path: '/operation/portfolio/:portfolioId/program/:programId/control',
     name: 'demand-control',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+    component: () => import('@/views/dashboard/program/Program.vue'),
   },
 
   {
