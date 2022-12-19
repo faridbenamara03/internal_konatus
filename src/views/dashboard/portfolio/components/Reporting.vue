@@ -1,5 +1,5 @@
 <template>
-  <div class="report">
+  <div v-if="reportingState === 'cost'" class="report">
     <div class="reporting-side">
       <div>
         <div class="report-block--head" style="margin-top:64px;">
@@ -563,6 +563,9 @@
       </template>
     </b-modal>
   </div>
+  <div v-else-if="reportingState === 'plan'">
+    <ReportingCostVue :data="itemsForDemand" :fields="fieldForDemand" />
+  </div>
 </template>
 
 <script>
@@ -576,6 +579,7 @@ import {
   BModal,
 } from 'bootstrap-vue'
 import moment from 'moment'
+import ReportingCostVue from './ReportingCost.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
@@ -590,6 +594,7 @@ export default {
     // BListGroup,
     // BListGroupItem,
     BModal,
+    ReportingCostVue
   },
   props: {
     data: {
@@ -597,6 +602,9 @@ export default {
       default: () => [],
     },
     otype: {
+      type: String
+    },
+    reportingState: {
       type: String
     }
   },
@@ -606,7 +614,68 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      openedCollapse: 0
+      openedCollapse: 0,
+      itemsForDemand: [
+        {
+          name: 'Konatus Industries',
+          budget_team: '2540',
+          budget_engaged: '1132.3',
+          real_estimated: '1132.3',
+          children: [
+            {
+              name: 'TEAM A',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM B',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM D',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM E',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+          ],
+        },
+        {
+          name: 'SPACE HOLDER FOR AN OTHER BU',
+          budget_team: '2540',
+          budget_engaged: '1132.3',
+          real_estimated: '1132.3',
+          children: [
+          ],
+        },
+      ],
+      fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
     }
   },
   mounted() {

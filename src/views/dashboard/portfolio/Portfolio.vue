@@ -76,7 +76,7 @@
           @click="ontabchange"
           class="no-action-bar"
         >
-          <Reporting :data="items" :otype="selectedNavType" />
+          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" />
         </b-tab>
         <b-tab
           title="Control"
@@ -142,13 +142,13 @@
             >
               <b-button
                 variant="outline-primary"
-                @click="onClickCPSelectBtn('reporting-cost')"
+                @click="onClickCPSelectBtn('reporting-cost', 'cost')"
               >
                 Cost
               </b-button>
               <b-button
                 variant="outline-primary"
-                @click="onClickCPSelectBtn('reporting-plan')"
+                @click="onClickCPSelectBtn('reporting-plan', 'plan')"
               >
                 Plan
               </b-button>
@@ -250,7 +250,8 @@ export default {
       isChartView: false,
       popoverShow: false,
       selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
-      rangeArray: []
+      rangeArray: [],
+      reportingState: 'cost'
     }
   },
   computed: {
@@ -319,7 +320,8 @@ export default {
         this.$router.push({ path: urlArr.join('/') })
       }
     },
-    onClickCPSelectBtn(url) {
+    onClickCPSelectBtn(url, value) {
+      this.reportingState = value
       const urlArr = this.$route.path.split('/')
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
