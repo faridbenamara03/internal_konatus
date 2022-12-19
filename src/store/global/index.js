@@ -361,6 +361,13 @@ const globalOrganizationData = {
     {
       id: '2.1.1',
       title: 'Paris',
+      type: 'unit',
+      route: {
+        name: 'unit-view',
+        params: {
+          unitId: 'Paris',
+        },
+      },
       children: [
         {
           id: '1.2.1',
@@ -990,6 +997,13 @@ const globalOrganizationData = {
     {
       id: '2.2.1',
       title: 'Sofia',
+      type: 'unit',
+      route: {
+        name: 'unit-view',
+        params: {
+          unitId: 'Sofia',
+        },
+      },
       children: [
         {
           id: '82.12.65.91',

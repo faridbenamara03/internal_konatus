@@ -83,8 +83,59 @@ export default [
     component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
   },
   {
-    path: '/orgnization/team/:teamId',
+    path: '/orgnization/unit/:unitId',
+    name: 'unit-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/demand',
+    name: 'unit-demand-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/reporting-cost',
+    name: 'unit-reporting-cost-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/reporting-plan',
+    name: 'unit-reporting-plan-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/control-table',
+    name: 'unit-control-table-view',
+    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+  },
+
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId',
     name: 'team-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId/demand',
+    name: 'team-demand-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId/reporting-cost',
+    name: 'team-reporting-cost-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId/reporting-plan',
+    name: 'team-reporting-plan-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId/control-table',
+    name: 'team-control-table-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/orgnization/unit/:unitId/team/:teamId/control-chart',
+    name: 'team-control-chart-view',
     component: () => import('@/views/dashboard/team/Team.vue'),
   },
 ]

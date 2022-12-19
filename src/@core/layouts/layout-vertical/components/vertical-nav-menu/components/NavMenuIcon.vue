@@ -41,6 +41,9 @@ export default {
         case 'team':
           this.icon = 'UsersIcon'
           break
+        case 'unit':
+          this.icon = 'LayersIcon'
+          break
         case 'user':
           this.icon = 'UserIcon'
           break
