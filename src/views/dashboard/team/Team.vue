@@ -76,7 +76,7 @@
           <Demand :data="c_demand_team_data" />
         </b-tab>
         <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
-          <Reporting :is-chart-view="isChartView" />
+          <Reporting :reportingState="reportingState" />
           <!-- <b-card-text>
             Carrot cake dragée chocolate.
           </b-card-text> -->

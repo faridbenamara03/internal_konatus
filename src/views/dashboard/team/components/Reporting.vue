@@ -1,5 +1,5 @@
 <template>
-  <div class="report-custom-team-report">
+  <div v-if="reportingState === 'plan'" class="report-custom-team-report">
     <div class="reporting-side-custom">
       <div>
         <div class="program-title">
@@ -129,6 +129,9 @@
     </b-modal>
     <import-loader-modal />
   </div>
+  <div class="w-100" v-else-if="reportingState === 'cost'">
+    <ReportingCostVue />
+  </div>
 </template>
 
 <script>
@@ -139,18 +142,19 @@ import moment from "moment"
 import { isEmpty } from '@/views/utils'
 import ProgressComponent from '@/views/dashboard/team/components/ProgressComponent.vue'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
+import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
   components: {
     BModal,
     BButton,
     ProgressComponent,
-    ImportLoaderModal
+    ImportLoaderModal,
+    ReportingCostVue
   },
   props: {
-    data: {
-      type: Array,
-      default: () => [],
+    reportingState: {
+      type: String,
     },
   },
   data() {
