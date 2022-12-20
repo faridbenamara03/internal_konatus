@@ -1,5 +1,5 @@
 <template>
-  <div v-if="reportingState === 'cost'" class="report">
+  <div v-if="reportingState === 'plan'" class="report">
     <div class="reporting-side">
       <div>
         <div class="report-block--head" style="margin-top:64px;">
@@ -306,7 +306,7 @@
       </template>
     </b-modal>
   </div>
-  <div style="width: 100%" v-else-if="reportingState === 'plan'">
+  <div style="width:100%" v-else-if="reportingState === 'cost'">
     <ReportingCostVue :data="itemsForDemand" :fields="fieldForDemand" />
   </div>
 </template>

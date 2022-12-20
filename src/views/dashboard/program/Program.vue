@@ -84,7 +84,7 @@
             <p>No activities for this project yet.<br>
               Finish setting up the project by creating a elementary activity or importing your data in .wbs format</p>
           </div>
-          <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
+          <Demand :teamData="projectElementTeamData" :isChartView="isChartView" :phaseData="projectElementPhaseData" />
         </b-tab>
         <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :data="c_items" :otype="selectedNavType" :reportingState="reportingState" />
@@ -186,7 +186,7 @@ import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
-import Reporting from '../portfolio/components/Reporting.vue'
+import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 
 export default {

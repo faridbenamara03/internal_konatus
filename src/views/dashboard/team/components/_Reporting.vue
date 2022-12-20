@@ -13,18 +13,6 @@
   </div>
 </template>
 
-<style scoped>
-  .container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  .sub-main {
-    flex: 1;
-    text-align: center;
-  }
-</style>
-
 <script>
 import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
 import ResourceAddedResult from '@/views/dashboard/team/components/sub-component/resourceAddedResult.vue'

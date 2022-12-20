@@ -1,6 +1,6 @@
 <template>
   <div class="project-demand-view">
-    <div v-if="tabState === 'team'" style="padding: 40px 15px">
+    <div v-if="isChartView" style="padding: 40px 15px">
       <div v-for="(team, index) in teamData" :key="index">
         <div class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
           style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
@@ -152,7 +152,7 @@
         </b-button>
       </div> -->
     </div>
-    <div v-else-if="tabState === 'phase'" style="padding: 40px 15px">
+    <div v-else style="padding: 40px 15px">
       <div v-for="(phase, index) in phaseData" :key="index">
         <div class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
           style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
@@ -249,9 +249,8 @@ export default {
       type: Array,
       default: () => [],
     },
-    tabState: {
-      type: String,
-      default: () => "",
+    isChartView: {
+      type: Boolean,
     },
   },
   data() {
