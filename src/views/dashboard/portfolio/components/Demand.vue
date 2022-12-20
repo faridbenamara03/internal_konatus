@@ -47,7 +47,7 @@
                         <b-form-input type="number" style="text-align:end" v-model="item1[ft]" />
                         <b-input-group-append>
                           <b-input-group-text class="bg-transparent font-weight-bold">
-                            US$
+                            €
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
@@ -115,7 +115,7 @@
                     <b-form-input type="number" style="text-align:end" v-model="item[ft]" />
                     <b-input-group-append>
                       <b-input-group-text class="bg-transparent font-weight-bold">
-                        US$
+                        €
                       </b-input-group-text>
                     </b-input-group-append>
                   </b-input-group>
@@ -433,12 +433,10 @@ export default {
       return null
     },
     formatCurrency(value) {
-      if (value) {
-        return new Intl.NumberFormat("en-US", {
-          style: "decimal",
-        }).format(value).concat(' US$')
-      }
-      return null
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(value)
     },
     rowClass(item, type) {
       const colorClass = 'table-success'

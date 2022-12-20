@@ -234,13 +234,10 @@ export default {
       return moment(new Date(date)).format('MM-DD-YYYY')
     },
     formatCurrency(value) {
-      // return new Intl.NumberFormat(undefined, {
-      //   style: 'currency',
-      //   currency: 'USD',
-      // }).format(value)
-      return new Intl.NumberFormat("en-US", {
-        style: "decimal",
-      }).format(value).concat(' US$')
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(value)
     },
     rowClass(item, type) {
       const colorClass = 'table-success'
