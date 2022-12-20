@@ -1,104 +1,109 @@
 <template>
-  <div style="width:100%;" :class="{'has-chart': isChartView}" class="m-1" >
-    <div class="mb-3" style="position: relative">
-      <div :style="`position:absolute;top:35px;left:${sWidth}px;width:${bndWidth}px;border-bottom:3px #D92163 solid;display: ${collapsed ? 'none' : 'block'}`">
-        <progress-circle-inner-icon style="position:absolute;top:-19px;left:-36px"/>
-        <b-icon icon="diamond-fill" style="position:absolute;top:-5px;right:-7px;color:#D92163;"/>
+  <div style="width:100%;">
+    <app-echart-stacked-area  style="width:100%;height:calc(100vh - 250px)" />
+    <div class="m-2">
+      <div class="containerSelf">
+        <div style="width: 330px">
+        </div>
+        <div class="containerSelf p-0" style="width: calc(100% - 330px); font-size: 15px; color: white;">
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday0().bcolor ">
+            {{ getday0().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday1().bcolor ">
+            {{ getday1().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday2().bcolor ">
+            {{ getday2().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday3().bcolor ">
+            {{ getday3().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday4().bcolor ">
+            {{ getday4().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday5().bcolor ">
+            {{ getday5().sdate }}
+          </div>
+          <div class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;" :style="'background-color:' + getday6().bcolor ">
+            {{ getday6().sdate }}
+          </div>
+        </div>
       </div>
-      <div class="containerSelf mb-2">
-        <div class="rounded-left"
-          style="background-color: #252D43; border-left-width: 6px; border-left-color: #FF900C; border-left-style: solid; width: 350px">
-          <div style="padding-top:5px; padding-bottom: 5px; display:flex; justify-content: space-between;background:#FFFFFF20" class="pr-1 pl-1">
-            <div style="font-size: 18px; color: white;">
-              {{ this.teamTitle }}
+      <div class="containerSelf mt-20" v-for="(item, l1) in data_source.series" v-bind:key="l1"
+        style="font-size: 15px; font-weight: bold;">
+        <div style="width: 100%;">
+          <div v-b-toggle="'accordion-1' + item.id" @click="item.isvisible = !item.isvisible" class="containerSelf" style=" margin-top:30px;">
+            <div style="position:relative">
+              <div v-if="l1 === 0" :style="`position:absolute;left:${dayBlockWidth + 330 + 15}px;width:${dayBlockWidth * 3 - 15}px;border-bottom:3px #D92163 solid`">
+                <progress-circle-inner-icon startColor="#FFACDA" circleColor="#D92163" style="position:absolute;top:-19px;left:-36px"/>
+                <b-icon icon="diamond-fill" style="position:absolute;top:-5px;right:-7px;color:#D92163;"/>
+              </div>
+              <div v-if="l1 === 1" :style="`position:absolute;left:${dayBlockWidth * 3 + 330 + 15}px;width:${dayBlockWidth * 3 - 15}px;border-bottom:3px #D92163 solid`">
+                <progress-circle-inner-icon startColor="#FFACDA" circleColor="#D92163" style="position:absolute;top:-19px;left:-36px"/>
+                <b-icon icon="diamond-fill" style="position:absolute;top:-5px;right:-7px;color:#D92163;"/>
+              </div>
+              <div v-if="l1 === 3" :style="`position:absolute;left:${dayBlockWidth + 330}px;width:${dayBlockWidth - 17}px;border-bottom:3px #06d39a solid`">
+                <progress-circle-inner-icon startColor="#adfbe5" circleColor="#06d39a" style="position:absolute;top:-19px;right:-36px"/>
+                <b-icon icon="diamond-fill" style="position:absolute;top:-5px;left:-7px;color:#06d39a;"/>
+              </div>
             </div>
-            <div>
-              <feather-icon :icon="collapsed ? 'ChevronDownIcon' : 'ChevronUpIcon'" size="16" style="cursor:pointer" v-on:click="onCollapse" />
+            <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
+              style="background-color: rgb(49,56,77); display:flex; justify-content: space-between; width: 330px">
+              <div>
+                {{ item.name }}
+              </div>
+              <div>
+                <feather-icon v-if="item.isvisible" :id="'my-modalclose'+ item.id" style="height: 23px; width:23px; color:rgb(115,103,240)" icon="ChevronUpIcon" />
+                <feather-icon v-if="!item.isvisible" :id="'my-modalopen'+ item.id" style="height: 23px; width:23px; color:rgb(115,103,240)" icon="ChevronDownIcon" />
+              </div>
+            </div>
+            <div class="containerSelf p-0" style="width: calc(100% - 330px)">
+              <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="(item_child, l2) in item.data" v-bind:key="l2"
+                :style="'background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor: pointer'">
+                {{ item_child.data }}
+              </div>
             </div>
           </div>
-          <div v-for="(item, index) in data_source.series" :key="index" :style="`display: ${collapsed ? 'none' : 'block'}`" class="pr-1 pl-1">
-            <div class="d-flex" style="justify-content:space-between;padding:8px;height:45px">
-              <div class="d-flex">
-                <div style="margin-top:auto;margin-bottom:auto;">
-                  <feather-icon icon="MenuIcon" class="mr-1" />
-                  {{ item.name }}
+          <b-collapse :id="'accordion-1' + item.id" >
+            <div class="containerSelf" style="width: 100%; font-weight:400;" v-for="(childitem, l3) in item.child" v-bind:key="l3">
+              <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
+                style="font-size: 14px; background-color: rgb(37,45,67); display:flex; justify-content: space-between; width: 330px; height:50px;align-items: center;">
+                <div style="font-weight:400; display:flex; align-items: center;">
+                  <feather-icon style="width:23px; height: 10px;" icon="MenuIcon" />
+                  {{ childitem.name }}
+                </div>
+                <div>
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="outline-primary"
+                    pill
+                    style="background-color:rgb(45,51,81);"
+                  >
+                  <span style="color: lightgray; font-weight:300; margin-right:5px;">
+                    8 H/D
+                  </span>
+                  <feather-icon
+                    icon="MoreHorizontalIcon"
+                  />
+                  </b-button>
                 </div>
               </div>
-              <div class="rounded-pill"
-                style="background-color:#353963;border:#7367F0 1px solid;padding:3px;width:80px;text-align:center;">
-                8 H/Ds
-                <feather-icon icon="MoreHorizontalIcon" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="width:calc(100% - 350px)">
-          <div class="d-flex">
-            <template v-for="(item, index) in reportingDates">
-              <div v-if="isToday(item)" :key="index" class="sub-main" style="padding-top:5px; padding-bottom: 5px;">
-                <div style="border-radius: 5px; background-color: crimson">
-                  <span style="font-size: 18px; color: white;">{{ item.format('dd') }} {{ item.format("D") }}</span>
+              <div class="containerSelf p-0" style="width: calc(100% - 330px);">
+                <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="(item_child_data, l4) in childitem.data" v-bind:key="l4"
+                  :style="'background-color:' + item_child_data.bg + '; color:' + item_child_data.clr + ';color: lightgray;cursor: pointer'">
+                  {{ item_child_data.data }}
                 </div>
               </div>
-              <div v-else :key="index" class="sub-main"
-                style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
-                <span style="font-size: 18px; color: white;">
-                  <span style="color:#283046">{{ item.format('dd') }}</span> {{ item.format("D") }}
-                </span>
-              </div>
-            </template>
-          </div>
-          <template v-for="(item, index) in data_source.series" >
-            <div :style="`display: ${collapsed ? 'none' : 'block'}`" v-bind:key="index">
-              <div class="d-flex" style="height:45px" >
-                <template v-for="(item1, jndex) in item.data">
-                  <div v-bind:key="jndex" class="sub-main d-flex"
-                    :style="`margin-right:0.5px;margin-left:0.5px;background:${item1.bg ? item1.bg : '#0F849E33'}`">
-                    <div style="margin:auto;">
-                      <span style="font-size: 18px; color: white;">
-                        {{ item1.data }}
-                      </span>
-                    </div>
-                  </div>
-                </template>
-              </div>
             </div>
-          </template>
+          </b-collapse>
         </div>
       </div>
-      <div class="containerSelf mb-2">
-        <div class="rounded-left pl-1 pr-1" style="width: 350px;color:aquamarine">
-          TOTAL TEAM CAPACITY
-        </div>
-        <div style="width:calc(100% - 350px);font-weight:bold;" class="d-flex">
-          <template v-for="(item, index) in data_source.teamCapacity">
-            <div :key="index" class="sub-main" v-if="item === '100'" style="color:#138B49">
-              {{ item }}%
-            </div>
-            <div :key="index" class="sub-main" v-if="item === '75'" style="color:#A6E4FF">
-              {{ item }}%
-            </div>
-            <div :key="index" class="sub-main" v-if="item === '0'" style="color:#283046">
-              {{ item }}%
-            </div>
-          </template>
-        </div>
-      </div>
+      <team-detail-modal />
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.day-s {
-
-  &.active {
-    background: #bd2020;
-    border-radius: 2px;
-    p {
-      color: #fff !important;
-    }
-  }
-}
+<style scoped>
 .containerSelf {
   display: flex;
   flex-direction: row;
@@ -111,58 +116,282 @@
 </style>
 
 <script>
-import { BIcon } from 'bootstrap-vue'
-import moment from "moment"
+import {
+  BCollapse, BButton, VBToggle, BIcon
+} from 'bootstrap-vue'
+import Ripple from 'vue-ripple-directive'
+import moment from 'moment'
 import ProgressCircleInnerIcon from './sub-component/progressCircleInnerIcon.vue'
 
 export default {
   components: {
-    ProgressCircleInnerIcon,
-    BIcon
+    BButton,
+    BCollapse,
+    BIcon,
+    ProgressCircleInnerIcon
+  },
+  directives: {
+    'b-toggle': VBToggle,
+    Ripple,
+  },
+  data() {
+    return {
+      dayBlockWidth: 0,
+      isvisible: true,
+      data_source: {
+        series: [
+          {
+            id: 1,
+            name: 'A sensor effector',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            showSymbol: false,
+            color: '#9a4964',
+            lineStyle: {
+              width: 0,
+            },
+            isvisible: true,
+            data: [
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '24/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '28/24' }
+            ],
+            child: [
+              {
+                name: 'laura Smith',
+                data: [
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '12' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '7' },
+                  { bg: 'rgb(35, 54, 60)', clr: '#FFF', data: '0' }
+                ]
+              },
+              {
+                name: 'Colette Mckinney',
+                data: [
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '10' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '7' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3' }
+                ]
+              },
+              {
+                name: 'Perry Doyle',
+                data: [
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '6' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3' },
+                  { bg: 'rgb(35, 54, 60)', clr: '#FFF', data: '0' },
+                  { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '12' },
+                  { bg: 'rgb(35, 54, 60)', clr: '#FFF', data: '0' }
+                ]
+              }
+            ],
+          },
+          {
+            id: 2,
+            name: 'B HW & meca',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            showSymbol: false,
+            color: '#9a4964',
+            lineStyle: {
+              width: 0,
+            },
+            isvisible: true,
+            data: [
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '32/32' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
+              { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' }
+            ],
+            child: [
+              {
+                name: 'laura Smith',
+                data: [
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '12' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '8' },
+                  { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '7' },
+                  { bg: 'rgb(35, 54, 60)', clr: '#FFF', data: '0' }
+                ]
+              },
+            ]
+          },
+          {
+            id: 3,
+            name: 'C general SW',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            showSymbol: false,
+            color: '#9a4964',
+            lineStyle: {
+              width: 0,
+            },
+            isvisible: true,
+            data: [
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '56/56' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '18/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3/24' }
+            ],
+          },
+          {
+            id: 4,
+            name: 'D real time SW',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            showSymbol: false,
+            color: '#9a4964',
+            lineStyle: {
+              width: 0,
+            },
+            isvisible: true,
+            data: [
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '64/64' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '18/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3/24' }
+            ],
+          },
+          {
+            id: 5,
+            name: 'F test',
+            type: 'line',
+            stack: 'Total',
+            areaStyle: {},
+            showSymbol: false,
+            isvisible: true,
+            color: '#9a4964',
+            lineStyle: {
+              width: 0,
+            },
+            data: [
+              { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '72/72' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '18/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '11/24' },
+              { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '3/24' }
+            ],
+          }
+        ],
+      },
+    }
   },
   methods: {
-    isToday(date) {
-      return moment().isSame(date, "day")
+    hideModal() {
+      this.$refs['my-modalclose'].hide()
+      // this.$refs['my-modalopen'].show()
+    },
+    getday0() {
+      const date = moment().day(0).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday1() {
+      const date = moment().day(1).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday2() {
+      const date = moment().day(2).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday3() {
+      const date = moment().day(3).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday4() {
+      const date = moment().day(4).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday5() {
+      const date = moment().day(5).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD').trim() === date.trim()) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
+    },
+    getday6() {
+      const date = moment().day(6).format("ddd DD")
+      let color = ''
+      if (moment().format('ddd DD') === date) {
+        color = 'rgb(255,0,0)'
+      } else {
+        color = 'rgb(26,34,57)'
+      }
+      return { sdate: date, bcolor: color }
     },
     setOffset() {
       const cwidth = document.getElementsByClassName('content-wrapper')[0].clientWidth
-      this.sWidth = 350 + 17 + (cwidth - 28 - 350) / 3.5
-      this.bndWidth = (cwidth * 5 - 28 * 5 - 350 * 5) / 7 - 16
+      this.dayBlockWidth = (cwidth - 330 - 42) / 7
+      // 330 + 15
     },
-    onCollapse() {
-      this.collapsed = !this.collapsed
-    }
   },
   created() {
     window.addEventListener("resize", this.setOffset)
   },
   mounted() {
-    const startDate = moment(moment()).subtract(3, "days")
-    const endDate = moment(moment()).add(4, "days")
-    this.reportingDates = [startDate.clone()]
-    while (startDate.add(1, "days").diff(endDate) < 0) {
-      this.reportingDates.push(startDate.clone())
-    }
     this.setOffset()
-  },
-  computed: {
-    teamTitle() {
-      return this.$store.state.globalState.demandTeamData.title
-    },
-  },
-  data() {
-    return {
-      reportingDates: [],
-      leftP: 15 * 30 + 8,
-      lineStartDate: moment(moment()).subtract(3, "days").format('YYYY.MM.DD'),
-      todate: moment().format('YYYY.MM.DD'),
-      timelineWinWidth: 76 * 30 + 8 * 2,
-
-      data_source: this.$store.state.teamState.teamControlData,
-      sWidth: 0,
-      bndWidth: 0,
-      collapsed: false
-    }
   },
   destroyed() {
     window.removeEventListener("resize", this.setOffset)

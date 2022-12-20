@@ -34,7 +34,6 @@
               @click="onDemandTableEditableClick"
               v-if="tabIndex === 0"
               variant="outline-primary"
-              style="margin-right:100px"
             >
               <feather-icon
                 icon="Edit2Icon"
@@ -42,7 +41,7 @@
               />
               <span>Edit as table</span>
             </b-button>
-            <b-button-group>
+            <!-- <b-button-group>
               <b-button
                 variant="outline-primary"
               >
@@ -55,7 +54,7 @@
                   icon="DollarSignIcon"
                 />
               </b-button>
-            </b-button-group>
+            </b-button-group> -->
           </div>
         </div>
         <b-tab

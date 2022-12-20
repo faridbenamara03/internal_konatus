@@ -17,14 +17,14 @@
               <feather-icon icon="BarChartIcon" />
               Priority
             </b-button>
-            <b-button variant="flat-primary">
+            <!-- <b-button variant="flat-primary">
               <b-icon icon="door-closed" />
               Update
             </b-button>
             <b-button variant="flat-primary">
               <feather-icon icon="ArrowRightIcon" />
               Next Phase
-            </b-button>
+            </b-button> -->
           </div>
         </div>
         <div v-if="tabIndex === 2" class="action-bar justify-content-between">

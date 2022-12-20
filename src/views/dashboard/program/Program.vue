@@ -33,14 +33,14 @@
               <feather-icon icon="BarChartIcon" />
               Priority
             </b-button>
-            <b-button variant="flat-primary">
+            <!-- <b-button variant="flat-primary">
               <b-icon icon="door-closed" />
               Update
             </b-button>
             <b-button variant="flat-primary">
               <feather-icon icon="ArrowRightIcon" />
               Next Phase
-            </b-button>
+            </b-button> -->
           </div>
         </div>
         <div v-if="tabIndex === 2" class="action-bar justify-content-between">
@@ -48,14 +48,14 @@
             <feather-icon icon="RotateCwIcon" />
             Update
           </b-button>
-          <b-button-group>
+          <!-- <b-button-group>
             <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
               <b-icon icon="bar-chart-line" />
             </b-button>
             <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="table" />
             </b-button>
-          </b-button-group>
+          </b-button-group> -->
           <div class="d-flex action-group">
             <div class="d-flex">
               <div class="rounded"
