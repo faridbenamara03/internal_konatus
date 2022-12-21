@@ -2,7 +2,7 @@
   <div v-if="reportingState === 'plan'" class="report">
     <div class="reporting-side">
       <div>
-        <div class="report-block--head" style="margin-top:64px;">
+        <div class="report-block--head" style="margin-top:50px;">
           <p class="m-0 text-uppercase">
             {{ data.title }}
           </p>
@@ -38,10 +38,11 @@
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
-        <b-button v-b-modal.modal-update variant="flat-primary">
+        <div />
+        <!-- <b-button v-b-modal.modal-update variant="flat-primary">
           <feather-icon icon="RotateCwIcon" />
           Update
-        </b-button>
+        </b-button> -->
         <div class="reporting-content-header--badge">
           <!-- <b-button
             variant="flat-dark"

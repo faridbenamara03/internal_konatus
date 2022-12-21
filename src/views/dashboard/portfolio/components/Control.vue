@@ -13,8 +13,8 @@
           </div>
         </div>
         <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
-          <div style="position:relative;top:-50px;height:0px;">TEAM {{ item }}</div>
-          <div :style="`position:relative;top:-28px;width:100%;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
+          <div style="position:relative;top:-43px;height:0px;">TEAM {{ item }}</div>
+          <div :style="`position:relative;top:-20px;width:100%;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
           <div style="display:flex;justify-content:space-between;">
             <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ item1 }}</div>
           </div>
@@ -239,13 +239,13 @@ export default {
         currency: 'EUR',
       }).format(value)
     },
-    rowClass(item, type) {
-      const colorClass = 'table-success'
-      if (!item || type !== 'row') { return }
+    // rowClass(item, type) {
+    //   const colorClass = 'table-success'
+    //   if (!item || type !== 'row') { return }
 
-      // eslint-disable-next-line consistent-return
-      if (item.title === 'total') { return colorClass }
-    },
+    //   // eslint-disable-next-line consistent-return
+    //   if (item.title === 'total') { return colorClass }
+    // },
   },
 }
 </script>
