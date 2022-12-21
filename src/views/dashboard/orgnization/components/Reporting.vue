@@ -50,10 +50,6 @@
       </div>
       <div class="reporting-content--header">
         <div class="first-child">
-          <div v-b-modal.modal-update style="display:inline-block">
-            <feather-icon icon="RotateCwIcon" style="margin-bottom:3px" />
-            Update
-          </div>
         </div>
         <div class="reporting-content-header--badge">
           <div class="phase">

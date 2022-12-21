@@ -2,8 +2,31 @@
   <b-card no-body footer-tag="footer" class="card-portfolio mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <!-- <div v-if="tabIndex === 1" class="action-bar">
-          <b-button-group>
+        <div class="action-bar justify-content-between">
+          <div />
+          <div>
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+              <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+              <span>Import</span>
+            </b-button>
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary" @click="handleDemandUpdate">
+              <feather-icon icon="RotateCwIcon" />
+              Update
+            </b-button>
+            <b-button v-if="(tabIndex === 1)" v-b-modal.modal-update class="ml-1" variant="primary">
+              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+              <span>Update</span>
+            </b-button>
+            <b-button class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <b-button class="ml-1" variant="primary">
+              <feather-icon icon="ZapIcon" size="16" />&nbsp;
+              <span>Configure</span>
+            </b-button>
+          </div>
+          <!-- <b-button-group>
             <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="bar-chart-line" />
             </b-button>
@@ -18,12 +41,8 @@
             <b-button variant="outline-primary">
               <feather-icon icon="DollarSignIcon" />
             </b-button>
-          </b-button-group>
-        </div> -->
-        <b-button v-if="tabIndex === 0" variant="flat-primary" @click="handleDemandUpdate" style="margin:10px">
-          <feather-icon icon="RotateCwIcon" />
-          Update
-        </b-button>
+          </b-button-group> -->
+        </div>
         <!-- <div v-if="tabIndex === 2" class="action-bar justify-content-between">
           <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />
@@ -88,15 +107,6 @@
                 </b-popover>
               </div>
             </div>
-            <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
-              variant="outline-primary">
-              <feather-icon icon="EyeIcon" size="16" />
-              <span>Edit Columns</span>
-            </b-button> -->
-            <!-- <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
-              <feather-icon icon="Edit2Icon" size="16" />
-              <span>Edit as table</span>
-            </b-button> -->
             <b-button-group v-if="tabIndex === 1" class="ml-1">
               <b-button
                 variant="outline-primary"
@@ -113,22 +123,15 @@
                 Plan
               </b-button>
             </b-button-group>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="outline-primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />
-              <span>Import</span>
-            </b-button>
-            <b-button v-if="(tabIndex === 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="RotateCwIcon" size="16" />
-              <span>Update</span>
-            </b-button>
-            <b-button class="ml-1" variant="outline-primary">
-              <feather-icon icon="UploadIcon" size="16" />
-              <span>Export</span>
-            </b-button>
-            <b-button class="ml-1" variant="primary">
-              <feather-icon icon="ZapIcon" size="16" />
-              <span>Configure</span>
-            </b-button>
+            <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
+              variant="outline-primary">
+              <feather-icon icon="EyeIcon" size="16" />
+              <span>Edit Columns</span>
+            </b-button> -->
+            <!-- <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
+              <feather-icon icon="Edit2Icon" size="16" />
+              <span>Edit as table</span>
+            </b-button> -->
             <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>
@@ -426,7 +429,9 @@ export default {
 
 <style lang="scss">
 .popover-body {
-  width: 649px !important;
+  position: absolute;
+  left: -576px;
 }
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
