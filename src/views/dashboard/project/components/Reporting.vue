@@ -153,7 +153,7 @@ import {
   BModal, BButton
 } from "bootstrap-vue"
 import moment from "moment"
-import ProgressComponent from '@/views/dashboard/project/components/ProgressComponent.vue'
+import ProgressComponent from './sub-component/ProgressComponent.vue'
 import { isEmpty } from "@/views/utils"
 
 export default {
