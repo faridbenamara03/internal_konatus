@@ -5,12 +5,11 @@
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
         <template v-for="(item, index) in data_source.xAxisData">
-          <div v-if="index === 1" v-bind:key="index" class="sub-main"
+          <div v-if="index === 1" :key="index" class="sub-main"
             style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
             <b style="font-size: 18px; color: white;">{{ item }}</b>
           </div>
-          <div v-else v-bind:key="index" class="sub-main"
-            style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
+          <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
             <b style="font-size: 18px; color: white;">{{ item }}</b>
           </div>
         </template>
@@ -20,13 +19,13 @@
       <div style="width: 300px">
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main" v-for="item in data_source.xAxisData1" v-bind:key="item"
+        <div class="sub-main" v-for="(item, i1) in data_source.xAxisData1" :key="i1"
           style="padding-top:5px; padding-bottom: 5px;">
           {{ item }}
         </div>
       </div>
     </div>
-    <div class="containerSelf" v-for="item in data_source.series" v-bind:key="item.name"
+    <div class="containerSelf" v-for="(item, i2) in data_source.series" :key="i2"
       style="font-size: 23px; font-weight: bold;">
       <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
         style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 300px">
@@ -38,7 +37,7 @@
         </div>
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="item_child in item.data" v-bind:key="item_child"
+        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="item_child in item.data" :key="item_child"
           :style="'margin: 0.5px; background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor: pointer'">
           {{ item_child.data }}
         </div>
@@ -47,18 +46,18 @@
     <div class="containerSelf m-2">
       <b style="font-size: 20px; color: #A6E4FF">TOTALS</b>
     </div>
-    <div class="containerSelf" v-for="(item, index) in filteredTotalData" v-bind:key="index">
+    <div class="containerSelf" v-for="(item, index) in filteredTotalData" :key="index">
       <div style="width: 300px">
         <b style="font-size: 18px; color: #A6E4FF">{{ item.captain }}</b>
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main" v-for="(item1, index) in item.data" v-bind:key="index"
+        <div class="sub-main" v-for="(item1, index) in item.data" :key="index"
           style="padding-top:5px; padding-bottom: 5px;">
           <b :style='"font-size: 18px; color:" + item1.numcolor'>{{ item1.value }}</b>
           <b :style='"font-size: 18px; color:" + item1.pctcolor'>
             (
-              {{ item1.percent }}
-              <span v-if="item1.percent >= 0">%</span>
+            {{ item1.percent }}
+            <span v-if="item1.percent >= 0">%</span>
             )
           </b>
         </div>

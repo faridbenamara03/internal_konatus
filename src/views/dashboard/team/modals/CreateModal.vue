@@ -30,17 +30,17 @@
     </div>
     <div v-if="curIndex === 1">
       <b-form-group label="Name" label-for="input-formatter" class="mb-2">
-        <b-form-input id="input-formatter" v-model="text1" placeholder="Paul Michel" :formatter="formatter" />
+        <b-form-input id="input-formatter" placeholder="Paul Michel" />
       </b-form-group>
       <div class="d-flex">
         <div style="flex:1;padding-right:3px;">
           <b-form-group label="Role" label-for="input-formatter" class="mb-0">
-            <b-form-input id="input-formatter" v-model="text1" placeholder="Developer" :formatter="formatter" />
+            <b-form-input id="input-formatter" placeholder="Developer" />
           </b-form-group>
         </div>
         <div style="flex:1;padding-left:3px;">
           <b-form-group label="Hours/Day" label-for="input-formatter" class="mb-0">
-            <b-form-input id="input-formatter" v-model="text1" placeholder="8" :formatter="formatter" />
+            <b-form-input id="input-formatter" placeholder="8" />
           </b-form-group>
         </div>
       </div>
