@@ -1,5 +1,25 @@
 <template>
   <div style="width:100%;">
+    <div class="d-flex justify-content-between">
+      <div />
+      <div class="d-flex action-group">
+        <div class="d-flex">
+          <div class="rounded"
+            style="background-color:#8b3b4e;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+          <div>ENGAGED</div>
+        </div>
+        <div class="d-flex">
+          <div class="ml-2 rounded"
+            style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+          <div>QUOTE</div>
+        </div>
+        <div class="d-flex">
+          <div class="ml-2 rounded"
+            style="background-color:#0a5666;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+          <div>ESTIMATED</div>
+        </div>
+      </div>
+    </div>
     <app-echart-stacked-area  style="width:100%;height:calc(100vh - 250px)" />
     <div class="m-2">
       <div class="containerSelf">

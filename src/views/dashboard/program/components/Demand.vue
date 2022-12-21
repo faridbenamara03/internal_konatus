@@ -229,7 +229,7 @@ import { isEmpty } from "@/views/utils"
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 import ActivityDetailModal from '../modals/ActivityDetailModal.vue'
-import CustomCollapse from './CustomCollapse.vue'
+import CustomCollapse from './sub-component/CustomCollapse.vue'
 
 export default {
   components: {
@@ -265,7 +265,7 @@ export default {
   },
   computed: {
     teamarr() {
-      return this.teamData.map(team => team.title)
+      return this.teamData.map(team => team?.title)
     },
     c_SelectedActivity() {
       return this.selectedActivity

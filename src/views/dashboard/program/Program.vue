@@ -2,75 +2,34 @@
   <b-card no-body footer-tag="footer" class="card-portfolio card-project mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div v-if="tabIndex === 0" class="action-bar justify-content-between">
+        <div class="action-bar justify-content-between">
           <div></div>
-          <!-- <b-button-group v-if="tabIndex === 0" class="ml-1">
-            <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('team')">
-              Team
-            </b-button>
-            <b-button variant="outline-primary" :style="`background:${demandTabState === 'phase' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('phase')">
-              Phase
-            </b-button>
-          </b-button-group> -->
-          <b-button-group v-if="tabIndex === 0" class="ml-1">
-            <b-button
-              variant="outline-primary"
-              :class="{'active': isChartView}"
-              @click="handleChangeViewMode(true)"
-            >
-              <b-icon icon="bar-chart-line" />
-            </b-button>
-            <b-button
-              variant="outline-primary"
-              :class="{'active': !isChartView}"
-              @click="handleChangeViewMode(false)"
-            >
-              <b-icon icon="table" />
-            </b-button>
-          </b-button-group>
-          <div class="d-flex action-group">
-            <b-button variant="flat-primary">
-              <feather-icon icon="BarChartIcon" />
-              Priority
-            </b-button>
-            <!-- <b-button variant="flat-primary">
-              <b-icon icon="door-closed" />
-              Update
-            </b-button>
-            <b-button variant="flat-primary">
-              <feather-icon icon="ArrowRightIcon" />
-              Next Phase
-            </b-button> -->
-          </div>
-        </div>
-        <div v-if="tabIndex === 2" class="action-bar justify-content-between">
-          <b-button variant="flat-primary" @click="handleUpdate">
-            <feather-icon icon="RotateCwIcon" />
-            Update
-          </b-button>
-          <!-- <b-button-group>
-            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
-              <b-icon icon="bar-chart-line" />
-            </b-button>
-            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
-              <b-icon icon="table" />
-            </b-button>
-          </b-button-group> -->
-          <div class="d-flex action-group">
-            <div class="d-flex">
-              <div class="rounded"
-                style="background-color:#8b3b4e;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
-              <div>ENGAGED</div>
+          <div>
+            <div v-if="(tabIndex === 0)">
+              <b-button v-b-modal.modal-import class="ml-1" variant="primary">
+                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+                <span>Import</span>
+              </b-button>
+              <b-button v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
+                <feather-icon icon="MapIcon" size="16" />&nbsp;
+                <span>Request Quote</span>
+              </b-button>
             </div>
-            <div class="d-flex">
-              <div class="ml-2 rounded"
-                style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
-              <div>QUOTE</div>
+            <div v-if="(tabIndex === 1)">
+              <b-button v-b-modal.modal-update class="mr-1" variant="primary">
+                <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+                <span>Update</span>
+              </b-button>
+              <b-button v-if="(tabIndex === 1)" variant="primary">
+                <feather-icon icon="ArrowRightIcon" size="16" />&nbsp;
+                Next Phase
+              </b-button>
             </div>
-            <div class="d-flex">
-              <div class="ml-2 rounded"
-                style="background-color:#0a5666;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
-              <div>ESTIMATED</div>
+            <div v-if="(tabIndex === 2)">
+              <b-button variant="primary">
+                <feather-icon icon="CommandIcon" size="16" />&nbsp;
+                Manage
+              </b-button>
             </div>
           </div>
         </div>
@@ -116,6 +75,22 @@
                 </b-popover>
               </div>
             </div> -->
+            <b-button-group v-if="tabIndex === 0" class="ml-1">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(true)"
+              >
+                Chart
+              </b-button>
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(false)"
+              >
+                Table
+              </b-button>
+            </b-button-group>
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button
                 variant="outline-primary"
@@ -132,22 +107,6 @@
                 Plan
               </b-button>
             </b-button-group>
-            <b-button v-if="(tabIndex !== 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />
-              <span>Import</span>
-            </b-button>
-            <b-button v-if="(tabIndex === 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="RotateCwIcon" size="16" />
-              <span>Update</span>
-            </b-button>
-            <b-button class="ml-1" variant="outline-primary">
-              <feather-icon icon="UploadIcon" size="16" />
-              <span>Export</span>
-            </b-button>
-            <b-button v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
-              <feather-icon icon="MapIcon" size="16" />
-              <span>Request Quote</span>
-            </b-button>
           </div>
         </template>
       </b-tabs>

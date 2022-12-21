@@ -1,11 +1,5 @@
 <template>
   <div class="demand-view" >
-    <div class="p-1">
-      <b-button variant="flat-primary">
-        <feather-icon icon="RotateCwIcon" />
-        Update
-      </b-button>
-    </div>
     <div class="border-top border-bottom">
       <div v-for="(item, index) in data" :key="index" class="d-flex">
         <div style="flex:4" class="border-right pr-2 pl-2">
@@ -106,11 +100,11 @@
 
 <script>
 import moment from 'moment'
-import { BButton } from 'bootstrap-vue'
+// import { BButton } from 'bootstrap-vue'
 
 export default {
   components: {
-    BButton
+    // BButton
   },
   props: {
     data: {

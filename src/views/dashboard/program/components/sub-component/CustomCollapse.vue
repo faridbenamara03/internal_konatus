@@ -8,7 +8,7 @@
         Select All
       </b-button>
     </div>
-    <app-collapse class="my-2">
+    <div class="my-2">
       <div class="d-flex mt-1 mb-1" style="justify-content:space-between;font-weight:bold;cursor:pointer"
         @click="toggleOpen">
         <div>{{ team.activities.length }} work element</div>
@@ -82,7 +82,7 @@
         <feather-icon icon="PlusIcon" />
         <span>Insert New Work Element</span>
       </b-button>
-    </app-collapse>
+    </div>
   </div>
 </template>
 
