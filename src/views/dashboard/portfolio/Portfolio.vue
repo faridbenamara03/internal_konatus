@@ -7,12 +7,12 @@
             <span v-if="tabIndex === 0">{{ tableTtle }}</span>
           </div>
           <div>
-            <div v-if="tabIndex === 0">
+            <div v-if="!isChartView && tabIndex === 0">
               <b-button @click="onDemandTableEditableClick" variant="primary">
                 <feather-icon icon="Edit2Icon" size="16" />&nbsp;
                 <span>Edit as table</span>
               </b-button>
-              <b-button v-if="!isChartView && tabIndex === 0" v-b-modal.modal-edit-column class="ml-1"
+              <b-button v-b-modal.modal-edit-column class="ml-1"
                 variant="primary">
                 <feather-icon icon="EyeIcon" size="16" />&nbsp;
                 <span>Edit Columns</span>
@@ -92,7 +92,7 @@
                   @click="handleChangeViewMode(true)">
                   Chart
                 </b-button>
-                <b-button variant="outline-primary" :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                <b-button variant="outline-primary" :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
                   @click="handleChangeViewMode(false)">
                   Table
                 </b-button>

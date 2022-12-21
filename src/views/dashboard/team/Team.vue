@@ -14,9 +14,7 @@
                 Engaged
               </b-button>
               <b-button variant="flat-primary">
-                <span style="font-size:12px;">
-                  <b-icon icon="diamond-fill" />
-                </span>
+                <b-icon icon="diamond-fill" style="font-size:12px;" />
                 Estimated
               </b-button>
             </div>
@@ -46,7 +44,7 @@
               <feather-icon icon="ZapIcon" size="16" />&nbsp;
               <span>Configure</span>
             </b-button> -->
-            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
+            <b-button v-if="tabIndex === 2 && !isChartView" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
               <feather-icon icon="UserPlusIcon" size="16" />&nbsp;
               <span>Add Resource</span>
             </b-button>

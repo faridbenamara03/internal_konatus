@@ -111,10 +111,10 @@
               </b-button>
             </b-button-group> -->
             <b-button-group v-if="tabIndex === 0" class="ml-1">
-              <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('team')">
+              <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#473ca3' : '#fff0'}`" @click="handleDemandState('team')">
                 Team
               </b-button>
-              <b-button variant="outline-primary" :style="`background:${demandTabState === 'phase' ? '#7367F040' : '#fff0'}`" @click="handleDemandState('phase')">
+              <b-button variant="outline-primary" :style="`background:${demandTabState === 'phase' ? '#473ca3' : '#fff0'}`" @click="handleDemandState('phase')">
                 Phase
               </b-button>
             </b-button-group>
