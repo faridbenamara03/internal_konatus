@@ -20,7 +20,6 @@
         </div>
       </div>
     </div>
-    <app-echart-stacked-area  style="width:100%;height:calc(100vh - 250px)" />
     <div class="m-2">
       <div class="containerSelf">
         <div style="width: 330px">
@@ -118,7 +117,6 @@
           </b-collapse>
         </div>
       </div>
-      <team-detail-modal />
     </div>
   </div>
 </template>
