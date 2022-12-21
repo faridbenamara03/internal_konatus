@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;" :class="{'has-chart': isChartView}" class="m-1" >
+  <div style="width:100%;" class="m-1" >
     <div class="mb-3" style="position: relative">
       <div :style="`position:absolute;top:35px;left:${sWidth}px;width:${bndWidth}px;border-bottom:3px #D92163 solid;display: ${collapsed ? 'none' : 'block'}`">
         <progress-circle-inner-icon style="position:absolute;top:-19px;left:-36px"/>

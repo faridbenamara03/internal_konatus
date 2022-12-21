@@ -192,7 +192,7 @@ import {
   BModal, BButton, BFormSelect
 } from "bootstrap-vue"
 import moment from "moment"
-import ProgressComponent from '@/views/dashboard/orgnization/components/ProgressComponent.vue'
+import ProgressComponent from './sub-component/ProgressComponent.vue'
 
 export default {
   components: {
