@@ -342,8 +342,8 @@ export default {
   },
   props: {
     data: {
-      type: Array,
-      default: () => [],
+      type: Object,
+      default: () => {},
     },
     otype: {
       type: String

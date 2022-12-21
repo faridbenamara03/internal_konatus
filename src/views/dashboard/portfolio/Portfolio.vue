@@ -185,10 +185,10 @@ export default {
     },
     tableTtle() {
       const { selectedNavObj } = this.$store.state.globalState
-      return selectedNavObj ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
+      return selectedNavObj.type ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
     },
     selectedNavType() {
-      return this.$store.state.globalState.selectedNavObj.type
+      return this.$store.state.globalState.selectedNavObj?.type
     }
   },
   mounted() {

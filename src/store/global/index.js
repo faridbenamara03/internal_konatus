@@ -2040,7 +2040,7 @@ export default {
     demandTeamData: {},
     activityDetailModalOpen: false,
     selectedNavId: '',
-    selectedNavObj: undefined,
+    selectedNavObj: {},
 
     globalOperationData,
     // globalOperationData: {
