@@ -2,23 +2,60 @@
   <b-card no-body footer-tag="footer" class="card-portfolio card-project mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div v-if="tabIndex === 0" class="action-bar justify-content-between">
-          <div></div>
-          <!-- <b-button variant="flat-primary" @click="handleUpdateDemand">
-            <feather-icon icon="RotateCwIcon" />
-            Update
-          </b-button> -->
+        <div class="action-bar justify-content-between">
+          <div>
+            <div v-if="tabIndex === 2" class="justify-content-between">
+              <b-button variant="flat-primary">
+                <circle-icon size="1x" class="custom-class" />
+                Real
+              </b-button>
+              <b-button variant="flat-primary">
+                <calendar-icon size="1x" class="custom-class" />
+                Engaged
+              </b-button>
+              <b-button variant="flat-primary">
+                <span style="font-size:12px;">
+                  <b-icon icon="diamond-fill" />
+                </span>
+                Estimated
+              </b-button>
+            </div>
+          </div>
           <div class="d-flex action-group">
-            <b-button variant="flat-primary">
-              <feather-icon icon="BarChartIcon" />
+            <!-- <b-button variant="primary">
+              <feather-icon icon="BarChartIcon" />&nbsp;
               Priority
+            </b-button> -->
+            <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="primary">
+              <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+              <span>Import</span>
+            </b-button>
+            <b-button v-if="(tabIndex == 0)" @click="handleUpdateDemand" class="ml-1" variant="primary">
+              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+              <span>Update</span>
+            </b-button>
+            <b-button v-if="(tabIndex == 1)" class="ml-1" variant="primary">
+              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+              <span>Update</span>
+            </b-button>
+            <!-- <b-button class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <b-button class="ml-1" variant="primary">
+              <feather-icon icon="ZapIcon" size="16" />&nbsp;
+              <span>Configure</span>
+            </b-button> -->
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
+              <feather-icon icon="UserPlusIcon" size="16" />&nbsp;
+              <span>Add Resource</span>
             </b-button>
             <!-- <b-button variant="flat-primary">
               <b-icon icon="door-closed" />
               Update
             </b-button>
             <b-button variant="flat-primary">
-              <feather-icon icon="ArrowRightIcon" />
+              <feather-icon icon="ArrowRightIcon" />&nbsp;
               Next Phase
             </b-button> -->
           </div>
@@ -41,41 +78,11 @@
             </b-button>
           </b-button-group>
         </div> -->
-        <div v-if="tabIndex === 2" class="action-bar justify-content-between">
-          <b-button variant="flat-primary" @click="handleUpdate">
-            <feather-icon icon="RotateCwIcon" />
-            Update
-          </b-button>
-          <b-button-group>
-            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
-              <b-icon icon="bar-chart-line" />
-            </b-button>
-            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
-              <b-icon icon="table" />
-            </b-button>
-          </b-button-group>
-          <div class="d-flex action-group">
-            <b-button variant="flat-primary">
-              <circle-icon size="1x" class="custom-class" />
-              Real
-            </b-button>
-            <b-button variant="flat-primary">
-              <calendar-icon size="1x" class="custom-class" />
-              Engaged
-            </b-button>
-            <b-button variant="flat-primary">
-              <span style="font-size:12px;" >
-                <b-icon icon="diamond-fill" />
-              </span>
-              <!-- <layers-icon size="1x" class="custom-class" /> -->
-              Estimated
-            </b-button>
-          </div>
-        </div>
         <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
           <Demand :data="c_demand_team_data" />
         </b-tab>
-        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
+        <b-tab title="Reporting"
+          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :reportingState="reportingState" />
           <!-- <b-card-text>
             Carrot cake dragée chocolate.
@@ -86,9 +93,9 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <!-- <div class="d-flex align-items-center">
-              <feather-icon icon="CalendarIcon" size="16" class="mr-1" />
-              <div style="white-space:nowrap">{{ getToday() }}</div>
+            <div class="d-flex align-items-center">
+              <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
+              <span>Period</span>
               <div class="ml-1">
                 <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
                 <b-popover
@@ -107,7 +114,17 @@
                   </div>
                 </b-popover>
               </div>
-            </div> -->
+            </div>
+            <b-button-group v-if="(tabIndex === 2)" class="ml-1">
+              <b-button variant="outline-primary" :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(true)">
+                Chart
+              </b-button>
+              <b-button variant="outline-primary" :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(false)">
+                Table
+              </b-button>
+            </b-button-group>
             <b-button-group v-if="(tabIndex === 1)" class="ml-1">
               <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-cost', 'cost')"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`">
@@ -118,30 +135,10 @@
                 Plan
               </b-button>
             </b-button-group>
-            <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />
-              <span>Import</span>
-            </b-button>
-            <b-button v-if="(tabIndex == 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="RotateCwIcon" size="16" />
-              <span>Update</span>
-            </b-button>
-            <b-button class="ml-1" variant="outline-primary">
-              <feather-icon icon="UploadIcon" size="16" />
-              <span>Export</span>
-            </b-button>
-            <b-button class="ml-1" variant="primary">
-              <feather-icon icon="ZapIcon" size="16" />
-              <span>Configure</span>
-            </b-button>
             <!-- <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
-              <feather-icon icon="MapIcon" size="16" />
+              <feather-icon icon="MapIcon" size="16" />&nbsp;
               <span>Show Work Element To Quote</span>
             </b-button> -->
-            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
-              <feather-icon icon="UserPlusIcon" size="16" />
-              <span>Add Resource</span>
-            </b-button>
           </div>
         </template>
       </b-tabs>
@@ -158,12 +155,12 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup
+  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BPopover, BFormInput
 } from 'bootstrap-vue'
 import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
-// import { MonthPicker } from 'vue-month-picker'
+import { MonthPicker } from 'vue-month-picker'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
@@ -186,9 +183,9 @@ export default {
     AddResourceModal,
     Reporting,
     BIcon,
-    // MonthPicker,
-    // BFormInput,
-    // BPopover,
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -252,7 +249,7 @@ export default {
     handleChangeViewMode(mode) {
       this.isChartView = mode
       const urlArr = this.$route.path.split('/')
-      const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control-chart', 'control-table']
+      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-chart', 'control-table']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
         this.$router.push({ path: urlArr.join('/').concat(mode ? '/control-chart' : '/control-table') })

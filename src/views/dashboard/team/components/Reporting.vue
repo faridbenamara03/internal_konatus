@@ -140,8 +140,8 @@ import {
 } from "bootstrap-vue"
 import moment from "moment"
 import { isEmpty } from '@/views/utils'
-import ProgressComponent from '@/views/dashboard/team/components/ProgressComponent.vue'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
+import ProgressComponent from './sub-component/ProgressComponent.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
