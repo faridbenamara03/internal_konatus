@@ -209,16 +209,18 @@ export default {
           colors: ["#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#7E36AF", "#008ffb", "#00e396"],
         },
         title: {
-          text: 'Reporting Cost View',
-          align: 'left',
-          offsetX: 110
+          text: 'REPORTING COST VIEW',
+          align: 'center',
+          style: {
+            color: '#555555'
+          }
         },
         xaxis: {
           categories: ['', 'Sep/21', 'Oct/21', 'Nov/21', 'Dev/21', ''],
           labels: {
             style: {
               fontWeight: 'bold',
-              colors: ["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]
+              colors: "#FFFFFF"
             }
           }
         },
@@ -236,8 +238,11 @@ export default {
                 colors: '#FFFFFF',
               },
               formatter(value) {
-                if (value < 1000) return value
-                return `${(value / 1000).toFixed(2)}k`
+                if (value) {
+                  if (value < 1000) return value.toFixed(0)
+                  return `${(value / 1000).toFixed(2)}k`
+                }
+                return 0
               },
             },
             // title: {
@@ -304,7 +309,6 @@ export default {
         //   },
         // },
         legend: {
-          fontWeight: 800,
           labels: {
             colors: '#888888',
             useSeriesColors: false
