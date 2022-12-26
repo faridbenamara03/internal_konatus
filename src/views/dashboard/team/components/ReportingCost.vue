@@ -155,23 +155,23 @@ export default {
       series: [
         {
           name: "BUDGET ENGAGED",
-          type: 'column',
+          type: 'bar',
           data: [null, 1000, 500, 1700, 300, null]
         },
         {
           name: "REAL ESTIMATED",
-          type: 'column',
+          type: 'bar',
           data: [null, 1800, 1200, 1000, 1500, null]
         },
         {
           name: "QUOTE",
-          type: 'column',
+          type: 'bar',
           data: [null, 1300, 800, 2100, 1400, null]
         },
         {
           name: "DEMAND",
-          type: 'column',
-          data: [null, 300, 500, 1600, 200, null]
+          type: 'bar',
+          data: [null, 300, 500, 1600, 500, null]
         },
         {
           name: 'ESTIMATED',
@@ -188,11 +188,25 @@ export default {
         }
       ],
       chartOptions: {
-        chart: {
-          height: 500,
-          type: 'line',
-          stacked: false
-        },
+        // chart: {
+        //   animations: {
+        //     enabled: true,
+        //     easing: 'easeinout',
+        //     speed: 100,
+        //     animateGradually: {
+        //       enabled: true,
+        //       delay: 150
+        //     },
+        //     dynamicAnimation: {
+        //       enabled: true,
+        //       speed: 350
+        //     }
+        //   },
+        //   background: '#fff'
+        //   sparkline: {
+        //     enabled: false,
+        //   }
+        // },
         plotOptions: {
           bar: {
             horizontal: false,
@@ -200,9 +214,9 @@ export default {
             borderRadius: 10
           },
         },
-        dataLabels: {
-          enabled: false
-        },
+        // dataLabels: {
+        //   enabled: false
+        // },
         stroke: {
           width: [10, 10, 10, 10, 4, 4, 4],
           dashArray: [0, 0, 0, 0, 8, 8, 8],
@@ -300,13 +314,50 @@ export default {
           //   }
           // },
         ],
+        colors: ['#ff2200', '#33FF00', '#004eff', '#ffeb00', '#775dd0', '#008ffb', '#00e396'],
+        tooltip: {
+          theme: 'dark',
+          custom: ({
+            series, seriesIndex, dataPointIndex, w
+          }) => {
+            console.log('series ----', series)
+            console.log('seriesIndex ----', seriesIndex)
+            console.log('dataPointIndex ----', dataPointIndex)
+            console.log('w ----', w)
+            return (
+              `<div class="m-1">
+                <div class="mb-1">Project X</div>
+                <div style="color:#ff2200">BUDGET ENGAGED</div>
+                <div class="mb-1">${series[0][dataPointIndex].toLocaleString('en')}</div>
+                <div style="color:#33FF00">REAL ESTIMATED</div>
+                <div class="mb-1">${series[1][dataPointIndex].toLocaleString('en')}</div>
+                <div style="color:#ffeb00">DEMAND</div>
+                <div>${series[3][dataPointIndex].toLocaleString('en')}</div>
+              </div>`
+            )
+            // var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+
+            // return '<ul>' +
+            // '<li><b>Price</b>: ' + data.x + '</li>' +
+            // '<li><b>Number</b>: ' + data.y + '</li>' +
+            // '<li><b>Product</b>: \'' + data.product + '\'</li>' +
+            // '<li><b>Info</b>: \'' + data.info + '\'</li>' +
+            // '<li><b>Site</b>: \'' + data.site + '\'</li>' +
+            // '</ul>';
+          }
+        },
         // tooltip: {
-        //   fixed: {
-        //     enabled: true,
-        //     // position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
-        //     offsetY: 30,
-        //     offsetX: 60
-        //   },
+        //   theme: 'dark',
+        //   // style: {
+        //   //   fontSize: '12px',
+        //   //   fontFamily: undefined
+        //   // },
+        //   // fixed: {
+        //   //   enabled: true,
+        //   //   // position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+        //   //   offsetY: 30,
+        //   //   offsetX: 60
+        //   // },
         // },
         legend: {
           labels: {
