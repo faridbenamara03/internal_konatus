@@ -95,13 +95,8 @@
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <span>Period</span>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
-                <b-popover
-                  placement="bottomleft"
-                  target="popover-manual-1"
-                  ref="popover"
-                  :show.sync="popoverShow"
-                >
+                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
+                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
                       <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
@@ -201,6 +196,7 @@ export default {
       selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
+      arr4chart: [],
     }
   },
   computed: {
@@ -229,17 +225,35 @@ export default {
     //   }
     // },
     onRangeChange(value) {
-      if (this.rangeArray.length === 2) this.rangeArray = []
+      if (this.rangeArray.length === 2) {
+        this.arr4chart = []
+        this.rangeArray = []
+      }
       const v = `${value.monthIndex} / ${value.year}`
+      this.arr4chart.push(`${value.year}-${value.monthIndex}-15`)
       this.rangeArray.push(v)
       this.selectedMonth = this.rangeArray.join(' - ')
       if (this.rangeArray.length === 2) {
+        const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
         this.popoverShow = false
-        this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+        this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
       }
     },
     onClose() {
       this.popoverShow = false
+    },
+    getBetweenMonthsArr(startD, endD) {
+      const startDate = moment(startD)
+      const endDate = moment(endD)
+      const betweenMonths = []
+      if (startDate <= endDate) {
+        const date = startDate.startOf('month')
+        while (date < endDate.endOf('month')) {
+          betweenMonths.push(date.format('YYYY-MM'))
+          date.add(1, 'month')
+        }
+      }
+      return betweenMonths
     },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
@@ -266,6 +280,10 @@ export default {
 </script>
 
 <style lang="scss">
+.popover-body {
+  position: absolute;
+  left: -576px;
+}
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 @import '@core/scss/vue/pages/dashboard-project.scss';
 </style>

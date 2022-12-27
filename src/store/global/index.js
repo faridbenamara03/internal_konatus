@@ -1,4 +1,5 @@
 import Vue from "vue"
+import moment from 'moment'
 
 const globalOperationData = {
   id: '1.1',
@@ -2054,7 +2055,17 @@ export default {
     //   },
     //   children: ['']
     // },
-    globalOrganizationData
+    globalOrganizationData,
+    chartXAxisData: ['', moment().format('YYYY-MM'), ''],
+    chartSeriesData: [
+      [null, parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), null],
+      [1450, 1450, 1450],
+      [1600, 1600, 1600],
+      [1500, 1500, 1500],
+    ]
   },
   mutations: {
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
@@ -2248,7 +2259,7 @@ export default {
       state.selectedNavId = navObj.id
       state.selectedNavObj = navObj
     },
-    ON_RANGE_CHANGE(state) {
+    ON_RANGE_CHANGE(state, betweenMonths) {
       if (state.selectedNavObj.children) {
         const ndt = state.selectedNavObj.children.map(t => {
           let budget = 0
@@ -2296,6 +2307,32 @@ export default {
         modifiedSelectedNavObj.children = ndt
         state.selectedNavObj = modifiedSelectedNavObj
       }
+      state.chartXAxisData = ['', ...betweenMonths, '']
+      const i0 = []
+      const i1 = []
+      const i2 = []
+      const i3 = []
+      const i4 = []
+      const i5 = []
+      const i6 = []
+      betweenMonths.forEach(() => {
+        i0.push(parseInt(Math.random() * 400 + 1300, 10))
+        i1.push(parseInt(Math.random() * 400 + 1300, 10))
+        i2.push(parseInt(Math.random() * 400 + 1300, 10))
+        i3.push(parseInt(Math.random() * 400 + 1300, 10))
+        i4.push(1450)
+        i5.push(1600)
+        i6.push(1500)
+      })
+      state.chartSeriesData = [
+        [null, ...i0, null],
+        [null, ...i1, null],
+        [null, ...i2, null],
+        [null, ...i3, null],
+        [1450, ...i4, 1450],
+        [1600, ...i5, 1600],
+        [1500, ...i6, 1500]
+      ]
     },
     OPERATION_NEW_SAVE(state, data) {
       console.log(state, data)

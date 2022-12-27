@@ -38,175 +38,190 @@ export default {
       // series: [
       //   {
       //     name: "BUDGET ENGAGED",
-      //     type: 'column',
-      //     data: [1000, 500, 1700, 300]
+      //     type: 'bar',
+      //     data: this.$store.state.globalState.chartSeriesData[0]
       //   },
       //   {
       //     name: "REAL ESTIMATED",
-      //     type: 'column',
-      //     data: [1800, 1200, 1000, 1500]
+      //     type: 'bar',
+      //     data: this.$store.state.globalState.chartSeriesData[1]
       //   },
       //   {
       //     name: "QUOTE",
-      //     type: 'column',
-      //     data: [1300, 800, 2100, 1400]
+      //     type: 'bar',
+      //     data: this.$store.state.globalState.chartSeriesData[2]
       //   },
       //   {
       //     name: "DEMAND",
-      //     type: 'column',
-      //     data: [300, 500, 1600, 200]
+      //     type: 'bar',
+      //     data: this.$store.state.globalState.chartSeriesData[3]
       //   },
       //   {
       //     name: 'ESTIMATED',
       //     type: 'line',
-      //     data: [2000, 2000, 2000, 2000]
+      //     data: this.$store.state.globalState.chartSeriesData[4]
       //   }, {
       //     name: 'ENGAGED',
       //     type: 'line',
-      //     data: [2800, 2800, 2800, 2800]
+      //     data: this.$store.state.globalState.chartSeriesData[5]
       //   }, {
       //     name: 'SPENT',
       //     type: 'line',
-      //     data: [1600, 1600, 1600, 1600]
+      //     data: this.$store.state.globalState.chartSeriesData[6]
       //   }
       // ],
       // chartOptions: {
-      //   legend: {
-      //     show: false,
-      //     labels: {
-      //       colors: ["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]
-      //     },
-      //     customLegendItems: [],
-      //     position: 'bottom',
-      //     horizontalAlign: 'left',
-      //     offsetX: 0,
-      //     offsetY: 10
-      //   },
-      //   chart: {
-      //     height: 350,
-      //     type: 'line',
+      //   annotations: {
+      //     yaxis: [
+      //       {
+      //         y: 8800,
+      //         borderColor: '#00E396',
+      //         label: {
+      //           borderColor: '#00E396',
+      //           style: {
+      //             color: '#fff',
+      //             background: '#00E396'
+      //           },
+      //           text: 'Y-axis annotation on 8800'
+      //         }
+      //       }
+      //     ]
       //   },
       //   plotOptions: {
       //     bar: {
       //       horizontal: false,
-      //       columnWidth: '155%',
+      //       columnWidth: '80%',
       //       borderRadius: 10
       //     },
       //   },
-      //   colors: ["green", "red", "yellow", "purple", "blue", "darkgreen", "orange"],
       //   stroke: {
-      //     width: [1, 1, 2, 2, 2, 1, 1],
-      //     curve: 'straight',
-      //     dashArray: [0, 0, 0, 0, 8, 8, 8]
+      //     width: [10, 10, 10, 10, 4, 4, 4],
+      //     dashArray: [0, 0, 0, 0, 8, 8, 8],
+      //     colors: ["#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#FFFFFF00", "#7E36AF", "#008ffb", "#00e396"],
       //   },
       //   title: {
-      //     text: 'CONSUMER ROBOTS',
+      //     text: 'REPORTING COST VIEW',
+      //     align: 'center',
       //     style: {
-      //       color: '#ffffff'
+      //       color: '#555555'
       //     }
       //   },
-      //   dataLabels: {
-      //     enabled: false
-      //   },
-      //   grid: {
-      //     borderColor: '#B9B9C320',
-      //   },
-      //   // markers: {
-      //   //   discrete: [{
-      //   //     seriesIndex: 3,
-      //   //     dataPointIndex: 11,
-      //   //     fillColor: '#ff0000',
-      //   //     strokeColor: '#ff0000',
-      //   //     size: 4,
-      //   //     radius: 5,
-      //   //     shape: "square" // "circle" | "square" | "rect"
-      //   //   }, {
-      //   //     seriesIndex: 4,
-      //   //     dataPointIndex: 11,
-      //   //     fillColor: '#20C997',
-      //   //     strokeColor: '#20C997',
-      //   //     size: 4,
-      //   //     shape: "circle" // "circle" | "square" | "rect"
-      //   //   }]
-      //   // },
-      //   fill: {
-      //     colors: ['#20C997', '#D46D6D', '#0000FF', '#0000FF', '#0000FF', '#7367F0', '#F5A623']
-      //   },
-      //   labels: ['Sep/21', 'Oct/21', 'Nov/21', 'Dev/21'],
       //   xaxis: {
+      //     // categories: ['', 'Sep', 'Oct', 'Nov', 'Dev', ''],
+      //     categories: this.$store.state.globalState.chartXAxisData,
       //     labels: {
       //       style: {
-      //         colors: ["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]
+      //         fontWeight: 'bold',
+      //         colors: "#FFFFFF"
       //       }
       //     }
       //   },
-      //   yaxis: {
+      //   yaxis: [
+      //     {
+      //       axisTicks: {
+      //         show: true,
+      //       },
+      //       axisBorder: {
+      //         show: true,
+      //         color: '#008FFB'
+      //       },
+      //       labels: {
+      //         style: {
+      //           colors: '#FFFFFF',
+      //         },
+      //         formatter(value) {
+      //           if (value) {
+      //             if (value < 1000) return value.toFixed(0)
+      //             return `${(value / 1000).toFixed(2)}k`
+      //           }
+      //           return 0
+      //         },
+      //       },
+      //       tooltip: {
+      //         enabled: true
+      //       }
+      //     },
+      //   ],
+      //   colors: ['#ff2200', '#33FF00', '#004eff', '#ffeb00', '#775dd0', '#008ffb', '#00e396'],
+      //   tooltip: {
+      //     theme: 'dark',
+      //     custom: ({
+      //       series, dataPointIndex
+      //     }) => `<div class="m-1">
+      //       <div class="mb-1" style="font-weight:bold">Project X</div>
+      //       <div style="color:#ff2200">BUDGET ENGAGED</div>
+      //       <div class="mb-1">${series[0][dataPointIndex].toLocaleString('en')}</div>
+      //       <div style="color:#33FF00">REAL ESTIMATED</div>
+      //       <div class="mb-1">${series[1][dataPointIndex].toLocaleString('en')}</div>
+      //       <div style="color:#ffeb00">DEMAND</div>
+      //       <div>${series[3][dataPointIndex].toLocaleString('en')}</div>
+      //     </div>`
+      //   },
+      //   legend: {
       //     labels: {
-      //       style: {
-      //         colors: ["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]
-      //       },
-      //       formatter(value) {
-      //         if (value < 1000) return value
-      //         return `${value / 1000}k`
-      //       },
-      //     }
+      //       colors: '#888888',
+      //       useSeriesColors: false
+      //     },
       //   }
       // },
-      series: [
+    }
+  },
+  computed: {
+    series() {
+      return [
         {
           name: "BUDGET ENGAGED",
           type: 'bar',
-          data: [null, 1000, 500, 1700, 300, null]
+          data: this.$store.state.globalState.chartSeriesData[0]
         },
         {
           name: "REAL ESTIMATED",
           type: 'bar',
-          data: [null, 1800, 1200, 1000, 1500, null]
+          data: this.$store.state.globalState.chartSeriesData[1]
         },
         {
           name: "QUOTE",
           type: 'bar',
-          data: [null, 1300, 800, 2100, 1400, null]
+          data: this.$store.state.globalState.chartSeriesData[2]
         },
         {
           name: "DEMAND",
           type: 'bar',
-          data: [null, 300, 500, 1600, 500, null]
+          data: this.$store.state.globalState.chartSeriesData[3]
         },
         {
           name: 'ESTIMATED',
           type: 'line',
-          data: [2000, 2000, 2000, 2000, 2000, 2000]
+          data: this.$store.state.globalState.chartSeriesData[4]
         }, {
           name: 'ENGAGED',
           type: 'line',
-          data: [2800, 2800, 2800, 2800, 2800, 2800]
+          data: this.$store.state.globalState.chartSeriesData[5]
         }, {
           name: 'SPENT',
           type: 'line',
-          data: [1600, 1600, 1600, 1600, 1600, 1600]
+          data: this.$store.state.globalState.chartSeriesData[6]
         }
-      ],
-      chartOptions: {
-        // chart: {
-        //   animations: {
-        //     enabled: true,
-        //     easing: 'easeinout',
-        //     speed: 100,
-        //     animateGradually: {
-        //       enabled: true,
-        //       delay: 150
-        //     },
-        //     dynamicAnimation: {
-        //       enabled: true,
-        //       speed: 350
-        //     }
-        //   },
-        //   background: '#fff'
-        //   sparkline: {
-        //     enabled: false,
-        //   }
-        // },
+      ]
+    },
+    chartOptions() {
+      return {
+        annotations: {
+          yaxis: [
+            {
+              y: 8800,
+              borderColor: '#00E396',
+              label: {
+                borderColor: '#00E396',
+                style: {
+                  color: '#fff',
+                  background: '#00E396'
+                },
+                text: 'Y-axis annotation on 8800'
+              }
+            }
+          ]
+        },
         plotOptions: {
           bar: {
             horizontal: false,
@@ -214,9 +229,6 @@ export default {
             borderRadius: 10
           },
         },
-        // dataLabels: {
-        //   enabled: false
-        // },
         stroke: {
           width: [10, 10, 10, 10, 4, 4, 4],
           dashArray: [0, 0, 0, 0, 8, 8, 8],
@@ -230,7 +242,8 @@ export default {
           }
         },
         xaxis: {
-          categories: ['', 'Sep/21', 'Oct/21', 'Nov/21', 'Dev/21', ''],
+          // categories: ['', 'Sep', 'Oct', 'Nov', 'Dev', ''],
+          categories: this.$store.state.globalState.chartXAxisData,
           labels: {
             style: {
               fontWeight: 'bold',
@@ -259,113 +272,33 @@ export default {
                 return 0
               },
             },
-            // title: {
-            //   text: "Income (thousand crores)",
-            //   style: {
-            //     color: '#008FFB',
-            //   }
-            // },
             tooltip: {
               enabled: true
             }
           },
-          // {
-          //   seriesName: 'Income',
-          //   opposite: true,
-          //   axisTicks: {
-          //     show: true,
-          //   },
-          //   axisBorder: {
-          //     show: true,
-          //     color: '#00E396'
-          //   },
-          //   labels: {
-          //     style: {
-          //       colors: '#00E396',
-          //     }
-          //   },
-          //   title: {
-          //     text: "Operating Cashflow (thousand crores)",
-          //     style: {
-          //       color: '#00E396',
-          //     }
-          //   },
-          // },
-          // {
-          //   seriesName: 'Revenue',
-          //   opposite: true,
-          //   axisTicks: {
-          //     show: true,
-          //   },
-          //   axisBorder: {
-          //     show: true,
-          //     color: '#FEB019'
-          //   },
-          //   labels: {
-          //     style: {
-          //       colors: '#FEB019',
-          //     },
-          //   },
-          //   title: {
-          //     text: "Revenue (thousand crores)",
-          //     style: {
-          //       color: '#FEB019',
-          //     }
-          //   }
-          // },
         ],
         colors: ['#ff2200', '#33FF00', '#004eff', '#ffeb00', '#775dd0', '#008ffb', '#00e396'],
         tooltip: {
           theme: 'dark',
           custom: ({
-            series, seriesIndex, dataPointIndex, w
-          }) => {
-            console.log('series ----', series)
-            console.log('seriesIndex ----', seriesIndex)
-            console.log('dataPointIndex ----', dataPointIndex)
-            console.log('w ----', w)
-            return (
-              `<div class="m-1">
-                <div class="mb-1">Project X</div>
-                <div style="color:#ff2200">BUDGET ENGAGED</div>
-                <div class="mb-1">${series[0][dataPointIndex].toLocaleString('en')}</div>
-                <div style="color:#33FF00">REAL ESTIMATED</div>
-                <div class="mb-1">${series[1][dataPointIndex].toLocaleString('en')}</div>
-                <div style="color:#ffeb00">DEMAND</div>
-                <div>${series[3][dataPointIndex].toLocaleString('en')}</div>
-              </div>`
-            )
-            // var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-
-            // return '<ul>' +
-            // '<li><b>Price</b>: ' + data.x + '</li>' +
-            // '<li><b>Number</b>: ' + data.y + '</li>' +
-            // '<li><b>Product</b>: \'' + data.product + '\'</li>' +
-            // '<li><b>Info</b>: \'' + data.info + '\'</li>' +
-            // '<li><b>Site</b>: \'' + data.site + '\'</li>' +
-            // '</ul>';
-          }
+            series, dataPointIndex
+          }) => `<div class="m-1">
+            <div class="mb-1" style="font-weight:bold">Project X</div>
+            <div style="color:#ff2200">BUDGET ENGAGED</div>
+            <div class="mb-1">${series[0][dataPointIndex].toLocaleString('en')}</div>
+            <div style="color:#33FF00">REAL ESTIMATED</div>
+            <div class="mb-1">${series[1][dataPointIndex].toLocaleString('en')}</div>
+            <div style="color:#ffeb00">DEMAND</div>
+            <div>${series[3][dataPointIndex].toLocaleString('en')}</div>
+          </div>`
         },
-        // tooltip: {
-        //   theme: 'dark',
-        //   // style: {
-        //   //   fontSize: '12px',
-        //   //   fontFamily: undefined
-        //   // },
-        //   // fixed: {
-        //   //   enabled: true,
-        //   //   // position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
-        //   //   offsetY: 30,
-        //   //   offsetX: 60
-        //   // },
-        // },
         legend: {
           labels: {
             colors: '#888888',
             useSeriesColors: false
           },
         }
-      },
+      }
     }
   }
 }
