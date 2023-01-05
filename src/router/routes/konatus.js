@@ -91,11 +91,16 @@ export default [
     name: 'portfolio-control',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
+  {
+    path: '/operation',
+    name: 'operation-view',
+    // component: () => import('@/views/welcome.vue'),
+  },
 
   {
     path: '/orgnization',
     name: 'orgnization-view',
-    // component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    // component: () => import('@/views/welcome.vue'),
   },
   {
     path: '/orgnization/unit/:unitId',

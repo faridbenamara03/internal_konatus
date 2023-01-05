@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body footer-tag="footer" class="card-portfolio mb-0">
+  <b-card v-if="!isUN(items.title)" no-body footer-tag="footer" class="card-portfolio mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar d-flex justify-content-between">
@@ -77,10 +77,10 @@
                 <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeFromChange"></month-picker>
                     </div>
                     <div>
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
                     </div>
                   </div>
                 </b-popover>
@@ -123,6 +123,9 @@
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
     <optimize-modal />
   </b-card>
+  <div v-else>
+    <Welcome />
+  </div>
 </template>
 
 <script>
@@ -132,6 +135,8 @@ import {
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
 import 'flatpickr/dist/themes/dark.css'
+import { isEmpty } from "@/views/utils"
+import Welcome from '@/views/welcome.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
@@ -156,6 +161,7 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
+    Welcome
   },
   props: {
     data: {
@@ -198,14 +204,20 @@ export default {
     })
   },
   methods: {
-    onRangeChange(value) {
-      if (this.rangeArray.length === 2) this.rangeArray = []
+    isUN(data) {
+      return isEmpty(data)
+    },
+    onRangeFromChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
-      this.rangeArray.push(v)
+      this.rangeArray[0] = v
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (this.rangeArray.length === 2) {
+    },
+    onRangeToChange(value) {
+      const v = `${value.monthIndex} / ${value.year}`
+      this.rangeArray[1] = v
+      this.selectedMonth = this.rangeArray.join(' - ')
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
         this.popoverShow = false
-        this.$store.commit('globalState/ON_RANGE_CHANGE', value)
       }
     },
     // getToday() {

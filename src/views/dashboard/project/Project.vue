@@ -93,10 +93,10 @@
                 <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeFromChange"></month-picker>
                     </div>
                     <div>
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
+                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
                     </div>
                   </div>
                 </b-popover>
@@ -159,6 +159,7 @@ import {
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
+import { isEmpty } from "@/views/utils"
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
@@ -266,19 +267,28 @@ export default {
     }
   },
   methods: {
-    onRangeChange(value) {
-      if (this.rangeArray.length === 2) {
-        this.arr4chart = []
-        this.rangeArray = []
-      }
+    isUN(data) {
+      return isEmpty(data)
+    },
+    onRangeFromChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
-      this.arr4chart.push(`${value.year}-${value.monthIndex}-15`)
-      this.rangeArray.push(v)
+      this.rangeArray[0] = v
+      this.arr4chart[0] = `${value.year}-${value.monthIndex}-15`
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (this.rangeArray.length === 2) {
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
         const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
-        this.popoverShow = false
         this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
+      }
+    },
+    onRangeToChange(value) {
+      const v = `${value.monthIndex} / ${value.year}`
+      this.rangeArray[1] = v
+      this.arr4chart[1] = `${value.year}-${value.monthIndex}-15`
+      this.selectedMonth = this.rangeArray.join(' - ')
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+        const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
+        this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
+        this.popoverShow = false
       }
     },
     getBetweenMonthsArr(startD, endD) {
