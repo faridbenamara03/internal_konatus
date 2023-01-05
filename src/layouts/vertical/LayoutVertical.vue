@@ -21,6 +21,9 @@ export default {
     AppCustomizer,
     LayoutVertical,
   },
+  mounted() {
+    this.$store.dispatch('globalState/load_nav_data')
+  },
   data() {
     return {
       showCustomizer: $themeConfig.layout.customizer,

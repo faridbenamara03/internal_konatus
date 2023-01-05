@@ -193,7 +193,7 @@ export default {
       selectedActivity: {},
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
       arr4chart: [],

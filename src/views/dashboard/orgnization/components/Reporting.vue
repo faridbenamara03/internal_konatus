@@ -201,12 +201,6 @@ export default {
     ProgressComponent,
     BFormSelect
   },
-  props: {
-    data: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       reportingDates: [],

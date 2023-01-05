@@ -2,14 +2,14 @@
   <b-card no-body footer-tag="footer" class="card-portfolio card-project mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
-        <div v-if="tabIndex === 0" class="action-bar justify-content-between">
+        <div class="action-bar justify-content-between">
           <div></div>
           <div class="d-flex action-group">
             <!-- <b-button variant="flat-primary">
               <feather-icon icon="BarChartIcon" />
               Priority
             </b-button> -->
-            <div v-if="(tabIndex === 0)">
+            <div v-if="tabIndex === 0">
               <b-button v-b-modal.modal-import class="ml-1" variant="primary">
                 <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import</span>
@@ -19,17 +19,27 @@
                 <span>Request Quote</span>
               </b-button>
             </div>
+            <div v-if="tabIndex === 2 || tabIndex === 1">
+              <b-button variant="primary">
+                <feather-icon icon="CommandIcon" size="16" />&nbsp;
+                Manage
+              </b-button>
+              <b-button class="ml-1" variant="primary">
+                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <span>Export</span>
+              </b-button>
+              <b-button v-if="tabIndex === 1" class="ml-1" variant="primary">
+                <feather-icon icon="ArrowRightIcon" />&nbsp;
+                Next Phase
+              </b-button>
+            </div>
             <!-- <b-button variant="flat-primary">
               <b-icon icon="door-closed" />
               Update
-            </b-button>
-            <b-button variant="flat-primary">
-              <feather-icon icon="ArrowRightIcon" />&nbsp;
-              Next Phase
             </b-button> -->
           </div>
         </div>
-        <div v-if="tabIndex === 2" class="action-bar justify-content-between">
+        <!-- <div v-if="tabIndex === 2" class="action-bar justify-content-between">
           <b-button variant="flat-primary" @click="handleUpdate">
             <feather-icon icon="RotateCwIcon" />&nbsp;
             Update
@@ -59,38 +69,28 @@
               <div>ESTIMATED</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <b-tab
           title="Demand"
           :class="{'border-0': !projectElementTeamData.length}"
           @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-team')"
         >
-          <div v-if="!projectElementTeamData.length" class="no-data">
-            <feather-icon icon="FileIcon" size="48" />
-            <p>No activities for this project yet.<br>
-              Finish setting up the project by creating a elementary activity or importing your data in .wbs format</p>
-          </div>
           <Demand :teamData="projectElementTeamData" :tabState="demandTabState" :phaseData="projectElementPhaseData" />
         </b-tab>
-        <!-- <b-tab title="Reporting">
-          <Reporting />
+        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
+          <Reporting :reportingState="reportingState" />
         </b-tab>
-        <b-tab title="Control">
-          <Control :data="items" :is-chart-view="isChartView" />
-        </b-tab> -->
+        <b-tab title="Control" @click="onClickCPSelectBtn('control')">
+          <Control />
+        </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <!-- <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" v-if="tabIndex !== 0">
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
-              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <span>Period</span>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
-                <b-popover
-                  placement="bottomleft"
-                  target="popover-manual-1"
-                  ref="popover"
-                  :show.sync="popoverShow"
-                >
+                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
+                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
                       <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
@@ -101,15 +101,23 @@
                   </div>
                 </b-popover>
               </div>
-            </div> -->
-            <!-- <b-button-group v-if="(tabIndex === 1)" class="ml-1">
-              <b-button variant="outline-primary">
+            </div>
+            <b-button-group v-if="(tabIndex === 1)" class="ml-1">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
+                @click="onClickCPSelectBtn('reporting-cost', 'cost')"
+              >
                 Cost
               </b-button>
-              <b-button variant="outline-primary">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
+                @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+              >
                 Plan
               </b-button>
-            </b-button-group> -->
+            </b-button-group>
             <b-button-group v-if="tabIndex === 0" class="ml-1">
               <b-button variant="outline-primary" :style="`background:${demandTabState === 'team' ? '#473ca3' : '#fff0'}`" @click="handleDemandState('team')">
                 Team
@@ -118,14 +126,6 @@
                 Phase
               </b-button>
             </b-button-group>
-            <!-- <b-button v-if="(tabIndex === 1)" v-b-modal.modal-import class="ml-1" variant="outline-primary">
-              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
-              <span>Update</span>
-            </b-button>
-            <b-button class="ml-1" variant="outline-primary">&nbsp;
-              <feather-icon icon="UploadIcon" size="16" />
-              <span>Export</span>
-            </b-button> -->
           </div>
         </template>
       </b-tabs>
@@ -153,19 +153,19 @@ import {
   BTabs,
   BTab,
   BButtonGroup,
-  // BFormInput,
-  // BPopover
+  BFormInput,
+  BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
-// import { MonthPicker } from 'vue-month-picker'
+import { MonthPicker } from 'vue-month-picker'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
-// import Reporting from './components/Reporting.vue'
-// import Control from './components/Control.vue'
+import Reporting from './components/Reporting.vue'
+import Control from './components/Control.vue'
 
 export default {
   components: {
@@ -176,15 +176,15 @@ export default {
     BTabs,
     BTab,
     Demand,
-    // Reporting,
-    // Control,
+    Reporting,
+    Control,
     ImportModal,
     ImportLoaderModal,
     ModalRequestQuote,
     CreateModal,
-    // MonthPicker,
-    // BFormInput,
-    // BPopover,
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -194,6 +194,7 @@ export default {
   },
   data() {
     return {
+      reportingState: 'cost',
       teams: [], // initial state is empty
       tabIndex: 0,
       openActivityModal: false,
@@ -202,8 +203,9 @@ export default {
       projectElementTeamData: this.$store.state.globalState.teamsState,
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
+      arr4chart: [],
       isChartView: false,
       items: [
         {
@@ -265,14 +267,32 @@ export default {
   },
   methods: {
     onRangeChange(value) {
-      if (this.rangeArray.length === 2) this.rangeArray = []
+      if (this.rangeArray.length === 2) {
+        this.arr4chart = []
+        this.rangeArray = []
+      }
       const v = `${value.monthIndex} / ${value.year}`
+      this.arr4chart.push(`${value.year}-${value.monthIndex}-15`)
       this.rangeArray.push(v)
       this.selectedMonth = this.rangeArray.join(' - ')
       if (this.rangeArray.length === 2) {
+        const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
         this.popoverShow = false
-        this.$store.commit('globalState/ON_RANGE_CHANGE', value)
+        this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
       }
+    },
+    getBetweenMonthsArr(startD, endD) {
+      const startDate = moment(startD)
+      const endDate = moment(endD)
+      const betweenMonths = []
+      if (startDate <= endDate) {
+        const date = startDate.startOf('month')
+        while (date < endDate.endOf('month')) {
+          betweenMonths.push(date.format('YYYY-MM'))
+          date.add(1, 'month')
+        }
+      }
+      return betweenMonths
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode
@@ -300,7 +320,7 @@ export default {
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
-      const urls = ['demand-team', 'demand-phase']
+      const urls = ['demand-team', 'demand-phase', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
         this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
@@ -348,6 +368,10 @@ export default {
 </script>
 
 <style lang="scss">
+.popover-body {
+  position: absolute;
+  left: -576px;
+}
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
 @import "@core/scss/vue/pages/dashboard-project.scss";
 </style>

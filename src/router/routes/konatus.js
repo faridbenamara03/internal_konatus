@@ -14,6 +14,21 @@ export default [
     name: 'project-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
+  {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/reporting-cost',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
+  {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/reporting-plan',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
+  {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/control',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
 
   {
     path: '/operation/portfolio/:portfolioId/program/:programId',

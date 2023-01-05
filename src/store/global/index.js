@@ -1,5 +1,6 @@
 import Vue from "vue"
 import moment from 'moment'
+import axios from "axios"
 
 const globalOperationData = {
   id: '1.1',
@@ -2037,7 +2038,7 @@ export default {
     projectReportingData: globalOperationData.children[0].children[0],
     teamsState,
     phaseState,
-    globalData: [globalOperationData, globalOrganizationData],
+    globalData: [],
     demandTeamData: {},
     activityDetailModalOpen: false,
     selectedNavId: '',
@@ -2376,7 +2377,20 @@ export default {
       //   },
       // }
       state.globalOperationData.children.push()
+    },
+
+    LOAD_NAV_DATA(state) {
+      state.globalData = [globalOperationData, globalOrganizationData]
     }
   },
-  actions: {},
+  actions: {
+    load_nav_data() {
+      axios.get('http://localhost:3001/api/menu/get_nav_data').then(response => {
+        console.log('nav_data ---->', response)
+      }).catch(err => {
+        console.log('error getting nav data ---->', err)
+      })
+      this.commit('globalState/LOAD_NAV_DATA')
+    }
+  },
 }

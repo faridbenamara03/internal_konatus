@@ -49,21 +49,16 @@
           <Reporting :data="c_items" :otype="selectedNavType" :reportingState="reportingState" />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control')">
-          <Control :data="items" :is-chart-view="isChartView" />
+          <Control />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <!-- <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" v-if="tabIndex !== 0">
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
-              <div style="white-space:nowrap">{{ getToday() }}</div>
+              <span>Period</span>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
-                <b-popover
-                  placement="bottomleft"
-                  target="popover-manual-1"
-                  ref="popover"
-                  :show.sync="popoverShow"
-                >
+                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
+                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
                       <month-picker no-default style="width:300px" variant="dark" @input="onRangeChange"></month-picker>
@@ -74,7 +69,7 @@
                   </div>
                 </b-popover>
               </div>
-            </div> -->
+            </div>
             <b-button-group v-if="tabIndex === 0" class="ml-1">
               <b-button
                 variant="outline-primary"
@@ -134,12 +129,12 @@ import {
   BTabs,
   BTab,
   BButtonGroup,
-  // BFormInput,
-  // BPopover
+  BFormInput,
+  BPopover
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
-// import { MonthPicker } from 'vue-month-picker'
+import { MonthPicker } from 'vue-month-picker'
 import ModalRequestQuote from './modals/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
@@ -163,9 +158,9 @@ export default {
     ImportLoaderModal,
     ModalRequestQuote,
     CreateModal,
-    // MonthPicker,
-    // BFormInput,
-    // BPopover,
+    MonthPicker,
+    BFormInput,
+    BPopover,
   },
   props: {
     data: {
@@ -184,7 +179,7 @@ export default {
       projectElementTeamData: this.$store.state.globalState.teamsState,
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth()} / ${new Date().getFullYear()} - ${new Date().getMonth()} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       isChartView: false,
       items: [
@@ -347,6 +342,10 @@ export default {
 </script>
 
 <style lang="scss">
+.popover-body {
+  position: absolute;
+  left: -576px;
+}
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
 @import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
