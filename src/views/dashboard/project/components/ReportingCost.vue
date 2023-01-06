@@ -278,6 +278,7 @@ export default {
           </div>`
         },
         legend: {
+          customLegendItems: ['Research viable materials', 'Design and consturction of landing pad', 'Autonomous flight control systems and software', 'Legal certification and permissions'],
           labels: {
             colors: '#888888',
             useSeriesColors: false
