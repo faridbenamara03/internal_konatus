@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body footer-tag="footer" class="card-portfolio card-project mb-0">
+  <b-card v-if="!isUN(c_demand_team_data.phases)" no-body footer-tag="footer" class="card-portfolio card-project mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
@@ -144,6 +144,9 @@
     <create-modal />
     <add-resource-modal />
   </b-card>
+  <div v-else>
+    <Welcome />
+  </div>
 </template>
 
 <script>
@@ -155,6 +158,7 @@ import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
 import { isEmpty } from "@/views/utils"
+import Welcome from '@/views/welcome.vue'
 import Demand from './components/Demand.vue'
 import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
@@ -180,6 +184,7 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
+    Welcome
   },
   props: {
     data: {
