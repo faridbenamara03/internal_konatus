@@ -13,7 +13,7 @@
           </div>
         </div>
         <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
-          <div style="position:relative;top:-43px;height:0px;">TEAM {{ item }}</div>
+          <div style="position:relative;top:-43px;height:0px;">{{ item }}</div>
           <div :style="`position:relative;top:-20px;width:100%;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
           <div style="display:flex;justify-content:space-between;">
             <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ item1 }}</div>
@@ -134,7 +134,7 @@ export default {
       opened: 0,
       c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
-      teams: ['A', 'B', 'C', 'D', 'E', 'F'],
+      teams: ['Paris - QA', 'Sofia - Dev', 'Plovdiv - Dev', 'Burgas - Dev', 'Varna - QA', 'Shumen - Dev'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [
         [
