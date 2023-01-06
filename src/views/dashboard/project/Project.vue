@@ -14,12 +14,22 @@
                 <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import</span>
               </b-button>
-              <b-button v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
+              <!-- <b-button v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
                 <feather-icon icon="MapIcon" size="16" />&nbsp;
                 <span>Request Quote</span>
+              </b-button> -->
+            </div>
+            <div v-if="(tabIndex === 1)">
+              <b-button class="mr-1" variant="primary">
+                <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+                <span>Update</span>
+              </b-button>
+              <b-button variant="primary">
+                <feather-icon icon="ArrowRightIcon" size="16" />&nbsp;
+                Next Phase
               </b-button>
             </div>
-            <div v-if="tabIndex === 2 || tabIndex === 1">
+            <div v-if="tabIndex === 2">
               <b-button variant="primary">
                 <feather-icon icon="CommandIcon" size="16" />&nbsp;
                 Manage
@@ -27,10 +37,6 @@
               <b-button class="ml-1" variant="primary">
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
-              </b-button>
-              <b-button v-if="tabIndex === 1" class="ml-1" variant="primary">
-                <feather-icon icon="ArrowRightIcon" />&nbsp;
-                Next Phase
               </b-button>
             </div>
             <!-- <b-button variant="flat-primary">
@@ -85,7 +91,7 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <div class="d-flex align-items-center" v-if="tabIndex !== 0">
+            <div class="d-flex align-items-center" v-if="tabIndex === 2">
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <span>Period</span>
               <div class="ml-1">

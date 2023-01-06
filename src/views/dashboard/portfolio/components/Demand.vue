@@ -296,7 +296,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['budget', 'demand', 'quote', 'engaged', 'real estimated', 'authorised', 'spent']
+          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorised', 'spent']
         },
         yaxis: {
           labels: {
@@ -415,7 +415,7 @@ export default {
       return [
         [{
           title: 'Consumer Robots',
-          data: [this.c_totalBudget, this.c_totalDemand, this.c_totalQuote, this.c_totalEngaged, this.c_totalReal, this.c_totalAuthor, this.c_totalSpent],
+          data: [this.c_totalBudget, this.c_totalDemand, this.c_totalQuote + this.c_totalEngaged, this.c_totalReal, this.c_totalAuthor, this.c_totalSpent],
         }]
       ]
     }

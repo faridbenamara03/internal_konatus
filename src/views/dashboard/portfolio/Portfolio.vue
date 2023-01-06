@@ -8,7 +8,11 @@
           </div>
           <div>
             <div v-if="!isChartView && tabIndex === 0">
-              <b-button @click="onDemandTableEditableClick" variant="primary">
+              <b-button variant="primary">
+                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <span>Export</span>
+              </b-button>
+              <b-button class="ml-1" @click="onDemandTableEditableClick" variant="primary">
                 <feather-icon icon="Edit2Icon" size="16" />&nbsp;
                 <span>Edit as table</span>
               </b-button>
@@ -27,11 +31,25 @@
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
               </b-button>
+              <b-button v-if="reportingState === 'cost'" class="ml-1" v-b-modal.modal-edit-column
+                variant="primary">
+                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+                <span>Edit Columns</span>
+              </b-button>
             </div>
             <div v-if="(tabIndex === 2)">
-              <b-button v-b-modal.modal-optimize class="ml-1" variant="primary">
+              <b-button v-b-modal.modal-optimize variant="primary">
                 <feather-icon icon="ZapIcon" size="16" />&nbsp;
                 <span>Optimize</span>
+              </b-button>
+              <b-button class="ml-1" variant="primary">
+                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <span>Export</span>
+              </b-button>
+              <b-button v-if="reportingState === 'cost'" class="ml-1" v-b-modal.modal-edit-column
+                variant="primary">
+                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+                <span>Edit Columns</span>
               </b-button>
             </div>
             <!-- <b-button class="ml-1" variant="outline-primary">
@@ -69,7 +87,7 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto pt-1 pb-1 actions">
-            <div class="d-flex align-items-center" v-if="tabIndex !== 2">
+            <div class="d-flex align-items-center" v-if="tabIndex !== 0">
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <span>Period</span>
               <div class="ml-1">
