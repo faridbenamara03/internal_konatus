@@ -268,17 +268,13 @@ export default {
         ],
         tooltip: {
           theme: 'dark',
-          custom: ({
-            seriesIndex, dataPointIndex, w
-          }) => `<div class="m-1">
-            <div class="mb-1" style="font-weight:bold">${w.globals.labels[dataPointIndex]}</div>
-            <div class="mb-1" style="font-weight:bold">${w.globals.seriesNames[seriesIndex]}</div>
-            <div style="color:#ff2200">BUDGET ENGAGED</div>
-            <div class="mb-1">12000</div>
-            <div style="color:#33FF00">REAL ESTIMATED</div>
-            <div class="mb-1">4200</div>
-            <div style="color:#ffeb00">BALANCE</div>
-            <div>3000</div>
+          custom: () => `<div class="m-1">
+            <div style="color:#BD2020;font-weight:bold">BUDGET ENGAGED</div>
+            <div class="mb-1">12.000,00</div>
+            <div style="color:#00BBF5;font-weight:bold">REAL ESTIMATED</div>
+            <div class="mb-1">4.200,00</div>
+            <div style="font-weight:bold">BALANCE</div>
+            <div style="font-weight:bold">+3.000,00</div>
           </div>`
         },
         legend: {
