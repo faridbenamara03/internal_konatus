@@ -22,7 +22,7 @@
     "editor.formatOnSave": false
   },
   "[vue]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "Vue.volar"
   },
   "vue3snippets.enable-compile-vue-file-on-did-save-code": true,
   "[json]": {

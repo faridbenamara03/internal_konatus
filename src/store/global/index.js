@@ -2317,22 +2317,22 @@ export default {
       const i5 = []
       const i6 = []
       betweenMonths.forEach(() => {
-        i0.push(parseInt(Math.random() * 400 + 1300, 10))
-        i1.push(parseInt(Math.random() * 400 + 1300, 10))
-        i2.push(parseInt(Math.random() * 400 + 1300, 10))
-        i3.push(parseInt(Math.random() * 400 + 1300, 10))
-        i4.push(1450)
-        i5.push(1600)
-        i6.push(1500)
+        i0.push(parseInt(Math.random() * 15000 + 5000, 10))
+        i1.push(parseInt(Math.random() * 15000 + 5000, 10))
+        i2.push(parseInt(Math.random() * 15000 + 5000, 10))
+        i3.push(parseInt(Math.random() * 15000 + 5000, 10))
+        i4.push(25500)
+        i5.push(20500)
+        i6.push(16000)
       })
       state.chartSeriesData = [
         [null, ...i0, null],
         [null, ...i1, null],
         [null, ...i2, null],
         [null, ...i3, null],
-        [1450, ...i4, 1450],
-        [1600, ...i5, 1600],
-        [1500, ...i6, 1500]
+        [25500, ...i4, 25500],
+        [20500, ...i5, 20500],
+        [16000, ...i6, 16000]
       ]
     },
     OPERATION_NEW_SAVE(state, data) {

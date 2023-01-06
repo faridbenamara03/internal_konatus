@@ -1,7 +1,7 @@
 <template>
   <div class="demand-view">
     <div class="w-100 p-1">
-      <vue-apex-charts type="line" height="400" :options="chartOptions" :series="series" />
+      <vue-apex-charts type="bar" height="400" :options="chartOptions" :series="series" />
     </div>
     <b-card class="mr-5 ml-5">
       <div style="font-weight:bold" class="table-wrap p-1">
@@ -33,8 +33,8 @@
         </div>
       </div>
       <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1" :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
-        <div :style="`color:white;`" class="table-wrap">
-          <div :style="`font-weight:bold;`" class="work-e">
+        <div style="color:white;" class="table-wrap">
+          <div style="font-weight:bold;" class="work-e">
             {{ item[0] }}
           </div>
           <div class="data-p">
@@ -106,59 +106,110 @@ export default {
     series() {
       return [
         {
-          name: "BUDGET ENGAGED",
+          name: "Research...",
+          color: '#20C997',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[0]
+          // data: [
+          //   null,
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          // ],
         },
         {
-          name: "REAL ESTIMATED",
+          name: "Design...",
+          color: '#D46D6D',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[1]
+          // data: [
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          //   null,
+          // ],
         },
         {
-          name: "QUOTE",
+          name: "Autonomous...",
+          color: '#7367F0',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[2]
+          // data: [
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          // ],
         },
         {
-          name: "DEMAND",
+          name: "Legal...",
           type: 'bar',
+          columnWidth: '70%',
+          color: '#F5A623',
           data: this.$store.state.globalState.chartSeriesData[3]
+          // data: [
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          //   parseInt(Math.random() * 5000 + 18000, 10),
+          //   null,
+          // ],
         },
         {
           name: 'ESTIMATED',
+          color: '#00BBF5',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[4]
+          // data: [
+          //   25500,
+          //   25500,
+          //   25500,
+          //   25500,
+          //   25500,
+          //   25500
+          // ],
         },
         {
           name: 'ENGAGED',
           type: 'line',
+          color: '#20C997',
           data: this.$store.state.globalState.chartSeriesData[5]
+          // data: [
+          //   20500,
+          //   20500,
+          //   20500,
+          //   20500,
+          //   20500,
+          //   20500
+          // ],
         },
         {
-          name: 'SPENT',
+          name: 'COST TO DATE',
+          color: '#D07017',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[6]
+          // data: [
+          //   16000,
+          //   16000,
+          //   16000,
+          //   16000,
+          //   16000,
+          //   16000,
+          // ],
         }
       ]
     },
     chartOptions() {
       return {
-        annotations: {
-          yaxis: [
-            {
-              y: 8800,
-              borderColor: '#00E396',
-              label: {
-                borderColor: '#00E396',
-                style: {
-                  color: '#fff',
-                  background: '#00E396'
-                },
-                text: 'Y-axis annotation on 8800'
-              }
-            }
-          ]
+        dataLabels: {
+          enabled: false,
         },
         plotOptions: {
           bar: {
@@ -180,7 +231,7 @@ export default {
           }
         },
         xaxis: {
-          // categories: ['', 'Sep', 'Oct', 'Nov', 'Dev', ''],
+          // categories: ['', 'Aug/21', 'Sep/21', 'Oct/21', 'Nov/21', ''],
           categories: this.$store.state.globalState.chartXAxisData,
           labels: {
             style: {
@@ -215,19 +266,19 @@ export default {
             }
           },
         ],
-        colors: ['#ff2200', '#33FF00', '#004eff', '#ffeb00', '#775dd0', '#008ffb', '#00e396'],
         tooltip: {
           theme: 'dark',
           custom: ({
-            series, dataPointIndex
+            seriesIndex, dataPointIndex, w
           }) => `<div class="m-1">
-            <div class="mb-1" style="font-weight:bold">Project X</div>
+            <div class="mb-1" style="font-weight:bold">${w.globals.labels[dataPointIndex]}</div>
+            <div class="mb-1" style="font-weight:bold">${w.globals.seriesNames[seriesIndex]}</div>
             <div style="color:#ff2200">BUDGET ENGAGED</div>
-            <div class="mb-1">${series[0][dataPointIndex].toLocaleString('en')}</div>
+            <div class="mb-1">12000</div>
             <div style="color:#33FF00">REAL ESTIMATED</div>
-            <div class="mb-1">${series[1][dataPointIndex].toLocaleString('en')}</div>
-            <div style="color:#ffeb00">DEMAND</div>
-            <div>${series[3][dataPointIndex].toLocaleString('en')}</div>
+            <div class="mb-1">4200</div>
+            <div style="color:#ffeb00">BALANCE</div>
+            <div>3000</div>
           </div>`
         },
         legend: {
