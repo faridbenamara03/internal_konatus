@@ -14,6 +14,10 @@
                 <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import</span>
               </b-button>
+              <b-button class="ml-1" variant="primary">
+                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <span>Export</span>
+              </b-button>
               <!-- <b-button v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
                 <feather-icon icon="MapIcon" size="16" />&nbsp;
                 <span>Request Quote</span>

@@ -356,9 +356,6 @@ const globalOrganizationData = {
   resource: 'konatus',
   isOperation: false,
   type: 'organization',
-  route: {
-    name: 'orgnization-view',
-  },
   children: [
     {
       id: '2.1.1',
@@ -474,6 +471,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Paris',
               teamId: 'team-a',
             },
           },
@@ -645,6 +643,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Paris',
               teamId: 'team-b',
             },
           },
@@ -800,6 +799,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Paris',
               teamId: 'team-c',
             },
           },
@@ -972,6 +972,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Paris',
               teamId: 'team-d',
             },
           },
@@ -1152,6 +1153,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Sofia',
               teamId: 'team-e',
             },
           },
@@ -1261,6 +1263,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Sofia',
               teamId: 'team-f',
             },
           },
@@ -1423,6 +1426,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Sofia',
               teamId: 'team-g',
             },
           },
@@ -1595,6 +1599,7 @@ const globalOrganizationData = {
           route: {
             name: 'team-view',
             params: {
+              unitId: 'Sofia',
               teamId: 'team-h',
             },
           },
