@@ -3,9 +3,13 @@
     <div style="font-size:16px;text-align: center;margin: auto;">
       <div style="margin-bottom:24px;display: flex;justify-content: center;">
         <div>
-          <img src="/img/logo.08dfa09a.svg" alt="logo" style="width: 38px; height: 38px;margin-top: 4px;" class="mr-1" />
+          <b-img
+            :src="appLogoImage"
+            alt="logo"
+            style="width: 38px;height: 38px;margin-top: 4px;margin-right: 10px;"
+          />
         </div>
-        <div style="font-size:33px;font-family: Arial;font-weight: bold;">KONATUS</div>
+        <div style="font-size:33px;font-family: Arial;font-weight: bold;text-transform: uppercase;">{{ appName }}</div>
       </div>
       <div style="margin-bottom:14px">
         Welcome to Konatus!
@@ -17,11 +21,23 @@
 </template>
 
 <script>
+import { $themeConfig } from '@themeConfig'
+import { BImg } from 'bootstrap-vue'
 
 export default {
+  components: {
+    BImg
+  },
   data() {
     return {
       cHeight: 0
+    }
+  },
+  setup() {
+    const { appName, appLogoImage } = $themeConfig.app
+    return {
+      appName,
+      appLogoImage,
     }
   },
   mounted() {
