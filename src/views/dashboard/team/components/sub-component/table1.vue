@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="containerSelf m-2">
+    <!-- <div class="containerSelf m-2">
       <div style="width: 300px">
       </div>
       <div style="width: calc(100% - 300px)">
@@ -58,7 +58,7 @@
           <b>140</b>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
