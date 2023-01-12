@@ -305,12 +305,11 @@ export default {
           ],
         },
         {
-          name: 'SPACE HOLDER FOR AN OTHER BU',
+          name: 'SPACE HOLDER FOR ANOTHER BU',
           budget_team: '2540',
           budget_engaged: '1132.3',
           real_estimated: '1132.3',
-          children: [
-          ],
+          children: [],
         },
       ],
       itemsForReport: [
