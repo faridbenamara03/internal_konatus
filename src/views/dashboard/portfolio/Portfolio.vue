@@ -8,18 +8,18 @@
           </div>
           <div>
             <div v-if="!isChartView && tabIndex === 0">
-              <b-button variant="primary">
+              <b-button v-if="!demandTableEditable" variant="primary">
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
-                <span>Export</span>
+                <span>Import Table</span>
+              </b-button>
+              <b-button v-if="!demandTableEditable" v-b-modal.modal-edit-column class="ml-1"
+                variant="primary">
+                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+                <span>Edit Columns</span>
               </b-button>
               <b-button class="ml-1" @click="onDemandTableEditableClick" variant="primary">
                 <feather-icon icon="Edit2Icon" size="16" />&nbsp;
                 <span>Edit as table</span>
-              </b-button>
-              <b-button v-b-modal.modal-edit-column class="ml-1"
-                variant="primary">
-                <feather-icon icon="EyeIcon" size="16" />&nbsp;
-                <span>Edit Columns</span>
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
@@ -213,7 +213,10 @@ export default {
     },
     selectedNavType() {
       return this.$store.state.globalState.selectedNavObj?.type
-    }
+    },
+    demandTableEditable() {
+      return this.$store.state.portfolioState.demandTableEditable
+    },
   },
   mounted() {
     this.fields = [...this.defaultFields]
