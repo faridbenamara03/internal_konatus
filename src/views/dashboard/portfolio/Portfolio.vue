@@ -9,7 +9,7 @@
           <div>
             <div v-if="!isChartView && tabIndex === 0">
               <b-button v-if="!demandTableEditable" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import Table</span>
               </b-button>
               <b-button v-if="!demandTableEditable" v-b-modal.modal-edit-column class="ml-1"
