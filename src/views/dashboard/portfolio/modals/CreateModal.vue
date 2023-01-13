@@ -150,52 +150,67 @@
         </div>
         <div class="select-box">
           <label>Value</label>
-          <v-select
+          <b-form-input
             v-model="step2.value"
-            :options="['0', '100']"
-            placeholder="100"
-            outlined
+            type="number"
           />
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Budget</label>
-          <v-select
+          <b-form-input
+            v-model="step2.budget"
+            type="number"
+          />
+          <!-- <v-select
             v-model="step2.budget"
             :options="['100', '200', '300', '400']"
             placeholder="300"
             outlined
-          />
+          /> -->
         </div>
         <div class="select-box">
           <label>Budget Engaged / Quote</label>
-          <v-select
+          <b-form-input
+            v-model="step2.quote"
+            type="number"
+            outlined
+          />
+          <!-- <v-select
             v-model="step2.quote"
             :options="['0', '100']"
             placeholder="0"
             outlined
-          />
+          /> -->
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Current Phase</label>
+          <!-- <b-form-input
+            v-model="step2.phase"
+            type="number"
+          /> -->
           <v-select
             v-model="step2.phase"
-            :options="['research']"
+            :options="['research', 'evaluation', 'development', 'testing', 'deployment', 'maintenance']"
             placeholder="Research"
             outlined
           />
         </div>
         <div class="select-box">
           <label>Budget Open</label>
-          <v-select
+          <b-form-input
+            v-model="step2.budgetOpen"
+            type="number"
+          />
+          <!-- <v-select
             v-model="step2.budgetOpen"
             :options="['0', '100']"
             placeholder="0"
             outlined
-          />
+          /> -->
         </div>
       </div>
       <div class="select-box">
@@ -229,16 +244,22 @@
         </div>
         <div class="select-box">
           <label>Nature of deadline</label>
-          <b-form-datepicker
+          <v-select
+            v-model="step3.n_deadline"
+            :options="['desired', 'time to market', 'legal constraint', 'other']"
+            id="production-datepicker1"
+            outlined
+          />
+          <!-- <b-form-datepicker
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="production-datepicker1"
             v-model="step3.n_deadline"
-          />
+          /> -->
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Customer Ex</label>
+          <label>Customer Ex ({{ step3.customer_ex }})</label>
           <b-form-input
             id="range-customer"
             v-model="step3.customer_ex"
@@ -249,7 +270,7 @@
           />
         </div>
         <div class="select-box">
-          <label>Sales Ex</label>
+          <label>Sales Ex ({{ step3.sales_ex }})</label>
           <b-form-input
             id="range-sales"
             v-model="step3.sales_ex"
@@ -262,7 +283,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box mb-0">
-          <label>Scoring</label>
+          <label>Scoring ({{ step3.scoring }})</label>
           <b-form-input
             id="range-scoring"
             v-model="step3.scoring"
@@ -330,52 +351,67 @@
       <div class="select-group--sub">
         <div class="select-box">
           <label>Head of Product Portfolio</label>
-          <v-select
+          <b-form-input
+            v-model="step5.head_product_portfolio"
+          />
+          <!-- <v-select
             v-model="step5.head_product_portfolio"
             :options="['SAP', 'Jira', 'Konatus']"
             placeholder="Select System"
             outlined
-          />
+          /> -->
         </div>
         <div class="select-box">
           <label>Product Manager</label>
-          <v-select
+          <b-form-input
+            v-model="step5.product_manager"
+          />
+          <!-- <v-select
             v-model="step5.product_manager"
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
-          />
+          /> -->
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Architect</label>
-          <v-select
+          <b-form-input
+            v-model="step5.architect"
+          />
+          <!-- <v-select
             v-model="step5.architect"
             :options="['SAP', 'Jira', 'Konatus']"
             placeholder="Select System"
             outlined
-          />
+          /> -->
         </div>
         <div class="select-box">
           <label>Head of Program Direction</label>
-          <v-select
+          <b-form-input
+            v-model="step5.head_program_direction"
+          />
+          <!-- <v-select
             v-model="step5.head_program_direction"
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
-          />
+          /> -->
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box mb-0">
           <label>Program Director</label>
-          <v-select
+          <b-form-input
+            v-model="step5.program_director"
+          />
+          <!-- <v-select
             v-model="step5.program_director"
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
-          />
+          /> -->
         </div>
         <div class="select-box m-0" />
       </div>
@@ -391,7 +427,7 @@
         />
         <h5>budget</h5>
       </div>
-      <div class="select-box">
+      <!-- <div class="select-box">
         <label>Portfolio</label>
         <v-select
           v-model="step6.portfolio"
@@ -399,7 +435,7 @@
           placeholder="Select Portfolio"
           outlined
         />
-      </div>
+      </div> -->
       <div class="select-group--sub">
         <div class="select-box">
           <label>Period start</label>
@@ -408,13 +444,13 @@
               v-model="step6.period_start_year"
               :options="years"
               class="mr-1"
-              :placeholder="years[0]"
+              placeholder="year"
               outlined
             />
             <v-select
               v-model="step6.period_start_month"
               :options="months"
-              :placeholder="months[0]"
+              placeholder="month"
               outlined
             />
           </div>
@@ -427,20 +463,20 @@
               v-model="step6.period_end_year"
               :options="years"
               class="mr-1"
-              :placeholder="years[0]"
+              placeholder="year"
               outlined
             />
             <v-select
               v-model="step6.period_end_month"
               :options="months"
-              :placeholder="months[0]"
+              placeholder="month"
               outlined
             />
           </div>
         </div>
       </div>
       <div class="select-box d-flex justify-content-center">
-        <label class="notice">Period duration: 12 months</label>
+        <label class="notice">Period duration: {{ this.monthPeriod }}</label>
       </div>
       <div class="select-box">
         <label>Budget</label>
@@ -504,6 +540,15 @@ export default {
     },
   },
   computed: {
+    monthPeriod() {
+      if (this.step6.period_start_year && this.step6.period_start_month && this.step6.period_end_year && this.step6.period_end_month) {
+        const yc = this.step6.period_end_year - this.step6.period_start_year
+        const startM = this.months.indexOf(this.step6.period_start_month) + 1
+        const endM = this.months.indexOf(this.step6.period_end_month) + 1
+        return `${endM - startM + yc * 12} months`
+      }
+      return ''
+    },
     option1() {
       const { globalOperationData } = this.$store.state.globalState
       const opt = []
@@ -573,6 +618,9 @@ export default {
     }
   },
   methods: {
+    onPSelect(a, b, c) {
+      console.log(a, b, c)
+    },
     hideModal() {
       this.$refs['my-modal'].hide()
     },
