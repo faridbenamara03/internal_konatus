@@ -5,26 +5,43 @@
         <div class="action-bar justify-content-between">
           <div />
           <div>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 0" variant="primary">
               <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
               <span>Import</span>
             </b-button>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary" @click="handleDemandUpdate">
-              <feather-icon icon="RotateCwIcon" />
-              Update
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <b-button v-if="tabIndex === 0" v-b-modal.modal-edit-column class="ml-1"
+              variant="primary">
+              <feather-icon icon="EyeIcon" size="16" />
+              <span>Edit Columns</span>
+            </b-button>
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+              <feather-icon icon="Edit2Icon" size="16" />
+              <span>Edit as table</span>
             </b-button>
             <b-button v-if="(tabIndex === 1)" v-b-modal.modal-update class="ml-1" variant="primary">
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
             </b-button>
-            <b-button class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 1" class="ml-1" variant="primary">
               <feather-icon icon="UploadIcon" size="16" />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
+              <feather-icon icon="CommandIcon" size="16" />&nbsp;
+              Manage
+            </b-button>
+            <!-- <b-button class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />&nbsp;
               <span>Configure</span>
-            </b-button>
+            </b-button> -->
           </div>
           <!-- <b-button-group>
             <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
@@ -123,15 +140,6 @@
                 Plan
               </b-button>
             </b-button-group>
-            <!-- <b-button v-if="!isChartView && tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
-              variant="outline-primary">
-              <feather-icon icon="EyeIcon" size="16" />
-              <span>Edit Columns</span>
-            </b-button> -->
-            <!-- <b-button v-if="isChartView && tabIndex === 0" class="ml-1" variant="outline-primary">
-              <feather-icon icon="Edit2Icon" size="16" />
-              <span>Edit as table</span>
-            </b-button> -->
             <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>

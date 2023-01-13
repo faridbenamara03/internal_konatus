@@ -24,30 +24,42 @@
               <feather-icon icon="BarChartIcon" />&nbsp;
               Priority
             </b-button> -->
-            <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="primary">
+            <b-button v-if="(tabIndex == 0)" class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <!-- <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="primary">
               <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
               <span>Import</span>
             </b-button>
             <b-button v-if="(tabIndex == 0)" @click="handleUpdateDemand" class="ml-1" variant="primary">
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
-            </b-button>
+            </b-button> -->
             <b-button v-if="(tabIndex == 1)" class="ml-1" variant="primary">
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
             </b-button>
-            <!-- <b-button class="ml-1" variant="primary">
+            <b-button v-if="(tabIndex == 1)" class="ml-1" variant="primary">
               <feather-icon icon="UploadIcon" size="16" />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button class="ml-1" variant="primary">
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
+              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <span>Export</span>
+            </b-button>
+            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
+              <feather-icon icon="CommandIcon" size="16" />&nbsp;
+              Manage
+            </b-button>
+            <!-- <b-button class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />&nbsp;
               <span>Configure</span>
             </b-button> -->
-            <b-button v-if="tabIndex === 2 && !isChartView" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
+            <!-- <b-button v-if="tabIndex === 2 && !isChartView" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
               <feather-icon icon="UserPlusIcon" size="16" />&nbsp;
               <span>Add Resource</span>
-            </b-button>
+            </b-button> -->
             <!-- <b-button variant="flat-primary">
               <b-icon icon="door-closed" />
               Update

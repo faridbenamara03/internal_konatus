@@ -28,6 +28,10 @@
                 <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
                 <span>Update</span>
               </b-button>
+              <b-button class="mr-1" variant="primary">
+                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+                <span>Export</span>
+              </b-button>
               <b-button variant="primary">
                 <feather-icon icon="ArrowRightIcon" size="16" />&nbsp;
                 Next Phase
