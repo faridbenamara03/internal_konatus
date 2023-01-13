@@ -546,6 +546,8 @@ export default {
     handleNext() {
       if (this.curIndex < 6) {
         this.curIndex += 1
+      } else {
+        this.$store.commit('global/ADD_PROJECT')
       }
     },
   },

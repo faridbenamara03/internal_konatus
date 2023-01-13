@@ -2398,6 +2398,9 @@ export default {
     WOEK_ELEMENT_CHECK(state, e) {
       if (e) state.selectedWorkElement = {}
       else state.selectedWorkElement = null
+    },
+    ADD_PROJECT() {
+      console.log(1)
     }
   },
   actions: {

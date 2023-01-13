@@ -162,7 +162,7 @@
       </div>
     </div>
     <b-modal
-      id="modal-update"
+      id="modal-project-plan-update"
       ref="my-modal"
       title="Create New"
       centered
@@ -218,7 +218,7 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      reportingData: this.$store.state.orgnizationState.reportingData,
+      // reportingData: this.$store.state.orgnizationState.reportingData,
       leftP: 15 * 30 + 8,
       lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
       todate: moment().format('YYYY.MM.DD'),
