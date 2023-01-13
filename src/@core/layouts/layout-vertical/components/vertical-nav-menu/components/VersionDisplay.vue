@@ -1,6 +1,6 @@
 <template>
   <div class="user-nav-group">
-    <div style="margin-bottom:20px;font-weight: 700;">
+    <div style="margin-bottom:20px;font-weight: 700;font-size: 15px;">
       v 0.9.1
     </div>
   </div>
