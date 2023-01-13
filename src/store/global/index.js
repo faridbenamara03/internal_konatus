@@ -2050,6 +2050,8 @@ export default {
     selectedNavObj: {},
 
     globalOperationData,
+    projectElementTeamData: [],
+    projectElementPhaseData: [],
     // globalOperationData: {
     //   id: '1.1',
     //   title: 'Konatus Industries',
@@ -2383,10 +2385,15 @@ export default {
       // }
       state.globalOperationData.children.push()
     },
-
     LOAD_NAV_DATA(state) {
       state.globalData = [globalOperationData, globalOrganizationData]
-    }
+    },
+    IMPORT_WBS_2(state) {
+      setTimeout(() => {
+        state.projectElementTeamData = teamsState
+        state.projectElementPhaseData = phaseState
+      }, 1000)
+    },
   },
   actions: {
     load_nav_data() {

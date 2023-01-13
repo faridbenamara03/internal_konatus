@@ -254,13 +254,13 @@ export default {
     },
   },
   data() {
-    const openedPhase = this.phaseData.map((t, i) => i)
+    // const openedPhase = this.phaseData.map((t, i) => i)
     return {
       selectedActivity: {},
       cardBarColorArr: [
         '#D68232', '#FFEA2C', '#d63232', '#28C76F', '#00CFE8', '#6610F2'
       ],
-      openedPhase
+      openedPhase: [0, 1]
     }
   },
   computed: {

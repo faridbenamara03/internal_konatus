@@ -181,8 +181,8 @@ export default {
       openActivityModal: false,
       selectedActivity: {},
       demandTabState: 'team',
-      projectElementTeamData: this.$store.state.globalState.teamsState,
-      projectElementPhaseData: this.$store.state.globalState.phaseState,
+      // projectElementTeamData: this.$store.state.globalState.teamsState,
+      // projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
@@ -316,6 +316,12 @@ export default {
       const { selectedNavObj } = this.$store.state.globalState
       return selectedNavObj
     },
+    projectElementTeamData() {
+      return this.$store.state.globalState.projectElementTeamData
+    },
+    projectElementPhaseData() {
+      return this.$store.state.globalState.projectElementPhaseData
+    }
   }
   // computed: {
   //   filteredTeam() {

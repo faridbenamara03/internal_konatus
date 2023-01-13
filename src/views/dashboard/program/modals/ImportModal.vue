@@ -110,6 +110,7 @@ export default {
         // this.$emit('onSubmit', this.data)
         this.$refs['my-modal'].hide()
         this.$store.commit('teamState/IMPORT_WBS', this.attachments)
+        this.$store.commit('globalState/IMPORT_WBS_2')
         this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V')
       }
     },
