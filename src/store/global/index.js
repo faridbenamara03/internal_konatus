@@ -2,6 +2,371 @@ import Vue from "vue"
 import moment from 'moment'
 import axios from "axios"
 
+const globalOperationData1 = {
+  id: '1.1',
+  title: 'Konatus Industries',
+  resource: 'konatus',
+  isOperation: true,
+  type: 'organization',
+  children: [
+    {
+      id: '1.1.1',
+      title: 'Consumer Robots',
+      type: 'portfolio',
+
+      priority: 'Highest',
+      budget: '210000',
+      deadline: '06/01/2021',
+      engaged: '215800',
+      quote: '210000',
+      demand: '319200',
+      realEstimated: '210100',
+      authorised: '124500',
+      spent: '21600',
+      value: '331',
+      next_gate: '03/01/2022',
+
+      route: {
+        name: 'portfolio-view',
+        params: {
+          portfolioId: 'consumer-robots',
+        },
+      },
+      children: [
+        {
+          id: '1.1.1.1',
+          title: 'Quadruped robot',
+          type: 'program',
+
+          priority: 'Highest',
+          budget: '91001',
+          deadline: '06/01/2021',
+          engaged: '21800',
+          quote: '89000',
+          demand: '19200',
+          realEstimated: '10100',
+          authorised: '14500',
+          spent: '11600',
+          value: '331',
+          next_gate: '03/01/2022',
+
+          route: {
+            name: 'program-view',
+            params: {
+              portfolioId: 'consumer-robots',
+              programId: 'quadruped-robot',
+            },
+          },
+          children: [
+            {
+              id: '1.28.11.1.1',
+              title: 'Full Model Design',
+
+              priority: 'High',
+              budget: '350000',
+              deadline: '06/01/2021',
+              engaged: '22450',
+              quote: '61900',
+              demand: '91800',
+              realEstimated: '235200',
+              authorised: '232100',
+              spent: '41800',
+              value: '64',
+              next_gate: '03/01/2022',
+
+              progress: 0,
+              start_date: '2022.11.6',
+              end_date: '2022.12.26',
+
+              sub_project: [
+                {
+                  id: '1.28.11.1.1.1',
+                  data: {}
+                },
+                {
+                  id: '1.28.11.1.2.2',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.04',
+                    end_date: '2022.12.21',
+                  }
+                },
+                {
+                  id: '1.28.11.1.3.3',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.02',
+                    end_date: '2022.12.25',
+                  }
+                },
+                {
+                  id: '1.28.11.1.4.4',
+                  data: {}
+                },
+                {
+                  id: '1.28.11.1.5.5',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.16',
+                    end_date: '2022.12.1',
+                  }
+                },
+                {
+                  id: '1.28.11.1.6.6',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.16',
+                    end_date: '2022.12.1',
+                  }
+                },
+                {
+                  id: '1.28.11.1.7.7',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.1',
+                    end_date: '2022.12.21',
+                  }
+                },
+                {
+                  id: '1.28.11.1.8.8',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.21',
+                    end_date: '2022.12.13',
+                  }
+                },
+                {
+                  id: '1.28.11.1.9.9',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.21',
+                    end_date: '2022.12.13',
+                  }
+                },
+                {
+                  id: '1.28.11.1.10.10',
+                  data: {
+                    progress: 0,
+                    start_date: '2022.11.21',
+                    end_date: '2022.12.13',
+                  }
+                },
+              ],
+              type: 'project',
+              route: {
+                name: 'project-view',
+                params: {
+                  portfolioId: 'consumer-robots',
+                  programId: 'quadruped-robot',
+                  projectId: 'new-format',
+                },
+              },
+            },
+            {
+              id: '1.28.11.1.2',
+              title: 'Enhanced motricity',
+              type: 'project',
+
+              priority: 'Highest',
+              budget: '82000',
+              deadline: '03/28/2021',
+              engaged: '46450',
+              quote: '54900',
+              demand: '98500',
+              realEstimated: '431700',
+              authorised: '39600',
+              spent: '61400',
+              next_gate: '06/02/2022',
+              value: '84',
+            },
+            {
+              id: '1.28.11.1.3',
+              title: 'Enhanced authonomy',
+              type: 'project',
+
+              priority: 'Highest',
+              budget: '98000',
+              deadline: '06/01/2021',
+              engaged: '450',
+              quote: '45900',
+              demand: '72400',
+              realEstimated: '82000',
+              authorised: '31000',
+              next_gate: '07/01/2022',
+              spent: '21300',
+              value: '31',
+            },
+            {
+              id: '1.28.11.1.4',
+              title: 'Dual sourcing for Quadruped',
+              type: 'project',
+
+              priority: 'Lowest',
+              budget: '80000',
+              deadline: '12/31/2021',
+              engaged: '450',
+              quote: '41550',
+              demand: '91500',
+              next_gate: '08/02/2022',
+              realEstimated: '211200',
+              authorised: '18800',
+              value: '3',
+              spent: '31100',
+            },
+          ],
+        },
+        {
+          id: '1.28.11.212',
+          title: 'New Program',
+          type: 'program',
+
+          priority: 'High',
+          budget: '5000',
+          deadline: '05/20/2018',
+          engaged: '450',
+          quote: '550',
+          demand: '1300',
+          realEstimated: '1200',
+          authorised: '1000',
+          next_gate: '06/02/2022',
+          value: '100',
+          spent: '100',
+        },
+        {
+          id: '1.28.11.2',
+          title: 'Hardened quadruped observation',
+          type: 'program',
+
+          priority: 'High',
+          budget: '5000',
+          deadline: '05/20/2018',
+          engaged: '450',
+          quote: '550',
+          demand: '1300',
+          realEstimated: '1200',
+          authorised: '1000',
+          next_gate: '06/02/2022',
+          value: '100',
+          spent: '100',
+        },
+        {
+          id: '1.28.11.3',
+          title: 'Handling robot',
+          type: 'program',
+
+          priority: 'Low',
+          budget: '1200',
+          deadline: '03/24/2018',
+          engaged: '450',
+          quote: '550',
+          demand: '1500',
+          realEstimated: '1800',
+          authorised: '900',
+          next_gate: '06/02/2022',
+          value: '10',
+          spent: '100',
+        },
+        {
+          id: '1.28.11.4',
+          title: 'power and programing station',
+          type: 'program',
+
+          priority: 'Lowest',
+          budget: '2000',
+          deadline: '12/03/2017',
+          engaged: '450',
+          quote: '550',
+          demand: '2100',
+          realEstimated: '1600',
+          authorised: '800',
+          next_gate: '06/02/2022',
+          value: '34',
+          spent: '100',
+        },
+      ],
+    },
+    {
+      id: '1.1.2',
+      title: 'Military Robots',
+      type: 'portfolio',
+
+      priority: 'Highest',
+      budget: '21000',
+      deadline: '06/01/2021',
+      engaged: '12800',
+      quote: '21000',
+      demand: '19200',
+      realEstimated: '10100',
+      authorised: '14500',
+      spent: '16000',
+      value: '331',
+      next_gate: '03/01/2022',
+
+      children: [
+        {
+          id: '1.1.2.1',
+          title: 'Attacking robot',
+          priority: 'Highest',
+          budget: '21000',
+          deadline: '06/01/2021',
+          engaged: '12800',
+          quote: '11000',
+          demand: '19200',
+          realEstimated: '10100',
+          authorised: '4500',
+          spent: '8600',
+          value: '331',
+          next_gate: '03/01/2022',
+          type: 'program',
+          children: [
+            {
+              id: '1.1.2.1.1',
+              title: 'Rocket lancher',
+              type: 'project',
+              priority: 'Highest',
+              budget: '11000',
+              deadline: '06/01/2021',
+              engaged: '12800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+            {
+              id: '1.1.2.1.2',
+              title: 'Enhanced motricity',
+              type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+            {
+              id: '1.1.2.1.3',
+              title: 'Enhanced authono...',
+              type: 'project',
+            },
+            {
+              id: '1.1.2.1.4',
+              title: 'Dual sourcing for Quadruped',
+              type: 'project',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
 const globalOperationData = {
   id: '1.1',
   title: 'Konatus Industries',
@@ -2050,6 +2415,7 @@ export default {
     selectedNavObj: {},
 
     globalOperationData,
+    globalOrganizationData,
     projectElementTeamData: [],
     projectElementPhaseData: [],
     // globalOperationData: {
@@ -2063,7 +2429,6 @@ export default {
     //   },
     //   children: ['']
     // },
-    globalOrganizationData,
     chartXAxisData: ['', moment().format('YYYY-MM'), ''],
     chartSeriesData: [
       [null, parseInt(Math.random() * 400 + 1300, 10), null],
@@ -2399,8 +2764,9 @@ export default {
       if (e) state.selectedWorkElement = {}
       else state.selectedWorkElement = null
     },
-    ADD_PROJECT() {
-      console.log(1)
+    ADD_PROJECT(state) {
+      Vue.$toast.success("New program added")
+      state.globalData = [globalOperationData1, globalOrganizationData]
     }
   },
   actions: {

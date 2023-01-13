@@ -64,7 +64,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step1.portfolio"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="['Consumer robots', 'Military robots']"
           placeholder="Select Portfolio"
           outlined
         />
@@ -73,7 +73,7 @@
         <label>Program</label>
         <v-select
           v-model="step1.program"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
           placeholder="Select Program"
           outlined
         />
@@ -82,7 +82,7 @@
         <label>Project</label>
         <v-select
           v-model="step1.project"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
           placeholder="Select Project"
           outlined
         />
@@ -94,7 +94,7 @@
         </div>
         <v-select
           v-model="step1.subProject"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="['']"
           placeholder="Select Sub Project"
           outlined
         />
@@ -546,8 +546,6 @@ export default {
     handleNext() {
       if (this.curIndex < 6) {
         this.curIndex += 1
-      } else {
-        this.$store.commit('global/ADD_PROJECT')
       }
     },
   },

@@ -85,7 +85,7 @@
         <label>Program</label>
         <InputSelect
           placeholder="Select Program"
-          :options="['New Quadruped robot', 'New Hardened quadruped observation', 'Handling robot', 'power and programing station', 'Attacking robot']"
+          :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
           :value="step1.program"
           @customChange="e => handleCustomChange(e, 'program')" />
         <!-- <v-select
@@ -99,7 +99,7 @@
         <label>Project</label>
         <InputSelect
           placeholder="Select Project"
-          :options="['New format', 'New Enhanced motricity', 'New Enhanced authonomy', 'New Dual sourcing for Quadruped']"
+          :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
           :value="step1.project"
           @customChange="e => handleCustomChange(e, 'project')" />
         <!-- <v-select
@@ -644,6 +644,8 @@ export default {
           step6: this.step6
         }
         this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
+        this.$store.commit('globalState/ADD_PROJECT')
+        this.$refs['my-modal'].hide()
       }
     },
     handleCustomChange(e, field) {
