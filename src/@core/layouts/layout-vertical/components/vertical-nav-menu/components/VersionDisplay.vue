@@ -1,7 +1,7 @@
 <template>
   <div class="user-nav-group">
-    <div style="margin-bottom:20px;font-weight: 700;font-size: 15px;">
-      v 0.9.1
+    <div class="ver">
+      v 0.9.6
     </div>
   </div>
 </template>
@@ -16,5 +16,10 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 15px;
+  }
+  .ver {
+      font-weight: 400;
+      font-size: 0.85em;
   }
 </style>

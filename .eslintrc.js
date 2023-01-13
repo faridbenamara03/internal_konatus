@@ -14,6 +14,8 @@ module.exports = {
     "vue/no-deprecated-v-on-native-modifier": "off",
     "vue/no-deprecated-filter": "off",
     "vue/no-deprecated-v-bind-sync": "off",
+    "no-tabs": "off",
+    "indent": "off",
     // "import/no-cycle": ["error", { maxDepth: Infinity }],
     "import/no-cycle": 0,
     semi: ["error", "never"],
