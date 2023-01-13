@@ -5,6 +5,11 @@ export default [
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
+    path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId',
+    name: 'project-view',
+    component: () => import('@/views/dashboard/project/Project.vue'),
+  },
+  {
     path: '/operation/portfolio/:portfolioId/program/:programId/project/:projectId/demand-team',
     name: 'project-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
