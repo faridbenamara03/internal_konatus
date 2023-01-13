@@ -27,7 +27,7 @@
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox v-model="activity.isSelected" />
+                <b-form-checkbox @change="onCheckChange" v-model="activity.isSelected" />
               </div>
             </div>
             <p class="muted">
@@ -59,7 +59,7 @@
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox v-model="activity.isSelected" />
+                <b-form-checkbox @change="onCheckChange" v-model="activity.isSelected" />
               </div>
             </div>
             <p class="muted">
@@ -122,6 +122,9 @@ export default {
     handleActivityDetails(phase, team) {
       this.$emit('openDetailActivity', phase, team)
     },
+    onCheckChange(e) {
+      this.$store.commit('globalState/WOEK_ELEMENT_CHECK', e)
+    }
   },
 }
 </script>

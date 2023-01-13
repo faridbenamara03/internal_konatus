@@ -2073,7 +2073,8 @@ export default {
       [1450, 1450, 1450],
       [1600, 1600, 1600],
       [1500, 1500, 1500],
-    ]
+    ],
+    selectedWorkElement: null
   },
   mutations: {
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
@@ -2394,6 +2395,10 @@ export default {
         state.projectElementPhaseData = phaseState
       }, 1000)
     },
+    WOEK_ELEMENT_CHECK(state, e) {
+      if (e) state.selectedWorkElement = {}
+      else state.selectedWorkElement = null
+    }
   },
   actions: {
     load_nav_data() {

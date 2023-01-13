@@ -18,10 +18,10 @@
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
               </b-button>
-              <!-- <b-button v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
+              <b-button :disabled="!selectedWorkElement" v-b-modal.modal-request-quote class="ml-1" variant="primary" >
                 <feather-icon icon="MapIcon" size="16" />&nbsp;
                 <span>Request Quote</span>
-              </b-button> -->
+              </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button class="mr-1" variant="primary">
@@ -202,6 +202,11 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  computed: {
+    selectedWorkElement() {
+      return this.$store.state.globalState.selectedWorkElement
+    }
   },
   data() {
     return {

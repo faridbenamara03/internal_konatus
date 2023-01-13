@@ -654,5 +654,6 @@ export default {
 </script>
 
 <style lang="scss">
+.range-slider-fill{ background-color: #ff9c00; }
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

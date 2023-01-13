@@ -126,14 +126,40 @@ export default {
     BModal,
   },
   props: {
-    data: {
-      type: Array,
-      default: () => [],
-    },
+    // data: {
+    //   type: Array,
+    //   default: () => [],
+    // },
   },
   data() {
     return {
       collapsed: [],
+      data: [
+        {
+          id: 1,
+          name: 'PARIS - QA'
+        },
+        {
+          id: 2,
+          name: 'SOFIA - DEV'
+        },
+        {
+          id: 3,
+          name: 'PLOVDIV - DEV'
+        },
+        {
+          id: 4,
+          name: 'BURGAS - DEV'
+        },
+        {
+          id: 5,
+          name: 'VARNA - QA'
+        },
+        {
+          id: 6,
+          name: 'SHUMEN - DEV'
+        },
+      ]
     }
   },
   methods: {

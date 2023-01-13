@@ -10,10 +10,10 @@
                 <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import</span>
               </b-button>
-              <!-- <b-button v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary" :disabled="!teams.length">
+              <b-button :disabled="!selectedWorkElement" v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary">
                 <feather-icon icon="MapIcon" size="16" />&nbsp;
                 <span>Request Quote</span>
-              </b-button> -->
+              </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button v-b-modal.modal-update class="mr-1" variant="primary">
@@ -309,6 +309,9 @@ export default {
     ClickOutside
   },
   computed: {
+    selectedWorkElement() {
+      return this.$store.state.globalState.selectedWorkElement
+    },
     selectedNavType() {
       return this.$store.state.globalState.selectedNavObj.type
     },
