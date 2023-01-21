@@ -54,12 +54,22 @@
       class="select-group"
     >
       <div class="select-box">
-        <label>Nomenclature System</label>
-        <InputSelect
-          placeholder="Select System"
-          :options="['SAP', 'Jira', 'Konatus']"
-          :value="step1.system"
-          @customChange="e => handleCustomChange(e, 'system')" />
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Nomenclature System</label>
+            <InputSelect
+              placeholder="Select System"
+              :options="['SAP', 'Jira', 'Konatus']"
+              :value="step1.system"
+              @customChange="e => handleCustomChange(e, 'system')" />
+          </div>
+          <div class="w-50 pl-1">
+            <label>SystemId</label>
+            <b-form-input
+              v-model="step1.systemId"
+            />
+          </div>
+        </div>
         <!-- <v-select
           v-model="step1.system"
           :options="['SAP', 'Jira', 'Konatus']"
@@ -68,12 +78,22 @@
         /> -->
       </div>
       <div class="select-box">
-        <label>Portfolio</label>
-        <InputSelect
-          placeholder="Select Portfolio"
-          :options="['Consumer Robots', 'Military Robots']"
-          :value="step1.portfolio"
-          @customChange="e => handleCustomChange(e, 'portfolio')" />
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Portfolio</label>
+            <InputSelect
+              placeholder="Select Portfolio"
+              :options="['Consumer Robots', 'Military Robots']"
+              :value="step1.portfolio"
+              @customChange="e => handleCustomChange(e, 'portfolio')" />
+          </div>
+          <div class="w-50 pl-1">
+            <label>PortfolioID</label>
+            <b-form-input
+              v-model="step1.portfolioId"
+            />
+          </div>
+        </div>
         <!-- <v-select
           v-model="step1.portfolio"
           :options="['Highest', 'High', 'Low', 'Lowest']"
@@ -82,12 +102,22 @@
         /> -->
       </div>
       <div class="select-box">
-        <label>Program</label>
-        <InputSelect
-          placeholder="Select Program"
-          :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
-          :value="step1.program"
-          @customChange="e => handleCustomChange(e, 'program')" />
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Program</label>
+            <InputSelect
+              placeholder="Select Program"
+              :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
+              :value="step1.program"
+              @customChange="e => handleCustomChange(e, 'program')" />
+          </div>
+          <div class="w-50 pl-1">
+            <label>ProgramId</label>
+            <b-form-input
+              v-model="step1.programId"
+            />
+          </div>
+        </div>
         <!-- <v-select
           v-model="step1.program"
           :options="['Highest', 'High', 'Low', 'Lowest']"
@@ -96,12 +126,22 @@
         /> -->
       </div>
       <div class="select-box">
-        <label>Project</label>
-        <InputSelect
-          placeholder="Select Project"
-          :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
-          :value="step1.project"
-          @customChange="e => handleCustomChange(e, 'project')" />
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Project</label>
+            <InputSelect
+              placeholder="Select Project"
+              :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
+              :value="step1.project"
+              @customChange="e => handleCustomChange(e, 'project')" />
+          </div>
+          <div class="w-50 pl-1">
+            <label>ProjectId</label>
+            <b-form-input
+              v-model="step1.projectId"
+            />
+          </div>
+        </div>
         <!-- <v-select
           v-model="step1.project"
           :options="['Highest', 'High', 'Low', 'Lowest']"
@@ -110,15 +150,24 @@
         /> -->
       </div>
       <div class="select-box">
-        <div class="d-flex justify-content-between">
-          <label>Sub Project</label>
-          <label>(Optional)</label>
+        <div class="d-flex">
+          <div class="w-50">
+            <div class="d-flex justify-content-between">
+              <label>Sub Project(Optional)</label>
+            </div>
+            <InputSelect
+              placeholder="Select Sub Project"
+              :options="[]"
+              :value="step1.subProject"
+              @customChange="e => handleCustomChange(e, 'subProject')" />
+          </div>
+          <div class="w-50 pl-1">
+            <label>SubProject</label>
+            <b-form-input
+              v-model="step1.subProjectId"
+            />
+          </div>
         </div>
-        <InputSelect
-          placeholder="Select Sub Project"
-          :options="[]"
-          :value="step1.subProject"
-          @customChange="e => handleCustomChange(e, 'subProject')" />
         <!-- <v-select
           v-model="step1.subProject"
           :options="['Highest', 'High', 'Low', 'Lowest']"
@@ -156,6 +205,78 @@
           />
         </div>
       </div>
+      <div class="select-box">
+        <label>Date Production Deadline</label>
+        <b-form-datepicker
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          id="example-datepicker"
+          v-model="step2.date"
+        />
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Budget demand</label>
+          <b-form-input
+            v-model="step2.budget_demand"
+            type="number"
+          />
+          <!-- <v-select
+            v-model="step2.budget_demand"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
+            placeholder="Highest"
+            outlined
+          /> -->
+        </div>
+        <div class="select-box">
+          <label>Unit</label>
+          <v-select
+            v-model="step2.unit1"
+            :options="['hours', '$']"
+            outlined
+          />
+        </div>
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Budget autorized</label>
+          <b-form-input
+            v-model="step2.budget_autorized"
+            type="number"
+          />
+          <!-- <v-select
+            v-model="step2.budget_demand"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
+            placeholder="Highest"
+            outlined
+          /> -->
+        </div>
+        <div class="select-box">
+          <label>Unit</label>
+          <v-select
+            v-model="step2.unit2"
+            :options="['hours', '$']"
+            outlined
+          />
+        </div>
+      </div>
+      <!-- <div class="select-group--sub">
+        <div class="select-box">
+          <label>Priority</label>
+          <v-select
+            v-model="step2.priority"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
+            placeholder="Highest"
+            outlined
+          />
+        </div>
+        <div class="select-box">
+          <label>Value</label>
+          <b-form-input
+            v-model="step2.value"
+            type="number"
+          />
+        </div>
+      </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Budget</label>
@@ -163,12 +284,6 @@
             v-model="step2.budget"
             type="number"
           />
-          <!-- <v-select
-            v-model="step2.budget"
-            :options="['100', '200', '300', '400']"
-            placeholder="300"
-            outlined
-          /> -->
         </div>
         <div class="select-box">
           <label>Budget Engaged / Quote</label>
@@ -177,21 +292,11 @@
             type="number"
             outlined
           />
-          <!-- <v-select
-            v-model="step2.quote"
-            :options="['0', '100']"
-            placeholder="0"
-            outlined
-          /> -->
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Current Phase</label>
-          <!-- <b-form-input
-            v-model="step2.phase"
-            type="number"
-          /> -->
           <v-select
             v-model="step2.phase"
             :options="['research', 'evaluation', 'development', 'testing', 'deployment', 'maintenance']"
@@ -205,22 +310,14 @@
             v-model="step2.budgetOpen"
             type="number"
           />
-          <!-- <v-select
+          <v-select
             v-model="step2.budgetOpen"
             :options="['0', '100']"
             placeholder="0"
             outlined
-          /> -->
+          />
         </div>
-      </div>
-      <div class="select-box">
-        <label>Date Production Deadline</label>
-        <b-form-datepicker
-          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          id="example-datepicker"
-          v-model="step2.date"
-        />
-      </div>
+      </div> -->
     </div>
     <div
       v-if="curIndex === 3"
@@ -350,7 +447,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Head of Product Portfolio</label>
+          <label>Head of the product portfolio</label>
           <b-form-input
             v-model="step5.head_product_portfolio"
           />
@@ -362,7 +459,7 @@
           /> -->
         </div>
         <div class="select-box">
-          <label>Product Manager</label>
+          <label>Product manager</label>
           <b-form-input
             v-model="step5.product_manager"
           />
@@ -388,7 +485,7 @@
           /> -->
         </div>
         <div class="select-box">
-          <label>Head of Program Direction</label>
+          <label>Head of program direction</label>
           <b-form-input
             v-model="step5.head_program_direction"
           />
@@ -401,19 +498,30 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box mb-0">
-          <label>Program Director</label>
+        <div class="select-box">
+          <label>Program director</label>
           <b-form-input
             v-model="step5.program_director"
           />
           <!-- <v-select
-            v-model="step5.program_director"
+            v-model="step5.architect"
+            :options="['SAP', 'Jira', 'Konatus']"
+            placeholder="Select System"
+            outlined
+          /> -->
+        </div>
+        <div class="select-box">
+          <label>Project mananger</label>
+          <b-form-input
+            v-model="step5.project_manager"
+          />
+          <!-- <v-select
+            v-model="step5.head_program_direction"
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Select Portfolio"
             outlined
           /> -->
         </div>
-        <div class="select-box m-0" />
       </div>
     </div>
     <div
@@ -603,6 +711,7 @@ export default {
         architect: null,
         head_program_direction: null,
         program_director: null,
+        project_manager: null,
       },
       step6: {
         portfolio: null,
