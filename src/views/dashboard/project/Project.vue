@@ -99,7 +99,7 @@
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <div class="d-flex align-items-center" v-if="tabIndex === 2">
+            <div class="d-flex align-items-center" v-if="tabIndex === 2 || tabIndex === 0">
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <span>Period</span>
               <div class="ml-1">
