@@ -11,6 +11,7 @@ import teamState from './team'
 import orgnizationState from './orgnization'
 import globalState from './global'
 import portfolioState from './portfolio'
+import databaseState from './database'
 
 Vue.use(Vuex)
 Vue.use(Faker)
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     orgnizationState,
     globalState,
     portfolioState,
+    databaseState
   },
   strict: process.env.DEV,
 })

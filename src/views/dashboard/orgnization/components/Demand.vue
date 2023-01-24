@@ -13,8 +13,8 @@
         </div>
       </div>
       <div class="part2">
-        <div class="data-child mr-1 org-uppercase" v-for="(item, index) in c_teams" :key="index">
-          {{ item }}
+        <div class="data-child mr-1 org-uppercase" v-for="(team, index) in c_teams" :key="index">
+          {{ team.title }}
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
       <div class="org-row org-sub-header org-bold org-table-row org-uppercase color-white header-shadow-btm row-header-bg">
         {{ item.title }}
       </div>
-      <div v-for="(item1, index1) in item.projects" :key="index1">
+      <div v-for="(item1, index1) in item.children" :key="index1">
         <div class="org-row org-bold org-sub-header org-table-row org-uppercase color-white row-header-bg border-btm-lgt" :class="{'inner-sdw': index1 === 0}">
           <div class="part1">
             <div class="header mr-1" v-on:click="onCollapseCLick(index1)" style="cursor:pointer">
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div v-if="index1 === c_opened">
-          <div v-for="(item3, index3) in item1.phases" :key="index3" class="org-row org-table-row font-14 border-bottom-dm">
+          <div v-for="(item3, index3) in item1.children" :key="index3" class="org-row org-table-row font-14 border-bottom-dm">
             <div class="part1">
               <div class="header mr-1 pl-4 org-bold">
                 {{ item3.title }}
@@ -123,13 +123,13 @@ export default {
       return this.opened
     },
     c_teams() {
-      return this.$store.state.orgnizationState.teams
+      return this.$store.state.databaseState.teamData
     },
     c_fields_a() {
       return this.$store.state.orgnizationState.fields
     },
     c_data_a() {
-      return this.$store.state.orgnizationState.data
+      return this.$store.state.orgnizationState.unitDemandData
     },
     c_total_data() {
       return this.$store.state.orgnizationState.total_data

@@ -5,112 +5,204 @@ import dateFormat from "dateformat"
 export default {
   namespaced: true,
   state: {
-    teams: ['team a', 'team b', 'team c', 'team d', 'team e'],
     fields: ['programs', 'gate', 'next_gate'],
-    total_data: [24, 45, 101, 117, 12],
-    data: [
+    total_data: [24, 45, 101, 117, 12, 101, 117, 12],
+    unitDemandData: [
       {
-        title: 'consumer robots',
-        projects: [
+        id: 'consumer-robots-portfolio',
+        title: 'Consumer Robots',
+        type: 'portfolio',
+        children: [
           {
+            id: 'quadruped-robot-program',
             title: 'Quadruped robot',
-            gate: '3',
-            next_gate: '02/03/2022',
-            data: ['21', '37', '88', '114', '9'],
-            phases: [
+            type: 'program',
+            next_gate: '03/01/2022',
+            gate: 3, // for unit demand page
+            data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
+            children: [
               {
-                title: 'New format',
-                gate: '2',
-                next_gate: '01/01/2021',
-                data: ['15', '31', '81', '104', '0'],
+                id: 'new-format-project',
+                title: 'New Format',
+                type: 'project',
+                next_gate: '03/01/2022',
+                gate: 3, // for unit demand page
+                data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
               },
               {
+                id: 'enhanced-motricity-project',
                 title: 'Enhanced motricity',
-                gate: '1',
-                next_gate: '01/01/2021',
-                data: ['2', '0', '4', '5', '5'],
+                type: 'project',
+                next_gate: '03/01/2022',
+                gate: 3, // for unit demand page
+                data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
               },
               {
-                title: 'Enhanced Autonomy',
-                gate: '0',
-                next_gate: '02/02/2021',
-                data: ['2', '2', '0', '0', '2'],
+                id: 'enhanced-autonomy-project',
+                title: 'Enhanced autonomy',
+                type: 'project',
+                next_gate: '03/01/2022',
+                gate: 3, // for unit demand page
+                data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
               },
               {
-                title: 'Dual sourcing for Q',
-                gate: '0',
-                next_gate: '01/01/2021',
-                data: ['2', '2', '0', '2', '0'],
-              },
-              {
-                title: 'Precise movement & control',
-                gate: '0',
-                next_gate: '02/01/2021',
-                data: ['0', '2', '3', '3', '2'],
+                id: 'dual-sourcing-for-quadruped-project',
+                title: 'Dual sourcing for Quadruped',
+                type: 'project',
+                next_gate: '03/01/2022',
+                gate: 3, // for unit demand page
+                data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
               },
             ]
           },
           {
-            title: 'handling robot',
-            gate: '54',
-            next_gate: '04/01/2021',
-            data: ['0', '0', '0', '0', '0'],
-            phases: [
-              {
-                title: 'update_interface',
-                gate: '2',
-                next_gate: '01/01/2021',
-                data: ['15', '31', '81', '104', '0'],
-              },
-              {
-                title: 'Backend_optimize',
-                gate: '1',
-                next_gate: '01/01/2021',
-                data: ['2', '0', '4', '5', '5'],
-              },
-              {
-                title: 'Anatomy Calculus',
-                gate: '0',
-                next_gate: '02/02/2021',
-                data: ['2', '2', '0', '0', '2'],
-              },
-              {
-                title: 'Denny Soon',
-                gate: '0',
-                next_gate: '01/01/2021',
-                data: ['2', '2', '0', '2', '0'],
-              },
-            ]
+            id: 'micro-robot-observation-nbc-program',
+            title: 'Micro robot observation NBC',
+            type: 'program',
+            next_gate: '06/02/2022',
+            gate: 3, // for unit demand page
+            data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
           },
           {
-            title: 'power & programming satellite',
-            gate: '1',
-            next_gate: '01/01/2021',
-            data: ['3', '8', '13', '3', '3'],
-            phases: [
-              {
-                title: 'launch perfection',
-                gate: '2',
-                next_gate: '01/01/2021',
-                data: ['15', '31', '81', '104', '0'],
-              },
-              {
-                title: 'calculate orbit',
-                gate: '1',
-                next_gate: '01/01/2021',
-                data: ['2', '0', '4', '5', '5'],
-              },
-              {
-                title: 'communication testing',
-                gate: '0',
-                next_gate: '02/02/2021',
-                data: ['2', '2', '0', '0', '2'],
-              },
-            ]
+            id: 'handling-robot-program',
+            title: 'Handling robot',
+            type: 'program',
+            next_gate: '06/02/2022',
+            gate: 3, // for unit demand page
+            data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
+          },
+          {
+            id: 'power-&-programming-station-program',
+            title: 'Power & programming station',
+            type: 'program',
+            next_gate: '06/02/2022',
+            gate: 3, // for unit demand page
+            data: ['15', '31', '81', '104', '0', '2', '13', '41'], // for unit demand page
           },
         ]
-      }
+      },
     ],
+
+    unitReportingData: [
+      {
+        id: 'consumer-robots-portfolio',
+        title: 'Consumer Robots',
+        type: 'portfolio',
+        children: [
+          {
+            id: 'quadruped-robot-program',
+            title: 'Quadruped robot',
+            type: 'program',
+            start_date: '2023.1.18',
+            end_date: '2023.2.12',
+            start_date1: '2023.1.18',
+            end_date1: '2023.2.12',
+            start_date2: '2023.1.18',
+            end_date2: '2023.2.12',
+            start_date3: '2023.1.18',
+            end_date3: '2023.2.12',
+            progress: 60,
+            children: [
+              {
+                id: 'new-format-project',
+                title: 'New Format',
+                type: 'project',
+                progress: 0,
+                start_date: '2023.1.20',
+                end_date: '2023.2.10',
+                start_date1: '2023.1.20',
+                end_date1: '2023.2.10',
+              },
+              {
+                id: 'enhanced-motricity-project',
+                title: 'Enhanced motricity',
+                type: 'project',
+                progress: 0,
+                start_date: '2023.1.20',
+                end_date: '2023.2.10',
+                start_date1: '2023.1.20',
+                end_date1: '2023.2.10',
+                start_date2: '2023.1.20',
+                end_date2: '2023.2.10',
+                start_date3: '2023.1.20',
+                end_date3: '2023.2.10',
+              },
+              {
+                id: 'enhanced-autonomy-project',
+                title: 'Enhanced autonomy',
+                type: 'project',
+                progress: 100,
+                start_date: '2023.1.20',
+                end_date: '2023.2.10',
+                start_date1: '2023.1.20',
+                end_date1: '2023.2.10',
+                start_date2: '2023.1.20',
+                end_date2: '2023.2.10',
+                start_date3: '2023.1.20',
+                end_date3: '2023.2.10',
+              },
+              {
+                id: 'dual-sourcing-for-quadruped-project',
+                title: 'Dual sourcing for Quadruped',
+                type: 'project',
+                progress: 100,
+                start_date: '2023.1.20',
+                end_date: '2023.2.10',
+                start_date1: '2023.1.20',
+                end_date1: '2023.2.10',
+                start_date2: '2023.1.20',
+                end_date2: '2023.2.10',
+                start_date3: '2023.1.20',
+                end_date3: '2023.2.10',
+              },
+            ]
+          },
+          {
+            id: 'micro-robot-observation-nbc-program',
+            title: 'Micro robot observation NBC',
+            type: 'program',
+            start_date: '2023.1.18',
+            end_date: '2023.2.12',
+            start_date1: '2023.1.18',
+            end_date1: '2023.2.12',
+            start_date2: '2023.1.18',
+            end_date2: '2023.2.12',
+            start_date3: '2023.1.18',
+            end_date3: '2023.2.12',
+            progress: 60,
+          },
+          {
+            id: 'handling-robot-program',
+            title: 'Handling robot',
+            type: 'program',
+            start_date: '2023.1.18',
+            end_date: '2023.2.12',
+            start_date1: '2023.1.18',
+            end_date1: '2023.2.12',
+            start_date2: '2023.1.18',
+            end_date2: '2023.2.12',
+            start_date3: '2023.1.18',
+            end_date3: '2023.2.12',
+            progress: 60,
+          },
+          {
+            id: 'power-&-programming-station-program',
+            title: 'Power & programming station',
+            type: 'program',
+            start_date: '2023.1.18',
+            end_date: '2023.2.12',
+            start_date1: '2023.1.18',
+            end_date1: '2023.2.12',
+            start_date2: '2023.1.18',
+            end_date2: '2023.2.12',
+            start_date3: '2023.1.18',
+            end_date3: '2023.2.12',
+            progress: 60,
+          },
+        ]
+      },
+    ],
+
     reportingData: [
       {
         title: 'Program 29',
@@ -216,7 +308,7 @@ export default {
                 start_date1: '2023.1.2',
                 end_date1: '2023.1.28',
                 start_date2: '2023.1.31',
-                end_date2: '2023.2.30',
+                end_date2: '2023.2.10',
                 start_date3: '2023.1.4',
                 end_date3: '2023.1.30',
               },

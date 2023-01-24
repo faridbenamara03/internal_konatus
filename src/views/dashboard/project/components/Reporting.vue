@@ -6,7 +6,7 @@
           <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
           <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
           {{ item.title }}
-          <span class="ml-3 mr-1">type:</span>
+          <span class="ml-1 mr-1">type:</span>
           <div style="display:inline-block">
             <b-form-select v-model="selected" :options="options" size="sm" />
           </div>
@@ -18,10 +18,10 @@
             <div class="header-child">
               <div class="child1">
                 <div class="title">
-                  {{ item1.child_title }}
+                  {{ item1.title }}
                 </div>
                 <div class="id">
-                  {{ item1.id }}
+                  {{ item1.title }}
                 </div>
               </div>
               <div class="child2">
@@ -31,10 +31,10 @@
               </div>
             </div>
           </div>
-          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.sub_project" :key="index2">
+          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.children" :key="index2">
             <div class="sub-project">
               <div class="child1">
-                {{ item2.id }}
+                {{ item2.title }}
               </div>
               <div class="child2">
                 ({{ item2.progress ? item2.progress : 0 }}%)
@@ -110,12 +110,12 @@
               <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
                 <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
                   :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.id} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
+                  :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
               </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.sub_project" :key="index2" >
+              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.children" :key="index2" >
                 <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
                   :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.id} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
+                  :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
               </div>
             </div>
           </div>
@@ -149,12 +149,12 @@
               <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
                 <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
                   :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.id} (${item1.progress}%)`" :isSub="false" :offsetBase="75" />
+                  :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="75" />
               </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.sub_project" :key="index2" >
+              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.children" :key="index2" >
                 <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
                   :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.id} (${item2.progress}%)`" :isSub="true" :offsetBase="75" />
+                  :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="75" />
               </div>
             </div>
           </div>
@@ -218,7 +218,6 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      // reportingData: this.$store.state.orgnizationState.reportingData,
       leftP: 15 * 30 + 8,
       lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
       todate: moment().format('YYYY.MM.DD'),
@@ -234,7 +233,7 @@ export default {
   },
   computed: {
     datt() {
-      return this.$store.state.orgnizationState.reportingData
+      return this.$store.state.orgnizationState.unitReportingData
     }
   },
   mounted() {
