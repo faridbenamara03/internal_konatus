@@ -4,113 +4,78 @@ export default {
   namespaced: true,
   state: {
     loaderModalShow: false,
-    teamsState: [],
-    resourceAdded: false,
-    teamReportUpdated: false,
-    demandTeamData: {},
-    teamControlData: {
-      teamCapacity: ['100', '100', '100', '100', '0', '0', '75'],
-      series: [
-        {
-          name: 'Travis Roach',
-          data: [
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { data: '' },
-            { data: '' },
-            { bg: '#66C85660', data: '8' },
-          ],
-        },
-        {
-          name: 'Ciaran Bradford',
-          data: [
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { data: '' },
-            { data: '' },
-            { bg: '#66C85660', data: '8' },
-          ],
-        },
-        {
-          name: 'George Logan',
-          data: [
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { bg: '#66C85660', data: '8' },
-            { data: '' },
-            { data: '' },
-            { bg: '#0F849E70', data: '4' },
-          ],
-        },
-        {
-          name: 'Angelica Russo',
-          data: [
-            { bg: '#0a5666', data: '8' },
-            { bg: '#8b3b4e', data: '8' },
-            { bg: '#0a5666', data: '8' },
-            { bg: '#448739', data: '8' },
-            { data: '' },
-            { data: '' },
-            { bg: '#0F849E70', data: '4' },
-          ],
-        },
-      ],
-    },
-    reportingData: {
-      title: 'Konatus Industries',
+    teamReportingData: {
+      id: 'consumer-robots-portfolio',
+      title: 'Consumer Robots',
+      type: 'portfolio',
       children: [
         {
-          title: 'Quardruped Robot',
+          id: 'quadruped-robot-program',
+          title: 'Quadruped robot',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
           children: [
             {
-              child_title: 'New Format',
-              id: '1.28.11',
-            },
-            {
-              child_title: '1.28.12.1',
+              id: 'new-format-project',
+              title: 'New Format',
+              parent: 'quadruped-robot-program',
+              type: 'project',
               progress: 0,
-              start_date: '2022.11.14 ',
-              end_date: '2022.12.30',
-              id: '1.28.12.1',
+              start_date: '2023.1.20',
+              end_date: '2023.3.12',
             },
             {
-              child_title: '1.28.17.1',
-              id: '1.28.17.1',
-            }
+              id: 'enhanced-motricity-project',
+              title: 'Enhanced motricity',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+            },
+            {
+              id: 'enhanced-autonomy-project',
+              title: 'Enhanced autonomy',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              progress: 0,
+              start_date: '2023.1.20',
+              end_date: '2023.3.12',
+            },
+            {
+              id: 'dual-sourcing-for-quadruped-project',
+              title: 'Dual sourcing for Quadruped',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              progress: 0,
+              start_date: '2023.1.20',
+              end_date: '2023.3.12',
+            },
           ]
         },
         {
-          title: 'Program 1.31',
-          children: [
-            {
-              child_title: '1.31.26.1',
-              id: '1.31.26.1',
-            },
-          ]
-        },
-        {
-          title: 'Program 1.32',
+          id: 'micro-robot-observation-nbc-program',
+          title: 'Micro robot observation NBC',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
           progress: 0,
-          start_date: '2022.11.14',
-          end_date: '2022.12.30',
-          id: '1.32',
-          children: [
-            {
-              child_title: '1.32.27.1',
-              progress: 0,
-              start_date: '2022.11.14',
-              end_date: '2022.12.30',
-              id: '1.32.27.1',
-            },
-          ]
-        }
+          start_date: '2023.1.20',
+          end_date: '2023.3.12',
+        },
+        {
+          id: 'handling-robot-program',
+          title: 'Handling robot',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+          progress: 0,
+          start_date: '2023.1.20',
+          end_date: '2023.3.12',
+        },
+        {
+          id: 'power-&-programming-station-program',
+          title: 'Power & programming station',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+        },
       ]
-    }
+    },
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow

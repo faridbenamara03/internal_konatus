@@ -2,13 +2,13 @@
   <div v-if="exist !== undefined" class="progress-container-cst" style="height:100%">
     <div class="cld">
       <div v-if="!isSub" style="margin-bottom:8px;color:white;font-size:12px;margin-left:6px;"> {{ title }} </div>
-      <div class="bar1" :style="`height:${this.progressHeight};width:300px;background-color:${bgClr}`" />
+      <div class="bar1" :style="`height:${this.progressHeight};width:400px;background-color:${bgClr}`" />
       <div class="d-flex">
-        <div class="bar2" :style="'height:' + this.progressHeight + ';width:400px'" />
+        <div class="bar2" :style="'height:' + this.progressHeight + ';width:410px'" />
         <!-- <div class="bar2-1" :style="'height:' + this.progressHeight + ';width:200px'"></div> -->
       </div>
       <div class="d-flex">
-        <div class="bar3" :style="'height:' + this.progressHeight + ';width:445px'" />
+        <div class="bar3" :style="'height:' + this.progressHeight + ';width:410px'" />
         <!-- <div class="bar3-1" :style="'height:' + this.progressHeight + ';width:200px'"></div> -->
       </div>
     </div>

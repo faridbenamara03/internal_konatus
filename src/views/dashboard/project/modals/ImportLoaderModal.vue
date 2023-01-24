@@ -91,11 +91,10 @@ export default {
       default: () => [],
     },
   },
-  // data() {
-  //   return {
-  //     loadershow: this.$store.state.teamState.loaderModalShow,
-  //   }
-  // },
+  data() {
+    return {
+    }
+  },
   computed: {
     loadershow() {
       return this.$store.state.teamState.loaderModalShow

@@ -18,7 +18,7 @@
         </div>
         <div class="program-title-cld1" v-for="(item1, index1) in item.children" :key="index1">
           <div class="program-title-child">
-            <div class="title">{{ item1.child_title }}</div>
+            <div class="title">{{ item1.title }}</div>
             <div class="id">{{ item1.id }}</div>
           </div>
         </div>
@@ -30,7 +30,7 @@
       </div>
       <div class="reporting-content--header">
         <div class="first-child">
-          <div v-if="!getTeamReportUpdateState" v-b-modal.modal-update style="color:#D68232">
+          <div v-b-modal.modal-update style="color:#D68232">
             <feather-icon icon="AlertCircleIcon" style="margin-bottom:3px" />
             Update Available
           </div>
@@ -163,7 +163,6 @@ export default {
       value1: 30,
       value2: 40,
       value3: 80,
-      reportingData: this.$store.state.teamState.reportingData,
       leftP: 15 * 30 + 8,
       lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
       todate: moment().format('YYYY.MM.DD'),
@@ -173,11 +172,8 @@ export default {
   },
   computed: {
     datt() {
-      return this.$store.state.teamState.reportingData
+      return this.$store.state.teamState.teamReportingData
     },
-    getTeamReportUpdateState() {
-      return this.$store.state.teamState.teamReportUpdated
-    }
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, "days")
