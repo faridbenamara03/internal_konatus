@@ -71,7 +71,6 @@ export default {
         ]
       },
     ],
-
     programData: [
       {
         id: 'quadruped-robot-program',
@@ -204,7 +203,7 @@ export default {
           },
         },
         children: [
-          'rocket-ancher-project',
+          'rocket-launcher-project',
           'location-system-project',
           'target-lock-project',
           'estimation-device-program'
@@ -330,15 +329,15 @@ export default {
         next_gate: '08/02/2022',
       },
       {
-        id: 'rocket-ancher-project',
-        title: 'Rocket lancher',
+        id: 'rocket-launcher-project',
+        title: 'Rocket launcher',
         type: 'project',
         route: {
           name: 'project-view',
           params: {
             portfolioId: 'military-robots',
             programId: 'attacking-robot',
-            projectId: 'rocket-ancher',
+            projectId: 'rocket-launcher',
           },
         },
         priority: 'Highest',
@@ -521,7 +520,7 @@ export default {
       },
       {
         id: 'phase-9',
-        projectId: 'rocket-ancher-project',
+        projectId: 'rocket-launcher-project',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -671,7 +670,8 @@ export default {
         isOperation: false,
         type: 'organization',
         children: [
-
+          'paris-unit',
+          'sofia-unit'
         ]
       }
     ],
@@ -687,6 +687,12 @@ export default {
             unitId: 'paris',
           },
         },
+        children: [
+          'team-a-team',
+          'team-b-team',
+          'team-c-team',
+          'team-d-team',
+        ]
       },
       {
         id: 'sofia-unit',
@@ -697,7 +703,13 @@ export default {
           params: {
             unitId: 'sofia',
           }
-        }
+        },
+        children: [
+          'team-e-team',
+          'team-f-team',
+          'team-g-team',
+          'team-h-team',
+        ]
       }
     ],
 
@@ -705,6 +717,7 @@ export default {
       {
         id: 'team-a-team',
         title: 'Team A',
+        parent: 'paris-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -723,6 +736,7 @@ export default {
       {
         id: 'team-b-team',
         title: 'Team B',
+        parent: 'paris-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -741,6 +755,7 @@ export default {
       {
         id: 'team-c-team',
         title: 'Team C',
+        parent: 'paris-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -759,6 +774,7 @@ export default {
       {
         id: 'team-d-team',
         title: 'Team D',
+        parent: 'paris-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -777,6 +793,7 @@ export default {
       {
         id: 'team-e-team',
         title: 'Team E',
+        parent: 'sofia-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -795,6 +812,7 @@ export default {
       {
         id: 'team-f-team',
         title: 'Team F',
+        parent: 'sofia-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -813,6 +831,7 @@ export default {
       {
         id: 'team-g-team',
         title: 'Team G',
+        parent: 'sofia-unit',
         type: 'team',
         route: {
           name: 'team-view',
@@ -831,6 +850,7 @@ export default {
       {
         id: 'team-h-team',
         title: 'Team H',
+        parent: 'sofia-unit',
         type: 'team',
         route: {
           name: 'team-view',
