@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 
 export default {
   namespaced: true,
@@ -25,7 +25,12 @@ export default {
             portfolioId: 'consumer-robots',
           },
         },
-        children: ['']
+        children: [
+          'quadruped-robot-program',
+          'micro-robot-observation-nbc-program',
+          'handling-robot-program',
+          'power-&-programming-station-program'
+        ]
       },
       {
         id: 'military-robots-portfolio',
@@ -47,7 +52,10 @@ export default {
           params: {
             portfolioId: 'military-robots',
           },
-        }
+        },
+        children: [
+          'attacking-robot-program'
+        ]
       },
     ],
 
@@ -55,6 +63,7 @@ export default {
       {
         id: 'quadruped-robot-program',
         title: 'Quadruped robot',
+        parent: 'consumer-robots-portfolio',
         type: 'program',
         priority: 'Highest',
         budget: '91001',
@@ -74,11 +83,17 @@ export default {
             programId: 'quadruped-robot',
           },
         },
-        children: []
+        children: [
+          'new-format-project',
+          'enhanced-motricity-project',
+          'enhanced-autonomy-project',
+          'dual-sourcing-for-quadruped-project'
+        ]
       },
       {
         id: 'micro-robot-observation-nbc-program',
         title: 'Micro robot observation NBC',
+        parent: 'consumer-robots-portfolio',
         type: 'program',
         priority: 'lowest',
         budget: '150',
@@ -103,6 +118,7 @@ export default {
       {
         id: 'handling-robot-program',
         title: 'Handling robot',
+        parent: 'consumer-robots-portfolio',
         type: 'program',
 
         priority: 'lowest',
@@ -128,6 +144,7 @@ export default {
       {
         id: 'power-&-programming-station-program',
         title: 'Power & programming station',
+        parent: 'consumer-robots-portfolio',
         type: 'program',
 
         priority: 'Low',
@@ -153,6 +170,7 @@ export default {
       {
         id: 'attacking-robot-program',
         title: 'Attacking robot',
+        parent: 'military-robots-portfolio',
         type: 'program',
         priority: 'Highest',
         budget: '21000',
@@ -172,13 +190,19 @@ export default {
             programId: 'attacking-robot',
           },
         },
-        children: [],
+        children: [
+          'rocket-ancher-project',
+          'location-system-project',
+          'target-lock-project',
+          'estimation-device-program'
+        ],
       },
     ],
     projectData: [
       {
         id: 'new-format-project',
         title: 'New Format',
+        parent: 'quadruped-robot-program',
         type: 'project',
         route: {
           name: 'project-view',
@@ -202,11 +226,18 @@ export default {
         progress: 64,
         start_date: '2022.11.6',
         end_date: '2022.12.26',
-        phases: [],
+        phases: [
+          'phase-1',
+          'phase-2',
+          'phase-3',
+          'phase-4',
+          'phase-5'
+        ],
       },
       {
         id: 'enhanced-motricity-project',
         title: 'Enhanced motricity',
+        parent: 'quadruped-robot-program',
         type: 'project',
         route: {
           name: 'project-view',
@@ -227,11 +258,15 @@ export default {
         spent: '61400',
         next_gate: '06/02/2022',
         value: '84',
-        phases: []
+        phases: [
+          'phase-6',
+          'phase-7'
+        ]
       },
       {
         id: 'enhanced-autonomy-project',
         title: 'Enhanced autonomy',
+        parent: 'quadruped-robot-program',
         type: 'project',
         route: {
           name: 'project-view',
@@ -252,10 +287,14 @@ export default {
         spent: '21300',
         next_gate: '07/01/2022',
         value: '31',
+        phases: [
+          'phase-8'
+        ]
       },
       {
         id: 'dual-sourcing-for-quadruped-project',
         title: 'Dual sourcing for Quadruped',
+        parent: 'quadruped-robot-program',
         type: 'project',
         route: {
           name: 'project-view',
@@ -300,6 +339,9 @@ export default {
         spent: '11600',
         value: '331',
         next_gate: '03/01/2022',
+        phases: [
+          'phase-9'
+        ]
       },
       {
         id: 'location-system-project',
@@ -323,6 +365,7 @@ export default {
         spent: '11600',
         value: '331',
         next_gate: '03/01/2022',
+        phases: [],
       },
       {
         id: 'target-lock-project',
@@ -346,6 +389,7 @@ export default {
         spent: '11600',
         value: '331',
         next_gate: '03/01/2022',
+        phases: [],
       },
       {
         id: 'estimation-device-program',
@@ -369,6 +413,7 @@ export default {
         spent: '11600',
         value: '331',
         next_gate: '03/01/2022',
+        phases: [],
       },
     ],
     phaseData: [
