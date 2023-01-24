@@ -327,6 +327,7 @@ export default {
         spent: '31100',
         value: '3',
         next_gate: '08/02/2022',
+        phases: []
       },
       {
         id: 'rocket-launcher-project',
@@ -1066,6 +1067,224 @@ export default {
         title: 'Alen Cano',
         parent: 'team-h-team',
         type: 'user',
+      },
+    ],
+
+    navbarData: [
+      {
+        id: 'konatus-industries-company',
+        title: 'Konatus Industries',
+        resource: 'konatus',
+        isOperation: true,
+        type: 'company',
+        children: [
+          {
+            id: 'consumer-robots-portfolio',
+            title: 'Consumer Robots',
+            type: 'portfolio',
+            route: {
+              name: 'portfolio-view',
+              params: {
+                portfolioId: 'consumer-robots',
+              },
+            },
+            children: [
+              {
+                id: 'quadruped-robot-program',
+                title: 'Quadruped robot',
+                parent: 'consumer-robots-portfolio',
+                type: 'program',
+                route: {
+                  name: 'program-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    programId: 'quadruped-robot',
+                  },
+                },
+                children: [
+                  {
+                    id: 'new-format-project',
+                    title: 'New Format',
+                    parent: 'quadruped-robot-program',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'consumer-robots',
+                        programId: 'quadruped-robot',
+                        projectId: 'new-format',
+                      },
+                    },
+                  },
+                  {
+                    id: 'enhanced-motricity-project',
+                    title: 'Enhanced motricity',
+                    parent: 'quadruped-robot-program',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'consumer-robots',
+                        programId: 'quadruped-robot',
+                        projectId: 'enhanced-motricity',
+                      },
+                    },
+                  },
+                  {
+                    id: 'enhanced-autonomy-project',
+                    title: 'Enhanced autonomy',
+                    parent: 'quadruped-robot-program',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'consumer-robots',
+                        programId: 'quadruped-robot',
+                        projectId: 'enhanced-autonomy',
+                      },
+                    },
+                  },
+                  {
+                    id: 'dual-sourcing-for-quadruped-project',
+                    title: 'Dual sourcing for Quadruped',
+                    parent: 'quadruped-robot-program',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'consumer-robots',
+                        programId: 'quadruped-robot',
+                        projectId: 'dual-sourcing-for-quadruped',
+                      },
+                    },
+                  },
+                ]
+              },
+              {
+                id: 'micro-robot-observation-nbc-program',
+                title: 'Micro robot observation NBC',
+                parent: 'consumer-robots-portfolio',
+                type: 'program',
+                route: {
+                  name: 'program-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    programId: 'micro-robot-observation-nbc',
+                  },
+                },
+                children: []
+              },
+              {
+                id: 'handling-robot-program',
+                title: 'Handling robot',
+                parent: 'consumer-robots-portfolio',
+                type: 'program',
+                route: {
+                  name: 'program-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    programId: 'handling-robot',
+                  },
+                },
+                children: []
+              },
+              {
+                id: 'power-&-programming-station-program',
+                title: 'Power & programming station',
+                parent: 'consumer-robots-portfolio',
+                type: 'program',
+                route: {
+                  name: 'program-view',
+                  params: {
+                    portfolioId: 'consumer-robots',
+                    programId: 'power-&-programming-station',
+                  },
+                },
+                children: []
+              },
+            ]
+          },
+          {
+            id: 'military-robots-portfolio',
+            title: 'Military Robots',
+            type: 'portfolio',
+            route: {
+              name: 'portfolio-view',
+              params: {
+                portfolioId: 'military-robots',
+              },
+            },
+            children: [
+              {
+                id: 'attacking-robot-program',
+                title: 'Attacking robot',
+                parent: 'military-robots-portfolio',
+                type: 'program',
+                route: {
+                  name: 'program-view',
+                  params: {
+                    portfolioId: 'military-robots',
+                    programId: 'attacking-robot',
+                  },
+                },
+                children: [
+                  {
+                    id: 'rocket-launcher-project',
+                    title: 'Rocket launcher',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'military-robots',
+                        programId: 'attacking-robot',
+                        projectId: 'rocket-launcher',
+                      },
+                    },
+                  },
+                  {
+                    id: 'location-system-project',
+                    title: 'Location system',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'military-robots',
+                        programId: 'attacking-robot',
+                        projectId: 'location-system',
+                      },
+                    },
+                  },
+                  {
+                    id: 'target-lock-project',
+                    title: 'Target lock',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'military-robots',
+                        programId: 'attacking-robot',
+                        projectId: 'target-lock',
+                      },
+                    },
+                  },
+                  {
+                    id: 'estimation-device-program',
+                    title: 'Estimation device',
+                    type: 'project',
+                    route: {
+                      name: 'project-view',
+                      params: {
+                        portfolioId: 'military-robots',
+                        programId: 'attacking-robot',
+                        projectId: 'estimation-device',
+                      },
+                    },
+                  },
+                ],
+              },
+            ]
+          },
+        ]
       },
     ]
   },
