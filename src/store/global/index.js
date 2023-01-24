@@ -444,7 +444,7 @@ const globalOperationData = {
   title: 'Konatus Industries',
   resource: 'konatus',
   isOperation: true,
-  type: 'organization',
+  type: 'company',
   children: [
     {
       id: '1.1.1',

@@ -3,6 +3,19 @@
 export default {
   namespaced: true,
   state: {
+    companyData: [
+      {
+        id: 'konatus-industries-company',
+        title: 'Konatus Industries',
+        resource: 'konatus',
+        isOperation: true,
+        type: 'company',
+        children: [
+          'consumer-robots-portfolio',
+          'military-robots-portfolio'
+        ]
+      }
+    ],
     portfolioData: [
       {
         id: 'consumer-robots-portfolio',
@@ -424,7 +437,12 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: [
+          `install-software-activity`,
+          'develop-control-software-activity',
+          `debugging-activity`
+        ]
       },
       {
         id: 'phase-2',
@@ -433,7 +451,11 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: [
+          `electricity-market-ai-activity`,
+          `improve-generator-component-activity`
+        ]
       },
       {
         id: 'phase-3',
@@ -442,7 +464,8 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: []
       },
       {
         id: 'phase-4',
@@ -451,7 +474,10 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: [
+          'electricity-market-ai-ii-activity'
+        ]
       },
       {
         id: 'phase-5',
@@ -460,7 +486,8 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: []
       },
       {
         id: 'phase-6',
@@ -469,7 +496,8 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: []
       },
       {
         id: 'phase-7',
@@ -478,7 +506,8 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: []
       },
       {
         id: 'phase-8',
@@ -487,7 +516,8 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
-        }
+        },
+        elements: []
       },
       {
         id: 'phase-9',
@@ -496,8 +526,88 @@ export default {
           progress: 0,
           start_date: '2022.11.04',
           end_date: '2022.12.21',
+        },
+        elements: []
+      },
+    ],
+    activityData: [
+      {
+        activityId: `install-software-activity`,
+        title: 'Install software',
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        priority: 'Highest',
+        gate: 1,
+        assigned: 'team-a-team',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
         }
       },
+      {
+        activityId: 'develop-control-software-activity',
+        title: 'Develop control software',
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        priority: 'Highest',
+        gate: 2,
+        assigned: 'team-a-team',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
+        },
+      },
+      {
+        activityId: `debugging-activity`,
+        title: 'Debugging',
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        priority: 'Highest',
+        gate: 1,
+        assigned: 'team-a-team',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
+        },
+      },
+      {
+        activityId: `electricity-market-ai-activity`,
+        title: 'Electricity market AI',
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        priority: 'Highest',
+        gate: 1,
+        assigned: 'team-a-team',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
+        },
+      },
+      {
+        activityId: `improve-generator-component-activity`,
+        title: 'Improve generator component',
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        priority: 'Highest',
+        gate: 2,
+        assigned: 'team-b-team',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
+        },
+      },
+      {
+        activityId: `electricity-market-ai-ii-activity`,
+        title: 'Electricity market AI II',
+        priority: 'Highest',
+        gate: 2,
+        description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        effort: {
+          load: 53,
+          duration: 26,
+          fte: 80
+        },
+      }
     ],
 
     programToCreate: {
@@ -552,6 +662,392 @@ export default {
       },
       phases: []
     },
+
+    organizationData: [
+      {
+        id: 'organization-dynamics-organization',
+        title: 'Organization Dynamics',
+        resource: 'Konatus',
+        isOperation: false,
+        type: 'organization',
+        children: [
+
+        ]
+      }
+    ],
+
+    unitData: [
+      {
+        id: 'paris-unit',
+        title: 'Paris',
+        type: 'unit',
+        route: {
+          name: 'unit-view',
+          params: {
+            unitId: 'paris',
+          },
+        },
+      },
+      {
+        id: 'sofia-unit',
+        title: 'Sofia',
+        type: 'unit',
+        route: {
+          name: 'unit-view',
+          params: {
+            unitId: 'sofia',
+          }
+        }
+      }
+    ],
+
+    teamData: [
+      {
+        id: 'team-a-team',
+        title: 'Team A',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'paris',
+            teamId: 'team-a',
+          },
+        },
+        children: [
+          'travis-roach-user',
+          'ciaran-bradford-user',
+          'george-logan-user',
+          'angelica-russo-user'
+        ]
+      },
+      {
+        id: 'team-b-team',
+        title: 'Team B',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'paris',
+            teamId: 'team-b',
+          },
+        },
+        children: [
+          'robert-garcia-user',
+          'hon-gonzalez-user',
+          'piren-lopez-user',
+          'aden-schmidt-user'
+        ]
+      },
+      {
+        id: 'team-c-team',
+        title: 'Team C',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'paris',
+            teamId: 'team-c',
+          },
+        },
+        children: [
+          'roman-weber-user',
+          'thomas-miller-user',
+          'tim-ruiz-user',
+          'jake-williams-user'
+        ]
+      },
+      {
+        id: 'team-d-team',
+        title: 'Team D',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'paris',
+            teamId: 'team-d',
+          },
+        },
+        children: [
+          'feed-silva-user',
+          'nuse-hansen-user',
+          'ilias-costa-user',
+          'albert-klein-user'
+        ]
+      },
+      {
+        id: 'team-e-team',
+        title: 'Team E',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'sofia',
+            teamId: 'team-e',
+          },
+        },
+        children: [
+          'lone-wolf-user',
+          'telora-varga-user',
+          'poke-green-user',
+          'assen-oliveira-user'
+        ]
+      },
+      {
+        id: 'team-f-team',
+        title: 'Team F',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'sofia',
+            teamId: 'team-f',
+          },
+        },
+        children: [
+          'tommie-maier-user',
+          'unifer-keller-user',
+          'erik-walter-user',
+          'davin-cruz-user'
+        ]
+      },
+      {
+        id: 'team-g-team',
+        title: 'Team G',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'sofia',
+            teamId: 'team-g',
+          },
+        },
+        children: [
+          'jenny-phillips-user',
+          'solon-collins-user',
+          'welter-christensen-user',
+          'eden-hahn-user'
+        ]
+      },
+      {
+        id: 'team-h-team',
+        title: 'Team H',
+        type: 'team',
+        route: {
+          name: 'team-view',
+          params: {
+            unitId: 'Sofia',
+            teamId: 'team-h',
+          },
+        },
+        children: [
+          'brone-henry-user',
+          'roppie-kraus-user',
+          'rober-vincent-user',
+          'alen-cano-user'
+        ]
+      }
+    ],
+
+    teamMemberData: [
+      {
+        id: 'travis-roach-user',
+        parent: 'team-a-team',
+        title: 'Travis Roach',
+        type: 'user',
+      },
+      {
+        id: 'ciaran-bradford-user',
+        parent: 'team-a-team',
+        title: 'Ciaran Bradford',
+        type: 'user',
+      },
+      {
+        id: 'george-logan-user',
+        parent: 'team-a-team',
+        title: 'George Logan',
+        type: 'user',
+      },
+      {
+        id: 'angelica-russo-user',
+        parent: 'team-a-team',
+        title: 'Angelica Russo',
+        type: 'user',
+      },
+      {
+        id: 'robert-garcia-user',
+        parent: 'team-b-team',
+        title: 'Robert Garcia',
+        type: 'user',
+      },
+      {
+        id: 'hon-gonzalez-user',
+        parent: 'team-b-team',
+        title: 'Hon Gonzalez',
+        type: 'user',
+      },
+      {
+        id: 'piren-lopez-user',
+        parent: 'team-b-team',
+        title: 'Piren Lopez',
+        type: 'user',
+      },
+      {
+        id: 'aden-schmidt-user',
+        parent: 'team-b-team',
+        title: 'Aden Schmidt',
+        type: 'user',
+      },
+
+      {
+        id: 'roman-weber-user',
+        title: 'Roman Weber',
+        parent: 'team-c-team',
+        type: 'user',
+      },
+      {
+        id: 'thomas-miller-user',
+        title: 'Thomas Miller',
+        parent: 'team-c-team',
+        type: 'user',
+      },
+      {
+        id: 'tim-ruiz-user',
+        title: 'Tim Ruiz',
+        parent: 'team-c-team',
+        type: 'user',
+      },
+      {
+        id: 'jake-williams-user',
+        title: 'Jake Williams',
+        parent: 'team-c-team',
+        type: 'user',
+      },
+
+      {
+        id: 'feed-silva-user',
+        title: 'Feed Silva',
+        parent: 'team-d-team',
+        type: 'user',
+      },
+      {
+        id: 'nuse-hansen-user',
+        title: 'Nuse Hansen',
+        parent: 'team-d-team',
+        type: 'user',
+      },
+      {
+        id: 'ilias-costa-user',
+        title: 'Ilias Costa',
+        parent: 'team-d-team',
+        type: 'user',
+      },
+      {
+        id: 'albert-klein-user',
+        title: 'Albert Klein',
+        parent: 'team-d-team',
+        type: 'user',
+      },
+
+      {
+        id: 'lone-wolf-user',
+        title: 'Lone Wolf',
+        parent: 'team-e-team',
+        type: 'user',
+      },
+      {
+        id: 'telora-varga-user',
+        title: 'Telora Varga',
+        parent: 'team-e-team',
+        type: 'user',
+      },
+      {
+        id: 'poke-green-user',
+        title: 'Poke Green',
+        parent: 'team-e-team',
+        type: 'user',
+      },
+      {
+        id: 'assen-oliveira-user',
+        title: 'Assen Oliveira',
+        parent: 'team-e-team',
+        type: 'user',
+      },
+
+      {
+        id: 'tommie-maier-user',
+        title: 'Tommie Maier',
+        parent: 'team-f-team',
+        type: 'user',
+      },
+      {
+        id: 'unifer-keller-user',
+        title: 'Unifer Keller',
+        parent: 'team-f-team',
+        type: 'user',
+      },
+      {
+        id: 'erik-walter-user',
+        title: 'Erik Walter',
+        parent: 'team-f-team',
+        type: 'user',
+      },
+      {
+        id: 'davin-cruz-user',
+        title: 'Davin Cruz',
+        parent: 'team-f-team',
+        type: 'user',
+      },
+
+      {
+        id: 'jenny-phillips-user',
+        title: 'Jenny Phillips',
+        parent: 'team-g-team',
+        type: 'user',
+      },
+      {
+        id: 'solon-collins-user',
+        title: 'Solon Collins',
+        parent: 'team-g-team',
+        type: 'user',
+      },
+      {
+        id: 'welter-christensen-user',
+        title: 'Welter Christensen',
+        parent: 'team-g-team',
+        type: 'user',
+      },
+      {
+        id: 'eden-hahn-user',
+        title: 'Eden Hahn',
+        parent: 'team-g-team',
+        type: 'user',
+      },
+
+      {
+        id: 'brone-henry-user',
+        title: 'Brone Henry',
+        parent: 'team-h-team',
+        type: 'user',
+      },
+      {
+        id: 'roppie-kraus-user',
+        title: 'Roppie Kraus',
+        parent: 'team-h-team',
+        type: 'user',
+      },
+      {
+        id: 'rober-vincent-user',
+        title: 'Rober Vincent',
+        parent: 'team-h-team',
+        type: 'user',
+      },
+      {
+        id: 'alen-cano-user',
+        title: 'Alen Cano',
+        parent: 'team-h-team',
+        type: 'user',
+      },
+    ]
   },
   getters: {
   },

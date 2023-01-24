@@ -29,6 +29,9 @@ export default {
   mounted() {
     if (this.item.type) {
       switch (this.item.type) {
+        case 'company':
+          this.icon = 'PackageIcon'
+          break
         case 'organization':
           this.icon = 'GlobeIcon'
           break
