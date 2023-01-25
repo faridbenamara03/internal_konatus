@@ -25,7 +25,7 @@
             TITLE
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
-            READY FOR PROGRAM
+            READY FOR PRESENT
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
             NEXT PHASE

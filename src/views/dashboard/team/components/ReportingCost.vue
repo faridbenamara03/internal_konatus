@@ -25,7 +25,7 @@
             TITLE
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
-            READY FOR PROGRAM
+            READY FOR PRESENT
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
             NEXT PHASE
@@ -95,10 +95,10 @@ export default {
     return {
       bColors: ['#20C997', '#D46D6D', '#7367F0', '#F5A623'],
       tableData: [
-        ['Research viable materials', 'Team A', '95', '10.000', '20-10-2021', 'info', '20-10-2021', '20-10-2021'],
-        ['Design and consturction of landing pad', 'Team B', '75', '12.000', '20-10-2021', 'info', '20-10-2021', '20-10-2021'],
-        ['Autonomous flight control systems and software', 'Team C', '0', '4.500', '20-10-2021', 'info', '20-10-2021', '20-10-2021'],
-        ['Legal certification and permissions', 'Team D', '20', '1.200', '20-10-2021', 'info', '20-10-2021', '20-10-2021'],
+        ['New Format', 'Team A', '95', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced motricity', 'Team A', '75', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced autonomy', 'Team A', '0', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Dual sourcing for Quadruped', 'Team A', '20', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
       ]
     }
   },
@@ -278,6 +278,7 @@ export default {
           </div>`
         },
         legend: {
+          customLegendItems: ['Research viable materials', 'Design and consturction of landing pad', 'Autonomous flight control systems and software', 'Legal certification and permissions'],
           labels: {
             colors: '#888888',
             useSeriesColors: false
