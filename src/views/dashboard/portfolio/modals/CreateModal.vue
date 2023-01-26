@@ -603,15 +603,15 @@
     <template #modal-footer>
       <b-button
         variant="outline-primary"
-        @click="handlePrev"
+        @click="handleCancel"
       >
-        {{ curIndex === 1 ? 'Cancel' : 'Previous' }}
+        Cancel
       </b-button>
       <b-button
         variant="primary"
-        @click="handleNext"
+        @click="handleSave"
       >
-        {{ curIndex === 6 ? 'Save' : 'Next' }}
+        Save
       </b-button>
     </template>
   </b-modal>
@@ -727,29 +727,21 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
-    handlePrev() {
-      if (this.curIndex === 1) {
+    handleCancel() {
         this.$refs['my-modal'].hide()
-      } else {
-        this.curIndex -= 1
-      }
     },
-    handleNext() {
-      if (this.curIndex < 6) {
-        this.curIndex += 1
-      } else {
-        const data = {
-          step1: this.step1,
-          step2: this.step2,
-          step3: this.step3,
-          step4: this.step4,
-          step5: this.step5,
-          step6: this.step6
-        }
-        this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
-        this.$store.commit('globalState/ADD_PROJECT')
-        this.$refs['my-modal'].hide()
+    handleSave() {
+      const data = {
+        step1: this.step1,
+        step2: this.step2,
+        step3: this.step3,
+        step4: this.step4,
+        step5: this.step5,
+        step6: this.step6
       }
+      this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
+      this.$store.commit('globalState/ADD_PROJECT')
+      this.$refs['my-modal'].hide()
     },
     handleCustomChange(e, field) {
       this.step1[field] = e
