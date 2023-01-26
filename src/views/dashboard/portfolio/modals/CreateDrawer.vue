@@ -1,5 +1,5 @@
 <template>
-  <div style="width:900px">
+  <div style="width:600px">
     <h3 class="modal-title mb-1">
       Create New
     </h3>
