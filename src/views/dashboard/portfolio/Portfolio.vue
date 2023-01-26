@@ -133,11 +133,18 @@
       </b-tabs>
     </b-card-body>
     <template #footer>
-      <b-button v-b-modal.modal-create variant="primary">
+      <!-- <b-button v-b-modal.modal-create variant="primary">
+        <feather-icon icon="PlusIcon" />
+      </b-button> -->
+      <b-button @click="toggle" variant="primary">
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
-    <create-modal />
+    <Drawer @close="toggle" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="open" >
+        <CreateDrawer />
+      </div>
+    </Drawer>
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
     <optimize-modal />
   </b-card>
@@ -152,13 +159,14 @@ import {
 } from 'bootstrap-vue'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
+import Drawer from "vue-simple-drawer"
 import 'flatpickr/dist/themes/dark.css'
 import { isEmpty } from "@/views/utils"
 import Welcome from '@/views/welcome.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
-import CreateModal from './modals/CreateModal.vue'
+import CreateDrawer from './modals/CreateDrawer.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
 
@@ -173,13 +181,14 @@ export default {
     Demand,
     Reporting,
     Control,
-    CreateModal,
     EditColumnsModal,
     OptimizeModal,
     MonthPicker,
     BFormInput,
     BPopover,
-    Welcome
+    Welcome,
+    Drawer,
+    CreateDrawer
   },
   props: {
     data: {
@@ -199,7 +208,8 @@ export default {
       popoverShow: false,
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
-      reportingState: 'cost'
+      reportingState: 'cost',
+      open: false
     }
   },
   computed: {
@@ -225,6 +235,9 @@ export default {
     })
   },
   methods: {
+    toggle() {
+      this.open = !this.open
+    },
     isUN(data) {
       return isEmpty(data)
     },
@@ -300,6 +313,10 @@ export default {
   position: absolute;
   left: -576px;
 }
-
+.mask {
+  background: #000 !important;
+}
+$--simple-drawer-bg-color: #212739;
+@import "~vue-simple-drawer/src/index";
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

@@ -1,50 +1,20 @@
 <template>
-  <b-modal
-    id="modal-create"
-    ref="my-modal"
-    title="Create New"
-    centered
-    no-fade
-    hide-backdrop
-    static
-    size="lg"
-  >
-    <!-- Modal Header -->
-    <template #modal-header>
-      <h5 class="modal-title">
-        Create New
-      </h5>
-      <div class="modal-actions">
-        <b-button
-          style="width: 200px"
-          variant="outline-primary"
-        >
-          <feather-icon
-            icon="SettingsIcon"
-            size="18"
-          />
-          <span class="pl-1">Select Fields</span>
-        </b-button>
-        <b-button
-          variant="outline-primary"
-          @click="hideModal"
-        >
-          <feather-icon
-            icon="XIcon"
-            size="18"
-          />
-        </b-button>
-      </div>
-    </template>
-    <!-- <div class="progress-group">
-      <div class="progress-group--bars">
-        <div
-          v-for="i in 6"
-          :key="i"
-          class="progress"
-          :class="{'active': curIndex >= i}"
+  <div style="width:900px">
+    <h3 class="modal-title mb-1">
+      Create New
+    </h3>
+    <!-- <div class="modal-actions">
+      <b-button
+        style="width: 200px"
+        variant="outline-primary"
+      >
+        <feather-icon
+          icon="SettingsIcon"
+          size="18"
         />
-      </div> -->
+        <span class="pl-1">Select Fields</span>
+      </b-button>
+    </div> -->
     <p class="text-uppercase" style="border-bottom: 2px solid #7367f0">
       {{ progressDescription[0] }}
     </p>
@@ -599,27 +569,21 @@
         </b-input-group>
       </div>
     </div>
-    <!-- Modal Footer -->
-    <template #modal-footer>
+    <div>
       <b-button
-        variant="outline-primary"
-        @click="handleCancel"
-      >
-        Cancel
-      </b-button>
-      <b-button
+        style="width: 100%"
         variant="primary"
         @click="handleSave"
       >
         Save
       </b-button>
-    </template>
-  </b-modal>
+    </div>
+  </div>
 </template>
 
 <script>
 import {
-  BButton, BFormDatepicker, BFormInput, BInputGroup, BInputGroupPrepend, BModal,
+  BButton, BFormDatepicker, BFormInput, BInputGroup, BInputGroupPrepend
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import InputSelect from './InputSelect.vue'
@@ -631,7 +595,6 @@ export default {
     BFormInput,
     BInputGroup,
     BInputGroupPrepend,
-    BModal,
     vSelect,
     InputSelect
   },
@@ -651,14 +614,6 @@ export default {
       }
       return ''
     },
-    option1() {
-      const { globalOperationData } = this.$store.state.globalState
-      const opt = []
-      globalOperationData.children.forEach(element => {
-        if (element.title && element.title.indexOf(this.step1.system) > -1) opt.push(element.title)
-      })
-      return opt
-    }
   },
   data() {
     return {
@@ -721,15 +676,6 @@ export default {
     }
   },
   methods: {
-    onPSelect(a, b, c) {
-      console.log(a, b, c)
-    },
-    hideModal() {
-      this.$refs['my-modal'].hide()
-    },
-    handleCancel() {
-        this.$refs['my-modal'].hide()
-    },
     handleSave() {
       const data = {
         step1: this.step1,
@@ -751,6 +697,82 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~@core/scss/base/components/variables-dark";
 .range-slider-fill{ background-color: #ff9c00; }
+.select-group {
+  padding: 27px 0;
+  .divider {
+    width: 63px;
+    height: 0px;
+    border: 1px solid $theme-dark-border-color;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
+    top: 16px;
+  }
+  .select-box {
+    label {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      &.notice {
+        color: $theme-dark-body-color;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+    .vs__dropdown-toggle {
+      background: $theme-dark-card-bg;
+      border-radius: 6px;
+    }
+    .v-select {
+      flex: 1;
+    }
+    margin-bottom: 27px;
+    &:last-child {
+      margin: 0;
+    }
+    .b-form-btn-label-control {
+      background: $theme-dark-card-bg;
+      label {
+        font-size: inherit;
+        line-height: 200%;
+      }
+    }
+    // .slider {
+
+    // }
+  }
+  .notice-box {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 27px;
+    border-bottom: 1px solid $theme-dark-border-color;
+    svg {
+      color: $theme-dark-navigation-li-icon-color;
+    }
+    h5 {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 24px;
+      margin: 0 0 0 8px;
+      text-transform: uppercase;
+    }
+  }
+  .select-group--sub {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    .select-box {
+      margin-right: 16px;
+      flex: 1;
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>
