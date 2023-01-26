@@ -36,7 +36,7 @@
         </b-button>
       </div>
     </template>
-    <div class="progress-group">
+    <!-- <div class="progress-group">
       <div class="progress-group--bars">
         <div
           v-for="i in 6"
@@ -44,14 +44,13 @@
           class="progress"
           :class="{'active': curIndex >= i}"
         />
-      </div>
-      <p class="text-uppercase">
-        {{ progressDescription[curIndex - 1] }}
-      </p>
-    </div>
+      </div> -->
+    <p class="text-uppercase" style="border-bottom: 2px solid #7367f0">
+      {{ progressDescription[0] }}
+    </p>
+    <!-- </div> -->
     <div
-      v-if="curIndex === 1"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="select-box">
         <div class="d-flex">
@@ -177,8 +176,7 @@
       </div>
     </div>
     <div
-      v-if="curIndex === 2"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -320,8 +318,7 @@
       </div> -->
     </div>
     <div
-      v-if="curIndex === 3"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -394,8 +391,7 @@
       </div>
     </div>
     <div
-      v-if="curIndex === 4"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -435,8 +431,7 @@
       </div>
     </div>
     <div
-      v-if="curIndex === 5"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -511,7 +506,7 @@
           /> -->
         </div>
         <div class="select-box">
-          <label>Project mananger</label>
+          <label>Project manager</label>
           <b-form-input
             v-model="step5.project_manager"
           />
@@ -525,8 +520,7 @@
       </div>
     </div>
     <div
-      v-if="curIndex === 6"
-      class="select-group"
+      class="select-group" style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
