@@ -76,6 +76,144 @@ export default {
         },
       ]
     },
+    teamDemandData: {
+      id: 'team-a-team',
+      title: 'Team A',
+      parent: 'paris-unit',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-a',
+        },
+      },
+      phases: [
+        {
+          id: 'phase-1',
+          projectId: 'new-format-project',
+          assigned: 'team-a-team',
+          time: 12, // for team demand
+          data: {
+            progress: 0,
+            start_date: '2022.11.04',
+            end_date: '2022.12.21',
+          },
+          elements: [
+            {
+              activityId: `install-software-activity`,
+              phase: 'phase-1',
+              title: 'Install software',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              priority: 'Highest',
+              gate: 1,
+              assigned: 'team-a-team',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              }
+            },
+            {
+              activityId: 'develop-control-software-activity',
+              title: 'Develop control software',
+              phase: 'phase-1',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              priority: 'Highest',
+              gate: 2,
+              assigned: 'team-a-team',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+            },
+            {
+              activityId: `debugging-activity`,
+              title: 'Debugging',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              phase: 'phase-1',
+              priority: 'Highest',
+              gate: 1,
+              assigned: 'team-a-team',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+            },
+          ]
+        },
+        {
+          id: 'phase-2',
+          projectId: 'new-format-project',
+          assigned: 'team-a-team',
+          time: 14, // for team demand
+          data: {
+            progress: 0,
+            start_date: '2022.11.04',
+            end_date: '2022.12.21',
+          },
+          elements: [
+            {
+              activityId: `electricity-market-ai-activity`,
+              title: 'Electricity market AI',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              priority: 'Highest',
+              phase: 'phase-2',
+              gate: 1,
+              assigned: 'team-a-team',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+            },
+            {
+              activityId: `improve-generator-component-activity`,
+              title: 'Improve generator component',
+              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+              priority: 'Highest',
+              phase: 'phase-2',
+              gate: 2,
+              assigned: 'team-b-team',
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              },
+            },
+          ]
+        },
+      ],
+      children: [
+        {
+          id: 'travis-roach-user',
+          parent: 'team-a-team',
+          title: 'Travis Roach',
+          type: 'user',
+        },
+        {
+          id: 'ciaran-bradford-user',
+          parent: 'team-a-team',
+          title: 'Ciaran Bradford',
+          type: 'user',
+        },
+        {
+          id: 'george-logan-user',
+          parent: 'team-a-team',
+          title: 'George Logan',
+          type: 'user',
+        },
+        {
+          id: 'angelica-russo-user',
+          parent: 'team-a-team',
+          title: 'Angelica Russo',
+          type: 'user',
+        },
+      ]
+    }
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
@@ -469,49 +607,16 @@ export default {
     // HANDLE_TEAM_DEMAND_UPDATE() {
     //   Vue.$toast.success('Updated Successfully!')
     // },
-    // HANDLE_NAV_TEAM_SELECT(state, data) {
-    //   state.demandTeamData = data
-    // },
-    // SELECT_ALL_PHASE_ACTS(state, n) {
-    //   let isSelectedAll = true
-    //   state.demandTeamData.phases.map(t => {
-    //     if (t.phaseV === n) {
-    //       t.tasks.map(t1 => {
-    //         const b = { ...t1 }
-    //         isSelectedAll = b.isSelected && isSelectedAll
-    //         b.isSelected = true
-    //         return null
-    //       })
-    //       return null
-    //     }
-    //     return null
-    //   })
-    //   const a = state.demandTeamData.phases.map(t => {
-    //     if (t.phaseV === n) {
-    //       const c = { ...t }
-    //       const tasks = t.tasks.map(t1 => {
-    //         const b = { ...t1 }
-    //         isSelectedAll = b.isSelected && isSelectedAll
-    //         b.isSelected = !isSelectedAll
-    //         return b
-    //       })
-    //       c.tasks = tasks
-    //       return c
-    //     }
-    //     return t
-    //   })
-    //   state.demandTeamData.phases = a
-    // },
     // INSERT_NEW_TASK(state, data) {
     //   const { phaseV, task } = data
-    //   const a = state.demandTeamData.phases.map(t => {
+    //   const a = state.teamDemandData.phases.map(t => {
     //     if (t.phaseV === phaseV) {
     //       t.tasks.push(task)
     //       return t
     //     }
     //     return t
     //   })
-    //   state.demandTeamData.phases = a
+    //   state.teamDemandData.phases = a
     //   Vue.$toast.success('Task inserted successfully.')
     // },
     // UPDATE_TEAM_REPORT_DATA(state) {
@@ -571,6 +676,64 @@ export default {
     //     Vue.$toast.success('Updated Successfully.')
     //   }, 600)
     // }
+    SELECT_ALL_PHASE_ACTS(state, n) {
+      console.log(state, n)
+      let isSelectedAll = true
+      state.teamDemandData.phases.map(t => {
+        if (t.id === n) {
+          t.elements.map(t1 => {
+            const b = { ...t1 }
+            isSelectedAll = b.isSelected && isSelectedAll
+            b.isSelected = true
+            return null
+          })
+          return null
+        }
+        return null
+      })
+      const a = state.teamDemandData.phases.map(t => {
+        if (t.id === n) {
+          const c = { ...t }
+          const elements = t.elements.map(t1 => {
+            const b = { ...t1 }
+            isSelectedAll = b.isSelected && isSelectedAll
+            b.isSelected = !isSelectedAll
+            return b
+          })
+          c.elements = elements
+          return c
+        }
+        return t
+      })
+      state.teamDemandData.phases = a
+    },
+    INSERT_NEW_TASK(state, data) {
+      const { phaseId, element } = data
+      const a = state.teamDemandData.phases.map(t => {
+        if (t.id === phaseId) {
+          t.elements.push(
+            {
+              activityId: element.elementId,
+              title: 'New inserted element',
+              description: 'New inserted element description.',
+              priority: element.priority,
+              phase: phaseId,
+              gate: element.gate,
+              assigned: t.assigned,
+              effort: {
+                load: 53,
+                duration: 26,
+                fte: 80
+              }
+            }
+          )
+          return t
+        }
+        return t
+      })
+      state.teamDemandData.phases = a
+      Vue.$toast.success('Task inserted successfully.')
+    },
   },
   actions: {},
 }

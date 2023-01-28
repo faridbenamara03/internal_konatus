@@ -7,18 +7,18 @@
     >
       <div class="d-flex justify-content-between align-items-center">
         <p class="text-capitalize m-0 team-name--text">
-          Phase {{ phase.phaseV }}
+          {{ phase.id }}
           <span style="color:#303952;margin-left:4px">
-            ({{ phase.hours ? phase.hours : 0 }} hours)
+            ({{ phase.time ? phase.time : 0 }} hours)
           </span>
         </p>
-        <b-button variant="flat-primary" @click="() => handleSelectAll(phase.phaseV)">
+        <b-button variant="flat-primary" @click="() => handleSelectAll(phase.id)">
           Select All
         </b-button>
       </div>
       <div class="collapse-card">
         <div
-          v-for="(task, idx) in phase.tasks"
+          v-for="(activity, idx) in phase.elements"
           :key="idx"
           class="phase-box my-2"
         >
@@ -28,31 +28,31 @@
           />
           <div class="phase-box--content">
             <div class="d-flex">
-              <div style="width:calc(100% - 20px);cursor:pointer;" v-b-modal.task-detail-modal @click="taskDetailMethod(task)">
-                <p v-if="isUN(task.taskName)" class="title">
-                  {{ task.taskId }}
+              <div style="width:calc(100% - 20px);cursor:pointer;" v-b-modal.task-detail-modal @click="taskDetailMethod(activity)">
+                <p v-if="isUN(activity.title)" class="title">
+                  {{ activity.activityId }}
                 </p>
                 <p v-else class="title">
-                  {{ task.taskName }}
+                  {{ activity.title }}
                 </p>
               </div>
               <div style="width:20px;">
-                <b-form-checkbox v-model="task.isSelected" />
+                <b-form-checkbox v-model="activity.isSelected" />
               </div>
             </div>
             <p class="muted">
-              {{ task.taskId }}
+              {{ activity.activityId }}
             </p>
             <div class="d-flex">
               <div class="d-flex w-50 align-items-center">
                 <feather-icon
                   icon="BarChartIcon"
                 />
-                <span>{{ task.priority }}</span>
+                <span>{{ activity.priority }}</span>
               </div>
               <div class="d-flex w-50 align-items-center">
                 <b-icon icon="door-closed" />
-                <span>{{ task.gate }}</span>
+                <span>{{ activity.gate }}</span>
               </div>
             </div>
           </div>
@@ -62,13 +62,13 @@
         variant="flat-secondary"
         class="w-100"
         v-b-modal.modal-add-new-task
-        @click="onInsertClick(phase.phaseV)"
+        @click="onInsertClick(phase.id)"
       >
         <feather-icon icon="PlusIcon" />
         <span>Insert new work element</span>
       </b-button>
     </div>
-    <insert-new-task-modal :phaseV="phaseVToInsert" />
+    <insert-new-task-modal :phaseId="phaseIdToInsert" />
     <b-modal
       :visible="c_openDetailModal"
       ref="t-d-modal"
@@ -84,21 +84,21 @@
         <div style="width:150px;font-weight:bold;padding-top:9px">Work Element ID</div>
         <div>
           <b-form-input
-            v-model="taskDetail.taskId"
-            style="width:200px"
+            v-model="taskDetail.activityId"
+            style="width:300px"
           />
         </div>
       </div>
       <div class="d-flex mb-1">
         <div style="width:150px;font-weight:bold;padding-top:9px">PRIORITY</div>
         <div >
-          <v-select v-model="taskDetail.priority" :options="['Highest', 'High', 'Low', 'Lowest']" style="width:200px" outlined />
+          <v-select v-model="taskDetail.priority" :options="['Highest', 'High', 'Low', 'Lowest']" style="width:300px" outlined />
         </div>
       </div>
       <div class="d-flex mb-1">
         <div style="width:150px;font-weight:bold;padding-top:9px">GATE</div>
         <div>
-          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:200px" outlined />
+          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:300px" outlined />
         </div>
       </div>
       <template #modal-footer>
@@ -137,7 +137,7 @@ export default {
     return {
       openActivityModal: false,
       selectedActivity: {},
-      phaseVToInsert: null,
+      phaseIdToInsert: null,
       openDetailModal: false,
       taskDetail: {}
     }
@@ -161,10 +161,10 @@ export default {
       this.openActivityModal = false
     },
     handleSelectAll(dt) {
-      this.$store.commit('globalState/SELECT_ALL_PHASE_ACTS', dt)
+      this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)
     },
-    onInsertClick(phaseV) {
-      this.phaseVToInsert = phaseV
+    onInsertClick(phaseId) {
+      this.phaseIdToInsert = phaseId
     },
     hideDetailModal() {
       this.$refs['t-d-modal'].hide()

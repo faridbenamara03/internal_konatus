@@ -438,6 +438,7 @@ export default {
       {
         id: 'phase-1',
         projectId: 'new-format-project',
+        assigned: 'team-a-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -452,6 +453,7 @@ export default {
       {
         id: 'phase-2',
         projectId: 'new-format-project',
+        assigned: 'team-a-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -465,6 +467,7 @@ export default {
       {
         id: 'phase-3',
         projectId: 'new-format-project',
+        assigned: 'team-b-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -475,6 +478,7 @@ export default {
       {
         id: 'phase-4',
         projectId: 'new-format-project',
+        assigned: 'team-b-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -487,6 +491,7 @@ export default {
       {
         id: 'phase-5',
         projectId: 'new-format-project',
+        assigned: 'team-b-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -497,6 +502,7 @@ export default {
       {
         id: 'phase-6',
         projectId: 'enhanced-motricity-project',
+        assigned: 'team-c-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -507,6 +513,7 @@ export default {
       {
         id: 'phase-7',
         projectId: 'enhanced-motricity-project',
+        assigned: 'team-d-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -517,6 +524,7 @@ export default {
       {
         id: 'phase-8',
         projectId: 'enhanced-autonomy-project',
+        assigned: 'team-e-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -527,6 +535,7 @@ export default {
       {
         id: 'phase-9',
         projectId: 'rocket-launcher-project',
+        assigned: 'team-e-team',
         data: {
           progress: 0,
           start_date: '2022.11.04',
@@ -538,6 +547,7 @@ export default {
     activityData: [
       {
         activityId: `install-software-activity`,
+        phase: 'phase-1',
         title: 'Install software',
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
         priority: 'Highest',
@@ -552,6 +562,7 @@ export default {
       {
         activityId: 'develop-control-software-activity',
         title: 'Develop control software',
+        phase: 'phase-1',
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
         priority: 'Highest',
         gate: 2,
@@ -566,6 +577,7 @@ export default {
         activityId: `debugging-activity`,
         title: 'Debugging',
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        phase: 'phase-1',
         priority: 'Highest',
         gate: 1,
         assigned: 'team-a-team',
@@ -580,6 +592,7 @@ export default {
         title: 'Electricity market AI',
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
         priority: 'Highest',
+        phase: 'phase-2',
         gate: 1,
         assigned: 'team-a-team',
         effort: {
@@ -593,6 +606,7 @@ export default {
         title: 'Improve generator component',
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
         priority: 'Highest',
+        phase: 'phase-2',
         gate: 2,
         assigned: 'team-b-team',
         effort: {
@@ -605,8 +619,10 @@ export default {
         activityId: `electricity-market-ai-ii-activity`,
         title: 'Electricity market AI II',
         priority: 'Highest',
+        phase: 'phase-4',
         gate: 2,
         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+        assigned: 'team-b-team',
         effort: {
           load: 53,
           duration: 26,

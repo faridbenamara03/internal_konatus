@@ -2,467 +2,28 @@ import Vue from "vue"
 import moment from 'moment'
 import axios from "axios"
 
-const globalOperationData1 = {
-  id: '1.1',
-  title: 'Konatus Industries',
-  resource: 'konatus',
-  isOperation: true,
-  type: 'organization',
-  children: [
-    {
-      id: '1.1.1',
-      title: 'Consumer Robots',
-      type: 'portfolio',
-
-      priority: 'Highest',
-      budget: '210000',
-      deadline: '06/01/2021',
-      engaged: '215800',
-      quote: '210000',
-      demand: '319200',
-      realEstimated: '210100',
-      authorised: '124500',
-      spent: '21600',
-      value: '331',
-      next_gate: '03/01/2022',
-
-      route: {
-        name: 'portfolio-view',
-        params: {
-          portfolioId: 'consumer-robots',
-        },
-      },
-      children: [
-        {
-          id: '1.1.1.1',
-          title: 'Quadruped robot',
-          type: 'program',
-
-          priority: 'Highest',
-          budget: '91001',
-          deadline: '06/01/2023',
-          engaged: '21800',
-          quote: '89000',
-          demand: '19200',
-          realEstimated: '10100',
-          authorised: '14500',
-          spent: '11600',
-          value: '331',
-          next_gate: '03/01/2022',
-
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'consumer-robots',
-              programId: 'quadruped-robot',
-            },
-          },
-          children: [
-            {
-              id: '1.28.11.1',
-              title: 'New Format',
-
-              priority: 'High',
-              budget: '350000',
-              deadline: '06/01/2021',
-              engaged: '22450',
-              quote: '61900',
-              demand: '91800',
-              realEstimated: '235200',
-              authorised: '232100',
-              spent: '41800',
-              value: '64',
-              next_gate: '03/01/2022',
-
-              progress: 0,
-              start_date: '2022.11.6',
-              end_date: '2022.12.26',
-
-              sub_project: [
-                {
-                  id: '1.28.11.1.1.1',
-                  data: {}
-                },
-                {
-                  id: '1.28.11.1.2.2',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.04',
-                    end_date: '2022.12.21',
-                  }
-                },
-                {
-                  id: '1.28.11.1.3.3',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.02',
-                    end_date: '2022.12.25',
-                  }
-                },
-                {
-                  id: '1.28.11.1.4.4',
-                  data: {}
-                },
-                {
-                  id: '1.28.11.1.5.5',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.16',
-                    end_date: '2022.12.1',
-                  }
-                },
-                {
-                  id: '1.28.11.1.6.6',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.16',
-                    end_date: '2022.12.1',
-                  }
-                },
-                {
-                  id: '1.28.11.1.7.7',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.1',
-                    end_date: '2022.12.21',
-                  }
-                },
-                {
-                  id: '1.28.11.1.8.8',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-                {
-                  id: '1.28.11.1.9.9',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-                {
-                  id: '1.28.11.1.10.10',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-              ],
-              type: 'project',
-              route: {
-                name: 'project-view',
-                params: {
-                  portfolioId: 'consumer-robots',
-                  programId: 'quadruped-robot',
-                  projectId: 'full-model-design',
-                },
-              },
-            },
-            {
-              id: '1.28.12.1',
-              title: 'Enhanced motricity',
-              type: 'project',
-
-              priority: 'Highest',
-              budget: '82000',
-              deadline: '03/28/2021',
-              engaged: '46450',
-              quote: '54900',
-              demand: '98500',
-              realEstimated: '431700',
-              authorised: '39600',
-              spent: '61400',
-              next_gate: '06/02/2022',
-              value: '84',
-            },
-            {
-              id: '1.28.15.2',
-              title: 'Enhanced autonomy',
-              type: 'project',
-
-              priority: 'Highest',
-              budget: '98000',
-              deadline: '06/01/2021',
-              engaged: '450',
-              quote: '45900',
-              demand: '72400',
-              realEstimated: '82000',
-              authorised: '31000',
-              next_gate: '07/01/2022',
-              spent: '21300',
-              value: '31',
-            },
-            {
-              id: '1.28.11.1.4',
-              title: 'Dual sourcing for Quadruped',
-              type: 'project',
-
-              priority: 'Lowest',
-              budget: '80000',
-              deadline: '12/31/2021',
-              engaged: '450',
-              quote: '41550',
-              demand: '91500',
-              next_gate: '08/02/2022',
-              realEstimated: '211200',
-              authorised: '18800',
-              value: '3',
-              spent: '31100',
-            },
-          ],
-        },
-        {
-          id: '2.31',
-          title: 'New Program',
-          type: 'program',
-
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          next_gate: '06/02/2022',
-          value: '100',
-          spent: '100',
-          gate: '2',
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'consumer-robots',
-              programId: 'new-program',
-            },
-          },
-          children: [
-            {
-              id: '1.28.2.13',
-              title: 'Project in New Program',
-              type: 'project',
-
-              priority: 'Highest',
-              budget: '82000',
-              deadline: '03/28/2021',
-              engaged: '46450',
-              quote: '54900',
-              demand: '98500',
-              realEstimated: '431700',
-              authorised: '39600',
-              spent: '61400',
-              next_gate: '06/02/2022',
-              value: '84',
-            },
-          ]
-        },
-        {
-          id: '1.1.1.1',
-          title: 'New Program',
-          type: 'program',
-
-          priority: 'Highest',
-          budget: '91001',
-          deadline: '06/01/2023',
-          engaged: '21800',
-          quote: '89000',
-          demand: '19200',
-          realEstimated: '10100',
-          authorised: '14500',
-          spent: '11600',
-          value: '331',
-          next_gate: '03/01/2022',
-
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'consumer-robots',
-              programId: 'new-program',
-            },
-          },
-          children: [],
-        },
-        {
-          id: '2.30',
-          title: 'Micro robot observation NBC',
-          type: 'program',
-
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          next_gate: '06/02/2022',
-          value: '100',
-          spent: '100',
-          gate: '2'
-        },
-        {
-          id: '1.31',
-          title: 'Handling robot',
-          type: 'program',
-
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          next_gate: '06/02/2022',
-          value: '100',
-          spent: '100',
-          gate: '2'
-        },
-        {
-          id: '1.32',
-          title: 'Power & programming station',
-          type: 'program',
-
-          priority: 'Low',
-          budget: '1200',
-          deadline: '03/24/2018',
-          engaged: '450',
-          quote: '550',
-          demand: '1500',
-          realEstimated: '1800',
-          authorised: '900',
-          next_gate: '06/02/2022',
-          value: '10',
-          spent: '100',
-        },
-        {
-          id: '1.28.11.4',
-          title: 'Power and programing station',
-          type: 'program',
-
-          priority: 'Lowest',
-          budget: '2000',
-          deadline: '12/03/2017',
-          engaged: '450',
-          quote: '550',
-          demand: '2100',
-          realEstimated: '1600',
-          authorised: '800',
-          next_gate: '06/02/2022',
-          value: '34',
-          spent: '100',
-        },
-      ],
-    },
-    {
-      id: '1.1.2',
-      title: 'Military Robots',
-      type: 'portfolio',
-
-      priority: 'Highest',
-      budget: '21000',
-      deadline: '06/01/2021',
-      engaged: '12800',
-      quote: '21000',
-      demand: '19200',
-      realEstimated: '10100',
-      authorised: '14500',
-      spent: '16000',
-      value: '331',
-      next_gate: '03/01/2022',
-
-      children: [
-        {
-          id: '1.1.2.1',
-          title: 'Attacking robot',
-          priority: 'Highest',
-          budget: '21000',
-          deadline: '06/01/2021',
-          engaged: '12800',
-          quote: '11000',
-          demand: '19200',
-          realEstimated: '10100',
-          authorised: '4500',
-          spent: '8600',
-          value: '331',
-          next_gate: '03/01/2022',
-          type: 'program',
-          children: [
-            {
-              id: '1.1.2.1.1',
-              title: 'Rocket lancher',
-              type: 'project',
-              priority: 'Highest',
-              budget: '11000',
-              deadline: '06/01/2021',
-              engaged: '12800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-            {
-              id: '1.1.2.1.2',
-              title: 'Enhanced motricity',
-              type: 'project',
-              priority: 'Highest',
-              budget: '21000',
-              engaged: '9800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-            {
-              id: '1.1.2.1.3',
-              title: 'Enhanced authono...',
-              type: 'project',
-            },
-            {
-              id: '1.1.2.1.4',
-              title: 'Dual sourcing for Quadruped',
-              type: 'project',
-            },
-          ],
-        },
-      ],
-    },
-  ],
-}
-
-const globalOperationData = {
-  id: '1.1',
+const globalOperationDataInsertedProgram = {
+  id: 'konatus-industries-company',
   title: 'Konatus Industries',
   resource: 'konatus',
   isOperation: true,
   type: 'company',
   children: [
     {
-      id: '1.1.1',
+      id: 'consumer-robots-portfolio',
       title: 'Consumer Robots',
       type: 'portfolio',
-
       priority: 'Highest',
       budget: '210000',
-      deadline: '06/01/2021',
+      deadline: '06/02/2023',
       engaged: '215800',
       quote: '210000',
       demand: '319200',
       realEstimated: '210100',
       authorised: '124500',
       spent: '21600',
-      value: '331',
-      next_gate: '03/01/2022',
-
+      value: '331', // ?
+      next_gate: '03/01/2022', // ?
       route: {
         name: 'portfolio-view',
         params: {
@@ -471,10 +32,10 @@ const globalOperationData = {
       },
       children: [
         {
-          id: '1.1.1.1',
+          id: 'quadruped-robot-program',
           title: 'Quadruped robot',
+          parent: 'consumer-robots-portfolio',
           type: 'program',
-
           priority: 'Highest',
           budget: '91001',
           deadline: '06/01/2023',
@@ -486,7 +47,7 @@ const globalOperationData = {
           spent: '11600',
           value: '331',
           next_gate: '03/01/2022',
-
+          gate: 3, // for unit demand page
           route: {
             name: 'program-view',
             params: {
@@ -496,9 +57,18 @@ const globalOperationData = {
           },
           children: [
             {
-              id: '1.28.11.1',
+              id: 'new-format-project',
               title: 'New Format',
-
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              route: {
+                name: 'project-view',
+                params: {
+                  portfolioId: 'consumer-robots',
+                  programId: 'quadruped-robot',
+                  projectId: 'new-format',
+                },
+              },
               priority: 'High',
               budget: '350000',
               deadline: '06/01/2021',
@@ -510,100 +80,22 @@ const globalOperationData = {
               spent: '41800',
               value: '64',
               next_gate: '03/01/2022',
-
-              progress: 0,
+              progress: 64,
               start_date: '2022.11.6',
               end_date: '2022.12.26',
-
-              sub_project: [
-                {
-                  id: '1.28.11.1.1.1',
-                  data: {}
-                },
-                {
-                  id: '1.28.11.1.2.2',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.04',
-                    end_date: '2022.12.21',
-                  }
-                },
-                {
-                  id: '1.28.11.1.3.3',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.02',
-                    end_date: '2022.12.25',
-                  }
-                },
-                {
-                  id: '1.28.11.1.4.4',
-                  data: {}
-                },
-                {
-                  id: '1.28.11.1.5.5',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.16',
-                    end_date: '2022.12.1',
-                  }
-                },
-                {
-                  id: '1.28.11.1.6.6',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.16',
-                    end_date: '2022.12.1',
-                  }
-                },
-                {
-                  id: '1.28.11.1.7.7',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.1',
-                    end_date: '2022.12.21',
-                  }
-                },
-                {
-                  id: '1.28.11.1.8.8',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-                {
-                  id: '1.28.11.1.9.9',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-                {
-                  id: '1.28.11.1.10.10',
-                  data: {
-                    progress: 0,
-                    start_date: '2022.11.21',
-                    end_date: '2022.12.13',
-                  }
-                },
-              ],
-              type: 'project',
-              route: {
-                name: 'project-view',
-                params: {
-                  portfolioId: 'consumer-robots',
-                  programId: 'quadruped-robot',
-                  projectId: 'full-model-design',
-                },
-              },
+              // phases: [
+              //   'phase-1',
+              //   'phase-2',
+              //   'phase-3',
+              //   'phase-4',
+              //   'phase-5'
+              // ],
             },
             {
-              id: '1.28.12.1',
+              id: 'enhanced-motricity-project',
               title: 'Enhanced motricity',
+              parent: 'quadruped-robot-program',
               type: 'project',
-
               priority: 'Highest',
               budget: '82000',
               deadline: '03/28/2021',
@@ -615,12 +107,16 @@ const globalOperationData = {
               spent: '61400',
               next_gate: '06/02/2022',
               value: '84',
+              // phases: [
+              //   'phase-6',
+              //   'phase-7'
+              // ]
             },
             {
-              id: '1.28.15.2',
+              id: 'enhanced-autonomy-project',
               title: 'Enhanced autonomy',
+              parent: 'quadruped-robot-program',
               type: 'project',
-
               priority: 'Highest',
               budget: '98000',
               deadline: '06/01/2021',
@@ -629,34 +125,89 @@ const globalOperationData = {
               demand: '72400',
               realEstimated: '82000',
               authorised: '31000',
-              next_gate: '07/01/2022',
               spent: '21300',
+              next_gate: '07/01/2022',
               value: '31',
+              // phases: [
+              //   'phase-8'
+              // ]
             },
             {
-              id: '1.28.11.1.4',
+              id: 'dual-sourcing-for-quadruped-project',
               title: 'Dual sourcing for Quadruped',
+              parent: 'quadruped-robot-program',
               type: 'project',
-
               priority: 'Lowest',
               budget: '80000',
               deadline: '12/31/2021',
               engaged: '450',
               quote: '41550',
               demand: '91500',
-              next_gate: '08/02/2022',
               realEstimated: '211200',
               authorised: '18800',
-              value: '3',
               spent: '31100',
+              value: '3',
+              next_gate: '08/02/2022',
+              // phases: []
             },
-          ],
+          ]
         },
         {
-          id: '2.30',
+          id: 'new-created-program-program',
+          title: 'New Created Program',
+          type: 'program',
+
+          priority: 'lowest',
+          budget: '150',
+          deadline: '05/20/2018',
+          engaged: '450',
+          quote: '292.5',
+          demand: '300',
+          realEstimated: '320',
+          authorised: '1000',
+          spent: '100',
+          value: '100',
+          next_gate: '06/02/2022',
+          route: {
+            name: 'program-view',
+            params: {
+              portfolioId: 'consumer-robots',
+              programId: 'new-created-program',
+            },
+          },
+          children: [
+            {
+              id: 'project-in-new-program-program',
+              title: 'Project in New Program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '82000',
+              deadline: '03/28/2021',
+              engaged: '46450',
+              quote: '54900',
+              demand: '98500',
+              realEstimated: '431700',
+              authorised: '39600',
+              spent: '61400',
+              value: '84',
+              next_gate: '06/02/2022',
+              route: {
+                name: 'program-view',
+                params: {
+                  portfolioId: 'consumer-robots',
+                  programId: 'new-created-program',
+                  projectId: 'project-in-new-program'
+                },
+              },
+              phases: []
+            },
+          ]
+        },
+        {
+          id: 'micro-robot-observation-nbc-program',
           title: 'Micro robot observation NBC',
+          parent: 'consumer-robots-portfolio',
           type: 'program',
-
           priority: 'lowest',
           budget: '150',
           deadline: '05/20/2018',
@@ -665,16 +216,16 @@ const globalOperationData = {
           demand: '300',
           realEstimated: '320',
           authorised: '1000',
-          next_gate: '06/02/2022',
-          value: '100',
           spent: '100',
-          gate: '2'
+          value: '100',
+          next_gate: '06/02/2022',
+          // children: []
         },
         {
-          id: '1.31',
+          id: 'handling-robot-program',
           title: 'Handling robot',
+          parent: 'consumer-robots-portfolio',
           type: 'program',
-
           priority: 'lowest',
           budget: '150',
           deadline: '05/20/2018',
@@ -683,16 +234,15 @@ const globalOperationData = {
           demand: '300',
           realEstimated: '320',
           authorised: '1000',
-          next_gate: '06/02/2022',
-          value: '100',
           spent: '100',
-          gate: '2'
+          value: '100',
+          next_gate: '06/02/2022',
         },
         {
-          id: '1.32',
+          id: 'power-&-programming-station-program',
           title: 'Power & programming station',
+          parent: 'consumer-robots-portfolio',
           type: 'program',
-
           priority: 'Low',
           budget: '1200',
           deadline: '03/24/2018',
@@ -701,34 +251,16 @@ const globalOperationData = {
           demand: '1500',
           realEstimated: '1800',
           authorised: '900',
-          next_gate: '06/02/2022',
+          spent: '100',
           value: '10',
-          spent: '100',
-        },
-        {
-          id: '1.28.11.4',
-          title: 'Power and programing station',
-          type: 'program',
-
-          priority: 'Lowest',
-          budget: '2000',
-          deadline: '12/03/2017',
-          engaged: '450',
-          quote: '550',
-          demand: '2100',
-          realEstimated: '1600',
-          authorised: '800',
           next_gate: '06/02/2022',
-          value: '34',
-          spent: '100',
         },
-      ],
+      ]
     },
     {
-      id: '1.1.2',
+      id: 'military-robots-portfolio',
       title: 'Military Robots',
       type: 'portfolio',
-
       priority: 'Highest',
       budget: '21000',
       deadline: '06/01/2021',
@@ -740,11 +272,18 @@ const globalOperationData = {
       spent: '16000',
       value: '331',
       next_gate: '03/01/2022',
-
+      route: {
+        name: 'portfolio-view',
+        params: {
+          portfolioId: 'military-robots',
+        },
+      },
       children: [
         {
-          id: '1.1.2.1',
+          id: 'attacking-robot-program',
           title: 'Attacking robot',
+          parent: 'military-robots-portfolio',
+          type: 'program',
           priority: 'Highest',
           budget: '21000',
           deadline: '06/01/2021',
@@ -756,11 +295,18 @@ const globalOperationData = {
           spent: '8600',
           value: '331',
           next_gate: '03/01/2022',
-          type: 'program',
+          route: {
+            name: 'program-view',
+            params: {
+              portfolioId: 'military-robots',
+              programId: 'attacking-robot',
+            },
+          },
           children: [
             {
-              id: '1.1.2.1.1',
-              title: 'Rocket lancher',
+              id: 'rocket-launcher-project',
+              title: 'Rocket launcher',
+              parent: 'attacking-robot-program',
               type: 'project',
               priority: 'Highest',
               budget: '11000',
@@ -775,8 +321,9 @@ const globalOperationData = {
               next_gate: '03/01/2022',
             },
             {
-              id: '1.1.2.1.2',
-              title: 'Enhanced motricity',
+              id: 'location-system-project',
+              title: 'Location system',
+              parent: 'attacking-robot-program',
               type: 'project',
               priority: 'Highest',
               budget: '21000',
@@ -790,1268 +337,2150 @@ const globalOperationData = {
               next_gate: '03/01/2022',
             },
             {
-              id: '1.1.2.1.3',
-              title: 'Enhanced authono...',
+              id: 'target-lock-project',
+              title: 'Target lock',
+              parent: 'attacking-robot-program',
               type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
             },
             {
-              id: '1.1.2.1.4',
-              title: 'Dual sourcing for Quadruped',
+              id: 'estimation-device-program',
+              title: 'Estimation device',
+              parent: 'attacking-robot-program',
               type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
             },
           ],
         },
-      ],
+      ]
     },
-  ],
+  ]
 }
 
+const globalOperationData = {
+  id: 'konatus-industries-company',
+  title: 'Konatus Industries',
+  resource: 'konatus',
+  isOperation: true,
+  type: 'company',
+  children: [
+    {
+      id: 'consumer-robots-portfolio',
+      title: 'Consumer Robots',
+      type: 'portfolio',
+      priority: 'Highest',
+      budget: '210000',
+      deadline: '06/02/2023',
+      engaged: '215800',
+      quote: '210000',
+      demand: '319200',
+      realEstimated: '210100',
+      authorised: '124500',
+      spent: '21600',
+      value: '331', // ?
+      next_gate: '03/01/2022', // ?
+      route: {
+        name: 'portfolio-view',
+        params: {
+          portfolioId: 'consumer-robots',
+        },
+      },
+      children: [
+        {
+          id: 'quadruped-robot-program',
+          title: 'Quadruped robot',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+          priority: 'Highest',
+          budget: '91001',
+          deadline: '06/01/2023',
+          engaged: '21800',
+          quote: '89000',
+          demand: '19200',
+          realEstimated: '10100',
+          authorised: '14500',
+          spent: '11600',
+          value: '331', // ?
+          next_gate: '03/01/2022', // ?
+          gate: 3, // for unit demand page
+          route: {
+            name: 'program-view',
+            params: {
+              portfolioId: 'consumer-robots',
+              programId: 'quadruped-robot',
+            },
+          },
+          children: [
+            {
+              id: 'new-format-project',
+              title: 'New Format',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              route: {
+                name: 'project-view',
+                params: {
+                  portfolioId: 'consumer-robots',
+                  programId: 'quadruped-robot',
+                  projectId: 'new-format',
+                },
+              },
+              priority: 'High',
+              budget: '350000',
+              deadline: '06/01/2021',
+              engaged: '22450',
+              quote: '61900',
+              demand: '91800',
+              realEstimated: '235200',
+              authorised: '232100',
+              spent: '41800',
+              value: '64',
+              next_gate: '03/01/2022',
+              progress: 64,
+              start_date: '2022.11.6',
+              end_date: '2022.12.26',
+              // phases: [
+              //   'phase-1',
+              //   'phase-2',
+              //   'phase-3',
+              //   'phase-4',
+              //   'phase-5'
+              // ],
+            },
+            {
+              id: 'enhanced-motricity-project',
+              title: 'Enhanced motricity',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '82000',
+              deadline: '03/28/2021',
+              engaged: '46450',
+              quote: '54900',
+              demand: '98500',
+              realEstimated: '431700',
+              authorised: '39600',
+              spent: '61400',
+              next_gate: '06/02/2022',
+              value: '84',
+              // phases: [
+              //   'phase-6',
+              //   'phase-7'
+              // ]
+            },
+            {
+              id: 'enhanced-autonomy-project',
+              title: 'Enhanced autonomy',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '98000',
+              deadline: '06/01/2021',
+              engaged: '450',
+              quote: '45900',
+              demand: '72400',
+              realEstimated: '82000',
+              authorised: '31000',
+              spent: '21300',
+              next_gate: '07/01/2022',
+              value: '31',
+              // phases: [
+              //   'phase-8'
+              // ]
+            },
+            {
+              id: 'dual-sourcing-for-quadruped-project',
+              title: 'Dual sourcing for Quadruped',
+              parent: 'quadruped-robot-program',
+              type: 'project',
+              priority: 'Lowest',
+              budget: '80000',
+              deadline: '12/31/2021',
+              engaged: '450',
+              quote: '41550',
+              demand: '91500',
+              realEstimated: '211200',
+              authorised: '18800',
+              spent: '31100',
+              value: '3',
+              next_gate: '08/02/2022',
+              // phases: []
+            },
+          ]
+        },
+        {
+          id: 'micro-robot-observation-nbc-program',
+          title: 'Micro robot observation NBC',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+          priority: 'lowest',
+          budget: '150',
+          deadline: '05/20/2018',
+          engaged: '450',
+          quote: '292.5',
+          demand: '300',
+          realEstimated: '320',
+          authorised: '1000',
+          spent: '100',
+          value: '100',
+          next_gate: '06/02/2022',
+          // children: []
+        },
+        {
+          id: 'handling-robot-program',
+          title: 'Handling robot',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+          priority: 'lowest',
+          budget: '150',
+          deadline: '05/20/2018',
+          engaged: '450',
+          quote: '292.5',
+          demand: '300',
+          realEstimated: '320',
+          authorised: '1000',
+          spent: '100',
+          value: '100',
+          next_gate: '06/02/2022',
+        },
+        {
+          id: 'power-&-programming-station-program',
+          title: 'Power & programming station',
+          parent: 'consumer-robots-portfolio',
+          type: 'program',
+          priority: 'Low',
+          budget: '1200',
+          deadline: '03/24/2018',
+          engaged: '450',
+          quote: '550',
+          demand: '1500',
+          realEstimated: '1800',
+          authorised: '900',
+          spent: '100',
+          value: '10',
+          next_gate: '06/02/2022',
+        },
+      ]
+    },
+    {
+      id: 'military-robots-portfolio',
+      title: 'Military Robots',
+      type: 'portfolio',
+      priority: 'Highest',
+      budget: '21000',
+      deadline: '06/01/2021',
+      engaged: '12800',
+      quote: '21000',
+      demand: '19200',
+      realEstimated: '10100',
+      authorised: '14500',
+      spent: '16000',
+      value: '331',
+      next_gate: '03/01/2022',
+      route: {
+        name: 'portfolio-view',
+        params: {
+          portfolioId: 'military-robots',
+        },
+      },
+      children: [
+        {
+          id: 'attacking-robot-program',
+          title: 'Attacking robot',
+          parent: 'military-robots-portfolio',
+          type: 'program',
+          priority: 'Highest',
+          budget: '21000',
+          deadline: '06/01/2021',
+          engaged: '12800',
+          quote: '11000',
+          demand: '19200',
+          realEstimated: '10100',
+          authorised: '4500',
+          spent: '8600',
+          value: '331',
+          next_gate: '03/01/2022',
+          route: {
+            name: 'program-view',
+            params: {
+              portfolioId: 'military-robots',
+              programId: 'attacking-robot',
+            },
+          },
+          children: [
+            {
+              id: 'rocket-launcher-project',
+              title: 'Rocket launcher',
+              parent: 'attacking-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '11000',
+              deadline: '06/01/2021',
+              engaged: '12800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+            {
+              id: 'location-system-project',
+              title: 'Location system',
+              parent: 'attacking-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+            {
+              id: 'target-lock-project',
+              title: 'Target lock',
+              parent: 'attacking-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+            {
+              id: 'estimation-device-program',
+              title: 'Estimation device',
+              parent: 'attacking-robot-program',
+              type: 'project',
+              priority: 'Highest',
+              budget: '21000',
+              engaged: '9800',
+              quote: '22000',
+              demand: '19200',
+              realEstimated: '10100',
+              authorised: '14500',
+              spent: '11600',
+              value: '331',
+              next_gate: '03/01/2022',
+            },
+          ],
+        },
+      ]
+    },
+  ]
+}
+
+// const globalOrganizationData = {
+//   id: '1.2',
+//   title: 'Organization Dynamics',
+//   resource: 'Konatus',
+//   isOperation: false,
+//   type: 'organization',
+//   children: [
+//     {
+//       id: '2.1.1',
+//       title: 'Paris',
+//       type: 'unit',
+//       route: {
+//         name: 'unit-view',
+//         params: {
+//           unitId: 'Paris',
+//         },
+//       },
+//       children: [
+//         {
+//           id: '1.2.1',
+//           title: 'Team A',
+//           type: 'team',
+//           color: '#D68232',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Paris',
+//               teamId: 'team-a',
+//             },
+//           },
+//           children: [
+//             {
+//               id: '2.3.1.22',
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.3.1.23',
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.3.1.25',
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.3.1.27',
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '122.1.23.1',
+//           title: 'Team B',
+//           type: 'team',
+//           color: '#32d6c7',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 5,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Paris',
+//               teamId: 'team-b',
+//             },
+//           },
+//           children: [
+//             {
+//               id: '2.21.6.25',
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.21.6.225',
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.21.6.29',
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               id: '2.21.6.204',
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '122.12.15.11',
+//           title: 'Team C',
+//           type: 'team',
+//           color: '#d63232',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Paris',
+//               teamId: 'team-c',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '112.62.155.111',
+//           title: 'Team D',
+//           type: 'team',
+//           color: '#ccd632',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 5,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Paris',
+//               teamId: 'team-d',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//       ]
+//     },
+//     {
+//       id: '2.2.1',
+//       title: 'Sofia',
+//       type: 'unit',
+//       route: {
+//         name: 'unit-view',
+//         params: {
+//           unitId: 'Sofia',
+//         },
+//       },
+//       children: [
+//         {
+//           id: '82.12.65.91',
+//           title: 'Team E',
+//           type: 'team',
+//           color: '#53d632',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 5,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Sofia',
+//               teamId: 'team-e',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '282.122.65.901',
+//           title: 'Team F',
+//           type: 'team',
+//           color: '#6610F2',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               hours: 0,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [],
+//             },
+//             {
+//               phaseV: 2,
+//               hours: 0,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [],
+//             },
+//             {
+//               phaseV: 3,
+//               hours: 0,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [],
+//             },
+//             {
+//               phaseV: 4,
+//               hours: 16,
+//               // name: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 4,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskName: 'Activity Element 16',
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 4,
+//                 },
+//                 {
+//                   taskName: 'Activity Element 17',
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 4,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Sofia',
+//               teamId: 'team-f',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '102.52.15.711',
+//           title: 'Team G',
+//           type: 'team',
+//           color: '#324ed6',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 5,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Sofia',
+//               teamId: 'team-g',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         },
+//         {
+//           id: '92.52.165.701',
+//           title: 'Team H',
+//           type: 'team',
+//           color: '#d6328d',
+//           phases: [
+//             {
+//               phaseV: 1,
+//               title: 'Install software',
+//               priority: 'Highest',
+//               gate: 1,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 2,
+//               title: 'Develop control software',
+//               priority: 'Highest',
+//               gate: 2,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 3,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Lowest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 4,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//             {
+//               phaseV: 5,
+//               title: 'Develop control software...',
+//               priority: 'Highest',
+//               gate: 3,
+//               activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//               // title: 'Escavate foundations',
+//               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+//               effort: {
+//                 load: 53,
+//                 duration: 26,
+//                 fte: 80
+//               },
+//               tasks: [
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//                 {
+//                   taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+//                   priority: 'Highest',
+//                   gate: 1,
+//                 },
+//               ],
+//             },
+//           ],
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'Sofia',
+//               teamId: 'team-h',
+//             },
+//           },
+//           children: [
+//             {
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ],
+//         }
+//       ]
+//     }
+//   ],
+// }
+
 const globalOrganizationData = {
-  id: '1.2',
+  id: 'organization-dynamics-organization',
   title: 'Organization Dynamics',
   resource: 'Konatus',
   isOperation: false,
   type: 'organization',
   children: [
     {
-      id: '2.1.1',
+      id: 'paris-unit',
       title: 'Paris',
       type: 'unit',
       route: {
         name: 'unit-view',
         params: {
-          unitId: 'Paris',
+          unitId: 'paris',
         },
       },
       children: [
         {
-          id: '1.2.1',
+          id: 'team-a-team',
           title: 'Team A',
+          parent: 'paris-unit',
           type: 'team',
           color: '#D68232',
-          phases: [
-            {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Paris',
+              unitId: 'paris',
               teamId: 'team-a',
             },
           },
+          phases: [
+            {
+              id: 'phase-1',
+              projectId: 'new-format-project',
+              assigned: 'team-a-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
+              },
+              elements: [
+                {
+                  activityId: `install-software-activity`,
+                  phase: 'phase-1',
+                  title: 'Install software',
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  priority: 'Highest',
+                  gate: 1,
+                  assigned: 'team-a-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  }
+                },
+                {
+                  activityId: 'develop-control-software-activity',
+                  title: 'Develop control software',
+                  phase: 'phase-1',
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  priority: 'Highest',
+                  gate: 2,
+                  assigned: 'team-a-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  },
+                },
+                {
+                  activityId: `debugging-activity`,
+                  title: 'Debugging',
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  phase: 'phase-1',
+                  priority: 'Highest',
+                  gate: 1,
+                  assigned: 'team-a-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  },
+                },
+              ]
+            },
+            {
+              id: 'phase-2',
+              projectId: 'new-format-project',
+              assigned: 'team-a-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
+              },
+              elements: [
+                {
+                  activityId: `electricity-market-ai-activity`,
+                  title: 'Electricity market AI',
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  priority: 'Highest',
+                  phase: 'phase-2',
+                  gate: 1,
+                  assigned: 'team-a-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  },
+                },
+                {
+                  activityId: `improve-generator-component-activity`,
+                  title: 'Improve generator component',
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  priority: 'Highest',
+                  phase: 'phase-2',
+                  gate: 2,
+                  assigned: 'team-b-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  },
+                },
+              ]
+            },
+          ],
           children: [
             {
-              id: '2.3.1.22',
+              id: 'travis-roach-user',
+              parent: 'team-a-team',
               title: 'Travis Roach',
               type: 'user',
             },
             {
-              id: '2.3.1.23',
+              id: 'ciaran-bradford-user',
+              parent: 'team-a-team',
               title: 'Ciaran Bradford',
               type: 'user',
             },
             {
-              id: '2.3.1.25',
+              id: 'george-logan-user',
+              parent: 'team-a-team',
               title: 'George Logan',
               type: 'user',
             },
             {
-              id: '2.3.1.27',
+              id: 'angelica-russo-user',
+              parent: 'team-a-team',
               title: 'Angelica Russo',
               type: 'user',
             },
-          ],
+          ]
         },
         {
-          id: '122.1.23.1',
+          id: 'team-b-team',
           title: 'Team B',
+          parent: 'paris-unit',
           type: 'team',
-          color: '#32d6c7',
-          phases: [
-            {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 5,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Paris',
+              unitId: 'paris',
               teamId: 'team-b',
             },
           },
           children: [
             {
-              id: '2.21.6.25',
-              title: 'Travis Roach',
+              id: 'robert-garcia-user',
+              parent: 'team-b-team',
+              title: 'Robert Garcia',
               type: 'user',
             },
             {
-              id: '2.21.6.225',
-              title: 'Ciaran Bradford',
+              id: 'hon-gonzalez-user',
+              parent: 'team-b-team',
+              title: 'Hon Gonzalez',
               type: 'user',
             },
             {
-              id: '2.21.6.29',
-              title: 'George Logan',
+              id: 'piren-lopez-user',
+              parent: 'team-b-team',
+              title: 'Piren Lopez',
               type: 'user',
             },
             {
-              id: '2.21.6.204',
-              title: 'Angelica Russo',
+              id: 'aden-schmidt-user',
+              parent: 'team-b-team',
+              title: 'Aden Schmidt',
               type: 'user',
             },
           ],
-        },
-        {
-          id: '122.12.15.11',
-          title: 'Team C',
-          type: 'team',
-          color: '#d63232',
           phases: [
             {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-3',
+              projectId: 'new-format-project',
+              assigned: 'team-b-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
+              elements: []
             },
             {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-4',
+              projectId: 'new-format-project',
+              assigned: 'team-b-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [
+              elements: [
                 {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
+                  activityId: `electricity-market-ai-ii-activity`,
+                  title: 'Electricity market AI II',
                   priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
+                  phase: 'phase-4',
+                  gate: 2,
+                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  assigned: 'team-b-team',
+                  effort: {
+                    load: 53,
+                    duration: 26,
+                    fte: 80
+                  },
+                }
+              ]
             },
             {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-5',
+              projectId: 'new-format-project',
+              assigned: 'team-b-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
+              elements: []
             },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
+          ]
+        },
+        {
+          id: 'team-c-team',
+          title: 'Team C',
+          parent: 'paris-unit',
+          type: 'team',
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Paris',
+              unitId: 'paris',
               teamId: 'team-c',
             },
           },
           children: [
             {
-              title: 'Travis Roach',
+              id: 'roman-weber-user',
+              title: 'Roman Weber',
+              parent: 'team-c-team',
               type: 'user',
             },
             {
-              title: 'Ciaran Bradford',
+              id: 'thomas-miller-user',
+              title: 'Thomas Miller',
+              parent: 'team-c-team',
               type: 'user',
             },
             {
-              title: 'George Logan',
+              id: 'tim-ruiz-user',
+              title: 'Tim Ruiz',
+              parent: 'team-c-team',
               type: 'user',
             },
             {
-              title: 'Angelica Russo',
+              id: 'jake-williams-user',
+              title: 'Jake Williams',
+              parent: 'team-c-team',
               type: 'user',
             },
           ],
-        },
-        {
-          id: '112.62.155.111',
-          title: 'Team D',
-          type: 'team',
-          color: '#ccd632',
           phases: [
             {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-6',
+              projectId: 'enhanced-motricity-project',
+              assigned: 'team-c-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
+              elements: []
             },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 5,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
+          ]
+        },
+        {
+          id: 'team-d-team',
+          title: 'Team D',
+          parent: 'paris-unit',
+          type: 'team',
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Paris',
+              unitId: 'paris',
               teamId: 'team-d',
             },
           },
           children: [
             {
-              title: 'Travis Roach',
+              id: 'feed-silva-user',
+              title: 'Feed Silva',
+              parent: 'team-d-team',
               type: 'user',
             },
             {
-              title: 'Ciaran Bradford',
+              id: 'nuse-hansen-user',
+              title: 'Nuse Hansen',
+              parent: 'team-d-team',
               type: 'user',
             },
             {
-              title: 'George Logan',
+              id: 'ilias-costa-user',
+              title: 'Ilias Costa',
+              parent: 'team-d-team',
               type: 'user',
             },
             {
-              title: 'Angelica Russo',
+              id: 'albert-klein-user',
+              title: 'Albert Klein',
+              parent: 'team-d-team',
               type: 'user',
             },
           ],
+          phases: [
+            {
+              id: 'phase-7',
+              projectId: 'enhanced-motricity-project',
+              assigned: 'team-d-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
+              },
+              elements: []
+            },
+          ]
         },
       ]
     },
     {
-      id: '2.2.1',
+      id: 'sofia-unit',
       title: 'Sofia',
       type: 'unit',
       route: {
         name: 'unit-view',
         params: {
-          unitId: 'Sofia',
-        },
+          unitId: 'sofia',
+        }
       },
       children: [
         {
-          id: '82.12.65.91',
+          id: 'team-e-team',
           title: 'Team E',
+          parent: 'sofia-unit',
           type: 'team',
-          color: '#53d632',
-          phases: [
-            {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 5,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Sofia',
+              unitId: 'sofia',
               teamId: 'team-e',
             },
           },
-          children: [
-            {
-              title: 'Travis Roach',
-              type: 'user',
-            },
-            {
-              title: 'Ciaran Bradford',
-              type: 'user',
-            },
-            {
-              title: 'George Logan',
-              type: 'user',
-            },
-            {
-              title: 'Angelica Russo',
-              type: 'user',
-            },
-          ],
-        },
-        {
-          id: '282.122.65.901',
-          title: 'Team F',
-          type: 'team',
-          color: '#6610F2',
           phases: [
             {
-              phaseV: 1,
-              hours: 0,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-8',
+              projectId: 'enhanced-autonomy-project',
+              assigned: 'team-e-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [],
+              elements: []
             },
             {
-              phaseV: 2,
-              hours: 0,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
+              id: 'phase-9',
+              projectId: 'rocket-launcher-project',
+              assigned: 'team-e-team',
+              data: {
+                progress: 0,
+                start_date: '2022.11.04',
+                end_date: '2022.12.21',
               },
-              tasks: [],
-            },
-            {
-              phaseV: 3,
-              hours: 0,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [],
-            },
-            {
-              phaseV: 4,
-              hours: 16,
-              // name: 'Develop control software...',
-              priority: 'Highest',
-              gate: 4,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskName: 'Activity Element 16',
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 4,
-                },
-                {
-                  taskName: 'Activity Element 17',
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 4,
-                },
-              ],
+              elements: []
             },
           ],
+          children: [
+            {
+              id: 'lone-wolf-user',
+              title: 'Lone Wolf',
+              parent: 'team-e-team',
+              type: 'user',
+            },
+            {
+              id: 'telora-varga-user',
+              title: 'Telora Varga',
+              parent: 'team-e-team',
+              type: 'user',
+            },
+            {
+              id: 'poke-green-user',
+              title: 'Poke Green',
+              parent: 'team-e-team',
+              type: 'user',
+            },
+            {
+              id: 'assen-oliveira-user',
+              title: 'Assen Oliveira',
+              parent: 'team-e-team',
+              type: 'user',
+            },
+          ]
+        },
+        {
+          id: 'team-f-team',
+          title: 'Team F',
+          parent: 'sofia-unit',
+          type: 'team',
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Sofia',
+              unitId: 'sofia',
               teamId: 'team-f',
             },
           },
           children: [
             {
-              title: 'Travis Roach',
+              id: 'tommie-maier-user',
+              title: 'Tommie Maier',
+              parent: 'team-f-team',
               type: 'user',
             },
             {
-              title: 'Ciaran Bradford',
+              id: 'unifer-keller-user',
+              title: 'Unifer Keller',
+              parent: 'team-f-team',
               type: 'user',
             },
             {
-              title: 'George Logan',
+              id: 'erik-walter-user',
+              title: 'Erik Walter',
+              parent: 'team-f-team',
               type: 'user',
             },
             {
-              title: 'Angelica Russo',
+              id: 'davin-cruz-user',
+              title: 'Davin Cruz',
+              parent: 'team-f-team',
               type: 'user',
             },
-          ],
+          ]
         },
         {
-          id: '102.52.15.711',
+          id: 'team-g-team',
           title: 'Team G',
+          parent: 'sofia-unit',
           type: 'team',
-          color: '#324ed6',
-          phases: [
-            {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 5,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
           route: {
             name: 'team-view',
             params: {
-              unitId: 'Sofia',
+              unitId: 'sofia',
               teamId: 'team-g',
             },
           },
           children: [
             {
-              title: 'Travis Roach',
+              id: 'jenny-phillips-user',
+              title: 'Jenny Phillips',
+              parent: 'team-g-team',
               type: 'user',
             },
             {
-              title: 'Ciaran Bradford',
+              id: 'solon-collins-user',
+              title: 'Solon Collins',
+              parent: 'team-g-team',
               type: 'user',
             },
             {
-              title: 'George Logan',
+              id: 'welter-christensen-user',
+              title: 'Welter Christensen',
+              parent: 'team-g-team',
               type: 'user',
             },
             {
-              title: 'Angelica Russo',
+              id: 'eden-hahn-user',
+              title: 'Eden Hahn',
+              parent: 'team-g-team',
               type: 'user',
             },
           ],
+          phases: []
         },
         {
-          id: '92.52.165.701',
+          id: 'team-h-team',
           title: 'Team H',
+          parent: 'sofia-unit',
           type: 'team',
-          color: '#d6328d',
-          phases: [
-            {
-              phaseV: 1,
-              title: 'Install software',
-              priority: 'Highest',
-              gate: 1,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 2,
-              title: 'Develop control software',
-              priority: 'Highest',
-              gate: 2,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 3,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Lowest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 4,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-            {
-              phaseV: 5,
-              title: 'Develop control software...',
-              priority: 'Highest',
-              gate: 3,
-              activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-              // title: 'Escavate foundations',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-              tasks: [
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-                {
-                  taskId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-                  priority: 'Highest',
-                  gate: 1,
-                },
-              ],
-            },
-          ],
           route: {
             name: 'team-view',
             params: {
@@ -2061,26 +2490,35 @@ const globalOrganizationData = {
           },
           children: [
             {
-              title: 'Travis Roach',
+              id: 'brone-henry-user',
+              title: 'Brone Henry',
+              parent: 'team-h-team',
               type: 'user',
             },
             {
-              title: 'Ciaran Bradford',
+              id: 'roppie-kraus-user',
+              title: 'Roppie Kraus',
+              parent: 'team-h-team',
               type: 'user',
             },
             {
-              title: 'George Logan',
+              id: 'rober-vincent-user',
+              title: 'Rober Vincent',
+              parent: 'team-h-team',
               type: 'user',
             },
             {
-              title: 'Angelica Russo',
+              id: 'alen-cano-user',
+              title: 'Alen Cano',
+              parent: 'team-h-team',
               type: 'user',
             },
           ],
+          phases: []
         }
       ]
     }
-  ],
+  ]
 }
 
 const teamsState = [
@@ -2596,51 +3034,6 @@ export default {
     HANDLE_TEAM_DEMAND_UPDATE() {
       Vue.$toast.success('Updated Successfully!')
     },
-    HANDLE_NAV_TEAM_SELECT(state, data) {
-      state.demandTeamData = data
-    },
-    SELECT_ALL_PHASE_ACTS(state, n) {
-      let isSelectedAll = true
-      state.demandTeamData.phases.map(t => {
-        if (t.phaseV === n) {
-          t.tasks.map(t1 => {
-            const b = { ...t1 }
-            isSelectedAll = b.isSelected && isSelectedAll
-            b.isSelected = true
-            return null
-          })
-          return null
-        }
-        return null
-      })
-      const a = state.demandTeamData.phases.map(t => {
-        if (t.phaseV === n) {
-          const c = { ...t }
-          const tasks = t.tasks.map(t1 => {
-            const b = { ...t1 }
-            isSelectedAll = b.isSelected && isSelectedAll
-            b.isSelected = !isSelectedAll
-            return b
-          })
-          c.tasks = tasks
-          return c
-        }
-        return t
-      })
-      state.demandTeamData.phases = a
-    },
-    INSERT_NEW_TASK(state, data) {
-      const { phaseV, task } = data
-      const a = state.demandTeamData.phases.map(t => {
-        if (t.phaseV === phaseV) {
-          t.tasks.push(task)
-          return t
-        }
-        return t
-      })
-      state.demandTeamData.phases = a
-      Vue.$toast.success('Task inserted successfully.')
-    },
     UPDATE_TEAM_REPORT_DATA(state) {
       setTimeout(() => {
         state.reportingData = {
@@ -2857,7 +3250,7 @@ export default {
     },
     ADD_PROJECT(state) {
       Vue.$toast.success("New program added")
-      state.globalData = [globalOperationData1, globalOrganizationData]
+      state.globalData = [globalOperationDataInsertedProgram, globalOrganizationData]
       state.projectElementTeamData = []
       state.projectElementPhaseData = []
       // this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })

@@ -1,9 +1,9 @@
 <template>
   <b-modal id="modal-add-new-task" centered hide-backdrop content-class="shadow" hide-header size="sm" @ok="handleOk">
     <div class="mb-2">
-      <b>Phase Number {{ phaseV }}</b>
+      <b>{{ phaseId }}</b>
     </div>
-    <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" />
+    <b-form-input id="input-elementId" v-model="elementId" placeholder="Work Element Id" class="mb-1" />
     <b-form-input id="input-gate" v-model="gate" placeholder="Gate" class="mb-1" />
     <b-form-select v-model="priority" :options="['Highest', 'High', 'Low', 'Lowest']" />
   </b-modal>
@@ -35,8 +35,8 @@ export default {
     BFormSelect
   },
   props: {
-    phaseV: {
-      type: Number
+    phaseId: {
+      type: String
     },
   },
   directives: {
@@ -45,20 +45,20 @@ export default {
   },
   data() {
     return {
-      taskId: '',
+      elementId: '',
       priority: 'High',
       gate: ''
     }
   },
   methods: {
     handleOk(e) {
-      if (isEmpty(this.taskId) || isEmpty(this.gate)) {
+      if (isEmpty(this.elementId) || isEmpty(this.gate)) {
         e.preventDefault()
         this.$toast.warning('Value is invalid!')
       } else {
         this.$bvModal.hide('modal-add-new-task')
-        this.$store.commit('globalState/INSERT_NEW_TASK', { phaseV: this.phaseV, task: { taskId: this.taskId, priority: this.priority, gate: this.gate } })
-        this.taskId = ''
+        this.$store.commit('teamState/INSERT_NEW_TASK', { phaseId: this.phaseId, element: { elementId: this.elementId, priority: this.priority, gate: this.gate } })
+        this.elementId = ''
         this.gate = ''
       }
     }

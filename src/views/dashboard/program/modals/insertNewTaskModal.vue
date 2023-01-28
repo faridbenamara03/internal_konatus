@@ -57,7 +57,7 @@ export default {
         this.$toast.warning('Value is invalid!')
       } else {
         this.$bvModal.hide('modal-add-new-task')
-        this.$store.commit('globalState/INSERT_NEW_TASK', { phaseV: this.phaseV, task: { taskId: this.taskId, priority: this.priority, gate: this.gate } })
+        this.$store.commit('teamState/INSERT_NEW_TASK', { phaseV: this.phaseV, task: { taskId: this.taskId, priority: this.priority, gate: this.gate } })
         this.taskId = ''
         this.gate = ''
       }

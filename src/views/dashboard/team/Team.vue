@@ -1,5 +1,5 @@
 <template>
-  <b-card v-if="!isUN(c_demand_team_data.phases)" no-body footer-tag="footer" class="card-portfolio card-project mb-0">
+  <b-card v-if="!isUN(c_team_demand_data.phases)" no-body footer-tag="footer" class="card-portfolio card-project mb-0">
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
@@ -89,7 +89,7 @@
           </b-button-group>
         </div> -->
         <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
-          <Demand :data="c_demand_team_data" />
+          <Demand :data="c_team_demand_data" />
         </b-tab>
         <b-tab title="Reporting"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
@@ -218,8 +218,8 @@ export default {
     }
   },
   computed: {
-    c_demand_team_data() {
-      return this.$store.state.globalState.demandTeamData
+    c_team_demand_data() {
+      return this.$store.state.teamState.teamDemandData
     }
   },
   methods: {
