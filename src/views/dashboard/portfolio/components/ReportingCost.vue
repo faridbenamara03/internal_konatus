@@ -1,5 +1,5 @@
 <template>
-  <div class="demand-view" >
+  <div class="demand-view">
     <!-- <div class="p-1">
       <b-button variant="flat-primary">
         <feather-icon icon="RotateCwIcon" />
@@ -8,7 +8,7 @@
     </div> -->
     <div class="border-top border-bottom">
       <div v-for="(item, index) in data" :key="index" class="d-flex">
-        <div style="flex:4" class="border-right pr-2 pl-2">
+        <div style="flex:6" class="border-right pr-2 pl-2">
           <div class="border-bottom">
             <div class="row-custom boldTxt">
               <div class="dataitem dataTitleItem d-flex">
@@ -21,47 +21,59 @@
                     <feather-icon icon="ChevronDownIcon" />
                   </div>
                 </div>
-                {{ item.name }}
+                {{ item.title }}
               </div>
             </div>
             <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
               :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
               <div class="dataitem dataSubTitleItem">
-                <feather-icon :style="`color:${colorArr[jndex]}`" :icon="`${iconArr[jndex]}`" class="mr-1" />{{ item1.name }}
+                <feather-icon :style="`color:${colorArr[jndex]}`" :icon="`${iconArr[jndex]}`" class="mr-1" />{{
+                  item1.title
+                }}
               </div>
             </div>
           </div>
         </div>
-        <div style="flex:3" class="border-right">
+        <div v-for="(item2, i) in c_fields" :key="i" style="flex:3" class="border-right">
           <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[0] }}</div>
+            <div class="dataitem">{{ item2 }}</div>
           </div>
           <div v-else class="row-custom"></div>
           <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
             :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.budget_team }}</div>
+            <div class="dataitem">{{ item1[item2] }}</div>
+          </div>
+        </div>
+        <!-- <div style="flex:3" class="border-right">
+          <div v-if="index === 0" class="row-custom">
+            <div class="dataitem">{{ c_fields[0] }}</div>
+          </div>
+          <div v-else class="row-custom"></div>
+          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+            <div class="dataitem">{{ item1.demand }}</div>
           </div>
         </div>
         <div style="flex:3" class="border-right">
           <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[1] }}</div>
+            <div class="dataitem">{{ c_fields[1] }}</div>
           </div>
           <div v-else class="row-custom"></div>
           <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
             :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.budget_engaged }}</div>
+            <div class="dataitem">{{ item1.engaged }}</div>
           </div>
         </div>
-        <div style="flex:3">
+        <div style="flex:3" class="border-right">
           <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[2] }}</div>
+            <div class="dataitem">{{ c_fields[2] }}</div>
           </div>
           <div v-else class="row-custom"></div>
           <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
             :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.real_estimated }}</div>
+            <div class="dataitem">{{ item1.realEstimated }}</div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -132,6 +144,9 @@ export default {
   computed: {
     computedOpenState() {
       return this.collapseOpen
+    },
+    c_fields() {
+      return this.fields.slice(1, this.fields.length - 1)
     }
   },
   methods: {

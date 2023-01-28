@@ -308,7 +308,7 @@
     </b-modal>
   </div>
   <div style="width:100%" v-else-if="reportingState === 'cost'">
-    <ReportingCostVue :data="itemsForDemand" :fields="fieldForDemand" />
+    <ReportingCostVue :data="itemsForDemand" :fields="fields" />
   </div>
 </template>
 
@@ -350,7 +350,11 @@ export default {
     },
     reportingState: {
       type: String
-    }
+    },
+    fields: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -359,55 +363,8 @@ export default {
       value2: 40,
       value3: 80,
       openedCollapse: 0,
-      itemsForDemand: [
-        {
-          name: 'Consumer ROBOTS',
-          budget_team: '2540',
-          budget_engaged: '1132.3',
-          real_estimated: '1132.3',
-          children: [
-            {
-              name: 'quadruped robot',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'handling robot',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'power & programming station',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-          ],
-        },
-        {
-          name: 'MILITARY ROBOTS',
-          budget_team: '2540',
-          budget_engaged: '1132.3',
-          real_estimated: '1132.3',
-          children: [
-            {
-              name: 'hardened quadruped robot',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'microrobot observation NBC',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-          ],
-        },
-      ],
-      fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
+      itemsForDemand: this.$store.state.portfolioState.reportingData,
+      // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
     }
   },
   mounted() {

@@ -80,7 +80,7 @@
         <b-tab title="Reporting"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
           class="no-action-bar">
-          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" />
+          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" :fields="fields" />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control')" class="no-action-bar">
           <Control :data="items.children" :tableTitle="tableTtle" />
@@ -198,8 +198,6 @@ export default {
   },
   data() {
     return {
-      // items: this.$store.state.globalState.globalOperationData.children[0].children,
-      // items: this.$store.state.globalState.selectedNavObj,
       activeColumns: ['priority', 'budget', 'deadline'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
