@@ -189,68 +189,10 @@ export default {
       openActivityModal: false,
       selectedActivity: {},
       demandTabState: 'team',
-      // projectElementTeamData: this.$store.state.globalState.teamsState,
-      // projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       isChartView: false,
-      items: [
-        {
-          name: 'Quadruped robot',
-          priority: 'Highest',
-          budget: '1100',
-          deadline: '06/01/2021',
-          children: [
-            {
-              name: 'New format',
-              priority: 'High',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Enhanced motricity',
-              priority: 'Highest',
-              budget: '240',
-              deadline: '03/28/2021',
-            },
-            {
-              name: 'Enhanced authonomy',
-              priority: 'Highest',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Dual sourcing for Q',
-              priority: 'Lowest',
-              budget: '150',
-              deadline: '12/31/2021',
-            },
-          ],
-        },
-        {
-          name: 'micro robot observation nbc',
-          priority: 'High',
-          budget: '13633.69',
-          deadline: '05/20/2018',
-        },
-        {
-          name: 'handling robot',
-          priority: 'Low',
-          budget: '13076.28',
-          deadline: '03/24/2018',
-        },
-        {
-          name: 'power and programing station',
-          priority: 'Lowest',
-          budget: '12336.17',
-          deadline: '12/03/2017',
-        },
-        {
-          name: 'total',
-          budget: '40146.14',
-        }
-      ],
     }
   },
   methods: {

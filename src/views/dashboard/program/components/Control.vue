@@ -161,15 +161,7 @@ export default {
           {
             id: 1,
             name: 'A sensor effector',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
             color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            isvisible: true,
             data: [
               { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '24/24' },
               { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '24/24' },
@@ -221,15 +213,7 @@ export default {
           {
             id: 2,
             name: 'B HW & meca',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
             color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            isvisible: true,
             data: [
               { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '32/32' },
               { bg: 'rgb(99, 56, 82)', clr: '#FFF', data: '28/24' },
@@ -257,15 +241,6 @@ export default {
           {
             id: 3,
             name: 'C general SW',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
-            color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            isvisible: true,
             data: [
               { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '56/56' },
               { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
@@ -279,15 +254,6 @@ export default {
           {
             id: 4,
             name: 'D real time SW',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
-            color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            isvisible: true,
             data: [
               { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '64/64' },
               { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
@@ -301,15 +267,6 @@ export default {
           {
             id: 5,
             name: 'F test',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
-            isvisible: true,
-            color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
             data: [
               { bg: 'rgb(22, 73, 97)', clr: '#FFF', data: '72/72' },
               { bg: 'rgb(56, 100, 68)', clr: '#FFF', data: '22/24' },
