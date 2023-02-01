@@ -12,11 +12,27 @@
             {{ ft }}
           </div>
         </div>
-        <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
-          <div style="position:relative;top:-43px;height:0px;">{{ item }}</div>
-          <div :style="`position:relative;top:-20px;width:100%;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
+        <div :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
+          <div style="position:relative;top:-43px;height:0px;cursor:pointer" @click="onTeamCollapse(index)">
+            <feather-icon
+              style="margin-top:-3px"
+              :icon="`${collapsedT.indexOf(index) > -1 ? 'PlusIcon' : 'MinusIcon'}`"
+              size="16"
+            />
+            {{ item }}
+          </div>
+          <div :style="`position:relative;top:-20px;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
           <div style="display:flex;justify-content:space-between;">
-            <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ item1 }}</div>
+            <template v-if="collapsedT.indexOf(index) > -1">
+              <div style="width:100%;text-align:center">
+                total
+              </div>
+            </template>
+            <template v-else>
+              <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">
+                {{ item1 }}
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -34,9 +50,16 @@
               <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
             </div>
           </div>
-          <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index1) in teams" :key="index1">
+          <div :style="`width:${collapsedT.indexOf(index1) > -1 ? 120 : 400}px;text-align:center;`" class="mr-1 ml-1" v-for="(item, index1) in teams" :key="index1">
             <div style="display:flex;justify-content:space-between;">
-              <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ teamD1[index][index1][jndex] }}</div>
+              <template v-if="collapsedT.indexOf(index1) > -1">
+                <div style="width:100%;text-align:center">
+                  {{ teamD1[index][index1][3] }}
+                </div>
+              </template>
+              <template v-else>
+                <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ teamD1[index][index1][jndex] }}</div>
+              </template>
             </div>
           </div>
         </div>
@@ -54,9 +77,16 @@
                   <span v-else>{{ item1[ft] ? formatCurrency(item1[ft]) : '' }}</span>
                 </div>
               </div>
-              <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
-                <div style="display:flex;">
-                  <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ teamD[index1][index][jndex] }}</div>
+              <div :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
+                <div style="display:flex;justify-content:space-between;">
+                  <template v-if="collapsedT.indexOf(index) > -1">
+                    <div style="width:100%;text-align:center">
+                      {{ teamD[index1][index][3] }}
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">{{ teamD[index1][index][jndex] }}</div>
+                  </template>
                 </div>
               </div>
             </div>
@@ -79,11 +109,18 @@
             </div>
           </div>
         </div>
-        <div style="width:400px;text-align:center;" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
+        <div :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`" class="mr-1 ml-1" v-for="(item, index) in teams" :key="index">
           <div style="display:flex;justify-content:space-between;">
-            <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">
-              <span :style="`color: hsl(${170 - (percentD[index][jndex] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][jndex] }}%</span>
-            </div>
+            <template v-if="collapsedT.indexOf(index) > -1">
+              <div style="width:100%;text-align:center">
+                <span :style="`color: hsl(${170 - (percentD[index][3] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][3] }}%</span>
+              </div>
+            </template>
+            <template v-else>
+              <div style="width:25%;text-align:center" v-for="(item1, jndex) in team_fields" :key="jndex">
+                <span :style="`color: hsl(${170 - (percentD[index][jndex] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][jndex] }}%</span>
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -131,6 +168,7 @@ export default {
   },
   data() {
     return {
+      collapsedT: [],
       opened: 0,
       c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
@@ -223,6 +261,14 @@ export default {
     }
   },
   methods: {
+    onTeamCollapse(i) {
+      const index = this.collapsedT.findIndex(x => x === i)
+      if (index > -1) {
+        this.collapsedT.splice(index, 1)
+      } else {
+        this.collapsedT.push(i)
+      }
+    },
     onCollapseCLick(index) {
       if (index === this.opened) {
         this.opened = -1

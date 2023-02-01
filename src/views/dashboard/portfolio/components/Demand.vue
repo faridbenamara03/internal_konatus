@@ -1,5 +1,5 @@
 <template>
-  <div class="demand-view" :class="{'has-chart': isChartView}">
+  <div class="demand-view" :class="{ 'has-chart': isChartView }">
     <div v-if="!isChartView" class="portf-demand-view">
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
@@ -15,7 +15,7 @@
       <div v-if="otype !== 'program'">
         <div v-for="(item, index) in this.c_data" :key="index">
           <div class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
-            :class="{'inner-sdw': index === 0}">
+            :class="{ 'inner-sdw': index === 0 }">
             <div class="part1 portf-uppercase" style="cursor:pointer" v-on:click="onCollapseCLick(index)">
               <feather-icon :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'" v-if="item.children"
                 size="16" class="mr-1" />
@@ -29,10 +29,21 @@
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
+            <div class="part3">
+              <b-button variant="flat-primary">
+                <feather-icon icon="Edit2Icon" />
+              </b-button>
+              <b-button @click="toggleDrawerOpen" variant="flat-primary">
+                <feather-icon icon="DollarSignIcon" />
+              </b-button>
+              <b-button variant="flat-primary">
+                <feather-icon icon="ChevronsRightIcon" />
+              </b-button>
+            </div>
           </div>
           <div v-if="opened === index">
             <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="portf-row portf-table-row font-14 border-bottom-dm" :class="{'inner-sdw': index1 === 0}">
+              <div class="portf-row portf-table-row font-14 border-bottom-dm" :class="{ 'inner-sdw': index1 === 0 }">
                 <div class="part1 portf-bold pl-2" style="padding-top:7px">
                   {{ item1.title }}
                 </div>
@@ -86,8 +97,8 @@
       </div>
       <div v-else>
         <div class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
-          :class="{'inner-sdw': index === 0}">
-          <div class="part1 portf-uppercase" >
+          :class="{ 'inner-sdw': index === 0 }">
+          <div class="part1 portf-uppercase">
             {{ data.title }}
           </div>
           <div class="part2">
@@ -100,7 +111,7 @@
           </div>
         </div>
         <div v-for="(item, index) in this.c_data" :key="index">
-          <div class="portf-row portf-table-row font-14 border-bottom-dm" :class="{'inner-sdw': index === 0}">
+          <div class="portf-row portf-table-row font-14 border-bottom-dm" :class="{ 'inner-sdw': index === 0 }">
             <div class="part1 portf-bold pl-2" style="padding-top:7px">
               {{ item.title }}
             </div>
@@ -175,7 +186,7 @@
       <b-card v-for="(serie, idx) in c_series" :key="idx" no-body no-footer class="chart-card">
         <b-row>
           <b-col>
-            <h2>{{serie[0].title}}</h2>
+            <h2>{{ serie[0].title }}</h2>
             <div class="d-flex justify-content-between align-center mt-1">
               <p class="text-uppercase m-0">
                 Budget Portfolio
@@ -209,6 +220,11 @@
         </b-row>
       </b-card>
     </div>
+    <Drawer @close="toggleDrawerOpen" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="budgetDrawerOpen" >
+        <BudgetDrawer />
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -217,8 +233,10 @@ import {
   BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BInputGroup, BInputGroupAppend, BInputGroupText
 } from 'bootstrap-vue'
 import moment from 'moment'
+import Drawer from "vue-simple-drawer"
 import VueApexCharts from 'vue-apexcharts'
 import vSelect from 'vue-select'
+import BudgetDrawer from '../modals/BudgetDrawer.vue'
 
 export default {
   components: {
@@ -234,11 +252,13 @@ export default {
     BInputGroupAppend,
     BInputGroupText,
     vSelect,
+    Drawer,
+    BudgetDrawer
   },
   props: {
     data: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     fields: {
       type: Array,
@@ -254,6 +274,7 @@ export default {
   },
   data() {
     return {
+      budgetDrawerOpen: false,
       opened: 0,
       chartOptions: {
         chart: {
@@ -421,6 +442,9 @@ export default {
     }
   },
   methods: {
+    toggleDrawerOpen() {
+      this.budgetDrawerOpen = !this.budgetDrawerOpen
+    },
     onCollapseCLick(index) {
       if (index === this.opened) {
         this.opened = -1

@@ -363,35 +363,44 @@
         <h5>planning</h5>
       </div>
       <div v-for="(t, i) in arrV" :key="i">
-        <div class="select-group--sub">
-          <div class="select-box mb-2">
-            <label>Select Phase</label>
-            <v-select
-              :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
-              placeholder="Select Phase"
-              outlined
-            />
-            <!-- <b-form-datepicker
-              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              id="date_next_gate-datepicker3"
-              v-model="step4.date_production"
-            /> -->
+        <div class="d-flex justify-content-between">
+          <div style="width:32%">
+            <div class="select-group--sub">
+              <div class="select-box mb-2">
+                <label>Select Phase</label>
+                <v-select
+                  style="padding-top:2px"
+                  :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
+                  placeholder="Select Phase"
+                  outlined
+                />
+                <!-- <b-form-datepicker
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                  id="date_next_gate-datepicker3"
+                  v-model="step4.date_production"
+                /> -->
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="select-group--sub mb-0">
-          <div class="select-box">
-            <label>Phase Start Date</label>
-            <b-form-datepicker
-              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              id="phase_start_date-datepicker1"
-            />
+          <div style="width:32%">
+            <div class="select-group--sub mb-0">
+              <div class="select-box">
+                <label>Phase Start Date</label>
+                <b-form-datepicker
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                  id="phase_start_date-datepicker1"
+                />
+              </div>
+            </div>
           </div>
-          <div class="select-box">
-            <label>Phase End Date</label>
-            <b-form-datepicker
-              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              id="phase_end_date-datepicker2"
-            />
+          <div style="width:32%">
+            <div class="select-box">
+              <label>Phase End Date</label>
+              <b-form-datepicker
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                id="phase_end_date-datepicker2"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -492,86 +501,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="select-group" style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="DollarSignIcon"
-          size="20"
-        />
-        <h5>budget</h5>
-      </div>
-      <!-- <div class="select-box">
-        <label>Portfolio</label>
-        <v-select
-          v-model="step6.portfolio"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
-          placeholder="Select Portfolio"
-          outlined
-        />
-      </div> -->
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Period start</label>
-          <div class="d-flex">
-            <v-select
-              v-model="step6.period_start_year"
-              :options="years"
-              class="mr-1"
-              placeholder="year"
-              outlined
-            />
-            <v-select
-              v-model="step6.period_start_month"
-              :options="months"
-              placeholder="month"
-              outlined
-            />
-          </div>
-        </div>
-        <div class="divider" />
-        <div class="select-box">
-          <label>Period End</label>
-          <div class="d-flex">
-            <v-select
-              v-model="step6.period_end_year"
-              :options="years"
-              class="mr-1"
-              placeholder="year"
-              outlined
-            />
-            <v-select
-              v-model="step6.period_end_month"
-              :options="months"
-              placeholder="month"
-              outlined
-            />
-          </div>
-        </div>
-      </div>
-      <div class="select-box d-flex justify-content-center">
-        <label class="notice">Period duration: {{ this.monthPeriod }}</label>
-      </div>
-      <div class="select-box">
-        <label>Budget</label>
-        <b-input-group>
-          <b-input-group-prepend>
-            <v-select
-              style="width:120px"
-              v-model="step6.currency"
-              :options="['EUR', 'USD']"
-              placeholder="unit"
-              outlined
-            />
-          </b-input-group-prepend>
-          <b-form-input
-            v-model="step6.budget"
-            placeholder="300"
-          />
-        </b-input-group>
-      </div>
-    </div>
     <div>
       <b-button
         style="width: 100%"
@@ -586,7 +515,7 @@
 
 <script>
 import {
-  BButton, BFormDatepicker, BFormInput, BInputGroup, BInputGroupPrepend
+  BButton, BFormDatepicker, BFormInput
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import InputSelect from './InputSelect.vue'
@@ -596,8 +525,6 @@ export default {
     BButton,
     BFormDatepicker,
     BFormInput,
-    BInputGroup,
-    BInputGroupPrepend,
     vSelect,
     InputSelect
   },
@@ -698,7 +625,6 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleAddPhase() {
-      console.log('handle add phase')
       this.arrV.push(1)
     },
     handleCustomChange(e, field) {
