@@ -2958,15 +2958,21 @@ export default {
     //   },
     //   children: ['']
     // },
-    chartXAxisData: ['', moment().format('YYYY-MM'), ''],
+    chartXAxisData: [
+      '',
+      moment().subtract(2, 'months').format('YYYY-MM-DD'),
+      moment().subtract(1, 'months').format('YYYY-MM-DD'),
+      moment().format('YYYY-MM'),
+      ''
+    ],
     chartSeriesData: [
-      [null, parseInt(Math.random() * 400 + 1300, 10), null],
-      [null, parseInt(Math.random() * 400 + 1300, 10), null],
-      [null, parseInt(Math.random() * 400 + 1300, 10), null],
-      [null, parseInt(Math.random() * 400 + 1300, 10), null],
-      [1450, 1450, 1450],
-      [1600, 1600, 1600],
-      [1500, 1500, 1500],
+      [null, parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), null],
+      [null, parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), parseInt(Math.random() * 400 + 1300, 10), null],
+      [1450, 1450, 1450, 1450, 1450],
+      [1600, 1600, 1600, 1600, 1600],
+      [1500, 1500, 1500, 1500, 1500],
     ],
     selectedWorkElement: null
   },
