@@ -317,7 +317,7 @@ export default {
       if (startDate <= endDate) {
         const date = startDate.startOf('month')
         while (date < endDate.endOf('month')) {
-          betweenMonths.push(date.format('YYYY-MM'))
+          betweenMonths.push(date.format('MM/YYYY'))
           date.add(1, 'month')
         }
       }

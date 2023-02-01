@@ -31,16 +31,22 @@
               </div>
             </div>
           </div>
-          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.children" :key="index2">
-            <div class="sub-project">
-              <div class="child1">
-                {{ item2.title }}
-              </div>
-              <div class="child2">
-                ({{ item2.progress ? item2.progress : 0 }}%)
+          <template v-for="(item2, index2) in item1.children" >
+            <div class="program-collapse-sub-project" style="cursor:pointer" :key="index2">
+              <div class="sub-project">
+                <div class="child1">
+                  {{ item2.title }}
+                </div>
+                <div class="child2">
+                  ({{ item2.progress ? item2.progress : 0 }}%)
+                </div>
               </div>
             </div>
-          </div>
+            <div class="pl-5" style="background:#242b3d;padding-top:5px;padding-bottom:5px"
+              v-for="(item3, index3) in item2.phases" :key="index3">
+              {{ item3.id }}
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -107,16 +113,19 @@
         <div v-if="!collapsed">
           <div v-for="(item, index) in datt" :key="index">
             <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
+              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px;'">
                 <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
                   :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
                   :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
               </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.children" :key="index2" >
-                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
-                  :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
-              </div>
+              <template v-for="(item2, index2) in item1.children" >
+                <div class="progress-wrapper-child" :style="`width:${timelineWinWidth}px;height:${item2.phases ? (46 + item2.phases.length * 30.3) : 46}px`"
+                  :key="index2" >
+                  <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
+                    :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
+                    :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
+                </div>
+              </template>
             </div>
           </div>
         </div>

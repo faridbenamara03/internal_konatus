@@ -2960,9 +2960,9 @@ export default {
     // },
     chartXAxisData: [
       '',
-      moment().subtract(2, 'months').format('YYYY-MM-DD'),
-      moment().subtract(1, 'months').format('YYYY-MM-DD'),
-      moment().format('YYYY-MM'),
+      moment().subtract(2, 'months').format('MM/YYYY'),
+      moment().subtract(1, 'months').format('MM/YYYY'),
+      moment().format('MM/YYYY'),
       ''
     ],
     chartSeriesData: [

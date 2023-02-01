@@ -112,6 +112,48 @@ export default {
                 end_date: '2023.2.10',
                 start_date1: '2023.1.20',
                 end_date1: '2023.2.10',
+                phases: [
+                  {
+                    id: 'phase-1',
+                    projectId: 'new-format-project',
+                    assigned: 'team-a-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                  {
+                    id: 'phase-2',
+                    projectId: 'new-format-project',
+                    assigned: 'team-a-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                  {
+                    id: 'phase-3',
+                    projectId: 'new-format-project',
+                    assigned: 'team-b-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                  {
+                    id: 'phase-4',
+                    projectId: 'new-format-project',
+                    assigned: 'team-b-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                ],
               },
               {
                 id: 'enhanced-motricity-project',
@@ -126,6 +168,28 @@ export default {
                 end_date2: '2023.2.10',
                 start_date3: '2023.1.20',
                 end_date3: '2023.2.10',
+                phases: [
+                  {
+                    id: 'phase-6',
+                    projectId: 'enhanced-motricity-project',
+                    assigned: 'team-c-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                  {
+                    id: 'phase-7',
+                    projectId: 'enhanced-motricity-project',
+                    assigned: 'team-d-team',
+                    data: {
+                      progress: 0,
+                      start_date: '2022.11.04',
+                      end_date: '2022.12.21',
+                    },
+                  },
+                ]
               },
               {
                 id: 'enhanced-autonomy-project',

@@ -211,7 +211,7 @@ export default {
       selectedActivity: {},
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
+      selectedMonth: `${moment().subtract(2, 'months').format('MM/YYYY')} - ${moment().format('MM/YYYY')}`,
       rangeArray: [],
       reportingState: 'cost',
       arr4chart: [],
@@ -276,7 +276,7 @@ export default {
       if (startDate <= endDate) {
         const date = startDate.startOf('month')
         while (date < endDate.endOf('month')) {
-          betweenMonths.push(date.format('YYYY-MM'))
+          betweenMonths.push(date.format('MM/YYYY'))
           date.add(1, 'month')
         }
       }
