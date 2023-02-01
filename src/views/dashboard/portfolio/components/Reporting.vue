@@ -91,73 +91,34 @@
                 Reticulating splines… {{ value1 + '%' }}
               </b-card-text>
               <div class="d-flex">
-                <div class="d-flex">
+                <CustomProgramBar color="#ea5455" :width="Math.random() * 100 + 600" />
+                <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
+                  <div :style="`width:${Math.random() * 100 + 500}px`">
                     <b-progress value="100%" max="100" variant="danger" />
                   </div>
                   <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${Math.random() * 100 + 100}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
+                </div> -->
               </div>
               <div class="d-flex">
-                <div class="d-flex">
+                <CustomProgramBar color="#28c76f" :width="Math.random() * 100 + 800" />
+                <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
+                  <div :style="`width:${Math.random() * 100 + 700}px`">
                     <b-progress value="100%" max="100" variant="success" />
                   </div>
                   <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${Math.random() * 100 + 200}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
+                </div> -->
               </div>
               <div class="d-flex">
-                <div class="d-flex">
+                <CustomProgramBar color="#00cfe8" :width="Math.random() * 100 + 700" />
+                <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${Math.random() * 100 + 250}px`">
+                  <div :style="`width:${Math.random() * 100 + 800}px`">
                     <b-progress value="100%" max="100" variant="info" />
                   </div>
                   <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${Math.random() * 100 + 300}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
+                </div> -->
               </div>
             </b-card>
           </div>
@@ -324,6 +285,7 @@ import {
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
+import CustomProgramBar from './CustomProgramBar.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
@@ -338,7 +300,8 @@ export default {
     // BListGroup,
     // BListGroupItem,
     BModal,
-    ReportingCostVue
+    ReportingCostVue,
+    CustomProgramBar
   },
   props: {
     data: {
