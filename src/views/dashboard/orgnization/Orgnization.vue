@@ -95,7 +95,7 @@
           <Demand :data="itemsForReport" :fields="fieldsForReport" />
         </b-tab>
         <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
-          <Reporting :data="itemsForReport" :fields="fieldsForReport" :is-chart-view="isChartView" />
+          <Reporting />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
           <Control :data="items" :is-chart-view="isChartView" />

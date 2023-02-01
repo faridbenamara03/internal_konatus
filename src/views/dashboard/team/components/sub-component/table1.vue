@@ -83,14 +83,7 @@ export default {
         series: [
           {
             name: 'Team A',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
             color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
             data: [
               { bg: '#0a5666', data: '24/24' },
               { bg: '#8b3b4e', data: '28/24' },
@@ -103,15 +96,7 @@ export default {
           },
           {
             name: 'Team B',
-            type: 'line',
-            stack: 'Total',
             color: '#4f964d',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            color_type: 1,
             data: [
               { bg: '#0a5666', data: '24/24' },
               { bg: '#8b3b4e', data: '28/24' },
@@ -124,14 +109,7 @@ export default {
           },
           {
             name: 'Back-end devs',
-            type: 'line',
-            stack: 'Total',
             color: '#186b83',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
             data: [
               { bg: '#0a5666', data: '80 + 0/160' },
               { bg: '#448739', data: '80 + 0/160' },

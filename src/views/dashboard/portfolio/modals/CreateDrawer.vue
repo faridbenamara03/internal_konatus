@@ -173,14 +173,6 @@
           />
         </div>
       </div>
-      <div class="select-box">
-        <label>Date Production Deadline</label>
-        <b-form-datepicker
-          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          id="example-datepicker"
-          v-model="step2.date"
-        />
-      </div>
       <div class="select-group--sub">
         <div class="select-box">
           <label>Budget demand</label>
@@ -370,35 +362,46 @@
         />
         <h5>planning</h5>
       </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Date Next Gate Demand</label>
-          <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            id="date_next_gate-datepicker1"
-            v-model="step4.date_next_gate"
-          />
+      <div v-for="(t, i) in arrV" :key="i">
+        <div class="select-group--sub">
+          <div class="select-box mb-2">
+            <label>Select Phase</label>
+            <v-select
+              :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
+              placeholder="Select Phase"
+              outlined
+            />
+            <!-- <b-form-datepicker
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              id="date_next_gate-datepicker3"
+              v-model="step4.date_production"
+            /> -->
+          </div>
         </div>
-        <div class="select-box">
-          <label>Date Ready for Test Demand</label>
-          <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            id="date_next_gate-datepicker2"
-            v-model="step4.date_ready_test"
-          />
+        <div class="select-group--sub mb-0">
+          <div class="select-box">
+            <label>Phase Start Date</label>
+            <b-form-datepicker
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              id="phase_start_date-datepicker1"
+            />
+          </div>
+          <div class="select-box">
+            <label>Phase End Date</label>
+            <b-form-datepicker
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              id="phase_end_date-datepicker2"
+            />
+          </div>
         </div>
       </div>
-      <div class="select-group--sub">
-        <div class="select-box mb-0">
-          <label>Date Production Demand</label>
-          <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            id="date_next_gate-datepicker3"
-            v-model="step4.date_production"
-          />
-        </div>
-        <div class="select-box m-0" />
-      </div>
+      <b-button
+        style="width: 100%"
+        variant="primary"
+        @click="handleAddPhase"
+      >
+        Add phase
+      </b-button>
     </div>
     <div
       class="select-group" style="padding-top: 0px"
@@ -617,6 +620,7 @@ export default {
   },
   data() {
     return {
+      arrV: [1],
       curIndex: 1,
       progressDescription: [
         'SELECT OR ADD A NEW PORTFOLIO',
@@ -650,6 +654,10 @@ export default {
         scoring: 0,
       },
       step4: {
+        phase: null,
+        phase_start_date: null,
+        phase_end_date: null,
+
         date_next_gate: null,
         date_ready_test: null,
         date_production: null,
@@ -688,6 +696,10 @@ export default {
       this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
       this.$store.commit('globalState/ADD_PROJECT')
       this.$refs['my-modal'].hide()
+    },
+    handleAddPhase() {
+      console.log('handle add phase')
+      this.arrV.push(1)
     },
     handleCustomChange(e, field) {
       this.step1[field] = e
