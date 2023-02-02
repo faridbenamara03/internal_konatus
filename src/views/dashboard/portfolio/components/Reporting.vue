@@ -91,7 +91,7 @@
                 Reticulating splines… {{ value1 + '%' }}
               </b-card-text>
               <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="Math.random() * 100 + 600" />
+                <CustomProgramBar color="#ea5455" :width="da1" />
                 <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
                   <div :style="`width:${Math.random() * 100 + 500}px`">
@@ -101,7 +101,7 @@
                 </div> -->
               </div>
               <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="Math.random() * 100 + 800" />
+                <CustomProgramBar color="#28c76f" :width="da2" />
                 <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
                   <div :style="`width:${Math.random() * 100 + 700}px`">
@@ -111,7 +111,7 @@
                 </div> -->
               </div>
               <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="Math.random() * 100 + 700" />
+                <CustomProgramBar color="#00cfe8" :width="da3" />
                 <!-- <div class="d-flex">
                   <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
                   <div :style="`width:${Math.random() * 100 + 800}px`">
@@ -131,21 +131,21 @@
                 <div class="d-flex">
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <div :style="`width:${dta[index2][0]}px`">
                       <b-progress value="100%" max="100" variant="danger" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <div :style="`width:${dta[index2][1]}px`">
                       <b-progress value="100%" max="100" variant="danger" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${Math.random() * 100 + 100}px`">
+                    <div :style="`width:${dta[index2][2]}px`">
                       <b-progress value="100%" max="100" variant="danger" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
@@ -154,21 +154,21 @@
                 <div class="d-flex">
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <div :style="`width:${dta[index2][3]}px`">
                       <b-progress value="100%" max="100" variant="success" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <div :style="`width:${dta[index2][4]}px`">
                       <b-progress value="100%" max="100" variant="success" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${Math.random() * 100 + 200}px`">
+                    <div :style="`width:${dta[index2][5]}px`">
                       <b-progress value="100%" max="100" variant="success" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
@@ -177,21 +177,21 @@
                 <div class="d-flex">
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${Math.random() * 100 + 250}px`">
+                    <div :style="`width:${dta[index2][6]}px`">
                       <b-progress value="100%" max="100" variant="info" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <div :style="`width:${dta[index2][7]}px`">
                       <b-progress value="100%" max="100" variant="info" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${Math.random() * 100 + 300}px`">
+                    <div :style="`width:${dta[index2][8]}px`">
                       <b-progress value="100%" max="100" variant="info" />
                     </div>
                     <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
@@ -306,7 +306,7 @@ export default {
   props: {
     data: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     otype: {
       type: String
@@ -328,6 +328,35 @@ export default {
       openedCollapse: 0,
       itemsForDemand: this.$store.state.portfolioState.reportingData,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
+      dta: [
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+      ]
+    }
+  },
+  computed: {
+    da1() {
+      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2]
+      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2]
+      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2]
+      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    },
+    da2() {
+      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5]
+      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5]
+      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5]
+      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    },
+    da3() {
+      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8]
+      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8]
+      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8]
+      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
     }
   },
   mounted() {
@@ -339,6 +368,9 @@ export default {
     }
   },
   methods: {
+    largest(a, b, c, d) {
+      return Math.max(a, b, c, d)
+    },
     onCollapseClick(index) {
       if (this.openedCollapse === index) this.openedCollapse = -1
       else this.openedCollapse = index
