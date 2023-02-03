@@ -358,6 +358,7 @@ export default {
       const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
       return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
     }
+    // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, 'days')
