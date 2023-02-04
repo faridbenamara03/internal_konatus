@@ -4,12 +4,12 @@
       <div>
         <div class="program-title">
           <div class="program-title-child">
-            {{ datt.title }}
+            CONSUMER ROBOTS
           </div>
         </div>
       </div>
-      <div v-for="(item, index) in datt.children" :key="index" >
-        <div class="program-title-cld" :class="{'active': index === 0}">
+      <div v-for="(item, index) in datt.children" :key="index">
+        <div class="program-title-cld" :class="{ 'active': index === 0 }">
           <div class="program-title-child">
             <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
             <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
@@ -25,8 +25,10 @@
       </div>
     </div>
     <div class="reporting-content-custom">
-      <div :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
-        <div class="rounded-circle" style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+      <div
+        :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
+        <div class="rounded-circle"
+          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
       </div>
       <div class="reporting-content--header">
         <div class="first-child">
@@ -41,15 +43,8 @@
             Phase
           </div>
           <div class="milestones">
-            <b-icon
-              icon="diamond-fill"
-              variant="success"
-            />
-            <b-icon
-              icon="triangle-fill"
-              class="rotate-icon"
-              variant="success"
-            />
+            <b-icon icon="diamond-fill" variant="success" />
+            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
             Milestones
           </div>
           <div class="demand">
@@ -68,16 +63,8 @@
       </div>
       <div class="reporting-content--body-custom">
         <div class="timeline-list">
-          <div
-            v-for="(date, index) in reportingDates"
-            :key="index"
-            class="date"
-            :class="{'active': isToday(date)}"
-          >
-            <p
-              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index-1]) : true"
-              class="month"
-            >
+          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
+            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -88,30 +75,105 @@
             </p>
           </div>
         </div>
-        <div v-for="(item, index) in datt.children" :key="index" >
+        <div v-for="(item, index) in datt.children" :key="index">
           <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
-            <div v-if="!isUN(item.start_date)" :style="'position:absolute;left:' + (getLength(lineStartDate, item.start_date) + 8) + 'px;width:' + getLength(item.start_date, item.end_date) + 'px'">
-              <progress-component :exist="'2022.11.11'" :value="getLength(item.start_date, todate) - 4" :title="`${item.id} (${item.progress}%)`" :isSub="false" />
+            <div class="progress-wrapper w-100">
+              <b-card no-body>
+                <b-card-text>
+                  Reticulating splines… {{ value1 + '%' }}
+                </b-card-text>
+                <div class="d-flex mt-1">
+                  <CustomProgramBar color="#ea5455" :width="da1" />
+                </div>
+                <div class="d-flex">
+                  <CustomProgramBar color="#28c76f" :width="da2" />
+                </div>
+                <div class="d-flex">
+                  <CustomProgramBar color="#00cfe8" :width="da3" />
+                </div>
+              </b-card>
             </div>
           </div>
-          <div v-for="(item1, index1) in item.children" :key="index1">
-            <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'" >
-              <div v-if="!isUN(item1.start_date)" :style="'position:absolute;left:' + (getLength(lineStartDate, item1.start_date) + 8) + 'px;width:' + getLength(item1.start_date, item1.end_date) + 'px'">
-                <progress-component :exist="item1.start_date" :value="getLength(item1.start_date, todate) - 4" :title="`${item1.id} (${item1.progress}%)`" :isSub="false" />
+          <div v-for="(item2, index2) in item.children" :key="index2" class="progress-wrapper w-100">
+            <b-card no-body>
+              <b-card-text>
+                Reticulating splines… {{ value1 + '%' }}
+              </b-card-text>
+              <div class="d-flex mt-1">
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                  <div :style="`width:${dta[index2][0]}px`">
+                    <b-progress value="100%" max="100" variant="danger" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                  <div :style="`width:${dta[index2][1]}px`">
+                    <b-progress value="100%" max="100" variant="danger" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                  <div :style="`width:${dta[index2][2]}px`">
+                    <b-progress value="100%" max="100" variant="danger" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                </div>
               </div>
-            </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                  <div :style="`width:${dta[index2][3]}px`">
+                    <b-progress value="100%" max="100" variant="success" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                  <div :style="`width:${dta[index2][4]}px`">
+                    <b-progress value="100%" max="100" variant="success" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                  <div :style="`width:${dta[index2][5]}px`">
+                    <b-progress value="100%" max="100" variant="success" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                  <div :style="`width:${dta[index2][6]}px`">
+                    <b-progress value="100%" max="100" variant="info" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                  <div :style="`width:${dta[index2][7]}px`">
+                    <b-progress value="100%" max="100" variant="info" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                </div>
+                <div class="d-flex">
+                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                  <div :style="`width:${dta[index2][8]}px`">
+                    <b-progress value="100%" max="100" variant="info" />
+                  </div>
+                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                </div>
+              </div>
+            </b-card>
           </div>
         </div>
       </div>
     </div>
-    <b-modal
-      id="modal-update"
-      ref="my-modal"
-      title="Create New"
-      centered
-      no-fade
-      hide-backdrop
-    >
+    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">Update</h5>
@@ -121,7 +183,8 @@
           </b-button>
         </div>
       </template>
-      <div style="font-size:11px;color:#D0D2D6">There is an update for <b style="color:white">Next Generation (2.29.18.1)</b>. Are you sure to update?</div>
+      <div style="font-size:11px;color:#D0D2D6">There is an update for <b style="color:white">Next Generation
+          (2.29.18.1)</b>. Are you sure to update?</div>
       <template #modal-footer>
         <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
         <b-button variant="primary" @click="onUpdate">Update</b-button>
@@ -136,21 +199,24 @@
 
 <script>
 import {
-  BModal, BButton
+  BModal, BButton, BProgress
 } from "bootstrap-vue"
 import moment from "moment"
 import { isEmpty } from '@/views/utils'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
-import ProgressComponent from './sub-component/ProgressComponent.vue'
+import CustomProgramBar from './CustomProgramBar.vue'
+// import ProgressComponent from './sub-component/ProgressComponent.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
   components: {
     BModal,
     BButton,
-    ProgressComponent,
+    BProgress,
+    // ProgressComponent,
     ImportLoaderModal,
-    ReportingCostVue
+    ReportingCostVue,
+    CustomProgramBar
   },
   props: {
     reportingState: {
@@ -167,13 +233,40 @@ export default {
       lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
       todate: moment().format('YYYY.MM.DD'),
       timelineWinWidth: 76 * 30 + 8 * 2,
-      collapsed: false
+      collapsed: false,
+      dta: [
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+      ]
     }
   },
   computed: {
     datt() {
       return this.$store.state.teamState.teamReportingData
     },
+    da1() {
+      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2]
+      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2]
+      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2]
+      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    },
+    da2() {
+      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5]
+      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5]
+      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5]
+      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    },
+    da3() {
+      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8]
+      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8]
+      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8]
+      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    }
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, "days")
@@ -184,6 +277,9 @@ export default {
     }
   },
   methods: {
+    largest(a, b, c, d) {
+      return Math.max(a, b, c, d)
+    },
     isToday(date) {
       return moment().isSame(date, "day")
     },
@@ -211,7 +307,7 @@ export default {
       this.$refs['my-modal'].hide()
     },
     onUpdate() {
-      this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V')
+      this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V', true)
       this.$store.commit('globalState/UPDATE_TEAM_REPORT_DATA')
       this.$refs['my-modal'].hide()
     },

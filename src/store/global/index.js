@@ -3095,6 +3095,7 @@ export default {
         state.loaderModalShow = !state.loaderModalShow
         state.teamReportUpdated = true
         Vue.$toast.success('Updated Successfully.')
+        this.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V', false)
       }, 600)
     },
     TEAM_PHASE_SELECT_ALL(state, team) {

@@ -11,7 +11,7 @@
           <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
             <feather-icon v-if="item1.children"
               :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
-            <p class="m-0 text-uppercase text-overflow-ellipse">
+            <p class="ml-1 m-0 text-overflow-ellipse">
               {{ item1.title }}
             </p>
           </div>

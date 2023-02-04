@@ -50,30 +50,30 @@ export default {
             },
           ]
         },
-        {
-          id: 'micro-robot-observation-nbc-program',
-          title: 'Micro robot observation NBC',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          progress: 0,
-          start_date: '2023.1.20',
-          end_date: '2023.3.12',
-        },
-        {
-          id: 'handling-robot-program',
-          title: 'Handling robot',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          progress: 0,
-          start_date: '2023.1.20',
-          end_date: '2023.3.12',
-        },
-        {
-          id: 'power-&-programming-station-program',
-          title: 'Power & programming station',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-        },
+        // {
+        //   id: 'micro-robot-observation-nbc-program',
+        //   title: 'Micro robot observation NBC',
+        //   parent: 'consumer-robots-portfolio',
+        //   type: 'program',
+        //   progress: 0,
+        //   start_date: '2023.1.20',
+        //   end_date: '2023.3.12',
+        // },
+        // {
+        //   id: 'handling-robot-program',
+        //   title: 'Handling robot',
+        //   parent: 'consumer-robots-portfolio',
+        //   type: 'program',
+        //   progress: 0,
+        //   start_date: '2023.1.20',
+        //   end_date: '2023.3.12',
+        // },
+        // {
+        //   id: 'power-&-programming-station-program',
+        //   title: 'Power & programming station',
+        //   parent: 'consumer-robots-portfolio',
+        //   type: 'program',
+        // },
       ]
     },
     teamDemandData: {
@@ -261,8 +261,9 @@ export default {
       }, 1000)
       // .todo axios request
     },
-    TOGGLE_IMPORT_LOADER_MODAL_V(state) {
-      state.loaderModalShow = !state.loaderModalShow
+    TOGGLE_IMPORT_LOADER_MODAL_V(state, visible) {
+      if (visible) state.loaderModalShow = visible
+      else state.loaderModalShow = !state.loaderModalShow
       // .todo axios request
     },
     RESOURCE_ADD(state, data) {
