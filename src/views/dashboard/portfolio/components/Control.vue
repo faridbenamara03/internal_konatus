@@ -172,7 +172,7 @@ export default {
       opened: 0,
       c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
-      teams: ['Paris - QA', 'Sofia - Dev', 'Plovdiv - Dev', 'Burgas - Dev', 'Varna - QA', 'Shumen - Dev'],
+      teams: ['Job A', 'Job B', 'Job C', 'Job D', 'Job E', 'Job F'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [
         [

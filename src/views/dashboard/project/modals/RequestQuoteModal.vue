@@ -137,27 +137,27 @@ export default {
       data: [
         {
           id: 1,
-          name: 'PARIS - QA'
+          name: 'Job A'
         },
         {
           id: 2,
-          name: 'SOFIA - DEV'
+          name: 'Job B'
         },
         {
           id: 3,
-          name: 'PLOVDIV - DEV'
+          name: 'Job C'
         },
         {
           id: 4,
-          name: 'BURGAS - DEV'
+          name: 'Job D'
         },
         {
           id: 5,
-          name: 'VARNA - QA'
+          name: 'Job E'
         },
         {
           id: 6,
-          name: 'SHUMEN - DEV'
+          name: 'Job F'
         },
       ]
     }
