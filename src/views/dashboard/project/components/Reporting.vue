@@ -5,11 +5,18 @@
         <div class="program-title-child">
           <!-- <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
           <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" /> -->
-          Quadruped robot
+          Consumer Robots
           <span class="ml-1 mr-1">type:</span>
           <div style="display:inline-block">
             <b-form-select v-model="selected" :options="options" size="sm" />
           </div>
+        </div>
+      </div>
+      <div class="program-title" style="margin-top:0;box-shadow: 0px -3px 10px 0px rgba(22, 22, 22, 0);margin-top:1px">
+        <div class="program-title-child">
+          <!-- <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
+          <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" /> -->
+          Quadruped robot
         </div>
       </div>
       <div class="program-collapse-header" style="border-bottom: 1px solid grey">
@@ -112,28 +119,38 @@
           </div>
         </div>
         <div v-if="!collapsed">
+          <b-card no-body style="margin-bottom:3px">
+              <div style="height:22px" />
+              <div class="d-flex">
+                <CustomProgramBar color="#ea5455" :width="655" />
+              </div>
+              <div class="d-flex">
+                <CustomProgramBar color="#28c76f" :width="700" />
+              </div>
+              <div class="d-flex">
+                <CustomProgramBar color="#00cfe8" :width="767" />
+              </div>
+            </b-card>
           <b-card class="mb-0" no-body style="padding: 10px 5px">
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1 + '%' }}
-            </b-card-text>
+            <div style="height:21px" />
             <div class="d-flex">
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                <div :style="`width:${Math.random() * 100 + 150}px`">
+                <div :style="`width:${210}px`">
                   <b-progress value="100%" max="100" variant="danger" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                <div :style="`width:${Math.random() * 100 + 150}px`">
+                <div :style="`width:${180}px`">
                   <b-progress value="100%" max="100" variant="danger" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                <div :style="`width:${Math.random() * 100 + 150}px`">
+                <div :style="`width:${200}px`">
                   <b-progress value="100%" max="100" variant="danger" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
@@ -142,21 +159,21 @@
             <div class="d-flex">
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                <div :style="`width:${Math.random() * 100 + 200}px`">
+                <div :style="`width:${200}px`">
                   <b-progress value="100%" max="100" variant="success" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                <div :style="`width:${Math.random() * 100 + 200}px`">
+                <div :style="`width:${220}px`">
                   <b-progress value="100%" max="100" variant="success" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                <div :style="`width:${Math.random() * 100 + 200}px`">
+                <div :style="`width:${210}px`">
                   <b-progress value="100%" max="100" variant="success" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
@@ -165,21 +182,21 @@
             <div class="d-flex">
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                <div :style="`width:${Math.random() * 100 + 250}px`">
+                <div :style="`width:${250}px`">
                   <b-progress value="100%" max="100" variant="info" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                <div :style="`width:${Math.random() * 100 + 250}px`">
+                <div :style="`width:${230}px`">
                   <b-progress value="100%" max="100" variant="info" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
               </div>
               <div class="d-flex">
                 <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                <div :style="`width:${Math.random() * 100 + 250}px`">
+                <div :style="`width:${220}px`">
                   <b-progress value="100%" max="100" variant="info" />
                 </div>
                 <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
@@ -513,6 +530,7 @@ import {
 } from "bootstrap-vue"
 import moment from "moment"
 // import ProgressComponent from './sub-component/ProgressComponent.vue'
+import CustomProgramBar from './CustomProgramBar.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
@@ -523,7 +541,8 @@ export default {
     BFormSelect,
     BProgress,
     ReportingCostVue,
-    BCard
+    BCard,
+    CustomProgramBar
   },
   props: {
     reportingState: {
