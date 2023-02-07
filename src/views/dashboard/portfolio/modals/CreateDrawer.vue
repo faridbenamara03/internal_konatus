@@ -362,7 +362,7 @@
         />
         <h5>planning</h5>
       </div>
-      <div v-for="(t, i) in arrV" :key="i">
+      <div v-for="(t, i) in step4.phaseData" :key="i">
         <div class="d-flex justify-content-between">
           <div style="width:32%">
             <div class="select-group--sub">
@@ -372,13 +372,9 @@
                   style="padding-top:2px"
                   :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
                   placeholder="Select Phase"
+                  v-model="t.phase"
                   outlined
                 />
-                <!-- <b-form-datepicker
-                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                  id="date_next_gate-datepicker3"
-                  v-model="step4.date_production"
-                /> -->
               </div>
             </div>
           </div>
@@ -388,7 +384,10 @@
                 <label>Phase Start Date</label>
                 <b-form-datepicker
                   :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                  id="phase_start_date-datepicker1"
+                  :id="`phase_start_date-datepicker${i}`"
+                  v-model="t.phase_start_date"
+                  :min="i > 0 && step4.phaseData[i - 1].phase_end_date ? step4.phaseData[i - 1].phase_end_date : null"
+                  :max="step4.phaseData[i].phase_end_date ? step4.phaseData[i].phase_end_date : null"
                 />
               </div>
             </div>
@@ -398,7 +397,10 @@
               <label>Phase End Date</label>
               <b-form-datepicker
                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                id="phase_end_date-datepicker2"
+                :id="`phase_end_date-datepicker${i}`"
+                v-model="t.phase_end_date"
+                :min="step4.phaseData[i].phase_start_date ? step4.phaseData[i].phase_start_date : null"
+                :max="step4.phaseData[i + 1] && step4.phaseData[i + 1].phase_start_date ? step4.phaseData[i + 1].phase_start_date : null"
               />
             </div>
           </div>
@@ -534,20 +536,8 @@ export default {
       default: () => [],
     },
   },
-  computed: {
-    monthPeriod() {
-      if (this.step6.period_start_year && this.step6.period_start_month && this.step6.period_end_year && this.step6.period_end_month) {
-        const yc = this.step6.period_end_year - this.step6.period_start_year
-        const startM = this.months.indexOf(this.step6.period_start_month) + 1
-        const endM = this.months.indexOf(this.step6.period_end_month) + 1
-        return `${endM - startM + yc * 12} months`
-      }
-      return ''
-    },
-  },
   data() {
     return {
-      arrV: [1],
       curIndex: 1,
       progressDescription: [
         'SELECT OR ADD A NEW PORTFOLIO',
@@ -581,13 +571,13 @@ export default {
         scoring: 0,
       },
       step4: {
-        phase: null,
-        phase_start_date: null,
-        phase_end_date: null,
-
-        date_next_gate: null,
-        date_ready_test: null,
-        date_production: null,
+        phaseData: [
+          {
+            phase: null,
+            phase_start_date: null,
+            phase_end_date: null
+          }
+        ]
       },
       step5: {
         head_product_portfolio: null,
@@ -625,7 +615,17 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleAddPhase() {
-      this.arrV.push(1)
+      if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {
+        this.$toast.warning('Please select phase start date')
+      } else {
+        this.step4.phaseData.push(
+          {
+            phase: null,
+            phase_start_date: this.step4.phaseData[this.step4.phaseData.length - 1].phase_end_date ? this.step4.phaseData[this.step4.phaseData.length - 1].phase_end_date : null,
+            phase_end_date: null
+          }
+        )
+      }
     },
     handleCustomChange(e, field) {
       this.step1[field] = e
