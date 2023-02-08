@@ -287,7 +287,7 @@
           icon="KeyIcon"
           size="20"
         />
-        <h5>RationalE</h5>
+        <h5>Rationale</h5>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
@@ -542,7 +542,7 @@ export default {
       progressDescription: [
         'SELECT OR ADD A NEW PORTFOLIO',
         'fill the Key elements',
-        'rationalE',
+        'rationale',
         'fill the planning',
         'fill the product line',
         'Almost finished! Fill the budget',
