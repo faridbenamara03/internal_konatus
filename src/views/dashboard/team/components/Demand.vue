@@ -23,16 +23,22 @@
           class="phase-box my-2"
           style="position: relative;"
         >
-          <div v-if="activity.quoted" style="
-            box-sizing: border-box;
-            border-top: solid 11px rgb(228, 255, 0);
-            border-right: solid 11px rgb(228, 255, 0);
-            border-top-right-radius: 5px;
-            border-left: solid 11px transparent;
-            border-bottom: solid 11px transparent;
-            position:absolute;
-            top:0;
-            right:0;"></div>
+          <div v-if="activity.quoted"
+            :id="`tooltip-target-${idx}`"
+            style="
+              box-sizing: border-box;
+              border-top: solid 11px rgb(228, 255, 0);
+              border-right: solid 11px rgb(228, 255, 0);
+              border-top-right-radius: 5px;
+              border-left: solid 11px transparent;
+              border-bottom: solid 11px transparent;
+              position:absolute;
+              top:0;
+              right:0;
+            " />
+          <b-tooltip :target="`tooltip-target-${idx}`" triggers="hover">
+            Quote requested
+          </b-tooltip>
           <div
             class="bar"
             :style="{ 'background': data.color}"
@@ -122,7 +128,7 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BModal, BFormInput
+  BButton, BFormCheckbox, BModal, BFormInput, BTooltip
 } from 'bootstrap-vue'
 import moment from 'moment'
 import vSelect from 'vue-select'
@@ -136,7 +142,8 @@ export default {
     BFormCheckbox,
     InsertNewTaskModal,
     vSelect,
-    BFormInput
+    BFormInput,
+    BTooltip
   },
   props: {
     data: {
