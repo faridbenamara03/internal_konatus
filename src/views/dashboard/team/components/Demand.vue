@@ -23,7 +23,16 @@
           class="phase-box my-2"
           style="position: relative;"
         >
-          <div v-if="activity.quoted" style="width: 0;height: 0;border-top: 20px solid rgb(228, 255, 0);border-left: 20px solid transparent;position:absolute;top:0;right:0;"></div>
+          <div v-if="activity.quoted" style="
+            box-sizing: border-box;
+            border-top: solid 11px rgb(228, 255, 0);
+            border-right: solid 11px rgb(228, 255, 0);
+            border-top-right-radius: 5px;
+            border-left: solid 11px transparent;
+            border-bottom: solid 11px transparent;
+            position:absolute;
+            top:0;
+            right:0;"></div>
           <div
             class="bar"
             :style="{ 'background': data.color}"
