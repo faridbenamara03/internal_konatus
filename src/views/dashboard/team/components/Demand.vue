@@ -21,7 +21,9 @@
           v-for="(activity, idx) in phase.elements"
           :key="idx"
           class="phase-box my-2"
+          style="position: relative;"
         >
+          <div v-if="activity.quoted" style="width: 0;height: 0;border-top: 20px solid rgb(228, 255, 0);border-left: 20px solid transparent;position:absolute;top:0;right:0;"></div>
           <div
             class="bar"
             :style="{ 'background': data.color}"

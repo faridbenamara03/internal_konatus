@@ -123,6 +123,7 @@ export default {
               priority: 'Highest',
               gate: 2,
               assigned: 'team-a-team',
+              quoted: true,
               effort: {
                 load: 53,
                 duration: 26,
@@ -162,6 +163,7 @@ export default {
               description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
               priority: 'Highest',
               phase: 'phase-2',
+              quoted: true,
               gate: 1,
               assigned: 'team-a-team',
               effort: {
