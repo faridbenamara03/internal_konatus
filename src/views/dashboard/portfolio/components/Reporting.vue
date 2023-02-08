@@ -85,49 +85,22 @@
           </div>
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
-          <div class="progress-wrapper w-100">
-            <b-card no-body>
-              <b-card-text class="mb-0">
-                Reticulating splines… {{ value1 + '%' }}
-              </b-card-text>
+          <div class="w-100" style="height:77px">
+            <b-card no-body style="height:76px;padding-top:10px;">
               <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="da1" />
-                <!-- <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${Math.random() * 100 + 500}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div> -->
+                <CustomProgramBar color="#ea5455" :width="index1 === 0 ? da1 : parseInt(Math.random() * 200, 10) + 500" />
               </div>
               <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="da2" />
-                <!-- <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${Math.random() * 100 + 700}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div> -->
+                <CustomProgramBar color="#28c76f" :width="index1 === 0 ? da2 : parseInt(Math.random() * 200, 10) + 600" />
               </div>
               <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="da3" />
-                <!-- <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${Math.random() * 100 + 800}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div> -->
+                <CustomProgramBar color="#00cfe8" :width="index1 === 0 ? da3 : parseInt(Math.random() * 200, 10) + 700" />
               </div>
             </b-card>
           </div>
           <template v-if="item1.children && openedCollapse === index1">
-            <div v-for="(item2, index2) in item1.children" :key="index2" class="progress-wrapper w-100">
-              <b-card no-body>
-                <b-card-text class="mb-0">
-                  Reticulating splines… {{ value1 + '%' }}
-                </b-card-text>
+            <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
+              <b-card no-body class="mb-0" style="height:50px;padding-top:5px;">
                 <div class="d-flex">
                   <div class="d-flex">
                     <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
@@ -201,50 +174,6 @@
             </div>
           </template>
         </div>
-        <!-- <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              max="100"
-              variant="danger"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="info"
-            />
-          </b-card>
-        </div>
-        <div class="progress-wrapper w-100">
-          <b-card no-body>
-            <b-card-text class="mb-0">
-              Reticulating splines… {{ value1+'%' }}
-            </b-card-text>
-            <b-progress
-              v-model="value1"
-              variant="danger"
-              max="100"
-            />
-            <b-progress
-              v-model="value2"
-              max="100"
-              variant="success"
-            />
-            <b-progress
-              v-model="value3"
-              max="100"
-              variant="info"
-            />
-          </b-card>
-        </div> -->
       </div>
     </div>
     <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
@@ -278,7 +207,6 @@ import {
   BButton,
   BProgress,
   BCard,
-  BCardText,
   // BListGroup,
   // BListGroupItem,
   BModal,
@@ -294,7 +222,6 @@ export default {
     BButton,
     BProgress,
     BCard,
-    BCardText,
     // AppCollapse,
     // AppCollapseItem,
     // BListGroup,
