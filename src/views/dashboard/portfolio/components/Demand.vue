@@ -29,16 +29,16 @@
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
-            <div class="part3">
-              <b-button variant="flat-primary">
+            <div class="part3 d-flex justify-content-center">
+              <b-button @click="toggleDrawerOpen" variant="flat-primary">
                 <feather-icon icon="Edit2Icon" />
               </b-button>
-              <b-button @click="toggleDrawerOpen" variant="flat-primary">
+              <!-- <b-button @click="toggleDrawerOpen" variant="flat-primary">
                 <feather-icon icon="DollarSignIcon" />
               </b-button>
               <b-button variant="flat-primary">
                 <feather-icon icon="ChevronsRightIcon" />
-              </b-button>
+              </b-button> -->
             </div>
           </div>
           <div v-if="opened === index">
@@ -79,16 +79,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="part3">
+                <div class="part3 d-flex justify-content-center">
                   <b-button variant="flat-primary">
                     <feather-icon icon="Edit2Icon" />
                   </b-button>
-                  <b-button variant="flat-primary">
+                  <!-- <b-button variant="flat-primary">
                     <feather-icon icon="DollarSignIcon" />
                   </b-button>
                   <b-button variant="flat-primary">
                     <feather-icon icon="ChevronsRightIcon" />
-                  </b-button>
+                  </b-button> -->
                 </div>
               </div>
             </div>
