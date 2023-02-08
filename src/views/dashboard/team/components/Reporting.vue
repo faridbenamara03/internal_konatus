@@ -16,12 +16,21 @@
             {{ item.title }}
           </div>
         </div>
-        <div class="program-title-cld1" v-for="(item1, index1) in item.children" :key="index1">
-          <div class="program-title-child">
-            <div class="title">{{ item1.title }}</div>
-            <div class="id">{{ item1.id }}</div>
+        <template v-for="(item1, index1) in item.children">
+          <div class="program-title-cld1" :key="index1">
+            <div class="program-title-child">
+              <div class="title">{{ item1.title }}</div>
+              <div class="id">{{ item1.id }}</div>
+            </div>
           </div>
-        </div>
+          <template v-if="item1.phases" >
+            <div v-for="(item2, index2) in item1.phases" :key="index2" class="work-element-child" >
+              <p class="m-0 text-uppercase text-overflow-ellipse">
+                {{ item2.id }} <span style="color:white">({{ item2.progress }})</span>
+              </p>
+            </div>
+          </template>
+        </template>
       </div>
     </div>
     <div class="reporting-content-custom">
@@ -75,101 +84,110 @@
             </p>
           </div>
         </div>
-        <div v-for="(item, index) in datt.children" :key="index">
-          <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
-            <div class="progress-wrapper w-100">
-              <b-card no-body>
-                <b-card-text>
-                  Reticulating splines… {{ value1 + '%' }}
-                </b-card-text>
-                <div class="d-flex mt-1">
-                  <CustomProgramBar color="#ea5455" :width="da1" />
-                </div>
-                <div class="d-flex">
-                  <CustomProgramBar color="#28c76f" :width="da2" />
-                </div>
-                <div class="d-flex">
-                  <CustomProgramBar color="#00cfe8" :width="da3" />
-                </div>
-              </b-card>
+        <div v-for="(item, index) in datt.children" :key="index" style="margin-left:1px">
+          <div style="height:77px;">
+            <div class="mb-0" style="height:76px;background-color:#283046;border-radius:5px;padding-top:10px;">
+              <div class="d-flex">
+                <CustomProgramBar color="#ea5455" :width="da1" />
+              </div>
+              <div class="d-flex">
+                <CustomProgramBar color="#28c76f" :width="da2" />
+              </div>
+              <div class="d-flex">
+                <CustomProgramBar color="#00cfe8" :width="da3" />
+              </div>
             </div>
           </div>
-          <div v-for="(item2, index2) in item.children" :key="index2" class="progress-wrapper w-100">
-            <b-card no-body>
-              <b-card-text>
-                Reticulating splines… {{ value1 + '%' }}
-              </b-card-text>
-              <div class="d-flex mt-1">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${dta[index2][0]}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
+          <template v-for="(item1, index1) in item.children">
+            <div style="height:77px" :key="index1">
+              <div style="padding-top:15px;height:76px;background-color:#283046;border-radius:5px;padding-left:3px">
+                <div class="d-flex" style="margin-bottom: 4px">
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${dta[index1][0]}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
                   </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${dta[index1][1]}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  </div>
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                    <div :style="`width:${dta[index1][2]}px`">
+                      <b-progress value="100%" max="100" variant="danger" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  </div>
+                </div>
+                <div class="d-flex" style="margin-bottom: 4px">
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${dta[index1][3]}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                  </div>
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${dta[index1][4]}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                  </div>
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                    <div :style="`width:${dta[index1][5]}px`">
+                      <b-progress value="100%" max="100" variant="success" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                  </div>
                 </div>
                 <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${dta[index2][1]}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${dta[index1][6]}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${dta[index2][2]}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${dta[index1][7]}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
                   </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                  <div class="d-flex">
+                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                    <div :style="`width:${dta[index1][8]}px`">
+                      <b-progress value="100%" max="100" variant="info" />
+                    </div>
+                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                  </div>
                 </div>
               </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${dta[index2][3]}px`">
+            </div>
+            <template v-if="item1.phases">
+              <div v-for="(item2, index2) in item1.phases" :key="index2" style="height:51px">
+                <div no-body class="mb-0" style="padding-top:5px;height:50px;background-color:#283046;border-radius:5px;padding-left:3px;">
+                  <div :style="`width:${Math.random() * 200 + 200}px;margin-bottom:2px`">
+                    <b-progress value="100%" max="100" variant="danger" />
+                  </div>
+                  <div :style="`width:${Math.random() * 200 + 250}px;margin-bottom:2px`">
                     <b-progress value="100%" max="100" variant="success" />
                   </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${dta[index2][4]}px`">
-                    <b-progress value="100%" max="100" variant="success" />
+                  <div :style="`width:${Math.random() * 200 + 300}px;margin-bottom:2px`">
+                    <b-progress value="100%" max="100" variant="info" />
                   </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${dta[index2][5]}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
                 </div>
               </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${dta[index2][6]}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${dta[index2][7]}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${dta[index2][8]}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-              </div>
-            </b-card>
-          </div>
+            </template>
+          </template>
         </div>
       </div>
     </div>

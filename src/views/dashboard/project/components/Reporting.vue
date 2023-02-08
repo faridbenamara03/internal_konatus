@@ -120,17 +120,17 @@
         </div>
         <div v-if="!collapsed">
           <b-card no-body style="margin-bottom:3px">
-              <div style="height:22px" />
-              <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="655" />
-              </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="700" />
-              </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="767" />
-              </div>
-            </b-card>
+            <div style="height:22px" />
+            <div class="d-flex">
+              <CustomProgramBar color="#ea5455" :width="655" />
+            </div>
+            <div class="d-flex">
+              <CustomProgramBar color="#28c76f" :width="700" />
+            </div>
+            <div class="d-flex">
+              <CustomProgramBar color="#00cfe8" :width="767" />
+            </div>
+          </b-card>
           <b-card class="mb-0" no-body style="padding: 10px 5px">
             <div style="height:21px" />
             <div class="d-flex">

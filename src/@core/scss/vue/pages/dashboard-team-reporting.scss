@@ -7,6 +7,18 @@
     width: 314px;
     display: block;
     background: $theme-dark-table-active-bg;
+    .work-element-child {
+      display: flex;
+      align-items: center;
+      background: $theme-dark-switch-bg-disabled;
+      // border-bottom: 1px solid $theme-dark-tabs-border-color;
+      box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
+      padding: 15px 44px;
+      color: #999999;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 24px;
+    }
     .program-title {
       display: flex;
       height: 88px;
@@ -24,7 +36,7 @@
     }
     .program-title-cld {
       display: flex;
-      height: 88px;
+      height: 77px;
       font-weight: bold;
       background-color: $theme-dark-widget-bg;
       &.active {
@@ -40,7 +52,7 @@
     }
     .program-title-cld1 {
       display: flex;
-      height: 88px;
+      height: 77px;
       background-color: $theme-dark-card-bg;
       padding-left: 18px;
       border-bottom: 1px solid $theme-dark-widget-bg;
@@ -224,7 +236,7 @@
       .progress-wrapper {
         padding: 2px 0 1px 0;
         border-bottom: 1px solid #303952;
-        height: 88px;
+        height: 77px;
         position: relative;
       }
     }

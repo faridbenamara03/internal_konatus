@@ -456,13 +456,28 @@ const globalOperationData = {
               progress: 64,
               start_date: '2022.11.6',
               end_date: '2022.12.26',
-              // phases: [
-              //   'phase-1',
-              //   'phase-2',
-              //   'phase-3',
-              //   'phase-4',
-              //   'phase-5'
-              // ],
+              phases: [
+                {
+                  id: '2.29.18.112',
+                  progress: '10%'
+                },
+                {
+                  id: '2.29.18.113',
+                  progress: '40%'
+                },
+                {
+                  id: '2.29.18.114',
+                  progress: '14%'
+                },
+                {
+                  id: '2.29.18.115',
+                  progress: '100%'
+                },
+                {
+                  id: '2.29.18.116',
+                  progress: '10%'
+                },
+              ],
             },
             {
               id: 'enhanced-motricity-project',
@@ -480,10 +495,16 @@ const globalOperationData = {
               spent: '61400',
               next_gate: '06/02/2022',
               value: '84',
-              // phases: [
-              //   'phase-6',
-              //   'phase-7'
-              // ]
+              phases: [
+                {
+                  id: '2.29.18.118',
+                  progress: '50%'
+                },
+                {
+                  id: '2.29.18.119',
+                  progress: '20%'
+                },
+              ]
             },
             {
               id: 'enhanced-autonomy-project',
@@ -501,9 +522,7 @@ const globalOperationData = {
               spent: '21300',
               next_gate: '07/01/2022',
               value: '31',
-              // phases: [
-              //   'phase-8'
-              // ]
+              phases: []
             },
             {
               id: 'dual-sourcing-for-quadruped-project',
@@ -521,7 +540,7 @@ const globalOperationData = {
               spent: '31100',
               value: '3',
               next_gate: '08/02/2022',
-              // phases: []
+              phases: []
             },
           ]
         },

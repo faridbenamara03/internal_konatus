@@ -23,12 +23,32 @@ export default {
               progress: 0,
               start_date: '2023.1.20',
               end_date: '2023.3.12',
+              phases: [
+                {
+                  id: '2.29.18.112',
+                  progress: '10%'
+                },
+                {
+                  id: '2.29.18.114',
+                  progress: '14%'
+                },
+                {
+                  id: '2.29.18.116',
+                  progress: '10%'
+                },
+              ]
             },
             {
               id: 'enhanced-motricity-project',
               title: 'Enhanced motricity',
               parent: 'quadruped-robot-program',
               type: 'project',
+              phases: [
+                {
+                  id: '2.29.18.118',
+                  progress: '50%'
+                },
+              ]
             },
             {
               id: 'enhanced-autonomy-project',
@@ -38,6 +58,7 @@ export default {
               progress: 0,
               start_date: '2023.1.20',
               end_date: '2023.3.12',
+              phases: []
             },
             {
               id: 'dual-sourcing-for-quadruped-project',
@@ -47,6 +68,7 @@ export default {
               progress: 0,
               start_date: '2023.1.20',
               end_date: '2023.3.12',
+              phases: []
             },
           ]
         },
