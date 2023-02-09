@@ -69,14 +69,14 @@
         </div>
         <div style="height:77px;">
           <b-card no-body class="mb-0" style="height:76px;padding-top:11px;">
-            <div class="d-flex">
-              <CustomProgramBar color="#ea5455" :width="da1" />
+            <div style="margin-bottom:5px">
+              <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da1-355" />
             </div>
-            <div class="d-flex">
-              <CustomProgramBar color="#28c76f" :width="da2" />
+            <div style="margin-bottom:5px">
+              <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da2-355" />
             </div>
-            <div class="d-flex">
-              <CustomProgramBar color="#00cfe8" :width="da3" />
+            <div>
+              <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da3-355" />
             </div>
           </b-card>
         </div>
@@ -198,8 +198,8 @@ import {
   BModal,
 } from 'bootstrap-vue'
 import moment from 'moment'
+import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ReportingCostVue from './ReportingCost.vue'
-import CustomProgramBar from './CustomProgramBar.vue'
 import ProgressComponent from './sub-component/ProgressComponent.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
@@ -215,7 +215,7 @@ export default {
     // BListGroupItem,
     BModal,
     ReportingCostVue,
-    CustomProgramBar,
+    ProgramProgressBar,
     ProgressComponent
   },
   props: {

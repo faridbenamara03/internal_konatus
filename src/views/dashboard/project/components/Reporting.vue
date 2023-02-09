@@ -120,15 +120,15 @@
         </div>
         <div v-if="!collapsed">
           <div style="height: 88px">
-            <b-card no-body style="height:87px;padding-top:15px;">
-              <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="655" />
+            <b-card no-body class="mb-0" style="height:87px;padding-top:15px;">
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="655-448" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="700" />
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="700-448" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="767" />
+              <div>
+                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="767-448" />
               </div>
             </b-card>
           </div>
@@ -389,7 +389,7 @@ import {
 } from "bootstrap-vue"
 import moment from "moment"
 import ProgressComponent from './sub-component/ProgressComponent.vue'
-import CustomProgramBar from './CustomProgramBar.vue'
+import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
@@ -400,7 +400,7 @@ export default {
     BProgress,
     ReportingCostVue,
     BCard,
-    CustomProgramBar
+    ProgramProgressBar
   },
   props: {
     reportingState: {

@@ -86,17 +86,17 @@
         </div>
         <div v-for="(item, index) in datt.children" :key="index" style="margin-left:1px">
           <div style="height:77px;">
-            <div class="mb-0" style="height:76px;background-color:#283046;border-radius:5px;padding-top:10px;">
-              <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="da1" />
+            <b-card class="mb-0" style="height:76px;background-color:#283046;border-radius:5px;padding-top:10px;">
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da1-445" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="da2" />
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da2-445" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="da3" />
+              <div>
+                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da3-445" />
               </div>
-            </div>
+            </b-card>
           </div>
           <template v-for="(item1, index1) in item.children">
             <div style="height:77px" :key="index1">
@@ -229,8 +229,8 @@ import {
 import moment from "moment"
 import { isEmpty } from '@/views/utils'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
-import CustomProgramBar from './CustomProgramBar.vue'
 import ProgressComponent from './sub-component/ProgressComponent.vue'
+import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
@@ -241,7 +241,7 @@ export default {
     ProgressComponent,
     ImportLoaderModal,
     ReportingCostVue,
-    CustomProgramBar
+    ProgramProgressBar
   },
   props: {
     reportingState: {

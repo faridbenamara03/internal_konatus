@@ -71,6 +71,11 @@
         </div>
       </div>
       <div class="reporting-content--body">
+        <div
+          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'">
+          <div class="rounded-circle"
+            style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+        </div>
         <div class="timeline-list">
           <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
             <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
@@ -86,15 +91,15 @@
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="w-100" style="height:77px">
-            <b-card no-body style="height:76px;padding-top:10px;">
-              <div class="d-flex">
-                <CustomProgramBar color="#ea5455" :width="index1 === 0 ? da1 : parseInt(Math.random() * 200, 10) + 500" />
+            <b-card no-body class="mb-0" style="height:76px;padding-top:11px;">
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da1-355" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#28c76f" :width="index1 === 0 ? da2 : parseInt(Math.random() * 200, 10) + 600" />
+              <div style="margin-bottom:5px">
+                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da2-355" />
               </div>
-              <div class="d-flex">
-                <CustomProgramBar color="#00cfe8" :width="index1 === 0 ? da3 : parseInt(Math.random() * 200, 10) + 700" />
+              <div>
+                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da3-355" />
               </div>
             </b-card>
           </div>
@@ -213,7 +218,7 @@ import {
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
-import CustomProgramBar from './CustomProgramBar.vue'
+import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
@@ -228,7 +233,7 @@ export default {
     // BListGroupItem,
     BModal,
     ReportingCostVue,
-    CustomProgramBar
+    ProgramProgressBar
   },
   props: {
     data: {
