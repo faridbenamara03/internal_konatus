@@ -26,6 +26,11 @@
       </div>
     </div>
     <div class="reporting-content">
+      <div
+        :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'">
+        <div class="rounded-circle"
+          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+      </div>
       <div class="reporting-content--header">
         <div />
         <div class="reporting-content-header--badge">
@@ -150,17 +155,9 @@
             </b-card>
           </div>
           <template v-if="item1.phases">
-            <div v-for="(item2, index2) in item1.phases" :key="index2" style="height:51px">
-              <b-card no-body class="mb-0" style="padding-top:5px;height:50px;padding-left:3px">
-                <div :style="`width:${Math.random() * 200 + 200}px;margin-bottom:2px`">
-                  <b-progress value="100%" max="100" variant="danger" />
-                </div>
-                <div :style="`width:${Math.random() * 200 + 250}px;margin-bottom:2px`">
-                  <b-progress value="100%" max="100" variant="success" />
-                </div>
-                <div :style="`width:${Math.random() * 200 + 300}px;margin-bottom:2px`">
-                  <b-progress value="100%" max="100" variant="info" />
-                </div>
+            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
+              <b-card no-body class="mb-0" style="height:50px;width:500px">
+                <ProgressComponent :index="index2" />
               </b-card>
             </div>
           </template>
@@ -203,6 +200,7 @@ import {
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
 import CustomProgramBar from './CustomProgramBar.vue'
+import ProgressComponent from './sub-component/ProgressComponent.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
@@ -217,7 +215,8 @@ export default {
     // BListGroupItem,
     BModal,
     ReportingCostVue,
-    CustomProgramBar
+    CustomProgramBar,
+    ProgressComponent
   },
   props: {
     data: {
@@ -233,6 +232,7 @@ export default {
   },
   data() {
     return {
+      paddingLeft: [90, 150, 280, 155, 180, 270, 50],
       reportingDates: [],
       value1: 30,
       value2: 40,

@@ -173,6 +173,13 @@
               </div>
             </div>
             <template v-if="item1.phases">
+              <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
+                <div class="mb-0" style="height:50px;width:500px">
+                  <ProgressComponent :index="index2" />
+                </div>
+              </div>
+            </template>
+            <!-- <template v-if="item1.phases">
               <div v-for="(item2, index2) in item1.phases" :key="index2" style="height:51px">
                 <div no-body class="mb-0" style="padding-top:5px;height:50px;background-color:#283046;border-radius:5px;padding-left:3px;">
                   <div :style="`width:${Math.random() * 200 + 200}px;margin-bottom:2px`">
@@ -186,7 +193,7 @@
                   </div>
                 </div>
               </div>
-            </template>
+            </template> -->
           </template>
         </div>
       </div>
@@ -223,7 +230,7 @@ import moment from "moment"
 import { isEmpty } from '@/views/utils'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
 import CustomProgramBar from './CustomProgramBar.vue'
-// import ProgressComponent from './sub-component/ProgressComponent.vue'
+import ProgressComponent from './sub-component/ProgressComponent.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
@@ -231,7 +238,7 @@ export default {
     BModal,
     BButton,
     BProgress,
-    // ProgressComponent,
+    ProgressComponent,
     ImportLoaderModal,
     ReportingCostVue,
     CustomProgramBar
@@ -243,6 +250,7 @@ export default {
   },
   data() {
     return {
+      paddingLeft: [90, 150, 280, 255, 180, 270, 50],
       reportingDates: [],
       value1: 30,
       value2: 40,
