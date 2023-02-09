@@ -30,13 +30,13 @@
               </div>
             </div>
             <div class="part3 d-flex justify-content-center">
-              <b-button @click="toggleDrawerOpen" variant="flat-primary">
+              <b-button @click="toggleEditDrawerOpen" variant="flat-primary">
                 <feather-icon icon="Edit2Icon" />
               </b-button>
-              <!-- <b-button @click="toggleDrawerOpen" variant="flat-primary">
+              <b-button @click="toggleDrawerOpen" variant="flat-primary">
                 <feather-icon icon="DollarSignIcon" />
               </b-button>
-              <b-button variant="flat-primary">
+              <!-- <b-button variant="flat-primary">
                 <feather-icon icon="ChevronsRightIcon" />
               </b-button> -->
             </div>
@@ -83,10 +83,10 @@
                   <b-button variant="flat-primary">
                     <feather-icon icon="Edit2Icon" />
                   </b-button>
-                  <!-- <b-button variant="flat-primary">
+                  <b-button variant="flat-primary">
                     <feather-icon icon="DollarSignIcon" />
                   </b-button>
-                  <b-button variant="flat-primary">
+                  <!-- <b-button variant="flat-primary">
                     <feather-icon icon="ChevronsRightIcon" />
                   </b-button> -->
                 </div>
@@ -225,6 +225,11 @@
         <BudgetDrawer />
       </div>
     </Drawer>
+    <Drawer @close="toggleEditDrawerOpen" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="editDrawerOpen" >
+        <EditDrawer />
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -237,6 +242,7 @@ import Drawer from "vue-simple-drawer"
 import VueApexCharts from 'vue-apexcharts'
 import vSelect from 'vue-select'
 import BudgetDrawer from '../modals/BudgetDrawer.vue'
+import EditDrawer from '../modals/EditDrawer.vue'
 
 export default {
   components: {
@@ -253,7 +259,8 @@ export default {
     BInputGroupText,
     vSelect,
     Drawer,
-    BudgetDrawer
+    BudgetDrawer,
+    EditDrawer
   },
   props: {
     data: {
@@ -275,6 +282,7 @@ export default {
   data() {
     return {
       budgetDrawerOpen: false,
+      editDrawerOpen: false,
       opened: 0,
       chartOptions: {
         chart: {
@@ -444,6 +452,9 @@ export default {
   methods: {
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
+    },
+    toggleEditDrawerOpen() {
+      this.editDrawerOpen = !this.editDrawerOpen
     },
     onCollapseCLick(index) {
       if (index === this.opened) {

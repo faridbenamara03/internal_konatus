@@ -1,115 +1,5 @@
 <template>
-  <div style="width:450px">
-    <div
-      class="select-group" style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="KeyIcon"
-          size="20"
-        />
-        <h5>Rationale</h5>
-      </div>
-      <div class="select-group--sub mb-1">
-        <div class="select-box">
-          <label>Date Production Deadline</label>
-          <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            id="production-datepicker"
-            v-model="p_deadline"
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Nature of deadline</label>
-          <v-select
-            v-model="n_deadline"
-            :options="['desired', 'time to market', 'legal constraint', 'other']"
-            id="production-datepicker1"
-            outlined
-          />
-        </div>
-        <div style="width:35%">
-          <label>Multiplier</label>
-          <v-select
-            v-model="n_deadline_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="deadline-multiplier"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Customer Ex ({{ customer_ex }})</label>
-          <b-form-input
-            id="range-customer"
-            v-model="customer_ex"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            v-model="customer_ex_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="customer-ex-weight"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Sales Ex ({{ sales_ex }})</label>
-          <b-form-input
-            id="range-sales"
-            v-model="sales_ex"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            v-model="sales_ex_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="sales-ex-weight"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Scoring ({{ scoring }})</label>
-          <b-form-input
-            id="range-scoring"
-            v-model="scoring"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            v-model="scoring_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="scoring-weight"
-            outlined
-          />
-        </div>
-      </div>
-      <div>
-        Final project score: {{ projectTotalScore }}
-      </div>
-    </div>
+  <div style="width:300px">
     <div
       class="select-group" style="padding-top: 0px"
     >
@@ -196,13 +86,12 @@
 
 <script>
 import {
-  BButton, BFormInput, BInputGroup, BInputGroupPrepend, BFormDatepicker
+  BButton, BFormInput, BInputGroup, BInputGroupPrepend
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
 export default {
   components: {
-    BFormDatepicker,
     BButton,
     BFormInput,
     BInputGroup,
@@ -225,9 +114,6 @@ export default {
       }
       return ''
     },
-    projectTotalScore() {
-      return this.n_deadline_weight * ((this.customer_ex * this.customer_ex_weight) + ((this.sales_ex * this.sales_ex_weight)) + ((this.scoring * this.scoring_weight)))
-    }
   },
   data() {
     return {
