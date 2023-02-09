@@ -86,114 +86,44 @@
         </div>
         <div v-for="(item, index) in datt.children" :key="index" style="margin-left:1px">
           <div style="height:77px;">
-            <b-card class="mb-0" style="height:76px;background-color:#283046;border-radius:5px;padding-top:10px;">
+            <div class="d-flex flex-column justify-content-around" style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da1-445" />
+                <ProgramProgressBar :type="0" :width1="810" :width2="455" />
               </div>
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da2-445" />
+                <ProgramProgressBar :type="1" :width1="900" :width2="455" />
               </div>
               <div>
-                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="445" :width2="da3-445" />
+                <ProgramProgressBar :type="2" :width1="953" :width2="455" />
               </div>
-            </b-card>
+            </div>
           </div>
           <template v-for="(item1, index1) in item.children">
             <div style="height:77px" :key="index1">
-              <div style="padding-top:15px;height:76px;background-color:#283046;border-radius:5px;padding-left:3px">
-                <div class="d-flex" style="margin-bottom: 4px">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index1][0]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index1][1]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index1][2]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                </div>
-                <div class="d-flex" style="margin-bottom: 4px">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index1][3]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index1][4]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index1][5]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index1][6]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index1][7]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index1][8]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                </div>
+              <div class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+                <ProjectProgressBar :type="0" :width1="250" :width2="250" :width3="250" :width4="456" />
+                <ProjectProgressBar :type="1" :width1="280" :width2="320" :width3="240" :width4="456" />
+                <ProjectProgressBar :type="2" :width1="290" :width2="330" :width3="270" :width4="456" />
               </div>
             </div>
             <template v-if="item1.phases">
               <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
+                <div class="d-flex flex-column justify-content-around" style="height:50px;width:500px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                  <div style="margin-bottom:1px">
+                    <ElementProgressBar :type="0" :width1="500" :width2="455 - paddingLeft[index2]" />
+                  </div>
+                  <div style="margin-bottom:1px">
+                    <ElementProgressBar :type="1" :width1="500" :width2="455 - paddingLeft[index2]" />
+                  </div>
+                  <ElementProgressBar :type="2" :width1="500" :width2="455 - paddingLeft[index2]" />
+                </div>
+              </div>
+              <!-- <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
                 <div class="mb-0" style="height:50px;width:500px">
                   <ProgressComponent :index="index2" />
                 </div>
-              </div>
+              </div> -->
             </template>
-            <!-- <template v-if="item1.phases">
-              <div v-for="(item2, index2) in item1.phases" :key="index2" style="height:51px">
-                <div no-body class="mb-0" style="padding-top:5px;height:50px;background-color:#283046;border-radius:5px;padding-left:3px;">
-                  <div :style="`width:${Math.random() * 200 + 200}px;margin-bottom:2px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <div :style="`width:${Math.random() * 200 + 250}px;margin-bottom:2px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <div :style="`width:${Math.random() * 200 + 300}px;margin-bottom:2px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                </div>
-              </div>
-            </template> -->
           </template>
         </div>
       </div>
@@ -224,12 +154,13 @@
 
 <script>
 import {
-  BModal, BButton, BProgress
+  BModal, BButton
 } from "bootstrap-vue"
 import moment from "moment"
 import { isEmpty } from '@/views/utils'
 import ImportLoaderModal from '@/views/dashboard/project/modals/ImportLoaderModal.vue'
-import ProgressComponent from './sub-component/ProgressComponent.vue'
+import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
+import ElementProgressBar from '../../globalComponent/ElementProgressBar.vue'
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
@@ -237,11 +168,11 @@ export default {
   components: {
     BModal,
     BButton,
-    BProgress,
-    ProgressComponent,
     ImportLoaderModal,
     ReportingCostVue,
-    ProgramProgressBar
+    ProgramProgressBar,
+    ProjectProgressBar,
+    ElementProgressBar
   },
   props: {
     reportingState: {

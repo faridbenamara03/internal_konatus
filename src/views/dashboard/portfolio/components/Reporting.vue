@@ -93,88 +93,22 @@
           <div class="w-100" style="height:77px">
             <b-card no-body class="mb-0" style="height:76px;padding-top:11px;">
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da1-355" />
+                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : Math.random() * 100 + 500" :width2="367" />
               </div>
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da2-355" />
+                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : Math.random() * 100 + 600" :width2="367" />
               </div>
               <div>
-                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="355" :width2="da3-355" />
+                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : Math.random() * 100 + 700" :width2="367" />
               </div>
             </b-card>
           </div>
           <template v-if="item1.children && openedCollapse === index1">
             <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
-              <b-card no-body class="mb-0" style="height:50px;padding-top:5px;">
-                <div class="d-flex">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index2][0]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index2][1]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                    <div :style="`width:${dta[index2][2]}px`">
-                      <b-progress value="100%" max="100" variant="danger" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index2][3]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index2][4]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                    <div :style="`width:${dta[index2][5]}px`">
-                      <b-progress value="100%" max="100" variant="success" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index2][6]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index2][7]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                  <div class="d-flex">
-                    <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                    <div :style="`width:${dta[index2][8]}px`">
-                      <b-progress value="100%" max="100" variant="info" />
-                    </div>
-                    <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                  </div>
-                </div>
+              <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 3px;">
+                <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]" :width4="363" />
+                <ProjectProgressBar :type="1" :width1="dta[index2][3]" :width2="dta[index2][4]" :width3="dta[index2][5]" :width4="363" />
+                <ProjectProgressBar :type="2" :width1="dta[index2][6]" :width2="dta[index2][7]" :width3="dta[index2][8]" :width4="363" />
               </b-card>
             </div>
           </template>
@@ -210,7 +144,6 @@
 <script>
 import {
   BButton,
-  BProgress,
   BCard,
   // BListGroup,
   // BListGroupItem,
@@ -219,13 +152,13 @@ import {
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
+import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
 export default {
   components: {
     BButton,
-    BProgress,
     BCard,
     // AppCollapse,
     // AppCollapseItem,
@@ -233,7 +166,8 @@ export default {
     // BListGroupItem,
     BModal,
     ReportingCostVue,
-    ProgramProgressBar
+    ProgramProgressBar,
+    ProjectProgressBar
   },
   props: {
     data: {

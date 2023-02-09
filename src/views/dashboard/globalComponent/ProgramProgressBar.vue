@@ -1,9 +1,9 @@
 <template>
-  <div class="d-flex">
-    <div :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type][color1]}`" />
-    <div :style="`width:${width1}px;height:12px;background:${colorArr[type][color2]};`" />
-    <div :style="`width:${width2}px;height:12px;background:${colorArr[type][color3]};`" />
-    <div :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type][color4]}`" />
+  <div class="d-flex position-relative">
+    <div :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type]}`" />
+    <div :style="`width:${width1}px;height:12px;background:${colorArr[type]};`" />
+    <div :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`" />
+    <div :style="`background-color:#0008;width:${width2}px;height:15px;position:absolute;left:0px;border-top-left-radius:10px;`" />
   </div>
 </template>
 
@@ -12,22 +12,6 @@ export default {
   props: {
     type: {
       type: Number
-    },
-    color1: {
-      type: Number,
-      default: () => 0,
-    },
-    color2: {
-      type: Number,
-      default: () => 0,
-    },
-    color3: {
-      type: Number,
-      default: () => 0,
-    },
-    color4: {
-      type: Number,
-      default: () => 0,
     },
     width1: {
       type: Number,
@@ -40,11 +24,7 @@ export default {
   },
   data() {
     return {
-      colorArr: [
-        ['#D46D6D50', '#ea5455'],
-        ['#5E944550', '#28c76f'],
-        ['#3A7A9E50', '#00cfe8']
-      ]
+      colorArr: ['#ea5455', '#28c76f', '#00cfe8']
     }
   }
 }

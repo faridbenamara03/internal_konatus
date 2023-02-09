@@ -83,8 +83,8 @@
         <div class="reporting-content-header--badge">
           <div class="phase">
             <div class="flag" />
-              Phase
-            </div>
+            Phase
+          </div>
           <div class="milestones">
             <b-icon icon="diamond-fill" variant="success" />
             <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
@@ -120,139 +120,97 @@
         </div>
         <div v-if="!collapsed">
           <div style="height: 88px">
-            <b-card no-body class="mb-0" style="height:87px;padding-top:15px;">
+            <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 3px">
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="655-448" />
+                <ProgramProgressBar :type="0" :width1="810" :width2="458" />
               </div>
               <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="700-448" />
+                <ProgramProgressBar :type="1" :width1="900" :width2="458" />
               </div>
               <div>
-                <ProgramProgressBar :type="2" :color1="0" :color2="0" :color3="1" :color4="1" :width1="448" :width2="767-448" />
+                <ProgramProgressBar :type="2" :width1="950" :width2="458" />
               </div>
             </b-card>
           </div>
           <div style="height:77px">
-            <b-card class="mb-0" no-body style="height:76px;">
-              <div style="height:21px" />
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${210}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${180}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
-                  <div :style="`width:${200}px`">
-                    <b-progress value="100%" max="100" variant="danger" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
-                </div>
-              </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${200}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${220}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
-                  <div :style="`width:${210}px`">
-                    <b-progress value="100%" max="100" variant="success" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
-                </div>
-              </div>
-              <div class="d-flex">
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${250}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${230}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-                <div class="d-flex">
-                  <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
-                  <div :style="`width:${220}px`">
-                    <b-progress value="100%" max="100" variant="info" />
-                  </div>
-                  <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
-                </div>
-              </div>
+            <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 3px;">
+              <ProjectProgressBar :type="0" :width1="250" :width2="250" :width3="250" :width4="458" />
+              <ProjectProgressBar :type="1" :width1="280" :width2="320" :width3="240" :width4="458" />
+              <ProjectProgressBar :type="2" :width1="290" :width2="330" :width3="270" :width4="458" />
             </b-card>
           </div>
           <div :style="`height:46px;padding-left:140px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="0" />
-            </div>
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="317" />
+              </div>
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="317" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="317" />
+            </b-card>
           </div>
           <div :style="`height:46px;padding-left:240px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="1" />
-            </div>
-          </div>
-          <div :style="`height:46px;padding-left:250px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="2" />
-            </div>
-          </div>
-          <div :style="`height:46px;padding-left:100px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="3" />
-            </div>
-          </div>
-          <div :style="`height:46px;padding-left:230px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="4" />
-            </div>
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="217" />
+              </div>
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="217" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="217" />
+            </b-card>
           </div>
           <div :style="`height:46px;padding-left:180px;`">
-            <div class="mb-0" style="height:45px;width:500px">
-              <ProgressComponent :index="5" />
-            </div>
-          </div>
-          <!-- <div v-for="(item, index) in datt" :key="index">
-            <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px;'">
-                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
-                  :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="277" />
               </div>
-              <template v-for="(item2, index2) in item1.children" >
-                <div class="progress-wrapper-child" :style="`width:${timelineWinWidth}px;height:${item2.phases ? (46 + item2.phases.length * 30.3) : 46}px`"
-                  :key="index2" >
-                  <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
-                    :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                    :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
-                </div>
-              </template>
-            </div>
-          </div> -->
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="277" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="277" />
+            </b-card>
+          </div>
+          <div :style="`height:46px;padding-left:160px;`">
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="297" />
+              </div>
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="297" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="297" />
+            </b-card>
+          </div>
+          <div :style="`height:46px;padding-left:150px;`">
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="307" />
+              </div>
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="307" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="307" />
+            </b-card>
+          </div>
+          <div :style="`height:46px;padding-left:190px;`">
+            <b-card class="d-flex flex-column justify-content-around" no-body
+              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="0" :width1="500" :width2="267" />
+              </div>
+              <div style="margin-bottom:1px">
+                <ElementProgressBar :type="1" :width1="500" :width2="267" />
+              </div>
+              <ElementProgressBar :type="2" :width1="500" :width2="267" />
+            </b-card>
+          </div>
         </div>
       </div>
       <div v-if="this.selected === 2" class="reporting-content--body-custom">
@@ -388,19 +346,21 @@ import {
   BModal, BButton, BProgress, BCard
 } from "bootstrap-vue"
 import moment from "moment"
-import ProgressComponent from './sub-component/ProgressComponent.vue'
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
+import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
+import ElementProgressBar from '../../globalComponent/ElementProgressBar.vue'
 import ReportingCostVue from "./ReportingCost.vue"
 
 export default {
   components: {
     BModal,
     BButton,
-    ProgressComponent,
     BProgress,
     ReportingCostVue,
     BCard,
-    ProgramProgressBar
+    ProgramProgressBar,
+    ProjectProgressBar,
+    ElementProgressBar
   },
   props: {
     reportingState: {
