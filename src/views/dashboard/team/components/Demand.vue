@@ -20,8 +20,7 @@
         <div
           v-for="(activity, idx) in phase.elements"
           :key="idx"
-          class="phase-box my-2"
-          style="position: relative;"
+          class="phase-box my-2 position-relative"
         >
           <div v-if="activity.quoted"
             :id="`tooltip-target-${idx}`"

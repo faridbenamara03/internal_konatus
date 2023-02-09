@@ -68,15 +68,15 @@
           </div>
         </div>
         <div style="height:77px;">
-          <b-card no-body class="mb-0" style="height:76px;padding-top:11px;">
+          <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
             <div style="margin-bottom:5px">
-              <ProgramProgressBar :type="0" :width1="813" :width2="367" />
+              <ProgramProgressBar :type="0" :width1="813" :width2="364" />
             </div>
             <div style="margin-bottom:5px">
-              <ProgramProgressBar :type="1" :width1="905" :width2="367" />
+              <ProgramProgressBar :type="1" :width1="905" :width2="364" />
             </div>
             <div>
-              <ProgramProgressBar :type="2" :width1="955" :width2="367" />
+              <ProgramProgressBar :type="2" :width1="955" :width2="364" />
             </div>
           </b-card>
         </div>

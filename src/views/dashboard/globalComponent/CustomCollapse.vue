@@ -17,7 +17,19 @@
         </div>
       </div>
       <template v-if="isOpen">
-        <div class="phase-box mb-1" v-for="(activity, jn) in team.activities" :key="jn">
+        <div class="phase-box mb-1 position-relative" v-for="(activity, jn) in team.activities" :key="jn">
+          <div v-b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}`"
+            style="
+              box-sizing: border-box;
+              border-top: solid 11px rgb(228, 255, 0);
+              border-right: solid 11px rgb(228, 255, 0);
+              border-top-right-radius: 5px;
+              border-left: solid 11px transparent;
+              border-bottom: solid 11px transparent;
+              position:absolute;
+              top:0;
+              right:0;
+            " />
           <div class="bar" :style="`background:${cardBarColorArr[index]}`" />
           <div class="phase-box--content">
             <div class="d-flex">
@@ -27,7 +39,7 @@
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox @change="onCheckChange" v-model="activity.isSelected" />
+                <b-form-checkbox @change="e => onCheckChange(e, activity.activityId)" v-model="activity.isSelected" />
               </div>
             </div>
             <p class="muted">
@@ -50,6 +62,18 @@
         <div class="phase-box mb-1 w-100"
           :style="`position:absolute;top:${15 * jn}px;z-index:${1000 - jn};box-shadow: 0px 2px 3px #161d31;`"
           v-for="(activity, jn) in team.activities" :key="jn">
+          <div v-b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}-1`"
+            style="
+              box-sizing: border-box;
+              border-top: solid 11px rgb(228, 255, 0);
+              border-right: solid 11px rgb(228, 255, 0);
+              border-top-right-radius: 5px;
+              border-left: solid 11px transparent;
+              border-bottom: solid 11px transparent;
+              position:absolute;
+              top:0;
+              right:0;
+            " />
           <div class="bar" :style="`background:${cardBarColorArr[index]}`" />
           <div class="phase-box--content">
             <div class="d-flex">
@@ -59,7 +83,7 @@
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox @change="onCheckChange" v-model="activity.isSelected" />
+                <b-form-checkbox @change="e => onCheckChange(e, activity.activityId)" v-model="activity.isSelected" />
               </div>
             </div>
             <p class="muted">
@@ -109,7 +133,12 @@ export default {
       cardBarColorArr: [
         '#D68232', '#FFEA2C', '#d63232', '#28C76F', '#00CFE8', '#6610F2'
       ],
-      isOpen: false
+      isOpen: false,
+    }
+  },
+  computed: {
+    requestedElement() {
+      return this.$store.state.globalState.requestedElement
     }
   },
   methods: {
@@ -122,8 +151,8 @@ export default {
     handleActivityDetails(phase, team) {
       this.$emit('openDetailActivity', phase, team)
     },
-    onCheckChange(e) {
-      this.$store.commit('globalState/WOEK_ELEMENT_CHECK', e)
+    onCheckChange(e, activityId) {
+      this.$emit('selectActivity', e, activityId)
     }
   },
 }

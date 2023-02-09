@@ -125,12 +125,12 @@ export default {
     BFormInput,
     BModal,
   },
-  // props: {
-  //   data: {
-  //     type: Array,
-  //     default: () => [],
-  //   },
-  // },
+  props: {
+    // data: {
+    //   type: Array,
+    //   default: () => [],
+    // },
+  },
   data() {
     return {
       collapsed: [],
@@ -167,9 +167,8 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
-      this.$store.commit('teamState/SUBMIT_TEAM_REQUEST_QUOTE', this.data)
+      this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       this.showToast('success', 'Success Request Quote.')
-      // this.$emit('onSubmit', this.data)
       this.$refs['my-modal'].hide()
     },
     showToast(variant, title) {

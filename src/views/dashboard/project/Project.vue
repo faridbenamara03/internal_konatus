@@ -18,7 +18,7 @@
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button :disabled="!selectedWorkElement" v-b-modal.modal-request-quote class="ml-1" variant="primary" >
+              <b-button :disabled="selectedWorkElement.length === 0" v-b-modal.modal-request-quote class="ml-1" variant="primary" >
                 <feather-icon icon="MapIcon" size="16" />&nbsp;
                 <span>Request Quote</span>
               </b-button>
@@ -174,7 +174,7 @@ import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
 import { isEmpty } from "@/views/utils"
-import ModalRequestQuote from './modals/RequestQuoteModal.vue'
+import ModalRequestQuote from '../globalComponent/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import CreateModal from './modals/CreateModal.vue'
