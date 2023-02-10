@@ -69,57 +69,72 @@
         </div>
         <div style="height:77px;">
           <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
-            <div style="margin-bottom:5px">
-              <ProgramProgressBar :type="0" :width1="813" :width2="364" />
+            <div :style="`padding-left:${programData[0][0]}px`">
+              <ProgramProgressBar :type="0" :width1="programData[0][1] + 50 - programData[0][0]" :width2="364- programData[0][0]" />
             </div>
-            <div style="margin-bottom:5px">
-              <ProgramProgressBar :type="1" :width1="905" :width2="364" />
+            <div :style="`padding-left:${programData[1][0]}px`">
+              <ProgramProgressBar :type="1" :width1="programData[1][1] + 50 - programData[1][0]" :width2="364 - programData[1][0]" />
             </div>
-            <div>
-              <ProgramProgressBar :type="2" :width1="955" :width2="364" />
+            <div :style="`padding-left:${programData[2][0]}px`">
+              <ProgramProgressBar :type="2" :width1="programData[2][1] + 50 - programData[2][0]" :width2="364 - programData[2][0]" />
             </div>
           </b-card>
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div style="height:77px">
-            <div class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
-              <ProjectProgressBar :type="0" :width1="250" :width2="250" :width3="250" :width4="363" />
-              <ProjectProgressBar :type="1" :width1="280" :width2="320" :width3="240" :width4="363" />
-              <ProjectProgressBar :type="2" :width1="290" :width2="330" :width3="270" :width4="363" />
+            <div class="d-flex flex-column justify-content-around"
+              style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+              <div :style="`padding-left:${projectPaddingData[index1][0][0]}px`">
+                <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
+                  :width3="projectData[index1][0][2]" :width4="363 - projectPaddingData[index1][0][0]" />
+              </div>
+              <div :style="`padding-left:${projectPaddingData[index1][1][0]}px`">
+                <ProjectProgressBar :type="1" :width1="projectData[index1][1][0]" :width2="projectData[index1][1][1]"
+                  :width3="projectData[index1][1][2]" :width4="363 - projectPaddingData[index1][1][0]" />
+              </div>
+              <div :style="`padding-left:${projectPaddingData[index1][2][0]}px`">
+                <ProjectProgressBar :type="2" :width1="projectData[index1][2][0]" :width2="projectData[index1][2][1]"
+                  :width3="projectData[index1][2][2]" :width4="363 - projectPaddingData[index1][2][0]" />
+              </div>
             </div>
           </div>
           <template v-if="item1.phases">
-            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
-              <div class="d-flex flex-column justify-content-around" style="height:50px;width:500px;padding:0 3px;background-color: #283046;border-radius:5px;">
-                <div style="margin-bottom:1px">
-                  <ElementProgressBar :type="0" :width1="500" :width2="362 - paddingLeft[index2]" />
+            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;`">
+              <div class="d-flex flex-column justify-content-around w-100"
+                style="height:50px;width:500px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][0][0]}px;`">
+                  <ElementProgressBar :type="0" :width1="elementData[index1][index2][0][1]"
+                    :width2="362 - elementData[index1][index2][0][0]" />
                 </div>
-                <div style="margin-bottom:1px">
-                  <ElementProgressBar :type="1" :width1="500" :width2="362 - paddingLeft[index2]" />
+                <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][1][0]}px;`">
+                  <ElementProgressBar :type="1" :width1="elementData[index1][index2][1][1]"
+                    :width2="362 - elementData[index1][index2][1][0]" />
                 </div>
-                <ElementProgressBar :type="2" :width1="500" :width2="362 - paddingLeft[index2]" />
+                <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][2][0]}px;`">
+                  <ElementProgressBar :type="2" :width1="elementData[index1][index2][2][1]"
+                    :width2="362 - elementData[index1][index2][2][0]" />
+                </div>
               </div>
             </div>
           </template>
         </div>
       </div>
     </div>
-    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="program-reporting-plan-update" ref="program_reporting_plan_update" title="Create New" centered no-fade
+      hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">
-          Update
-        </h5>
+        <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
-          <b-button variant="outline-primary">
+          <b-button @click="hideModal" variant="outline-primary">
             <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary">Cancel</b-button>
-        <b-button variant="primary">Update</b-button>
+        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
+        <b-button variant="primary" @click="onUpdate">Update</b-button>
       </template>
     </b-modal>
   </div>
@@ -164,11 +179,7 @@ export default {
   },
   data() {
     return {
-      paddingLeft: [90, 150, 280, 155, 180, 270, 50],
       reportingDates: [],
-      value1: 30,
-      value2: 40,
-      value3: 80,
       openedCollapse: 0,
       itemsForDemand: [
         {
@@ -219,37 +230,153 @@ export default {
         },
       ],
       fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
-      dta: [
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+      elementData: [
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ],
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ]
+      ],
+      projectData: [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
       ]
     }
   },
   computed: {
-    da1() {
-      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2]
-      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2]
-      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2]
-      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    projectPaddingData() {
+      return (
+        [
+          [
+            [
+              Math.min(this.elementData[0][0][0][0], this.elementData[0][1][0][0], this.elementData[0][2][0][0], this.elementData[0][3][0][0], this.elementData[0][4][0][0])],
+            [
+              Math.min(this.elementData[0][0][1][0], this.elementData[0][1][1][0], this.elementData[0][2][1][0], this.elementData[0][3][1][0], this.elementData[0][4][1][0])],
+            [
+              Math.min(this.elementData[0][0][2][0], this.elementData[0][1][2][0], this.elementData[0][2][2][0], this.elementData[0][3][2][0], this.elementData[0][4][2][0])],
+          ],
+          [
+            [
+              Math.min(this.elementData[1][0][0][0], this.elementData[1][1][0][0]),
+            ],
+            [
+              Math.min(this.elementData[1][0][1][0], this.elementData[1][1][1][0]),
+            ],
+            [
+              Math.min(this.elementData[1][0][2][0], this.elementData[1][1][2][0]),
+            ],
+          ],
+          [
+            [
+              this.randomTen(200, 50),
+            ],
+            [
+              this.randomTen(200, 50),
+            ],
+            [
+              this.randomTen(200, 50),
+            ],
+          ],
+          [
+            [
+              this.randomTen(200, 50),
+            ],
+            [
+              this.randomTen(200, 50),
+            ],
+            [
+              this.randomTen(200, 50),
+            ],
+          ]
+        ]
+      )
     },
-    da2() {
-      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5]
-      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5]
-      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5]
-      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+    programData() {
+      return (
+        [
+          [
+            Math.min(this.projectPaddingData[0][0][0], this.projectPaddingData[1][0][0], this.projectPaddingData[2][0][0], this.projectPaddingData[3][0][0]),
+            Math.max(
+              this.projectData[0][0][0] + this.projectData[0][0][1] + this.projectData[0][0][2] + this.projectPaddingData[0][0][0],
+              this.projectData[1][0][0] + this.projectData[1][0][1] + this.projectData[1][0][2] + this.projectPaddingData[1][0][0],
+              this.projectData[2][0][0] + this.projectData[2][0][1] + this.projectData[2][0][2] + this.projectPaddingData[2][0][0],
+              this.projectData[3][0][0] + this.projectData[3][0][1] + this.projectData[3][0][2] + this.projectPaddingData[3][0][0],
+            )
+          ],
+          [
+            Math.min(this.projectPaddingData[0][1][0], this.projectPaddingData[1][1][0], this.projectPaddingData[2][1][0], this.projectPaddingData[3][1][0]),
+            Math.max(
+              this.projectData[0][1][0] + this.projectData[0][1][1] + this.projectData[0][1][2] + this.projectPaddingData[0][1][0],
+              this.projectData[1][1][0] + this.projectData[1][1][1] + this.projectData[1][1][2] + this.projectPaddingData[1][1][0],
+              this.projectData[2][1][0] + this.projectData[2][1][1] + this.projectData[2][1][2] + this.projectPaddingData[2][1][0],
+              this.projectData[3][1][0] + this.projectData[3][1][1] + this.projectData[3][1][2] + this.projectPaddingData[3][1][0],
+            )
+          ],
+          [
+            Math.min(this.projectPaddingData[0][2][0], this.projectPaddingData[1][2][0], this.projectPaddingData[2][2][0], this.projectPaddingData[3][2][0]),
+            Math.max(
+              this.projectData[0][2][0] + this.projectData[0][2][1] + this.projectData[0][2][2] + this.projectPaddingData[0][2][0],
+              this.projectData[1][2][0] + this.projectData[1][2][1] + this.projectData[1][2][2] + this.projectPaddingData[1][2][0],
+              this.projectData[2][2][0] + this.projectData[2][2][1] + this.projectData[2][2][2] + this.projectPaddingData[2][2][0],
+              this.projectData[3][2][0] + this.projectData[3][2][1] + this.projectData[3][2][2] + this.projectPaddingData[3][2][0],
+            )
+          ]
+        ]
+      )
     },
-    da3() {
-      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8]
-      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8]
-      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8]
-      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
-    }
-    // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
+
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, 'days')
@@ -260,8 +387,8 @@ export default {
     }
   },
   methods: {
-    largest(a, b, c, d) {
-      return Math.max(a, b, c, d)
+    randomTen(val1, val2) {
+      return parseInt(Math.random() * val1, 10) + val2
     },
     onCollapseClick(index) {
       if (this.openedCollapse === index) this.openedCollapse = -1
@@ -279,6 +406,75 @@ export default {
     getMonth(date) {
       return date.format('MMM YYYY')
     },
+    hideModal() {
+      this.$refs.program_reporting_plan_update.hide()
+    },
+    onUpdate() {
+      this.elementData = [
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ],
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ]
+      ]
+      this.projectData = [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+      ]
+      this.$refs.program_reporting_plan_update.hide()
+    }
   },
 }
 </script>

@@ -20,7 +20,7 @@
               </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
-              <b-button v-b-modal.modal-update class="mr-1" variant="primary">
+              <b-button v-b-modal.program-reporting-plan-update class="mr-1" variant="primary">
                 <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
                 <span>Update</span>
               </b-button>
