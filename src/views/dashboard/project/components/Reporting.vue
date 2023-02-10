@@ -31,7 +31,7 @@
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            2.29.18.112  <span style="color:white">(10%)</span>
+            2.29.18.112 <span style="color:white">(10%)</span>
           </div>
         </div>
       </div>
@@ -114,94 +114,101 @@
         <div v-if="!collapsed">
           <div style="height: 88px">
             <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 3px">
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :width1="810" :width2="458" />
+              <div :style="`padding-left:${programData[0][0]}px`">
+                <ProgramProgressBar :type="0" :width1="programData[0][1]" :width2="458 - programData[0][0]" />
               </div>
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :width1="900" :width2="458" />
+              <div :style="`padding-left:${programData[1][0]}px`">
+                <ProgramProgressBar :type="1" :width1="programData[1][1]" :width2="458 - programData[1][0]" />
               </div>
-              <div>
-                <ProgramProgressBar :type="2" :width1="950" :width2="458" />
+              <div :style="`padding-left:${programData[2][0]}px`">
+                <ProgramProgressBar :type="2" :width1="programData[2][1]" :width2="458 - programData[2][0]" />
               </div>
             </b-card>
           </div>
           <div style="height:77px">
             <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 3px;">
-              <ProjectProgressBar :type="0" :width1="250" :width2="250" :width3="250" :width4="458" />
-              <ProjectProgressBar :type="1" :width1="280" :width2="320" :width3="240" :width4="458" />
-              <ProjectProgressBar :type="2" :width1="290" :width2="330" :width3="270" :width4="458" />
+              <div :style="`padding-left:${projectPaddingData[0]}px`">
+                <ProjectProgressBar :type="0" :width1="projectData[0][0]" :width2="projectData[0][1]"
+                  :width3="projectData[0][2]" :width4="458 - projectPaddingData[0]" />
+              </div>
+              <div :style="`padding-left:${projectPaddingData[1]}px`">
+                <ProjectProgressBar :type="1" :width1="projectData[1][0]" :width2="projectData[1][1]"
+                  :width3="projectData[1][2]" :width4="458 - projectPaddingData[1]" />
+              </div>
+              <div :style="`padding-left:${projectPaddingData[2]}px`">
+                <ProjectProgressBar :type="2" :width1="projectData[2][0]" :width2="projectData[2][1]"
+                  :width3="projectData[2][2]" :width4="458 - projectPaddingData[2]" />
+              </div>
             </b-card>
           </div>
-          <div :style="`height:46px;padding-left:140px;`">
+          <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="317" />
+              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              <div :style="`margin-bottom:1px;padding-left:${elementData[0][0][0]}px;`">
+                <ElementProgressBar :type="0" :width1="elementData[0][0][1]" :width2="458 - elementData[0][0][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="317" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[0][1][0]}px;`">
+                <ElementProgressBar :type="1" :width1="elementData[0][1][1]" :width2="458 - elementData[0][1][0]" />
               </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="317" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[0][2][0]}px;`">
+                <ElementProgressBar :type="2" :width1="elementData[0][2][1]" :width2="458 - elementData[0][2][0]" />
+              </div>
             </b-card>
           </div>
-          <div :style="`height:46px;padding-left:240px;`">
+          <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="217" />
+              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              <div :style="`margin-bottom:1px;padding-left:${elementData[1][0][0]}px;`">
+                <ElementProgressBar :type="0" :width1="elementData[1][0][1]" :width2="458 - elementData[1][0][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="217" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[1][1][0]}px;`">
+                <ElementProgressBar :type="1" :width1="elementData[1][1][1]" :width2="458 - elementData[1][1][0]" />
               </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="217" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[1][2][0]}px;`">
+                <ElementProgressBar :type="2" :width1="elementData[1][2][1]" :width2="458 - elementData[1][2][0]" />
+              </div>
             </b-card>
           </div>
-          <div :style="`height:46px;padding-left:180px;`">
+          <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="277" />
+              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              <div :style="`margin-bottom:1px;padding-left:${elementData[2][0][0]}px;`">
+                <ElementProgressBar :type="0" :width1="elementData[2][0][1]" :width2="458 - elementData[2][0][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="277" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[2][1][0]}px;`">
+                <ElementProgressBar :type="1" :width1="elementData[2][1][1]" :width2="458 - elementData[2][1][0]" />
               </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="277" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[2][2][0]}px;`">
+                <ElementProgressBar :type="2" :width1="elementData[2][2][1]" :width2="458 - elementData[2][2][0]" />
+              </div>
             </b-card>
           </div>
-          <div :style="`height:46px;padding-left:160px;`">
+          <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="297" />
+              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              <div :style="`margin-bottom:1px;padding-left:${elementData[3][0][0]}px;`">
+                <ElementProgressBar :type="0" :width1="elementData[3][0][1]" :width2="458 - elementData[3][0][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="297" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[3][1][0]}px;`">
+                <ElementProgressBar :type="1" :width1="elementData[3][1][1]" :width2="458 - elementData[3][1][0]" />
               </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="297" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[3][2][0]}px;`">
+                <ElementProgressBar :type="2" :width1="elementData[3][2][1]" :width2="458 - elementData[3][2][0]" />
+              </div>
             </b-card>
           </div>
-          <div :style="`height:46px;padding-left:150px;`">
+          <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="307" />
+              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              <div :style="`margin-bottom:1px;padding-left:${elementData[4][0][0]}px;`">
+                <ElementProgressBar :type="0" :width1="elementData[4][0][1]" :width2="458 - elementData[4][0][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="307" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[4][1][0]}px;`">
+                <ElementProgressBar :type="1" :width1="elementData[4][1][1]" :width2="458 - elementData[4][1][0]" />
               </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="307" />
-            </b-card>
-          </div>
-          <div :style="`height:46px;padding-left:190px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;width:500px;padding:0 3px;">
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="0" :width1="500" :width2="267" />
+              <div :style="`margin-bottom:1px;padding-left:${elementData[4][2][0]}px;`">
+                <ElementProgressBar :type="2" :width1="elementData[4][2][1]" :width2="458 - elementData[4][2][0]" />
               </div>
-              <div style="margin-bottom:1px">
-                <ElementProgressBar :type="1" :width1="500" :width2="267" />
-              </div>
-              <ElementProgressBar :type="2" :width1="500" :width2="267" />
             </b-card>
           </div>
         </div>
@@ -312,13 +319,14 @@
         </div>
       </div>
     </div>
-    <b-modal id="modal-project-plan-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="project-reporting-plan-update" ref="project_reporting_plan_update" title="Create New" centered no-fade
+      hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
-          <b-button variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" v-on:click="hideModal()" />
+          <b-button @click="hideModal" variant="outline-primary">
+            <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
@@ -378,12 +386,61 @@ export default {
         { value: 1, text: 1 },
         { value: 2, text: 2 },
       ],
-      updatedd: false
+      elementData: [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+      ],
+      projectData: [
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+      ],
     }
   },
   computed: {
     datt() {
       return this.$store.state.orgnizationState.unitReportingData
+    },
+    projectPaddingData() {
+      return (
+        [
+          Math.min(this.elementData[0][0][0], this.elementData[1][0][0], this.elementData[2][0][0], this.elementData[3][0][0], this.elementData[4][0][0]),
+          Math.min(this.elementData[0][1][0], this.elementData[1][1][0], this.elementData[2][1][0], this.elementData[3][1][0], this.elementData[4][1][0]),
+          Math.min(this.elementData[0][2][0], this.elementData[1][2][0], this.elementData[2][2][0], this.elementData[3][2][0], this.elementData[4][2][0]),
+        ]
+      )
+    },
+    programData() {
+      return (
+        [
+          [Math.random() * this.projectPaddingData[0], this.randomTen(100, 900)],
+          [Math.random() * this.projectPaddingData[1], this.randomTen(100, 1000)],
+          [Math.random() * this.projectPaddingData[2], this.randomTen(100, 1100)]
+        ]
+      )
     }
   },
   mounted() {
@@ -401,6 +458,9 @@ export default {
     }
   },
   methods: {
+    randomTen(val1, val2) {
+      return parseInt(Math.random() * val1, 10) + val2
+    },
     isToday(date) {
       return moment().isSame(date, "day")
     },
@@ -417,11 +477,42 @@ export default {
       this.collapsed = !this.collapsed
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$refs.project_reporting_plan_update.hide()
     },
     onUpdate() {
-      this.$store.commit('orgnizationState/UPDATE_REPORTING_DATA')
-      this.$refs['my-modal'].hide()
+      this.elementData = [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)],
+          [this.randomTen(200, 100), this.randomTen(200, 300)]
+        ],
+      ]
+      this.projectData = [
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+      ]
+      this.$refs.project_reporting_plan_update.hide()
     }
   },
 }
