@@ -70,13 +70,16 @@
         <div style="height:77px;">
           <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
             <div :style="`padding-left:${programData[0][0]}px`">
-              <ProgramProgressBar :type="0" :width1="programData[0][1] + 50 - programData[0][0]" :width2="364- programData[0][0]" />
+              <ProgramProgressBar :type="0" :width1="programData[0][1] + 50 - programData[0][0]"
+                :width2="364 - programData[0][0]" />
             </div>
             <div :style="`padding-left:${programData[1][0]}px`">
-              <ProgramProgressBar :type="1" :width1="programData[1][1] + 50 - programData[1][0]" :width2="364 - programData[1][0]" />
+              <ProgramProgressBar :type="1" :width1="programData[1][1] + 50 - programData[1][0]"
+                :width2="364 - programData[1][0]" />
             </div>
             <div :style="`padding-left:${programData[2][0]}px`">
-              <ProgramProgressBar :type="2" :width1="programData[2][1] + 50 - programData[2][0]" :width2="364 - programData[2][0]" />
+              <ProgramProgressBar :type="2" :width1="programData[2][1] + 50 - programData[2][0]"
+                :width2="364 - programData[2][0]" />
             </div>
           </b-card>
         </div>
@@ -84,17 +87,17 @@
           <div style="height:77px">
             <div class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
-              <div :style="`padding-left:${projectPaddingData[index1][0][0]}px`">
+              <div :style="`padding-left:${projectPaddingData[index1][0]}px`">
                 <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
-                  :width3="projectData[index1][0][2]" :width4="363 - projectPaddingData[index1][0][0]" />
+                  :width3="projectData[index1][0][2]" :width4="363 - projectPaddingData[index1][0]" />
               </div>
-              <div :style="`padding-left:${projectPaddingData[index1][1][0]}px`">
+              <div :style="`padding-left:${projectPaddingData[index1][1]}px`">
                 <ProjectProgressBar :type="1" :width1="projectData[index1][1][0]" :width2="projectData[index1][1][1]"
-                  :width3="projectData[index1][1][2]" :width4="363 - projectPaddingData[index1][1][0]" />
+                  :width3="projectData[index1][1][2]" :width4="363 - projectPaddingData[index1][1]" />
               </div>
-              <div :style="`padding-left:${projectPaddingData[index1][2][0]}px`">
+              <div :style="`padding-left:${projectPaddingData[index1][2]}px`">
                 <ProjectProgressBar :type="2" :width1="projectData[index1][2][0]" :width2="projectData[index1][2][1]"
-                  :width3="projectData[index1][2][2]" :width4="363 - projectPaddingData[index1][2][0]" />
+                  :width3="projectData[index1][2][2]" :width4="363 - projectPaddingData[index1][2]" />
               </div>
             </div>
           </div>
@@ -300,45 +303,24 @@ export default {
       return (
         [
           [
-            [
-              Math.min(this.elementData[0][0][0][0], this.elementData[0][1][0][0], this.elementData[0][2][0][0], this.elementData[0][3][0][0], this.elementData[0][4][0][0])],
-            [
-              Math.min(this.elementData[0][0][1][0], this.elementData[0][1][1][0], this.elementData[0][2][1][0], this.elementData[0][3][1][0], this.elementData[0][4][1][0])],
-            [
-              Math.min(this.elementData[0][0][2][0], this.elementData[0][1][2][0], this.elementData[0][2][2][0], this.elementData[0][3][2][0], this.elementData[0][4][2][0])],
+            Math.min(this.elementData[0][0][0][0], this.elementData[0][1][0][0], this.elementData[0][2][0][0], this.elementData[0][3][0][0], this.elementData[0][4][0][0]),
+            Math.min(this.elementData[0][0][1][0], this.elementData[0][1][1][0], this.elementData[0][2][1][0], this.elementData[0][3][1][0], this.elementData[0][4][1][0]),
+            Math.min(this.elementData[0][0][2][0], this.elementData[0][1][2][0], this.elementData[0][2][2][0], this.elementData[0][3][2][0], this.elementData[0][4][2][0]),
           ],
           [
-            [
-              Math.min(this.elementData[1][0][0][0], this.elementData[1][1][0][0]),
-            ],
-            [
-              Math.min(this.elementData[1][0][1][0], this.elementData[1][1][1][0]),
-            ],
-            [
-              Math.min(this.elementData[1][0][2][0], this.elementData[1][1][2][0]),
-            ],
+            Math.min(this.elementData[1][0][0][0], this.elementData[1][1][0][0]),
+            Math.min(this.elementData[1][0][1][0], this.elementData[1][1][1][0]),
+            Math.min(this.elementData[1][0][2][0], this.elementData[1][1][2][0]),
           ],
           [
-            [
-              this.randomTen(200, 50),
-            ],
-            [
-              this.randomTen(200, 50),
-            ],
-            [
-              this.randomTen(200, 50),
-            ],
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
           ],
           [
-            [
-              this.randomTen(200, 50),
-            ],
-            [
-              this.randomTen(200, 50),
-            ],
-            [
-              this.randomTen(200, 50),
-            ],
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
           ]
         ]
       )
@@ -347,36 +329,35 @@ export default {
       return (
         [
           [
-            Math.min(this.projectPaddingData[0][0][0], this.projectPaddingData[1][0][0], this.projectPaddingData[2][0][0], this.projectPaddingData[3][0][0]),
+            Math.min(this.projectPaddingData[0][0], this.projectPaddingData[1][0], this.projectPaddingData[2][0], this.projectPaddingData[3][0]),
             Math.max(
-              this.projectData[0][0][0] + this.projectData[0][0][1] + this.projectData[0][0][2] + this.projectPaddingData[0][0][0],
-              this.projectData[1][0][0] + this.projectData[1][0][1] + this.projectData[1][0][2] + this.projectPaddingData[1][0][0],
-              this.projectData[2][0][0] + this.projectData[2][0][1] + this.projectData[2][0][2] + this.projectPaddingData[2][0][0],
-              this.projectData[3][0][0] + this.projectData[3][0][1] + this.projectData[3][0][2] + this.projectPaddingData[3][0][0],
+              this.projectData[0][0][0] + this.projectData[0][0][1] + this.projectData[0][0][2] + this.projectPaddingData[0][0],
+              this.projectData[1][0][0] + this.projectData[1][0][1] + this.projectData[1][0][2] + this.projectPaddingData[1][0],
+              this.projectData[2][0][0] + this.projectData[2][0][1] + this.projectData[2][0][2] + this.projectPaddingData[2][0],
+              this.projectData[3][0][0] + this.projectData[3][0][1] + this.projectData[3][0][2] + this.projectPaddingData[3][0],
             )
           ],
           [
-            Math.min(this.projectPaddingData[0][1][0], this.projectPaddingData[1][1][0], this.projectPaddingData[2][1][0], this.projectPaddingData[3][1][0]),
+            Math.min(this.projectPaddingData[0][1], this.projectPaddingData[1][1], this.projectPaddingData[2][1], this.projectPaddingData[3][1]),
             Math.max(
-              this.projectData[0][1][0] + this.projectData[0][1][1] + this.projectData[0][1][2] + this.projectPaddingData[0][1][0],
-              this.projectData[1][1][0] + this.projectData[1][1][1] + this.projectData[1][1][2] + this.projectPaddingData[1][1][0],
-              this.projectData[2][1][0] + this.projectData[2][1][1] + this.projectData[2][1][2] + this.projectPaddingData[2][1][0],
-              this.projectData[3][1][0] + this.projectData[3][1][1] + this.projectData[3][1][2] + this.projectPaddingData[3][1][0],
+              this.projectData[0][1][0] + this.projectData[0][1][1] + this.projectData[0][1][2] + this.projectPaddingData[0][1],
+              this.projectData[1][1][0] + this.projectData[1][1][1] + this.projectData[1][1][2] + this.projectPaddingData[1][1],
+              this.projectData[2][1][0] + this.projectData[2][1][1] + this.projectData[2][1][2] + this.projectPaddingData[2][1],
+              this.projectData[3][1][0] + this.projectData[3][1][1] + this.projectData[3][1][2] + this.projectPaddingData[3][1],
             )
           ],
           [
-            Math.min(this.projectPaddingData[0][2][0], this.projectPaddingData[1][2][0], this.projectPaddingData[2][2][0], this.projectPaddingData[3][2][0]),
+            Math.min(this.projectPaddingData[0][2], this.projectPaddingData[1][2], this.projectPaddingData[2][2], this.projectPaddingData[3][2]),
             Math.max(
-              this.projectData[0][2][0] + this.projectData[0][2][1] + this.projectData[0][2][2] + this.projectPaddingData[0][2][0],
-              this.projectData[1][2][0] + this.projectData[1][2][1] + this.projectData[1][2][2] + this.projectPaddingData[1][2][0],
-              this.projectData[2][2][0] + this.projectData[2][2][1] + this.projectData[2][2][2] + this.projectPaddingData[2][2][0],
-              this.projectData[3][2][0] + this.projectData[3][2][1] + this.projectData[3][2][2] + this.projectPaddingData[3][2][0],
+              this.projectData[0][2][0] + this.projectData[0][2][1] + this.projectData[0][2][2] + this.projectPaddingData[0][2],
+              this.projectData[1][2][0] + this.projectData[1][2][1] + this.projectData[1][2][2] + this.projectPaddingData[1][2],
+              this.projectData[2][2][0] + this.projectData[2][2][1] + this.projectData[2][2][2] + this.projectPaddingData[2][2],
+              this.projectData[3][2][0] + this.projectData[3][2][1] + this.projectData[3][2][2] + this.projectPaddingData[3][2],
             )
           ]
         ]
       )
     },
-
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, 'days')

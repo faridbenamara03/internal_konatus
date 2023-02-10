@@ -23,8 +23,8 @@
               <div class="id">{{ item1.id }}</div>
             </div>
           </div>
-          <template v-if="item1.phases" >
-            <div v-for="(item2, index2) in item1.phases" :key="index2" class="work-element-child" >
+          <template v-if="item1.phases">
+            <div v-for="(item2, index2) in item1.phases" :key="index2" class="work-element-child">
               <p class="m-0 text-uppercase text-overflow-ellipse">
                 {{ item2.id }} <span style="color:white">({{ item2.progress }})</span>
               </p>
@@ -86,60 +86,75 @@
         </div>
         <div v-for="(item, index) in datt.children" :key="index" style="margin-left:1px">
           <div style="height:77px;">
-            <div class="d-flex flex-column justify-content-around" style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :width1="810" :width2="455" />
+            <div class="d-flex flex-column justify-content-around"
+              style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+              <div :style="`padding-left:${programData[0][0]}px`">
+                <ProgramProgressBar :type="0" :width1="programData[0][1] + 60 - programData[0][0]"
+                  :width2="455 - programData[0][0]" />
               </div>
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :width1="900" :width2="455" />
+              <div :style="`padding-left:${programData[1][0]}px`">
+                <ProgramProgressBar :type="1" :width1="programData[1][1] + 60 - programData[1][0]"
+                  :width2="455 - programData[1][0]" />
               </div>
-              <div>
-                <ProgramProgressBar :type="2" :width1="953" :width2="455" />
+              <div :style="`padding-left:${programData[2][0]}px`">
+                <ProgramProgressBar :type="2" :width1="programData[2][1] + 60 - programData[2][0]"
+                  :width2="455 - programData[2][0]" />
               </div>
             </div>
           </div>
           <template v-for="(item1, index1) in item.children">
             <div style="height:77px" :key="index1">
-              <div class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
-                <ProjectProgressBar :type="0" :width1="250" :width2="250" :width3="250" :width4="456" />
-                <ProjectProgressBar :type="1" :width1="280" :width2="320" :width3="240" :width4="456" />
-                <ProjectProgressBar :type="2" :width1="290" :width2="330" :width3="270" :width4="456" />
+              <div class="d-flex flex-column justify-content-around"
+                style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+                <div :style="`padding-left:${projectPaddingData[index1][0]}px`">
+                  <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
+                    :width3="projectData[index1][0][2]" :width4="455 - projectPaddingData[index1][0]" />
+                </div>
+                <div :style="`padding-left:${projectPaddingData[index1][1]}px`">
+                  <ProjectProgressBar :type="1" :width1="projectData[index1][1][0]" :width2="projectData[index1][1][1]"
+                    :width3="projectData[index1][1][2]" :width4="455 - projectPaddingData[index1][1]" />
+                </div>
+                <div :style="`padding-left:${projectPaddingData[index1][2]}px`">
+                  <ProjectProgressBar :type="2" :width1="projectData[index1][2][0]" :width2="projectData[index1][2][1]"
+                    :width3="projectData[index1][2][2]" :width4="455 - projectPaddingData[index1][2]" />
+                </div>
               </div>
             </div>
             <template v-if="item1.phases">
-              <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
-                <div class="d-flex flex-column justify-content-around" style="height:50px;width:500px;padding:0 3px;background-color: #283046;border-radius:5px;">
-                  <div style="margin-bottom:1px">
-                    <ElementProgressBar :type="0" :width1="500" :width2="455 - paddingLeft[index2]" />
+              <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;`">
+                <div class="d-flex flex-column justify-content-around"
+                  style="height:50px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                  <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][0][0]}px;`">
+                    <ElementProgressBar :type="0" :width1="elementData[index1][index2][0][1]"
+                      :width2="455 - elementData[index1][index2][0][0]" />
                   </div>
-                  <div style="margin-bottom:1px">
-                    <ElementProgressBar :type="1" :width1="500" :width2="455 - paddingLeft[index2]" />
+                  <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][1][0]}px;`">
+                    <ElementProgressBar :type="1" :width1="elementData[index1][index2][1][1]"
+                      :width2="455 - elementData[index1][index2][1][0]" />
                   </div>
-                  <ElementProgressBar :type="2" :width1="500" :width2="455 - paddingLeft[index2]" />
+                  <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][2][0]}px;`">
+                    <ElementProgressBar :type="2" :width1="elementData[index1][index2][2][1]"
+                      :width2="455 - elementData[index1][index2][2][0]" />
+                  </div>
                 </div>
               </div>
-              <!-- <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;padding-left:${paddingLeft[index2]}px;`">
-                <div class="mb-0" style="height:50px;width:500px">
-                  <ProgressComponent :index="index2" />
-                </div>
-              </div> -->
             </template>
           </template>
         </div>
       </div>
     </div>
-    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="team-reporting-plan-update" ref="team_reporting_plan_update" title="Create New" centered no-fade
+      hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
-          <b-button variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" v-on:click="hideModal()" />
+          <b-button @click="hideModal" variant="outline-primary">
+            <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
-      <div style="font-size:11px;color:#D0D2D6">There is an update for <b style="color:white">Next Generation
-          (2.29.18.1)</b>. Are you sure to update?</div>
+      <div>Are you sure to update?</div>
       <template #modal-footer>
         <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
         <b-button variant="primary" @click="onUpdate">Update</b-button>
@@ -181,49 +196,137 @@ export default {
   },
   data() {
     return {
-      paddingLeft: [90, 150, 280, 255, 180, 270, 50],
       reportingDates: [],
-      value1: 30,
-      value2: 40,
-      value3: 80,
       leftP: 15 * 30 + 8,
-      lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
-      todate: moment().format('YYYY.MM.DD'),
-      timelineWinWidth: 76 * 30 + 8 * 2,
       collapsed: false,
-      dta: [
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+      elementData: [
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ],
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ]
+      ],
+      projectData: [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
       ]
     }
   },
   computed: {
+    projectPaddingData() {
+      return (
+        [
+          [
+            Math.min(this.elementData[0][0][0][0], this.elementData[0][1][0][0], this.elementData[0][2][0][0], this.elementData[0][3][0][0], this.elementData[0][4][0][0]),
+            Math.min(this.elementData[0][0][1][0], this.elementData[0][1][1][0], this.elementData[0][2][1][0], this.elementData[0][3][1][0], this.elementData[0][4][1][0]),
+            Math.min(this.elementData[0][0][2][0], this.elementData[0][1][2][0], this.elementData[0][2][2][0], this.elementData[0][3][2][0], this.elementData[0][4][2][0]),
+          ],
+          [
+            Math.min(this.elementData[1][0][0][0], this.elementData[1][1][0][0]),
+            Math.min(this.elementData[1][0][1][0], this.elementData[1][1][1][0]),
+            Math.min(this.elementData[1][0][2][0], this.elementData[1][1][2][0]),
+          ],
+          [
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+          ],
+          [
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+            this.randomTen(200, 50),
+          ]
+        ]
+      )
+    },
+    programData() {
+      return (
+        [
+          [
+            Math.min(this.projectPaddingData[0][0], this.projectPaddingData[1][0], this.projectPaddingData[2][0], this.projectPaddingData[3][0]),
+            Math.max(
+              this.projectData[0][0][0] + this.projectData[0][0][1] + this.projectData[0][0][2] + this.projectPaddingData[0][0],
+              this.projectData[1][0][0] + this.projectData[1][0][1] + this.projectData[1][0][2] + this.projectPaddingData[1][0],
+              this.projectData[2][0][0] + this.projectData[2][0][1] + this.projectData[2][0][2] + this.projectPaddingData[2][0],
+              this.projectData[3][0][0] + this.projectData[3][0][1] + this.projectData[3][0][2] + this.projectPaddingData[3][0],
+            )
+          ],
+          [
+            Math.min(this.projectPaddingData[0][1], this.projectPaddingData[1][1], this.projectPaddingData[2][1], this.projectPaddingData[3][1]),
+            Math.max(
+              this.projectData[0][1][0] + this.projectData[0][1][1] + this.projectData[0][1][2] + this.projectPaddingData[0][1],
+              this.projectData[1][1][0] + this.projectData[1][1][1] + this.projectData[1][1][2] + this.projectPaddingData[1][1],
+              this.projectData[2][1][0] + this.projectData[2][1][1] + this.projectData[2][1][2] + this.projectPaddingData[2][1],
+              this.projectData[3][1][0] + this.projectData[3][1][1] + this.projectData[3][1][2] + this.projectPaddingData[3][1],
+            )
+          ],
+          [
+            Math.min(this.projectPaddingData[0][2], this.projectPaddingData[1][2], this.projectPaddingData[2][2], this.projectPaddingData[3][2]),
+            Math.max(
+              this.projectData[0][2][0] + this.projectData[0][2][1] + this.projectData[0][2][2] + this.projectPaddingData[0][2],
+              this.projectData[1][2][0] + this.projectData[1][2][1] + this.projectData[1][2][2] + this.projectPaddingData[1][2],
+              this.projectData[2][2][0] + this.projectData[2][2][1] + this.projectData[2][2][2] + this.projectPaddingData[2][2],
+              this.projectData[3][2][0] + this.projectData[3][2][1] + this.projectData[3][2][2] + this.projectPaddingData[3][2],
+            )
+          ]
+        ]
+      )
+    },
     datt() {
       return this.$store.state.teamState.teamReportingData
     },
-    da1() {
-      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2]
-      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2]
-      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2]
-      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
-    },
-    da2() {
-      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5]
-      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5]
-      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5]
-      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
-    },
-    da3() {
-      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8]
-      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8]
-      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8]
-      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
-    }
   },
   mounted() {
     const startDate = moment(moment()).subtract(15, "days")
@@ -234,6 +337,9 @@ export default {
     }
   },
   methods: {
+    randomTen(val1, val2) {
+      return parseInt(Math.random() * val1, 10) + val2
+    },
     largest(a, b, c, d) {
       return Math.max(a, b, c, d)
     },
@@ -261,12 +367,75 @@ export default {
       this.collapsed = !this.collapsed
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$refs.team_reporting_plan_update.hide()
     },
     onUpdate() {
-      this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V', true)
-      this.$store.commit('globalState/UPDATE_TEAM_REPORT_DATA')
-      this.$refs['my-modal'].hide()
+      // this.$store.commit('teamState/TOGGLE_IMPORT_LOADER_MODAL_V', true)
+      // this.$store.commit('globalState/UPDATE_TEAM_REPORT_DATA')
+      this.elementData = [
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ],
+        [
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+          [
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)],
+            [this.randomTen(200, 50), this.randomTen(200, 300)]
+          ],
+        ]
+      ]
+      this.projectData = [
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+        [
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+          [this.randomTen(200, 100), this.randomTen(200, 100), this.randomTen(200, 100)],
+        ],
+      ]
+      this.$refs.team_reporting_plan_update.hide()
     },
     isUN(data) {
       return isEmpty(data)

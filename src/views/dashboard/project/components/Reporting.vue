@@ -436,9 +436,9 @@ export default {
     programData() {
       return (
         [
-          [Math.random() * this.projectPaddingData[0], this.randomTen(100, 900)],
-          [Math.random() * this.projectPaddingData[1], this.randomTen(100, 1000)],
-          [Math.random() * this.projectPaddingData[2], this.randomTen(100, 1100)]
+          [Math.random() * this.projectPaddingData[0], this.randomTen(100, 800)],
+          [Math.random() * this.projectPaddingData[1], this.randomTen(100, 900)],
+          [Math.random() * this.projectPaddingData[2], this.randomTen(100, 900)]
         ]
       )
     }

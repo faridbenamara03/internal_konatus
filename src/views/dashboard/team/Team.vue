@@ -36,7 +36,7 @@
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
             </b-button> -->
-            <b-button v-if="(tabIndex == 1)" class="ml-1" variant="primary">
+            <b-button v-b-modal.team-reporting-plan-update v-if="(tabIndex == 1)" class="ml-1" variant="primary">
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
             </b-button>
