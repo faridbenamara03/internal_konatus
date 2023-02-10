@@ -24,33 +24,11 @@
           </template>
         </div>
       </div>
-      <!-- <app-collapse accordion>
-        <app-collapse-item title="Accordion Item 1">
-          <b-list-group>
-            <b-list-group-item>Cras justo odio</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Morbi leo risus</b-list-group-item>
-            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
-          </b-list-group>
-        </app-collapse-item>
-      </app-collapse> -->
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
         <div />
-        <!-- <b-button v-b-modal.modal-update variant="flat-primary">
-          <feather-icon icon="RotateCwIcon" />
-          Update
-        </b-button> -->
         <div class="reporting-content-header--badge">
-          <!-- <b-button
-            variant="flat-dark"
-            class="d-inline-flex align-items-center"
-          >
-            <span class="badge" />
-            <span>Phase</span>
-          </b-button> -->
           <b-button variant="flat-dark">
             <b-icon icon="diamond-fill" variant="success" />
             <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
@@ -91,48 +69,54 @@
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="w-100" style="height:77px">
-            <b-card no-body class="mb-0" style="height:76px;padding-top:11px;">
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : Math.random() * 100 + 500" :width2="367" />
+            <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : randomTen(100, 50)}px`">
+                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : Math.random() * 100 + 500" :width2="364" />
               </div>
-              <div style="margin-bottom:5px">
-                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : Math.random() * 100 + 600" :width2="367" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : randomTen(100, 50)}px`">
+                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : Math.random() * 100 + 600" :width2="364" />
               </div>
-              <div>
-                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : Math.random() * 100 + 700" :width2="367" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : randomTen(100, 50)}px`">
+                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : Math.random() * 100 + 700" :width2="364" />
               </div>
             </b-card>
           </div>
           <template v-if="item1.children && openedCollapse === index1">
             <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
               <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 3px;">
-                <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]" :width4="363" />
-                <ProjectProgressBar :type="1" :width1="dta[index2][3]" :width2="dta[index2][4]" :width3="dta[index2][5]" :width4="363" />
-                <ProjectProgressBar :type="2" :width1="dta[index2][6]" :width2="dta[index2][7]" :width3="dta[index2][8]" :width4="363" />
+                <div :style="`padding-left:${paddingV[index2][0]}px`">
+                  <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]"
+                    :width4="363" />
+                </div>
+                <div :style="`padding-left:${paddingV[index2][1]}px`">
+                  <ProjectProgressBar :type="1" :width1="dta[index2][3]" :width2="dta[index2][4]" :width3="dta[index2][5]"
+                    :width4="363" />
+                </div>
+                <div :style="`padding-left:${paddingV[index2][2]}px`">
+                  <ProjectProgressBar :type="2" :width1="dta[index2][6]" :width2="dta[index2][7]" :width3="dta[index2][8]"
+                    :width4="363" />
+                </div>
               </b-card>
             </div>
           </template>
         </div>
       </div>
     </div>
-    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="portfolio-reporting-plan-update" ref="portfolio_reporting_plan_update" title="Create New" centered
+      no-fade hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">
-          Update
-        </h5>
+        <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
-          <b-button variant="outline-primary">
+          <b-button @click="hideModal" variant="outline-primary">
             <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary">Cancel
-        </b-button>
-        <b-button variant="primary">Update
-        </b-button>
+        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
+        <b-button variant="primary" @click="onUpdate">Update</b-button>
       </template>
     </b-modal>
   </div>
@@ -188,41 +172,53 @@ export default {
   data() {
     return {
       reportingDates: [],
-      value1: 30,
-      value2: 40,
-      value3: 80,
       openedCollapse: 0,
       itemsForDemand: this.$store.state.portfolioState.reportingData,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta: [
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
-        [parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 100, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 150, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200, parseInt(Math.random() * 100, 10) + 200],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+      ],
+      paddingV: [
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
       ]
     }
   },
   computed: {
     da1() {
-      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2]
-      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2]
-      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2]
-      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2] + this.paddingV[0][0]
+      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2] + this.paddingV[1][0]
+      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2] + this.paddingV[2][0]
+      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2] + this.paddingV[3][0]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa1
     },
     da2() {
-      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5]
-      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5]
-      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5]
-      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5] + this.paddingV[0][1]
+      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5] + this.paddingV[1][1]
+      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5] + this.paddingV[2][1]
+      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5] + this.paddingV[3][1]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa2
     },
     da3() {
-      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8]
-      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8]
-      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8]
-      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24
+      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8] + this.paddingV[0][2]
+      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8] + this.paddingV[1][2]
+      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8] + this.paddingV[2][2]
+      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8] + this.paddingV[3][2]
+      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa3
+    },
+    paddingDa1() {
+      return this.smallest(this.paddingV[0][0], this.paddingV[1][0], this.paddingV[2][0], this.paddingV[3][0])
+    },
+    paddingDa2() {
+      return this.smallest(this.paddingV[0][1], this.paddingV[1][1], this.paddingV[2][1], this.paddingV[3][1])
+    },
+    paddingDa3() {
+      return this.smallest(this.paddingV[0][2], this.paddingV[1][2], this.paddingV[2][2], this.paddingV[3][2])
     }
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
@@ -235,8 +231,14 @@ export default {
     }
   },
   methods: {
+    randomTen(val1, val2) {
+      return parseInt(Math.random() * val1, 10) + val2
+    },
     largest(a, b, c, d) {
       return Math.max(a, b, c, d)
+    },
+    smallest(a, b, c, d) {
+      return Math.min(a, b, c, d)
     },
     onCollapseClick(index) {
       if (this.openedCollapse === index) this.openedCollapse = -1
@@ -254,6 +256,24 @@ export default {
     getMonth(date) {
       return date.format('MMM YYYY')
     },
+    hideModal() {
+      this.$refs.portfolio_reporting_plan_update.hide()
+    },
+    onUpdate() {
+      this.dta = [
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
+      ]
+      this.paddingV = [
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+      ]
+      this.$refs.portfolio_reporting_plan_update.hide()
+    }
   },
 }
 </script>

@@ -31,42 +31,35 @@
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            1.28.11.1.1
+            2.29.18.112  <span style="color:white">(10%)</span>
           </div>
         </div>
       </div>
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            1.28.11.1.2
+            2.29.18.113 <span style="color:white">(40%)</span>
           </div>
         </div>
       </div>
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            1.28.11.1.3
+            2.29.18.114 <span style="color:white">(14%)</span>
           </div>
         </div>
       </div>
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            1.28.11.1.4
+            2.29.18.115 <span style="color:white">(100%)</span>
           </div>
         </div>
       </div>
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            1.28.11.1.5
-          </div>
-        </div>
-      </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
-        <div class="sub-project">
-          <div class="child1 ml-1">
-            1.28.11.1.6
+            2.29.18.116 <span style="color:white">(10%)</span>
           </div>
         </div>
       </div>

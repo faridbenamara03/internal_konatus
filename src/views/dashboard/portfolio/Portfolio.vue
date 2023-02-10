@@ -23,7 +23,7 @@
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
-              <b-button v-b-modal.modal-update class="ml-1" variant="primary">
+              <b-button v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
                 <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
                 <span>Update</span>
               </b-button>
@@ -188,7 +188,7 @@ export default {
     BPopover,
     Welcome,
     Drawer,
-    CreateDrawer
+    CreateDrawer,
   },
   props: {
     data: {
@@ -252,9 +252,6 @@ export default {
         this.popoverShow = false
       }
     },
-    // getToday() {
-    //   return `Today ${moment().format('MM/DD/YYYY')}`
-    // },
     handleChangeViewMode(mode) {
       const urlArr = this.$route.path.split('/')
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
@@ -280,14 +277,6 @@ export default {
     onClose() {
       this.popoverShow = false
     },
-    // ontabchange() {
-    //   const urlArr = this.$route.path.split('/')
-    //   const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
-    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-    //     urlArr.pop()
-    //     this.$router.push({ path: urlArr.join('/') })
-    //   }
-    // },
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
@@ -298,7 +287,7 @@ export default {
       } else {
         this.$router.push({ path: this.$route.path.concat(`/${url}`) })
       }
-    }
+    },
   },
   directives: {
     ClickOutside
