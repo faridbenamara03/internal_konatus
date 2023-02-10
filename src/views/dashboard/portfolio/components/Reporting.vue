@@ -70,14 +70,14 @@
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="w-100" style="height:77px">
             <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : randomTen(100, 50)}px`">
-                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : Math.random() * 100 + 500" :width2="364" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1-1][0]}px`">
+                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : randomTen(100, 500)" :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1-1][0]" />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : randomTen(100, 50)}px`">
-                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : Math.random() * 100 + 600" :width2="364" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1-1][1]}px`">
+                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : randomTen(100, 600)" :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1-1][1]" />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : randomTen(100, 50)}px`">
-                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : Math.random() * 100 + 700" :width2="364" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1-1][2]}px`">
+                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : randomTen(100, 700)" :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1-1][2]" />
               </div>
             </b-card>
           </div>
@@ -86,15 +86,15 @@
               <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 3px;">
                 <div :style="`padding-left:${paddingV[index2][0]}px`">
                   <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]"
-                    :width4="363" />
+                    :width4="363 - paddingV[index2][0]" />
                 </div>
                 <div :style="`padding-left:${paddingV[index2][1]}px`">
                   <ProjectProgressBar :type="1" :width1="dta[index2][3]" :width2="dta[index2][4]" :width3="dta[index2][5]"
-                    :width4="363" />
+                    :width4="363 - paddingV[index2][1]" />
                 </div>
                 <div :style="`padding-left:${paddingV[index2][2]}px`">
                   <ProjectProgressBar :type="2" :width1="dta[index2][6]" :width2="dta[index2][7]" :width3="dta[index2][8]"
-                    :width4="363" />
+                    :width4="363 - paddingV[index2][2]" />
                 </div>
               </b-card>
             </div>
@@ -186,6 +186,11 @@ export default {
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+      ],
+      paddingV1: [
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
       ]
     }
   },
@@ -268,6 +273,11 @@ export default {
       ]
       this.paddingV = [
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
+      ]
+      this.paddingV1 = [
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
