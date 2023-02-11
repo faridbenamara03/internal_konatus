@@ -1,59 +1,73 @@
 <template>
-  <div class="report-custom">
-    <div class="reporting-side-custom" v-for="(item, index) in datt" :key="index">
-      <div class="program-title">
-        <div class="program-title-child">
-          <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
-          <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
-          {{ item.title }}
-          <span class="ml-1 mr-1">type:</span>
-          <div style="display:inline-block">
-            <b-form-select v-model="selected" :options="options" size="sm" />
+  <div class="unit-report-custom">
+    <div class="unit-reporting-side-custom">
+      <div style="height:124.3px" class="d-flex flex-column justify-content-end">
+        <b-form-select v-model="optionSelect" :options="options" />
+      </div>
+      <template v-for="(item, index) in datt">
+        <div class="program-title" v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}`">
+          <div class="program-title-child">
+            <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
+            <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
+            {{ item.title }}
           </div>
         </div>
-      </div>
-      <div v-if="!collapsed">
-        <div v-for="(item1, index1) in item.children" :key="index1">
-          <div class="program-collapse-header">
-            <div class="header-child">
-              <div class="child1">
-                <div class="title">
-                  {{ item1.title }}
-                </div>
-                <div class="id">
-                  {{ item1.title }}
-                </div>
-              </div>
-              <div class="child2">
-                <div class="content">
-                  <feather-icon icon="XIcon" style="cursor:pointer" />
+        <template v-if="!collapsed">
+          <template v-for="(item1, index1) in item.children">
+            <div class="program-collapse-header" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+              :key="`${index}-${index1}`">
+              <div class="header-child">
+                <div class="child1">
+                  <div class="title">
+                    {{ item1.title }}
+                  </div>
+                  <div class="id">
+                    {{ item1.title }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="program-collapse-sub-project" v-for="(item2, index2) in item1.children" :key="index2">
-            <div class="sub-project">
-              <div class="child1">
-                {{ item2.title }}
+            <template v-for="(item2, index2) in item1.children">
+              <div class="program-collapse-sub-project" v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                :key="`${index}-${index1}-${index2}`">
+                <div class="sub-project">
+                  <div class="child1">
+                    {{ item2.title }}
+                  </div>
+                  <div class="child2">
+                    ({{ item2.progress ? item2.progress : 0 }}%)
+                  </div>
+                </div>
               </div>
-              <div class="child2">
-                ({{ item2.progress ? item2.progress : 0 }}%)
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              <template v-for="(item3, index3) in item2.phases">
+                <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
+                  class="d-flex flex-column justify-content-around" v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                  :key="`${index}-${index1}-${index2}-${index3}`">
+                  <div class="d-flex justify-content-between ml-5 mr-3">
+                    <div>
+                      {{ item3.id }}
+                    </div>
+                    <div style="color:#FFF">
+                      ({{ item3.progress ? item3.progress : 0 }}%)
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </template>
+          </template>
+        </template>
+      </template>
     </div>
-    <div class="reporting-content-custom">
+    <div class="unit-reporting-content-custom">
       <div
         :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
         <div class="rounded-circle"
           style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
       </div>
-      <div class="reporting-content--header">
+      <div class="unit-reporting-content--header">
         <div class="first-child">
         </div>
-        <div class="reporting-content-header--badge">
+        <div class="unit-reporting-content-header--badge">
           <div class="phase">
             <div class="flag" />
             Phase
@@ -77,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div v-if="this.selected === 1" class="reporting-content--body-custom">
+      <div class="unit-reporting-content--body-custom">
         <div class="timeline-list">
           <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
             <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
@@ -92,67 +106,98 @@
           </div>
         </div>
         <div v-if="!collapsed">
-          <div v-for="(item, index) in datt" :key="index">
-            <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
-                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1"
-                  :e1Date="item1.end_date1" :s2Date="item1.start_date2" :e2Date="item1.end_date2"
-                  :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="15" />
-              </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'"
-                v-for="(item2, index2) in item1.children" :key="index2">
-                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1"
-                  :e1Date="item2.end_date1" :s2Date="item2.start_date2" :e2Date="item2.end_date2"
-                  :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="15" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div v-if="this.selected === 2" class="reporting-content--body-custom">
-        <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates1" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates1[index - 1]) : true" class="month">
-              {{ getMonth(date) }}
-            </p>
-            <p class="week">
-              {{ getWeek(date) }}
-            </p>
-            <p class="day">
-              {{ getDay(date) }}
-            </p>
-          </div>
-        </div>
-        <div v-if="!collapsed">
-          <div v-for="(item, index) in datt" :key="index">
-            <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
-                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1"
-                  :e1Date="item1.end_date1" :s2Date="item1.start_date2" :e2Date="item1.end_date2"
-                  :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.id} (${item1.progress}%)`" :isSub="false" :offsetBase="75" />
-              </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'"
-                v-for="(item2, index2) in item1.children" :key="index2">
-                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1"
-                  :e1Date="item2.end_date1" :s2Date="item2.start_date2" :e2Date="item2.end_date2"
-                  :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.id} (${item2.progress}%)`" :isSub="true" :offsetBase="75" />
+          <template v-for="(item, index) in datt">
+            <div v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" style="height:89px;" :key="`${index}`">
+              <div class="d-flex flex-column justify-content-around"
+                style="height:88px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+                <div :style="`padding-left:${item.reportingData.red[0]}px`">
+                  <ProgramProgressBar :type="0" :width1="item.reportingData.red[1]"
+                    :width2="item.reportingData.red[2]" />
+                </div>
+                <div :style="`padding-left:${item.reportingData.green[0]}px`">
+                  <ProgramProgressBar :type="1" :width1="item.reportingData.green[1]"
+                    :width2="item.reportingData.green[2]" />
+                </div>
+                <div :style="`padding-left:${item.reportingData.blue[0]}px`">
+                  <ProgramProgressBar :type="2" :width1="item.reportingData.blue[1]"
+                    :width2="item.reportingData.blue[2]" />
+                </div>
               </div>
             </div>
-          </div>
+            <template v-for="(item1, index1) in item.children">
+              <div style="height:77px" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}-${index1}`">
+                <div class="d-flex flex-column justify-content-around"
+                  style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+                  <div :style="`padding-left:${item1.reportingData.red[0]}px`">
+                    <ProgramProgressBar :type="0" :width1="item1.reportingData.red[1]"
+                      :width2="item1.reportingData.red[2]" />
+                  </div>
+                  <div :style="`padding-left:${item1.reportingData.green[0]}px`">
+                    <ProgramProgressBar :type="1" :width1="item1.reportingData.green[1]"
+                      :width2="item1.reportingData.green[2]" />
+                  </div>
+                  <div :style="`padding-left:${item1.reportingData.blue[0]}px`">
+                    <ProgramProgressBar :type="2" :width1="item1.reportingData.blue[1]"
+                      :width2="item1.reportingData.blue[2]" />
+                  </div>
+                </div>
+              </div>
+              <template v-for="(item2, index2) in item1.children">
+                <div style="height:77px" v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                  :key="`${index}-${index1}-${index2}`">
+                  <div class="d-flex flex-column justify-content-around"
+                    style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+                    <div :style="`padding-left:${item2.reportingData.red[0]}px`">
+                      <ProjectProgressBar :type="0" :width1="item2.reportingData.red[1]"
+                        :width2="item2.reportingData.red[2]" :width3="item2.reportingData.red[3]"
+                        :width4="item2.reportingData.red[4]" />
+                    </div>
+                    <div :style="`padding-left:${item2.reportingData.green[0]}px`">
+                      <ProjectProgressBar :type="1" :width1="item2.reportingData.green[1]"
+                        :width2="item2.reportingData.green[2]" :width3="item2.reportingData.green[3]"
+                        :width4="item2.reportingData.green[4]" />
+                    </div>
+                    <div :style="`padding-left:${item2.reportingData.blue[0]}px`">
+                      <ProjectProgressBar :type="2" :width1="item2.reportingData.blue[1]"
+                        :width2="item2.reportingData.blue[2]" :width3="item2.reportingData.blue[3]"
+                        :width4="item2.reportingData.blue[4]" />
+                    </div>
+                  </div>
+                </div>
+                <template v-for="(item3, index3) in item2.phases">
+                  <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
+                    class="d-flex flex-column justify-content-around" v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                    :key="`${index}-${index1}-${index2}-${index3}`">
+                    <div class="d-flex flex-column justify-content-around"
+                      style="height:49px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                      <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.red[0]}px;`">
+                        <ElementProgressBar :type="0" :width1="item3.reportingData.red[1]"
+                          :width2="item3.reportingData.red[2]" />
+                      </div>
+                      <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.green[0]}px;`">
+                        <ElementProgressBar :type="1" :width1="item3.reportingData.green[1]"
+                          :width2="item3.reportingData.green[2]" />
+                      </div>
+                      <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.blue[0]}px;`">
+                        <ElementProgressBar :type="2" :width1="item3.reportingData.blue[1]"
+                          :width2="item3.reportingData.blue[2]" />
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+            </template>
+          </template>
         </div>
       </div>
     </div>
-    <b-modal id="modal-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="unit-reporting-update-modal" ref="unit_reporting_update_modal" title="Create New" centered no-fade hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">Update</h5>
         <div class="modal-actions">
-          <b-button variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" v-on:click="hideModal()" />
+          <b-button @click="hideModal" variant="outline-primary">
+            <feather-icon icon="XIcon" size="18" />
           </b-button>
         </div>
       </template>
@@ -170,33 +215,32 @@ import {
   BModal, BButton, BFormSelect
 } from "bootstrap-vue"
 import moment from "moment"
-import ProgressComponent from './sub-component/ProgressComponent.vue'
+import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
+import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
+import ElementProgressBar from '../../globalComponent/ElementProgressBar.vue'
 
 export default {
   components: {
     BModal,
     BButton,
-    ProgressComponent,
-    BFormSelect
+    BFormSelect,
+    ProgramProgressBar,
+    ProjectProgressBar,
+    ElementProgressBar,
   },
   data() {
     return {
       reportingDates: [],
-      reportingDates1: [],
-      value1: 30,
-      value2: 40,
-      value3: 80,
       leftP: 15 * 30 + 8,
-      lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
-      todate: moment().format('YYYY.MM.DD'),
-      timelineWinWidth: 76 * 30 + 8 * 2,
       collapsed: false,
-      selected: 1,
       options: [
-        { value: 1, text: 1 },
-        { value: 2, text: 2 },
+        { value: 'show_all', text: 'Show all' },
+        { value: 'Team A', text: 'Team A' },
+        { value: 'Team B', text: 'Team B' },
+        { value: 'Team C', text: 'Team C' },
+        { value: 'Team D', text: 'Team D' },
       ],
-      updatedd: false
+      optionSelect: 'show_all'
     }
   },
   computed: {
@@ -210,12 +254,6 @@ export default {
     this.reportingDates = [startDate.clone()]
     while (startDate.add(1, "days").diff(endDate) < 0) {
       this.reportingDates.push(startDate.clone())
-    }
-    const startDate1 = moment(moment()).subtract(75, "days")
-    const endDate1 = moment(moment()).add(5, "M")
-    this.reportingDates1 = [startDate1.clone()]
-    while (startDate1.add(5, "days").diff(endDate1) < 0) {
-      this.reportingDates1.push(startDate1.clone())
     }
   },
   methods: {
@@ -235,16 +273,16 @@ export default {
       this.collapsed = !this.collapsed
     },
     hideModal() {
-      this.$refs['my-modal'].hide()
+      this.$refs.unit_reporting_update_modal.hide()
     },
     onUpdate() {
-      this.$store.commit('orgnizationState/UPDATE_REPORTING_DATA')
-      this.$refs['my-modal'].hide()
+      this.$store.commit('orgnizationState/UPDATE_TEAM_REPORT_DATA')
+      this.$refs.unit_reporting_update_modal.hide()
     }
   },
 }
 </script>
 
 <style lang="scss">
-@import "@core/scss/vue/pages/dashboard-project.scss";
+@import "@core/scss/vue/pages/dashboard-unit-reporting.scss";
 </style>

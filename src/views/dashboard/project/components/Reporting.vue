@@ -228,20 +228,6 @@
           </div>
         </div>
         <div v-if="!collapsed">
-          <!-- <div v-for="(item, index) in datt" :key="index">
-            <div v-for="(item1, index1) in item.children" :key="index1">
-              <div class="progress-wrapper" :style="'width:' + timelineWinWidth + 'px'">
-                <progress-component :sDate="item1.start_date" :eDate="item1.end_date" :s1Date="item1.start_date1" :e1Date="item1.end_date1"
-                  :s2Date="item1.start_date2" :e2Date="item1.end_date2" :s3Date="item1.start_date3" :e3Date="item1.end_date3" :exist="item1.start_date"
-                  :title="`${item1.title} (${item1.progress}%)`" :isSub="false" :offsetBase="75" />
-              </div>
-              <div class="progress-wrapper-child" :style="'width:' + timelineWinWidth + 'px'" v-for="(item2, index2) in item1.children" :key="index2" >
-                <progress-component :sDate="item2.start_date" :eDate="item2.end_date" :s1Date="item2.start_date1" :e1Date="item2.end_date1"
-                  :s2Date="item2.start_date2" :e2Date="item2.end_date2" :s3Date="item2.start_date3" :e3Date="item2.end_date3" :exist="item2.start_date"
-                  :title="`${item2.title} (${item2.progress}%)`" :isSub="true" :offsetBase="75" />
-              </div>
-            </div>
-          </div> -->
           <b-card no-body style="padding: 10px 5px">
             <b-card-text class="mb-0">
               Reticulating splines… {{ value1 + '%' }}
@@ -421,9 +407,6 @@ export default {
     }
   },
   computed: {
-    datt() {
-      return this.$store.state.orgnizationState.unitReportingData
-    },
     projectPaddingData() {
       return (
         [

@@ -1,8 +1,208 @@
 import Vue from "vue"
 import dateFormat from "dateformat"
 // import moment from "moment"
+function randomTen(val1, val2) {
+  return parseInt(Math.random() * val1, 10) + val2
+}
+
+const elementData = [
+  [
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+  ],
+  [
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+  ]
+]
+
+const projectData = [
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+]
+
+const projectPaddingData = [
+  [
+    Math.min(elementData[0][0][0][0], elementData[0][1][0][0], elementData[0][2][0][0], elementData[0][3][0][0], elementData[0][4][0][0]),
+    Math.min(elementData[0][0][1][0], elementData[0][1][1][0], elementData[0][2][1][0], elementData[0][3][1][0], elementData[0][4][1][0]),
+    Math.min(elementData[0][0][2][0], elementData[0][1][2][0], elementData[0][2][2][0], elementData[0][3][2][0], elementData[0][4][2][0]),
+  ],
+  [
+    Math.min(elementData[1][0][0][0], elementData[1][1][0][0]),
+    Math.min(elementData[1][0][1][0], elementData[1][1][1][0]),
+    Math.min(elementData[1][0][2][0], elementData[1][1][2][0]),
+  ],
+  [
+    randomTen(200, 50),
+    randomTen(200, 50),
+    randomTen(200, 50),
+  ],
+  [
+    randomTen(200, 50),
+    randomTen(200, 50),
+    randomTen(200, 50),
+  ]
+]
+
+const programData = [
+  [
+    [
+      Math.min(projectPaddingData[0][0], projectPaddingData[1][0], projectPaddingData[2][0], projectPaddingData[3][0]),
+      Math.max(
+        projectData[0][0][0] + projectData[0][0][1] + projectData[0][0][2] + projectPaddingData[0][0],
+        projectData[1][0][0] + projectData[1][0][1] + projectData[1][0][2] + projectPaddingData[1][0],
+        projectData[2][0][0] + projectData[2][0][1] + projectData[2][0][2] + projectPaddingData[2][0],
+        projectData[3][0][0] + projectData[3][0][1] + projectData[3][0][2] + projectPaddingData[3][0],
+      )
+    ],
+    [
+      Math.min(projectPaddingData[0][1], projectPaddingData[1][1], projectPaddingData[2][1], projectPaddingData[3][1]),
+      Math.max(
+        projectData[0][1][0] + projectData[0][1][1] + projectData[0][1][2] + projectPaddingData[0][1],
+        projectData[1][1][0] + projectData[1][1][1] + projectData[1][1][2] + projectPaddingData[1][1],
+        projectData[2][1][0] + projectData[2][1][1] + projectData[2][1][2] + projectPaddingData[2][1],
+        projectData[3][1][0] + projectData[3][1][1] + projectData[3][1][2] + projectPaddingData[3][1],
+      )
+    ],
+    [
+      Math.min(projectPaddingData[0][2], projectPaddingData[1][2], projectPaddingData[2][2], projectPaddingData[3][2]),
+      Math.max(
+        projectData[0][2][0] + projectData[0][2][1] + projectData[0][2][2] + projectPaddingData[0][2],
+        projectData[1][2][0] + projectData[1][2][1] + projectData[1][2][2] + projectPaddingData[1][2],
+        projectData[2][2][0] + projectData[2][2][1] + projectData[2][2][2] + projectPaddingData[2][2],
+        projectData[3][2][0] + projectData[3][2][1] + projectData[3][2][2] + projectPaddingData[3][2],
+      )
+    ]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ],
+]
+
+const portfolioData = [
+  [
+    [
+      Math.min(programData[0][0][0], programData[1][0][0], programData[2][0][0], programData[3][0][0]),
+      Math.max(programData[0][0][1] + programData[0][0][0], programData[1][0][1] + programData[1][0][0], programData[2][0][1] + programData[2][0][0], programData[3][0][1] + programData[3][0][0])
+      - Math.min(programData[0][0][0], programData[1][0][0], programData[2][0][0], programData[3][0][0])
+    ],
+    [
+      Math.min(programData[0][1][0], programData[1][1][0], programData[2][1][0], programData[3][1][0]),
+      Math.max(programData[0][1][1] + programData[0][1][0], programData[1][1][1] + programData[1][1][0], programData[2][1][1] + programData[2][1][0], programData[3][1][1] + programData[3][1][0])
+      - Math.min(programData[0][1][0], programData[1][1][0], programData[2][1][0], programData[3][1][0]),
+    ],
+    [
+      Math.min(programData[0][2][0], programData[1][2][0], programData[2][2][0], programData[3][2][0]),
+      Math.max(programData[0][2][1] + programData[0][2][0], programData[1][2][1] + programData[1][2][0], programData[2][2][1] + programData[2][2][0], programData[3][2][1] + programData[3][2][0])
+      - Math.min(programData[0][2][0], programData[1][2][0], programData[2][2][0], programData[3][2][0]),
+    ],
+  ],
+  []
+]
 
 export default {
+  elementData: [
+    [
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+    ],
+    [
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+      [
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)],
+        [randomTen(200, 50), randomTen(200, 300)]
+      ],
+    ]
+  ],
   namespaced: true,
   state: {
     fields: ['programs', 'gate', 'next_gate'],
@@ -88,106 +288,116 @@ export default {
         id: 'consumer-robots-portfolio',
         title: 'Consumer Robots',
         type: 'portfolio',
+        assigned: ['Team A', 'Team B', 'Team C', 'Team D'],
+        reportingData: {
+          red: [portfolioData[0][0][0], portfolioData[0][0][1], 455 - portfolioData[0][0][0]],
+          green: [portfolioData[0][1][0], portfolioData[0][1][1], 455 - portfolioData[0][1][0]],
+          blue: [portfolioData[0][2][0], portfolioData[0][2][1], 455 - portfolioData[0][2][0]],
+        },
         children: [
           {
             id: 'quadruped-robot-program',
             title: 'Quadruped robot',
             type: 'program',
-            start_date: '2023.1.18',
-            end_date: '2023.2.12',
-            start_date1: '2023.1.18',
-            end_date1: '2023.2.12',
-            start_date2: '2023.1.18',
-            end_date2: '2023.2.12',
-            start_date3: '2023.1.18',
-            end_date3: '2023.2.12',
+            assigned: ['Team A', 'Team B', 'Team C'],
             progress: 60,
+            reportingData: {
+              red: [programData[0][0][0], programData[0][0][1], 455 - programData[0][0][0]],
+              green: [programData[0][1][0], programData[0][1][1], 455 - programData[0][1][0]],
+              blue: [programData[0][2][0], programData[0][2][1], 455 - programData[0][2][0]],
+            },
             children: [
               {
                 id: 'new-format-project',
                 title: 'New Format',
                 type: 'project',
+                assigned: ['Team A', 'Team B'],
                 progress: 0,
-                start_date: '2023.1.20',
-                end_date: '2023.2.10',
-                start_date1: '2023.1.20',
-                end_date1: '2023.2.10',
+                reportingData: {
+                  red: [projectPaddingData[0][0], projectData[0][0][0], projectData[0][0][1], projectData[0][0][2], 455 - projectPaddingData[0][0]],
+                  green: [projectPaddingData[0][1], projectData[0][1][0], projectData[0][1][1], projectData[0][1][2], 455 - projectPaddingData[0][1]],
+                  blue: [projectPaddingData[0][2], projectData[0][2][0], projectData[0][2][1], projectData[0][2][2], 455 - projectPaddingData[0][2]],
+                },
                 phases: [
                   {
                     id: 'phase-1',
                     projectId: 'new-format-project',
-                    assigned: 'team-a-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    assigned: ['Team A'],
+                    reportingData: {
+                      red: [elementData[0][0][0][0], elementData[0][0][0][1], 455 - elementData[0][0][0][0]],
+                      green: [elementData[0][0][1][0], elementData[0][0][1][1], 455 - elementData[0][0][1][0]],
+                      blue: [elementData[0][0][2][0], elementData[0][0][2][1], 455 - elementData[0][0][2][0]],
                     },
+                    progress: 0,
                   },
                   {
                     id: 'phase-2',
                     projectId: 'new-format-project',
-                    assigned: 'team-a-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    assigned: ['Team A'],
+                    reportingData: {
+                      red: [elementData[0][1][0][0], elementData[0][1][0][1], 455 - elementData[0][1][0][0]],
+                      green: [elementData[0][1][1][0], elementData[0][1][1][1], 455 - elementData[0][1][1][0]],
+                      blue: [elementData[0][1][2][0], elementData[0][1][2][1], 455 - elementData[0][1][2][0]],
                     },
+                    progress: 0,
                   },
                   {
                     id: 'phase-3',
                     projectId: 'new-format-project',
-                    assigned: 'team-b-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    assigned: ['Team B'],
+                    reportingData: {
+                      red: [elementData[0][2][0][0], elementData[0][2][0][1], 455 - elementData[0][2][0][0]],
+                      green: [elementData[0][2][1][0], elementData[0][2][1][1], 455 - elementData[0][2][1][0]],
+                      blue: [elementData[0][2][2][0], elementData[0][2][2][1], 455 - elementData[0][2][2][0]],
                     },
+                    progress: 0,
                   },
                   {
                     id: 'phase-4',
+                    assigned: ['Team B'],
                     projectId: 'new-format-project',
-                    assigned: 'team-b-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    reportingData: {
+                      red: [elementData[0][3][0][0], elementData[0][3][0][1], 455 - elementData[0][3][0][0]],
+                      green: [elementData[0][3][1][0], elementData[0][3][1][1], 455 - elementData[0][3][1][0]],
+                      blue: [elementData[0][3][2][0], elementData[0][3][2][1], 455 - elementData[0][3][2][0]],
                     },
+                    progress: 0,
                   },
                 ],
               },
               {
                 id: 'enhanced-motricity-project',
                 title: 'Enhanced motricity',
+                assigned: ['Team A', 'Team C'],
                 type: 'project',
                 progress: 0,
-                start_date: '2023.1.20',
-                end_date: '2023.2.10',
-                start_date1: '2023.1.20',
-                end_date1: '2023.2.10',
-                start_date2: '2023.1.20',
-                end_date2: '2023.2.10',
-                start_date3: '2023.1.20',
-                end_date3: '2023.2.10',
+                reportingData: {
+                  red: [projectPaddingData[1][0], projectData[1][0][0], projectData[1][0][1], projectData[1][0][2], 455 - projectPaddingData[1][0]],
+                  green: [projectPaddingData[1][1], projectData[1][1][0], projectData[1][1][1], projectData[1][1][2], 455 - projectPaddingData[1][1]],
+                  blue: [projectPaddingData[1][2], projectData[1][2][0], projectData[1][2][1], projectData[1][2][2], 455 - projectPaddingData[1][2]],
+                },
                 phases: [
                   {
                     id: 'phase-6',
                     projectId: 'enhanced-motricity-project',
-                    assigned: 'team-c-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    assigned: ['Team A'],
+                    reportingData: {
+                      red: [elementData[1][0][0][0], elementData[1][0][0][1], 455 - elementData[1][0][0][0]],
+                      green: [elementData[1][0][1][0], elementData[1][0][1][1], 455 - elementData[1][0][1][0]],
+                      blue: [elementData[1][0][2][0], elementData[1][0][2][1], 455 - elementData[1][0][2][0]],
                     },
+                    progress: 0,
                   },
                   {
                     id: 'phase-7',
                     projectId: 'enhanced-motricity-project',
-                    assigned: 'team-d-team',
-                    data: {
-                      progress: 0,
-                      start_date: '2022.11.04',
-                      end_date: '2022.12.21',
+                    assigned: ['Team C'],
+                    reportingData: {
+                      red: [elementData[1][1][0][0], elementData[1][1][0][1], 455 - elementData[1][1][0][0]],
+                      green: [elementData[1][1][1][0], elementData[1][1][1][1], 455 - elementData[1][1][1][0]],
+                      blue: [elementData[1][1][2][0], elementData[1][1][2][1], 455 - elementData[1][1][2][0]],
                     },
+                    progress: 0,
                   },
                 ]
               },
@@ -195,72 +405,62 @@ export default {
                 id: 'enhanced-autonomy-project',
                 title: 'Enhanced autonomy',
                 type: 'project',
+                assigned: ['Team B'],
                 progress: 100,
-                start_date: '2023.1.20',
-                end_date: '2023.2.10',
-                start_date1: '2023.1.20',
-                end_date1: '2023.2.10',
-                start_date2: '2023.1.20',
-                end_date2: '2023.2.10',
-                start_date3: '2023.1.20',
-                end_date3: '2023.2.10',
+                reportingData: {
+                  red: [projectPaddingData[2][0], projectData[2][0][0], projectData[2][0][1], projectData[2][0][2], 455 - projectPaddingData[2][0]],
+                  green: [projectPaddingData[2][1], projectData[2][1][0], projectData[2][1][1], projectData[2][1][2], 455 - projectPaddingData[2][1]],
+                  blue: [projectPaddingData[2][2], projectData[2][2][0], projectData[2][2][1], projectData[2][2][2], 455 - projectPaddingData[2][2]],
+                },
               },
               {
                 id: 'dual-sourcing-for-quadruped-project',
                 title: 'Dual sourcing for Quadruped',
                 type: 'project',
                 progress: 100,
-                start_date: '2023.1.20',
-                end_date: '2023.2.10',
-                start_date1: '2023.1.20',
-                end_date1: '2023.2.10',
-                start_date2: '2023.1.20',
-                end_date2: '2023.2.10',
-                start_date3: '2023.1.20',
-                end_date3: '2023.2.10',
+                assigned: ['Team C'],
+                reportingData: {
+                  red: [projectPaddingData[3][0], projectData[3][0][0], projectData[3][0][1], projectData[3][0][2], 455 - projectPaddingData[3][0]],
+                  green: [projectPaddingData[3][1], projectData[3][1][0], projectData[3][1][1], projectData[3][1][2], 455 - projectPaddingData[3][1]],
+                  blue: [projectPaddingData[3][2], projectData[3][2][0], projectData[3][2][1], projectData[3][2][2], 455 - projectPaddingData[3][2]],
+                },
               },
             ]
           },
           {
             id: 'micro-robot-observation-nbc-program',
             title: 'Micro robot observation NBC',
+            assigned: ['Team B', 'Team C', 'Team D'],
             type: 'program',
-            start_date: '2023.1.18',
-            end_date: '2023.2.12',
-            start_date1: '2023.1.18',
-            end_date1: '2023.2.12',
-            start_date2: '2023.1.18',
-            end_date2: '2023.2.12',
-            start_date3: '2023.1.18',
-            end_date3: '2023.2.12',
+            reportingData: {
+              red: [programData[1][0][0], programData[1][0][1], 455 - programData[1][0][0]],
+              green: [programData[1][1][0], programData[1][1][1], 455 - programData[1][1][0]],
+              blue: [programData[1][2][0], programData[1][2][1], 455 - programData[1][2][0]],
+            },
             progress: 60,
           },
           {
             id: 'handling-robot-program',
             title: 'Handling robot',
+            assigned: ['Team B', 'Team D'],
             type: 'program',
-            start_date: '2023.1.18',
-            end_date: '2023.2.12',
-            start_date1: '2023.1.18',
-            end_date1: '2023.2.12',
-            start_date2: '2023.1.18',
-            end_date2: '2023.2.12',
-            start_date3: '2023.1.18',
-            end_date3: '2023.2.12',
+            reportingData: {
+              red: [programData[2][0][0], programData[2][0][1], 455 - programData[2][0][0]],
+              green: [programData[2][1][0], programData[2][1][1], 455 - programData[2][1][0]],
+              blue: [programData[2][2][0], programData[2][2][1], 455 - programData[2][2][0]],
+            },
             progress: 60,
           },
           {
             id: 'power-&-programming-station-program',
             title: 'Power & programming station',
+            assigned: ['Team C', 'Team D'],
             type: 'program',
-            start_date: '2023.1.18',
-            end_date: '2023.2.12',
-            start_date1: '2023.1.18',
-            end_date1: '2023.2.12',
-            start_date2: '2023.1.18',
-            end_date2: '2023.2.12',
-            start_date3: '2023.1.18',
-            end_date3: '2023.2.12',
+            reportingData: {
+              red: [programData[3][0][0], programData[3][0][1], 455 - programData[3][0][0]],
+              green: [programData[3][1][0], programData[3][1][1], 455 - programData[3][1][0]],
+              blue: [programData[3][2][0], programData[3][2][1], 455 - programData[3][2][0]],
+            },
             progress: 60,
           },
         ]
@@ -626,158 +826,346 @@ export default {
       state.data = data
       state.total_data = vt
     },
-    UPDATE_REPORTING_DATA(state) {
-      const st = parseInt(Math.random() * 15 + 4, 10)
-      const st1 = parseInt(Math.random() * 15 + 5, 10)
-      const st20 = parseInt(Math.random() * 15 + 4, 10)
-      const st21 = parseInt(Math.random() * 15 + 5, 10)
-      const st30 = parseInt(Math.random() * 15 + 6, 10)
-      const st31 = parseInt(Math.random() * 15 + 3, 10)
-      const st40 = parseInt(Math.random() * 15 + 4, 10)
-      const st41 = parseInt(Math.random() * 15 + 5, 10)
-      const st50 = parseInt(Math.random() * 15 + 5, 10)
-      const st51 = parseInt(Math.random() * 15 + 6, 10)
-      const st52 = parseInt(Math.random() * 15 + 5, 10)
-      const st60 = parseInt(Math.random() * 15 + 3, 10)
-      const st61 = parseInt(Math.random() * 15 + 5, 10)
-      const st62 = parseInt(Math.random() * 15 + 4, 10)
-      const st70 = parseInt(Math.random() * 15 + 5, 10)
-      const st71 = parseInt(Math.random() * 15 + 4, 10)
-      const st72 = parseInt(Math.random() * 15 + 5, 10)
-      const reportingData2Update = [
+    UPDATE_TEAM_REPORT_DATA(state) {
+      const elementDataUpdated = [
+        [
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+        ],
+        [
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+          [
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)],
+            [randomTen(200, 50), randomTen(200, 300)]
+          ],
+        ]
+      ]
+
+      const projectDataUpdated = [
+        [
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+        ],
+        [
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+        ],
+        [
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+        ],
+        [
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+          [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+        ],
+      ]
+
+      const projectPaddingDataUpdated = [
+        [
+          Math.min(elementDataUpdated[0][0][0][0], elementDataUpdated[0][1][0][0], elementDataUpdated[0][2][0][0], elementDataUpdated[0][3][0][0], elementDataUpdated[0][4][0][0]),
+          Math.min(elementDataUpdated[0][0][1][0], elementDataUpdated[0][1][1][0], elementDataUpdated[0][2][1][0], elementDataUpdated[0][3][1][0], elementDataUpdated[0][4][1][0]),
+          Math.min(elementDataUpdated[0][0][2][0], elementDataUpdated[0][1][2][0], elementDataUpdated[0][2][2][0], elementDataUpdated[0][3][2][0], elementDataUpdated[0][4][2][0]),
+        ],
+        [
+          Math.min(elementDataUpdated[1][0][0][0], elementDataUpdated[1][1][0][0]),
+          Math.min(elementDataUpdated[1][0][1][0], elementDataUpdated[1][1][1][0]),
+          Math.min(elementDataUpdated[1][0][2][0], elementDataUpdated[1][1][2][0]),
+        ],
+        [
+          randomTen(200, 50),
+          randomTen(200, 50),
+          randomTen(200, 50),
+        ],
+        [
+          randomTen(200, 50),
+          randomTen(200, 50),
+          randomTen(200, 50),
+        ]
+      ]
+
+      const programDataUpdated = [
+        [
+          [
+            Math.min(projectPaddingDataUpdated[0][0], projectPaddingDataUpdated[1][0], projectPaddingDataUpdated[2][0], projectPaddingDataUpdated[3][0]),
+            Math.max(
+              projectDataUpdated[0][0][0] + projectDataUpdated[0][0][1] + projectDataUpdated[0][0][2] + projectPaddingDataUpdated[0][0],
+              projectDataUpdated[1][0][0] + projectDataUpdated[1][0][1] + projectDataUpdated[1][0][2] + projectPaddingDataUpdated[1][0],
+              projectDataUpdated[2][0][0] + projectDataUpdated[2][0][1] + projectDataUpdated[2][0][2] + projectPaddingDataUpdated[2][0],
+              projectDataUpdated[3][0][0] + projectDataUpdated[3][0][1] + projectDataUpdated[3][0][2] + projectPaddingDataUpdated[3][0],
+            )
+          ],
+          [
+            Math.min(projectPaddingDataUpdated[0][1], projectPaddingDataUpdated[1][1], projectPaddingDataUpdated[2][1], projectPaddingDataUpdated[3][1]),
+            Math.max(
+              projectDataUpdated[0][1][0] + projectDataUpdated[0][1][1] + projectDataUpdated[0][1][2] + projectPaddingDataUpdated[0][1],
+              projectDataUpdated[1][1][0] + projectDataUpdated[1][1][1] + projectDataUpdated[1][1][2] + projectPaddingDataUpdated[1][1],
+              projectDataUpdated[2][1][0] + projectDataUpdated[2][1][1] + projectDataUpdated[2][1][2] + projectPaddingDataUpdated[2][1],
+              projectDataUpdated[3][1][0] + projectDataUpdated[3][1][1] + projectDataUpdated[3][1][2] + projectPaddingDataUpdated[3][1],
+            )
+          ],
+          [
+            Math.min(projectPaddingDataUpdated[0][2], projectPaddingDataUpdated[1][2], projectPaddingDataUpdated[2][2], projectPaddingDataUpdated[3][2]),
+            Math.max(
+              projectDataUpdated[0][2][0] + projectDataUpdated[0][2][1] + projectDataUpdated[0][2][2] + projectPaddingDataUpdated[0][2],
+              projectDataUpdated[1][2][0] + projectDataUpdated[1][2][1] + projectDataUpdated[1][2][2] + projectPaddingDataUpdated[1][2],
+              projectDataUpdated[2][2][0] + projectDataUpdated[2][2][1] + projectDataUpdated[2][2][2] + projectPaddingDataUpdated[2][2],
+              projectDataUpdated[3][2][0] + projectDataUpdated[3][2][1] + projectDataUpdated[3][2][2] + projectPaddingDataUpdated[3][2],
+            )
+          ]
+        ],
+        [
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)]
+        ],
+        [
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)]
+        ],
+        [
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)],
+          [randomTen(50, 100), randomTen(200, 600)]
+        ],
+      ]
+
+      const portfolioDataUpdated = [
+        [
+          [
+            Math.min(programDataUpdated[0][0][0], programDataUpdated[1][0][0], programDataUpdated[2][0][0], programDataUpdated[3][0][0]),
+            Math.max(programDataUpdated[0][0][1] + programDataUpdated[0][0][0], programDataUpdated[1][0][1] + programDataUpdated[1][0][0], programDataUpdated[2][0][1] + programDataUpdated[2][0][0], programDataUpdated[3][0][1] + programDataUpdated[3][0][0])
+            - Math.min(programDataUpdated[0][0][0], programDataUpdated[1][0][0], programDataUpdated[2][0][0], programDataUpdated[3][0][0])
+          ],
+          [
+            Math.min(programDataUpdated[0][1][0], programDataUpdated[1][1][0], programDataUpdated[2][1][0], programDataUpdated[3][1][0]),
+            Math.max(programDataUpdated[0][1][1] + programDataUpdated[0][1][0], programDataUpdated[1][1][1] + programDataUpdated[1][1][0], programDataUpdated[2][1][1] + programDataUpdated[2][1][0], programDataUpdated[3][1][1] + programDataUpdated[3][1][0])
+            - Math.min(programDataUpdated[0][1][0], programDataUpdated[1][1][0], programDataUpdated[2][1][0], programDataUpdated[3][1][0]),
+          ],
+          [
+            Math.min(programDataUpdated[0][2][0], programDataUpdated[1][2][0], programDataUpdated[2][2][0], programDataUpdated[3][2][0]),
+            Math.max(programDataUpdated[0][2][1] + programDataUpdated[0][2][0], programDataUpdated[1][2][1] + programDataUpdated[1][2][0], programDataUpdated[2][2][1] + programDataUpdated[2][2][0], programDataUpdated[3][2][1] + programDataUpdated[3][2][0])
+            - Math.min(programDataUpdated[0][2][0], programDataUpdated[1][2][0], programDataUpdated[2][2][0], programDataUpdated[3][2][0]),
+          ],
+        ],
+        []
+      ]
+
+      state.unitReportingData = [
         {
-          title: 'Program 29',
+          id: 'consumer-robots-portfolio',
+          title: 'Consumer Robots',
+          type: 'portfolio',
+          assigned: ['Team A', 'Team B', 'Team C', 'Team D'],
+          reportingData: {
+            red: [portfolioDataUpdated[0][0][0], portfolioDataUpdated[0][0][1], 455 - portfolioDataUpdated[0][0][0]],
+            green: [portfolioDataUpdated[0][1][0], portfolioDataUpdated[0][1][1], 455 - portfolioDataUpdated[0][1][0]],
+            blue: [portfolioDataUpdated[0][2][0], portfolioDataUpdated[0][2][1], 455 - portfolioDataUpdated[0][2][0]],
+          },
           children: [
             {
-              child_title: 'Next gen platform',
+              id: 'quadruped-robot-program',
+              title: 'Quadruped robot',
+              type: 'program',
+              assigned: ['Team A', 'Team B', 'Team C'],
               progress: 60,
-              start_date: `2023.1.${st}`,
-              end_date: `2023.2.${st1}`,
-              start_date1: `2023.1.${st}`,
-              end_date1: `2023.2.${st1}`,
-              start_date2: `2023.1.${st}`,
-              end_date2: `2023.2.${st1}`,
-              start_date3: `2023.1.${st}`,
-              end_date3: `2023.2.${st1}`,
-              id: '2.29.18.1',
-              sub_project: [
+              reportingData: {
+                red: [programDataUpdated[0][0][0], programDataUpdated[0][0][1], 455 - programDataUpdated[0][0][0]],
+                green: [programDataUpdated[0][1][0], programDataUpdated[0][1][1], 455 - programDataUpdated[0][1][0]],
+                blue: [programDataUpdated[0][2][0], programDataUpdated[0][2][1], 455 - programDataUpdated[0][2][0]],
+              },
+              children: [
                 {
-                  id: '2.29.18.1.10',
+                  id: 'new-format-project',
+                  title: 'New Format',
+                  type: 'project',
+                  assigned: ['Team A', 'Team B'],
                   progress: 0,
-                  start_date: `2023.1.${st20}`,
-                  end_date: `2023.2.${st21}`,
-                  start_date1: `2023.1.${st20}`,
-                  end_date1: `2023.2.${st21}`,
+                  reportingData: {
+                    red: [projectPaddingDataUpdated[0][0], projectDataUpdated[0][0][0], projectDataUpdated[0][0][1], projectDataUpdated[0][0][2], 455 - projectPaddingDataUpdated[0][0]],
+                    green: [projectPaddingDataUpdated[0][1], projectDataUpdated[0][1][0], projectDataUpdated[0][1][1], projectDataUpdated[0][1][2], 455 - projectPaddingDataUpdated[0][1]],
+                    blue: [projectPaddingDataUpdated[0][2], projectDataUpdated[0][2][0], projectDataUpdated[0][2][1], projectDataUpdated[0][2][2], 455 - projectPaddingDataUpdated[0][2]],
+                  },
+                  phases: [
+                    {
+                      id: 'phase-1',
+                      projectId: 'new-format-project',
+                      assigned: ['Team A'],
+                      reportingData: {
+                        red: [elementDataUpdated[0][0][0][0], elementDataUpdated[0][0][0][1], 455 - elementDataUpdated[0][0][0][0]],
+                        green: [elementDataUpdated[0][0][1][0], elementDataUpdated[0][0][1][1], 455 - elementDataUpdated[0][0][1][0]],
+                        blue: [elementDataUpdated[0][0][2][0], elementDataUpdated[0][0][2][1], 455 - elementDataUpdated[0][0][2][0]],
+                      },
+                      progress: 0,
+                    },
+                    {
+                      id: 'phase-2',
+                      projectId: 'new-format-project',
+                      assigned: ['Team A'],
+                      reportingData: {
+                        red: [elementDataUpdated[0][1][0][0], elementDataUpdated[0][1][0][1], 455 - elementDataUpdated[0][1][0][0]],
+                        green: [elementDataUpdated[0][1][1][0], elementDataUpdated[0][1][1][1], 455 - elementDataUpdated[0][1][1][0]],
+                        blue: [elementDataUpdated[0][1][2][0], elementDataUpdated[0][1][2][1], 455 - elementDataUpdated[0][1][2][0]],
+                      },
+                      progress: 0,
+                    },
+                    {
+                      id: 'phase-3',
+                      projectId: 'new-format-project',
+                      assigned: ['Team B'],
+                      reportingData: {
+                        red: [elementDataUpdated[0][2][0][0], elementDataUpdated[0][2][0][1], 455 - elementDataUpdated[0][2][0][0]],
+                        green: [elementDataUpdated[0][2][1][0], elementDataUpdated[0][2][1][1], 455 - elementDataUpdated[0][2][1][0]],
+                        blue: [elementDataUpdated[0][2][2][0], elementDataUpdated[0][2][2][1], 455 - elementDataUpdated[0][2][2][0]],
+                      },
+                      progress: 0,
+                    },
+                    {
+                      id: 'phase-4',
+                      assigned: ['Team B'],
+                      projectId: 'new-format-project',
+                      reportingData: {
+                        red: [elementDataUpdated[0][3][0][0], elementDataUpdated[0][3][0][1], 455 - elementDataUpdated[0][3][0][0]],
+                        green: [elementDataUpdated[0][3][1][0], elementDataUpdated[0][3][1][1], 455 - elementDataUpdated[0][3][1][0]],
+                        blue: [elementDataUpdated[0][3][2][0], elementDataUpdated[0][3][2][1], 455 - elementDataUpdated[0][3][2][0]],
+                      },
+                      progress: 0,
+                    },
+                  ],
                 },
                 {
-                  id: '2.29.18.1.11',
+                  id: 'enhanced-motricity-project',
+                  title: 'Enhanced motricity',
+                  assigned: ['Team A', 'Team C'],
+                  type: 'project',
                   progress: 0,
-                  start_date: `2023.1.${st30}`,
-                  end_date: `2023.2.${st31}`,
-                  start_date1: `2023.1.${st30}`,
-                  end_date1: `2023.2.${st31}`,
-                  start_date2: `2023.1.${st30}`,
-                  end_date2: `2023.2.${st31}`,
-                  start_date3: `2023.1.${st30}`,
-                  end_date3: `2023.2.${st31}`,
+                  reportingData: {
+                    red: [projectPaddingDataUpdated[1][0], projectDataUpdated[1][0][0], projectDataUpdated[1][0][1], projectDataUpdated[1][0][2], 455 - projectPaddingDataUpdated[1][0]],
+                    green: [projectPaddingDataUpdated[1][1], projectDataUpdated[1][1][0], projectDataUpdated[1][1][1], projectDataUpdated[1][1][2], 455 - projectPaddingDataUpdated[1][1]],
+                    blue: [projectPaddingDataUpdated[1][2], projectDataUpdated[1][2][0], projectDataUpdated[1][2][1], projectDataUpdated[1][2][2], 455 - projectPaddingDataUpdated[1][2]],
+                  },
+                  phases: [
+                    {
+                      id: 'phase-6',
+                      projectId: 'enhanced-motricity-project',
+                      assigned: ['Team A'],
+                      reportingData: {
+                        red: [elementDataUpdated[1][0][0][0], elementDataUpdated[1][0][0][1], 455 - elementDataUpdated[1][0][0][0]],
+                        green: [elementDataUpdated[1][0][1][0], elementDataUpdated[1][0][1][1], 455 - elementDataUpdated[1][0][1][0]],
+                        blue: [elementDataUpdated[1][0][2][0], elementDataUpdated[1][0][2][1], 455 - elementDataUpdated[1][0][2][0]],
+                      },
+                      progress: 0,
+                    },
+                    {
+                      id: 'phase-7',
+                      projectId: 'enhanced-motricity-project',
+                      assigned: ['Team C'],
+                      reportingData: {
+                        red: [elementDataUpdated[1][1][0][0], elementDataUpdated[1][1][0][1], 455 - elementDataUpdated[1][1][0][0]],
+                        green: [elementDataUpdated[1][1][1][0], elementDataUpdated[1][1][1][1], 455 - elementDataUpdated[1][1][1][0]],
+                        blue: [elementDataUpdated[1][1][2][0], elementDataUpdated[1][1][2][1], 455 - elementDataUpdated[1][1][2][0]],
+                      },
+                      progress: 0,
+                    },
+                  ]
                 },
                 {
-                  id: '2.29.18.1.110',
+                  id: 'enhanced-autonomy-project',
+                  title: 'Enhanced autonomy',
+                  type: 'project',
+                  assigned: ['Team B'],
                   progress: 100,
-                  start_date: `2023.1.${st20}`,
-                  end_date: `2023.2.${st21}`,
-                  start_date1: `2023.1.${st20}`,
-                  end_date1: `2023.2.${st21}`,
-                  start_date2: `2023.1.${st20}`,
-                  end_date2: `2023.2.${st21}`,
-                  start_date3: `2023.1.${st20}`,
-                  end_date3: `2023.2.${st21}`,
+                  reportingData: {
+                    red: [projectPaddingDataUpdated[2][0], projectDataUpdated[2][0][0], projectDataUpdated[2][0][1], projectDataUpdated[2][0][2], 455 - projectPaddingDataUpdated[2][0]],
+                    green: [projectPaddingDataUpdated[2][1], projectDataUpdated[2][1][0], projectDataUpdated[2][1][1], projectDataUpdated[2][1][2], 455 - projectPaddingDataUpdated[2][1]],
+                    blue: [projectPaddingDataUpdated[2][2], projectDataUpdated[2][2][0], projectDataUpdated[2][2][1], projectDataUpdated[2][2][2], 455 - projectPaddingDataUpdated[2][2]],
+                  },
                 },
                 {
-                  id: '2.29.18.1.111',
+                  id: 'dual-sourcing-for-quadruped-project',
+                  title: 'Dual sourcing for Quadruped',
+                  type: 'project',
                   progress: 100,
-                  start_date: `2023.1.${st30}`,
-                  end_date: `2023.2.${st31}`,
-                  start_date1: `2023.1.${st30}`,
-                  end_date1: `2023.2.${st31}`,
-                  start_date2: `2023.1.${st30}`,
-                  end_date2: `2023.2.${st31}`,
-                  start_date3: `2023.1.${st30}`,
-                  end_date3: `2023.2.${st31}`,
-                },
-                {
-                  id: '2.29.18.1.112',
-                  progress: 100,
-                  start_date: `2023.1.${st40}`,
-                  end_date: `2023.2.${st41}`,
-                  start_date1: `2023.1.${st40}`,
-                  end_date1: `2023.2.${st41}`,
-                  start_date2: `2023.1.${st40}`,
-                  end_date2: `2023.2.${st41}`,
-                  start_date3: `2023.1.${st40}`,
-                  end_date3: `2023.2.${st41}`,
-                },
-                {
-                  id: '2.29.18.1.12',
-                  progress: 0,
-                  start_date: `2023.1.${st50}`,
-                  end_date: `2023.2.${st51}`,
-                  start_date1: `2023.1.${st50}`,
-                  end_date1: `2023.2.${st51}`,
-                  start_date2: `2023.1.${st52}`,
-                  end_date2: `2023.2.${st51}`,
-                  start_date3: `2023.1.${st52}`,
-                  end_date3: `2023.2.${st51}`,
-                },
-                {
-                  id: '2.29.18.1.13',
-                  progress: 0,
-                  start_date: `2023.1.${st60}`,
-                  end_date: `2023.2.${st61}`,
-                  start_date1: `2023.1.${st60}`,
-                  end_date1: `2023.2.${st61}`,
-                  start_date2: `2023.1.${st62}`,
-                  end_date2: `2023.2.${st61}`,
-                  start_date3: `2023.1.${st62}`,
-                  end_date3: `2023.2.${st61}`,
-                },
-                {
-                  id: '2.29.18.1.14',
-                  progress: 0,
-                  start_date: `2023.1.${st70}`,
-                  end_date: `2023.2.${st72}`,
-                  start_date1: `2023.1.${st70}`,
-                  end_date1: `2023.2.${st72}`,
-                  start_date2: `2023.1.${st71}`,
-                  end_date2: `2023.2.${st72}`,
-                  start_date3: `2023.1.${st71}`,
-                  end_date3: `2023.2.${st72}`,
-                },
-                {
-                  id: '2.29.18.1.15',
-                  progress: 0,
-                  start_date: '2023.1.5',
-                  end_date: '2023.2.15',
-                  start_date1: '2023.1.2',
-                  end_date1: '2023.2.9',
-                  start_date2: '2023.1.4',
-                  end_date2: '2023.2.11',
-                  start_date3: '2023.1.7',
-                  end_date3: '2023.2.15',
-                },
-                {
-                  id: '2.29.18.1.16',
-                },
-                {
-                  id: '2.29.18.1.17',
+                  assigned: ['Team C'],
+                  reportingData: {
+                    red: [projectPaddingDataUpdated[3][0], projectDataUpdated[3][0][0], projectDataUpdated[3][0][1], projectDataUpdated[3][0][2], 455 - projectPaddingDataUpdated[3][0]],
+                    green: [projectPaddingDataUpdated[3][1], projectDataUpdated[3][1][0], projectDataUpdated[3][1][1], projectDataUpdated[3][1][2], 455 - projectPaddingDataUpdated[3][1]],
+                    blue: [projectPaddingDataUpdated[3][2], projectDataUpdated[3][2][0], projectDataUpdated[3][2][1], projectDataUpdated[3][2][2], 455 - projectPaddingDataUpdated[3][2]],
+                  },
                 },
               ]
-            }
+            },
+            {
+              id: 'micro-robot-observation-nbc-program',
+              title: 'Micro robot observation NBC',
+              assigned: ['Team B', 'Team C', 'Team D'],
+              type: 'program',
+              reportingData: {
+                red: [programDataUpdated[1][0][0], programDataUpdated[1][0][1], 455 - programDataUpdated[1][0][0]],
+                green: [programDataUpdated[1][1][0], programDataUpdated[1][1][1], 455 - programDataUpdated[1][1][0]],
+                blue: [programDataUpdated[1][2][0], programDataUpdated[1][2][1], 455 - programDataUpdated[1][2][0]],
+              },
+              progress: 60,
+            },
+            {
+              id: 'handling-robot-program',
+              title: 'Handling robot',
+              assigned: ['Team B', 'Team D'],
+              type: 'program',
+              reportingData: {
+                red: [programDataUpdated[2][0][0], programDataUpdated[2][0][1], 455 - programDataUpdated[2][0][0]],
+                green: [programDataUpdated[2][1][0], programDataUpdated[2][1][1], 455 - programDataUpdated[2][1][0]],
+                blue: [programDataUpdated[2][2][0], programDataUpdated[2][2][1], 455 - programDataUpdated[2][2][0]],
+              },
+              progress: 60,
+            },
+            {
+              id: 'power-&-programming-station-program',
+              title: 'Power & programming station',
+              assigned: ['Team C', 'Team D'],
+              type: 'program',
+              reportingData: {
+                red: [programDataUpdated[3][0][0], programDataUpdated[3][0][1], 455 - programDataUpdated[3][0][0]],
+                green: [programDataUpdated[3][1][0], programDataUpdated[3][1][1], 455 - programDataUpdated[3][1][0]],
+                blue: [programDataUpdated[3][2][0], programDataUpdated[3][2][1], 455 - programDataUpdated[3][2][0]],
+              },
+              progress: 60,
+            },
           ]
-        }
+        },
       ]
-      state.reportingData = reportingData2Update
-      Vue.$toast.success('Updated Successfully.')
     }
   },
 }

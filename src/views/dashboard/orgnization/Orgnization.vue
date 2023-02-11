@@ -22,7 +22,7 @@
               <feather-icon icon="Edit2Icon" size="16" />
               <span>Edit as table</span>
             </b-button>
-            <b-button v-if="(tabIndex === 1)" v-b-modal.modal-update class="ml-1" variant="primary">
+            <b-button v-if="(tabIndex === 1)" v-b-modal.unit-reporting-update-modal class="ml-1" variant="primary">
               <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
               <span>Update</span>
             </b-button>

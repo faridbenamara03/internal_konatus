@@ -70,15 +70,15 @@
         <div style="height:77px;">
           <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
             <div :style="`padding-left:${programData[0][0]}px`">
-              <ProgramProgressBar :type="0" :width1="programData[0][1] + 50 - programData[0][0]"
+              <ProgramProgressBar :type="0" :width1="programData[0][1] + 60 - programData[0][0]"
                 :width2="364 - programData[0][0]" />
             </div>
             <div :style="`padding-left:${programData[1][0]}px`">
-              <ProgramProgressBar :type="1" :width1="programData[1][1] + 50 - programData[1][0]"
+              <ProgramProgressBar :type="1" :width1="programData[1][1] + 60 - programData[1][0]"
                 :width2="364 - programData[1][0]" />
             </div>
             <div :style="`padding-left:${programData[2][0]}px`">
-              <ProgramProgressBar :type="2" :width1="programData[2][1] + 50 - programData[2][0]"
+              <ProgramProgressBar :type="2" :width1="programData[2][1] + 60 - programData[2][0]"
                 :width2="364 - programData[2][0]" />
             </div>
           </b-card>
