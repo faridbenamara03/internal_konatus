@@ -86,6 +86,7 @@
     background: $theme-dark-modal-header-bg;
     width: calc(100% - 314px);
     overflow-x: auto;
+    overflow-y: hidden;
     position: relative;
     .reporting-content--header {
       padding: 8px 16px;

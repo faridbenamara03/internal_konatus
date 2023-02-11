@@ -231,8 +231,8 @@
           .reporting-content {
             background: $theme-dark-modal-header-bg;
             flex: 1;
+            overflow-y: hidden;
             position: relative;
-            overflow-x: auto;
             .reporting-content--header {
               padding: 8px 16px;
               display: flex;
