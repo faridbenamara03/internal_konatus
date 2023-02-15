@@ -13,9 +13,14 @@
               <feather-icon icon="UploadIcon" size="16" />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 0" v-b-modal.modal-edit-column class="ml-1"
+            <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-edit-column class="ml-1"
               variant="primary">
-              <feather-icon icon="EyeIcon" size="16" />
+              <feather-icon icon="EyeIcon" size="16" />&nbsp;
+              <span>Edit Columns</span>
+            </b-button> -->
+            <b-button v-if="tabIndex === 0" class="ml-1"
+              variant="primary">
+              <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
             </b-button>
             <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
