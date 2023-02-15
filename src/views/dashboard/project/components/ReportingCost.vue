@@ -5,34 +5,41 @@
     </div>
     <b-card class="mr-5 ml-5">
       <div style="font-weight:bold" class="table-wrap p-1">
-        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="work-e">
+        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="work-e">
           WORK ELEMENT
         </div>
         <div class="data-p">
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             TEAM
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             PROGRESS
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             BUDGET ENGAGED
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            BUDGET
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            REAL ESTIMATED
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             READY FOR TEST
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             TITLE
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             READY FOR PRESENT
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             NEXT PHASE
           </div>
         </div>
       </div>
-      <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1" :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
+      <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1"
+        :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
         <div style="color:white;" class="table-wrap">
           <div style="font-weight:bold;" class="work-e">
             {{ item[0] }}
@@ -58,6 +65,12 @@
             </div>
             <div class="chld">
               {{ item[7] }}
+            </div>
+            <div class="chld">
+              {{ item[8] }}
+            </div>
+            <div class="chld">
+              {{ item[9] }}
             </div>
           </div>
         </div>
@@ -95,10 +108,10 @@ export default {
     return {
       bColors: ['#20C997', '#D46D6D', '#7367F0', '#F5A623'],
       tableData: [
-        ['New Format', 'Team A', '95', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced motricity', 'Team A', '75', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced autonomy', 'Team A', '0', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Dual sourcing for Quadruped', 'Team A', '20', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['New Format', 'Team A', '95', '10.200', '10.400', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced motricity', 'Team A', '75', '12.000', '15.000', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced autonomy', 'Team A', '0', '10.700', '10.100', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Dual sourcing for Quadruped', 'Team A', '20', '10.200', '11.000', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
       ]
     }
   },
@@ -293,22 +306,27 @@ export default {
 <style lang="scss">
 .table-wrap {
   display: flex;
+
   .work-e {
     width: 200px;
   }
+
   .data-p {
     width: calc(100% - 200px);
-    padding-left: 80px;
+    padding-left: 30px;
     display: flex;
     justify-content: space-between;
+
     .chld {
-      text-align: right;
+      text-align: 'center';
       width: 10%;
     }
   }
 }
+
 .card-body {
   padding: 0
 }
+
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

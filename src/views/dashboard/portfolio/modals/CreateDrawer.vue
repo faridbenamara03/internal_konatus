@@ -540,7 +540,7 @@ export default {
     return {
       curIndex: 1,
       progressDescription: [
-        'SELECT OR ADD A NEW PORTFOLIO',
+        'Add new program & project',
         'fill the Key elements',
         'rationale',
         'fill the planning',
