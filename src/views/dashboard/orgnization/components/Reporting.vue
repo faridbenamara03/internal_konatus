@@ -5,7 +5,8 @@
         <b-form-select v-model="optionSelect" :options="options" />
       </div>
       <template v-for="(item, index) in datt">
-        <div class="program-title" v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}`">
+        <div class="program-title" v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+          :key="`${index}`">
           <div class="program-title-child">
             <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
             <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
@@ -14,8 +15,8 @@
         </div>
         <template v-if="!collapsed">
           <template v-for="(item1, index1) in item.children">
-            <div class="program-collapse-header" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-              :key="`${index}-${index1}`">
+            <div class="program-collapse-header"
+              v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}-${index1}`">
               <div class="header-child">
                 <div class="child1">
                   <div class="title">
@@ -28,7 +29,8 @@
               </div>
             </div>
             <template v-for="(item2, index2) in item1.children">
-              <div class="program-collapse-sub-project" v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+              <div class="program-collapse-sub-project"
+                v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
                 :key="`${index}-${index1}-${index2}`">
                 <div class="sub-project">
                   <div class="child1">
@@ -41,7 +43,8 @@
               </div>
               <template v-for="(item3, index3) in item2.phases">
                 <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
-                  class="d-flex flex-column justify-content-around" v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                  class="d-flex flex-column justify-content-around"
+                  v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
                   :key="`${index}-${index1}-${index2}-${index3}`">
                   <div class="d-flex justify-content-between ml-5 mr-3">
                     <div>
@@ -107,12 +110,12 @@
         </div>
         <div v-if="!collapsed">
           <template v-for="(item, index) in datt">
-            <div v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" style="height:89px;" :key="`${index}`">
+            <div v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" style="height:89px;"
+              :key="`${index}`">
               <div class="d-flex flex-column justify-content-around"
-                style="height:88px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+                style="height:88px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;">
                 <div :style="`padding-left:${item.reportingData.red[0]}px`">
-                  <ProgramProgressBar :type="0" :width1="item.reportingData.red[1]"
-                    :width2="item.reportingData.red[2]" />
+                  <ProgramProgressBar :type="0" :width1="item.reportingData.red[1]" :width2="item.reportingData.red[2]" />
                 </div>
                 <div :style="`padding-left:${item.reportingData.green[0]}px`">
                   <ProgramProgressBar :type="1" :width1="item.reportingData.green[1]"
@@ -125,9 +128,10 @@
               </div>
             </div>
             <template v-for="(item1, index1) in item.children">
-              <div style="height:77px" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}-${index1}`">
+              <div style="height:77px" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                :key="`${index}-${index1}`">
                 <div class="d-flex flex-column justify-content-around"
-                  style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+                  style="height:76px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;">
                   <div :style="`padding-left:${item1.reportingData.red[0]}px`">
                     <ProgramProgressBar :type="0" :width1="item1.reportingData.red[1]"
                       :width2="item1.reportingData.red[2]" />
@@ -146,7 +150,7 @@
                 <div style="height:77px" v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
                   :key="`${index}-${index1}-${index2}`">
                   <div class="d-flex flex-column justify-content-around"
-                    style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+                    style="height:76px;padding:5px 10px 5px 3px;width:fit-content;background-color: #283046;border-radius:5px;">
                     <div :style="`padding-left:${item2.reportingData.red[0]}px`">
                       <ProjectProgressBar :type="0" :width1="item2.reportingData.red[1]"
                         :width2="item2.reportingData.red[2]" :width3="item2.reportingData.red[3]"
@@ -165,11 +169,12 @@
                   </div>
                 </div>
                 <template v-for="(item3, index3) in item2.phases">
-                  <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
-                    class="d-flex flex-column justify-content-around" v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                  <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;width:fit-content;"
+                    class="d-flex flex-column justify-content-around"
+                    v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
                     :key="`${index}-${index1}-${index2}-${index3}`">
                     <div class="d-flex flex-column justify-content-around"
-                      style="height:49px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                      style="height:49px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;">
                       <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.red[0]}px;`">
                         <ElementProgressBar :type="0" :width1="item3.reportingData.red[1]"
                           :width2="item3.reportingData.red[2]" />
@@ -191,7 +196,8 @@
         </div>
       </div>
     </div>
-    <b-modal id="unit-reporting-update-modal" ref="unit_reporting_update_modal" title="Create New" centered no-fade hide-backdrop>
+    <b-modal id="unit-reporting-update-modal" ref="unit_reporting_update_modal" title="Create New" centered no-fade
+      hide-backdrop>
       <!-- Modal Header -->
       <template #modal-header>
         <h5 class="modal-title">Update</h5>
@@ -283,6 +289,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "@core/scss/vue/pages/dashboard-unit-reporting.scss";
-</style>
+<style lang="scss">@import "@core/scss/vue/pages/dashboard-unit-reporting.scss";</style>

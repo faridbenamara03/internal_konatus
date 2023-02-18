@@ -87,7 +87,7 @@
         <div v-for="(item, index) in datt.children" :key="index" style="margin-left:1px">
           <div style="height:77px;">
             <div class="d-flex flex-column justify-content-around"
-              style="height:76px;background-color:#283046;border-radius:5px;padding:5px 3px;">
+              style="height:76px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;">
               <div :style="`padding-left:${programData[0][0]}px`">
                 <ProgramProgressBar :type="0" :width1="programData[0][1] + 60 - programData[0][0]"
                   :width2="455 - programData[0][0]" />
@@ -105,7 +105,7 @@
           <template v-for="(item1, index1) in item.children">
             <div style="height:77px" :key="index1">
               <div class="d-flex flex-column justify-content-around"
-                style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+                style="height:76px;padding:5px 10px 5px 3px;width:fit-content;background-color: #283046;border-radius:5px;">
                 <div :style="`padding-left:${projectPaddingData[index1][0]}px`">
                   <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
                     :width3="projectData[index1][0][2]" :width4="455 - projectPaddingData[index1][0]" />
@@ -123,7 +123,7 @@
             <template v-if="item1.phases">
               <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;`">
                 <div class="d-flex flex-column justify-content-around"
-                  style="height:50px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                  style="height:50px;padding:0 10px 0 3px;width:fit-content;background-color: #283046;border-radius:5px;">
                   <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][0][0]}px;`">
                     <ElementProgressBar :type="0" :width1="elementData[index1][index2][0][1]"
                       :width2="455 - elementData[index1][index2][0][0]" />

@@ -9,8 +9,8 @@
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
-            <feather-icon v-if="item1.children"
-              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
+            <feather-icon v-if="item1.children" :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16" class="mr-1" />
             <p class="m-0 text-uppercase text-overflow-ellipse">
               {{ item1.title }}
             </p>
@@ -69,21 +69,25 @@
         </div>
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div class="w-100" style="height:77px">
-            <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1-1][0]}px`">
-                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : randomTen(100, 500)" :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1-1][0]" />
+            <b-card no-body class="d-flex flex-column justify-content-around"
+              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1 - 1][0]}px`">
+                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da1 : randomTen(100, 500)"
+                  :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1 - 1][0]" />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1-1][1]}px`">
-                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : randomTen(100, 600)" :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1-1][1]" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1 - 1][1]}px`">
+                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da2 : randomTen(100, 600)"
+                  :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1 - 1][1]" />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1-1][2]}px`">
-                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : randomTen(100, 700)" :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1-1][2]" />
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1 - 1][2]}px`">
+                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da3 : randomTen(100, 700)"
+                  :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1 - 1][2]" />
               </div>
             </b-card>
           </div>
           <template v-if="item1.children && openedCollapse === index1">
             <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
-              <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 3px;">
+              <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 10px 1px 3px;width:fit-content;">
                 <div :style="`padding-left:${paddingV[index2][0]}px`">
                   <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]"
                     :width4="363 - paddingV[index2][0]" />
@@ -293,5 +297,4 @@ export default {
 
 .rotate-icon {
   transform: rotate(180deg);
-}
-</style>
+}</style>

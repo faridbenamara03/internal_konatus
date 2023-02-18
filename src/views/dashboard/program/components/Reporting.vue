@@ -68,7 +68,7 @@
           </div>
         </div>
         <div style="height:77px;">
-          <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;">
+          <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;width:fit-content;padding-right:10px;">
             <div :style="`padding-left:${programData[0][0]}px`">
               <ProgramProgressBar :type="0" :width1="programData[0][1] + 60 - programData[0][0]"
                 :width2="364 - programData[0][0]" />
@@ -86,7 +86,7 @@
         <div v-for="(item1, index1) in data.children" :key="index1">
           <div style="height:77px">
             <div class="d-flex flex-column justify-content-around"
-              style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;">
+              style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;width:fit-content;padding-right:10px;">
               <div :style="`padding-left:${projectPaddingData[index1][0]}px`">
                 <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
                   :width3="projectData[index1][0][2]" :width4="363 - projectPaddingData[index1][0]" />
@@ -102,9 +102,9 @@
             </div>
           </div>
           <template v-if="item1.phases">
-            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;`">
+            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;width:fit-content;`">
               <div class="d-flex flex-column justify-content-around w-100"
-                style="height:50px;width:500px;padding:0 3px;background-color: #283046;border-radius:5px;">
+                style="height:50px;width:500px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;">
                 <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][0][0]}px;`">
                   <ElementProgressBar :type="0" :width1="elementData[index1][index2][0][1]"
                     :width2="362 - elementData[index1][index2][0][0]" />

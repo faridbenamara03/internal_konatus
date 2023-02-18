@@ -113,101 +113,101 @@
         </div>
         <div v-if="!collapsed">
           <div style="height: 88px">
-            <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 3px">
+            <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 10px 7px 3px;width:fit-content;">
               <div :style="`padding-left:${programData[0][0]}px`">
-                <ProgramProgressBar :type="0" :width1="programData[0][1]" :width2="458 - programData[0][0]" />
+                <ProgramProgressBar :type="0" :width1="programData[0][1]" :width2="456 - programData[0][0]" />
               </div>
               <div :style="`padding-left:${programData[1][0]}px`">
-                <ProgramProgressBar :type="1" :width1="programData[1][1]" :width2="458 - programData[1][0]" />
+                <ProgramProgressBar :type="1" :width1="programData[1][1]" :width2="456 - programData[1][0]" />
               </div>
               <div :style="`padding-left:${programData[2][0]}px`">
-                <ProgramProgressBar :type="2" :width1="programData[2][1]" :width2="458 - programData[2][0]" />
+                <ProgramProgressBar :type="2" :width1="programData[2][1]" :width2="456 - programData[2][0]" />
               </div>
             </b-card>
           </div>
           <div style="height:77px">
-            <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 3px;">
+            <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
               <div :style="`padding-left:${projectPaddingData[0]}px`">
                 <ProjectProgressBar :type="0" :width1="projectData[0][0]" :width2="projectData[0][1]"
-                  :width3="projectData[0][2]" :width4="458 - projectPaddingData[0]" />
+                  :width3="projectData[0][2]" :width4="456 - projectPaddingData[0]" />
               </div>
               <div :style="`padding-left:${projectPaddingData[1]}px`">
                 <ProjectProgressBar :type="1" :width1="projectData[1][0]" :width2="projectData[1][1]"
-                  :width3="projectData[1][2]" :width4="458 - projectPaddingData[1]" />
+                  :width3="projectData[1][2]" :width4="456 - projectPaddingData[1]" />
               </div>
               <div :style="`padding-left:${projectPaddingData[2]}px`">
                 <ProjectProgressBar :type="2" :width1="projectData[2][0]" :width2="projectData[2][1]"
-                  :width3="projectData[2][2]" :width4="458 - projectPaddingData[2]" />
+                  :width3="projectData[2][2]" :width4="456 - projectPaddingData[2]" />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[0][0][1]" :width2="458 - elementData[0][0][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[0][0][1]" :width2="456 - elementData[0][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[0][1][1]" :width2="458 - elementData[0][1][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[0][1][1]" :width2="456 - elementData[0][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[0][2][1]" :width2="458 - elementData[0][2][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[0][2][1]" :width2="456 - elementData[0][2][0]" />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[1][0][1]" :width2="458 - elementData[1][0][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[1][0][1]" :width2="456 - elementData[1][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[1][1][1]" :width2="458 - elementData[1][1][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[1][1][1]" :width2="456 - elementData[1][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[1][2][1]" :width2="458 - elementData[1][2][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[1][2][1]" :width2="456 - elementData[1][2][0]" />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[2][0][1]" :width2="458 - elementData[2][0][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[2][0][1]" :width2="456 - elementData[2][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[2][1][1]" :width2="458 - elementData[2][1][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[2][1][1]" :width2="456 - elementData[2][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[2][2][1]" :width2="458 - elementData[2][2][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[2][2][1]" :width2="456 - elementData[2][2][0]" />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[3][0][1]" :width2="458 - elementData[3][0][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[3][0][1]" :width2="456 - elementData[3][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[3][1][1]" :width2="458 - elementData[3][1][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[3][1][1]" :width2="456 - elementData[3][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[3][2][1]" :width2="458 - elementData[3][2][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[3][2][1]" :width2="456 - elementData[3][2][0]" />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
             <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding: 5px 0px;padding:0 3px;">
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[4][0][1]" :width2="458 - elementData[4][0][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[4][0][1]" :width2="456 - elementData[4][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[4][1][1]" :width2="458 - elementData[4][1][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[4][1][1]" :width2="456 - elementData[4][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[4][2][1]" :width2="458 - elementData[4][2][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[4][2][1]" :width2="456 - elementData[4][2][0]" />
               </div>
             </b-card>
           </div>
