@@ -25,7 +25,7 @@
 <script>
 // import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
 import VueApexCharts from 'vue-apexcharts'
-import TableComponent from './sub-component/table1.vue'
+import TableComponent from './sub-component/table.vue'
 
 export default {
   components: {
