@@ -2,6 +2,44 @@ import Vue from "vue"
 import moment from 'moment'
 import axios from "axios"
 
+const weekNumbersArr = betweenMonths => {
+  const m1 = parseInt(betweenMonths[0].split('/')[0], 10)
+  const y1 = parseInt(betweenMonths[0].split('/')[1], 10)
+  const startDay = new Date(y1, m1 - 1, 1)
+  const m2 = parseInt(betweenMonths[betweenMonths.length - 1].split('/')[0], 10)
+  const y2 = parseInt(betweenMonths[betweenMonths.length - 1].split('/')[1], 10)
+  const lastDay = new Date(y2, m2, 0)
+  // const lastD = `${y2}-${m2}-`
+  let step = 0
+  const labelArr = []
+  while (step <= y2 - y1) {
+    let startD
+    let lastD
+    if (step === 0) {
+      startD = startDay
+    } else {
+      startD = new Date(y1 + step, 0, 1)
+    }
+    if (step === (y2 - y1)) {
+      lastD = lastDay
+    } else {
+      lastD = new Date(y1 + step, 12, 0)
+    }
+
+    const yearStartDate = new Date(y1 + step, 0, 1)
+    const days1 = Math.floor((startD - yearStartDate) / (24 * 60 * 60 * 1000))
+    const weekNumber1 = Math.ceil(days1 / 7) + 1
+    const days2 = Math.floor((lastD - yearStartDate) / (24 * 60 * 60 * 1000))
+    const weekNumber2 = Math.ceil(days2 / 7) + 1
+
+    step += 1
+    for (let k = weekNumber1; k <= weekNumber2; k += 1) {
+      labelArr.push(k)
+    }
+  }
+  return labelArr
+}
+
 const globalOperationDataInsertedProgram = {
   id: 'konatus-industries-company',
   title: 'Konatus Industries',
@@ -1394,7 +1432,8 @@ export default {
       [1500, 1500, 1500, 1500, 1500],
     ],
     selectedWorkElement: [],
-    requestedElement: []
+    requestedElement: [],
+    customChartXLabel: weekNumbersArr([`${moment().subtract(2, 'months').format('MM/YYYY')}`, `${moment().format('MM/YYYY')}`])
   },
   mutations: {
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
@@ -1518,6 +1557,7 @@ export default {
       state.selectedNavObj = navObj
     },
     ON_RANGE_CHANGE(state, betweenMonths) {
+      state.customChartXLabel = weekNumbersArr(betweenMonths)
       if (state.selectedNavObj.children) {
         const ndt = state.selectedNavObj.children.map(t => {
           let budget = 0
@@ -1663,6 +1703,6 @@ export default {
         console.log('error getting nav data ---->', err)
       })
       this.commit('globalState/LOAD_NAV_DATA')
-    }
+    },
   },
 }

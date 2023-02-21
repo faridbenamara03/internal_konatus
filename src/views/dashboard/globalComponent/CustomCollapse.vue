@@ -18,7 +18,7 @@
       </div>
       <template v-if="isOpen">
         <div class="phase-box mb-1 position-relative" v-for="(activity, jn) in team.activities" :key="jn">
-          <div v-b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}`"
+          <div b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}`"
             style="
               box-sizing: border-box;
               border-top: solid 11px rgb(228, 255, 0);
@@ -62,7 +62,7 @@
         <div class="phase-box mb-1 w-100"
           :style="`position:absolute;top:${15 * jn}px;z-index:${1000 - jn};box-shadow: 0px 2px 3px #161d31;`"
           v-for="(activity, jn) in team.activities" :key="jn">
-          <div v-b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}-1`"
+          <div b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}-1`"
             style="
               box-sizing: border-box;
               border-top: solid 11px rgb(228, 255, 0);
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { BButton, BFormCheckbox } from 'bootstrap-vue'
+import { BButton, BFormCheckbox, BTooltip } from 'bootstrap-vue'
 import { isEmpty } from "@/views/utils"
 
 export default {
@@ -155,6 +155,9 @@ export default {
       this.$emit('selectActivity', e, activityId)
     }
   },
+  directives: {
+    'b-tooltip': BTooltip
+  }
 }
 </script>
 
