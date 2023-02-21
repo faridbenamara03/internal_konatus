@@ -2,7 +2,7 @@
   <div class="p-2">
     <div class="d-flex">
       <div style="width:40px;padding-bottom:20px;" class="d-flex flex-column justify-content-between">
-        <div v-for="(t, i) in yAxisData" :key="i">
+        <div v-for="(t, i) in yAxisData" :key="i" style="text-align:end;padding-right:5pxъ">
           {{ t }}
         </div>
       </div>

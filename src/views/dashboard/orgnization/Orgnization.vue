@@ -103,7 +103,7 @@
           <Reporting />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
-          <Control :data="items" :is-chart-view="isChartView" />
+          <Control />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">

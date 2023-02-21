@@ -7,10 +7,10 @@
         <template v-for="(item, index) in data_source.xAxisData">
           <div v-if="index === 1" :key="index" class="sub-main"
             style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 18px; color: white;">{{ item }}</b>
+            <b style="font-size: 17px; color: white;">{{ item }}</b>
           </div>
           <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 18px; color: white;">{{ item }}</b>
+            <b style="font-size: 17px; color: white;">{{ item }}</b>
           </div>
         </template>
       </div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="containerSelf" v-for="(item, i2) in data_source.series" :key="i2"
-      style="font-size: 23px; font-weight: bold;">
+      style="font-size: 16px; font-weight: bold;">
       <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
         style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 300px">
         <div>
@@ -44,17 +44,17 @@
       </div>
     </div>
     <div class="containerSelf m-2">
-      <b style="font-size: 20px; color: #A6E4FF">TOTALS</b>
+      <b style="font-size: 17px; color: #A6E4FF">TOTALS</b>
     </div>
     <div class="containerSelf" v-for="(item, index) in filteredTotalData" :key="index">
       <div style="width: 300px">
-        <b style="font-size: 18px; color: #A6E4FF">{{ item.captain }}</b>
+        <b style="font-size: 16px; color: #A6E4FF">{{ item.captain }}</b>
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
         <div class="sub-main" v-for="(item1, index) in item.data" :key="index"
           style="padding-top:5px; padding-bottom: 5px;">
-          <b :style='"font-size: 18px; color:" + item1.numcolor'>{{ item1.value }}</b>
-          <b :style='"font-size: 18px; color:" + item1.pctcolor'>
+          <b :style='"font-size: 16px; color:" + item1.numcolor'>{{ item1.value }}</b>
+          <b :style='"font-size: 16px; color:" + item1.pctcolor'>
             (
             {{ item1.percent }}
             <span v-if="item1.percent >= 0">%</span>

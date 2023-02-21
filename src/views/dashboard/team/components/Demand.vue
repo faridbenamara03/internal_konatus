@@ -26,11 +26,11 @@
             :id="`tooltip-target-${idx}`"
             style="
               box-sizing: border-box;
-              border-top: solid 11px rgb(228, 255, 0);
-              border-right: solid 11px rgb(228, 255, 0);
+              border-top: solid 10px #7367f0;
+              border-right: solid 10px #7367f0;
               border-top-right-radius: 5px;
-              border-left: solid 11px transparent;
-              border-bottom: solid 11px transparent;
+              border-left: solid 10px transparent;
+              border-bottom: solid 10px transparent;
               position:absolute;
               top:0;
               right:0;
