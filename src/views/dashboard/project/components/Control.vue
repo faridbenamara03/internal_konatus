@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="item_child in item.data" :key="item_child"
+        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="(item_child, k) in item.data" :key="k"
           :style="'margin: 0.5px; background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor: pointer'">
           {{ item_child.data }}
         </div>

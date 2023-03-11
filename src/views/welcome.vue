@@ -41,7 +41,6 @@ export default {
     }
   },
   mounted() {
-    console.log(document.getElementsByClassName('app-content')[0].clientHeight)
     this.cHeight = document.getElementsByClassName('app-content')[0].clientHeight
   },
 }

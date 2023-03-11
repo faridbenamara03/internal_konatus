@@ -179,7 +179,7 @@ export default {
           name: 'ESTIMATED',
           color: '#00BBF5',
           type: 'line',
-          data: this.$store.state.globalState.chartSeriesData[4]
+          data: this.$store.state.globalState.chartSeriesData[4],
           // data: [
           //   25500,
           //   25500,
