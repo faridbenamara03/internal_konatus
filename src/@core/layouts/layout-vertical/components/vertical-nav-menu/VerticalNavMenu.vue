@@ -31,10 +31,19 @@
             size="25"
           />
         </div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5" >
           <feather-icon
+            @click="toggleCreateNewDrawer"
             style="color:white"
             icon="PlusCircleIcon"
+            size="25"
+          />
+        </div>
+        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+          <feather-icon
+            @click="toggleEditPortfolioDrawer"
+            style="color:white"
+            icon="EditIcon"
             size="25"
           />
         </div>
@@ -111,7 +120,6 @@
         class="navigation navigation-main"
       />
     </vue-perfect-scrollbar>
-    <!-- /main menu content-->
   </div>
 </template>
 
@@ -133,7 +141,7 @@ export default {
     VerticalNavMenuItems,
     BLink,
     BImg,
-    VerticalNavUserMenu
+    VerticalNavUserMenu,
   },
   props: {
     isVerticalMenuActive: {
@@ -150,6 +158,14 @@ export default {
       const data = [{ search: true }]
       data.push(...store.state.globalState.globalData)
       return data
+    },
+  },
+  methods: {
+    toggleCreateNewDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+    },
+    toggleEditPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     }
   },
   setup(props) {

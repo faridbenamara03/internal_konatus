@@ -1433,9 +1433,125 @@ export default {
     ],
     selectedWorkElement: [],
     requestedElement: [],
-    customChartXLabel: weekNumbersArr([`${moment().subtract(2, 'months').format('MM/YYYY')}`, `${moment().format('MM/YYYY')}`])
+    customChartXLabel: weekNumbersArr([`${moment().subtract(2, 'months').format('MM/YYYY')}`, `${moment().format('MM/YYYY')}`]),
+    openCreateNewPortfolioDrawer: false,
+    openCreateNewUnitDrawer: false,
+    openEditPortfolioDrawer: false,
   },
   mutations: {
+    TOGGLE_CREATE_NEW_DRAWER(state) {
+      const u1 = !state.openCreateNewPortfolioDrawer
+      const u2 = !state.openCreateNewUnitDrawer
+      state.openCreateNewPortfolioDrawer = u1
+      state.openCreateNewUnitDrawer = u2
+    },
+    CREATE_NEW_UNIT(state, data) {
+      if (!data.unitName) {
+        Vue.$toast.warning('Please input correctly.')
+      } else {
+        const dt = { ...globalOrganizationData }
+        const cdn = dt.children
+        cdn.push(
+          {
+            id: `${data.unitName.toLowerCase()}-unit`,
+            title: data.unitName,
+            type: 'unit',
+            route: {
+              name: 'unit-view',
+              params: {
+                unitId: data.unitName.toLowerCase(),
+              },
+            },
+            children: [
+              {
+                id: 'team-ln-team',
+                title: 'Team LN',
+                parent: 'lyon-unit',
+                type: 'team',
+                route: {
+                  name: 'team-view',
+                  params: {
+                    unitId: 'lyon',
+                    teamId: 'team-ln',
+                  },
+                },
+                children: [
+                  {
+                    id: 'lone-wolf-user',
+                    title: 'Lone Wolf',
+                    parent: 'team-e-team',
+                    type: 'user',
+                  },
+                  {
+                    id: 'telora-varga-user',
+                    title: 'Telora Varga',
+                    parent: 'team-e-team',
+                    type: 'user',
+                  },
+                  {
+                    id: 'poke-green-user',
+                    title: 'Poke Green',
+                    parent: 'team-e-team',
+                    type: 'user',
+                  },
+                  {
+                    id: 'assen-oliveira-user',
+                    title: 'Assen Oliveira',
+                    parent: 'team-e-team',
+                    type: 'user',
+                  },
+                ]
+              }
+            ]
+          }
+        )
+        dt.children = cdn
+        state.globalOrganizationData = dt
+        const u1 = !state.openCreateNewPortfolioDrawer
+        const u2 = !state.openCreateNewUnitDrawer
+        state.openCreateNewPortfolioDrawer = u1
+        state.openCreateNewUnitDrawer = u2
+      }
+    },
+    CREATE_NEW_PORTFOLIO(state, data) {
+      if (!!data.parentOrganization && !!data.portfolioName && !!data.portfolioBudget) {
+        const dt = { ...globalOperationData }
+        const chld = dt.children
+        chld.push({
+          id: `${data.portfolioName.toLowerCase()}-portfolio`,
+          title: data.portfolioName,
+          budget: data.portfolioBudget,
+          type: 'portfolio',
+          children: [
+            {
+              id: `${data.portfolioName.toLowerCase()}-program`,
+              title: 'sample program',
+              type: 'program'
+            }
+          ]
+        })
+        dt.children = chld
+        state.globalOperationData = dt
+        const u1 = !state.openCreateNewPortfolioDrawer
+        const u2 = !state.openCreateNewUnitDrawer
+        state.openCreateNewPortfolioDrawer = u1
+        state.openCreateNewUnitDrawer = u2
+      } else {
+        Vue.$toast.warning('Please input correctly.')
+      }
+    },
+    TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
+      const u = state.openEditPortfolioDrawer
+      state.openEditPortfolioDrawer = !u
+    },
+    EDIT_PORTFOLIO(state, data) {
+      if (!!data.portfolio && !!data.portfolioBudget) {
+        const u = state.openEditPortfolioDrawer
+        state.openEditPortfolioDrawer = !u
+      } else {
+        Vue.$toast.warning('Please input correctly.')
+      }
+    },
     HIDE_ACTIVITY_DETAIL_MODAL(state) {
       state.activityDetailModalOpen = false
     },

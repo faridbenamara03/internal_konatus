@@ -161,6 +161,11 @@
     <create-modal />
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
     <optimize-modal />
+    <Drawer @close="toggleCreateNewUnitDrawer" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="openCreateNewUnitDrawer" >
+        <CreateNewUnitDrawer />
+      </div>
+    </Drawer>
   </b-card>
 </template>
 
@@ -168,6 +173,7 @@
 import {
   BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
 } from 'bootstrap-vue'
+import Drawer from "vue-simple-drawer"
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
@@ -178,6 +184,7 @@ import Control from './components/Control.vue'
 import CreateModal from './modals/CreateModal.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
+import CreateNewUnitDrawer from './modals/CreateNewUnitDrawer.vue'
 
 export default {
   components: {
@@ -196,6 +203,8 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
+    CreateNewUnitDrawer,
+    Drawer
   },
   props: {
     data: {
@@ -377,6 +386,11 @@ export default {
       rangeArray: []
     }
   },
+  computed: {
+    openCreateNewUnitDrawer() {
+      return this.$store.state.globalState.openCreateNewUnitDrawer
+    },
+  },
   mounted() {
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
@@ -392,6 +406,9 @@ export default {
     //     this.$router.push({ path: urlArr.join('/') })
     //   }
     // },
+    toggleCreateNewUnitDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+    },
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
@@ -450,6 +467,9 @@ export default {
 .popover-body {
   position: absolute;
   left: -576px;
+}
+.mask {
+  background: #000 !important;
 }
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 @import "@core/scss/vue/pages/dashboard-project.scss";

@@ -149,6 +149,16 @@
         <CreateDrawer />
       </div>
     </Drawer>
+    <Drawer @close="toggleCreateNewPortfolioDrawer" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="openCreateNewPortfolioDrawer" >
+        <CreateNewPortfolioDrawer />
+      </div>
+    </Drawer>
+    <Drawer @close="toggleEditPortfolioDrawer" align="right" :closeable="false" :maskClosable="true" >
+      <div v-if="openEditPortfolioDrawer" >
+        <EditPortfolioDrawer />
+      </div>
+    </Drawer>
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
     <optimize-modal />
   </b-card>
@@ -173,6 +183,8 @@ import Control from './components/Control.vue'
 import CreateDrawer from './modals/CreateDrawer.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
+import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
+import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
 
 export default {
   components: {
@@ -193,6 +205,8 @@ export default {
     Welcome,
     Drawer,
     CreateDrawer,
+    CreateNewPortfolioDrawer,
+    EditPortfolioDrawer
   },
   props: {
     data: {
@@ -211,10 +225,16 @@ export default {
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
-      open: false
+      open: false,
     }
   },
   computed: {
+    openCreateNewPortfolioDrawer() {
+      return this.$store.state.globalState.openCreateNewPortfolioDrawer
+    },
+    openEditPortfolioDrawer() {
+      return this.$store.state.globalState.openEditPortfolioDrawer
+    },
     items() {
       const { selectedNavObj } = this.$store.state.globalState
       return selectedNavObj
@@ -239,6 +259,12 @@ export default {
   methods: {
     toggle() {
       this.open = !this.open
+    },
+    toggleCreateNewPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+    },
+    toggleEditPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     },
     isUN(data) {
       return isEmpty(data)
