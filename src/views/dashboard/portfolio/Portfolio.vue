@@ -8,10 +8,6 @@
           </div>
           <div>
             <div v-if="!isChartView && tabIndex === 0">
-              <b-button @click="handleControlOK" v-if="!demandTableEditable" variant="primary">
-                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
-                <span>Control</span>
-              </b-button>
               <b-button v-if="!demandTableEditable" variant="primary" class="ml-1">
                 <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
                 <span>Import Table</span>
@@ -318,9 +314,6 @@ export default {
         this.$router.push({ path: this.$route.path.concat(`/${url}`) })
       }
     },
-    handleControlOK() {
-      console.log("Todo control to add/edit portfolio")
-    }
   },
   directives: {
     ClickOutside
