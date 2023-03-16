@@ -1,6 +1,6 @@
 <template>
   <b-modal id="modal-activity-detail" v-model="show" title="Activity Details" centered no-fade hide-backdrop static
-    ref="activity-detail-modal" @hide="hideModal">
+    ref="activity-detail-modal" @hide="hideModal" size="lg">
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
@@ -75,11 +75,26 @@
         </div>
         <div class="select-box">
           <label>Subproject</label>
-          <v-select :options="['Template', 'System programming', 'Checking', 'Illustration']" placeholder="Select Subproject" outlined />
+          <v-select :options="['Template', 'System programming', 'Checking', 'Illustration']"
+            placeholder="Select Subproject" outlined />
         </div>
         <div class="select-box">
           <label>Task</label>
           <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="detail-box">
+          <feather-icon icon="PaperclipIcon" size="18" />
+          <p class="pl-1 m-0 text-uppercase">
+            Job
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="select-box">
+          <label>Jobs Available</label>
+          <v-select :options="['Design', 'Program', 'Manage']" placeholder="Select a job" outlined />
         </div>
       </div>
       <div class="form-group">
@@ -100,17 +115,43 @@
       <div class="form-group has-switch">
         <div class="detail-box">
           <feather-icon icon="BarChart2Icon" size="18" />
-          <p class="pl-1 m-0 text-uppercase">
+          <p class="px-1 m-0 text-uppercase">
             effort
           </p>
+          <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd" />
         </div>
         <b-form-checkbox checked="true" switch inline>
           Show details
         </b-form-checkbox>
       </div>
       <div class="form-group">
+        <div class="row" v-for="(t, i) in effortData" :key="i">
+          <div class="col-6">
+            <label>Skillset</label>
+            <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skillset"
+              placeholder="Select Subproject" outlined @input="effortChange('skillset', i, $event)" />
+          </div>
+          <div class="col">
+            <label>Load</label>
+            <b-form-input :value="t.load" @input="effortChange('load', i, $event)" />
+          </div>
+          <div class="col">
+            <label>Duration</label>
+            <b-form-input :value="t.duration" @input="effortChange('duration', i, $event)" />
+          </div>
+          <div class="col">
+            <label>FTE</label>
+            <b-form-input :value="t.fte" @input="effortChange('fte', i, $event)" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-group">
         <div class="select-group p-0">
           <div class="select-group--sub">
+            <div class="select-box mb-0">
+              <label>Subproject</label>
+              <v-select :options="['Design', 'Program', 'Manage']" placeholder="Select Subproject" outlined />
+            </div>
             <div class="select-box mb-0">
               <label>Load</label>
               <b-form-input :value="selectedActivityData.phase.effort.load" />
@@ -125,7 +166,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="d-flex" style="justify-content:end">
         <div>
           <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;"
@@ -195,6 +236,14 @@ export default {
       activity: {},
       show: false,
       selectedTeam: null,
+      effortData: [
+        {
+          skillset: null,
+          load: null,
+          duration: null,
+          fte: null
+        }
+      ]
     }
   },
   computed: {
@@ -217,6 +266,17 @@ export default {
     },
     teamSelectHandle(value) {
       console.log(value)
+    },
+    effortChange(field, index, e) {
+      this.effortData[index][field] = e
+    },
+    onEffortAdd() {
+      this.effortData.push({
+        skillset: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
     }
   },
 }
