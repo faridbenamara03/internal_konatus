@@ -55,6 +55,35 @@
       </div>
       <div class="form-group">
         <div class="detail-box">
+          <feather-icon icon="CompassIcon" size="18" />
+          <p class="pl-1 m-0 text-uppercase">
+            Predecessor
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="select-box">
+          <label>Program</label>
+          <v-select
+            :options="['Quadruped robot', 'Micro robot observation NBC', 'Handling robot', 'Power & programming station']"
+            placeholder="Select Program" outlined />
+        </div>
+        <div class="select-box">
+          <label>Project</label>
+          <v-select :options="['New Format', 'Enhanced motricity', 'Enhanced autonomy', 'Dual sourcing for Quadruped']"
+            placeholder="Select Project" outlined />
+        </div>
+        <div class="select-box">
+          <label>Subproject</label>
+          <v-select :options="['Template', 'System programming', 'Checking', 'Illustration']" placeholder="Select Subproject" outlined />
+        </div>
+        <div class="select-box">
+          <label>Task</label>
+          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="detail-box">
           <feather-icon icon="UsersIcon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
             team
@@ -99,7 +128,8 @@
       </div>
       <div class="d-flex" style="justify-content:end">
         <div>
-          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;" toggle-class="text-decoration-none" no-caret>
+          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;"
+            toggle-class="text-decoration-none" no-caret>
             <template #button-content>
               <span style="color:#7367F0">
                 Effort per Skill
