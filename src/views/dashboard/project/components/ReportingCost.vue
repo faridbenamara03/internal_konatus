@@ -177,7 +177,7 @@ export default {
         },
         {
           name: 'BUDGET ENGAGED',
-          color: '#00BBF5',
+          color: '#BD2020',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[4],
           // data: [
@@ -192,7 +192,7 @@ export default {
         {
           name: 'REAL ESTIMATED',
           type: 'line',
-          color: '#20C997',
+          color: '#00BBF5',
           data: this.$store.state.globalState.chartSeriesData[5]
           // data: [
           //   20500,
@@ -205,7 +205,7 @@ export default {
         },
         {
           name: 'BALANCE',
-          color: '#D07017',
+          color: '#FFFFFF',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[6]
           // data: [
@@ -251,6 +251,9 @@ export default {
               fontWeight: 'bold',
               colors: "#FFFFFF"
             }
+          },
+          tooltip: {
+            enabled: false
           }
         },
         yaxis: [
