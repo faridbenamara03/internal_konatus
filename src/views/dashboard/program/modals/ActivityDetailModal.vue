@@ -1,6 +1,6 @@
 <template>
   <b-modal id="modal-activity-detail" v-model="show" title="Activity Details" centered no-fade hide-backdrop static
-    ref="activity-detail-modal" @hide="hideModal">
+    ref="activity-detail-modal" @hide="hideModal" size="lg">
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
@@ -55,6 +55,34 @@
       </div>
       <div class="form-group">
         <div class="detail-box">
+          <feather-icon icon="CompassIcon" size="18" />
+          <p class="pl-1 m-0 text-uppercase">
+            Dependency
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="select-box">
+          <label>Tasks</label>
+          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="detail-box">
+          <feather-icon icon="PaperclipIcon" size="18" />
+          <p class="pl-1 m-0 text-uppercase">
+            Job
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="select-box">
+          <label>Jobs Available</label>
+          <v-select :options="['Design', 'Program', 'Manage']" placeholder="Select a job" outlined />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="detail-box">
           <feather-icon icon="UsersIcon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
             team
@@ -71,15 +99,37 @@
       <div class="form-group has-switch">
         <div class="detail-box">
           <feather-icon icon="BarChart2Icon" size="18" />
-          <p class="pl-1 m-0 text-uppercase">
+          <p class="px-1 m-0 text-uppercase">
             effort
           </p>
+          <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd" />
         </div>
         <b-form-checkbox checked="true" switch inline>
           Show details
         </b-form-checkbox>
       </div>
       <div class="form-group">
+        <div class="row" v-for="(t, i) in effortData" :key="i">
+          <div class="col-6">
+            <label>Skill</label>
+            <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
+              placeholder="Select Subproject" outlined @input="effortChange('skill', i, $event)" />
+          </div>
+          <div class="col">
+            <label>Load</label>
+            <b-form-input :value="t.load" @input="effortChange('load', i, $event)" />
+          </div>
+          <div class="col">
+            <label>Duration</label>
+            <b-form-input :value="t.duration" @input="effortChange('duration', i, $event)" />
+          </div>
+          <div class="col">
+            <label>FTE</label>
+            <b-form-input :value="t.fte" @input="effortChange('fte', i, $event)" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-group">
         <div class="select-group p-0">
           <div class="select-group--sub">
             <div class="select-box mb-0">
@@ -96,10 +146,11 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="d-flex" style="justify-content:end">
+      </div> -->
+      <!-- <div class="d-flex" style="justify-content:end">
         <div>
-          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;" toggle-class="text-decoration-none" no-caret>
+          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;"
+            toggle-class="text-decoration-none" no-caret>
             <template #button-content>
               <span style="color:#7367F0">
                 Effort per Skill
@@ -112,7 +163,7 @@
             <b-dropdown-item disabled>Skill 4</b-dropdown-item>
           </b-dropdown>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
@@ -130,7 +181,7 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal, BDropdown, BDropdownItem
+  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ActivitySplitModal from './ActivitySplitModal.vue'
@@ -146,8 +197,6 @@ export default {
     BFormTextarea,
     BModal,
     vSelect,
-    BDropdown,
-    BDropdownItem
   },
   props: {
     selectedActivityData: {
@@ -165,6 +214,14 @@ export default {
       activity: {},
       show: false,
       selectedTeam: null,
+      effortData: [
+        {
+          skill: null,
+          load: null,
+          duration: null,
+          fte: null
+        }
+      ]
     }
   },
   computed: {
@@ -187,6 +244,17 @@ export default {
     },
     teamSelectHandle(value) {
       console.log(value)
+    },
+    effortChange(field, index, e) {
+      this.effortData[index][field] = e
+    },
+    onEffortAdd() {
+      this.effortData.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
     }
   },
 }

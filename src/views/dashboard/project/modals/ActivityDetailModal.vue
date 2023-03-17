@@ -53,7 +53,7 @@
           <b-form-textarea v-model="selectedActivityData.phase.description" rows="5" />
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <div class="detail-box">
           <feather-icon icon="CompassIcon" size="18" />
           <p class="pl-1 m-0 text-uppercase">
@@ -80,6 +80,20 @@
         </div>
         <div class="select-box">
           <label>Task</label>
+          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+        </div>
+      </div> -->
+      <div class="form-group">
+        <div class="detail-box">
+          <feather-icon icon="CompassIcon" size="18" />
+          <p class="pl-1 m-0 text-uppercase">
+            Dependency
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="select-box">
+          <label>Tasks</label>
           <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
         </div>
       </div>
@@ -127,9 +141,9 @@
       <div class="form-group">
         <div class="row" v-for="(t, i) in effortData" :key="i">
           <div class="col-6">
-            <label>Skillset</label>
-            <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skillset"
-              placeholder="Select Subproject" outlined @input="effortChange('skillset', i, $event)" />
+            <label>Skill</label>
+            <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
+              placeholder="Select Subproject" outlined @input="effortChange('skill', i, $event)" />
           </div>
           <div class="col">
             <label>Load</label>
@@ -167,7 +181,7 @@
           </div>
         </div>
       </div> -->
-      <div class="d-flex" style="justify-content:end">
+      <!-- <div class="d-flex" style="justify-content:end">
         <div>
           <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;"
             toggle-class="text-decoration-none" no-caret>
@@ -183,7 +197,7 @@
             <b-dropdown-item disabled>Skill 4</b-dropdown-item>
           </b-dropdown>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
@@ -201,7 +215,7 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal, BDropdown, BDropdownItem
+  BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ActivitySplitModal from './ActivitySplitModal.vue'
@@ -217,8 +231,8 @@ export default {
     BFormTextarea,
     BModal,
     vSelect,
-    BDropdown,
-    BDropdownItem
+    // BDropdown,
+    // BDropdownItem
   },
   props: {
     selectedActivityData: {
@@ -238,7 +252,7 @@ export default {
       selectedTeam: null,
       effortData: [
         {
-          skillset: null,
+          skill: null,
           load: null,
           duration: null,
           fte: null
@@ -272,7 +286,7 @@ export default {
     },
     onEffortAdd() {
       this.effortData.push({
-        skillset: null,
+        skill: null,
         load: null,
         duration: null,
         fte: null

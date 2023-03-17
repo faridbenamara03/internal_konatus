@@ -1,7 +1,7 @@
 <template>
   <div class="demand-view">
     <div class="w-100 p-1">
-      <vue-apex-charts type="bar" height="400" :options="chartOptions" :series="series" />
+      <vue-apex-charts type="line" height="400" :options="chartOptions" :series="series" />
     </div>
     <b-card class="mr-5 ml-5">
       <div style="font-weight:bold" class="table-wrap p-1">
@@ -119,7 +119,7 @@ export default {
     series() {
       return [
         {
-          name: "Research...",
+          name: "New Format",
           color: '#20C997',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[0]
@@ -133,7 +133,7 @@ export default {
           // ],
         },
         {
-          name: "Design...",
+          name: "Enhanced motricity",
           color: '#D46D6D',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[1]
@@ -147,7 +147,7 @@ export default {
           // ],
         },
         {
-          name: "Autonomous...",
+          name: "Enhanced autonomy",
           color: '#7367F0',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[2]
@@ -161,7 +161,7 @@ export default {
           // ],
         },
         {
-          name: "Legal...",
+          name: "Dual sourcing for Quadruped",
           type: 'bar',
           columnWidth: '70%',
           color: '#F5A623',
@@ -176,7 +176,7 @@ export default {
           // ],
         },
         {
-          name: 'ESTIMATED',
+          name: 'BUDGET ENGAGED',
           color: '#00BBF5',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[4],
@@ -190,7 +190,7 @@ export default {
           // ],
         },
         {
-          name: 'ENGAGED',
+          name: 'REAL ESTIMATED',
           type: 'line',
           color: '#20C997',
           data: this.$store.state.globalState.chartSeriesData[5]
@@ -204,7 +204,7 @@ export default {
           // ],
         },
         {
-          name: 'COST TO DATE',
+          name: 'BALANCE',
           color: '#D07017',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[6]
@@ -281,14 +281,35 @@ export default {
         ],
         tooltip: {
           theme: 'dark',
-          custom: () => `<div class="m-1">
-            <div style="color:#BD2020;font-weight:bold">BUDGET ENGAGED</div>
-            <div class="mb-1">12.000,00</div>
-            <div style="color:#00BBF5;font-weight:bold">REAL ESTIMATED</div>
-            <div class="mb-1">4.200,00</div>
-            <div style="font-weight:bold">BALANCE</div>
-            <div style="font-weight:bold">+3.000,00</div>
-          </div>`
+          custom: data => {
+            if (data.seriesIndex > 3) {
+              return (
+                `<div class="m-1">
+                  <div style="color:#BD2020;font-weight:bold">BUDGET ENGAGED</div>
+                  <div class="mb-1">${data.series[4][data.dataPointIndex]}</div>
+                  <div style="color:#00BBF5;font-weight:bold">REAL ESTIMATED</div>
+                  <div class="mb-1">${data.series[5][data.dataPointIndex]}</div>
+                  <div style="font-weight:bold">BALANCE</div>
+                  <div style="font-weight:bold">${data.series[6][data.dataPointIndex]}</div>
+                </div>`
+              )
+            }
+            if (data.series[0][data.dataPointIndex] && data.series[1][data.dataPointIndex] && data.series[2][data.dataPointIndex] && data.series[3][data.dataPointIndex]) {
+              return (
+                `<div class="m-1">
+                  <div style="color:rgb(32, 201, 151);font-weight:bold">New Format</div>
+                  <div class="mb-1">${data.series[0][data.dataPointIndex]}</div>
+                  <div style="color:rgb(212, 109, 109);font-weight:bold">Enhanced motricity</div>
+                  <div class="mb-1">${data.series[1][data.dataPointIndex]}</div>
+                  <div style="color:rgb(115, 103, 240);font-weight:bold">Enhanced autonomy</div>
+                  <div style="font-weight:bold">${data.series[2][data.dataPointIndex]}</div>
+                  <div style="color:rgb(245, 166, 35);font-weight:bold">Dual sourcing for Quadruped</div>
+                  <div style="font-weight:bold">${data.series[3][data.dataPointIndex]}</div>
+                </div>`
+              )
+            }
+            return ''
+          }
         },
         legend: {
           customLegendItems: ['New Format', 'Enhanced motricity', 'Enhanced autonomy', 'Dual sourcing for Quadruped'],
