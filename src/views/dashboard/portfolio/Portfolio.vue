@@ -151,7 +151,7 @@
       </div>
     </Drawer>
     <Drawer @close="toggleEditPortfolioDrawer" align="right" :closeable="false" :maskClosable="true" >
-      <div v-if="openEditPortfolioDrawer" >
+      <div v-if="openEditPortfolioDrawer && selectedNavType === 'portfolio'" >
         <EditPortfolioDrawer />
       </div>
     </Drawer>
@@ -244,7 +244,7 @@ export default {
     },
     demandTableEditable() {
       return this.$store.state.portfolioState.demandTableEditable
-    },
+    }
   },
   mounted() {
     this.fields = [...this.defaultFields]

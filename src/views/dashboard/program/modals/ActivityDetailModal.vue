@@ -63,8 +63,8 @@
       </div>
       <div class="form-group">
         <div class="select-box">
-          <label>Tasks</label>
-          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+          <label>Activity</label>
+          <v-select :options="activityList" placeholder="Select Task" outlined />
         </div>
       </div>
       <div class="form-group">
@@ -227,6 +227,14 @@ export default {
   computed: {
     c_SelectedActivity() {
       return this.selectedActivityData
+    },
+    activityList() {
+      const activityArray = []
+      const teamState = this.$store.state.globalState?.teamsState
+      if (teamState) {
+        teamState.map(t => t.phases?.map(t1 => t1.activities?.map(t3 => activityArray.push(t3.title))))
+      }
+      return activityArray
     }
   },
   watch: {

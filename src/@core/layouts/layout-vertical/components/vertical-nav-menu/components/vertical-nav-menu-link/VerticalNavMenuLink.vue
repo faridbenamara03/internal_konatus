@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     onNavItemClick(data) {
+      // console.log('>>>>>>>>>>', data)
       this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
     }
   }

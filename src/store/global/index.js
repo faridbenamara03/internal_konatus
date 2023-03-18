@@ -1043,7 +1043,7 @@ const teamsState = [
             },
           },
           {
-            title: 'Electricity market AI',
+            title: 'Electricity market AI-1',
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
@@ -1055,7 +1055,7 @@ const teamsState = [
             },
           },
           {
-            title: 'Electricity market AI',
+            title: 'Electricity market AI-2',
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
@@ -1248,7 +1248,7 @@ const phaseState = [
             },
           },
           {
-            title: 'Electricity market AI',
+            title: 'Electricity market AI-1',
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
@@ -1260,7 +1260,7 @@ const phaseState = [
             },
           },
           {
-            title: 'Electricity market AI',
+            title: 'Electricity market AI-2',
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
@@ -1542,12 +1542,23 @@ export default {
     },
     TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
       const u = state.openEditPortfolioDrawer
-      state.openEditPortfolioDrawer = !u
+      if (!u) {
+        if (state.selectedNavObj.type === 'portfolio') {
+          state.openEditPortfolioDrawer = !u
+        }
+      } else {
+        state.openEditPortfolioDrawer = !u
+      }
     },
     EDIT_PORTFOLIO(state, data) {
       if (!!data.portfolio && !!data.portfolioBudget) {
         const u = state.openEditPortfolioDrawer
         state.openEditPortfolioDrawer = !u
+        const toUpdatedChild = state.globalOperationData.children?.find(t => t.id === state.selectedNavId)
+        const updatedChild = { ...toUpdatedChild }
+        updatedChild.title = data.portfolio
+        updatedChild.budget = data.portfolioBudget
+        Object.assign(toUpdatedChild, updatedChild)
       } else {
         Vue.$toast.warning('Please input correctly.')
       }

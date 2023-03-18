@@ -111,6 +111,7 @@ export default {
   },
   methods: {
     handleNavItemClick(data) {
+      // console.log('---->>>>>>>>>>>>>>>>>>>', data)
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
       this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
