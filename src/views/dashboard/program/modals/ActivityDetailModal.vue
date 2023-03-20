@@ -232,7 +232,7 @@ export default {
       const activityArray = []
       const teamState = this.$store.state.globalState?.teamsState
       if (teamState) {
-        teamState.map(t => t.phases?.map(t1 => t1.activities?.map(t3 => activityArray.push(t3.title))))
+        teamState.map(t => t.phases?.map(t1 => t1.activities?.map(t3 => activityArray.push(t3.activityId.concat("-").concat(t3.title)))))
       }
       return activityArray
     }
