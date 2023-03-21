@@ -25,15 +25,11 @@
 </style>
 
 <script>
-// import AppEchartStackedArea from '@core/components/charts/echart/AppEchartStackedArea.vue'
-// import VueApexCharts from 'vue-apexcharts'
 import TableComponent from './sub-component/table.vue'
 import CustomBarChart from './sub-component/customBarChart.vue'
 
 export default {
   components: {
-    // AppEchartStackedArea,
-    // VueApexCharts,
     TableComponent,
     CustomBarChart
   },

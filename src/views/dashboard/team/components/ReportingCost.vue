@@ -1,38 +1,45 @@
 <template>
   <div class="demand-view">
     <div class="w-100 p-1">
-      <vue-apex-charts type="bar" height="400" :options="chartOptions" :series="series" />
+      <vue-apex-charts type="line" height="400" :options="chartOptions" :series="series" />
     </div>
     <b-card class="mr-5 ml-5">
       <div style="font-weight:bold" class="table-wrap p-1">
-        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="work-e">
+        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="work-e">
           WORK ELEMENT
         </div>
         <div class="data-p">
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             TEAM
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             PROGRESS
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             BUDGET ENGAGED
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            BUDGET
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            REAL ESTIMATED
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             READY FOR TEST
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             TITLE
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             READY FOR PRESENT
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"  class="chld">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             NEXT PHASE
           </div>
         </div>
       </div>
-      <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1" :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
+      <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1"
+        :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
         <div style="color:white;" class="table-wrap">
           <div style="font-weight:bold;" class="work-e">
             {{ item[0] }}
@@ -58,6 +65,12 @@
             </div>
             <div class="chld">
               {{ item[7] }}
+            </div>
+            <div class="chld">
+              {{ item[8] }}
+            </div>
+            <div class="chld">
+              {{ item[9] }}
             </div>
           </div>
         </div>
@@ -95,10 +108,10 @@ export default {
     return {
       bColors: ['#20C997', '#D46D6D', '#7367F0', '#F5A623'],
       tableData: [
-        ['New Format', 'Team A', '95', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced motricity', 'Team A', '75', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced autonomy', 'Team A', '0', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Dual sourcing for Quadruped', 'Team A', '20', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['New Format', 'Team A', '95', '10.200', '10.400', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced motricity', 'Team A', '75', '12.000', '15.000', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Enhanced autonomy', 'Team A', '0', '10.700', '10.100', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Dual sourcing for Quadruped', 'Team A', '20', '10.200', '11.000', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
       ]
     }
   },
@@ -106,7 +119,7 @@ export default {
     series() {
       return [
         {
-          name: "Research...",
+          name: "New Format",
           color: '#20C997',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[0]
@@ -120,7 +133,7 @@ export default {
           // ],
         },
         {
-          name: "Design...",
+          name: "Enhanced motricity",
           color: '#D46D6D',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[1]
@@ -134,7 +147,7 @@ export default {
           // ],
         },
         {
-          name: "Autonomous...",
+          name: "Enhanced autonomy",
           color: '#7367F0',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[2]
@@ -148,7 +161,7 @@ export default {
           // ],
         },
         {
-          name: "Legal...",
+          name: "Dual sourcing for Quadruped",
           type: 'bar',
           columnWidth: '70%',
           color: '#F5A623',
@@ -166,7 +179,7 @@ export default {
           name: 'ESTIMATED',
           color: '#00BBF5',
           type: 'line',
-          data: this.$store.state.globalState.chartSeriesData[4]
+          data: this.$store.state.globalState.chartSeriesData[4],
           // data: [
           //   25500,
           //   25500,
@@ -191,8 +204,8 @@ export default {
           // ],
         },
         {
-          name: 'COST TO DATE',
-          color: '#D07017',
+          name: 'SPENT',
+          color: '#d96e00',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[6]
           // data: [
@@ -238,6 +251,9 @@ export default {
               fontWeight: 'bold',
               colors: "#FFFFFF"
             }
+          },
+          tooltip: {
+            enabled: false
           }
         },
         yaxis: [
@@ -268,14 +284,35 @@ export default {
         ],
         tooltip: {
           theme: 'dark',
-          custom: () => `<div class="m-1">
-            <div style="color:#BD2020;font-weight:bold">BUDGET ENGAGED</div>
-            <div class="mb-1">12.000,00</div>
-            <div style="color:#00BBF5;font-weight:bold">REAL ESTIMATED</div>
-            <div class="mb-1">4.200,00</div>
-            <div style="font-weight:bold">BALANCE</div>
-            <div style="font-weight:bold">+3.000,00</div>
-          </div>`
+          custom: data => {
+            if (data.seriesIndex > 3) {
+              return (
+                `<div class="m-1">
+                  <div style="color:#00BBF5;font-weight:bold">ESTIMATED</div>
+                  <div class="mb-1" style="color:#00BBF5">${data.series[4][data.dataPointIndex]}</div>
+                  <div style="color:#20C997;font-weight:bold">ENGAGED</div>
+                  <div class="mb-1" style="color:#20C997">${data.series[5][data.dataPointIndex]}</div>
+                  <div style="color:#d96e00;font-weight:bold">SPENT</div>
+                  <div style="color:#d96e00;font-weight:bold">${data.series[6][data.dataPointIndex]}</div>
+                </div>`
+              )
+            }
+            if (data.series[0][data.dataPointIndex] && data.series[1][data.dataPointIndex] && data.series[2][data.dataPointIndex] && data.series[3][data.dataPointIndex]) {
+              return (
+                `<div class="m-1">
+                  <div style="color:rgb(32, 201, 151);font-weight:bold">New Format</div>
+                  <div class="mb-1" style="color:rgb(32, 201, 151);font-weight:bold">${data.series[0][data.dataPointIndex]}</div>
+                  <div style="color:rgb(212, 109, 109);font-weight:bold">Enhanced motricity</div>
+                  <div class="mb-1" style="color:rgb(212, 109, 109);font-weight:bold">${data.series[1][data.dataPointIndex]}</div>
+                  <div style="color:rgb(115, 103, 240);font-weight:bold">Enhanced autonomy</div>
+                  <div class="mb-1" style="color:rgb(115, 103, 240);font-weight:bold">${data.series[2][data.dataPointIndex]}</div>
+                  <div style="color:rgb(245, 166, 35);font-weight:bold">Dual sourcing for Quadruped</div>
+                  <div style="color:rgb(245, 166, 35);font-weight:bold">${data.series[3][data.dataPointIndex]}</div>
+                </div>`
+              )
+            }
+            return ''
+          }
         },
         legend: {
           customLegendItems: ['New Format', 'Enhanced motricity', 'Enhanced autonomy', 'Dual sourcing for Quadruped'],
@@ -293,22 +330,27 @@ export default {
 <style lang="scss">
 .table-wrap {
   display: flex;
+
   .work-e {
     width: 200px;
   }
+
   .data-p {
     width: calc(100% - 200px);
-    padding-left: 80px;
+    padding-left: 30px;
     display: flex;
     justify-content: space-between;
+
     .chld {
-      text-align: right;
+      text-align: 'center';
       width: 10%;
     }
   }
 }
+
 .card-body {
   padding: 0
 }
+
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>

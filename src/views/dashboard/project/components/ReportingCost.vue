@@ -176,8 +176,8 @@ export default {
           // ],
         },
         {
-          name: 'BUDGET ENGAGED',
-          color: '#BD2020',
+          name: 'ESTIMATED',
+          color: '#00BBF5',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[4],
           // data: [
@@ -190,9 +190,9 @@ export default {
           // ],
         },
         {
-          name: 'REAL ESTIMATED',
+          name: 'ENGAGED',
           type: 'line',
-          color: '#00BBF5',
+          color: '#20C997',
           data: this.$store.state.globalState.chartSeriesData[5]
           // data: [
           //   20500,
@@ -204,8 +204,8 @@ export default {
           // ],
         },
         {
-          name: 'BALANCE',
-          color: '#FFFFFF',
+          name: 'SPENT',
+          color: '#d96e00',
           type: 'line',
           data: this.$store.state.globalState.chartSeriesData[6]
           // data: [
@@ -288,12 +288,12 @@ export default {
             if (data.seriesIndex > 3) {
               return (
                 `<div class="m-1">
-                  <div style="color:#BD2020;font-weight:bold">BUDGET ENGAGED</div>
-                  <div class="mb-1">${data.series[4][data.dataPointIndex]}</div>
-                  <div style="color:#00BBF5;font-weight:bold">REAL ESTIMATED</div>
-                  <div class="mb-1">${data.series[5][data.dataPointIndex]}</div>
-                  <div style="font-weight:bold">BALANCE</div>
-                  <div style="font-weight:bold">${data.series[6][data.dataPointIndex]}</div>
+                  <div style="color:#00BBF5;font-weight:bold">ESTIMATED</div>
+                  <div class="mb-1" style="color:#00BBF5">${data.series[4][data.dataPointIndex]}</div>
+                  <div style="color:#20C997;font-weight:bold">ENGAGED</div>
+                  <div class="mb-1" style="color:#20C997">${data.series[5][data.dataPointIndex]}</div>
+                  <div style="color:#d96e00;font-weight:bold">SPENT</div>
+                  <div style="color:#d96e00;font-weight:bold">${data.series[6][data.dataPointIndex]}</div>
                 </div>`
               )
             }
@@ -301,13 +301,13 @@ export default {
               return (
                 `<div class="m-1">
                   <div style="color:rgb(32, 201, 151);font-weight:bold">New Format</div>
-                  <div class="mb-1">${data.series[0][data.dataPointIndex]}</div>
+                  <div class="mb-1" style="color:rgb(32, 201, 151);font-weight:bold">${data.series[0][data.dataPointIndex]}</div>
                   <div style="color:rgb(212, 109, 109);font-weight:bold">Enhanced motricity</div>
-                  <div class="mb-1">${data.series[1][data.dataPointIndex]}</div>
+                  <div class="mb-1" style="color:rgb(212, 109, 109);font-weight:bold">${data.series[1][data.dataPointIndex]}</div>
                   <div style="color:rgb(115, 103, 240);font-weight:bold">Enhanced autonomy</div>
-                  <div style="font-weight:bold">${data.series[2][data.dataPointIndex]}</div>
+                  <div class="mb-1" style="color:rgb(115, 103, 240);font-weight:bold">${data.series[2][data.dataPointIndex]}</div>
                   <div style="color:rgb(245, 166, 35);font-weight:bold">Dual sourcing for Quadruped</div>
-                  <div style="font-weight:bold">${data.series[3][data.dataPointIndex]}</div>
+                  <div style="color:rgb(245, 166, 35);font-weight:bold">${data.series[3][data.dataPointIndex]}</div>
                 </div>`
               )
             }

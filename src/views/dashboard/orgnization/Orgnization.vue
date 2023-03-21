@@ -129,7 +129,7 @@
                 </b-popover>
               </div>
             </div>
-            <b-button-group v-if="tabIndex === 1" class="ml-1">
+            <!-- <b-button-group v-if="tabIndex === 1" class="ml-1">
               <b-button
                 variant="outline-primary"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
@@ -144,7 +144,7 @@
               >
                 Plan
               </b-button>
-            </b-button-group>
+            </b-button-group> -->
             <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>
@@ -171,7 +171,7 @@
 
 <script>
 import {
-  BButton, BButtonGroup, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
+  BButton, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
 } from 'bootstrap-vue'
 import Drawer from "vue-simple-drawer"
 import moment from 'moment'
@@ -189,7 +189,7 @@ import CreateNewUnitDrawer from './modals/CreateNewUnitDrawer.vue'
 export default {
   components: {
     BButton,
-    BButtonGroup,
+    // BButtonGroup,
     BCard,
     BCardBody,
     BTabs,
