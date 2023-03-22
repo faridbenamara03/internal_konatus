@@ -122,7 +122,7 @@
       <div class="form-group">
         <div class="select-box">
           <label>Team Assigned</label>
-          <v-select @input="teamSelectHandle" v-model="selectedTeam" :options="teamdata" placeholder="Select Team"
+          <v-select @input="teamSelectHandle" v-model="selectedTeam" :options="c_teamData" placeholder="Select Team"
             outlined />
         </div>
       </div>
@@ -237,7 +237,7 @@ export default {
   props: {
     selectedActivityData: {
       type: Object,
-      default: () => { },
+      default: () => {},
     },
     teamdata: {
       type: Array,
@@ -249,7 +249,7 @@ export default {
     return {
       activity: {},
       show: false,
-      selectedTeam: null,
+      selectedTeam: "System auto select",
       effortData: [
         {
           skill: null,
@@ -261,6 +261,10 @@ export default {
     }
   },
   computed: {
+    c_teamData() {
+      const dt = ["System auto select", ...this.teamdata]
+      return dt
+    },
     c_SelectedActivity() {
       return this.selectedActivityData
     },
