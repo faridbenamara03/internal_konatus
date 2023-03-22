@@ -6,12 +6,9 @@
     <b-card class="mr-5 ml-5">
       <div style="font-weight:bold" class="table-wrap p-1">
         <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="work-e">
-          WORK ELEMENT
+          PROJECT
         </div>
         <div class="data-p">
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            TEAM
-          </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             PROGRESS
           </div>
@@ -19,22 +16,16 @@
             BUDGET ENGAGED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            BUDGET
+            ESTIMATED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            REAL ESTIMATED
+            SPENT
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            READY FOR TEST
+            AUTHORIZED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            TITLE
-          </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            READY FOR PRESENT
-          </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            NEXT PHASE
+            CURRENT PHASE
           </div>
         </div>
       </div>
@@ -63,15 +54,29 @@
             <div class="chld">
               {{ item[6] }}
             </div>
-            <div class="chld">
-              {{ item[7] }}
-            </div>
-            <div class="chld">
-              {{ item[8] }}
-            </div>
-            <div class="chld">
-              {{ item[9] }}
-            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-weight:bold" class="table-wrap p-1">
+        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="work-e">
+          TOTAL
+        </div>
+        <div class="data-p">
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            27,900
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            27,350
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            23,900
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            26,500
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
           </div>
         </div>
       </div>
@@ -108,10 +113,10 @@ export default {
     return {
       bColors: ['#20C997', '#D46D6D', '#7367F0', '#F5A623'],
       tableData: [
-        ['New Format', 'Team A', '95', '10.200', '10.400', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced motricity', 'Team A', '75', '12.000', '15.000', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced autonomy', 'Team A', '0', '10.700', '10.100', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Dual sourcing for Quadruped', 'Team A', '20', '10.200', '11.000', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['New Format', '95', '10,200', '10,400', '10,000', '10,000', '3'],
+        ['Enhanced motricity', '75', '12,000', '11,000', '10,400', '12,000', '4'],
+        ['Enhanced autonomy', '50', '4,500', '4,450', '2,000', '3,000', '1'],
+        ['Dual sourcing for Quadruped', '100', '1,200', '1,500', '1,500', '1,500', '2'],
       ]
     }
   },
@@ -228,7 +233,7 @@ export default {
           bar: {
             horizontal: false,
             columnWidth: '80%',
-            borderRadius: 10
+            borderRadius: 5,
           },
         },
         stroke: {
@@ -332,18 +337,18 @@ export default {
   display: flex;
 
   .work-e {
-    width: 200px;
+    width: 300px;
   }
 
   .data-p {
-    width: calc(100% - 200px);
+    width: calc(100% - 300px);
     padding-left: 30px;
     display: flex;
     justify-content: space-between;
 
     .chld {
       text-align: 'center';
-      width: 10%;
+      width: 15%;
     }
   }
 }
