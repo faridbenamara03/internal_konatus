@@ -1578,36 +1578,37 @@ export default {
       // todo: post save request
       Vue.$toast.success("Saved Successfully!")
     },
-    HANDLE_ACTIVITY_SPLIT(state, data) {
-      let index = -1
-      state.teamsState.forEach((t, i) => {
-        if (t.title === data.teamTitle) index = i
-      })
-      const sate = { ...state.teamsState[index] }
-      const newPhases = []
-      sate.phases.forEach(t => {
-        if (t.activityId === data.phase.activityId) {
-          newPhases.push(data.newA1, data.newA2)
-        } else {
-          newPhases.push(t)
-        }
-      })
-      state.teamsState[index].phases = newPhases
+    HANDLE_ACTIVITY_SPLIT() {
+      // let index = -1
+      // state.teamsState.forEach((t, i) => {
+      //   if (t.title === data.teamTitle) index = i
+      // })
+      // const sate = { ...state.teamsState[index] }
+      // const newPhases = []
+      // sate.phases.forEach(t => {
+      //   if (t.activityId === data.phase.activityId) {
+      //     newPhases.push(data.newA1, data.newA2)
+      //   } else {
+      //     newPhases.push(t)
+      //   }
+      // })
+      // state.teamsState[index].phases = newPhases
       Vue.$toast.success('Splitted Successfully!')
     },
-    HANDLE_ACTIVITY_MERGE(state, data) {
-      let index = -1
-      state.teamsState.forEach((t, i) => {
-        if (t.title === data.teamTitle) index = i
-      })
-      const sate = { ...state.teamsState[index] }
-      const newPhases = [data.merged]
-      sate.phases.forEach(t => {
-        if (t.activityId !== data.toMergeId1 && t.activityId !== data.toMergeId2) {
-          newPhases.push(t)
-        }
-      })
-      state.teamsState[index].phases = newPhases
+    HANDLE_ACTIVITY_MERGE() {
+      // let index = -1
+      // state.teamsState.forEach((t, i) => {
+      //   if (t.title === data.teamTitle) index = i
+      // })
+      // const sate = { ...state.teamsState[0] }
+      // const newPhases = [data.merged]
+      // console.log(sate, data)
+      // sate.phases.forEach(t => {
+      //   if (t.activityId !== data.toMergeId1 && t.activityId !== data.toMergeId2) {
+      //     newPhases.push(t)
+      //   }
+      // })
+      // state.teamsState[0].phases = newPhases
       Vue.$toast.success('Merged Successfully!')
     },
     HANDLE_TEAM_DEMAND_UPDATE() {

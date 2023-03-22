@@ -1,28 +1,14 @@
 <template>
-  <b-modal
-    id="modal-activity-merge"
-    ref="my-modal"
-    title="Merge Activity"
-    centered
-    no-fade
-    hide-backdrop
-    static
-    size="xl"
-  >
+  <b-modal id="modal-activity-merge" ref="my-modal" title="Merge Activity" centered no-fade hide-backdrop static
+    size="xl">
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
         Merge Activity
       </h5>
       <div class="modal-actions">
-        <b-button
-          variant="outline-primary"
-          @click="hideModal"
-        >
-          <feather-icon
-            icon="XIcon"
-            size="18"
-          />
+        <b-button variant="outline-primary" @click="hideModal">
+          <feather-icon icon="XIcon" size="18" />
         </b-button>
       </div>
     </template>
@@ -42,10 +28,7 @@
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
+              <feather-icon icon="AlignLeftIcon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -65,10 +48,7 @@
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
+              <feather-icon icon="BarChart2Icon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 effort
               </p>
@@ -95,27 +75,18 @@
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
-                outlined
-              />
+              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
-            <b-button
-              variant="outline-primary"
-            >
+            <b-button variant="outline-primary">
               <feather-icon icon="PlusIcon" />
               <span class="pl-1">Add dependency</span>
             </b-button>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <custom-icon
-                name="hexahedron"
-              />
+              <custom-icon name="hexahedron" />
               <p class="pl-1 m-0 text-uppercase">
                 Dependencies
               </p>
@@ -137,22 +108,14 @@
           <div class="form-group" v-if="this.toMerge === null">
             <div class="select-box">
               <label>Search activity</label>
-              <v-select
-                v-model="selectedActivity"
-                :options="this.toMergeList"
-                @input="onActivitySelect"
-                placeholder="Select an activity"
-                outlined
-              />
+              <v-select v-model="selectedActivity" :options="this.toMergeList" @input="onActivitySelect"
+                placeholder="Select an activity" outlined />
             </div>
           </div>
           <div v-else>
             <div class="form-group">
               <div class="detail-box">
-                <feather-icon
-                  icon="AlignLeftIcon"
-                  size="18"
-                />
+                <feather-icon icon="AlignLeftIcon" size="18" />
                 <p class="pl-1 m-0 text-uppercase">
                   Details
                 </p>
@@ -167,18 +130,12 @@
             <div class="form-group">
               <div class="select-box">
                 <label>Description</label>
-                <b-form-textarea
-                  :value="this.toMerge.description"
-                  rows="5"
-                />
+                <b-form-textarea :value="this.toMerge.description" rows="5" />
               </div>
             </div>
             <div class="form-group has-switch">
               <div class="detail-box">
-                <feather-icon
-                  icon="BarChart2Icon"
-                  size="18"
-                />
+                <feather-icon icon="BarChart2Icon" size="18" />
                 <p class="pl-1 m-0 text-uppercase">
                   effort
                 </p>
@@ -205,27 +162,18 @@
             <div class="form-group">
               <div class="select-box">
                 <label>Epic</label>
-                <v-select
-                  v-model="selectedEpic"
-                  :options="['Epic A', 'Epic B']"
-                  placeholder="Select Epic"
-                  outlined
-                />
+                <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
               </div>
             </div>
             <div class="form-group d-flex justify-content-end">
-              <b-button
-                variant="outline-primary"
-              >
+              <b-button variant="outline-primary">
                 <feather-icon icon="PlusIcon" />
                 <span class="pl-1">Add dependency</span>
               </b-button>
             </div>
             <div class="form-group">
               <div class="detail-box">
-                <custom-icon
-                  name="hexahedron"
-                />
+                <custom-icon name="hexahedron" />
                 <p class="pl-1 m-0 text-uppercase">
                   Dependencies
                 </p>
@@ -247,10 +195,7 @@
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
+              <feather-icon icon="AlignLeftIcon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -265,18 +210,12 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea
-                :value="merged.description"
-                rows="5"
-              />
+              <b-form-textarea :value="merged.description" rows="5" />
             </div>
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
+              <feather-icon icon="BarChart2Icon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 effort
               </p>
@@ -303,27 +242,18 @@
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
-                outlined
-              />
+              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
-            <b-button
-              variant="outline-primary"
-            >
+            <b-button variant="outline-primary">
               <feather-icon icon="PlusIcon" />
               <span class="pl-1">Add dependency</span>
             </b-button>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <custom-icon
-                name="hexahedron"
-              />
+              <custom-icon name="hexahedron" />
               <p class="pl-1 m-0 text-uppercase">
                 Dependencies
               </p>
@@ -334,16 +264,10 @@
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button
-        variant="outline-primary"
-        @click="hideModal"
-      >
+      <b-button variant="outline-primary" @click="hideModal">
         Cancel
       </b-button>
-      <b-button
-        variant="primary"
-        @click="handleSave"
-      >
+      <b-button variant="primary" @click="handleSave">
         Save
       </b-button>
     </template>
@@ -369,12 +293,12 @@ export default {
   props: {
     selectedActivityData: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     isOpen: Boolean,
     team_data: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
   data() {
@@ -397,11 +321,14 @@ export default {
     },
     toMergeList() {
       const arr = []
-      this.selectedActivityData.team.phases.flat().forEach(t => {
-        if (this.selectedActivityData.phase.activityId !== t.activityId) {
-          arr.push(t.activityId)
-        }
-      })
+      console.log(2222, this.selectedActivityData)
+      if (this.selectedActivityData && this.selectedActivityData.team && this.selectedActivityData.team.activities) {
+        this.selectedActivityData.team.activities.flat().forEach(t => {
+          if (this.selectedActivityData.phase.activityId !== t.activityId) {
+            arr.push(t.activityId)
+          }
+        })
+      }
       return arr
     },
     c_TeamTitle() {
@@ -432,9 +359,8 @@ export default {
       }
     },
     onActivitySelect(selectedActivityId) {
-      const selectedActivity = this.selectedActivityData.team.phases.flat().find(t => t.activityId === selectedActivityId)
+      const selectedActivity = this.selectedActivityData.team.activities.flat().find(t => t.activityId === selectedActivityId)
       this.toMerge = selectedActivity
-
       const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
       const mergedDuration = this.merged.effort.duration + selectedActivity.effort.duration
       const mergedFte = this.merged.effort.fte + selectedActivity.effort.fte

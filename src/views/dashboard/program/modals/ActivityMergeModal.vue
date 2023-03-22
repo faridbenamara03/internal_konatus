@@ -397,7 +397,7 @@ export default {
     },
     toMergeList() {
       const arr = []
-      this.selectedActivityData.team.phases.flat().forEach(t => {
+      this.selectedActivityData.team.activities.flat().forEach(t => {
         if (this.selectedActivityData.phase.activityId !== t.activityId) {
           arr.push(t.activityId)
         }
@@ -432,7 +432,7 @@ export default {
       }
     },
     onActivitySelect(selectedActivityId) {
-      const selectedActivity = this.selectedActivityData.team.phases.flat().find(t => t.activityId === selectedActivityId)
+      const selectedActivity = this.selectedActivityData.team.activities.flat().find(t => t.activityId === selectedActivityId)
       this.toMerge = selectedActivity
 
       const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
