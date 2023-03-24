@@ -17,11 +17,20 @@
       </div>
     </template>
     <div class="activity-modal--body">
-      <div class="form-group header">
-        <label>ACTIVITY ID</label>
-        <p v-if="selectedActivityData.phase">
-          {{ selectedActivityData.phase.activityId }}
-        </p>
+      <div class="form-group header d-flex justify-content-between">
+        <div>
+          <label>ACTIVITY ID</label>
+          <p v-if="selectedActivityData.phase">
+            {{ selectedActivityData.phase.activityId }}
+          </p>
+        </div>
+        <div>
+          <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">External
+              System: Jira</label></div>
+          <p style="color: #bbbbbb;font-size: 16px;">
+            External Activity Id: JR-12345
+          </p>
+        </div>
       </div>
       <div class="form-group btn-group">
         <b-button v-b-modal.modal-activity-split variant="outline-primary">
@@ -237,7 +246,7 @@ export default {
   props: {
     selectedActivityData: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     teamdata: {
       type: Array,

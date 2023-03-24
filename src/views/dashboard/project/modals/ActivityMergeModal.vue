@@ -15,6 +15,11 @@
     <div class="activity-modal--body">
       <div class="activity-split-view">
         <div class="split-box flex-2">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="danger">
+              To merge
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -22,9 +27,13 @@
                 {{ selectedActivityData.phase.activityId }}
               </p>
             </div>
-            <b-badge variant="danger">
-              To merge
-            </b-badge>
+            <div>
+              <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">
+                  External System: Jira</label></div>
+              <p style="color: #bbbbbb;font-size: 16px;">
+                External Activity Id: JR-12345
+              </p>
+            </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
@@ -49,26 +58,30 @@
           <div class="form-group has-switch">
             <div class="detail-box">
               <feather-icon icon="BarChart2Icon" size="18" />
-              <p class="pl-1 m-0 text-uppercase">
+              <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
+              <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd1" />
             </div>
           </div>
           <div class="form-group">
-            <div class="select-group p-0">
-              <div class="select-group--sub">
-                <div class="select-box mb-0">
-                  <label>Load</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.load" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>Duration</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.duration" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>FTE</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.fte" />
-                </div>
+            <div class="row" v-for="(t, i) in effortData1" :key="i">
+              <div class="col-6">
+                <label>Skill</label>
+                <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                  placeholder="Select Subproject" outlined @input="effortChange1('skill', i, $event)" />
+              </div>
+              <div class="col">
+                <label>Load</label>
+                <b-form-input :value="t.load" @input="effortChange1('load', i, $event)" />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input :value="t.duration" @input="effortChange1('duration', i, $event)" />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input :value="t.fte" @input="effortChange1('fte', i, $event)" />
               </div>
             </div>
           </div>
@@ -94,6 +107,11 @@
           </div>
         </div>
         <div class="split-box flex-2">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="danger">
+              To merge
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -101,9 +119,13 @@
                 {{ toMerge ? toMerge.activityId : '' }}
               </p>
             </div>
-            <b-badge variant="danger">
-              To merge
-            </b-badge>
+            <div>
+              <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">
+                  External System: Jira</label></div>
+              <p style="color: #bbbbbb;font-size: 16px;">
+                External Activity Id: JR-12345
+              </p>
+            </div>
           </div>
           <div class="form-group" v-if="this.toMerge === null">
             <div class="select-box">
@@ -136,26 +158,30 @@
             <div class="form-group has-switch">
               <div class="detail-box">
                 <feather-icon icon="BarChart2Icon" size="18" />
-                <p class="pl-1 m-0 text-uppercase">
+                <p class="px-1 m-0 text-uppercase">
                   effort
                 </p>
+                <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd2" />
               </div>
             </div>
             <div class="form-group">
-              <div class="select-group p-0">
-                <div class="select-group--sub">
-                  <div class="select-box mb-0">
-                    <label>Load</label>
-                    <b-form-input :value="this.toMerge.effort.load" />
-                  </div>
-                  <div class="select-box mb-0">
-                    <label>Duration</label>
-                    <b-form-input :value="this.toMerge.effort.duration" />
-                  </div>
-                  <div class="select-box mb-0">
-                    <label>FTE</label>
-                    <b-form-input :value="this.toMerge.effort.fte" />
-                  </div>
+              <div class="row" v-for="(t, i) in effortData2" :key="i">
+                <div class="col-6">
+                  <label>Skill</label>
+                  <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                    placeholder="Select Subproject" outlined @input="effortChange2('skill', i, $event)" />
+                </div>
+                <div class="col">
+                  <label>Load</label>
+                  <b-form-input :value="t.load" @input="effortChange2('load', i, $event)" />
+                </div>
+                <div class="col">
+                  <label>Duration</label>
+                  <b-form-input :value="t.duration" @input="effortChange2('duration', i, $event)" />
+                </div>
+                <div class="col">
+                  <label>FTE</label>
+                  <b-form-input :value="t.fte" @input="effortChange2('fte', i, $event)" />
                 </div>
               </div>
             </div>
@@ -182,6 +208,11 @@
           </div>
         </div>
         <div class="split-box flex-3">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="success">
+              Merged
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -189,9 +220,6 @@
                 {{ merged.activityId }}
               </p>
             </div>
-            <b-badge variant="success">
-              Merged
-            </b-badge>
           </div>
           <div class="form-group">
             <div class="detail-box">
@@ -216,26 +244,31 @@
           <div class="form-group has-switch">
             <div class="detail-box">
               <feather-icon icon="BarChart2Icon" size="18" />
-              <p class="pl-1 m-0 text-uppercase">
+              <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
+              <!-- <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd3" /> -->
             </div>
           </div>
           <div class="form-group">
-            <div class="select-group p-0">
-              <div class="select-group--sub">
-                <div class="select-box mb-0">
-                  <label>Load</label>
-                  <b-form-input :value="merged.effort.load" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>Duration</label>
-                  <b-form-input :value="merged.effort.duration" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>FTE</label>
-                  <b-form-input :value="merged.effort.fte" />
-                </div>
+            <div class="row" v-for="(t, i) in effortData3" :key="i">
+              <div class="col-6">
+                <label>Skill</label>
+                <b-form-input readonly :value="t.skill" />
+                <!-- <v-select readonly :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                  placeholder="Select Subproject" outlined @input="effortChange3('skill', i, $event)" /> -->
+              </div>
+              <div class="col">
+                <label>Load</label>
+                <b-form-input readonly :value="t.load" @input="effortChange3('load', i, $event)" />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input readonly :value="t.duration" @input="effortChange3('duration', i, $event)" />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input readonly :value="t.fte" @input="effortChange3('fte', i, $event)" />
               </div>
             </div>
           </div>
@@ -308,6 +341,36 @@ export default {
       selectedActivity: null,
       selectedEpic: null,
       toMerge: null,
+      effortData1: [
+        {
+          skill: "Design",
+          load: 15,
+          duration: 23,
+          fte: 56
+        }
+      ],
+      effortData2: [
+        {
+          skill: "Design",
+          load: 45,
+          duration: 22,
+          fte: 14
+        },
+        {
+          skill: "Engineering",
+          load: 41,
+          duration: 21,
+          fte: 17
+        },
+      ],
+      // effortData3: [
+      //   {
+      //     skill: null,
+      //     load: null,
+      //     duration: null,
+      //     fte: null
+      //   }
+      // ],
     }
   },
   watch: {
@@ -316,19 +379,33 @@ export default {
     },
   },
   computed: {
+    effortData3() {
+      const d1 = JSON.parse(JSON.stringify(this.effortData1))
+      const d2 = JSON.parse(JSON.stringify(this.effortData2))
+      const data = [...d1, ...d2]
+      const rd = []
+      data.forEach(t => {
+        const ad = rd.find(t1 => t1.skill === t.skill)
+        if (ad) {
+          ad.load = parseInt(t.load ? t.load : 0, 10) + parseInt(ad.load ? ad.load : 0, 10)
+          ad.duration = parseInt(t.duration ? t.duration : 0, 10) + parseInt(ad.duration ? ad.duration : 0, 10)
+          ad.fte = parseInt(t.fte ? t.fte : 0, 10) + parseInt(ad.fte ? ad.fte : 0, 10)
+        } else {
+          rd.push(t)
+        }
+      })
+      return rd
+    },
     merged() {
       return { ...this.selectedActivityData.phase, activityId: Vue.faker().internet.ip() }
     },
     toMergeList() {
       const arr = []
-      console.log(2222, this.selectedActivityData)
-      if (this.selectedActivityData && this.selectedActivityData.team && this.selectedActivityData.team.activities) {
-        this.selectedActivityData.team.activities.flat().forEach(t => {
-          if (this.selectedActivityData.phase.activityId !== t.activityId) {
-            arr.push(t.activityId)
-          }
-        })
-      }
+      this.$store.state.globalState.teamsState[0].phases[2].activities.flat().forEach(t => {
+        if (this.selectedActivityData.phase.activityId !== t.activityId) {
+          arr.push(t.activityId)
+        }
+      })
       return arr
     },
     c_TeamTitle() {
@@ -336,6 +413,51 @@ export default {
     }
   },
   methods: {
+    effortChange1(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData1.splice(index, 1)
+      } else {
+        this.effortData1[index][field] = e
+      }
+    },
+    effortChange2(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData2.splice(index, 1)
+      } else {
+        this.effortData2[index][field] = e
+      }
+    },
+    effortChange3(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData3.splice(index, 1)
+      } else {
+        this.effortData3[index][field] = e
+      }
+    },
+    onEffortAdd1() {
+      this.effortData1.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
+    onEffortAdd2() {
+      this.effortData2.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
+    onEffortAdd3() {
+      this.effortData3.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
     hideModal() {
       this.$refs['my-modal'].hide()
       this.toMerge = null
@@ -359,7 +481,7 @@ export default {
       }
     },
     onActivitySelect(selectedActivityId) {
-      const selectedActivity = this.selectedActivityData.team.activities.flat().find(t => t.activityId === selectedActivityId)
+      const selectedActivity = this.$store.state.globalState.teamsState[0].phases[2].activities.flat().find(t => t.activityId === selectedActivityId)
       this.toMerge = selectedActivity
       const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
       const mergedDuration = this.merged.effort.duration + selectedActivity.effort.duration

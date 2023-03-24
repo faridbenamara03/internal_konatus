@@ -800,7 +800,7 @@ const globalOrganizationData = {
                   activityId: `install-software-activity`,
                   phase: 'phase-1',
                   title: 'Install software',
-                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
                   priority: 'Highest',
                   gate: 1,
                   assigned: 'team-a-team',
@@ -814,7 +814,7 @@ const globalOrganizationData = {
                   activityId: 'develop-control-software-activity',
                   title: 'Develop control software',
                   phase: 'phase-1',
-                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
                   priority: 'Highest',
                   gate: 2,
                   assigned: 'team-a-team',
@@ -827,7 +827,7 @@ const globalOrganizationData = {
                 {
                   activityId: `debugging-activity`,
                   title: 'Debugging',
-                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
                   phase: 'phase-1',
                   priority: 'Highest',
                   gate: 1,
@@ -853,7 +853,7 @@ const globalOrganizationData = {
                 {
                   activityId: `electricity-market-ai-activity`,
                   title: 'Electricity market AI',
-                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
                   priority: 'Highest',
                   phase: 'phase-2',
                   gate: 1,
@@ -867,7 +867,7 @@ const globalOrganizationData = {
                 {
                   activityId: `improve-generator-component-activity`,
                   title: 'Improve generator component',
-                  description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
                   priority: 'Highest',
                   phase: 'phase-2',
                   gate: 2,
@@ -1001,7 +1001,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1018,7 +1018,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1035,7 +1035,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1047,7 +1047,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1059,7 +1059,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1076,7 +1076,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1088,7 +1088,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1114,7 +1114,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1131,7 +1131,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1148,7 +1148,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1165,7 +1165,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1182,7 +1182,7 @@ const teamsState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1206,7 +1206,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1223,7 +1223,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1240,7 +1240,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1252,7 +1252,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1264,7 +1264,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1281,7 +1281,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1293,7 +1293,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 1,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1318,7 +1318,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1335,7 +1335,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1352,7 +1352,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1369,7 +1369,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,
@@ -1386,7 +1386,7 @@ const phaseState = [
             priority: 'Highest',
             gate: 2,
             activityId: `${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}.${parseInt(Math.random() * 255, 10)}`,
-            description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
+            description: 'Set up foundations with dimmentions 30cm by 50cm.',
             effort: {
               load: 53,
               duration: 26,

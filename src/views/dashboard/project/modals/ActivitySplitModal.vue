@@ -1,34 +1,25 @@
 <template>
-  <b-modal
-    id="modal-activity-split"
-    ref="my-modal"
-    title="Split Activity"
-    centered
-    no-fade
-    hide-backdrop
-    static
-    size="xl"
-  >
+  <b-modal id="modal-activity-split" ref="my-modal" title="Split Activity" centered no-fade hide-backdrop static
+    size="xl">
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
         Split Activity
       </h5>
       <div class="modal-actions">
-        <b-button
-          variant="outline-primary"
-          @click="hideModal"
-        >
-          <feather-icon
-            icon="XIcon"
-            size="18"
-          />
+        <b-button variant="outline-primary" @click="hideModal">
+          <feather-icon icon="XIcon" size="18" />
         </b-button>
       </div>
     </template>
     <div class="activity-modal--body">
       <div class="activity-split-view">
         <div class="split-box flex-3">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="danger">
+              To split
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -36,16 +27,17 @@
                 {{ selectedActivityData.phase.activityId }}
               </p>
             </div>
-            <b-badge variant="danger">
-              To split
-            </b-badge>
+            <div>
+              <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">
+                  External System: Jira</label></div>
+              <p style="color: #bbbbbb;font-size: 16px;">
+                External Activity Id: JR-12345
+              </p>
+            </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
+              <feather-icon icon="AlignLeftIcon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -60,24 +52,41 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea
-                :value="selectedActivityData.phase.description"
-                rows="5"
-              />
+              <b-form-textarea :value="selectedActivityData.phase.description" rows="5" />
             </div>
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
+              <feather-icon icon="BarChart2Icon" size="18" />
+              <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
+              <!-- <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd1" /> -->
             </div>
           </div>
           <div class="form-group">
+            <div class="row" v-for="(t, i) in effortData1" :key="i">
+              <div class="col-6">
+                <label>Skill</label>
+                <b-form-input :value="t.skill" readonly/>
+                <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                  placeholder="Select Subproject" outlined @input="effortChange1('skill', i, $event)" /> -->
+              </div>
+              <div class="col">
+                <label>Load</label>
+                <b-form-input :value="t.load" readonly />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input :value="t.duration" readonly />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input :value="t.fte" readonly />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
             <div class="select-group p-0">
               <div class="select-group--sub">
                 <div class="select-box mb-0">
@@ -94,37 +103,29 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
-                outlined
-              />
+              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
-            <b-button
-              variant="outline-primary"
-            >
+            <b-button variant="outline-primary">
               <feather-icon icon="PlusIcon" />
               <span class="pl-1">Add dependency</span>
             </b-button>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <custom-icon
-                name="hexahedron"
-              />
+              <custom-icon name="hexahedron" />
               <p class="pl-1 m-0 text-uppercase">
                 Dependencies
               </p>
             </div>
           </div>
-          <div v-for="(item, index) in selectedActivityData.phase.dependency" :key="index" class="shadow rounded d-flex" style="padding:10px;justify-content:space-between;">
+          <div v-for="(item, index) in selectedActivityData.phase.dependency" :key="index" class="shadow rounded d-flex"
+            style="padding:10px;justify-content:space-between;">
             <div class="d-flex">
               <div class="bg-warning" style="width:8px;height:22px;border-radius:2px;margin-right:8px" />
               <feather-icon icon="LinkIcon" style="margin-top:4px;margin-right:8px" />
@@ -136,6 +137,11 @@
           </div>
         </div>
         <div class="split-box flex-2">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="success">
+              Splited
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -143,16 +149,10 @@
                 {{ newActivityId1 }}
               </p>
             </div>
-            <b-badge variant="success">
-              Splited
-            </b-badge>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
+              <feather-icon icon="AlignLeftIcon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -161,7 +161,8 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input v-model="title1" id="input-title1" aria-describedby="input-title1-feedback" :state="title1Valid" />
+              <b-form-input v-model="title1" id="input-title1" aria-describedby="input-title1-feedback"
+                :state="title1Valid" />
               <b-form-invalid-feedback id="input-title1-feedback" style="float:left">
                 Add a new title
               </b-form-invalid-feedback>
@@ -170,9 +171,8 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea v-model="description1" id="input-description1" aria-describedby="input-description1-feedback" :state="description1Valid"
-                rows="5"
-              />
+              <b-form-textarea v-model="description1" id="input-description1"
+                aria-describedby="input-description1-feedback" :state="description1Valid" rows="5" />
               <b-form-invalid-feedback id="input-description1-feedback" style="float:left">
                 Add a new description
               </b-form-invalid-feedback>
@@ -180,16 +180,35 @@
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
+              <feather-icon icon="BarChart2Icon" size="18" />
+              <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
+              <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd2" />
             </div>
           </div>
           <div class="form-group">
+            <div class="row" v-for="(t, i) in effortData2" :key="i">
+              <div class="col-6">
+                <label>Skill</label>
+                <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                  placeholder="Select Subproject" outlined @input="effortChange2('skill', i, $event)" />
+              </div>
+              <div class="col">
+                <label>Load</label>
+                <b-form-input :value="t.load" @input="effortChange2('load', i, $event)" />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input :value="t.duration" @input="effortChange2('duration', i, $event)" />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input :value="t.fte" @input="effortChange2('fte', i, $event)" />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
             <div class="select-group p-0">
               <div class="select-group--sub">
                 <div class="select-box mb-0">
@@ -206,31 +225,22 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
-                outlined
-              />
+              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
-            <b-button
-              variant="outline-primary"
-            >
+            <b-button variant="outline-primary">
               <feather-icon icon="PlusIcon" />
               <span class="pl-1">Add dependency</span>
             </b-button>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <custom-icon
-                name="hexahedron"
-              />
+              <custom-icon name="hexahedron" />
               <p class="pl-1 m-0 text-uppercase">
                 Dependencies
               </p>
@@ -238,6 +248,11 @@
           </div>
         </div>
         <div class="split-box flex-2">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="success">
+              Splited
+            </b-badge>
+          </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
               <label>ACTIVITY ID</label>
@@ -245,16 +260,10 @@
                 {{ newActivityId2 }}
               </p>
             </div>
-            <b-badge variant="success">
-              Splited
-            </b-badge>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
+              <feather-icon icon="AlignLeftIcon" size="18" />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -263,7 +272,8 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input v-model="title2" id="input-title2" aria-describedby="input-title2-feedback" :state="title2Valid" />
+              <b-form-input v-model="title2" id="input-title2" aria-describedby="input-title2-feedback"
+                :state="title2Valid" />
               <b-form-invalid-feedback id="input-title2-feedback" style="float:left">
                 Add a new title
               </b-form-invalid-feedback>
@@ -272,9 +282,8 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea v-model="description2" id="input-description2" aria-describedby="input-description2-feedback" :state="description2Valid"
-                rows="5"
-              />
+              <b-form-textarea v-model="description2" id="input-description2"
+                aria-describedby="input-description2-feedback" :state="description2Valid" rows="5" />
               <b-form-invalid-feedback id="input-description2 -feedback" style="float:left">
                 Add a new description
               </b-form-invalid-feedback>
@@ -282,16 +291,36 @@
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
+              <feather-icon icon="BarChart2Icon" size="18" />
+              <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
+              <!-- <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd3" /> -->
             </div>
           </div>
           <div class="form-group">
+            <div class="row" v-for="(t, i) in effortData3" :key="i">
+              <div class="col-6">
+                <label>Skill</label>
+                <b-form-input :value="t.skill" readonly />
+                <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
+                  placeholder="Select Subproject" outlined @input="effortChange3('skill', i, $event)" /> -->
+              </div>
+              <div class="col">
+                <label>Load</label>
+                <b-form-input :value="t.load" readonly />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input :value="t.duration" readonly />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input :value="t.fte" readonly />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
             <div class="select-group p-0">
               <div class="select-group--sub">
                 <div class="select-box mb-0">
@@ -308,31 +337,22 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
-                outlined
-              />
+              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
-            <b-button
-              variant="outline-primary"
-            >
+            <b-button variant="outline-primary">
               <feather-icon icon="PlusIcon" />
               <span class="pl-1">Add dependency</span>
             </b-button>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <custom-icon
-                name="hexahedron"
-              />
+              <custom-icon name="hexahedron" />
               <p class="pl-1 m-0 text-uppercase">
                 Dependencies
               </p>
@@ -343,16 +363,10 @@
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button
-        variant="outline-primary"
-        @click="hideModal"
-      >
+      <b-button variant="outline-primary" @click="hideModal">
         Cancel
       </b-button>
-      <b-button
-        variant="primary"
-        @click="handleSave"
-      >
+      <b-button variant="primary" @click="handleSave">
         Save
       </b-button>
     </template>
@@ -379,7 +393,7 @@ export default {
   props: {
     selectedActivityData: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     isOpen: Boolean,
   },
@@ -407,6 +421,42 @@ export default {
       fte2,
       newActivityId1: Vue.faker().internet.ip(),
       newActivityId2: Vue.faker().internet.ip(),
+      effortData1: [
+        {
+          skill: "Design",
+          load: 26,
+          duration: 40,
+          fte: 56
+        },
+        {
+          skill: "Management",
+          load: 43,
+          duration: 25,
+          fte: 34
+        },
+        {
+          skill: "Engineering",
+          load: 43,
+          duration: 45,
+          fte: 34
+        },
+      ],
+      effortData2: [
+        {
+          skill: null,
+          load: null,
+          duration: null,
+          fte: null
+        }
+      ],
+      // effortData3: [
+      //   {
+      //     skill: null,
+      //     load: null,
+      //     duration: null,
+      //     fte: null
+      //   }
+      // ],
     }
   },
   watch: {
@@ -429,9 +479,69 @@ export default {
     },
     c_TeamTitle() {
       return this.selectedActivityData.team.title
+    },
+    effortData3() {
+      const dt = JSON.parse(JSON.stringify(this.effortData1))
+      const data = []
+      dt.forEach(t => {
+        const d = { ...t }
+        const exist = this.effortData2.find(t1 => t1.skill === t.skill)
+        if (exist) {
+          d.load = (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10)) < 0 ? 0 : (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10))
+          d.duration = (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10)) < 0 ? 0 : (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10))
+          d.fte = (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10)) < 0 ? 0 : (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10))
+        }
+        if (d.load + d.duration + d.fte > 0) data.push(d)
+      })
+      return data
     }
   },
   methods: {
+    effortChange1(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData1.splice(index, 1)
+      } else {
+        this.effortData1[index][field] = e
+      }
+    },
+    effortChange2(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData2.splice(index, 1)
+      } else {
+        this.effortData2[index][field] = e
+      }
+    },
+    effortChange3(field, index, e) {
+      if (field === "skill" && !e) {
+        this.effortData3.splice(index, 1)
+      } else {
+        this.effortData3[index][field] = e
+      }
+    },
+    onEffortAdd1() {
+      this.effortData1.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
+    onEffortAdd2() {
+      this.effortData2.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
+    onEffortAdd3() {
+      this.effortData3.push({
+        skill: null,
+        load: null,
+        duration: null,
+        fte: null
+      })
+    },
     hideModal() {
       this.$refs['my-modal'].hide()
       this.newActivityId1 = Vue.faker().internet.ip()
