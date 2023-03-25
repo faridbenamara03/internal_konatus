@@ -147,10 +147,10 @@
           Show details
         </b-form-checkbox>
       </div>
-      <div class="form-group" v-if="effortDetailShow">
+      <div class="form-group">
         <div class="row">
-          <div class="col-6">
-          </div>
+          <!-- <div class="col-6">
+          </div> -->
           <div class="col">
             <label>Total Load</label>
             <b-form-input :value="totalEffortData.tLoad" readonly />
@@ -164,23 +164,25 @@
             <b-form-input :value="totalEffortData.tFte" readonly />
           </div>
         </div>
-        <div class="row" v-for="(t, i) in effortData" :key="i">
-          <div class="col-6">
-            <label>Skillset</label>
-            <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
-              placeholder="Select skillset" outlined @input="effortChange('skill', i, $event)" />
-          </div>
-          <div class="col">
-            <label>Load</label>
-            <b-form-input :value="t.load" @input="effortChange('load', i, $event)" />
-          </div>
-          <div class="col">
-            <label>Duration</label>
-            <b-form-input :value="t.duration" @input="effortChange('duration', i, $event)" />
-          </div>
-          <div class="col">
-            <label>FTE</label>
-            <b-form-input :value="t.fte" @input="effortChange('fte', i, $event)" />
+        <div v-if="effortDetailShow">
+          <div class="row" v-for="(t, i) in effortData" :key="i">
+            <div class="col-6">
+              <label>Skillset</label>
+              <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
+                placeholder="Select skillset" outlined @input="effortChange('skill', i, $event)" />
+            </div>
+            <div class="col">
+              <label>Load</label>
+              <b-form-input :value="t.load" @input="effortChange('load', i, $event)" />
+            </div>
+            <div class="col">
+              <label>Duration</label>
+              <b-form-input :value="t.duration" @input="effortChange('duration', i, $event)" />
+            </div>
+            <div class="col">
+              <label>FTE</label>
+              <b-form-input :value="t.fte" @input="effortChange('fte', i, $event)" />
+            </div>
           </div>
         </div>
       </div>
