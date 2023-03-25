@@ -85,7 +85,7 @@
         <div class="select-box">
           <label>Subproject</label>
           <v-select :options="['Template', 'System programming', 'Checking', 'Illustration']"
-            placeholder="Select Subproject" outlined />
+            placeholder="Select skillset" outlined />
         </div>
         <div class="select-box">
           <label>Task</label>
@@ -143,16 +143,32 @@
           </p>
           <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd" />
         </div>
-        <b-form-checkbox checked="true" switch inline>
+        <b-form-checkbox @change="effortDetailShowToggle" :checked="effortDetailShow" switch inline>
           Show details
         </b-form-checkbox>
       </div>
-      <div class="form-group">
+      <div class="form-group" v-if="effortDetailShow">
+        <div class="row">
+          <!-- <div class="col-6">
+          </div> -->
+          <div class="col">
+            <label>Total Load</label>
+            <b-form-input :value="totalEffortData.tLoad" readonly />
+          </div>
+          <div class="col">
+            <label>Total Duration</label>
+            <b-form-input :value="totalEffortData.tDuration" readonly />
+          </div>
+          <div class="col">
+            <label>Total FTE</label>
+            <b-form-input :value="totalEffortData.tFte" readonly />
+          </div>
+        </div>
         <div class="row" v-for="(t, i) in effortData" :key="i">
           <div class="col-6">
-            <label>Skill</label>
+            <label>Skillset</label>
             <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
-              placeholder="Select Subproject" outlined @input="effortChange('skill', i, $event)" />
+              placeholder="Select skillset" outlined @input="effortChange('skill', i, $event)" />
           </div>
           <div class="col">
             <label>Load</label>
@@ -168,45 +184,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="form-group">
-        <div class="select-group p-0">
-          <div class="select-group--sub">
-            <div class="select-box mb-0">
-              <label>Subproject</label>
-              <v-select :options="['Design', 'Program', 'Manage']" placeholder="Select Subproject" outlined />
-            </div>
-            <div class="select-box mb-0">
-              <label>Load</label>
-              <b-form-input :value="selectedActivityData.phase.effort.load" />
-            </div>
-            <div class="select-box mb-0">
-              <label>Duration</label>
-              <b-form-input :value="selectedActivityData.phase.effort.duration" />
-            </div>
-            <div class="select-box mb-0">
-              <label>FTE</label>
-              <b-form-input :value="selectedActivityData.phase.effort.fte" />
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="d-flex" style="justify-content:end">
-        <div>
-          <b-dropdown size="sm" variant="link" id="dropdown-1" style="margin-right:-24px;"
-            toggle-class="text-decoration-none" no-caret>
-            <template #button-content>
-              <span style="color:#7367F0">
-                Effort per Skill
-                <feather-icon icon="ChevronDownIcon" class="ml-1" />
-              </span>
-            </template>
-            <b-dropdown-item>Skill 1</b-dropdown-item>
-            <b-dropdown-item>Skill 2</b-dropdown-item>
-            <b-dropdown-item active>Skill 3</b-dropdown-item>
-            <b-dropdown-item disabled>Skill 4</b-dropdown-item>
-          </b-dropdown>
-        </div>
-      </div> -->
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
@@ -266,10 +243,22 @@ export default {
           duration: null,
           fte: null
         }
-      ]
+      ],
+      effortDetailShow: true
     }
   },
   computed: {
+    totalEffortData() {
+      let load = 0
+      let duration = 0
+      let fte = 0
+      this.effortData.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
+      return { tLoad: load, tDuration: duration, tFte: fte }
+    },
     c_teamData() {
       const dt = ["System auto select", ...this.teamdata]
       return dt
@@ -312,6 +301,9 @@ export default {
         duration: null,
         fte: null
       })
+    },
+    effortDetailShowToggle(e) {
+      this.effortDetailShow = e
     }
   },
 }

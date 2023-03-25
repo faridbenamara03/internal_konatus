@@ -65,12 +65,28 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="row">
+              <!-- <div class="col-6">
+              </div> -->
+              <div class="col">
+                <label>Total Load</label>
+                <b-form-input :value="totalEffortData1.tLoad" readonly />
+              </div>
+              <div class="col">
+                <label>Total Duration</label>
+                <b-form-input :value="totalEffortData1.tDuration" readonly />
+              </div>
+              <div class="col">
+                <label>Total FTE</label>
+                <b-form-input :value="totalEffortData1.tFte" readonly />
+              </div>
+            </div>
             <div class="row" v-for="(t, i) in effortData1" :key="i">
               <div class="col-6">
-                <label>Skill</label>
-                <b-form-input :value="t.skill" readonly/>
+                <label>Skillset</label>
+                <b-form-input :value="t.skill" readonly />
                 <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select Subproject" outlined @input="effortChange1('skill', i, $event)" /> -->
+                  placeholder="Select skillset" outlined @input="effortChange1('skill', i, $event)" /> -->
               </div>
               <div class="col">
                 <label>Load</label>
@@ -188,11 +204,27 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="row">
+              <!-- <div class="col-6">
+              </div> -->
+              <div class="col">
+                <label>Total Load</label>
+                <b-form-input :value="totalEffortData2.tLoad" readonly />
+              </div>
+              <div class="col">
+                <label>Total Duration</label>
+                <b-form-input :value="totalEffortData2.tDuration" readonly />
+              </div>
+              <div class="col">
+                <label>Total FTE</label>
+                <b-form-input :value="totalEffortData2.tFte" readonly />
+              </div>
+            </div>
             <div class="row" v-for="(t, i) in effortData2" :key="i">
               <div class="col-6">
-                <label>Skill</label>
+                <label>Skillset</label>
                 <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select Subproject" outlined @input="effortChange2('skill', i, $event)" />
+                  placeholder="Select skillset" outlined @input="effortChange2('skill', i, $event)" />
               </div>
               <div class="col">
                 <label>Load</label>
@@ -299,12 +331,28 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="row">
+              <!-- <div class="col-6">
+              </div> -->
+              <div class="col">
+                <label>Total Load</label>
+                <b-form-input :value="totalEffortData3.tLoad" readonly />
+              </div>
+              <div class="col">
+                <label>Total Duration</label>
+                <b-form-input :value="totalEffortData3.tDuration" readonly />
+              </div>
+              <div class="col">
+                <label>Total FTE</label>
+                <b-form-input :value="totalEffortData3.tFte" readonly />
+              </div>
+            </div>
             <div class="row" v-for="(t, i) in effortData3" :key="i">
               <div class="col-6">
-                <label>Skill</label>
+                <label>Skillset</label>
                 <b-form-input :value="t.skill" readonly />
                 <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select Subproject" outlined @input="effortChange3('skill', i, $event)" /> -->
+                  placeholder="Select skillset" outlined @input="effortChange3('skill', i, $event)" /> -->
               </div>
               <div class="col">
                 <label>Load</label>
@@ -465,6 +513,39 @@ export default {
     },
   },
   computed: {
+    totalEffortData1() {
+      let load = 0
+      let duration = 0
+      let fte = 0
+      this.effortData1.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
+      return { tLoad: load, tDuration: duration, tFte: fte }
+    },
+    totalEffortData2() {
+      let load = 0
+      let duration = 0
+      let fte = 0
+      this.effortData2.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
+      return { tLoad: load, tDuration: duration, tFte: fte }
+    },
+    totalEffortData3() {
+      let load = 0
+      let duration = 0
+      let fte = 0
+      this.effortData3.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
+      return { tLoad: load, tDuration: duration, tFte: fte }
+    },
     title1Valid() {
       return this.title1.length > 0
     },
