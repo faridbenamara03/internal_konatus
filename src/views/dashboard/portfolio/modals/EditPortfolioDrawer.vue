@@ -66,7 +66,7 @@ export default {
       edited: false,
       parentOrganization: "Konatus Industries",
       startDate: "2023-01-13",
-      endDate: "2023-04-29"
+      endDate: "2023-04-30"
     }
   },
   methods: {
