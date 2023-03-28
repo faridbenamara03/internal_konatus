@@ -18,8 +18,7 @@
               <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
             </b-button> -->
-            <b-button v-if="tabIndex === 0" class="ml-1"
-              variant="primary">
+            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
               <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
             </b-button>
@@ -96,14 +95,15 @@
             </div>
           </div>
         </div> -->
-        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{'has-default-card-bg': !isChartView}">
+        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{ 'has-default-card-bg': !isChartView }">
           <Demand :data="itemsForReport" :fields="fieldsForReport" />
         </b-tab>
-        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
+        <b-tab title="Reporting"
+          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
-          <Control />
+          <Control :isChartView="isChartView" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
@@ -111,16 +111,12 @@
               <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
               <div style="white-space:nowrap">Period</div>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth"/>
-                <b-popover
-                  placement="bottomleft"
-                  target="popover-manual-1"
-                  ref="popover"
-                  :show.sync="popoverShow"
-                >
+                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
+                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
                   <div v-click-outside="onClose" style="display:flex;">
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeFromChange"></month-picker>
+                      <month-picker no-default style="width:300px" variant="dark"
+                        @input="onRangeFromChange"></month-picker>
                     </div>
                     <div>
                       <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
@@ -129,19 +125,24 @@
                 </b-popover>
               </div>
             </div>
+            <b-button-group v-if="(tabIndex === 2)" class="ml-1">
+              <b-button variant="outline-primary" :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(true)">
+                Chart
+              </b-button>
+              <b-button variant="outline-primary" :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(false)">
+                Table
+              </b-button>
+            </b-button-group>
             <!-- <b-button-group v-if="tabIndex === 1" class="ml-1">
-              <b-button
-                variant="outline-primary"
+              <b-button variant="outline-primary"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
-                @click="onClickCPSelectBtn('reporting-cost', 'cost')"
-              >
+                @click="onClickCPSelectBtn('reporting-cost', 'cost')">
                 Cost
               </b-button>
-              <b-button
-                variant="outline-primary"
-                @click="onClickCPSelectBtn('reporting-plan', 'plan')"
-                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
-              >
+              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`">
                 Plan
               </b-button>
             </b-button-group> -->
@@ -161,8 +162,8 @@
     <create-modal />
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
     <optimize-modal />
-    <Drawer @close="toggleCreateNewUnitDrawer" align="right" :closeable="false" :maskClosable="true" >
-      <div v-if="openCreateNewUnitDrawer" >
+    <Drawer @close="toggleCreateNewUnitDrawer" align="right" :closeable="false" :maskClosable="true">
+      <div v-if="openCreateNewUnitDrawer">
         <CreateNewUnitDrawer />
       </div>
     </Drawer>
@@ -171,7 +172,7 @@
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover
+  BButton, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover, BButtonGroup
 } from 'bootstrap-vue'
 import Drawer from "vue-simple-drawer"
 import moment from 'moment'
@@ -189,7 +190,7 @@ import CreateNewUnitDrawer from './modals/CreateNewUnitDrawer.vue'
 export default {
   components: {
     BButton,
-    // BButtonGroup,
+    BButtonGroup,
     BCard,
     BCardBody,
     BTabs,
@@ -468,9 +469,11 @@ export default {
   position: absolute;
   left: -576px;
 }
+
 .mask {
   background: #000 !important;
 }
+
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 @import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
