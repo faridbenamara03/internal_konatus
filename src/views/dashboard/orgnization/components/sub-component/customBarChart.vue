@@ -1,9 +1,8 @@
 <template>
   <div class="p-2">
-    <div style="margin-left:40px;font-size:20px;margin-bottom:10px;margin-top:10px"><b>Skillset load per team</b></div>
     <div class="d-flex">
       <div style="width:40px;padding-bottom:20px;" class="d-flex flex-column justify-content-between">
-        <div v-for="(t, i) in yAxisData_1" :key="i" style="text-align:end;padding-right:5px">
+        <div v-for="(t, i) in yAxisData" :key="i" style="text-align:end;padding-right:5px">
           {{ t }}
         </div>
       </div>
@@ -12,29 +11,30 @@
           style="display:flex;justify-content:space-between; border-left: 1px solid white; border-bottom: 1px solid white;">
           <div v-for="(t, i) in xAxisData" :key="i" class="d-flex flex-column justify-content-end"
             :style="`width:${100 / xAxisData.length * 0.8}%;`">
-            <div v-for="(t1, i1) in skillsetArr" class="tool-tip" @click="onSubClick_1(chartData_1[i][i1].team)"
-              :style="`height:${chartData_1[i][i1].value}px;cursor:pointer;width:100%;background:${colorsArr_1[chartData_1[i][i1].loaded]}${selectedSkillset !== null && selectedSkillset !== chartData_1[i][i1].team ? '44' : 'ff'};border:1px solid #222`"
-              :key="i1">
-              <div class="tool-tiptext">{{ chartData_1[i][i1].team }}</div>
+            <div v-for="(t1, i1) in teamArr" class="tool-tip" @click="onSubClick(chartData[i][i1].team)"
+              :style="`height:${chartData[i][i1].engaged / yAxisData[0] * 200}px;cursor:pointer;width:100%;background:${genBgColor(chartData[i][i1].engaged, chartData[i][i1].extCap)}${selectedTeam !== null && selectedTeam !== chartData[i][i1].team ? '44' : 'ff'};
+                                                            border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff;`" :key="i1">
+              <div class="tool-tiptext">{{ chartData[i][i1].team }} ({{ chartData[i][i1].engaged }} /
+                {{ chartData[i][i1].extCap }})</div>
             </div>
           </div>
         </div>
         <div style="display:flex;justify-content:space-between">
           <div v-for="(t, i) in xAxisData" :key="i"
-            :style="`width:${100 / xAxisData.length * 0.8}%;text-align:center;border-radius:4px;margin-top:4px;background:${t === 'w2' ? '#ed143d' : null}`">
-            {{ t }}
+            :style="`width:${100 / xAxisData.length * 0.8}%;text-align:center;border-radius:4px;margin-top:4px;background:${t === 'w2' ? '#7c1615' : null}`">
+            <b>{{ t }}</b>
           </div>
         </div>
       </div>
     </div>
-    <div class="mt-2 w-100">
+    <div class="mt-4 w-100">
       <div class="containerSelf">
         <div style="width: 300px">
         </div>
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-          <template v-for="(item, index) in data_source.xAxisData">
+          <template v-for="(item, index) in xAxisData">
             <div v-if="index === 1" :key="index" class="sub-main"
-              style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
+              style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;">
               <b style="font-size: 17px; color: white;">{{ item }}</b>
             </div>
             <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
@@ -47,47 +47,41 @@
         <div style="width: 300px">
         </div>
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-          <div class="sub-main" v-for="(item, i1) in data_source.xAxisData1" :key="i1"
-            style="padding-top:5px; padding-bottom: 5px;">
+          <div class="sub-main" v-for="(item, i1) in labelData" :key="i1" style="padding-top:5px; padding-bottom: 5px;">
             {{ item }}
           </div>
         </div>
       </div>
-      <div class="containerSelf" v-for="(item, i2) in data_source.series" :key="i2"
-        style="font-size: 16px; font-weight: bold;">
+      <div class="containerSelf" v-for="(team, i2) in teamArr" :key="i2" style="font-size: 16px; font-weight: bold;">
         <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
           style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 300px">
           <div>
-            {{ item.name }}
+            {{ team }}
           </div>
           <div>
             <feather-icon icon="ChevronUpIcon" />
           </div>
         </div>
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-          <div class="sub-main pt-1 pb-1" v-for="item_child in item.data" :key="item_child"
-            :style="'margin: 0.5px; background-color:' + item_child.bg + '; color:' + item_child.clr">
-            {{ item_child.data }}
+          <div class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData" :key="item_child"
+            :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])};`">
+            {{ weeklyEstimatedData[k][i2] }} | {{ weeklyEngagedData[k][i2] }} | {{ extCapData[i2] }}
           </div>
         </div>
       </div>
       <div class="containerSelf m-2">
         <b style="font-size: 17px; color: #A6E4FF">TOTALS</b>
       </div>
-      <div class="containerSelf" v-for="(item, index) in filteredTotalData" :key="index">
+      <div class="containerSelf" v-for="(totalLabel, jndex) in totalLabelData" :key="jndex">
         <div style="width: 300px">
-          <b style="font-size: 16px; color: #A6E4FF">{{ item.captain }}</b>
+          <b style="font-size: 16px; color: #A6E4FF">{{ totalLabel }}</b>
         </div>
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-          <div class="sub-main" v-for="(item1, index) in item.data" :key="index"
-            style="padding-top:5px; padding-bottom: 5px;">
-            <b :style='"font-size: 16px; color:" + item1.numcolor'>{{ item1.value }}</b>
-            <b :style='"font-size: 16px; color:" + item1.pctcolor'>
-              (
-              {{ item1.percent }}
-              <span v-if="item1.percent >= 0">%</span>
-              )
-            </b>
+          <div class="sub-main" v-for="(item1, index) in xAxisData" :key="index"
+            :style="`padding-top:5px;padding-bottom: 5px;font-weight: bold`">
+            {{ parseInt(weeklyTotalData[jndex][index] * 100, 10) / 100 }} / {{ capacity }}
+            (<span :style="`color:${genFontColor(weeklyTotalData[jndex][index], capacity)}`">{{
+              parseInt(weeklyTotalData[jndex][index] * 100 / capacity, 10) }}%</span>)
           </div>
         </div>
       </div>
@@ -141,112 +135,74 @@ export default {
   },
   data() {
     return {
-      data_source: {
-        xAxisData: ['W1', 'W2', 'W3', 'W4', 'W5'],
-        xAxisData1: ['Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap'],
-        total_data: [
-          {
-            captain: 'Real Est./Capacity', data: ['144/160', '136/120', '0/160', '0/160', '0/160']
-          },
-          {
-            captain: 'Engaged/Capacity', data: ['160/160', '120/160', '160/180', '160/180', '160/180']
-          },
-          {
-            captain: 'Engaged+Quote/Capacity', data: ['4/16', '0/0', '80/80', '80/80', '80/80']
-          },
-        ],
-        series: [
-          {
-            name: 'PHP Back-end',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
-            color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            data: [
-              { bg: '#252D43', clr: '#FFF', data: '80 | 80 | 80' },
-              { bg: '#252D43', clr: '#FF900C', data: '96 | 120 | 160' },
-              { bg: '#252D43', clr: '#A6E4FF', data: '80 | 80 | 80' },
-              { bg: '#6A0737', clr: '#D40E6E', data: '96 | 120 | 160' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FFACDA', data: '28/24' }
-            ],
-          },
-          {
-            name: 'Javascript',
-            type: 'line',
-            stack: 'Total',
-            color: '#4f964d',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            color_type: 1,
-            data: [
-              { bg: 'bwarn', clr: '#FF900C', data: '96 | 120 | 160' },
-              { bg: '#252D43', clr: '#FF900C', data: '96 | 160 | 160' },
-              { bg: '#252D43', clr: '#A6E4FF', data: '80 | 80 | 80' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FF900C', data: '96 | 120 | 160' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FFACDA', data: '28/24' }
-            ],
-          },
-          {
-            name: 'Management',
-            type: 'line',
-            stack: 'Total',
-            color: '#186b83',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            data: [
-              { bg: '#6A0737', clr: '#D40E6E', data: '40 | 44 | 48' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FF900C', data: '80 | 80 | 80' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FF900C', data: '96 | 120 | 160' },
-              { bg: '#252D43', clr: '#A6E4FF', data: '0 | 80 | 80' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FFACDA', data: '28/24' }
-            ],
-          },
-          {
-            name: 'QA',
-            type: 'line',
-            stack: 'Total',
-            showSymbol: false,
-            color: '#554bb8',
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            data: [
-              { bg: '#6A0737', clr: '#D40E6E', data: '100 | 120 | 100' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FF900C', data: '80 | 80 | 80' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FF900C', data: '96 | 120 | 160' },
-              { bg: '#252D43', clr: '#A6E4FF', data: '0 | 80 | 80' },
-              { bg: 'rgba(209, 90, 119, 0.4)', clr: '#FFACDA', data: '28/24' }
-            ],
-          },
-        ],
-      },
-      skillsetG1: this.shuffleArray(['PHP Back-end', 'Javascript', 'Management', 'QA']),
-      skillsetG2: this.shuffleArray(['PHP Back-end', 'Javascript', 'Management', 'QA']),
-      skillsetG3: this.shuffleArray(['PHP Back-end', 'Javascript', 'Management', 'QA']),
-      skillsetG4: this.shuffleArray(['PHP Back-end', 'Javascript', 'Management', 'QA']),
-      colorsArr_1: ['#677499', '#4c73e5', '#d15a77', '#6a0737'],
-      skillsetArr: ['PHP Back-end', 'Javascript', 'Management', 'QA'],
-      selectedSkillset: null,
+      labelData: ['Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap'],
+      teamArr: ['Team FP-A', 'Team FP-B', 'Team FP-C', 'Team FP-D'],
+      extCapData: [175, 180, 195, 190],
+      weelyQuotedData: [0, 0, 0, 0, 50, 75, 125, 45, 73],
+      weeklyEstimatedData: [
+        [169, 169, 180, 193],
+        [169, 175, 190, 150],
+        [158, 132, 150, 195],
+        [168, 178, 195, 160],
+        [135, 168, 162, 160],
+        [152, 135, 160, 190],
+        [178, 179, 195, 140],
+        [160, 155, 146, 139],
+        [160, 168, 165, 162]
+      ],
+      weeklyEngagedData: [
+        [180, 169, 178, 196],
+        [50, 175, 190, 150],
+        [160, 130, 145, 185],
+        [90, 96, 190, 155],
+        [130, 170, 165, 88],
+        [160, 145, 162, 191],
+        [138, 89, 195, 150],
+        [40, 156, 142, 139],
+        [160, 178, 185, 162]
+      ],
+      capacity: 680,
+      totalLabelData: ['Real Est./Capacity', 'Engaged/Capacity', 'Engaged+Quote/Capacity'],
+      colorsArr: ['#0641ff', '#ffffff00', '#cd7700', '#a11414'],
+      selectedTeam: null,
     }
   },
   computed: {
-    yAxisData_1() {
+    weeklyTotalData() {
+      const engPlusQData = []
+      this.weeklyTotalEngaged.forEach((t, i) => {
+        engPlusQData.push(t + this.weelyQuotedData[i])
+      })
+      return [this.weeklyTotalEstimated, this.weeklyTotalEngaged, engPlusQData]
+    },
+    weeklyTotalEstimated() {
+      const dt = []
+      this.weeklyEstimatedData.forEach(t => {
+        let sm = 0
+        t.forEach(t1 => {
+          sm += t1
+        })
+        dt.push(sm)
+      })
+      return dt
+    },
+    weeklyTotalEngaged() {
+      const dt = []
+      this.weeklyEngagedData.forEach(t => {
+        let sm = 0
+        t.forEach(t1 => {
+          sm += t1
+        })
+        dt.push(sm)
+      })
+      return dt
+    },
+    yAxisData() {
       let max = -9999
-      this.chartData_1.forEach(t => {
+      this.chartData.forEach(t => {
         let tv = 0
         t.forEach(t1 => {
-          tv += parseInt(t1.value, 10)
+          tv += parseInt(t1.engaged, 10)
         })
         if (tv > max) max = tv
       })
@@ -257,41 +213,21 @@ export default {
       const weekNumber = this.getWeekNumber(today)
       return weekNumber
     },
-    filteredTotalData() {
-      return this.data_source.total_data.map(t => {
-        const valueArr = t.data.map(t1 => {
-          let pctcolor = '#138B49'
-          let numcolor = 'white'
-          const vvle = t1.split('/')[0] / t1.split('/')[1]
-          if (vvle > 0.5 && vvle <= 0.9) pctcolor = '#F5A623'
-          else if (vvle <= 0.5) pctcolor = '#BD2020'
-          const percent = parseInt(vvle * 100, 10)
-          if (parseInt(t1.split('/')[0], 10) === 0) {
-            pctcolor = 'gray'
-            numcolor = 'gray'
-          }
-          return {
-            value: t1, percent, pctcolor, numcolor
-          }
-        })
-        return { captain: t.captain, data: valueArr }
-      })
-    },
     xAxisData() {
       return ['w1', 'w2', 'w3', 'w4', 'w5']
       // return this.$store.state.globalState.customChartXLabel
     },
-    chartData_1() {
+    chartData() {
       const dt = []
-      const teamG = this.shuffleArray(['PHP Back-end', 'Javascript', 'Management', 'QA'])
       for (let i = 0; i < this.xAxisData.length; i += 1) {
         const pdt = []
-        for (let j = 0; j < this.skillsetArr.length; j += 1) {
+        for (let j = 0; j < this.teamArr.length; j += 1) {
           pdt.push(
             {
-              value: parseInt(Math.random() * 80 + 40, 10),
-              loaded: parseInt(Math.random() * 4, 10),
-              team: teamG[j],
+              estimated: this.weeklyEstimatedData[i][j],
+              engaged: this.weeklyEngagedData[i][j],
+              extCap: this.extCapData[j],
+              team: this.teamArr[j]
             }
           )
         }
@@ -311,11 +247,11 @@ export default {
       }
       return array
     },
-    onSubClick_1(skillsetName) {
-      if (skillsetName === this.selectedSkillset) {
-        this.selectedSkillset = null
+    onSubClick(teamName) {
+      if (teamName === this.selectedTeam) {
+        this.selectedTeam = null
       } else {
-        this.selectedSkillset = skillsetName
+        this.selectedTeam = teamName
       }
     },
     getWeekNumber(date) {
@@ -324,6 +260,20 @@ export default {
       const days = Math.round((date - firstDayOfYear) / (1000 * 60 * 60 * 24))
       const weekNumber = Math.ceil((days + firstDayOfYear.getDay() + 1) / 7)
       return weekNumber
+    },
+    genBgColor(engaged, capacity) {
+      let color = '#343434'
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
+      return color
+    },
+    genFontColor(engaged, capacity) {
+      let color = null
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
+      return color
     }
   },
 }

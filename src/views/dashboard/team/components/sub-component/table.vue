@@ -6,7 +6,7 @@
       <div class="containerSelf p-0" style="width: calc(100% - 300px)">
         <template v-for="(item, index) in weekData">
           <div v-if="index === 1" :key="index" class="sub-main"
-            style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
+            style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;">
             <b style="font-size: 17px; color: white;">{{ item }}</b>
           </div>
           <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
@@ -147,17 +147,17 @@ export default {
   },
   methods: {
     genBgColor(engaged, capacity) {
-      let color = '#282828'
-      if (engaged <= 0.6 * capacity) color = '#0641ff'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#cd7700'
-      else if (engaged > capacity) color = '#a11414'
+      let color = '#343434'
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
       return color
     },
     genFontColor(engaged, capacity) {
       let color = null
-      if (engaged <= 0.6 * capacity) color = '#0641ff'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#cd7700'
-      else if (engaged > capacity) color = '#a11414'
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
       return color
     }
   }

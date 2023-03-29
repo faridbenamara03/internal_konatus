@@ -11,17 +11,16 @@
           style="display:flex;justify-content:space-between; border-left: 1px solid white; border-bottom: 1px solid white;">
           <div v-for="(t, i) in xAxisData" :key="i" class="d-flex flex-column justify-content-end"
             :style="`width:${100 / xAxisData.length * 0.8}%;`">
-            <div v-for="(t1, i1) in skillsetArr" class="tool-tip" @click="onSubClick(chartData[i][i1].skillset)"
-              :style="`height:${chartData[i][i1].engaged}px;cursor:pointer;width:100%;background:${genBgColor(chartData[i][i1].engaged, chartData[i][i1].extCap)}${selectedSkillset !== null && selectedSkillset !== chartData[i][i1].skillset ? '44' : 'ff'};
-                border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff;`"
-              :key="i1">
-              <div class="tool-tiptext">{{ chartData[i][i1].skillset }}</div>
+            <div v-for="(t1, i1) in skillsetArr" class="tool-tip" @click="onSubClick(chartData[i][i1].skillset)" :style="`height:${chartData[i][i1].engaged / yAxisData[0] * 200}px;cursor:pointer;width:100%;background:${genBgColor(chartData[i][i1].engaged, chartData[i][i1].extCap)}${selectedSkillset !== null && selectedSkillset !== chartData[i][i1].skillset ? '44' : 'ff'};
+                              border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff;`" :key="i1">
+              <div class="tool-tiptext">{{ chartData[i][i1].skillset }} ({{ chartData[i][i1].engaged }} /
+                {{ chartData[i][i1].extCap }})</div>
             </div>
           </div>
         </div>
         <div style="display:flex;justify-content:space-between">
           <div v-for="(t, i) in xAxisData" :key="i"
-            :style="`width:${100 / xAxisData.length * 0.8}%;text-align:center;border-radius:4px;margin-top:4px;background:${t === 'w2' ? '#ed143d' : null}`">
+            :style="`width:${100 / xAxisData.length * 0.8}%;text-align:center;border-radius:4px;margin-top:4px;background:${t === 'w2' ? '#7c1615' : null}`">
             <b>{{ t }}</b>
           </div>
         </div>
@@ -34,7 +33,7 @@
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
           <template v-for="(item, index) in xAxisData">
             <div v-if="index === 1" :key="index" class="sub-main"
-              style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
+              style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;">
               <b style="font-size: 17px; color: white;">{{ item }}</b>
             </div>
             <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
@@ -64,8 +63,7 @@
           </div>
         </div>
         <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-          <div class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData"
-            :key="item_child"
+          <div class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData" :key="item_child"
             :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])};`">
             {{ weeklyEstimatedData[k][i2] }} | {{ weeklyEngagedData[k][i2] }} | {{ extCapData[i2] }}
           </div>
@@ -140,9 +138,9 @@ export default {
       labelData: ['Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap'],
       skillsetArr: ['PHP Back-end', 'JavaScript', 'Python', 'Test'],
       extCapData: [65, 40, 52, 50],
-      weelyQuotedData: [0, 0, 0, 0, 10, 15, 25, 25, 33],
+      weelyQuotedData: [5, 7, 2, 0, 10, 15, 25, 25, 33],
       weeklyEstimatedData: [
-        [70.84, 32.25, 16.9, 49.01],
+        [70.84, 31.25, 15.9, 45.01],
         [50.56, 37.32, 10.14, 70.98],
         [37.04, 42.39, 42.25, 47.32],
         [26.9, 22.11, 30.42, 74.36],
@@ -153,9 +151,9 @@ export default {
         [42, 10, 17, 32]
       ],
       weeklyEngagedData: [
-        [70, 30, 20, 49],
-        [50, 35, 14, 70],
-        [40, 40, 40, 49],
+        [65, 15, 17, 49],
+        [45, 30, 14, 70],
+        [40, 36, 38, 49],
         [26, 22.5, 33, 70],
         [50, 22.5, 40, 50],
         [70, 10, 33, 35],
@@ -165,7 +163,6 @@ export default {
       ],
       capacity: 169,
       totalLabelData: ['Real Est./Capacity', 'Engaged/Capacity', 'Engaged+Quote/Capacity'],
-      colorsArr: ['#0641ff', '#ffffff00', '#cd7700', '#a11414'],
       selectedSkillset: null,
     }
   },
@@ -265,17 +262,17 @@ export default {
       return weekNumber
     },
     genBgColor(engaged, capacity) {
-      let color = '#282828'
-      if (engaged <= 0.6 * capacity) color = '#0641ff'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#cd7700'
-      else if (engaged > capacity) color = '#a11414'
+      let color = '#343434'
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
       return color
     },
     genFontColor(engaged, capacity) {
       let color = null
-      if (engaged <= 0.6 * capacity) color = '#0641ff'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#cd7700'
-      else if (engaged > capacity) color = '#a11414'
+      if (engaged <= 0.6 * capacity) color = '#003f5c'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
+      else if (engaged > capacity) color = '#7c1615'
       return color
     }
   },
