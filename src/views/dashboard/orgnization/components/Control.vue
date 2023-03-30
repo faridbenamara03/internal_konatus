@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;" :class="{ 'has-chart': isChartView }">
+  <div style="width:100%;overflow: auto;" :class="{ 'has-chart': isChartView }">
     <template v-if="isChartView">
       <CustomBarChart />
     </template>

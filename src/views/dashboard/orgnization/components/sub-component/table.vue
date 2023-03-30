@@ -1,25 +1,25 @@
 <template>
   <div class="p-2 w-100">
     <div class="containerSelf">
-      <div style="width: 300px">
+      <div style="width: 250px">
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <template v-for="(item, index) in weekData">
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <template v-for="(item, index) in xAxisData">
           <div v-if="index === 1" :key="index" class="sub-main"
-            style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 17px; color: white;">{{ item }}</b>
+            style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;min-width:130px;">
+            <b style="font-size: 14px; color: white;">{{ item }}</b>
           </div>
-          <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 17px; color: white;">{{ item }}</b>
+          <div v-else :key="index" class="sub-main" style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;min-width:130px;">
+            <b style="font-size: 14px; color: white;">{{ item }}</b>
           </div>
         </template>
       </div>
     </div>
     <div class="containerSelf">
-      <div style="width: 300px">
+      <div style="width: 250px">
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main" v-for="(item, i1) in labelData" :key="i1" style="padding-top:5px; padding-bottom: 5px;">
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <div class="sub-main" v-for="(item, i1) in labelData" :key="i1" style="padding-top:5px; padding-bottom: 5px;min-width:130px;font-size:13px;">
           {{ item }}
         </div>
       </div>
@@ -27,7 +27,7 @@
     <div class="containerSelf" v-for="(team, i2) in teamArr" :key="i2"
       style="font-size: 16px; font-weight: bold;">
       <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
-        style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 300px">
+        style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 250px;font-size:13px;">
         <div>
           {{ team }}
         </div>
@@ -35,9 +35,9 @@
           <feather-icon icon="ChevronUpIcon" />
         </div>
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="(item_child, k) in weekData" :key="item_child"
-          :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])};cursor:pointer;`">
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <div v-b-modal.modal-no-backdrop class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData" :key="item_child"
+          :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])};cursor:pointer;min-width:130px;font-size:13px;`">
           {{ weeklyEstimatedData[k][i2] }} | {{ weeklyEngagedData[k][i2] }} | {{ extCapData[i2] }}
         </div>
       </div>
@@ -46,12 +46,12 @@
       <b style="font-size: 17px; color: #A6E4FF">TOTALS</b>
     </div>
     <div class="containerSelf" v-for="(totalLabel, jndex) in totalLabelData" :key="jndex">
-      <div style="width: 300px">
-        <b style="font-size: 16px; color: #A6E4FF">{{ totalLabel }}</b>
+      <div style="width: 250px">
+        <b style="font-size: 13px; color: #A6E4FF">{{ totalLabel }}</b>
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main" v-for="(item1, index) in weekData" :key="index"
-          :style="`padding-top:5px;padding-bottom: 5px;font-weight: bold`">
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <div class="sub-main" v-for="(item1, index) in xAxisData" :key="index"
+          :style="`padding-top:5px;padding-bottom: 5px;font-weight: bold;min-width:130px;font-size:13px;`">
           {{ parseInt(weeklyTotalData[jndex][index] * 100, 10) / 100 }} / {{ capacity }}
           (<span :style="`color:${genFontColor(weeklyTotalData[jndex][index], capacity)}`">{{
             parseInt(weeklyTotalData[jndex][index] * 100 / capacity, 10) }}%</span>)
@@ -83,7 +83,7 @@ export default {
   },
   data() {
     return {
-      weekData: ['W1', 'W2', 'W3', 'W4', 'W5'],
+      xAxisData: ['W1', 'W2', 'W3', 'W4', 'W5'],
       labelData: ['Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap'],
       teamArr: ['Team FP-A', 'Team FP-B', 'Team FP-C', 'Team FP-D'],
       extCapData: [175, 180, 195, 190],
