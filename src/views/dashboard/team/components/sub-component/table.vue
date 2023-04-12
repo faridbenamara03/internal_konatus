@@ -39,7 +39,7 @@
       </div>
       <div class="containerSelf p-0" style="width: calc(100% - 250px)">
         <div class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData" :key="item_child"
-          :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])};white-space:nowrap;min-width:130px`">
+          :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])}  ;white-space:nowrap;min-width:130px`">
           {{ weeklyEstimatedData[k][i2] }} | {{ weeklyEngagedData[k][i2] }} | {{ extCapData[i2] }}
         </div>
       </div>
@@ -150,16 +150,16 @@ export default {
   methods: {
     genBgColor(engaged, capacity) {
       let color = '#343434'
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     },
     genFontColor(engaged, capacity) {
       let color = null
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     }
   }

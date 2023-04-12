@@ -12,7 +12,7 @@
           <div v-for="(t, i) in xAxisData" :key="i" class="d-flex flex-column justify-content-end"
             :style="`width:${100 / xAxisData.length * 0.8}%;`">
             <div v-for="(t1, i1) in teamArr" class="tool-tip" @click="onSubClick(chartData[i][i1].team)"
-              :style="`height:${chartData[i][i1].engaged / yAxisData[0] * 200}px;cursor:pointer;width:100%;background:${genBgColor(chartData[i][i1].engaged, chartData[i][i1].extCap)}${selectedTeam !== null && selectedTeam !== chartData[i][i1].team ? '44' : 'ff'};
+              :style="`height:${chartData[i][i1].engaged / yAxisData[0] * 260}px;cursor:pointer;width:100%;background:${genBgColor(chartData[i][i1].engaged, chartData[i][i1].extCap)}${selectedTeam !== null && selectedTeam !== chartData[i][i1].team ? '44' : 'ff'};
                                                                             border-top:2px solid #fff;border-right:2px solid #fff;border-left:2px solid #fff;`" :key="i1">
               <div class="tool-tiptext">{{ chartData[i][i1].team }} ({{ chartData[i][i1].engaged }} /
                 {{ chartData[i][i1].extCap }})</div>
@@ -266,16 +266,16 @@ export default {
     },
     genBgColor(engaged, capacity) {
       let color = '#343434'
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     },
     genFontColor(engaged, capacity) {
       let color = null
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     }
   },

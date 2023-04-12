@@ -1,5 +1,5 @@
 <template>
-  <div class="unit-report-custom">
+  <div v-if="reportingState === 'plan'" class="unit-report-custom">
     <div class="unit-reporting-side-custom">
       <div style="height:124.3px" class="d-flex flex-column justify-content-end">
         <b-form-select v-model="optionSelect" :options="options" />
@@ -214,6 +214,9 @@
       </template>
     </b-modal>
   </div>
+  <div v-else class="unit-report-custom">
+    <ReportingCost :data="itemsForReport" :fields="fieldsForReport" />
+  </div>
 </template>
 
 <script>
@@ -224,6 +227,7 @@ import moment from "moment"
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
 import ElementProgressBar from '../../globalComponent/ElementProgressBar.vue'
+import ReportingCost from './ReportingCost.vue'
 
 export default {
   components: {
@@ -233,6 +237,7 @@ export default {
     ProgramProgressBar,
     ProjectProgressBar,
     ElementProgressBar,
+    ReportingCost
   },
   data() {
     return {
@@ -246,8 +251,153 @@ export default {
         { value: 'Team C', text: 'Team C' },
         { value: 'Team D', text: 'Team D' },
       ],
-      optionSelect: 'show_all'
+      optionSelect: 'show_all',
+      itemsForDemand: [
+        {
+          name: 'Konatus Industries',
+          budget_team: '2540',
+          budget_engaged: '1132.3',
+          real_estimated: '1132.3',
+          children: [
+            {
+              name: 'TEAM A',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM B',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM D',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM C',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+            {
+              name: 'TEAM E',
+              budget_team: '228k',
+              budget_engaged: '320k',
+              real_estimated: '58',
+            },
+          ],
+        },
+        {
+          name: 'SPACE HOLDER FOR ANOTHER BU',
+          budget_team: '2540',
+          budget_engaged: '1132.3',
+          real_estimated: '1132.3',
+          children: [],
+        },
+      ],
+      itemsForReport: [
+        {
+          _showDetails: true,
+          name: 'Konatus Industries',
+          budget_team: '3740',
+          budget_engaged: '1647.3',
+          real_estimated: '1478.2',
+          children: [
+            {
+              name: 'Paris',
+              budget_team: '1390',
+              budget_engaged: '601.9',
+              real_estimated: '601.9',
+              state: 'up',
+              children: [
+                {
+                  name: 'TEAM A',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'up',
+                },
+                {
+                  name: 'TEAM B',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'up',
+                },
+                {
+                  name: 'TEAM C',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'down',
+                },
+              ]
+            },
+            {
+              name: 'Sofia',
+              budget_team: '500',
+              budget_engaged: '210.6',
+              real_estimated: '210.6',
+              state: 'up',
+              children: [
+                {
+                  name: 'TEAM D',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'up',
+                },
+                {
+                  name: 'TEAM E',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'down',
+                },
+                {
+                  name: 'TEAM F',
+                  budget_team: '1390',
+                  budget_engaged: '601.9',
+                  real_estimated: '601.9',
+                  state: 'up',
+                },
+              ]
+            },
+          ],
+        },
+        {
+          name: 'SPACE HOLDER FOR AN OTHER BU',
+        },
+        {
+          name: 'total',
+          budget_team: '3740',
+          budget_engaged: '1647.3',
+          real_estimated: '1478.2',
+        }
+      ],
+      fieldsForReport: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'budget_team', 'budget_engaged', 'real_estimated', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
     }
+  },
+  props: {
+    reportingState: {
+      type: String,
+    },
   },
   computed: {
     datt() {
@@ -289,4 +439,6 @@ export default {
 }
 </script>
 
-<style lang="scss">@import "@core/scss/vue/pages/dashboard-unit-reporting.scss";</style>
+<style lang="scss">
+@import "@core/scss/vue/pages/dashboard-unit-reporting.scss";
+</style>

@@ -156,6 +156,7 @@
     <modal-request-quote :data="projectElementTeamData" @onSubmit="handleRequestQuote" />
     <import-modal />
     <import-loader-modal />
+    <InsertNewTaskModal />
   </b-card>
 </template>
 
@@ -181,6 +182,7 @@ import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
+import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
 
 export default {
   components: {
@@ -200,6 +202,7 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
+    InsertNewTaskModal
   },
   props: {
     data: {

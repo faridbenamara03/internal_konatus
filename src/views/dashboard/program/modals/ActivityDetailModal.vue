@@ -24,12 +24,26 @@
             {{ selectedActivityData.phase.activityId }}
           </p>
         </div>
-        <div>
-          <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">External
-              System: Jira</label></div>
-          <p style="color: #bbbbbb;font-size: 16px;">
-            External Activity Id: JR-12345
-          </p>
+        <div style="display: flex">
+          <div>
+            <div style="text-align: end;">
+              <label v-if="!externalEditable" style="font-size: 14px; color: #898989;text-transform:none">
+                External System: {{ externalSystem }}
+              </label>
+              <div v-else>
+                <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem" placeholder="Select External System" outlined />
+              </div>
+            </div>
+            <p v-if="!externalEditable" style="color: #bbbbbb;font-size: 16px;">
+              External Activity Id: {{ externalId }}
+            </p>
+            <div v-else>
+              <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
+            </div>
+          </div>
+          <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
+            <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+          </div>
         </div>
       </div>
       <div class="form-group btn-group">
@@ -246,7 +260,10 @@ export default {
           fte: null
         }
       ],
-      effortDetailShow: true
+      effortDetailShow: true,
+      externalEditable: false,
+      externalSystem: "Jira",
+      externalId: "JR-12345"
     }
   },
   computed: {
@@ -283,6 +300,9 @@ export default {
     },
   },
   methods: {
+    handleExternalEdit() {
+      this.externalEditable = !this.externalEditable
+    },
     hideModal() {
       this.$emit('hideModal')
     },

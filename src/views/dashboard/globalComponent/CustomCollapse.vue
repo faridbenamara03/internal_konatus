@@ -102,7 +102,7 @@
           </div>
         </div>
       </div>
-      <b-button variant="flat-secondary" class="phase-btn">
+      <b-button v-b-modal.modal-add-new-task-program variant="flat-secondary" class="phase-btn" @click="handleInsertNewWorkElement">
         <feather-icon icon="PlusIcon" />
         <span>Insert New Work Element</span>
       </b-button>
@@ -117,7 +117,7 @@ import { isEmpty } from "@/views/utils"
 export default {
   components: {
     BFormCheckbox,
-    BButton
+    BButton,
   },
   props: {
     team: {
@@ -127,6 +127,12 @@ export default {
     index: {
       type: Number,
     },
+    index0: {
+      type: Number,
+    },
+    state: {
+      type: String,
+    }
   },
   data() {
     return {
@@ -153,6 +159,9 @@ export default {
     },
     onCheckChange(e, activityId) {
       this.$emit('selectActivity', e, activityId)
+    },
+    handleInsertNewWorkElement() {
+      this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', { index0: this.index0, index: this.index, state: this.state })
     }
   },
   directives: {

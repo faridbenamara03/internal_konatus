@@ -81,7 +81,7 @@
         @click="onInsertClick(phase.id)"
       >
         <feather-icon icon="PlusIcon" />
-        <span>Insert new work element</span>
+        <span>Insert New Work Element</span>
       </b-button>
     </div>
     <insert-new-task-modal :phaseId="phaseIdToInsert" />

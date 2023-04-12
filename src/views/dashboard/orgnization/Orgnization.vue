@@ -96,11 +96,11 @@
           </div>
         </div> -->
         <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{ 'has-default-card-bg': !isChartView }">
-          <Demand :data="itemsForReport" :fields="fieldsForReport" />
+          <Demand />
         </b-tab>
         <b-tab title="Reporting"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
-          <Reporting />
+          <Reporting :reportingState="reportingState" />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
           <Control :isChartView="isChartView" />
@@ -135,7 +135,7 @@
                 Table
               </b-button>
             </b-button-group>
-            <!-- <b-button-group v-if="tabIndex === 1" class="ml-1">
+            <b-button-group v-if="tabIndex === 1" class="ml-1">
               <b-button variant="outline-primary"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
                 @click="onClickCPSelectBtn('reporting-cost', 'cost')">
@@ -145,7 +145,7 @@
                 :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`">
                 Plan
               </b-button>
-            </b-button-group> -->
+            </b-button-group>
             <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
               <feather-icon icon="ZapIcon" size="16" />
               <span>Optimize</span>
@@ -205,7 +205,7 @@ export default {
     BFormInput,
     BPopover,
     CreateNewUnitDrawer,
-    Drawer
+    Drawer,
   },
   props: {
     data: {
@@ -276,109 +276,6 @@ export default {
       activeColumns: ['priority', 'budget', 'deadline'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: ['priority', 'budget', 'deadline'],
-      itemsForDemand: [
-        {
-          name: 'Konatus Industries',
-          budget_team: '2540',
-          budget_engaged: '1132.3',
-          real_estimated: '1132.3',
-          children: [
-            {
-              name: 'TEAM A',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM B',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM D',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-            {
-              name: 'TEAM E',
-              budget_team: '228k',
-              budget_engaged: '320k',
-              real_estimated: '58',
-            },
-          ],
-        },
-        {
-          name: 'SPACE HOLDER FOR ANOTHER BU',
-          budget_team: '2540',
-          budget_engaged: '1132.3',
-          real_estimated: '1132.3',
-          children: [],
-        },
-      ],
-      itemsForReport: [
-        {
-          name: 'Konatus Industries',
-          budget_team: '2540',
-          budget_engaged: '1132.3',
-          real_estimated: '1132.3',
-          children: [
-            {
-              name: 'TEAM A',
-              budget_team: '1390',
-              budget_engaged: '601.9',
-              real_estimated: '601.9',
-            },
-            {
-              name: 'TEAM B',
-              budget_team: '500',
-              budget_engaged: '210.6',
-              real_estimated: '210.6',
-            },
-            {
-              name: 'TEAM C',
-              budget_team: '500',
-              budget_engaged: '210.6',
-              real_estimated: '210.6',
-            },
-            {
-              name: 'TEAM D',
-              budget_team: '500',
-              budget_engaged: '210.6',
-              real_estimated: '210.6',
-            },
-          ],
-        },
-        {
-          name: 'SPACE HOLDER FOR AN OTHER BU',
-        },
-        {
-          name: 'total',
-          budget_team: '5240',
-          budget_engaged: '2241.2',
-          real_estimated: '2241.2',
-        }
-      ],
-      fieldsForReport: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'budget_team', 'budget_engaged', 'real_estimated', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
       tabIndex: 0,
       isChartView: false,

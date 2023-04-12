@@ -1,7 +1,7 @@
 <template>
-  <b-modal id="modal-add-new-task" centered hide-backdrop content-class="shadow" hide-header size="sm" @ok="handleOk">
+  <b-modal id="modal-add-new-task-program" centered hide-backdrop content-class="shadow" hide-header size="sm" @ok="handleOk">
     <div class="mb-2">
-      <b>Phase Number {{ phaseV }}</b>
+      <b>Insert Work Element</b>
     </div>
     <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" />
     <b-form-input id="input-gate" v-model="gate" placeholder="Gate" class="mb-1" />
@@ -56,8 +56,8 @@ export default {
         e.preventDefault()
         this.$toast.warning('Value is invalid!')
       } else {
-        this.$bvModal.hide('modal-add-new-task')
-        this.$store.commit('teamState/INSERT_NEW_TASK', { phaseV: this.phaseV, task: { taskId: this.taskId, priority: this.priority, gate: this.gate } })
+        this.$bvModal.hide('modal-add-new-task-program')
+        this.$store.commit('globalState/INSERT_NEW_TASK', { id: this.taskId, priority: this.priority, gate: this.gate })
         this.taskId = ''
         this.gate = ''
       }

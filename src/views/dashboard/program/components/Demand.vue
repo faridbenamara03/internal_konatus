@@ -11,7 +11,7 @@
         </div>
         <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
           <div v-for="(item1, index1) in team.phases" :key="index1" class="project-team no-border">
-            <CustomCollapse :team="item1" :index="index1"
+            <CustomCollapse :team="item1" :index="index1" :index0="index" state="team"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
               @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)" />
           </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
           <div v-for="(item1, index1) in phase.teams" :key="index1" class="project-team no-border">
-            <CustomCollapse :team="item1" :index="index1"
+            <CustomCollapse :team="item1" :index="index1" :index0="index" state="phase"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
               @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)" />
           </div>
@@ -38,6 +38,7 @@
     </div>
     <activity-detail-modal :is-open="openActivityModal" :selectedActivityData="c_SelectedActivity"
       @hideModal="hideModal" :teamdata="teamarr" />
+    <InsertNewTaskModal />
   </div>
 </template>
 
@@ -45,11 +46,13 @@
 import { isEmpty } from "@/views/utils"
 import ActivityDetailModal from '../modals/ActivityDetailModal.vue'
 import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
+import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
 
 export default {
   components: {
     ActivityDetailModal,
-    CustomCollapse
+    CustomCollapse,
+    InsertNewTaskModal
   },
   props: {
     teamData: {

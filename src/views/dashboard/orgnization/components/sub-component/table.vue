@@ -148,16 +148,16 @@ export default {
   methods: {
     genBgColor(engaged, capacity) {
       let color = '#343434'
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     },
     genFontColor(engaged, capacity) {
       let color = null
-      if (engaged <= 0.6 * capacity) color = '#003f5c'
-      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#bd7100'
-      else if (engaged > capacity) color = '#7c1615'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
       return color
     }
   }

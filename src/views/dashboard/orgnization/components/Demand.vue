@@ -103,16 +103,6 @@
 export default {
   components: {
   },
-  props: {
-    data: {
-      type: Array,
-      default: () => [],
-    },
-    fields: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       opened: 0,

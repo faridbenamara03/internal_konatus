@@ -1437,6 +1437,7 @@ export default {
     openCreateNewPortfolioDrawer: false,
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
+    parentIndexForInsertElement: {}
   },
   mutations: {
     TOGGLE_CREATE_NEW_DRAWER(state) {
@@ -1821,7 +1822,47 @@ export default {
       state.projectElementTeamData = []
       state.projectElementPhaseData = []
       // this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
-    }
+    },
+    SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
+      state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
+    },
+    INSERT_NEW_TASK(state, data) {
+      const { id, priority, gate } = data
+      if (state.parentIndexForInsertElement.state === "team") {
+        const t = state.teamsState[state.parentIndexForInsertElement.index0]?.phases[state.parentIndexForInsertElement.index]?.activities
+        t.push(
+          {
+            title: 'New inserted element',
+            priority,
+            gate,
+            activityId: id,
+            description: 'New inserted element description.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        )
+      } else {
+        const t = state.phaseState[state.parentIndexForInsertElement.index0]?.teams[state.parentIndexForInsertElement.index]?.activities
+        t.push(
+          {
+            title: 'New inserted element',
+            priority,
+            gate,
+            activityId: id,
+            description: 'New inserted element description.',
+            effort: {
+              load: 53,
+              duration: 26,
+              fte: 80
+            },
+          }
+        )
+      }
+      Vue.$toast.success('Task inserted successfully.')
+    },
   },
   actions: {
     load_nav_data() {

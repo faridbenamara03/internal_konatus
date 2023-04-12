@@ -27,12 +27,27 @@
                 {{ selectedActivityData.phase.activityId }}
               </p>
             </div>
-            <div>
-              <div style="text-align: end;"><label style="font-size: 14px; color: #898989;text-transform:none">
-                  External System: Jira</label></div>
-              <p style="color: #bbbbbb;font-size: 16px;">
-                External Activity Id: JR-12345
-              </p>
+            <div style="display: flex">
+              <div>
+                <div style="text-align: end;">
+                  <label v-if="!externalEditable" style="font-size: 14px; color: #898989;text-transform:none">
+                    External System: {{ externalSystem }}
+                  </label>
+                  <div v-else>
+                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem"
+                      placeholder="Select External System" outlined />
+                  </div>
+                </div>
+                <p v-if="!externalEditable" style="color: #bbbbbb;font-size: 16px;">
+                  External Activity Id: {{ externalId }}
+                </p>
+                <div v-else>
+                  <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
+                </div>
+              </div>
+              <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
+                <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -68,7 +83,7 @@
             <div class="row" v-for="(t, i) in effortData1" :key="i">
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input :value="t.skill" readonly/>
+                <b-form-input :value="t.skill" readonly />
                 <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
                   placeholder="Select skillset" outlined @input="effortChange1('skill', i, $event)" /> -->
               </div>
@@ -449,6 +464,9 @@ export default {
           fte: null
         }
       ],
+      externalEditable: false,
+      externalSystem: "Jira",
+      externalId: "JR-12345"
       // effortData3: [
       //   {
       //     skill: null,
@@ -497,6 +515,9 @@ export default {
     }
   },
   methods: {
+    handleExternalEdit() {
+      this.externalEditable = !this.externalEditable
+    },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
         this.effortData1.splice(index, 1)
