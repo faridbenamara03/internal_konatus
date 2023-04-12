@@ -45,8 +45,8 @@
                   <b-form-input v-model="externalId1" placeholder="Input External Activity Id" />
                 </div>
               </div>
-              <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit1">
-                <feather-icon :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit1">
+                <feather-icon :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
               </div>
             </div>
           </div>
@@ -168,8 +168,8 @@
                   <b-form-input v-model="externalId2" placeholder="Input External Activity Id" />
                 </div>
               </div>
-              <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit2">
-                <feather-icon :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit2">
+                <feather-icon :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
               </div>
             </div>
           </div>
@@ -281,6 +281,28 @@
               <p v-if="selectedActivityData.phase">
                 {{ merged.activityId }}
               </p>
+            </div>
+            <div style="display: flex">
+              <div>
+                <div style="text-align: end;">
+                  <label v-if="!externalEditable3" style="font-size: 14px; color: #898989;text-transform:none">
+                    External System: {{ externalSystem3 }}
+                  </label>
+                  <div v-else>
+                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem3"
+                      placeholder="Select External System" outlined />
+                  </div>
+                </div>
+                <p v-if="!externalEditable3" style="color: #bbbbbb;font-size: 16px;">
+                  External Activity Id: {{ externalId3 }}
+                </p>
+                <div v-else>
+                  <b-form-input v-model="externalId3" placeholder="Input External Activity Id" />
+                </div>
+              </div>
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit3">
+                <feather-icon :icon="externalEditable3 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -447,6 +469,9 @@ export default {
       externalEditable2: false,
       externalSystem2: "Jira",
       externalId2: "JR-12345",
+      externalEditable3: false,
+      externalSystem3: "Jira",
+      externalId3: "JR-12345",
       // effortData3: [
       //   {
       //     skill: null,
@@ -535,6 +560,9 @@ export default {
     },
     handleExternalEdit2() {
       this.externalEditable2 = !this.externalEditable2
+    },
+    handleExternalEdit3() {
+      this.externalEditable3 = !this.externalEditable3
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {

@@ -41,8 +41,8 @@
               <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
             </div>
           </div>
-          <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
-            <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+          <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
+            <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
           </div>
         </div>
       </div>

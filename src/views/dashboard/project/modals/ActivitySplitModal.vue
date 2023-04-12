@@ -45,8 +45,8 @@
                   <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
                 </div>
               </div>
-              <div style="padding-top: 10px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
-                <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" size="25" />
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
+                <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
               </div>
             </div>
           </div>
@@ -180,6 +180,28 @@
                 {{ newActivityId1 }}
               </p>
             </div>
+            <div style="display: flex">
+              <div>
+                <div style="text-align: end;">
+                  <label v-if="!externalEditable1" style="font-size: 14px; color: #898989;text-transform:none">
+                    External System: {{ externalSystem1 }}
+                  </label>
+                  <div v-else>
+                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem1"
+                      placeholder="Select External System" outlined />
+                  </div>
+                </div>
+                <p v-if="!externalEditable1" style="color: #bbbbbb;font-size: 16px;">
+                  External Activity Id: {{ externalId1 }}
+                </p>
+                <div v-else>
+                  <b-form-input v-model="externalId1" placeholder="Input External Activity Id" />
+                </div>
+              </div>
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit1">
+                <feather-icon :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
@@ -306,6 +328,28 @@
               <p v-if="selectedActivityData.phase">
                 {{ newActivityId2 }}
               </p>
+            </div>
+            <div style="display: flex">
+              <div>
+                <div style="text-align: end;">
+                  <label v-if="!externalEditable2" style="font-size: 14px; color: #898989;text-transform:none">
+                    External System: {{ externalSystem2 }}
+                  </label>
+                  <div v-else>
+                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem2"
+                      placeholder="Select External System" outlined />
+                  </div>
+                </div>
+                <p v-if="!externalEditable2" style="color: #bbbbbb;font-size: 16px;">
+                  External Activity Id: {{ externalId2 }}
+                </p>
+                <div v-else>
+                  <b-form-input v-model="externalId2" placeholder="Input External Activity Id" />
+                </div>
+              </div>
+              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit2">
+                <feather-icon :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -514,7 +558,13 @@ export default {
       ],
       externalEditable: false,
       externalSystem: "Jira",
-      externalId: "JR-12345"
+      externalId: "JR-12345",
+      externalEditable1: false,
+      externalSystem1: "Jira",
+      externalId1: "JR-12345",
+      externalEditable2: false,
+      externalSystem2: "Jira",
+      externalId2: "JR-12345",
       // effortData3: [
       //   {
       //     skill: null,
@@ -598,6 +648,12 @@ export default {
   methods: {
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
+    },
+    handleExternalEdit1() {
+      this.externalEditable1 = !this.externalEditable1
+    },
+    handleExternalEdit2() {
+      this.externalEditable2 = !this.externalEditable2
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
