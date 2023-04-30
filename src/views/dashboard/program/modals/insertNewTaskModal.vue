@@ -3,8 +3,11 @@
     <div class="mb-2">
       <b>Insert Work Element</b>
     </div>
-    <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" />
-    <b-form-input id="input-gate" v-model="gate" placeholder="Gate" class="mb-1" />
+    <b-form-select id="input-taskId" v-model="taskId" class="mb-1" placeholder="WorK Element Id" :options="['JIRA', 'SAP']" />
+    <!-- <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" /> -->
+    <b-form-input id="input-name" v-model="name" placeholder="WorK Element Name" class="mb-1" />
+    <b-form-select id="select-team" v-model="teamttle" class="mb-1" placeholder="Gate" :options="['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F']" />
+    <b-form-select id="input-gate" v-model="gate" class="mb-1" placeholder="Gate" :options="['Gate1', 'Gate2', 'Gate3', 'Gate4']" />
     <b-form-select v-model="priority" :options="['Highest', 'High', 'Low', 'Lowest']" />
   </b-modal>
 </template>
@@ -45,9 +48,17 @@ export default {
   },
   data() {
     return {
-      taskId: '',
-      priority: 'High',
-      gate: ''
+      taskId: 'JIRA',
+      gate: '',
+      name: ''
+    }
+  },
+  computed: {
+    teamttle() {
+      return this.$store.state.globalState.parentTeamTtle
+    },
+    priority() {
+      return this.$store.state.globalState.selectedNavObj.priority
     }
   },
   methods: {
@@ -57,7 +68,9 @@ export default {
         this.$toast.warning('Value is invalid!')
       } else {
         this.$bvModal.hide('modal-add-new-task-program')
-        this.$store.commit('globalState/INSERT_NEW_TASK', { id: this.taskId, priority: this.priority, gate: this.gate })
+        this.$store.commit('globalState/INSERT_NEW_TASK', {
+          id: this.taskId, priority: this.priority, gate: this.gate, name: this.name
+        })
         this.taskId = ''
         this.gate = ''
       }

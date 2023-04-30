@@ -12,6 +12,7 @@
         <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
           <div v-for="(item1, index1) in team.phases" :key="index1" class="project-team no-border">
             <CustomCollapse :team="item1" :index="index1" :index0="index" state="team"
+              :teamttle="team.title"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
               @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)" />
           </div>

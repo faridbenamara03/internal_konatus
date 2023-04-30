@@ -205,6 +205,7 @@ export default {
   ],
   namespaced: true,
   state: {
+    reportingColumnData: undefined,
     fields: ['programs', 'gate', 'next_gate'],
     total_data: [24, 45, 101, 117, 12, 101, 117, 12],
     unitDemandData: [
@@ -1166,6 +1167,9 @@ export default {
           ]
         },
       ]
+    },
+    REPORTING_COLUMN_UPDATE(state, columns) {
+      state.reportingColumnData = columns
     }
   },
 }

@@ -51,7 +51,10 @@
         <div style="width: 30%">
 
         </div>
-        <div style="width: 23%">
+        <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%; text-transform: uppercase`">
+          {{ item }}
+        </div>
+        <!-- <div style="width: 23%">
           BUDGET TEAM
         </div>
         <div style="width: 23%">
@@ -59,7 +62,7 @@
         </div>
         <div style="width: 24%">
           REAL ESTIMATED
-        </div>
+        </div> -->
       </div>
       <div v-for="(org, oIndex) in data" :key="oIndex" style="color: white">
         <div
@@ -69,7 +72,10 @@
             <feather-icon v-if="org.name === 'SPACE HOLDER FOR AN OTHER BU'" icon="PlusIcon" size="16" class="mr-1" />
             {{ org.name }}
           </div>
-          <div style="width: 23%">
+          <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+            {{ org[item] }}
+          </div>
+          <!-- <div style="width: 23%">
             {{ org.budget_team }}
           </div>
           <div style="width: 23%">
@@ -77,18 +83,21 @@
           </div>
           <div style="width: 24%">
             {{ org.real_estimated }}
-          </div>
+          </div> -->
         </div>
         <div v-if="org.children">
           <div v-for="(unit, uIndex) in org.children" :key="uIndex">
-            <div
-              style="display:flex;background-color: #23293a;height: 50px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);">
+            <div @click="onclickunit(uIndex)"
+              style="display:flex;background-color: #23293a;height: 50px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); cursor: pointer;">
               <div style="width: 30%; padding-left: 45px;">
                 <feather-icon :icon="unit.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
                   :style="`color:${unit.state === 'up' ? 'green' : 'red'}`" />
                 {{ unit.name }}
               </div>
-              <div style="width: 23%">
+              <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+                {{ unit[item] }}
+              </div>
+              <!-- <div style="width: 23%">
                 {{ unit.budget_team }}
               </div>
               <div style="width: 23%">
@@ -96,17 +105,20 @@
               </div>
               <div style="width: 24%">
                 {{ unit.real_estimated }}
-              </div>
+              </div> -->
             </div>
             <div v-if="unit.children">
               <div v-for="(team, tIndex) in unit.children" :key="tIndex">
-                <div style="display:flex;height: 50px;align-items: center;">
+                <div v-if="collapsedItems.indexOf(uIndex) === -1" style="display:flex;height: 50px;align-items: center;">
                   <div style="width: 30%; padding-left: 50px;">
                     <feather-icon :icon="team.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
                       :style="`color:${team.state === 'up' ? 'green' : 'red'}`" />
                     {{ team.name }}
                   </div>
-                  <div style="width: 23%">
+                  <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+                    {{ team[item] }}
+                  </div>
+                  <!-- <div style="width: 23%">
                     {{ team.budget_team }}
                   </div>
                   <div style="width: 23%">
@@ -114,7 +126,7 @@
                   </div>
                   <div style="width: 24%">
                     {{ team.real_estimated }}
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -196,6 +208,7 @@ export default {
   },
   data() {
     return {
+      collapsedItems: [],
       series: [[{
         data: [120, 240, 2040, 1920, 3960, 3720],
       }],
@@ -273,7 +286,19 @@ export default {
       },
     }
   },
+  computed: {
+    c_fileds() {
+      return this.$store.state.orgnizationState.reportingColumnData ? this.$store.state.orgnizationState.reportingColumnData : ['budget_team', 'budget_engaged', 'real_estimated']
+    },
+  },
   methods: {
+    onclickunit(index) {
+      if (this.collapsedItems.indexOf(index) !== -1) { // If the value is found in the array
+        this.collapsedItems.splice(this.collapsedItems.indexOf(index), 1) // Remove the value at the found index
+      } else {
+        this.collapsedItems.push(index)
+      }
+    },
     function(row) {
       return row === this.data[0]
     },

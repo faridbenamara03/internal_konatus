@@ -111,8 +111,8 @@ export default {
       ],
       options2: [
         { text: 'Priority', value: 'priority' },
-        { text: 'Budget demand', value: 'demand' },
-        { text: 'Authorised', value: 'authorised' },
+        // { text: 'Demand', value: 'demand' },
+        // { text: 'Authorised', value: 'authorised' },
       ],
       options3: [
         { text: 'Product Deadline', value: 'deadline' },

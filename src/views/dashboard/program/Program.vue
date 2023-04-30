@@ -3,7 +3,9 @@
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
-          <div></div>
+          <div>
+            <h4 v-if="c_items.type === 'program'">Total hours: {{ totalProjectHours }}</h4>
+          </div>
           <div>
             <div v-if="(tabIndex === 0)">
               <b-button v-b-modal.modal-import class="ml-1" variant="primary">
@@ -261,6 +263,15 @@ export default {
   computed: {
     selectedWorkElement() {
       return this.$store.state.globalState.selectedWorkElement
+    },
+    totalProjectHours() {
+      const { selectedNavObj } = this.$store.state.globalState
+      let thours = 0
+      selectedNavObj.children.map(t => {
+        thours += parseInt(t.value, 10)
+        return null
+      })
+      return thours
     },
     selectedNavType() {
       return this.$store.state.globalState.selectedNavObj.type

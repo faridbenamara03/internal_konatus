@@ -318,12 +318,22 @@ export default {
           budget_team: '3740',
           budget_engaged: '1647.3',
           real_estimated: '1478.2',
+          value: '2391',
+          quote: '2291',
+          spend: '1190',
+          demand: '1011',
+          authorised: '921.2',
           children: [
             {
               name: 'Paris',
               budget_team: '1390',
               budget_engaged: '601.9',
               real_estimated: '601.9',
+              value: '2391',
+              quote: '2291',
+              spend: '1190',
+              demand: '1011',
+              authorised: '921.2',
               state: 'up',
               children: [
                 {
@@ -331,6 +341,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'up',
                 },
                 {
@@ -338,6 +353,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'up',
                 },
                 {
@@ -345,6 +365,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'down',
                 },
               ]
@@ -354,6 +379,11 @@ export default {
               budget_team: '500',
               budget_engaged: '210.6',
               real_estimated: '210.6',
+              value: '2391',
+              quote: '2291',
+              spend: '1190',
+              demand: '1011',
+              authorised: '921.2',
               state: 'up',
               children: [
                 {
@@ -361,6 +391,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'up',
                 },
                 {
@@ -368,6 +403,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'down',
                 },
                 {
@@ -375,6 +415,11 @@ export default {
                   budget_team: '1390',
                   budget_engaged: '601.9',
                   real_estimated: '601.9',
+                  value: '2391',
+                  quote: '2291',
+                  spend: '1190',
+                  demand: '1011',
+                  authorised: '921.2',
                   state: 'up',
                 },
               ]
@@ -389,9 +434,15 @@ export default {
           budget_team: '3740',
           budget_engaged: '1647.3',
           real_estimated: '1478.2',
+          value: '2391',
+          quote: '2291',
+          spend: '1190',
+          demand: '1011',
+          authorised: '921.2',
         }
       ],
-      fieldsForReport: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'budget_team', 'budget_engaged', 'real_estimated', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
+      fieldsForReport: ['budget_team', 'budget_engaged', 'real_estimated'],
+      // fieldsForReport: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'budget_team', 'budget_engaged', 'real_estimated', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
     }
   },
   props: {

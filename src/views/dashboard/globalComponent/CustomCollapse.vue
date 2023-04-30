@@ -124,6 +124,9 @@ export default {
       type: Object,
       default: () => { },
     },
+    teamttle: {
+      type: String,
+    },
     index: {
       type: Number,
     },
@@ -161,7 +164,15 @@ export default {
       this.$emit('selectActivity', e, activityId)
     },
     handleInsertNewWorkElement() {
-      this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', { index0: this.index0, index: this.index, state: this.state })
+      let teamt = ""
+      if (!this.teamttle) {
+        teamt = this.team.title
+      } else {
+        teamt = this.teamttle
+      }
+      this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
+        index0: this.index0, index: this.index, state: this.state, team: teamt
+      })
     }
   },
   directives: {

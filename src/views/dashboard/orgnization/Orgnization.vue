@@ -13,15 +13,15 @@
               <feather-icon icon="UploadIcon" size="16" />&nbsp;
               <span>Export</span>
             </b-button>
-            <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-edit-column class="ml-1"
+            <b-button v-if="tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
               variant="primary">
               <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
-            </b-button> -->
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
+            </b-button>
+            <!-- <b-button v-if="tabIndex === 0 || tabIndex === 1" class="ml-1" variant="primary">
               <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
-            </b-button>
+            </b-button> -->
             <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
               <feather-icon icon="Edit2Icon" size="16" />
               <span>Edit as table</span>
@@ -273,7 +273,7 @@ export default {
           budget: '40146.14',
         }
       ],
-      activeColumns: ['priority', 'budget', 'deadline'],
+      activeColumns: ['budget_team', 'budget_engaged', 'real_estimated'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: ['priority', 'budget', 'deadline'],
       fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
@@ -350,6 +350,7 @@ export default {
       })
       this.fields = temp
       this.activeColumns = columns
+      this.$store.commit('orgnizationState/REPORTING_COLUMN_UPDATE', columns)
     },
     handleDemandUpdate() {
       this.$store.commit('orgnizationState/UPDATE_DATA')

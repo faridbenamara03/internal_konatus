@@ -1437,7 +1437,8 @@ export default {
     openCreateNewPortfolioDrawer: false,
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
-    parentIndexForInsertElement: {}
+    parentIndexForInsertElement: {},
+    parentTeamTtle: ''
   },
   mutations: {
     TOGGLE_CREATE_NEW_DRAWER(state) {
@@ -1825,14 +1826,17 @@ export default {
     },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
       state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
+      state.parentTeamTtle = data.team
     },
     INSERT_NEW_TASK(state, data) {
-      const { id, priority, gate } = data
+      const {
+        id, priority, gate, name
+      } = data
       if (state.parentIndexForInsertElement.state === "team") {
         const t = state.teamsState[state.parentIndexForInsertElement.index0]?.phases[state.parentIndexForInsertElement.index]?.activities
         t.push(
           {
-            title: 'New inserted element',
+            title: name,
             priority,
             gate,
             activityId: id,
@@ -1848,7 +1852,7 @@ export default {
         const t = state.phaseState[state.parentIndexForInsertElement.index0]?.teams[state.parentIndexForInsertElement.index]?.activities
         t.push(
           {
-            title: 'New inserted element',
+            title: name,
             priority,
             gate,
             activityId: id,

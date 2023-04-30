@@ -85,11 +85,14 @@ export default {
     return {
       selected: [],
       options: [
-        { text: 'Priority', value: 'priority' },
-        { text: 'Budget', value: 'budget' },
-        { text: 'Deadline', value: 'deadline' },
-        { text: 'Engaged', value: 'engaged' },
+        { text: 'Budget', value: 'budget_team' },
+        { text: 'Engaged', value: 'budget_engaged' },
+        { text: 'Real Estimate', value: 'real_estimated' },
+        { text: 'Value', value: 'value' },
         { text: 'Quote', value: 'quote' },
+        { text: 'Spend', value: 'spend' },
+        { text: 'Demand', value: 'demand' },
+        { text: 'Authorised', value: 'authorised' },
       ],
     }
   },
