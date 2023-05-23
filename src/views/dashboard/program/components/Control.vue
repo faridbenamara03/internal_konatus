@@ -115,6 +115,26 @@
         </div>
       </div>
     </div>
+    <div class="containerSelf m-2">
+      <b style="font-size: 17px; color: #A6E4FF">TOTALS</b>
+    </div>
+    <div class="containerSelf m-1" v-for="(item, index) in filteredTotalData" :key="index">
+      <div style="width: 350px">
+        <b style="font-size: 16px; color: #A6E4FF">{{ item.captain }}</b>
+      </div>
+      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
+        <div class="sub-main" v-for="(item1, index) in item.data" :key="index"
+          style="padding-top:5px; padding-bottom: 5px;">
+          <b :style='"font-size: 16px; color:" + item1.numcolor'>{{ item1.value }}</b>
+          <b :style='"font-size: 16px; color:" + item1.pctcolor'>
+            (
+            {{ item1.percent }}
+            <span v-if="item1.percent >= 0">%</span>
+            )
+          </b>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -154,6 +174,11 @@ export default {
       dayBlockWidth: 0,
       isvisible: true,
       data_source: {
+        total_data: [
+          {
+            captain: 'Real Est./Capacity', data: ['248/248', '118/120', '124/120', '106/120', '85/120', '85/120', '25/120']
+          }
+        ],
         series: [
           {
             id: 1,
@@ -411,5 +436,28 @@ export default {
   destroyed() {
     window.removeEventListener("resize", this.setOffset)
   },
+  computed: {
+    filteredTotalData() {
+      return this.data_source.total_data.map(t => {
+        const valueArr = t.data.map(t1 => {
+          let pctcolor = '#138B49'
+          let numcolor = 'white'
+          const vvle = t1.split('/')[0] / t1.split('/')[1]
+          if (vvle > 0.5 && vvle <= 0.9) pctcolor = '#F5A623'
+          else if (vvle <= 0.5) pctcolor = '#BD2020'
+          const percent = parseInt(vvle * 100, 10)
+          if (parseInt(t1.split('/')[0], 10) === 0) {
+            pctcolor = 'gray'
+            numcolor = 'gray'
+          }
+          return {
+            value: t1, percent, pctcolor, numcolor
+          }
+        })
+        console.log({ captain: t.captain, data: valueArr })
+        return { captain: t.captain, data: valueArr }
+      })
+    }
+  }
 }
 </script>

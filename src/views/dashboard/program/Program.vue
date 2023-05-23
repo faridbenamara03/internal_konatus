@@ -4,7 +4,7 @@
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
           <div>
-            <h4 v-if="c_items.type === 'program'">Total hours: {{ totalProjectHours }}</h4>
+            <h4 v-if="c_items.type === 'program'"></h4>
           </div>
           <div>
             <div v-if="(tabIndex === 0)">
