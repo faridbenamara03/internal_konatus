@@ -8,6 +8,7 @@
       :is-active="isActive"
       @toggleChange="toggleChange"
     />
+    <VerticalNavMenuContent  class="teams-jobs-toggler" />
     <VersionDisplay />
   </ul>
 </template>
@@ -20,6 +21,7 @@ import VerticalNavMenuHeader from '../vertical-nav-menu-header'
 import VerticalNavMenuLink from '../vertical-nav-menu-link/VerticalNavMenuLink.vue'
 import VerticalNavMenuSearch from '../vertical-nav-menu-search/VerticalNavMenuSearch.vue'
 import VerticalNavMenuGroup from '../vertical-nav-menu-group/VerticalNavMenuGroup.vue'
+import VerticalNavMenuContent from '../vertical-nav-menu-contents/VerticalNavMenuContent.vue'
 
 export default {
   components: {
@@ -27,8 +29,9 @@ export default {
     VerticalNavMenuLink,
     VerticalNavMenuSearch,
     VerticalNavMenuGroup,
+    VerticalNavMenuContent,
     VersionDisplay,
-  },
+},
   props: {
     items: {
       type: Array,
@@ -52,3 +55,14 @@ export default {
   },
 }
 </script>
+
+<style>
+  .teams-jobs-toggler {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 30px 0px !important;
+  }
+</style>

@@ -95,14 +95,14 @@
             </div>
           </div>
         </div> -->
-        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{ 'has-default-card-bg': !isChartView }">
+        <b-tab id="demand" title="Demand" @click="onClickCPSelectBtn('demand')" event-key="demand" :class="{ 'has-default-card-bg': !isChartView }">
           <Demand />
         </b-tab>
-        <b-tab title="Reporting"
+        <b-tab id="reporting" title="Reporting" event-key="reporting-cost"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :reportingState="reportingState" />
         </b-tab>
-        <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
+        <b-tab id="control-table" title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar" event-key="control-table">
           <Control :isChartView="isChartView" />
         </b-tab>
         <template #tabs-end>
@@ -215,6 +215,7 @@ export default {
   },
   data() {
     return {
+      activeTab: 'demand',
       reportingState: 'cost',
       rangeDate: [],
       items: [
@@ -290,11 +291,17 @@ export default {
     },
   },
   mounted() {
+    this.triggerTabChange('control-table')
+    // this.$root.$on('bv::toggle::tab', this.handleTabChange)
+    // this.handleInitialTabChange()
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)
     })
   },
+  // beforeDestroy() {
+  //   this.$root.$off('bv::toggle::tab', this.handleTabChange)
+  // },
   methods: {
     // ontabchange() {
     //   const urlArr = this.$route.path.split('/')
@@ -303,6 +310,27 @@ export default {
     //     urlArr.pop()
     //     this.$router.push({ path: urlArr.join('/') })
     //   }
+    // },
+    triggerTabChange(tabKey) {
+      // Emit the bv-tabs event to programmatically change the active tab
+      console.log(this.$route.query.activeTab)
+      this.$root.$emit('bv::toggle::tab', tabKey)
+    },
+    // handleInitialTabChange() {
+    //   const tabKey = this.$route.query.activeTab || 'control-table'
+    //   console.log(tabKey)
+    //   this.triggerTabChange(tabKey)
+    // },
+
+    // handleTabChange(tabKey) {
+    //   console.log("tabKey ", tabKey)
+    //   this.$router.replace({ query: { activeTab: tabKey } })
+    // },
+
+    // triggerTabChange(tabKey) {
+    //   console.log("aaaaaa", tabKey)
+    //   // Emit the bv-tabs event to programmatically change the active tab
+    //   this.$root.$emit('bv::toggle::tab', tabKey)
     // },
     toggleCreateNewUnitDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')

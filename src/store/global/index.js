@@ -469,7 +469,7 @@ const globalOperationData = {
           children: [
             {
               id: 'new-format-project',
-              title: 'New Format',
+              title: 'laura Smith',
               parent: 'quadruped-robot-program',
               type: 'project',
               route: {
@@ -519,7 +519,7 @@ const globalOperationData = {
             },
             {
               id: 'enhanced-motricity-project',
-              title: 'Enhanced motricity',
+              title: 'Colette Mckinney',
               parent: 'quadruped-robot-program',
               type: 'project',
               priority: 'Highest',
@@ -546,7 +546,7 @@ const globalOperationData = {
             },
             {
               id: 'enhanced-autonomy-project',
-              title: 'Enhanced autonomy',
+              title: 'Perry Doyle',
               parent: 'quadruped-robot-program',
               type: 'project',
               priority: 'Highest',
@@ -562,24 +562,24 @@ const globalOperationData = {
               value: '31',
               phases: []
             },
-            {
-              id: 'dual-sourcing-for-quadruped-project',
-              title: 'Dual sourcing for Quadruped',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              priority: 'Lowest',
-              budget: '80000',
-              deadline: '12/31/2021',
-              engaged: '450',
-              quote: '41550',
-              demand: '91500',
-              realEstimated: '211200',
-              authorised: '18800',
-              spent: '31100',
-              value: '3',
-              next_gate: '08/02/2022',
-              phases: []
-            },
+            // {
+            //   id: 'dual-sourcing-for-quadruped-project',
+            //   title: 'Dual sourcing for Quadruped',
+            //   parent: 'quadruped-robot-program',
+            //   type: 'project',
+            //   priority: 'Lowest',
+            //   budget: '80000',
+            //   deadline: '12/31/2021',
+            //   engaged: '450',
+            //   quote: '41550',
+            //   demand: '91500',
+            //   realEstimated: '211200',
+            //   authorised: '18800',
+            //   spent: '31100',
+            //   value: '3',
+            //   next_gate: '08/02/2022',
+            //   phases: []
+            // },
           ]
         },
         {
