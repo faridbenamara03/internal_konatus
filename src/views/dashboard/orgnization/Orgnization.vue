@@ -95,14 +95,14 @@
             </div>
           </div>
         </div> -->
-        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')" :class="{ 'has-default-card-bg': !isChartView }">
+        <b-tab id="demand" title="Demand" @click="onClickCPSelectBtn('demand')" event-key="demand" :class="{ 'has-default-card-bg': !isChartView }">
           <Demand />
         </b-tab>
-        <b-tab title="Reporting"
+        <b-tab id="reporting" title="Reporting" event-key="reporting-cost"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
           <Reporting :reportingState="reportingState" />
         </b-tab>
-        <b-tab title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar">
+        <b-tab id="control-table" title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar" event-key="control-table">
           <Control :isChartView="isChartView" />
         </b-tab>
         <template #tabs-end>
@@ -215,6 +215,7 @@ export default {
   },
   data() {
     return {
+      activeTab: 'demand',
       reportingState: 'cost',
       rangeDate: [],
       items: [
@@ -290,20 +291,17 @@ export default {
     },
   },
   mounted() {
+    this.triggerTabChange('control-table')
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)
     })
   },
   methods: {
-    // ontabchange() {
-    //   const urlArr = this.$route.path.split('/')
-    //   const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table']
-    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-    //     urlArr.pop()
-    //     this.$router.push({ path: urlArr.join('/') })
-    //   }
-    // },
+    triggerTabChange(tabKey) {
+      console.log(this.$route.query.activeTab)
+      this.$root.$emit('bv::toggle::tab', tabKey)
+    },
     toggleCreateNewUnitDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
     },
