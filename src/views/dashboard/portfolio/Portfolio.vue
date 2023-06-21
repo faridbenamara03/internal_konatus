@@ -5,6 +5,10 @@
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
             <span v-if="tabIndex === 0">{{ tableTtle }}</span>
+            <div v-if="updateIndex === true && tabIndex === 1" style="display: flex;align-items: center;color: orange;">
+              <feather-icon icon="InfoIcon" size="16" />&nbsp;
+              <span>Update Available</span>
+            </div>
           </div>
           <div>
             <div v-if="!isChartView && tabIndex === 0">
@@ -23,7 +27,7 @@
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
-              <b-button v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
+              <b-button v-if="updateIndex" v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
                 <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
                 <span>Update</span>
               </b-button>
@@ -80,7 +84,7 @@
         <b-tab title="Reporting"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
           class="no-action-bar">
-          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" :fields="fields" />
+          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" :fields="fields" @update-clicked="handleToggleUpdateHide" />
         </b-tab>
         <b-tab title="Control" @click="onClickCPSelectBtn('control')" class="no-action-bar">
           <Control :data="items.children" :tableTitle="tableTtle" />
@@ -156,7 +160,7 @@
       </div>
     </Drawer>
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
-    <optimize-modal />
+    <optimize-modal :checked-data="activeColumns" @toggleUpdate="handleToggleUpdateShow" />
   </b-card>
   <div v-else>
     <Welcome />
@@ -222,6 +226,7 @@ export default {
       rangeArray: [],
       reportingState: 'cost',
       open: false,
+      updateIndex: false,
     }
   },
   computed: {
@@ -255,6 +260,12 @@ export default {
   methods: {
     toggle() {
       this.open = !this.open
+    },
+    handleToggleUpdateShow() {
+      this.updateIndex = true
+    },
+    handleToggleUpdateHide() {
+      this.updateIndex = false
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
@@ -290,6 +301,7 @@ export default {
       this.isChartView = mode
     },
     columnChange(columns) {
+      console.log('22222222222222222222222')
       const temp = [...this.defaultFields]
       columns.forEach((column, idx) => {
         temp.splice(idx + 1, 0, column)

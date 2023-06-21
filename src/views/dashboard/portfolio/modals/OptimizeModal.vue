@@ -183,6 +183,7 @@ export default {
     },
     handleSave() {
       this.$emit('columnChange', this.selected)
+      this.$emit('toggleUpdate')
       this.$refs['my-modal'].hide()
     },
   },

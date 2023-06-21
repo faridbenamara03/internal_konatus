@@ -106,23 +106,7 @@
         </div>
       </div>
     </div>
-    <b-modal id="portfolio-reporting-plan-update" ref="portfolio_reporting_plan_update" title="Create New" centered
-      no-fade hide-backdrop>
-      <!-- Modal Header -->
-      <template #modal-header>
-        <h5 class="modal-title">Update</h5>
-        <div class="modal-actions">
-          <b-button @click="hideModal" variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" />
-          </b-button>
-        </div>
-      </template>
-      <div>Are you sure to update?</div>
-      <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
-        <b-button variant="primary" @click="onUpdate">Update</b-button>
-      </template>
-    </b-modal>
+    <update-confirm-modal @onUpdate="onUpdate" />
   </div>
   <div style="width:100%" v-else-if="reportingState === 'cost'">
     <ReportingCostVue :data="itemsForDemand" :fields="fields" />
@@ -135,12 +119,12 @@ import {
   BCard,
   // BListGroup,
   // BListGroupItem,
-  BModal,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
+import UpdateConfirmModal from '../modals/UpdateConfirmModal.vue'
 // import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
 // import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
@@ -152,18 +136,15 @@ export default {
     // AppCollapseItem,
     // BListGroup,
     // BListGroupItem,
-    BModal,
     ReportingCostVue,
     ProgramProgressBar,
-    ProjectProgressBar
+    ProjectProgressBar,
+    UpdateConfirmModal
   },
   props: {
     data: {
       type: Object,
       default: () => { },
-    },
-    otype: {
-      type: String
     },
     reportingState: {
       type: String
@@ -286,7 +267,8 @@ export default {
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
         [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
       ]
-      this.$refs.portfolio_reporting_plan_update.hide()
+      this.$emit('update-clicked')
+      // this.$refs.portfolio_reporting_plan_update.hide()
     }
   },
 }
