@@ -6,14 +6,14 @@
           @click="handleToggle(false)"
           id="jobs"
         >
-          Jobs
+          Job
         </b-button>
         <b-button
           @click="handleToggle(true)"
           class="active"
           id="teams"
         >
-          Teams
+          Unit
         </b-button>
       </b-button-group>
     </div>
@@ -45,35 +45,25 @@ export default {
   methods: {
     handleToggle(state) {
       const url = window.location.href
-      const pattern = /\/orgnization\// // Update the pattern to match your specific requirement
+      const pattern = /\/orgnization\/?/ // Update the pattern to match your specific requirement
 
+      console.log('aaaaaaaaaaaaaa')
       if (pattern.test(url)) {
+        console.log('bbbbbbbbbbbbbbbb')
         const parts = url.split('/')
         let unitId = ''
-        let teamId = ''
+        // let teamId = ''
         if (parts.length > 5) {
           [unitId] = parts.slice(5)
         }
-        if (parts.length > 7) {
-          [teamId] = parts.slice(7)
-        }
+        // if (parts.length > 7) {
+        //   [teamId] = parts.slice(7)
+        // }
 
-        if (unitId !== '') {
+        // if (unitId !== '') {
           let baseUrl = ''
           if (state) {
-            baseUrl = `/orgnization/unit/${unitId}/control-table`
-            this.$router.push(baseUrl)
-            let m = 0
-            const stateCheck = setInterval(() => {
-              const tableElement = document.getElementById('control-table___BV_tab_button__')
-              if (tableElement) {
-                tableElement.click()
-              }
-              m += 1
-              if (m === 1) {
-                clearInterval(stateCheck)
-              }
-            }, 500)
+            this.$store.commit('orgnizationState/Unit_Teams_UPDATE', 'unit')
             const jobsElement = document.getElementById('jobs')
             const teamsElement = document.getElementById('teams')
             if (jobsElement) {
@@ -82,85 +72,8 @@ export default {
             if (teamsElement) {
               teamsElement.classList.add('active')
             }
-          } else if (teamId !== '') {
-            baseUrl = `/orgnization/unit/${unitId}/team/${teamId}/control-table`
-            this.$router.push(baseUrl)
-            let m = 0
-            const stateCheck = setInterval(() => {
-              const elements = document.getElementsByClassName('nav-link')
-              let tableElement = null
-              for (let i = 0; i < elements.length; i += 1) {
-                if (elements[i].innerText.trim() === 'Control') {
-                  tableElement = elements[i]
-                  break
-                }
-              }
-              if (tableElement) {
-                tableElement.click()
-              }
-              m += 1
-              if (m === 1) {
-                clearInterval(stateCheck)
-              }
-            }, 500)
-            const jobsElement = document.getElementById('jobs')
-            const teamsElement = document.getElementById('teams')
-            if (jobsElement) {
-              jobsElement.classList.add('active')
-            }
-            if (teamsElement) {
-              teamsElement.classList.remove('active')
-            }
-          } else if (unitId === 'paris') {
-            baseUrl = `/orgnization/unit/paris/team/team-a/control-table`
-            this.$router.push(baseUrl)
-            let m = 0
-            const stateCheck = setInterval(() => {
-              const elements = document.getElementsByClassName('nav-link')
-              let tableElement = null
-              for (let i = 0; i < elements.length; i += 1) {
-                if (elements[i].innerText.trim() === 'Control') {
-                  tableElement = elements[i]
-                  break
-                }
-              }
-              if (tableElement) {
-                tableElement.click()
-              }
-              m += 1
-              if (m === 1) {
-                clearInterval(stateCheck)
-              }
-            }, 500)
-            const jobsElement = document.getElementById('jobs')
-            const teamsElement = document.getElementById('teams')
-            if (jobsElement) {
-              jobsElement.classList.add('active')
-            }
-            if (teamsElement) {
-              teamsElement.classList.remove('active')
-            }
           } else {
-            baseUrl = `/orgnization/unit/sofia/team/team-e/control-table`
-            this.$router.push(baseUrl)
-            let m = 0
-            const stateCheck = setInterval(() => {
-              const elements = document.getElementsByClassName('nav-link')
-              let tableElement = null
-              for (let i = 0; i < elements.length; i += 1) {
-                if (elements[i].innerText.trim() === 'Control') {
-                  tableElement = elements[i]
-                  break
-                }
-              }
-              if (tableElement) {
-                tableElement.click()
-              }
-              m += 1
-              if (m === 1) {
-                clearInterval(stateCheck)
-              }
-            }, 500)
+            this.$store.commit('orgnizationState/Unit_Teams_UPDATE', 'teams')
             const jobsElement = document.getElementById('jobs')
             const teamsElement = document.getElementById('teams')
             if (jobsElement) {
@@ -170,7 +83,114 @@ export default {
               teamsElement.classList.remove('active')
             }
           }
-        }
+
+          if (unitId !== '') {
+            baseUrl = `/orgnization/unit/${unitId}/reporting-cost`
+          } else {
+            baseUrl = `/orgnization/unit/paris/reporting-cost`
+          }
+          this.$router.push(baseUrl)
+          let m = 0
+          const stateCheck = setInterval(() => {
+            const tableElement = document.getElementById('reporting___BV_tab_button__')
+            if (tableElement) {
+              tableElement.click()
+            }
+            m += 1
+            if (m === 1) {
+              clearInterval(stateCheck)
+            }
+          }, 500)
+
+          //  else if (teamId !== '') {
+          //   baseUrl = `/orgnization/unit/${unitId}/team/${teamId}/reporting-cost`
+          //   this.$router.push(baseUrl)
+          //   let m = 0
+          //   const stateCheck = setInterval(() => {
+          //     const elements = document.getElementsByClassName('nav-link')
+          //     let tableElement = null
+          //     for (let i = 0; i < elements.length; i += 1) {
+          //       if (elements[i].innerText.trim() === 'Reporting') {
+          //         tableElement = elements[i]
+          //         break
+          //       }
+          //     }
+          //     if (tableElement) {
+          //       tableElement.click()
+          //     }
+          //     m += 1
+          //     if (m === 1) {
+          //       clearInterval(stateCheck)
+          //     }
+          //   }, 500)
+          //   const jobsElement = document.getElementById('jobs')
+          //   const teamsElement = document.getElementById('teams')
+          //   if (jobsElement) {
+          //     jobsElement.classList.add('active')
+          //   }
+          //   if (teamsElement) {
+          //     teamsElement.classList.remove('active')
+          //   }
+          // } else if (unitId === 'paris') {
+          //   baseUrl = `/orgnization/unit/paris/team/team-a/reporting-cost`
+          //   this.$router.push(baseUrl)
+          //   let m = 0
+          //   const stateCheck = setInterval(() => {
+          //     const elements = document.getElementsByClassName('nav-link')
+          //     let tableElement = null
+          //     for (let i = 0; i < elements.length; i += 1) {
+          //       if (elements[i].innerText.trim() === 'Reporting') {
+          //         tableElement = elements[i]
+          //         break
+          //       }
+          //     }
+          //     if (tableElement) {
+          //       tableElement.click()
+          //     }
+          //     m += 1
+          //     if (m === 1) {
+          //       clearInterval(stateCheck)
+          //     }
+          //   }, 500)
+          //   const jobsElement = document.getElementById('jobs')
+          //   const teamsElement = document.getElementById('teams')
+          //   if (jobsElement) {
+          //     jobsElement.classList.add('active')
+          //   }
+          //   if (teamsElement) {
+          //     teamsElement.classList.remove('active')
+          //   }
+          // } else {
+          //   baseUrl = `/orgnization/unit/sofia/team/team-e/reporting-cost`
+          //   this.$router.push(baseUrl)
+          //   let m = 0
+          //   const stateCheck = setInterval(() => {
+          //     const elements = document.getElementsByClassName('nav-link')
+          //     let tableElement = null
+          //     for (let i = 0; i < elements.length; i += 1) {
+          //       if (elements[i].innerText.trim() === 'Reporting') {
+          //         tableElement = elements[i]
+          //         break
+          //       }
+          //     }
+          //     if (tableElement) {
+          //       tableElement.click()
+          //     }
+          //     m += 1
+          //     if (m === 1) {
+          //       clearInterval(stateCheck)
+          //     }
+          //   }, 500)
+          //   const jobsElement = document.getElementById('jobs')
+          //   const teamsElement = document.getElementById('teams')
+          //   if (jobsElement) {
+          //     jobsElement.classList.add('active')
+          //   }
+          //   if (teamsElement) {
+          //     teamsElement.classList.remove('active')
+          //   }
+          // }
+        // }
       }
 
       this.$emit('toggleChange', state)

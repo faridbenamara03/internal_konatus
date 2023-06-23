@@ -1,61 +1,66 @@
 <template>
-  <div class="m-2">
-    <div class="containerSelf mb-2">
-      <div style="width: 300px">
+  <div class="p-2 w-100">
+    <div class="containerSelf">
+      <div style="width: 250px">
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <template v-for="(item, index) in data_source.xAxisData">
-          <div v-if="index === 1" v-bind:key="index" class="sub-main"
-            style="border-radius: 5px; background-color: crimson; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 18px; color: white;">{{ item }}</b>
+      <div class="containerSelf p-0" style="width: calc(100% - 250px);">
+        <template v-for="(item, index) in xAxisData">
+          <div v-if="index === 1" :key="index" class="sub-main"
+            style="border-radius: 5px; background-color: #7c1615; padding-top:5px; padding-bottom: 5px;min-width:130px;">
+            <b style="font-size: 14px; color: white;">{{ item }}</b>
           </div>
-          <div v-else v-bind:key="index" class="sub-main"
-            style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;">
-            <b style="font-size: 18px; color: white;">{{ item }}</b>
+          <div v-else :key="index" class="sub-main"
+            style="border-radius: 5px; padding-top:5px; padding-bottom: 5px;min-width:130px;">
+            <b style="font-size: 14px; color: white;">{{ item }}</b>
           </div>
         </template>
       </div>
     </div>
-    <div class="containerSelf mb-2" v-for="item in data_source.series" v-bind:key="item.name"
-      style="font-size: 23px; font-weight: bold;">
+    <div class="containerSelf">
+      <div style="width: 250px">
+      </div>
+      <div class="containerSelf p-0" style="width: calc(100% - 250px);">
+        <div class="sub-main" v-for="(item, i1) in labelData" :key="i1"
+          style="padding-top:5px; padding-bottom: 5px;font-size:13px;min-width:130px;">
+          {{ item }}
+        </div>
+      </div>
+    </div>
+    <div class="containerSelf" v-for="(skillset, i2) in skillsetArr" :key="i2"
+      style="font-size: 13px; font-weight: bold;">
       <div class="pt-1 pb-1 rounded-left pl-1 pr-1"
-        style="background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 300px">
+        style="margin: 0.5px; background-color: #252D43; border-left-width: 10px; border-left-color: #FF900C; border-left-style: solid; display:flex; justify-content: space-between; width: 250px;">
         <div>
-          {{ item.name }}
+          {{ skillset }}
         </div>
         <div>
           <feather-icon icon="ChevronUpIcon" />
         </div>
       </div>
-      <div class="containerSelf p-0" style="width: calc(100% - 300px)">
-        <div class="sub-main pt-1 pb-1" v-for="item_child in item.data" v-bind:key="item_child"
-          :style="'background-color:' + item_child.bg + '; color:' + item_child.clr + ';cursor:pointer'">
-          {{ item_child.data }}
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <div class="sub-main pt-1 pb-1" v-for="(item_child, k) in xAxisData" :key="item_child"
+          :style="`margin:0.5px;background-color:${genBgColor(weeklyEngagedData[k][i2], extCapData[i2])}  ;white-space:nowrap;min-width:130px`">
+          {{ weeklyEstimatedData[k][i2] }} | {{ weeklyEngagedData[k][i2] }} | {{ extCapData[i2] }}
         </div>
       </div>
     </div>
     <div class="containerSelf m-2">
-      <div style="width: 300px">
+      <b style="font-size: 17px; color: #A6E4FF">TOTALS</b>
+    </div>
+    <div class="containerSelf" v-for="(totalLabel, jndex) in totalLabelData" :key="jndex">
+      <div style="width: 250px">
+        <b style="font-size: 13px; color: #A6E4FF">{{ totalLabel }}</b>
       </div>
-      <div style="width: calc(100% - 300px)">
-        <div class="d-flex" style="width:300px;justify-content:space-between;color:#A6E4FF">
-          <b>80</b>
-          <b>160</b>
-          <b>200</b>
-        </div>
-        <div class="d-flex" style="width:300px;justify-content:start;margin-bottom:2px;">
-          <div style="height:10px;background-color:#8b3b4e;width:200px;border-top-left-radius:2px;border-bottom-left-radius:2px;" />
-          <div style="height:10px;background-color:#448739;width:100px;border-top-right-radius:2px;border-bottom-right-radius:2px;" />
-        </div>
-        <div class="d-flex" style="width:300px;justify-content:start">
-          <div style="height:10px;background-color:#0a5666;width:30px;border-top-left-radius:2px;border-bottom-left-radius:2px;" />
-          <div style="height:10px;background-color:#1d97b1;width:270px;border-top-right-radius:2px;border-bottom-right-radius:2px;" />
-        </div>
-        <div class="d-flex" style="width:300px;justify-content:center;color:#A6E4FF">
-          <b>140</b>
+      <div class="containerSelf p-0" style="width: calc(100% - 250px)">
+        <div class="sub-main" v-for="(item1, index) in xAxisData" :key="index"
+          :style="`padding-top:5px;padding-bottom: 5px;font-weight: bold;white-space:nowrap;min-width:130px;`">
+          {{ parseInt(weeklyTotalData[jndex][index] * 100, 10) / 100 }} / {{ capacity }}
+          (<span :style="`color:${genFontColor(weeklyTotalData[jndex][index], capacity)}`">{{
+            parseInt(weeklyTotalData[jndex][index] * 100 / capacity, 10) }}%</span>)
         </div>
       </div>
     </div>
+    <team-detail-modal />
   </div>
 </template>
 
@@ -72,75 +77,90 @@
 </style>
 
 <script>
+import TeamDetailModal from '../../modals/teamDetailModal1.vue'
+
 export default {
+  components: {
+    TeamDetailModal,
+  },
   data() {
     return {
-      data_source: {
-        xAxisData: ['Mon 01', 'Tue 02', 'Wed 03', 'Thu 04', 'Fri 05', 'Sat 06', 'Sun 07'],
-        series: [
-          {
-            name: 'Team A',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {},
-            showSymbol: false,
-            color: '#9a4964',
-            lineStyle: {
-              width: 0,
-            },
-            data: [
-              { bg: '#0a5666', data: '24/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#0a5666', data: '22/24' },
-              { bg: '#448739', data: '18/24' },
-              { bg: '#448739', data: '11/16' },
-              { bg: '#8b3b4e', data: '27/24' },
-              { bg: '#448739', data: '3/8' },
-            ],
-          },
-          {
-            name: 'Team B',
-            type: 'line',
-            stack: 'Total',
-            color: '#4f964d',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            color_type: 1,
-            data: [
-              { bg: '#0a5666', data: '24/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-              { bg: '#8b3b4e', data: '28/24' },
-            ],
-          },
-          {
-            name: 'Back-end devs',
-            type: 'line',
-            stack: 'Total',
-            color: '#186b83',
-            showSymbol: false,
-            areaStyle: {},
-            lineStyle: {
-              width: 0,
-            },
-            data: [
-              { bg: '#0a5666', data: '80 + 0/160' },
-              { bg: '#448739', data: '80 + 0/160' },
-              { bg: '#448739', data: '120 + 8/160' },
-              { bg: '#448739', data: '20 + 60/160' },
-              { bg: '#448739', data: '0 + 80/160' },
-              { bg: '#448739', data: '0 + 40/160' },
-              { bg: '#448739', data: '0 + 0/160' },
-            ],
-          },
-        ],
-      },
+      xAxisData: ['W1', 'W2', 'W3', 'W4', 'W5'],
+      labelData: ['Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap', 'Real Est. | Engaged | Ext. cap'],
+      skillsetArr: ['PHP Back-end', 'JavaScript', 'Python', 'Test'],
+      extCapData: [65, 40, 52, 50],
+      weelyQuotedData: [0, 0, 0, 0, 10, 15, 25, 25, 33],
+      weeklyEstimatedData: [
+        [70.84, 32.25, 16.9, 49.01],
+        [50.56, 37.32, 10.14, 70.98],
+        [37.04, 42.39, 42.25, 47.32],
+        [26.9, 22.11, 30.42, 74.36],
+        [62.39, 4, 42.25, 54.08],
+        [74.22, 21.42, 30.42, 27.04],
+        [28.59, 37.32, 23.66, 45.63],
+        [48, 25.49, 11.83, 35.49],
+        [42, 10, 17, 32]
+      ],
+      weeklyEngagedData: [
+        [70, 30, 20, 49],
+        [50, 35, 14, 70],
+        [40, 40, 40, 49],
+        [26, 22.5, 33, 70],
+        [50, 22.5, 40, 50],
+        [70, 10, 33, 35],
+        [30, 40, 25, 40],
+        [48, 25, 15, 35],
+        [42, 10, 17, 32]
+      ],
+      capacity: 169,
+      totalLabelData: ['Real Est./Capacity', 'Engaged/Capacity', 'Engaged+Quote/Capacity'],
+    }
+  },
+  computed: {
+    weeklyTotalData() {
+      const engPlusQData = []
+      this.weeklyTotalEngaged.forEach((t, i) => {
+        engPlusQData.push(t + this.weelyQuotedData[i])
+      })
+      return [this.weeklyTotalEstimated, this.weeklyTotalEngaged, engPlusQData]
+    },
+    weeklyTotalEstimated() {
+      const dt = []
+      this.weeklyEstimatedData.forEach(t => {
+        let sm = 0
+        t.forEach(t1 => {
+          sm += t1
+        })
+        dt.push(sm)
+      })
+      return dt
+    },
+    weeklyTotalEngaged() {
+      const dt = []
+      this.weeklyEngagedData.forEach(t => {
+        let sm = 0
+        t.forEach(t1 => {
+          sm += t1
+        })
+        dt.push(sm)
+      })
+      return dt
+    },
+  },
+  methods: {
+    genBgColor(engaged, capacity) {
+      let color = '#343434'
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
+      return color
+    },
+    genFontColor(engaged, capacity) {
+      let color = null
+      if (engaged <= 0.6 * capacity) color = '#02283a'
+      else if (engaged <= capacity && engaged >= 0.9 * capacity) color = '#744600'
+      else if (engaged > capacity) color = '#560b0a'
+      return color
     }
   }
 }

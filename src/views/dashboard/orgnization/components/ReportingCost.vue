@@ -66,8 +66,8 @@
       </div>
       <div v-for="(org, oIndex) in data" :key="oIndex" style="color: white">
         <div
-          style="display:flex;background-color: #303952;height: 60px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);">
-          <div style="width: 30%; padding-left: 40px; text-transform: uppercase;">
+          style="display:flex;background-color: #303952; height: 60px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);">
+          <div style="width: 30%; padding-left: 30px; text-transform: uppercase;">
             <feather-icon v-if="org.name === 'Konatus Industries'" icon="ChevronDownIcon" size="16" class="mr-1" />
             <feather-icon v-if="org.name === 'SPACE HOLDER FOR AN OTHER BU'" icon="PlusIcon" size="16" class="mr-1" />
             {{ org.name }}
@@ -89,7 +89,7 @@
           <div v-for="(unit, uIndex) in org.children" :key="uIndex">
             <div @click="onclickunit(uIndex)"
               style="display:flex;background-color: #23293a;height: 50px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); cursor: pointer;">
-              <div style="width: 30%; padding-left: 45px;">
+              <div style="width: 30%; padding-left: 30px;">
                 <feather-icon :icon="unit.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
                   :style="`color:${unit.state === 'up' ? 'green' : 'red'}`" />
                 {{ unit.name }}
@@ -97,20 +97,11 @@
               <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
                 {{ unit[item] }}
               </div>
-              <!-- <div style="width: 23%">
-                {{ unit.budget_team }}
-              </div>
-              <div style="width: 23%">
-                {{ unit.budget_engaged }}
-              </div>
-              <div style="width: 24%">
-                {{ unit.real_estimated }}
-              </div> -->
             </div>
             <div v-if="unit.children">
               <div v-for="(team, tIndex) in unit.children" :key="tIndex">
-                <div v-if="collapsedItems.indexOf(uIndex) === -1" style="display:flex;height: 50px;align-items: center;">
-                  <div style="width: 30%; padding-left: 50px;">
+                <div @click="onclickunit1(tIndex)" v-if="collapsedItems.indexOf(uIndex) === -1" style="display:flex;height: 50px;align-items: center;background-color: #282e41;">
+                  <div style="width: 30%; padding-left: 45px;">
                     <feather-icon :icon="team.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
                       :style="`color:${team.state === 'up' ? 'green' : 'red'}`" />
                     {{ team.name }}
@@ -118,15 +109,22 @@
                   <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
                     {{ team[item] }}
                   </div>
-                  <!-- <div style="width: 23%">
-                    {{ team.budget_team }}
+
+                </div>
+                <div v-if="team.children">
+                  <div v-for="(subteam, stIndex) in team.children" :key="stIndex">
+                    <div v-if="collapsedItems.indexOf(uIndex) === -1 && collapsedItems1.indexOf(tIndex) === -1" style="display:flex;height: 50px;align-items: center;">
+                      <div style="width: 30%; padding-left: 60px;">
+                        <feather-icon :icon="subteam.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
+                          :style="`color:${subteam.state === 'up' ? 'green' : 'red'}`" />
+                        {{ subteam.name }}
+                      </div>
+                      <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+                        {{ subteam[item] }}
+                      </div>
+
+                    </div>
                   </div>
-                  <div style="width: 23%">
-                    {{ team.budget_engaged }}
-                  </div>
-                  <div style="width: 24%">
-                    {{ team.real_estimated }}
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -209,6 +207,7 @@ export default {
   data() {
     return {
       collapsedItems: [],
+      collapsedItems1: [],
       series: [[{
         data: [120, 240, 2040, 1920, 3960, 3720],
       }],
@@ -297,6 +296,13 @@ export default {
         this.collapsedItems.splice(this.collapsedItems.indexOf(index), 1) // Remove the value at the found index
       } else {
         this.collapsedItems.push(index)
+      }
+    },
+    onclickunit1(index) {
+      if (this.collapsedItems1.indexOf(index) !== -1) { // If the value is found in the array
+        this.collapsedItems1.splice(this.collapsedItems1.indexOf(index), 1) // Remove the value at the found index
+      } else {
+        this.collapsedItems1.push(index)
       }
     },
     function(row) {

@@ -35,6 +35,9 @@ export default {
         case 'organization':
           this.icon = 'GlobeIcon'
           break
+        case 'organization-unit':
+          this.icon = 'GlobeIcon'
+          break
         case 'portfolio':
           this.icon = 'HomeIcon'
           break

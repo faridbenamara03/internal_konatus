@@ -754,6 +754,241 @@ const globalOperationData = {
   ]
 }
 
+// const globalOrganizationData = {
+//   id: 'organization-dynamics-organization',
+//   title: 'Organization Dynamics',
+//   resource: 'Konatus',
+//   isOperation: false,
+//   type: 'organization',
+//   children: [
+//     {
+//       id: 'paris-unit',
+//       title: 'Paris',
+//       type: 'unit',
+//       route: {
+//         name: 'unit-view',
+//         params: {
+//           unitId: 'paris',
+//         },
+//       },
+//       children: [
+//         {
+//           id: 'team-a-team',
+//           title: 'Team FP',
+//           parent: 'paris-unit',
+//           type: 'team',
+//           color: '#D68232',
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'paris',
+//               teamId: 'team-a',
+//             },
+//           },
+//           phases: [
+//             {
+//               id: 'phase-1',
+//               projectId: 'new-format-project',
+//               assigned: 'team-a-team',
+//               data: {
+//                 progress: 0,
+//                 start_date: '2022.11.04',
+//                 end_date: '2022.12.21',
+//               },
+//               elements: [
+//                 {
+//                   activityId: `install-software-activity`,
+//                   phase: 'phase-1',
+//                   title: 'Install software',
+//                   description: 'Set up foundations with dimmentions 30cm by 50cm.',
+//                   priority: 'Highest',
+//                   gate: 1,
+//                   assigned: 'team-a-team',
+//                   effort: {
+//                     load: 53,
+//                     duration: 26,
+//                     fte: 80
+//                   }
+//                 },
+//                 {
+//                   activityId: 'develop-control-software-activity',
+//                   title: 'Develop control software',
+//                   phase: 'phase-1',
+//                   description: 'Set up foundations with dimmentions 30cm by 50cm.',
+//                   priority: 'Highest',
+//                   gate: 2,
+//                   assigned: 'team-a-team',
+//                   effort: {
+//                     load: 53,
+//                     duration: 26,
+//                     fte: 80
+//                   },
+//                 },
+//                 {
+//                   activityId: `debugging-activity`,
+//                   title: 'Debugging',
+//                   description: 'Set up foundations with dimmentions 30cm by 50cm.',
+//                   phase: 'phase-1',
+//                   priority: 'Highest',
+//                   gate: 1,
+//                   assigned: 'team-a-team',
+//                   effort: {
+//                     load: 53,
+//                     duration: 26,
+//                     fte: 80
+//                   },
+//                 },
+//               ]
+//             },
+//             {
+//               id: 'phase-2',
+//               projectId: 'new-format-project',
+//               assigned: 'team-a-team',
+//               data: {
+//                 progress: 0,
+//                 start_date: '2022.11.04',
+//                 end_date: '2022.12.21',
+//               },
+//               elements: [
+//                 {
+//                   activityId: `electricity-market-ai-activity`,
+//                   title: 'Electricity market AI',
+//                   description: 'Set up foundations with dimmentions 30cm by 50cm.',
+//                   priority: 'Highest',
+//                   phase: 'phase-2',
+//                   gate: 1,
+//                   assigned: 'team-a-team',
+//                   effort: {
+//                     load: 53,
+//                     duration: 26,
+//                     fte: 80
+//                   },
+//                 },
+//                 {
+//                   activityId: `improve-generator-component-activity`,
+//                   title: 'Improve generator component',
+//                   description: 'Set up foundations with dimmentions 30cm by 50cm.',
+//                   priority: 'Highest',
+//                   phase: 'phase-2',
+//                   gate: 2,
+//                   assigned: 'team-b-team',
+//                   effort: {
+//                     load: 53,
+//                     duration: 26,
+//                     fte: 80
+//                   },
+//                 },
+//               ]
+//             },
+//           ],
+//           children: [
+//             {
+//               id: 'travis-roach-user',
+//               parent: 'team-a-team',
+//               title: 'Travis Roach',
+//               type: 'user',
+//             },
+//             {
+//               id: 'ciaran-bradford-user',
+//               parent: 'team-a-team',
+//               title: 'Ciaran Bradford',
+//               type: 'user',
+//             },
+//             {
+//               id: 'george-logan-user',
+//               parent: 'team-a-team',
+//               title: 'George Logan',
+//               type: 'user',
+//             },
+//             {
+//               id: 'angelica-russo-user',
+//               parent: 'team-a-team',
+//               title: 'Angelica Russo',
+//               type: 'user',
+//             },
+//           ]
+//         }
+//       ]
+//     },
+//     {
+//       id: 'sofia-unit',
+//       title: 'Sofia',
+//       type: 'unit',
+//       route: {
+//         name: 'unit-view',
+//         params: {
+//           unitId: 'sofia',
+//         }
+//       },
+//       children: [
+//         {
+//           id: 'team-e-team',
+//           title: 'Team FS',
+//           parent: 'sofia-unit',
+//           type: 'team',
+//           route: {
+//             name: 'team-view',
+//             params: {
+//               unitId: 'sofia',
+//               teamId: 'team-e',
+//             },
+//           },
+//           phases: [
+//             {
+//               id: 'phase-8',
+//               projectId: 'enhanced-autonomy-project',
+//               assigned: 'team-e-team',
+//               data: {
+//                 progress: 0,
+//                 start_date: '2022.11.04',
+//                 end_date: '2022.12.21',
+//               },
+//               elements: []
+//             },
+//             {
+//               id: 'phase-9',
+//               projectId: 'rocket-launcher-project',
+//               assigned: 'team-e-team',
+//               data: {
+//                 progress: 0,
+//                 start_date: '2022.11.04',
+//                 end_date: '2022.12.21',
+//               },
+//               elements: []
+//             },
+//           ],
+//           children: [
+//             {
+//               id: 'lone-wolf-user',
+//               title: 'Lone Wolf',
+//               parent: 'team-e-team',
+//               type: 'user',
+//             },
+//             {
+//               id: 'telora-varga-user',
+//               title: 'Telora Varga',
+//               parent: 'team-e-team',
+//               type: 'user',
+//             },
+//             {
+//               id: 'poke-green-user',
+//               title: 'Poke Green',
+//               parent: 'team-e-team',
+//               type: 'user',
+//             },
+//             {
+//               id: 'assen-oliveira-user',
+//               title: 'Assen Oliveira',
+//               parent: 'team-e-team',
+//               type: 'user',
+//             },
+//           ]
+//         }
+//       ]
+//     }
+//   ]
+// }
+
 const globalOrganizationData = {
   id: 'organization-dynamics-organization',
   title: 'Organization Dynamics',
@@ -774,7 +1009,7 @@ const globalOrganizationData = {
       children: [
         {
           id: 'team-a-team',
-          title: 'Team FP',
+          title: 'Sensor & Effector',
           parent: 'paris-unit',
           type: 'team',
           color: '#D68232',
@@ -785,129 +1020,125 @@ const globalOrganizationData = {
               teamId: 'team-a',
             },
           },
-          phases: [
-            {
-              id: 'phase-1',
-              projectId: 'new-format-project',
-              assigned: 'team-a-team',
-              data: {
-                progress: 0,
-                start_date: '2022.11.04',
-                end_date: '2022.12.21',
-              },
-              elements: [
-                {
-                  activityId: `install-software-activity`,
-                  phase: 'phase-1',
-                  title: 'Install software',
-                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
-                  priority: 'Highest',
-                  gate: 1,
-                  assigned: 'team-a-team',
-                  effort: {
-                    load: 53,
-                    duration: 26,
-                    fte: 80
-                  }
-                },
-                {
-                  activityId: 'develop-control-software-activity',
-                  title: 'Develop control software',
-                  phase: 'phase-1',
-                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
-                  priority: 'Highest',
-                  gate: 2,
-                  assigned: 'team-a-team',
-                  effort: {
-                    load: 53,
-                    duration: 26,
-                    fte: 80
-                  },
-                },
-                {
-                  activityId: `debugging-activity`,
-                  title: 'Debugging',
-                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
-                  phase: 'phase-1',
-                  priority: 'Highest',
-                  gate: 1,
-                  assigned: 'team-a-team',
-                  effort: {
-                    load: 53,
-                    duration: 26,
-                    fte: 80
-                  },
-                },
-              ]
-            },
-            {
-              id: 'phase-2',
-              projectId: 'new-format-project',
-              assigned: 'team-a-team',
-              data: {
-                progress: 0,
-                start_date: '2022.11.04',
-                end_date: '2022.12.21',
-              },
-              elements: [
-                {
-                  activityId: `electricity-market-ai-activity`,
-                  title: 'Electricity market AI',
-                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
-                  priority: 'Highest',
-                  phase: 'phase-2',
-                  gate: 1,
-                  assigned: 'team-a-team',
-                  effort: {
-                    load: 53,
-                    duration: 26,
-                    fte: 80
-                  },
-                },
-                {
-                  activityId: `improve-generator-component-activity`,
-                  title: 'Improve generator component',
-                  description: 'Set up foundations with dimmentions 30cm by 50cm.',
-                  priority: 'Highest',
-                  phase: 'phase-2',
-                  gate: 2,
-                  assigned: 'team-b-team',
-                  effort: {
-                    load: 53,
-                    duration: 26,
-                    fte: 80
-                  },
-                },
-              ]
-            },
-          ],
           children: [
             {
-              id: 'travis-roach-user',
+              id: 'teama-roach-user',
               parent: 'team-a-team',
-              title: 'Travis Roach',
-              type: 'user',
-            },
-            {
-              id: 'ciaran-bradford-user',
-              parent: 'team-a-team',
-              title: 'Ciaran Bradford',
-              type: 'user',
-            },
-            {
-              id: 'george-logan-user',
-              parent: 'team-a-team',
-              title: 'George Logan',
-              type: 'user',
-            },
-            {
-              id: 'angelica-russo-user',
-              parent: 'team-a-team',
-              title: 'Angelica Russo',
+              title: 'Team A',
               type: 'user',
             },
           ]
-        }
+        },
+        {
+          id: 'team-b-team',
+          title: 'HW & meca',
+          parent: 'paris-unit',
+          type: 'team',
+          color: '#D68232',
+          route: {
+            name: 'team-view',
+            params: {
+              unitId: 'paris',
+              teamId: 'team-b',
+            },
+          },
+          children: [
+            {
+              id: 'teamb-roach-user',
+              parent: 'team-a-team',
+              title: 'Team B',
+              type: 'user',
+            },
+          ]
+        },
+        {
+          id: 'team-c-team',
+          title: 'general SW',
+          parent: 'paris-unit',
+          type: 'team',
+          color: '#D68232',
+          route: {
+            name: 'team-view',
+            params: {
+              unitId: 'paris',
+              teamId: 'team-b',
+            },
+          },
+          children: [
+            {
+              id: 'teamc-roach-user',
+              parent: 'team-c-team',
+              title: 'Team C',
+              type: 'user',
+            },
+          ]
+        },
+        {
+          id: 'team-d-team',
+          title: 'real time SW',
+          parent: 'paris-unit',
+          type: 'team',
+          color: '#D68232',
+          route: {
+            name: 'team-view',
+            params: {
+              unitId: 'paris',
+              teamId: 'team-d',
+            },
+          },
+          children: [
+            {
+              id: 'teamd-roach-user',
+              parent: 'team-d-team',
+              title: 'Team D',
+              type: 'user',
+            },
+          ]
+        },
+        {
+          id: 'team-e-team',
+          title: 'FPGA & ASIC',
+          parent: 'paris-unit',
+          type: 'team',
+          color: '#D68232',
+          route: {
+            name: 'team-view',
+            params: {
+              unitId: 'paris',
+              teamId: 'team-e',
+            },
+          },
+          children: [
+            {
+              id: 'teame-roach-user',
+              parent: 'team-e-team',
+              title: 'Team E',
+              type: 'user',
+            },
+          ]
+        },
+        {
+          id: 'team-fp-team',
+          title: 'test',
+          parent: 'paris-unit',
+          type: 'team',
+          color: '#D68232',
+          route: {
+            name: 'team-view',
+            params: {
+              unitId: 'paris',
+              teamId: 'team-fp',
+            },
+          },
+          children: [
+            {
+              id: 'teamfp-roach-user',
+              parent: 'team-fp-team',
+              title: 'Team FP',
+              type: 'user',
+            },
+          ]
+        },
       ]
     },
     {
@@ -922,70 +1153,170 @@ const globalOrganizationData = {
       },
       children: [
         {
-          id: 'team-e-team',
-          title: 'Team FS',
+          id: 'team-fs-team',
+          title: 'test',
           parent: 'sofia-unit',
           type: 'team',
           route: {
             name: 'team-view',
             params: {
               unitId: 'sofia',
-              teamId: 'team-e',
+              teamId: 'team-fs',
             },
           },
-          phases: [
-            {
-              id: 'phase-8',
-              projectId: 'enhanced-autonomy-project',
-              assigned: 'team-e-team',
-              data: {
-                progress: 0,
-                start_date: '2022.11.04',
-                end_date: '2022.12.21',
-              },
-              elements: []
-            },
-            {
-              id: 'phase-9',
-              projectId: 'rocket-launcher-project',
-              assigned: 'team-e-team',
-              data: {
-                progress: 0,
-                start_date: '2022.11.04',
-                end_date: '2022.12.21',
-              },
-              elements: []
-            },
-          ],
           children: [
             {
-              id: 'lone-wolf-user',
-              title: 'Lone Wolf',
-              parent: 'team-e-team',
-              type: 'user',
-            },
-            {
-              id: 'telora-varga-user',
-              title: 'Telora Varga',
-              parent: 'team-e-team',
-              type: 'user',
-            },
-            {
-              id: 'poke-green-user',
-              title: 'Poke Green',
-              parent: 'team-e-team',
-              type: 'user',
-            },
-            {
-              id: 'assen-oliveira-user',
-              title: 'Assen Oliveira',
-              parent: 'team-e-team',
+              id: 'teamfs-wolf-user',
+              title: 'Team FS',
+              parent: 'team-fs-team',
               type: 'user',
             },
           ]
         }
       ]
     }
+  ]
+}
+
+const globalOrganizationData1 = {
+  id: 'organization-dynamics-organization-unit',
+  title: 'Organization Dynamics',
+  resource: 'Konatus',
+  isOperation: false,
+  type: 'organization-unit',
+  children: [
+    {
+      id: 'team-a-team',
+      title: 'Sensor & Effector',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-a',
+        },
+      },
+      children: [
+        {
+          id: 'teama-roach-user',
+          parent: 'team-a-team',
+          title: 'Team A',
+          type: 'user',
+        },
+      ]
+    },
+    {
+      id: 'team-b-team',
+      title: 'HW & meca',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-b',
+        },
+      },
+      children: [
+        {
+          id: 'teamb-roach-user',
+          parent: 'team-a-team',
+          title: 'Team B',
+          type: 'user',
+        },
+      ]
+    },
+    {
+      id: 'team-c-team',
+      title: 'general SW',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-b',
+        },
+      },
+      children: [
+        {
+          id: 'teamc-roach-user',
+          parent: 'team-c-team',
+          title: 'Team C',
+          type: 'user',
+        },
+      ]
+    },
+    {
+      id: 'team-d-team',
+      title: 'real time SW',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-d',
+        },
+      },
+      children: [
+        {
+          id: 'teamd-roach-user',
+          parent: 'team-d-team',
+          title: 'Team D',
+          type: 'user',
+        },
+      ]
+    },
+    {
+      id: 'team-e-team',
+      title: 'FPGA & ASIC',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-e',
+        },
+      },
+      children: [
+        {
+          id: 'teame-roach-user',
+          parent: 'team-e-team',
+          title: 'Team E',
+          type: 'user',
+        },
+      ]
+    },
+    {
+      id: 'team-fp-team',
+      title: 'test',
+      type: 'team',
+      color: '#D68232',
+      route: {
+        name: 'team-view',
+        params: {
+          unitId: 'paris',
+          teamId: 'team-fp',
+        },
+      },
+      children: [
+        {
+          id: 'teamfp-roach-user',
+          parent: 'team-fp-team',
+          title: 'Team FP',
+          type: 'user',
+        },
+        {
+          id: 'teamfs-roach-user',
+          parent: 'team-fp-team',
+          title: 'Team Fs',
+          type: 'user',
+        },
+      ]
+    },
   ]
 }
 
@@ -1406,6 +1737,7 @@ export default {
     teamsState,
     phaseState,
     globalData: [],
+    globalData1: [],
     demandTeamData: {},
     activityDetailModalOpen: false,
     selectedNavId: '',
@@ -1413,6 +1745,7 @@ export default {
 
     globalOperationData,
     globalOrganizationData,
+    globalOrganizationData1,
     projectElementTeamData: [],
     projectElementPhaseData: [],
     chartXAxisData: [
@@ -1807,6 +2140,7 @@ export default {
     },
     LOAD_NAV_DATA(state) {
       state.globalData = [globalOperationData, globalOrganizationData]
+      state.globalData1 = [globalOperationData, globalOrganizationData1]
     },
     IMPORT_WBS_2(state) {
       setTimeout(() => {

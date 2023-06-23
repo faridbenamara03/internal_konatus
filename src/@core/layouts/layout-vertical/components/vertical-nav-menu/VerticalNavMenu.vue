@@ -115,8 +115,12 @@
       tagname="ul"
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
-      <vertical-nav-menu-items
+      <vertical-nav-menu-items v-if="getIndex === 'unit'"
         :items="comptNavMenuItems"
+        class="navigation navigation-main"
+      />
+      <vertical-nav-menu-items v-else
+        :items="getNavJobMenuItems"
         class="navigation navigation-main"
       />
     </vue-perfect-scrollbar>
@@ -159,6 +163,14 @@ export default {
       data.push(...store.state.globalState.globalData)
       return data
     },
+    getIndex() {
+      return this.$store.state.orgnizationState.unitOrTeamsIndex
+    },
+    getNavJobMenuItems() {
+      const data = [{ search: true }]
+      data.push(...store.state.globalState.globalData1)
+      return data
+    }
   },
   methods: {
     toggleCreateNewDrawer() {

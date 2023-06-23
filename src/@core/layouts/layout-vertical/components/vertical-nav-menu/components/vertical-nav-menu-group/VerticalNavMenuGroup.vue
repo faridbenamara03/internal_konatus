@@ -11,7 +11,7 @@
     <b-link
       v-bind="linkProps"
       class="d-flex align-items-center"
-      :class="{'m-0': (item.type === 'organization' || item.type === 'company')}"
+      :class="{'m-0': (item.type === 'organization' || item.type === 'company' || item.type === 'organization-unit')}"
       @click="handleNavItemClick(item)"
     >
       <div :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
