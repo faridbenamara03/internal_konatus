@@ -47,9 +47,7 @@ export default {
       const url = window.location.href
       const pattern = /\/orgnization\/?/ // Update the pattern to match your specific requirement
 
-      console.log('aaaaaaaaaaaaaa')
       if (pattern.test(url)) {
-        console.log('bbbbbbbbbbbbbbbb')
         const parts = url.split('/')
         let unitId = ''
         // let teamId = ''

@@ -208,7 +208,7 @@ export default {
     reportingColumnData: undefined,
     fields: ['programs', 'gate', 'next_gate'],
     total_data: [24, 45, 101, 117, 12, 101, 117, 12],
-    unitOrTeamsIndex: 'teams',
+    unitOrTeamsIndex: 'unit',
     unitDemandData: [
       {
         id: 'consumer-robots-portfolio',
