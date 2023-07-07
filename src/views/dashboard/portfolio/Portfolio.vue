@@ -5,9 +5,9 @@
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
             <span v-if="tabIndex === 0">{{ tableTtle }}</span>
-            <div v-if="updateIndex === true && tabIndex === 1" style="display: flex;align-items: center;color: orange;">
-              <feather-icon icon="InfoIcon" size="16" />&nbsp;
-              <span>Update Available</span>
+            <div v-if="updateIndex === true && tabIndex === 1 && reportingState === 'plan'" style="display: flex;align-items: center;color: orange;">
+              <feather-icon icon="ZapIcon" size="16" />&nbsp;
+              <span>Currently viewing the proposed optimised state of the data</span>
             </div>
           </div>
           <div>
@@ -27,7 +27,23 @@
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
-              <b-button v-if="updateIndex" v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
+              <b-button v-if="updateIndex === true && reportingState === 'plan'" class="ml-1" variant="primary" @click="onClickAction('accept')">
+                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+                <span>Accept</span>
+              </b-button>
+              <b-button v-if="updateIndex === true && reportingState === 'plan'" class="ml-1" variant="primary" @click="onClickAction('reject')">
+                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+                <span>Reject</span>
+              </b-button>
+              <b-button v-if="updateIndex === true && reportingState === 'plan' && originIndex" class="ml-1" variant="primary" @click="onClickAction('origin')">
+                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+                <span>Show original</span>
+              </b-button>
+              <b-button v-if="updateIndex === true && reportingState === 'plan' && !originIndex" class="ml-1" variant="primary" @click="onClickAction('optimise')">
+                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+                <span>Show optimised</span>
+              </b-button>
+              <b-button v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
                 <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
                 <span>Update</span>
               </b-button>
@@ -160,7 +176,7 @@
       </div>
     </Drawer>
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
-    <optimize-modal :checked-data="activeColumns" @toggleUpdate="handleToggleUpdateShow" />
+    <optimize-modal :checked-data="activeColumns" @toggleUpdate="handleToggleUpdateShow" @columnChange="columnChange"/>
   </b-card>
   <div v-else>
     <Welcome />
@@ -227,6 +243,7 @@ export default {
       reportingState: 'cost',
       open: false,
       updateIndex: false,
+      originIndex: true,
     }
   },
   computed: {
@@ -262,6 +279,7 @@ export default {
       this.open = !this.open
     },
     handleToggleUpdateShow() {
+      this.onClickCPSelectBtn('reporting-plan', 'plan')
       this.updateIndex = true
     },
     handleToggleUpdateHide() {
@@ -301,7 +319,6 @@ export default {
       this.isChartView = mode
     },
     columnChange(columns) {
-      console.log('22222222222222222222222')
       const temp = [...this.defaultFields]
       columns.forEach((column, idx) => {
         temp.splice(idx + 1, 0, column)
@@ -314,6 +331,25 @@ export default {
     },
     onClose() {
       this.popoverShow = false
+    },
+    onClickAction(value) {
+      if (value === 'accept') {
+        this.updateIndex = false
+        this.$store.optimiseState = 'optimise'
+        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+      } else if (value === 'reject') {
+        this.updateIndex = false
+        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'origin')
+        this.$store.optimiseState = 'origin'
+      } else if (value === 'origin') {
+        this.$store.optimiseState = 'origin'
+        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'origin')
+        this.originIndex = !this.originIndex
+      } else if (value === 'optimise') {
+        this.$store.optimiseState = 'optimise'
+        this.originIndex = !this.originIndex
+        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+      }
     },
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value

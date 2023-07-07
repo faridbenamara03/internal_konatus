@@ -115,12 +115,12 @@
       tagname="ul"
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
-      <vertical-nav-menu-items v-if="getIndex === 'unit'"
-        :items="comptNavMenuItems"
+      <vertical-nav-menu-items v-if="getIndex === 'teams'"
+        :items="getNavJobMenuItems"
         class="navigation navigation-main"
       />
       <vertical-nav-menu-items v-else
-        :items="getNavJobMenuItems"
+        :items="comptNavMenuItems"
         class="navigation navigation-main"
       />
     </vue-perfect-scrollbar>

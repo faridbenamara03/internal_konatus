@@ -1742,6 +1742,7 @@ export default {
     activityDetailModalOpen: false,
     selectedNavId: '',
     selectedNavObj: {},
+    optimiseState: 'origin',
 
     globalOperationData,
     globalOrganizationData,

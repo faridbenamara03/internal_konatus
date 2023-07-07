@@ -34,7 +34,7 @@
         </b-button>
       </div>
     </template>
-    <div class="optimize-modal-body">
+    <div v-if="isStatus==='initial'" class="optimize-modal-body">
       <div class="flex-1">
         <div class="checkbox-slider-group">
           <b-form-checkbox
@@ -112,6 +112,25 @@
         </div>
       </div>
     </div>
+    <div v-if="isStatus==='pending'" class="optimize-modal-body" style="height: 200px;justify-content: center;align-items: center;">
+      <div class="flex">
+        <b-spinner id="spinner1" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
+        <b-spinner id="spinner2" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
+        <b-spinner id="spinner3" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
+      </div>
+    </div>
+    <div v-if="isStatus==='preview'" class="optimize-modal-body" style="flex-direction: column;">
+      <div class="flex">
+        Changes will affect the projects:
+      </div>
+      <div class="flex">
+        New Format (1.28.11.1)
+      </div>
+      <div class="flex">
+        Next Generation (2.29.18.1)
+      </div>
+    </div>
+
     <!-- Modal Footer -->
     <template #modal-footer>
       <b-button
@@ -121,10 +140,18 @@
         Cancel
       </b-button>
       <b-button
+        v-if="isStatus==='initial'"
         variant="primary"
-        @click="handleSave"
+        @click="handleStart"
       >
         Start
+      </b-button>
+      <b-button
+        v-if="isStatus==='preview'"
+        variant="primary"
+        @click="handlePreview"
+      >
+        Preview changes
       </b-button>
     </template>
   </b-modal>
@@ -132,7 +159,7 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BModal,
+  BButton, BFormCheckbox, BFormInput, BModal, BSpinner
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -142,6 +169,7 @@ export default {
     BFormCheckbox,
     BFormInput,
     BModal,
+    BSpinner,
     vSelect,
   },
   props: {
@@ -172,6 +200,7 @@ export default {
       selectedPriority: null,
       isOngoingProject: false,
       isOtherOption: false,
+      isStatus: "initial"
     }
   },
   mounted() {
@@ -180,15 +209,37 @@ export default {
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
+      this.isStatus = 'initial'
     },
-    handleSave() {
+    handleStart() {
+      this.isStatus = 'pending'
+      setTimeout(() => {
+        this.isStatus = 'preview'
+      }, 3000)
+    },
+    handlePreview() {
       this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
+      this.isStatus = 'initial'
       this.$refs['my-modal'].hide()
     },
   },
 }
 </script>
+
+<style>
+  #spinner1 {
+    animation-delay: 0s;
+  }
+
+  #spinner2 {
+    animation-delay: 0.5s;
+  }
+
+  #spinner3 {
+    animation-delay: 1s;
+  }
+</style>
 
 <style lang="scss">
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';

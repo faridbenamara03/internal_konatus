@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: {
     demandTableEditable: false,
+    optimizeStatus: 'origin',
     reportingData: [
       {
         id: '63d3d79802e5f6e2220b516e',
@@ -105,6 +106,9 @@ export default {
   mutations: {
     UPDATE_DEMAND_TABLE_EDITABLE(state) {
       state.demandTableEditable = !state.demandTableEditable
+    },
+    UPDATE_OPTIMIZE_STATUES(state, value) {
+      state.optimizeStatus = value
     },
   },
 }
