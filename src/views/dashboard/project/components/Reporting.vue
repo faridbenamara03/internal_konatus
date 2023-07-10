@@ -38,14 +38,14 @@
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            2.29.18.113 <span style="color:white">(40%)</span>
+            2.29.18.113 <span style="color:white">({{ percentage113 }})</span>
           </div>
         </div>
       </div>
       <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
         <div class="sub-project">
           <div class="child1 ml-1">
-            2.29.18.114 <span style="color:white">(14%)</span>
+            2.29.18.114 <span style="color:white">({{ percentage114 }})</span>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
           </div>
           <div class="demand">
             <b-icon icon="circle-fill" class="flag" />
-            Demand
+            Real
           </div>
           <div class="engaged">
             <b-icon icon="circle-fill" class="flag" />
@@ -93,7 +93,7 @@
           </div>
           <div class="real-estimated">
             <b-icon icon="circle-fill" class="flag" />
-            Real Estimated
+            Estimated
           </div>
         </div>
       </div>
@@ -115,29 +115,29 @@
           <div style="height: 88px">
             <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 10px 7px 3px;width:fit-content;">
               <div :style="`padding-left:${programData[0][0]}px`">
-                <ProgramProgressBar :type="0" :width1="programData[0][1]" :width2="456 - programData[0][0]" />
+                <ProgramProgressBar :type="1" :width1="programData[0][1]" :width2="leftP - programData[0][0]" />
               </div>
               <div :style="`padding-left:${programData[1][0]}px`">
-                <ProgramProgressBar :type="1" :width1="programData[1][1]" :width2="456 - programData[1][0]" />
+                <ProgramProgressBar :type="2" :width1="programData[1][1]" :width2="leftP - programData[1][0]" />
               </div>
               <div :style="`padding-left:${programData[2][0]}px`">
-                <ProgramProgressBar :type="2" :width1="programData[2][1]" :width2="456 - programData[2][0]" />
+                <ProgramProgressBar :type="0" :width1="programData[2][1]" :width2="leftP - programData[2][0]" />
               </div>
             </b-card>
           </div>
           <div style="height:77px">
             <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
               <div :style="`padding-left:${projectPaddingData[0]}px`">
-                <ProjectProgressBar :type="0" :width1="projectData[0][0]" :width2="projectData[0][1]"
-                  :width3="projectData[0][2]" :width4="456 - projectPaddingData[0]" />
+                <ProjectProgressBar :type="1" :width1="projectData[0][0]" :width2="projectData[0][1]"
+                  :width3="projectData[0][2]" :width4="leftP - projectPaddingData[0]" />
               </div>
               <div :style="`padding-left:${projectPaddingData[1]}px`">
-                <ProjectProgressBar :type="1" :width1="projectData[1][0]" :width2="projectData[1][1]"
-                  :width3="projectData[1][2]" :width4="456 - projectPaddingData[1]" />
+                <ProjectProgressBar :type="2" :width1="projectData[1][0]" :width2="projectData[1][1]"
+                  :width3="projectData[1][2]" :width4="leftP - projectPaddingData[1]" />
               </div>
               <div :style="`padding-left:${projectPaddingData[2]}px`">
-                <ProjectProgressBar :type="2" :width1="projectData[2][0]" :width2="projectData[2][1]"
-                  :width3="projectData[2][2]" :width4="456 - projectPaddingData[2]" />
+                <ProjectProgressBar :type="0" :width1="projectData[2][0]" :width2="projectData[2][1]"
+                  :width3="projectData[2][2]" :width4="leftP - projectPaddingData[2]" />
               </div>
             </b-card>
           </div>
@@ -145,13 +145,13 @@
             <b-card class="d-flex flex-column justify-content-around" no-body
               style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[0][0][1]" :width2="456 - elementData[0][0][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[0][0][1]" :width2="leftP - elementData[0][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[0][1][1]" :width2="456 - elementData[0][1][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[0][1][1]" :width2="leftP - elementData[0][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[0][2][1]" :width2="456 - elementData[0][2][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[0][2][1]" :width2="leftP - elementData[0][2][0]" />
               </div>
             </b-card>
           </div>
@@ -159,13 +159,13 @@
             <b-card class="d-flex flex-column justify-content-around" no-body
               style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[1][0][1]" :width2="456 - elementData[1][0][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[1][0][1]" :width2="leftP - elementData[1][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[1][1][1]" :width2="456 - elementData[1][1][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[1][1][1]" :width2="leftP - elementData[1][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[1][2][1]" :width2="456 - elementData[1][2][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[1][2][1]" :width2="leftP - elementData[1][2][0]" />
               </div>
             </b-card>
           </div>
@@ -173,13 +173,13 @@
             <b-card class="d-flex flex-column justify-content-around" no-body
               style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[2][0][1]" :width2="456 - elementData[2][0][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[2][0][1]" :width2="leftP - elementData[2][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[2][1][1]" :width2="456 - elementData[2][1][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[2][1][1]" :width2="leftP - elementData[2][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[2][2][1]" :width2="456 - elementData[2][2][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[2][2][1]" :width2="leftP - elementData[2][2][0]" />
               </div>
             </b-card>
           </div>
@@ -187,13 +187,13 @@
             <b-card class="d-flex flex-column justify-content-around" no-body
               style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[3][0][1]" :width2="456 - elementData[3][0][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[3][0][1]" :width2="leftP - elementData[3][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[3][1][1]" :width2="456 - elementData[3][1][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[3][1][1]" :width2="leftP - elementData[3][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[3][2][1]" :width2="456 - elementData[3][2][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[3][2][1]" :width2="leftP - elementData[3][2][0]" />
               </div>
             </b-card>
           </div>
@@ -201,13 +201,13 @@
             <b-card class="d-flex flex-column justify-content-around" no-body
               style="height:45px;padding:0 10px 0 3px;width:fit-content;">
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][0][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[4][0][1]" :width2="456 - elementData[4][0][0]" />
+                <ElementProgressBar :type="1" :width1="elementData[4][0][1]" :width2="leftP - elementData[4][0][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][1][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[4][1][1]" :width2="456 - elementData[4][1][0]" />
+                <ElementProgressBar :type="2" :width1="elementData[4][1][1]" :width2="leftP - elementData[4][1][0]" />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][2][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[4][2][1]" :width2="456 - elementData[4][2][0]" />
+                <ElementProgressBar :type="0" :width1="elementData[4][2][1]" :width2="leftP - elementData[4][2][0]" />
               </div>
             </b-card>
           </div>
@@ -356,14 +356,15 @@ export default {
   },
   data() {
     return {
+      percentage113: '60%',
+      percentage114: '44%',
       paddingLeft: [90, 150, 280, 255, 180, 270, 50],
       reportingDates: [],
       reportingDates1: [],
       value1: 30,
       value2: 40,
       value3: 80,
-      leftP: 15 * 30 + 8,
-      lineStartDate: moment(moment()).subtract(15, "days").format('YYYY.MM.DD'),
+      leftP: 0,
       todate: moment().format('YYYY.MM.DD'),
       timelineWinWidth: 76 * 30 + 8 * 2,
       collapsed: false,
@@ -379,14 +380,14 @@ export default {
           [this.randomTen(200, 100), this.randomTen(200, 300)]
         ],
         [
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)]
+          [0, (15 + 31 - 1) * 30],
+          [(2 + 31 - 1) * 30, 13 * 30],
+          [(2 + 31 - 1) * 30, 28 * 30]
         ],
         [
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)]
+          [(31 * 30), 14 * 30],
+          [(2 + 31 - 1) * 30, 13 * 30],
+          [(2 + 31 - 1) * 30, 28 * 30]
         ],
         [
           [this.randomTen(200, 100), this.randomTen(200, 300)],
@@ -419,42 +420,85 @@ export default {
     programData() {
       return (
         [
-          [Math.random() * this.projectPaddingData[0], this.randomTen(100, 800)],
-          [Math.random() * this.projectPaddingData[1], this.randomTen(100, 900)],
-          [Math.random() * this.projectPaddingData[2], this.randomTen(100, 900)]
+          [Math.random() * 1000, this.randomTen(100, 800)],
+          [Math.random() * 1000, this.randomTen(100, 900)],
+          [Math.random() * 1000, this.randomTen(100, 900)]
         ]
       )
+    },
+    calcWidth(val1) {
+      return this.leftP - val1
     }
   },
   mounted() {
-    const startDate = moment(moment()).subtract(15, "days")
-    const endDate = moment(moment()).add(2, "M")
-    this.reportingDates = [startDate.clone()]
-    while (startDate.add(1, "days").diff(endDate) < 0) {
-      this.reportingDates.push(startDate.clone())
+    const currentDate = new Date("2023-01-04")
+    const startDate = new Date("2022-11-01")
+    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate())
+
+    // Calculate the time difference in milliseconds
+    const timeDiff = currentDate.getTime() - startDate.getTime()
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24)
+    this.leftP = 30 * daysDiff + 20
+
+    this.reportingDates = [new Date(startDate)]
+    while (startDate.getTime() < endDate.getTime()) {
+      startDate.setDate(startDate.getDate() + 1)
+      this.reportingDates.push(new Date(startDate))
     }
-    const startDate1 = moment(moment()).subtract(75, "days")
-    const endDate1 = moment(moment()).add(5, "M")
-    this.reportingDates1 = [startDate1.clone()]
-    while (startDate1.add(5, "days").diff(endDate1) < 0) {
-      this.reportingDates1.push(startDate1.clone())
+
+    const startDate1 = new Date("2022-11-01")
+    const endDate1 = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate())
+    this.reportingDates1 = [new Date(startDate1)]
+    while (startDate1.getTime() < endDate1.getTime()) {
+      startDate1.setDate(startDate1.getDate() + 5)
+      this.reportingDates1.push(new Date(startDate1))
     }
+
+    // const startDate = moment(moment()).subtract(15, "days")
+    // const endDate = moment(moment()).add(2, "M")
+    // this.reportingDates = [startDate.clone()]
+    // while (startDate.add(1, "days").diff(endDate) < 0) {
+    //   this.reportingDates.push(startDate.clone())
+    // }
+    // const startDate1 = moment(moment()).subtract(75, "days")
+    // const endDate1 = moment(moment()).add(5, "M")
+    // this.reportingDates1 = [startDate1.clone()]
+    // while (startDate1.add(5, "days").diff(endDate1) < 0) {
+    //   this.reportingDates1.push(startDate1.clone())
+    // }
   },
   methods: {
     randomTen(val1, val2) {
-      return parseInt(Math.random() * val1, 10) + val2
+      return parseInt(Math.random() * 65, 10) * 30 + val2
     },
     isToday(date) {
-      return moment().isSame(date, "day")
+      const currentDate = new Date("2023-01-04")
+      // const currentDate = moment()
+      return (
+        currentDate.getFullYear() === date.getFullYear() && currentDate.getMonth() === date.getMonth() && currentDate.getDate() === date.getDate()
+      )
+          // return currentDate.isSame(date, "day")
     },
     getWeek(date) {
-      return date.format("dd").substring(0, 1)
+      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      const dayOfWeekIndex = date.getDay()
+      return daysOfWeek[dayOfWeekIndex].substring(0, 1)
+      // return date.format("dd").substring(0, 1)
     },
     getDay(date) {
-      return date.format("D")
+      return date.getDate().toString()
+      // return date.format("D")
     },
     getMonth(date) {
-      return date.format("MMM YYYY")
+      const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ]
+
+      const month = date.getMonth()
+      const year = date.getFullYear()
+      return `${monthNames[month]} ${year}`
+      // return date.format("MMM YYYY")
     },
     onCollapse() {
       this.collapsed = !this.collapsed
@@ -463,6 +507,8 @@ export default {
       this.$refs.project_reporting_plan_update.hide()
     },
     onUpdate() {
+      this.percentage113 = '100%'
+      this.percentage114 = '100%'
       this.elementData = [
         [
           [this.randomTen(200, 100), this.randomTen(200, 300)],
@@ -470,14 +516,14 @@ export default {
           [this.randomTen(200, 100), this.randomTen(200, 300)]
         ],
         [
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)]
+          [0, (20 + 31 - 1) * 30],
+          [(2 + 31 - 1) * 30, 23 * 30],
+          [(2 + 31 - 1) * 30, 23 * 30]
         ],
         [
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)],
-          [this.randomTen(200, 100), this.randomTen(200, 300)]
+          [(31 * 30), 19 * 30],
+          [(2 + 31 - 1) * 30, 18 * 30],
+          [(2 + 31 - 1) * 30, 18 * 30]
         ],
         [
           [this.randomTen(200, 100), this.randomTen(200, 300)],
