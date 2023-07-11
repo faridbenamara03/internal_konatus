@@ -58,7 +58,7 @@
               </b-button>
             </div>
             <div v-if="(tabIndex === 2)">
-              <b-button v-b-modal.modal-optimize variant="primary">
+              <b-button class="ml-1" @click="showOptimizeModal" variant="primary">
                 <feather-icon icon="ZapIcon" size="16" />&nbsp;
                 <span>Optimize</span>
               </b-button>
@@ -175,8 +175,8 @@
         <EditPortfolioDrawer />
       </div>
     </Drawer>
+    <optimize-modal @toggleUpdate="handleToggleUpdateShow" @columnChange="columnChange" ref="optimizeModal" />
     <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
-    <optimize-modal :checked-data="activeColumns" @toggleUpdate="handleToggleUpdateShow" @columnChange="columnChange"/>
   </b-card>
   <div v-else>
     <Welcome />
@@ -275,6 +275,9 @@ export default {
     })
   },
   methods: {
+    showOptimizeModal() {
+      this.$refs.optimizeModal.$refs['my-modal'].show()
+    },
     toggle() {
       this.open = !this.open
     },

@@ -1,13 +1,5 @@
 <template>
-  <b-modal
-    id="modal-optimize"
-    ref="my-modal"
-    title="optimize"
-    centered
-    no-fade
-    hide-backdrop
-    static
-  >
+  <b-modal id="modal-optimize-show" ref="my-modal" title="optimize" centered no-fade hide-backdrop static>
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title text-uppercase">
@@ -159,25 +151,19 @@
 
 <script>
 import {
-  BButton, BFormCheckbox, BFormInput, BModal, BSpinner
+  BButton, BModal, BSpinner
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
 export default {
   components: {
     BButton,
-    BFormCheckbox,
-    BFormInput,
     BModal,
     BSpinner,
     vSelect,
   },
   props: {
     data: {
-      type: Array,
-      default: () => [],
-    },
-    checkedData: {
       type: Array,
       default: () => [],
     },
@@ -204,7 +190,6 @@ export default {
     }
   },
   mounted() {
-    this.selected = this.checkedData
   },
   methods: {
     hideModal() {
@@ -218,7 +203,7 @@ export default {
       }, 3000)
     },
     handlePreview() {
-      this.$emit('columnChange', this.selected)
+      // this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
       this.isStatus = 'initial'
       this.$refs['my-modal'].hide()
