@@ -5,7 +5,7 @@
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
             <span v-if="tabIndex === 0">{{ tableTtle }}</span>
-            <div v-if="updateIndex === true && tabIndex === 1 && reportingState === 'plan'" style="display: flex;align-items: center;color: orange;">
+            <div v-if="updateIndex === true && reportingState === 'plan' && tabIndex === 1" style="display: flex;align-items: center;color: orange;">
               <feather-icon icon="ZapIcon" size="16" />&nbsp;
               <span>Currently viewing the proposed optimised state of the data</span>
             </div>
@@ -282,8 +282,27 @@ export default {
       this.open = !this.open
     },
     handleToggleUpdateShow() {
-      this.onClickCPSelectBtn('reporting-plan', 'plan')
       this.updateIndex = true
+      this.onClickCPSelectBtn('reporting-plan', 'plan')
+
+      let m = 0
+      const stateCheck = setInterval(() => {
+        const elements = document.getElementsByClassName('nav-link')
+        let tableElement = null
+        for (let i = 0; i < elements.length; i += 1) {
+          if (elements[i].innerText.trim() === 'Reporting') {
+            tableElement = elements[i]
+            break
+          }
+        }
+        if (tableElement) {
+          tableElement.click()
+        }
+        m += 1
+        if (m === 1) {
+          clearInterval(stateCheck)
+        }
+      }, 500)
     },
     handleToggleUpdateHide() {
       this.updateIndex = false

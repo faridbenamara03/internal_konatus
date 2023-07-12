@@ -151,7 +151,7 @@
 
 <script>
 import {
-  BButton, BModal, BSpinner
+  BButton, BModal, BSpinner, BFormCheckbox, BFormInput
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -160,6 +160,8 @@ export default {
     BButton,
     BModal,
     BSpinner,
+    BFormCheckbox,
+    BFormInput,
     vSelect,
   },
   props: {
