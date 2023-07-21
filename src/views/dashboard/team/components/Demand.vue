@@ -12,7 +12,10 @@
             ({{ phase.time ? phase.time : 0 }} hours)
           </span>
         </p>
-        <b-button variant="flat-primary" @click="() => handleSelectAll(phase.id)">
+        <b-button
+          variant="flat-primary"
+          @click="() => handleSelectAll(phase.id)"
+        >
           Select All
         </b-button>
       </div>
@@ -22,7 +25,8 @@
           :key="idx"
           class="phase-box my-2 position-relative"
         >
-          <div v-if="activity.quoted"
+          <div
+            v-if="activity.quoted"
             :id="`tooltip-target-${idx}`"
             style="
               box-sizing: border-box;
@@ -34,8 +38,12 @@
               position:absolute;
               top:0;
               right:0;
-            " />
-          <b-tooltip :target="`tooltip-target-${idx}`" triggers="hover">
+            "
+          />
+          <b-tooltip
+            :target="`tooltip-target-${idx}`"
+            triggers="hover"
+          >
             Quote requested
           </b-tooltip>
           <div
@@ -44,11 +52,21 @@
           />
           <div class="phase-box--content">
             <div class="d-flex">
-              <div style="width:calc(100% - 20px);cursor:pointer;" v-b-modal.task-detail-modal @click="taskDetailMethod(activity)">
-                <p v-if="isUN(activity.title)" class="title">
+              <div
+                v-b-modal.task-detail-modal
+                style="width:calc(100% - 20px);cursor:pointer;"
+                @click="taskDetailMethod(activity)"
+              >
+                <p
+                  v-if="isUN(activity.title)"
+                  class="title"
+                >
                   {{ activity.activityId }}
                 </p>
-                <p v-else class="title">
+                <p
+                  v-else
+                  class="title"
+                >
                   {{ activity.title }}
                 </p>
               </div>
@@ -75,29 +93,33 @@
         </div>
       </div>
       <b-button
+        v-b-modal.modal-add-new-task
         variant="flat-secondary"
         class="w-100"
-        v-b-modal.modal-add-new-task
         @click="onInsertClick(phase.id)"
       >
         <feather-icon icon="PlusIcon" />
         <span>Insert New Work Element</span>
       </b-button>
     </div>
-    <insert-new-task-modal :phaseId="phaseIdToInsert" />
+    <insert-new-task-modal :phase-id="phaseIdToInsert" />
     <b-modal
-      :visible="c_openDetailModal"
-      ref="t-d-modal"
       id="task-detail-modal"
+      ref="t-d-modal"
+      :visible="c_openDetailModal"
       title="Work Element Detail"
       centered
       no-fade
     >
       <template #modal-header>
-        <h5 class="modal-title">Work Element Detail</h5>
+        <h5 class="modal-title">
+          Work Element Detail
+        </h5>
       </template>
       <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">Work Element ID</div>
+        <div style="width:150px;font-weight:bold;padding-top:9px">
+          Work Element ID
+        </div>
         <div>
           <b-form-input
             v-model="taskDetail.activityId"
@@ -106,20 +128,40 @@
         </div>
       </div>
       <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">PRIORITY</div>
-        <div >
-          <v-select v-model="taskDetail.priority" :options="['Highest', 'High', 'Low', 'Lowest']" style="width:300px" outlined />
+        <div style="width:150px;font-weight:bold;padding-top:9px">
+          PRIORITY
+        </div>
+        <div>
+          <v-select
+            v-model="taskDetail.priority"
+            :options="['Highest', 'High', 'Low', 'Lowest']"
+            style="width:300px"
+            outlined
+          />
         </div>
       </div>
       <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">GATE</div>
+        <div style="width:150px;font-weight:bold;padding-top:9px">
+          GATE
+        </div>
         <div>
-          <v-select v-model="taskDetail.gate" :options="['1', '2', '3', '4', '5']" style="width:300px" outlined />
+          <v-select
+            v-model="taskDetail.gate"
+            :options="['1', '2', '3', '4', '5']"
+            style="width:300px"
+            outlined
+          />
         </div>
       </div>
       <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideDetailModal">Cancel</b-button>
-        <b-button variant="primary" @click="hideDetailModal">Update</b-button>
+        <b-button
+          variant="outline-primary"
+          @click="hideDetailModal"
+        >Cancel</b-button>
+        <b-button
+          variant="primary"
+          @click="hideDetailModal"
+        >Update</b-button>
       </template>
     </b-modal>
   </div>
@@ -163,6 +205,9 @@ export default {
     c_openDetailModal() {
       return this.openDetailModal
     }
+  },
+  mounted() {
+    this.$store.dispatch('teamState/get_team_demand_data')
   },
   methods: {
     isUN(data) {

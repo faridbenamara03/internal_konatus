@@ -329,6 +329,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch('teamState/get_team_reporting_data')
     const startDate = moment(moment()).subtract(15, "days")
     const endDate = moment(moment()).add(2, "M")
     this.reportingDates = [startDate.clone()]

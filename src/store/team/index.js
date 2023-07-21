@@ -1,219 +1,12 @@
-import Vue from 'vue'
+import Vue from "vue"
+import axios from "axios"
 
 export default {
   namespaced: true,
   state: {
     loaderModalShow: false,
-    teamReportingData: {
-      id: 'consumer-robots-portfolio',
-      title: 'Consumer Robots',
-      type: 'portfolio',
-      children: [
-        {
-          id: 'quadruped-robot-program',
-          title: 'Quadruped robot',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          children: [
-            {
-              id: 'new-format-project',
-              title: 'New Format',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              progress: 0,
-              start_date: '2023.1.20',
-              end_date: '2023.3.12',
-              phases: [
-                {
-                  id: '2.29.18.112',
-                  progress: '10%'
-                },
-                {
-                  id: '2.29.18.114',
-                  progress: '14%'
-                },
-                {
-                  id: '2.29.18.116',
-                  progress: '10%'
-                },
-              ]
-            },
-            {
-              id: 'enhanced-motricity-project',
-              title: 'Enhanced motricity',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              phases: [
-                {
-                  id: '2.29.18.118',
-                  progress: '50%'
-                },
-              ]
-            },
-            {
-              id: 'enhanced-autonomy-project',
-              title: 'Enhanced autonomy',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              progress: 0,
-              start_date: '2023.1.20',
-              end_date: '2023.3.12',
-              phases: []
-            },
-            {
-              id: 'dual-sourcing-for-quadruped-project',
-              title: 'Dual sourcing for Quadruped',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              progress: 0,
-              start_date: '2023.1.20',
-              end_date: '2023.3.12',
-              phases: []
-            },
-          ]
-        },
-      ]
-    },
-    teamDemandData: {
-      id: 'team-a-team',
-      title: 'Team A',
-      parent: 'paris-unit',
-      type: 'team',
-      color: '#D68232',
-      route: {
-        name: 'team-view',
-        params: {
-          unitId: 'paris',
-          teamId: 'team-a',
-        },
-      },
-      phases: [
-        {
-          id: 'phase-1',
-          projectId: 'new-format-project',
-          assigned: 'team-a-team',
-          time: 12, // for team demand
-          data: {
-            progress: 0,
-            start_date: '2022.11.04',
-            end_date: '2022.12.21',
-          },
-          elements: [
-            {
-              activityId: `install-software-activity`,
-              phase: 'phase-1',
-              title: 'Install software',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              priority: 'Highest',
-              gate: 1,
-              assigned: 'team-a-team',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              }
-            },
-            {
-              activityId: 'develop-control-software-activity',
-              title: 'Develop control software',
-              phase: 'phase-1',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              priority: 'Highest',
-              gate: 2,
-              assigned: 'team-a-team',
-              quoted: true,
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-            },
-            {
-              activityId: `debugging-activity`,
-              title: 'Debugging',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              phase: 'phase-1',
-              priority: 'Highest',
-              gate: 1,
-              assigned: 'team-a-team',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-            },
-          ]
-        },
-        {
-          id: 'phase-2',
-          projectId: 'new-format-project',
-          assigned: 'team-a-team',
-          time: 14, // for team demand
-          data: {
-            progress: 0,
-            start_date: '2022.11.04',
-            end_date: '2022.12.21',
-          },
-          elements: [
-            {
-              activityId: `electricity-market-ai-activity`,
-              title: 'Electricity market AI',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              priority: 'Highest',
-              phase: 'phase-2',
-              quoted: true,
-              gate: 1,
-              assigned: 'team-a-team',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-            },
-            {
-              activityId: `improve-generator-component-activity`,
-              title: 'Improve generator component',
-              description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
-              priority: 'Highest',
-              phase: 'phase-2',
-              gate: 2,
-              assigned: 'team-b-team',
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              },
-            },
-          ]
-        },
-      ],
-      children: [
-        {
-          id: 'travis-roach-user',
-          parent: 'team-a-team',
-          title: 'Travis Roach',
-          type: 'user',
-        },
-        {
-          id: 'ciaran-bradford-user',
-          parent: 'team-a-team',
-          title: 'Ciaran Bradford',
-          type: 'user',
-        },
-        {
-          id: 'george-logan-user',
-          parent: 'team-a-team',
-          title: 'George Logan',
-          type: 'user',
-        },
-        {
-          id: 'angelica-russo-user',
-          parent: 'team-a-team',
-          title: 'Angelica Russo',
-          type: 'user',
-        },
-      ]
-    }
+    teamReportingData: {},
+    teamDemandData: {},
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
@@ -229,6 +22,12 @@ export default {
         Vue.$toast.success("Imported Successfully!")
       }, 1000)
       // .todo axios request
+    },
+    GET_REPORTING_DATA(state, data) {
+      state.teamReportingData = data
+    },
+    GET_DEMAND_DATA(state, data) {
+      state.teamDemandData = data
     },
     TOGGLE_IMPORT_LOADER_MODAL_V(state, visible) {
       if (visible) state.loaderModalShow = visible
@@ -312,5 +111,24 @@ export default {
       Vue.$toast.success('Task inserted successfully.')
     },
   },
-  actions: {},
+  actions: {
+    get_team_reporting_data() {
+      axios.get('http://localhost/konatus-me/public/api/team/reporting').then(response => {
+        const teamReportingData = response.data
+        this.commit('teamState/GET_REPORTING_DATA', teamReportingData)
+      }).catch(err => {
+        console.log('error getting team reporting data ---->', err)
+        Vue.$toast.error('Failed to get team reporting data.')
+      })
+    },
+    get_team_demand_data() {
+      axios.get('http://localhost/konatus-me/public/api/team/demand').then(response => {
+        const teamDemandData = response.data
+        this.commit('teamState/GET_DEMAND_DATA', teamDemandData)
+      }).catch(err => {
+        console.log('error getting team demand data ---->', err)
+        Vue.$toast.error('Failed to get team demand data.')
+      })
+    },
+  },
 }
