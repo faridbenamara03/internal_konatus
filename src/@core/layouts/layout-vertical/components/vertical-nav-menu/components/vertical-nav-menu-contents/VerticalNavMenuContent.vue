@@ -42,6 +42,11 @@ export default {
       default: '',
     },
   },
+  mounted() {
+    this.$store.dispatch('orgnizationState/get_unit_reporting_data')
+    this.$store.dispatch('orgnizationState/get_unit_demand_data')
+    this.$store.dispatch('orgnizationState/get_unit_control_data')
+  },
   methods: {
     handleToggle(state) {
       const url = window.location.href
