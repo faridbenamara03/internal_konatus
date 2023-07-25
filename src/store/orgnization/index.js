@@ -8,45 +8,6 @@ function randomTen(val1, val2) {
 
 export default {
   elementData: [
-    [
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-    ],
-    [
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-      [
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)],
-        [randomTen(200, 50), randomTen(200, 300)]
-      ],
-    ]
   ],
   namespaced: true,
   state: {
@@ -55,9 +16,7 @@ export default {
     total_data: [24, 45, 101, 117, 12, 101, 117, 12],
     unitOrTeamsIndex: 'unit',
     unitDemandData: [],
-
     unitReportingData: [],
-
     unitControlData: []
   },
   mutations: {
