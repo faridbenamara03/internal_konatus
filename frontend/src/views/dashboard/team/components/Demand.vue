@@ -207,7 +207,7 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch('teamState/get_team_demand_data')
+    this.$store.dispatch('teamState/get_team_demand_data')
   },
   methods: {
     isUN(data) {
