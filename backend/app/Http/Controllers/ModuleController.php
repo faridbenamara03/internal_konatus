@@ -82,4 +82,5 @@ class ModuleController extends Controller
     {
         //
     }
+
 }

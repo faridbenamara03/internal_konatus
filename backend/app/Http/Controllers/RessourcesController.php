@@ -83,6 +83,33 @@ class RessourcesController extends Controller
         //
     }
 
+    public function nav_data_new(Ressources $ressources){
+        $navData = [];
+        $orgData = [];
+        $orgData1 = [];
+        $result = [];
+        $modules = DB::connection("pgsql")->select("select * from modules");
+        $mIndex = 0;
+        while($mIndex < $modules->count){
+            $portfolio = DB::connection("pgsql")->select("select * from portfolio where moduleId = ?", [$modules[$mIndex]->id]);
+            $ptIndex = 0;
+            while($ptIndex < $portfolio->count){
+                $program = DB::connection('pgsql')->select("SELECT * FROM programme_backlog WHERE head_product_portfolio = ?", [$portfolio[$ptIndex]->title]);
+                $pgIndex = 0;
+                while($pgIndex < $program->count){
+                    $project = DB::connection("pgsql")->select("select * from product_line where programId = ?", [$program[$pgIndex]->id]);
+                    $pgIndex++;
+                }
+                $ptIndex++;
+            }
+            $mIndex++;
+        }
+        $result["navData"] = $navData;
+        $result["orgData"] = $orgData;
+        $result["orgData1"] = $orgData1;
+        return json_encode($result);
+    }
+
     public function nav_data(Ressources $ressources)
     {
         // "{\"id\": \"63d3d79802e5f6e2220b516d\",
