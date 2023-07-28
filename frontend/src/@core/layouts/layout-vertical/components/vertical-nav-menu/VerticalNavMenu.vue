@@ -8,47 +8,68 @@
     @mouseenter="updateMouseHovered(true)"
     @mouseleave="updateMouseHovered(false)"
   >
-    <div class="nav-left-menu-1" style="height:100%;width:50px;position:absolute;left:0;display:flex;flex-direction:column;justify-content:space-between;">
+    <div
+      class="nav-left-menu-1"
+      style="height:100%;width:50px;position:absolute;left:0;display:flex;flex-direction:column;justify-content:space-between;"
+    >
       <div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+        <div
+          style="display:flex;justify-content:center;cursor:pointer"
+          class="mt-5"
+        >
           <feather-icon
             style="color:white"
             icon="FileTextIcon"
             size="25"
           />
         </div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+        <div
+          style="display:flex;justify-content:center;cursor:pointer"
+          class="mt-5"
+        >
           <feather-icon
             style="color:white"
             icon="CalendarIcon"
             size="25"
           />
         </div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+        <div
+          style="display:flex;justify-content:center;cursor:pointer"
+          class="mt-5"
+        >
           <feather-icon
             style="color:white"
             icon="BarChart2Icon"
             size="25"
           />
         </div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5" >
+        <div
+          style="display:flex;justify-content:center;cursor:pointer"
+          class="mt-5"
+        >
           <feather-icon
-            @click="toggleCreateNewDrawer"
             style="color:white"
             icon="PlusCircleIcon"
             size="25"
+            @click="toggleCreateNewDrawer"
           />
         </div>
-        <div style="display:flex;justify-content:center;cursor:pointer" class="mt-5">
+        <div
+          style="display:flex;justify-content:center;cursor:pointer"
+          class="mt-5"
+        >
           <feather-icon
-            @click="toggleEditPortfolioDrawer"
             style="color:white"
             icon="EditIcon"
             size="25"
+            @click="toggleEditPortfolioDrawer"
           />
         </div>
       </div>
-      <div style="display:flex;justify-content:center" class="mb-2">
+      <div
+        style="display:flex;justify-content:center"
+        class="mb-2"
+      >
         <VerticalNavUserMenu />
       </div>
     </div>
@@ -115,11 +136,13 @@
       tagname="ul"
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
-      <vertical-nav-menu-items v-if="getIndex === 'teams'"
+      <vertical-nav-menu-items
+        v-if="getIndex === 'teams'"
         :items="getNavJobMenuItems"
         class="navigation navigation-main"
       />
-      <vertical-nav-menu-items v-else
+      <vertical-nav-menu-items
+        v-else
         :items="comptNavMenuItems"
         class="navigation navigation-main"
       />

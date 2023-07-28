@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ressources;
 use Illuminate\Http\Request;
-
+use DB;
 class RessourcesController extends Controller
 {
     /**
@@ -83,36 +83,80 @@ class RessourcesController extends Controller
         //
     }
 
-    public function nav_data_new(Ressources $ressources){
+    public function nav_data_new(Ressources $ressources)
+    {
         $navData = [];
         $orgData = [];
         $orgData1 = [];
         $result = [];
-        $modules = DB::connection("pgsql")->select("select * from modules");
-        $mIndex = 0;
-        while($mIndex < $modules->count){
-            $portfolio = DB::connection("pgsql")->select("select * from portfolio where moduleId = ?", [$modules[$mIndex]->id]);
+        $modules = DB::connection("pgsql")->select("select * from module");
+        if(count($modules) > 0) {
+            $module = (array) $modules[0];
+            $module['children'] = [];
+            $portfolio = DB::connection("pgsql")->select("select * from portfolio where moduleid = ?", [$module['id']]);
             $ptIndex = 0;
-            while($ptIndex < $portfolio->count){
-                $program = DB::connection('pgsql')->select("SELECT * FROM programme_backlog WHERE head_product_portfolio = ?", [$portfolio[$ptIndex]->title]);
-                $pgIndex = 0;
-                while($pgIndex < $program->count){
-                    $project = DB::connection("pgsql")->select("select * from product_line where programId = ?", [$program[$pgIndex]->id]);
-                    $pgIndex++;
-                }
-                $ptIndex++;
+            while($ptIndex < count($portfolio)){
+                 $portfolioArray = (array) $portfolio[$ptIndex];
+                 $portfolioArray['children'] = [];
+                 array_push($module['children'], $portfolioArray);
+                 $program = DB::connection('pgsql')->select("SELECT * FROM program_backlog WHERE head_product_portfolio = ?", [$portfolio[$ptIndex]->title]);
+                  $pgIndex = 0;
+                  while($pgIndex < count($program)){
+                      $programArray = (array) $program[$pgIndex];
+                      $programArray['children'] = [];
+                      array_push($module["children"][$ptIndex]["children"], $programArray);
+                      $project = DB::connection("pgsql")->select("select id_product_line as id, title, type, programid from product_line where programid = ?", [$program[$pgIndex]->id]);
+                      $pjIndex = 0;
+                      while($pjIndex < count($project)){
+                          $projectArray = (array) $project[$pjIndex];
+                          array_push($module["children"][$ptIndex]["children"][$pgIndex]["children"], $projectArray);
+                          $pjIndex++;
+                      }
+                      $pgIndex++;
+                  }
+                  $ptIndex++;
             }
-            $mIndex++;
+            $navData = $module;
         }
-        $result["navData"] = $navData;
-        $result["orgData"] = $orgData;
-        $result["orgData1"] = $orgData1;
+
+        $organizations = DB::connection("pgsql")->select("select * from organization");
+        if(count($organizations) > 0) {
+          $organization = (array) $organizations[0];
+          $organization['children'] = [];
+          $units = DB::connection("pgsql")->select("select * from unit where organizationid = ?", [$organization['id']]);
+          $utIndex = 0;
+          while($utIndex < count($units)){
+            $unitArray = (array) $units[$utIndex];
+            $unitArray['children'] = [];
+            array_push($organization['children'], $unitArray);
+            $teams = DB::connection('pgsql')->select("SELECT id, name as title, idunit, type, color FROM team WHERE idunit = ?", [$unitArray['id']]);
+            $tIndex = 0;
+            while($tIndex < count($teams)){
+                $teamArray = (array) $teams[$tIndex];
+                $teamArray['children'] = [];
+                array_push($organization['children'][$utIndex]['children'], $teamArray);
+                $teamusers = DB::connection("pgsql")->select("select id_tbg as id, teamid, title, type from teambacklog where teamid = ?", [$teamArray['id']]);
+                $tuIndex = 0;
+                while($tuIndex < count($teamusers)){
+                    $userArray = (array) $teamusers[$tuIndex];
+                    array_push($organization['children'][$utIndex]['children'][$tIndex]['children'], $userArray);
+                    $tuIndex++;
+                }
+                $tIndex++;
+            }
+            $utIndex++;
+          }
+          $orgData = $organization;
+          $orgData1 = $organization;
+        }
+        $result["navData"] = json_encode($navData);
+        $result["orgData"] = json_encode($orgData);
+        $result["orgData1"] = json_encode($orgData1);
         return json_encode($result);
     }
 
     public function nav_data(Ressources $ressources)
     {
-        // "{\"id\": \"63d3d79802e5f6e2220b516d\",
         $result = "{
             \"navData\" : {
                 \"id\": \"konatus-industries-company\",

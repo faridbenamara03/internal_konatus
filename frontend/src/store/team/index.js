@@ -113,7 +113,8 @@ export default {
   },
   actions: {
     get_team_reporting_data() {
-      axios.get('http://127.0.0.1:8000/api/team/reporting').then(response => {
+      // axios.get('http://127.0.0.1:8000/api/team/reporting').then(response => {
+      axios.get('http://localhost/konatus-me/public/api/team/reporting').then(response => {
         const teamReportingData = response.data
         this.commit('teamState/GET_REPORTING_DATA', teamReportingData)
       }).catch(err => {
@@ -122,7 +123,8 @@ export default {
       })
     },
     get_team_demand_data() {
-      axios.get('http://127.0.0.1:8000/api/team/demand').then(response => {
+      // axios.get('http://127.0.0.1:8000/api/team/demand').then(response => {
+      axios.get('http://localhost/konatus-me/public/api/team/demand').then(response => {
         const teamDemandData = response.data
         this.commit('teamState/GET_DEMAND_DATA', teamDemandData)
       }).catch(err => {

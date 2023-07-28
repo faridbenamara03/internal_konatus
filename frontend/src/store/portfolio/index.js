@@ -23,12 +23,13 @@ export default {
   },
   actions: {
     get_portfolio_reporting_data() {
-      axios.get('http://127.0.0.1:8000/api/portfolio/reporting').then(response => {
+      // axios.get('http://127.0.0.1:8000/api/portfolio/reporting').then(response => {
+      axios.get('http://localhost/konatus-me/public/api/portfolio/reporting').then(response => {
         const portfolioReportingData = response.data
         this.commit('portfolioState/GET_REPORTING_DATA', portfolioReportingData)
       }).catch(err => {
-        console.log('error getting team reporting data ---->', err)
-        Vue.$toast.error('Failed to get team reporting data.')
+        console.log('error getting portfolio reporting data ---->', err)
+        Vue.$toast.error('Failed to get portfolio reporting data.')
       })
     }
   },
