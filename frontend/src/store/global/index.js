@@ -1297,8 +1297,8 @@ export default {
   },
   actions: {
     load_nav_data() {
-      // axios.get('http://127.0.0.1:8000/api/menu/get_nav_data').then(response => {
-      axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
+      axios.get('https://konatus-api.onrender.com/api/menu/get_nav_data').then(response => {
+      // axios.get('https://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
         const globalAllData = response.data
         this.commit('globalState/LOAD_NAV_DATA', globalAllData)
       }).catch(err => {

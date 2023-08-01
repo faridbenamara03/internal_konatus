@@ -79,12 +79,13 @@ class CompanyDataController extends Controller
             }
             $utIndex++;
           }
-          $orgData = $organization;
-          $orgData1 = $organization;
+        //   $orgData = $organization;
+        //   $orgData1 = $organization;
         }
         $result["navData"] = json_encode($navData);
         $result["orgData"] = json_encode($orgData);
         $result["orgData1"] = json_encode($orgData1);
+
         return json_encode($result);
     }
 }
