@@ -311,6 +311,7 @@ export default {
         colors: ['#7367F0', '#D46D6D', '#BC00F9', '#00CFE8', '#0D6EFD', '#28C76F'],
         dataLabels: {
           enabled: true,
+          formatter: val => `€${val}`
         },
         legend: {
           show: true,
@@ -325,7 +326,10 @@ export default {
           },
         },
         xaxis: {
-          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorised', 'spent']
+          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorised', 'spent'],
+          labels: {
+            formatter: val => `€${val}`
+          }
         },
         yaxis: {
           labels: {
