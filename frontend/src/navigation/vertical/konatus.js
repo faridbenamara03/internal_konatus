@@ -105,7 +105,7 @@ export default [
     isOperation: false,
     type: 'root',
     route: {
-      name: 'orgnization-view',
+      name: 'organization-view',
     },
     children: [
       {

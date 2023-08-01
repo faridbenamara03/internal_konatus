@@ -50,7 +50,7 @@ export default {
   methods: {
     handleToggle(state) {
       const url = window.location.href
-      const pattern = /\/orgnization\/?/ // Update the pattern to match your specific requirement
+      const pattern = /\/organization\/?/ // Update the pattern to match your specific requirement
 
       if (pattern.test(url)) {
         const parts = url.split('/')
@@ -88,9 +88,9 @@ export default {
           }
 
           if (unitId !== '') {
-            baseUrl = `/orgnization/unit/${unitId}/reporting-cost`
+            baseUrl = `/organization/unit/${unitId}/reporting-cost`
           } else {
-            baseUrl = `/orgnization/unit/paris/reporting-cost`
+            baseUrl = `/organization/unit/paris/reporting-cost`
           }
           this.$router.push(baseUrl)
           let m = 0
@@ -106,7 +106,7 @@ export default {
           }, 500)
 
           //  else if (teamId !== '') {
-          //   baseUrl = `/orgnization/unit/${unitId}/team/${teamId}/reporting-cost`
+          //   baseUrl = `/organization/unit/${unitId}/team/${teamId}/reporting-cost`
           //   this.$router.push(baseUrl)
           //   let m = 0
           //   const stateCheck = setInterval(() => {
@@ -135,7 +135,7 @@ export default {
           //     teamsElement.classList.remove('active')
           //   }
           // } else if (unitId === 'paris') {
-          //   baseUrl = `/orgnization/unit/paris/team/team-a/reporting-cost`
+          //   baseUrl = `/organization/unit/paris/team/team-a/reporting-cost`
           //   this.$router.push(baseUrl)
           //   let m = 0
           //   const stateCheck = setInterval(() => {
@@ -164,7 +164,7 @@ export default {
           //     teamsElement.classList.remove('active')
           //   }
           // } else {
-          //   baseUrl = `/orgnization/unit/sofia/team/team-e/reporting-cost`
+          //   baseUrl = `/organization/unit/sofia/team/team-e/reporting-cost`
           //   this.$router.push(baseUrl)
           //   let m = 0
           //   const stateCheck = setInterval(() => {
