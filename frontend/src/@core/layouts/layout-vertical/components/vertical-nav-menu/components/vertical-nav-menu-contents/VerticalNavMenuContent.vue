@@ -43,6 +43,7 @@ export default {
     },
   },
   mounted() {
+    console.log('VerticalNavMenuContent')
     this.$store.dispatch('orgnizationState/get_unit_reporting_data')
     this.$store.dispatch('orgnizationState/get_unit_demand_data')
     this.$store.dispatch('orgnizationState/get_unit_control_data')

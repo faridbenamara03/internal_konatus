@@ -520,6 +520,7 @@ export default {
     get_unit_reporting_data() {
       axios.get('https://konatus-api.onrender.com/api/unit/reporting').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/unit/reporting').then(response => {
+        console.log('https://konatus-api.onrender.com/api/unit/reporting is called')
         const unitReportingData = response.data
         this.commit('orgnizationState/GET_UNIT_REPORTING_DATA', unitReportingData)
       }).catch(err => {
@@ -529,7 +530,8 @@ export default {
     },
     get_unit_demand_data() {
       axios.get('https://konatus-api.onrender.com/api/unit/demand').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/unit/demand').then(response => {
+        console.log('https://konatus-api.onrender.com/api/unit/demand is called')
+        // axios.get('http://localhost/konatus-me/public/api/unit/demand').then(response => {
         const unitDemandData = response.data
         this.commit('orgnizationState/GET_UNIT_DEMAND_DATA', unitDemandData)
       }).catch(err => {
@@ -540,6 +542,7 @@ export default {
     get_unit_control_data() {
       axios.get('https://konatus-api.onrender.com/api/unit/control').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/unit/control').then(response => {
+        console.log('https://konatus-api.onrender.com/api/unit/control is called')
         const unitControlData = response.data
         this.commit('orgnizationState/GET_UNIT_CONTROL_DATA', unitControlData)
       }).catch(err => {
