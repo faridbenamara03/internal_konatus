@@ -1230,10 +1230,10 @@ export default {
       state.globalOperationData.children.push()
     },
     LOAD_NAV_DATA(state, globalAllData) {
-      state.globalData = [globalAllData.navData, globalAllData.orgData]
-      state.globalData1 = [globalAllData.navData, globalAllData.orgData1]
-      // state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
-      // state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
+      // state.globalData = [globalAllData.navData, globalAllData.orgData]
+      // state.globalData1 = [globalAllData.navData, globalAllData.orgData1]
+      state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
+      state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
     },
     IMPORT_WBS_2(state) {
       setTimeout(() => {
@@ -1298,7 +1298,7 @@ export default {
   actions: {
     load_nav_data() {
       axios.get('https://konatus-api.onrender.com/api/menu/get_nav_data').then(response => {
-      // axios.get('https://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
         const globalAllData = response.data
         this.commit('globalState/LOAD_NAV_DATA', globalAllData)
       }).catch(err => {

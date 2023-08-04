@@ -267,7 +267,7 @@ class WorkElementController extends Controller
 
     public function reporting(Work_Element $work_Element)
     {
-        $reportingData = [
+        $reportingData =
             "{
                 \"id\": \"63d3d79802e5f6e2220b516e\",
                 \"title\": \"Consumer Robots\",
@@ -360,8 +360,7 @@ class WorkElementController extends Controller
                     \"next_gate\": \"06/02/2022\"
                 }
               ]
-            }"
-          ];
+            }";
         return $reportingData;
     }
 

@@ -18,7 +18,7 @@ export default {
       state.optimizeStatus = value
     },
     GET_PORTFOLIO_REPORTING_DATA(state, data) {
-      state.reportingData = data
+      state.reportingData.push(data)
     },
   },
   actions: {
@@ -26,7 +26,6 @@ export default {
       axios.get('https://konatus-api.onrender.com/api/portfolio/reporting').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/portfolio/reporting').then(response => {
         const portfolioReportingData = response.data
-        console.log('https://konatus-api.onrender.com/api/portfolio/reporting is called')
         this.commit('portfolioState/GET_PORTFOLIO_REPORTING_DATA', portfolioReportingData)
       }).catch(err => {
         console.log('error getting portfolio reporting data ---->', err)

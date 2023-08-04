@@ -79,8 +79,36 @@ class CompanyDataController extends Controller
             }
             $utIndex++;
           }
-        //   $orgData = $organization;
-        //   $orgData1 = $organization;
+          $orgData = $organization;
+        }
+        $organizations = DB::connection("pgsql")->select("select * from organization_data");
+        if(count($organizations) > 0) {
+          $organization = (array) $organizations[0];
+          $organization['type'] = 'organization-unit';
+          $organization['children'] = [];
+          $units = DB::connection("pgsql")->select("select * from unit_data where organizationid = ?", [$organization['id']]);
+          $utIndex = 0;
+          while($utIndex < count($units)){
+            $unitArray = (array) $units[$utIndex];
+            $unitArray['children'] = [];
+            $teams = DB::connection('pgsql')->select("select * from team_data WHERE unitid = ?", [$unitArray['id']]);
+            $tIndex = 0;
+            while($tIndex < count($teams)){
+                $teamArray = (array) $teams[$tIndex];
+                $teamArray['children'] = [];
+                array_push($organization['children'], $teamArray);
+                $teamusers = DB::connection("pgsql")->select("select * from team_member_data where teamid = ?", [$teamArray['id']]);
+                $tuIndex = 0;
+                while($tuIndex < count($teamusers)){
+                    $userArray = (array) $teamusers[$tuIndex];
+                    array_push($organization['children'][$tIndex]['children'], $userArray);
+                    $tuIndex++;
+                }
+                $tIndex++;
+            }
+            $utIndex++;
+          }
+          $orgData1 = $organization;
         }
         $result["navData"] = json_encode($navData);
         $result["orgData"] = json_encode($orgData);

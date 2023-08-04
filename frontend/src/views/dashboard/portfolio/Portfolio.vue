@@ -269,7 +269,6 @@ export default {
     }
   },
   mounted() {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
