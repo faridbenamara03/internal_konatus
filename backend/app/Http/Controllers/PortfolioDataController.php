@@ -12,7 +12,7 @@ class PortfolioDataController extends Controller
     {
         $reportingData = [];
         $portfolio = DB::connection("pgsql")->select("select * from portfolio_data");
-        $ptIndex = count($portfolio) - 1;
+        $ptIndex = 0;
         while($ptIndex < count($portfolio)){
             $portfolioArray = (array) $portfolio[$ptIndex];
             $portfolioArray['children'] = [];
@@ -34,6 +34,6 @@ class PortfolioDataController extends Controller
             }
             $ptIndex++;
         }
-        return json_decode($reportingData);
+        return json_encode($reportingData);
     }
 }
