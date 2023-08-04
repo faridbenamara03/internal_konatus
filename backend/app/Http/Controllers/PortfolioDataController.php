@@ -34,6 +34,6 @@ class PortfolioDataController extends Controller
             }
             $ptIndex++;
         }
-        return json_encode($reportingData);
+        return json_encode($reportingData[0]);
     }
 }
