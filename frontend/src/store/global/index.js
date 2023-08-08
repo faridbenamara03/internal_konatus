@@ -1232,8 +1232,12 @@ export default {
     LOAD_NAV_DATA(state, globalAllData) {
       // state.globalData = [globalAllData.navData, globalAllData.orgData]
       // state.globalData1 = [globalAllData.navData, globalAllData.orgData1]
-      state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
-      state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
+      state.globalData.push(globalAllData.navData)
+      state.globalData.push(globalAllData.orgData)
+      state.globalData1.push(globalAllData.navData)
+      state.globalData1.push(globalAllData.orgData1)
+      // state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
+      // state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
     },
     IMPORT_WBS_2(state) {
       setTimeout(() => {

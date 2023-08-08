@@ -13,7 +13,7 @@
           <div>
             <div v-if="!isChartView && tabIndex === 0">
               <b-button v-if="!demandTableEditable" variant="primary" class="ml-1">
-                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+                <feather-icon icon="ArrowUpIcon" size="16" />&nbsp;
                 <span>Import Table</span>
               </b-button>
               <b-button v-if="!demandTableEditable" v-b-modal.modal-edit-column class="ml-1"
@@ -24,6 +24,10 @@
               <b-button class="ml-1" @click="onDemandTableEditableClick" variant="primary">
                 <feather-icon icon="Edit2Icon" size="16" />&nbsp;
                 <span>Edit as table</span>
+              </b-button>
+              <b-button v-if="!demandTableEditable" variant="primary" class="ml-1">
+                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+                <span>Export Table</span>
               </b-button>
             </div>
             <div v-if="tabIndex === 1">

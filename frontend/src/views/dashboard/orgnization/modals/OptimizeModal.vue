@@ -104,11 +104,20 @@
         </div>
         <div class="checkbox-slider-group">
           <b-form-checkbox
-            v-model="isOtherOption"
+            v-model="isProject"
             class="custom-control-primary mb-1"
           >
-            Other option here
+            Potential Project
           </b-form-checkbox>
+          <b-form-input
+            v-model="projectRange"
+            class="slider"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            :disabled="!isProject"
+          />
         </div>
       </div>
     </div>
@@ -166,9 +175,11 @@ export default {
       isPriority: true,
       isLoad: true,
       isValue: false,
+      isProject: false,
       priorityRange: 0,
       loadRange: 0,
       valueRange: 0,
+      projectRange: 0,
       selectedPriority: null,
       isOngoingProject: false,
       isOtherOption: false,
