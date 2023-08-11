@@ -7,7 +7,9 @@ use App\Http\Controllers\WorkElementController;
 use App\Http\Controllers\ProgramBacklogController;
 use App\Http\Controllers\ProductLineController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UnitDataController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamDataController;
 use App\Http\Controllers\PortfolioDataController;
 use App\Http\Controllers\CompanyDataController;
 /*
@@ -42,10 +44,20 @@ Route::get('/project/demand/team', [ProductLineController::class, 'demand_team']
 Route::get('/project/demand/phase', [ProductLineController::class, 'demand_phase']);
 Route::get('/project/report', [ProductLineController::class, 'report']);
 Route::get('/project/control', [ProductLineController::class, 'control']);
-Route::get('/unit/demand', [UnitController::class, 'demand']);
+
+// Route::get('/unit/demand', [UnitController::class, 'demand']);
 Route::get('/unit/reporting', [UnitController::class, 'reporting']);
 Route::get('/unit/control', [UnitController::class, 'control']);
-Route::get('/team/demand', [TeamController::class, 'demand']);
-Route::get('/team/reporting', [TeamController::class, 'reporting']);
+
+Route::get('/unit/demand', [UnitDataController::class, 'demand']);
+// Route::get('/unit/reporting', [UnitDataController::class, 'reporting']);
+// Route::get('/unit/control', [UnitDataController::class, 'control']);
+
+// Route::get('/team/demand', [TeamController::class, 'demand']);
+// Route::get('/team/reporting', [TeamController::class, 'reporting']);
+
+Route::get('/team/demand', [TeamDataController::class, 'demand']);
+Route::get('/team/reporting', [TeamDataController::class, 'reporting']);
+
 Route::get('/team/control/table', [TeamController::class, 'control']);
 Route::get('/team/control/chart', [TeamController::class, 'chart']);

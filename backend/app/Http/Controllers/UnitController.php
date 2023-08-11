@@ -167,6 +167,7 @@ class UnitController extends Controller
 
     public function reporting(Unit $unit)
     {
+
         $unitReportingData = [
             "{
                 \"id\": \"63d3d79802e5f6e2220b516e\",
