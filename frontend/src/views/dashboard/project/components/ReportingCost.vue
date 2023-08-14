@@ -13,28 +13,25 @@
             TEAM
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            PROGRESS
+            BUDGET
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             BUDGET ENGAGED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            BUDGET
+            SPENT
+          </div>
+          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+            % SPEND VS LINE TIME
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
             REAL ESTIMATED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            READY FOR TEST
+            $ ACCOMPLISHED
           </div>
           <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            TITLE
-          </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            READY FOR PRESENT
-          </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
-            NEXT PHASE
+            % ACCOMPLISHED vs SPEND
           </div>
         </div>
       </div>
@@ -69,9 +66,9 @@
             <div class="chld">
               {{ item[8] }}
             </div>
-            <div class="chld">
+            <!-- <div class="chld">
               {{ item[9] }}
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -108,10 +105,14 @@ export default {
     return {
       bColors: ['#20C997', '#D46D6D', '#7367F0', '#F5A623'],
       tableData: [
-        ['New Format', 'Team A', '95', '10.200', '10.400', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced motricity', 'Team A', '75', '12.000', '15.000', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Enhanced autonomy', 'Team A', '0', '10.700', '10.100', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
-        ['Dual sourcing for Quadruped', 'Team A', '20', '10.200', '11.000', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        ['Install software', 'Team A', '100', '95', '50', '50%/20-01-2023', '20-02-2023', '100', '50%/50'],
+        ['Debugging', 'Team A', '75', '80', '15', '20%/20-01-2023', '22-03-2023', '75', '15%/20'],
+        ['Electricity market AI', 'Team A', '120', '120', '50', '41.47%/20-01-2023', '15-03-2023', '120', '45%/50'],
+        ['Develop control software', 'Team B', '150', '150', '45', '30%/20-01-2023', '15-03-2023', '150', '31%/35'],
+        // ['New Format', 'Team A', '95', '10.200', '10.400', '10.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        // ['Enhanced motricity', 'Team A', '75', '12.000', '15.000', '12.000', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        // ['Enhanced autonomy', 'Team A', '0', '10.700', '10.100', '4.500', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
+        // ['Dual sourcing for Quadruped', 'Team A', '20', '10.200', '11.000', '1.200', '20-01-2023', 'info', '12-03-2023', '15-03-2023'],
       ]
     }
   },
@@ -119,7 +120,7 @@ export default {
     series() {
       return [
         {
-          name: "New Format",
+          name: "Install software",
           color: '#20C997',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[0]
@@ -133,7 +134,7 @@ export default {
           // ],
         },
         {
-          name: "Enhanced motricity",
+          name: "Debugging",
           color: '#D46D6D',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[1]
@@ -147,7 +148,7 @@ export default {
           // ],
         },
         {
-          name: "Enhanced autonomy",
+          name: "Electricity market AI",
           color: '#7367F0',
           type: 'bar',
           data: this.$store.state.globalState.chartSeriesData[2]
@@ -161,7 +162,7 @@ export default {
           // ],
         },
         {
-          name: "Dual sourcing for Quadruped",
+          name: "Develop control software",
           type: 'bar',
           columnWidth: '70%',
           color: '#F5A623',
@@ -300,13 +301,13 @@ export default {
             if (data.series[0][data.dataPointIndex] && data.series[1][data.dataPointIndex] && data.series[2][data.dataPointIndex] && data.series[3][data.dataPointIndex]) {
               return (
                 `<div class="m-1">
-                  <div style="color:rgb(32, 201, 151);font-weight:bold">New Format</div>
+                  <div style="color:rgb(32, 201, 151);font-weight:bold">Install software</div>
                   <div class="mb-1" style="color:rgb(32, 201, 151);font-weight:bold">${data.series[0][data.dataPointIndex]}</div>
-                  <div style="color:rgb(212, 109, 109);font-weight:bold">Enhanced motricity</div>
+                  <div style="color:rgb(212, 109, 109);font-weight:bold">Debugging</div>
                   <div class="mb-1" style="color:rgb(212, 109, 109);font-weight:bold">${data.series[1][data.dataPointIndex]}</div>
-                  <div style="color:rgb(115, 103, 240);font-weight:bold">Enhanced autonomy</div>
+                  <div style="color:rgb(115, 103, 240);font-weight:bold">Electricity market AI</div>
                   <div class="mb-1" style="color:rgb(115, 103, 240);font-weight:bold">${data.series[2][data.dataPointIndex]}</div>
-                  <div style="color:rgb(245, 166, 35);font-weight:bold">Dual sourcing for Quadruped</div>
+                  <div style="color:rgb(245, 166, 35);font-weight:bold">Develop control software</div>
                   <div style="color:rgb(245, 166, 35);font-weight:bold">${data.series[3][data.dataPointIndex]}</div>
                 </div>`
               )
@@ -315,7 +316,7 @@ export default {
           }
         },
         legend: {
-          customLegendItems: ['New Format', 'Enhanced motricity', 'Enhanced autonomy', 'Dual sourcing for Quadruped'],
+          customLegendItems: ['Install software', 'Debugging', 'Electricity market AI', 'Develop control software'],
           labels: {
             colors: '#888888',
             useSeriesColors: false
@@ -354,3 +355,28 @@ export default {
 
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 </style>
+<!--
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  PROGRESS
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  BUDGET ENGAGED
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  BUDGET
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  REAL ESTIMATED
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  READY FOR TEST
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  TITLE
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  READY FOR PRESENT
+</div>
+<div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+  NEXT PHASE
+</div> -->
