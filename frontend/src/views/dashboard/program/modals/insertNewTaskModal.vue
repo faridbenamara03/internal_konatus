@@ -84,7 +84,7 @@ export default {
       return selectedOptions
     },
     teamttle() {
-      return this.$store.state.globalState.parentTeamTtle
+      return this.$store.state.globalState.parentTeamTitle
     },
     priority() {
       return this.$store.state.globalState.selectedNavObj.priority

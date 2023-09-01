@@ -37,8 +37,8 @@ export default {
     }
   },
   methods: {
-    handleCreate() {
-      this.$store.commit('globalState/CREATE_NEW_UNIT', { unitName: this.unitName })
+    async handleCreate() {
+      await this.$store.dispatch('globalState/create_new_unit', { unitName: this.unitName })
     }
   },
 }

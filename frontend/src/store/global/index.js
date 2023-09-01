@@ -830,13 +830,15 @@ export default {
     phaseState,
     globalData: [],
     globalData1: [],
-    // projectReportingData: globalOperationData.children[0].children[0],
+    projectReportingData: {},
     demandTeamData: {},
     activityDetailModalOpen: false,
     selectedNavId: '',
     selectedNavObj: {},
     optimiseState: 'origin',
-
+    globalOperationData: [],
+    globalOrganizationData: [],
+    globalOrganizationData1: [],
     projectElementTeamData: [],
     projectElementPhaseData: [],
     chartXAxisData: [
@@ -862,7 +864,7 @@ export default {
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
     parentIndexForInsertElement: {},
-    parentTeamTtle: ''
+    parentTeamTitle: ''
   },
   mutations: {
     TOGGLE_CREATE_NEW_DRAWER(state) {
@@ -1105,6 +1107,7 @@ export default {
       const reArr = [...state.selectedWorkElement]
       state.requestedElement = reArr
       // .todo axios request
+      // dispatch('sumit_team_request_quote')
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id
@@ -1227,17 +1230,20 @@ export default {
       //     },
       //   },
       // }
-      state.globalOperationData.children.push()
+      state.globalOperationData.children.push(data)
     },
     LOAD_NAV_DATA(state, globalAllData) {
-      // state.globalData = [globalAllData.navData, globalAllData.orgData]
-      // state.globalData1 = [globalAllData.navData, globalAllData.orgData1]
+      state.globalOperationData = globalAllData.navData
+      state.globalOrganizationData = globalAllData.orgData
+      state.globalOrganizationData1 = globalAllData.orgData1
+
       state.globalData.push(globalAllData.navData)
       state.globalData.push(globalAllData.orgData)
       state.globalData1.push(globalAllData.navData)
       state.globalData1.push(globalAllData.orgData1)
       // state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
       // state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
+      // state.projectReportingData = globalOperationData.children[0].children[0];
     },
     IMPORT_WBS_2(state) {
       setTimeout(() => {
@@ -1257,7 +1263,7 @@ export default {
     },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
       state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
-      state.parentTeamTtle = data.team
+      state.parentTeamTitle = data.team
     },
     INSERT_NEW_TASK(state, data) {
       const {
@@ -1310,5 +1316,14 @@ export default {
         Vue.$toast.error('Failed to load navigation data.')
       })
     },
+    create_new_unit(payload) {
+      axios.post('https://konatus-api.onrender.com/api/unit/create', payload).then(response => {
+        const newData = response.data
+        this.commit('globalState/CREATE_NEW_UNIT', newData)
+      }).catch(err => {
+        console.log('error creating new unit --->', err)
+        Vue.$toast.error('Failed to create new unit.')
+      })
+    }
   },
 }

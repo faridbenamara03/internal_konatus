@@ -55,7 +55,7 @@
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button v-if="reportingState === 'cost'" class="ml-1" v-b-modal.modal-edit-column
+              <b-button class="ml-1" v-b-modal.modal-edit-column
                 variant="primary">
                 <feather-icon icon="EyeIcon" size="16" />&nbsp;
                 <span>Edit Columns</span>
@@ -70,30 +70,12 @@
                 <feather-icon icon="UploadIcon" size="16" />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button v-if="reportingState === 'cost'" class="ml-1" v-b-modal.modal-edit-column
+              <b-button class="ml-1" v-b-modal.modal-edit-column
                 variant="primary">
                 <feather-icon icon="EyeIcon" size="16" />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
             </div>
-            <!-- <b-button class="ml-1" variant="outline-primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />
-              <span>Import</span>
-            </b-button> -->
-            <!-- <b-button-group>
-              <b-button
-                variant="outline-primary"
-              >
-                <b-icon icon="pencil" />
-              </b-button>
-              <b-button
-                variant="outline-primary"
-              >
-                <feather-icon
-                  icon="DollarSignIcon"
-                />
-              </b-button>
-            </b-button-group> -->
           </div>
         </div>
         <b-tab title="Demand" @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
