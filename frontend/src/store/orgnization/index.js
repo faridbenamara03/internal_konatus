@@ -5,7 +5,161 @@ import axios from "axios"
 function randomTen(val1, val2) {
   return parseInt(Math.random() * val1, 10) + val2
 }
+const elementData = [
+  [
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+  ],
+  [
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+    [
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)],
+      [randomTen(200, 50), randomTen(200, 300)]
+    ],
+  ]
+]
 
+const projectData = [
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+  [
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+    [randomTen(200, 100), randomTen(200, 100), randomTen(200, 100)],
+  ],
+]
+
+const projectPaddingData = [
+  [
+    Math.min(elementData[0][0][0][0], elementData[0][1][0][0], elementData[0][2][0][0], elementData[0][3][0][0], elementData[0][4][0][0]),
+    Math.min(elementData[0][0][1][0], elementData[0][1][1][0], elementData[0][2][1][0], elementData[0][3][1][0], elementData[0][4][1][0]),
+    Math.min(elementData[0][0][2][0], elementData[0][1][2][0], elementData[0][2][2][0], elementData[0][3][2][0], elementData[0][4][2][0]),
+  ],
+  [
+    Math.min(elementData[1][0][0][0], elementData[1][1][0][0]),
+    Math.min(elementData[1][0][1][0], elementData[1][1][1][0]),
+    Math.min(elementData[1][0][2][0], elementData[1][1][2][0]),
+  ],
+  [
+    randomTen(200, 50),
+    randomTen(200, 50),
+    randomTen(200, 50),
+  ],
+  [
+    randomTen(200, 50),
+    randomTen(200, 50),
+    randomTen(200, 50),
+  ]
+]
+
+const programData = [
+  [
+    [
+      Math.min(projectPaddingData[0][0], projectPaddingData[1][0], projectPaddingData[2][0], projectPaddingData[3][0]),
+      Math.max(
+        projectData[0][0][0] + projectData[0][0][1] + projectData[0][0][2] + projectPaddingData[0][0],
+        projectData[1][0][0] + projectData[1][0][1] + projectData[1][0][2] + projectPaddingData[1][0],
+        projectData[2][0][0] + projectData[2][0][1] + projectData[2][0][2] + projectPaddingData[2][0],
+        projectData[3][0][0] + projectData[3][0][1] + projectData[3][0][2] + projectPaddingData[3][0],
+      )
+    ],
+    [
+      Math.min(projectPaddingData[0][1], projectPaddingData[1][1], projectPaddingData[2][1], projectPaddingData[3][1]),
+      Math.max(
+        projectData[0][1][0] + projectData[0][1][1] + projectData[0][1][2] + projectPaddingData[0][1],
+        projectData[1][1][0] + projectData[1][1][1] + projectData[1][1][2] + projectPaddingData[1][1],
+        projectData[2][1][0] + projectData[2][1][1] + projectData[2][1][2] + projectPaddingData[2][1],
+        projectData[3][1][0] + projectData[3][1][1] + projectData[3][1][2] + projectPaddingData[3][1],
+      )
+    ],
+    [
+      Math.min(projectPaddingData[0][2], projectPaddingData[1][2], projectPaddingData[2][2], projectPaddingData[3][2]),
+      Math.max(
+        projectData[0][2][0] + projectData[0][2][1] + projectData[0][2][2] + projectPaddingData[0][2],
+        projectData[1][2][0] + projectData[1][2][1] + projectData[1][2][2] + projectPaddingData[1][2],
+        projectData[2][2][0] + projectData[2][2][1] + projectData[2][2][2] + projectPaddingData[2][2],
+        projectData[3][2][0] + projectData[3][2][1] + projectData[3][2][2] + projectPaddingData[3][2],
+      )
+    ]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ],
+  [
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)],
+    [randomTen(50, 100), randomTen(200, 600)]
+  ]
+]
+
+const portfolioData = [
+  [
+    [
+      Math.min(programData[0][0][0], programData[1][0][0], programData[2][0][0], programData[3][0][0]),
+      Math.max(programData[0][0][1] + programData[0][0][0], programData[1][0][1] + programData[1][0][0], programData[2][0][1] + programData[2][0][0], programData[3][0][1] + programData[3][0][0])
+      - Math.min(programData[0][0][0], programData[1][0][0], programData[2][0][0], programData[3][0][0])
+    ],
+    [
+      Math.min(programData[0][1][0], programData[1][1][0], programData[2][1][0], programData[3][1][0]),
+      Math.max(programData[0][1][1] + programData[0][1][0], programData[1][1][1] + programData[1][1][0], programData[2][1][1] + programData[2][1][0], programData[3][1][1] + programData[3][1][0])
+      - Math.min(programData[0][1][0], programData[1][1][0], programData[2][1][0], programData[3][1][0]),
+    ],
+    [
+      Math.min(programData[0][2][0], programData[1][2][0], programData[2][2][0], programData[3][2][0]),
+      Math.max(programData[0][2][1] + programData[0][2][0], programData[1][2][1] + programData[1][2][0], programData[2][2][1] + programData[2][2][0], programData[3][2][1] + programData[3][2][0])
+      - Math.min(programData[0][2][0], programData[1][2][0], programData[2][2][0], programData[3][2][0]),
+    ],
+  ],
+  []
+]
 export default {
   elementData: [
   ],
@@ -513,7 +667,7 @@ export default {
       state.unitDemandData.push(data)
     },
     GET_UNIT_CONTROL_DATA(state, data) {
-      state.unitControlData.push(data)
+      state.unitControlData = data
     },
   },
   actions: {
@@ -521,6 +675,38 @@ export default {
       axios.get('https://konatus-api.onrender.com/api/unit/reporting').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/unit/reporting').then(response => {
         const unitReportingData = response.data
+        unitReportingData.reportingData = {
+          red: [portfolioData[0][0][0], portfolioData[0][0][1], 455 - portfolioData[0][0][0]],
+          green: [portfolioData[0][1][0], portfolioData[0][1][1], 455 - portfolioData[0][1][0]],
+          blue: [portfolioData[0][2][0], portfolioData[0][2][1], 455 - portfolioData[0][2][0]],
+        }
+        if (unitReportingData.children !== undefined) {
+          for (let index = 0; index < unitReportingData.children.length; index += 1) {
+            unitReportingData.children[index].reportingData = {
+                red: [programData[0][0][0], programData[0][0][1], 455 - programData[0][0][0]],
+                green: [programData[0][1][0], programData[0][1][1], 455 - programData[0][1][0]],
+                blue: [programData[0][2][0], programData[0][2][1], 455 - programData[0][2][0]],
+            }
+            if (unitReportingData.children[index].children !== undefined) {
+              for (let tmp = 0; tmp < unitReportingData.children[index].children.length; tmp += 1) {
+                unitReportingData.children[index].children[tmp].reportingData = {
+                  red: [projectPaddingData[0][0], projectData[0][0][0], projectData[0][0][1], projectData[0][0][2], 455 - projectPaddingData[0][0]],
+                  green: [projectPaddingData[0][1], projectData[0][1][0], projectData[0][1][1], projectData[0][1][2], 455 - projectPaddingData[0][1]],
+                  blue: [projectPaddingData[0][2], projectData[0][2][0], projectData[0][2][1], projectData[0][2][2], 455 - projectPaddingData[0][2]],
+                }
+                if (unitReportingData.children[index].children[tmp].phases !== undefined) {
+                  for (let temp = 0; temp < unitReportingData.children[index].children[tmp].phases.length; temp += 1) {
+                    unitReportingData.children[index].children[tmp].phases[temp].reportingData = {
+                      red: [elementData[0][1][0][0], elementData[0][1][0][1], 455 - elementData[0][1][0][0]],
+                      green: [elementData[0][1][1][0], elementData[0][1][1][1], 455 - elementData[0][1][1][0]],
+                      blue: [elementData[0][1][2][0], elementData[0][1][2][1], 455 - elementData[0][1][2][0]],
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         this.commit('orgnizationState/GET_UNIT_REPORTING_DATA', unitReportingData)
       }).catch(err => {
         console.log('error getting unit reporting data ---->', err)

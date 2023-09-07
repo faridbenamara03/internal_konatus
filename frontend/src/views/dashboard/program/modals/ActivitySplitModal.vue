@@ -1,14 +1,28 @@
 <template>
-  <b-modal id="modal-activity-split" ref="my-modal" title="Split Activity" centered no-fade hide-backdrop static
-    size="xl">
+  <b-modal
+    id="modal-activity-split"
+    ref="my-modal"
+    title="Split Activity"
+    centered
+    no-fade
+    hide-backdrop
+    static
+    size="xl"
+  >
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
         Split Activity
       </h5>
       <div class="modal-actions">
-        <b-button variant="outline-primary" @click="hideModal">
-          <feather-icon icon="XIcon" size="18" />
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
         </b-button>
       </div>
     </template>
@@ -30,29 +44,53 @@
             <div style="display: flex">
               <div>
                 <div style="text-align: end;">
-                  <label v-if="!externalEditable" style="font-size: 14px; color: #898989;text-transform:none">
+                  <label
+                    v-if="!externalEditable"
+                    style="font-size: 14px; color: #898989;text-transform:none"
+                  >
                     External System: {{ externalSystem }}
                   </label>
                   <div v-else>
-                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem"
-                      placeholder="Select External System" outlined />
+                    <v-select
+                      v-model="externalSystem"
+                      style="margin-bottom: 3px"
+                      :options="['Jira', 'SAP']"
+                      placeholder="Select External System"
+                      outlined
+                    />
                   </div>
                 </div>
-                <p v-if="!externalEditable" style="color: #bbbbbb;font-size: 16px;">
+                <p
+                  v-if="!externalEditable"
+                  style="color: #bbbbbb;font-size: 16px;"
+                >
                   External Activity Id: {{ externalId }}
                 </p>
                 <div v-else>
-                  <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
+                  <b-form-input
+                    v-model="externalId"
+                    placeholder="Input External Activity Id"
+                  />
                 </div>
               </div>
-              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
-                <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              <div
+                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+                @click="handleExternalEdit"
+              >
+                <feather-icon
+                  :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon icon="AlignLeftIcon" size="18" />
+              <feather-icon
+                icon="AlignLeftIcon"
+                size="18"
+              />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -67,12 +105,18 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea :value="selectedActivityData.phase.description" rows="5" />
+              <b-form-textarea
+                :value="selectedActivityData.phase.description"
+                rows="5"
+              />
             </div>
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon icon="BarChart2Icon" size="18" />
+              <feather-icon
+                icon="BarChart2Icon"
+                size="18"
+              />
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
@@ -80,24 +124,40 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="row" v-for="(t, i) in effortData1" :key="i">
+            <div
+              v-for="(t, i) in effortData1"
+              :key="i"
+              class="row"
+            >
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input :value="t.skill" readonly />
+                <b-form-input
+                  :value="t.skill"
+                  readonly
+                />
                 <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
                   placeholder="Select skillset" outlined @input="effortChange1('skill', i, $event)" /> -->
               </div>
               <div class="col">
                 <label>Load</label>
-                <b-form-input :value="t.load" readonly />
+                <b-form-input
+                  :value="t.load"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label>Duration</label>
-                <b-form-input :value="t.duration" readonly />
+                <b-form-input
+                  :value="t.duration"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label>FTE</label>
-                <b-form-input :value="t.fte" readonly />
+                <b-form-input
+                  :value="t.fte"
+                  readonly
+                />
               </div>
             </div>
           </div>
@@ -122,7 +182,12 @@
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
+              <v-select
+                v-model="selectedEpic"
+                :options="['Epic A', 'Epic B']"
+                placeholder="Select Epic"
+                outlined
+              />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
@@ -139,14 +204,27 @@
               </p>
             </div>
           </div>
-          <div v-for="(item, index) in selectedActivityData.phase.dependency" :key="index" class="shadow rounded d-flex"
-            style="padding:10px;justify-content:space-between;">
+          <div
+            v-for="(item, index) in selectedActivityData.phase.dependency"
+            :key="index"
+            class="shadow rounded d-flex"
+            style="padding:10px;justify-content:space-between;"
+          >
             <div class="d-flex">
-              <div class="bg-warning" style="width:8px;height:22px;border-radius:2px;margin-right:8px" />
-              <feather-icon icon="LinkIcon" style="margin-top:4px;margin-right:8px" />
+              <div
+                class="bg-warning"
+                style="width:8px;height:22px;border-radius:2px;margin-right:8px"
+              />
+              <feather-icon
+                icon="LinkIcon"
+                style="margin-top:4px;margin-right:8px"
+              />
               <i>{{ item }}</i>
             </div>
-            <div v-on:click="handleDependencyDelete(index)" style="cursor:pointer">
+            <div
+              style="cursor:pointer"
+              @click="handleDependencyDelete(index)"
+            >
               <feather-icon icon="TrashIcon" />
             </div>
           </div>
@@ -167,29 +245,53 @@
             <div style="display: flex">
               <div>
                 <div style="text-align: end;">
-                  <label v-if="!externalEditable1" style="font-size: 14px; color: #898989;text-transform:none">
+                  <label
+                    v-if="!externalEditable1"
+                    style="font-size: 14px; color: #898989;text-transform:none"
+                  >
                     External System: {{ externalSystem1 }}
                   </label>
                   <div v-else>
-                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem1"
-                      placeholder="Select External System" outlined />
+                    <v-select
+                      v-model="externalSystem1"
+                      style="margin-bottom: 3px"
+                      :options="['Jira', 'SAP']"
+                      placeholder="Select External System"
+                      outlined
+                    />
                   </div>
                 </div>
-                <p v-if="!externalEditable1" style="color: #bbbbbb;font-size: 16px;">
+                <p
+                  v-if="!externalEditable1"
+                  style="color: #bbbbbb;font-size: 16px;"
+                >
                   External Activity Id: {{ externalId1 }}
                 </p>
                 <div v-else>
-                  <b-form-input v-model="externalId1" placeholder="Input External Activity Id" />
+                  <b-form-input
+                    v-model="externalId1"
+                    placeholder="Input External Activity Id"
+                  />
                 </div>
               </div>
-              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit1">
-                <feather-icon :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              <div
+                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+                @click="handleExternalEdit1"
+              >
+                <feather-icon
+                  :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon icon="AlignLeftIcon" size="18" />
+              <feather-icon
+                icon="AlignLeftIcon"
+                size="18"
+              />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -198,9 +300,16 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input v-model="title1" id="input-title1" aria-describedby="input-title1-feedback"
-                :state="title1Valid" />
-              <b-form-invalid-feedback id="input-title1-feedback" style="float:left">
+              <b-form-input
+                id="input-title1"
+                v-model="title1"
+                aria-describedby="input-title1-feedback"
+                :state="title1Valid"
+              />
+              <b-form-invalid-feedback
+                id="input-title1-feedback"
+                style="float:left"
+              >
                 Add a new title
               </b-form-invalid-feedback>
             </div>
@@ -208,40 +317,74 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea v-model="description1" id="input-description1"
-                aria-describedby="input-description1-feedback" :state="description1Valid" rows="5" />
-              <b-form-invalid-feedback id="input-description1-feedback" style="float:left">
+              <b-form-textarea
+                id="input-description1"
+                v-model="description1"
+                aria-describedby="input-description1-feedback"
+                :state="description1Valid"
+                rows="5"
+              />
+              <b-form-invalid-feedback
+                id="input-description1-feedback"
+                style="float:left"
+              >
                 Add a new description
               </b-form-invalid-feedback>
             </div>
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon icon="BarChart2Icon" size="18" />
+              <feather-icon
+                icon="BarChart2Icon"
+                size="18"
+              />
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
-              <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd2" />
+              <feather-icon
+                icon="PlusIcon"
+                size="18"
+                style="cursor:pointer"
+                @click="onEffortAdd2"
+              />
             </div>
           </div>
           <div class="form-group">
-            <div class="row" v-for="(t, i) in effortData2" :key="i">
+            <div
+              v-for="(t, i) in effortData2"
+              :key="i"
+              class="row"
+            >
               <div class="col-6">
                 <label>Skillset</label>
-                <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select skillset" outlined @input="effortChange2('skill', i, $event)" />
+                <v-select
+                  :options="['Design', 'Engineering', 'Management']"
+                  :value="t.skill"
+                  placeholder="Select skillset"
+                  outlined
+                  @input="effortChange2('skill', i, $event)"
+                />
               </div>
               <div class="col">
                 <label>Load</label>
-                <b-form-input :value="t.load" @input="effortChange2('load', i, $event)" />
+                <b-form-input
+                  :value="t.load"
+                  @input="effortChange2('load', i, $event)"
+                />
               </div>
               <div class="col">
                 <label>Duration</label>
-                <b-form-input :value="t.duration" @input="effortChange2('duration', i, $event)" />
+                <b-form-input
+                  :value="t.duration"
+                  @input="effortChange2('duration', i, $event)"
+                />
               </div>
               <div class="col">
                 <label>FTE</label>
-                <b-form-input :value="t.fte" @input="effortChange2('fte', i, $event)" />
+                <b-form-input
+                  :value="t.fte"
+                  @input="effortChange2('fte', i, $event)"
+                />
               </div>
             </div>
           </div>
@@ -266,7 +409,12 @@
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
+              <v-select
+                v-model="selectedEpic"
+                :options="['Epic A', 'Epic B']"
+                placeholder="Select Epic"
+                outlined
+              />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
@@ -300,29 +448,53 @@
             <div style="display: flex">
               <div>
                 <div style="text-align: end;">
-                  <label v-if="!externalEditable2" style="font-size: 14px; color: #898989;text-transform:none">
+                  <label
+                    v-if="!externalEditable2"
+                    style="font-size: 14px; color: #898989;text-transform:none"
+                  >
                     External System: {{ externalSystem2 }}
                   </label>
                   <div v-else>
-                    <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem2"
-                      placeholder="Select External System" outlined />
+                    <v-select
+                      v-model="externalSystem2"
+                      style="margin-bottom: 3px"
+                      :options="['Jira', 'SAP']"
+                      placeholder="Select External System"
+                      outlined
+                    />
                   </div>
                 </div>
-                <p v-if="!externalEditable2" style="color: #bbbbbb;font-size: 16px;">
+                <p
+                  v-if="!externalEditable2"
+                  style="color: #bbbbbb;font-size: 16px;"
+                >
                   External Activity Id: {{ externalId2 }}
                 </p>
                 <div v-else>
-                  <b-form-input v-model="externalId2" placeholder="Input External Activity Id" />
+                  <b-form-input
+                    v-model="externalId2"
+                    placeholder="Input External Activity Id"
+                  />
                 </div>
               </div>
-              <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit2">
-                <feather-icon :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+              <div
+                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+                @click="handleExternalEdit2"
+              >
+                <feather-icon
+                  :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="detail-box">
-              <feather-icon icon="AlignLeftIcon" size="18" />
+              <feather-icon
+                icon="AlignLeftIcon"
+                size="18"
+              />
               <p class="pl-1 m-0 text-uppercase">
                 Details
               </p>
@@ -331,9 +503,16 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input v-model="title2" id="input-title2" aria-describedby="input-title2-feedback"
-                :state="title2Valid" />
-              <b-form-invalid-feedback id="input-title2-feedback" style="float:left">
+              <b-form-input
+                id="input-title2"
+                v-model="title2"
+                aria-describedby="input-title2-feedback"
+                :state="title2Valid"
+              />
+              <b-form-invalid-feedback
+                id="input-title2-feedback"
+                style="float:left"
+              >
                 Add a new title
               </b-form-invalid-feedback>
             </div>
@@ -341,16 +520,27 @@
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
-              <b-form-textarea v-model="description2" id="input-description2"
-                aria-describedby="input-description2-feedback" :state="description2Valid" rows="5" />
-              <b-form-invalid-feedback id="input-description2 -feedback" style="float:left">
+              <b-form-textarea
+                id="input-description2"
+                v-model="description2"
+                aria-describedby="input-description2-feedback"
+                :state="description2Valid"
+                rows="5"
+              />
+              <b-form-invalid-feedback
+                id="input-description2 -feedback"
+                style="float:left"
+              >
                 Add a new description
               </b-form-invalid-feedback>
             </div>
           </div>
           <div class="form-group has-switch">
             <div class="detail-box">
-              <feather-icon icon="BarChart2Icon" size="18" />
+              <feather-icon
+                icon="BarChart2Icon"
+                size="18"
+              />
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
@@ -358,24 +548,40 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="row" v-for="(t, i) in effortData3" :key="i">
+            <div
+              v-for="(t, i) in effortData3"
+              :key="i"
+              class="row"
+            >
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input :value="t.skill" readonly />
+                <b-form-input
+                  :value="t.skill"
+                  readonly
+                />
                 <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
                   placeholder="Select skillset" outlined @input="effortChange3('skill', i, $event)" /> -->
               </div>
               <div class="col">
                 <label>Load</label>
-                <b-form-input :value="t.load" readonly />
+                <b-form-input
+                  :value="t.load"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label>Duration</label>
-                <b-form-input :value="t.duration" readonly />
+                <b-form-input
+                  :value="t.duration"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label>FTE</label>
-                <b-form-input :value="t.fte" readonly />
+                <b-form-input
+                  :value="t.fte"
+                  readonly
+                />
               </div>
             </div>
           </div>
@@ -400,7 +606,12 @@
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
-              <v-select v-model="selectedEpic" :options="['Epic A', 'Epic B']" placeholder="Select Epic" outlined />
+              <v-select
+                v-model="selectedEpic"
+                :options="['Epic A', 'Epic B']"
+                placeholder="Select Epic"
+                outlined
+              />
             </div>
           </div>
           <div class="form-group d-flex justify-content-end">
@@ -422,10 +633,16 @@
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button variant="outline-primary" @click="hideModal">
+      <b-button
+        variant="outline-primary"
+        @click="hideModal"
+      >
         Cancel
       </b-button>
-      <b-button variant="primary" @click="handleSave">
+      <b-button
+        variant="primary"
+        @click="handleSave"
+      >
         Save
       </b-button>
     </template>
@@ -527,11 +744,6 @@ export default {
       // ],
     }
   },
-  watch: {
-    isOpen(val) {
-      this.show = val
-    },
-  },
   computed: {
     title1Valid() {
       return this.title1.length > 0
@@ -563,6 +775,11 @@ export default {
       })
       return data
     }
+  },
+  watch: {
+    isOpen(val) {
+      this.show = val
+    },
   },
   methods: {
     handleExternalEdit() {

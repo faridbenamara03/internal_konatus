@@ -222,6 +222,11 @@ export default {
       return this.$store.state.teamState.teamDemandData
     }
   },
+  mounted() {
+    console.log("AAAA")
+    this.$store.dispatch('teamState/get_team_demand_data')
+    this.$store.dispatch('teamState/get_team_reporting_data')
+  },
   methods: {
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value

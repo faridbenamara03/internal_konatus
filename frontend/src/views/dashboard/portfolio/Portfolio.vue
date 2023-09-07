@@ -1,110 +1,269 @@
 <template>
-  <b-card v-if="!isUN(items.title)" no-body footer-tag="footer" class="card-portfolio mb-0">
+  <b-card
+    v-if="!isUN(items.title)"
+    no-body
+    footer-tag="footer"
+    class="card-portfolio mb-0"
+  >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
             <span v-if="tabIndex === 0">{{ tableTtle }}</span>
-            <div v-if="updateIndex === true && reportingState === 'plan' && tabIndex === 1" style="display: flex;align-items: center;color: orange;">
-              <feather-icon icon="ZapIcon" size="16" />&nbsp;
+            <div
+              v-if="updateIndex === true && reportingState === 'plan' && tabIndex === 1"
+              style="display: flex;align-items: center;color: orange;"
+            >
+              <feather-icon
+                icon="ZapIcon"
+                size="16"
+              />&nbsp;
               <span>Currently viewing the proposed optimised state of the data</span>
             </div>
           </div>
           <div>
             <div v-if="!isChartView && tabIndex === 0">
-              <b-button v-if="!demandTableEditable" variant="primary" class="ml-1">
-                <feather-icon icon="ArrowUpIcon" size="16" />&nbsp;
+              <b-button
+                v-if="!demandTableEditable"
+                variant="primary"
+                class="ml-1"
+              >
+                <feather-icon
+                  icon="ArrowUpIcon"
+                  size="16"
+                />&nbsp;
                 <span>Import Table</span>
               </b-button>
-              <b-button v-if="!demandTableEditable" v-b-modal.modal-edit-column class="ml-1"
-                variant="primary">
-                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+              <b-button
+                v-if="!demandTableEditable"
+                v-b-modal.modal-edit-column
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EyeIcon"
+                  size="16"
+                />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
-              <b-button class="ml-1" @click="onDemandTableEditableClick" variant="primary">
-                <feather-icon icon="Edit2Icon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+                @click="onDemandTableEditableClick"
+              >
+                <feather-icon
+                  icon="Edit2Icon"
+                  size="16"
+                />&nbsp;
                 <span>Edit as table</span>
               </b-button>
-              <b-button v-if="!demandTableEditable" variant="primary" class="ml-1">
-                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+              <b-button
+                v-if="!demandTableEditable"
+                variant="primary"
+                class="ml-1"
+              >
+                <feather-icon
+                  icon="ArrowDownIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export Table</span>
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
-              <b-button v-if="updateIndex === true && reportingState === 'plan'" class="ml-1" variant="primary" @click="onClickAction('accept')">
-                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+              <b-button
+                v-if="updateIndex === true && reportingState === 'plan'"
+                class="ml-1"
+                variant="primary"
+                @click="onClickAction('accept')"
+              >
+                <feather-icon
+                  icon="UpdateIcon"
+                  size="16"
+                />&nbsp;
                 <span>Accept</span>
               </b-button>
-              <b-button v-if="updateIndex === true && reportingState === 'plan'" class="ml-1" variant="primary" @click="onClickAction('reject')">
-                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+              <b-button
+                v-if="updateIndex === true && reportingState === 'plan'"
+                class="ml-1"
+                variant="primary"
+                @click="onClickAction('reject')"
+              >
+                <feather-icon
+                  icon="UpdateIcon"
+                  size="16"
+                />&nbsp;
                 <span>Reject</span>
               </b-button>
-              <b-button v-if="updateIndex === true && reportingState === 'plan' && originIndex" class="ml-1" variant="primary" @click="onClickAction('origin')">
-                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+              <b-button
+                v-if="updateIndex === true && reportingState === 'plan' && originIndex"
+                class="ml-1"
+                variant="primary"
+                @click="onClickAction('origin')"
+              >
+                <feather-icon
+                  icon="UpdateIcon"
+                  size="16"
+                />&nbsp;
                 <span>Show original</span>
               </b-button>
-              <b-button v-if="updateIndex === true && reportingState === 'plan' && !originIndex" class="ml-1" variant="primary" @click="onClickAction('optimise')">
-                <feather-icon icon="UpdateIcon" size="16" />&nbsp;
+              <b-button
+                v-if="updateIndex === true && reportingState === 'plan' && !originIndex"
+                class="ml-1"
+                variant="primary"
+                @click="onClickAction('optimise')"
+              >
+                <feather-icon
+                  icon="UpdateIcon"
+                  size="16"
+                />&nbsp;
                 <span>Show optimised</span>
               </b-button>
-              <b-button v-b-modal.portfolio-reporting-plan-update class="ml-1" variant="primary">
-                <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+              <b-button
+                v-b-modal.portfolio-reporting-plan-update
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="RotateCwIcon"
+                  size="16"
+                />&nbsp;
                 <span>Update</span>
               </b-button>
-              <b-button class="ml-1" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="UploadIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button class="ml-1" v-b-modal.modal-edit-column
-                variant="primary">
-                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+              <b-button
+                v-b-modal.modal-edit-column
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EyeIcon"
+                  size="16"
+                />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
             </div>
             <div v-if="(tabIndex === 2)">
-              <b-button class="ml-1" @click="showOptimizeModal" variant="primary">
-                <feather-icon icon="ZapIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+                @click="showOptimizeModal"
+              >
+                <feather-icon
+                  icon="ZapIcon"
+                  size="16"
+                />&nbsp;
                 <span>Optimize</span>
               </b-button>
-              <b-button class="ml-1" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="UploadIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button class="ml-1" v-b-modal.modal-edit-column
-                variant="primary">
-                <feather-icon icon="EyeIcon" size="16" />&nbsp;
+              <b-button
+                v-b-modal.modal-edit-column
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EyeIcon"
+                  size="16"
+                />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
             </div>
           </div>
         </div>
-        <b-tab title="Demand" @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
-          :class="{ 'has-default-card-bg': !isChartView }">
-          <Demand v-if="tableTtle" :otype="selectedNavType" :data="items" :fields="fields"
-            :is-chart-view="isChartView" />
+        <b-tab
+          title="Demand"
+          :class="{ 'has-default-card-bg': !isChartView }"
+          @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
+        >
+          <Demand
+            v-if="tableTtle"
+            :otype="selectedNavType"
+            :data="items"
+            :fields="fields"
+            :is-chart-view="isChartView"
+          />
         </b-tab>
-        <b-tab title="Reporting"
+        <b-tab
+          title="Reporting"
+          class="no-action-bar"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
-          class="no-action-bar">
-          <Reporting :data="items" :otype="selectedNavType" :reportingState="reportingState" :fields="fields" @update-clicked="handleToggleUpdateHide" />
+        >
+          <Reporting
+            :data="items"
+            :otype="selectedNavType"
+            :reporting-state="reportingState"
+            :fields="fields"
+            @update-clicked="handleToggleUpdateHide"
+          />
         </b-tab>
-        <b-tab title="Control" @click="onClickCPSelectBtn('control')" class="no-action-bar">
-          <Control :data="items.children" :tableTitle="tableTtle" />
+        <b-tab
+          title="Control"
+          class="no-action-bar"
+          @click="onClickCPSelectBtn('control')"
+        >
+          <Control
+            :data="items.children"
+            :table-title="tableTtle"
+          />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto pt-1 pb-1 actions">
-            <div class="d-flex align-items-center" >
-              <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
+            <div class="d-flex align-items-center">
+              <feather-icon
+                icon="CalendarIcon"
+                size="16"
+                style="margin-right:3px"
+              />
               <span>Period</span>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
-                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
-                  <div v-click-outside="onClose" style="display:flex;">
+                <b-form-input
+                  id="popover-manual-1"
+                  v-model="selectedMonth"
+                  style="width:160px"
+                  readonly
+                />
+                <b-popover
+                  ref="popover"
+                  placement="bottomleft"
+                  target="popover-manual-1"
+                  :show.sync="popoverShow"
+                >
+                  <div
+                    v-click-outside="onClose"
+                    style="display:flex;"
+                  >
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeFromChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeFromChange"
+                      />
                     </div>
                     <div>
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeToChange"
+                      />
                     </div>
                   </div>
                 </b-popover>
@@ -112,24 +271,34 @@
             </div>
             <div class="ml-1">
               <b-button-group v-if="tabIndex === 0">
-                <b-button variant="outline-primary" :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
-                  @click="handleChangeViewMode(true)">
+                <b-button
+                  variant="outline-primary"
+                  :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                  @click="handleChangeViewMode(true)"
+                >
                   Chart
                 </b-button>
-                <b-button variant="outline-primary" :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
-                  @click="handleChangeViewMode(false)">
+                <b-button
+                  variant="outline-primary"
+                  :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
+                  @click="handleChangeViewMode(false)"
+                >
                   Table
                 </b-button>
               </b-button-group>
               <b-button-group v-if="tabIndex === 1">
-                <b-button variant="outline-primary"
+                <b-button
+                  variant="outline-primary"
                   :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
-                  @click="onClickCPSelectBtn('reporting-cost', 'cost')">
+                  @click="onClickCPSelectBtn('reporting-cost', 'cost')"
+                >
                   Cost
                 </b-button>
-                <b-button variant="outline-primary"
+                <b-button
+                  variant="outline-primary"
                   :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
-                  @click="onClickCPSelectBtn('reporting-plan', 'plan')">
+                  @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+                >
                   Plan
                 </b-button>
               </b-button-group>
@@ -142,27 +311,52 @@
       <!-- <b-button v-b-modal.modal-create variant="primary">
         <feather-icon icon="PlusIcon" />
       </b-button> -->
-      <b-button @click="toggle" variant="primary">
+      <b-button
+        variant="primary"
+        @click="toggle"
+      >
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
-    <Drawer @close="toggle" align="right" :closeable="false" :maskClosable="true" >
-      <div v-if="open" >
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggle"
+    >
+      <div v-if="open">
         <CreateDrawer />
       </div>
     </Drawer>
-    <Drawer @close="toggleCreateNewPortfolioDrawer" align="right" :closeable="false" :maskClosable="true" >
-      <div v-if="openCreateNewPortfolioDrawer" >
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewPortfolioDrawer"
+    >
+      <div v-if="openCreateNewPortfolioDrawer">
         <CreateNewPortfolioDrawer />
       </div>
     </Drawer>
-    <Drawer @close="toggleEditPortfolioDrawer" align="right" :closeable="false" :maskClosable="true" >
-      <div v-if="openEditPortfolioDrawer && selectedNavType === 'portfolio'" >
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleEditPortfolioDrawer"
+    >
+      <div v-if="openEditPortfolioDrawer && selectedNavType === 'portfolio'">
         <EditPortfolioDrawer />
       </div>
     </Drawer>
-    <optimize-modal @toggleUpdate="handleToggleUpdateShow" @columnChange="columnChange" ref="optimizeModal" />
-    <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
+    <optimize-modal
+      ref="optimizeModal"
+      @toggleUpdate="handleToggleUpdateShow"
+      @columnChange="columnChange"
+    />
+    <edit-columns-modal
+      :checked-data="activeColumns"
+      @columnChange="columnChange"
+    />
   </b-card>
   <div v-else>
     <Welcome />
@@ -209,6 +403,9 @@ export default {
     CreateDrawer,
     CreateNewPortfolioDrawer,
     EditPortfolioDrawer
+  },
+  directives: {
+    ClickOutside
   },
   props: {
     data: {
@@ -371,9 +568,6 @@ export default {
         this.$router.push({ path: this.$route.path.concat(`/${url}`) })
       }
     },
-  },
-  directives: {
-    ClickOutside
   }
 }
 </script>

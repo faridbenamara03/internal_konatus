@@ -1,47 +1,95 @@
 <template>
-  <b-card no-body footer-tag="footer" class="card-portfolio card-project mb-0">
+  <b-card
+    no-body
+    footer-tag="footer"
+    class="card-portfolio card-project mb-0"
+  >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
           <div>
-            <h4 v-if="c_items.type === 'program'"></h4>
+            <h4 v-if="c_items.type === 'program'" />
           </div>
           <div>
             <div v-if="(tabIndex === 0)">
-              <b-button v-b-modal.modal-import class="ml-1" variant="primary">
-                <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+              <b-button
+                v-b-modal.modal-import
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="ArrowDownIcon"
+                  size="16"
+                />&nbsp;
                 <span>Import</span>
               </b-button>
-              <b-button class="ml-1" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="UploadIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button :disabled="selectedWorkElement.length === 0" v-if="(tabIndex === 0)" v-b-modal.modal-request-quote class="ml-1" variant="primary">
-                <feather-icon icon="MapIcon" size="16" />&nbsp;
+              <b-button
+                v-if="(tabIndex === 0)"
+                v-b-modal.modal-request-quote
+                :disabled="selectedWorkElement.length === 0"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="MapIcon"
+                  size="16"
+                />&nbsp;
                 <span>Request Quote</span>
               </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
-              <b-button v-b-modal.program-reporting-plan-update class="mr-1" variant="primary">
-                <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+              <b-button
+                v-b-modal.program-reporting-plan-update
+                class="mr-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="RotateCwIcon"
+                  size="16"
+                />&nbsp;
                 <span>Update</span>
               </b-button>
               <!-- <b-button variant="primary">
                 <feather-icon icon="ArrowRightIcon" size="16" />&nbsp;
                 Next Phase
               </b-button> -->
-              <b-button class="ml-1" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="UploadIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export</span>
               </b-button>
             </div>
             <div v-if="(tabIndex === 2)">
               <b-button variant="primary">
-                <feather-icon icon="CommandIcon" size="16" />&nbsp;
+                <feather-icon
+                  icon="CommandIcon"
+                  size="16"
+                />&nbsp;
                 Manage
               </b-button>
-              <b-button class="ml-1" variant="primary">
-                <feather-icon icon="UploadIcon" size="16" />&nbsp;
+              <b-button
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="UploadIcon"
+                  size="16"
+                />&nbsp;
                 <span>Export</span>
               </b-button>
             </div>
@@ -49,42 +97,92 @@
         </div>
         <b-tab
           title="Demand"
-          @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
           :class="{'border-0': !projectElementTeamData.length}"
+          @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
         >
-          <div v-if="!projectElementTeamData.length" class="no-data">
-            <feather-icon icon="FileIcon" size="48" />
+          <div
+            v-if="!projectElementTeamData.length"
+            class="no-data"
+          >
+            <feather-icon
+              icon="FileIcon"
+              size="48"
+            />
             <p>No activities for this project yet.<br>
               Finish setting up the project by creating a elementary activity or importing your data in .wbs format</p>
           </div>
-          <Demand :teamData="projectElementTeamData" :isChartView="isChartView" :phaseData="projectElementPhaseData" />
+          <Demand
+            :team-data="projectElementTeamData"
+            :is-chart-view="isChartView"
+            :phase-data="projectElementPhaseData"
+          />
         </b-tab>
-        <b-tab title="Reporting" @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
-          <Reporting :data="c_items" :otype="selectedNavType" :reportingState="reportingState" />
+        <b-tab
+          title="Reporting"
+          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
+        >
+          <Reporting
+            :data="c_items"
+            :otype="selectedNavType"
+            :reporting-state="reportingState"
+          />
         </b-tab>
-        <b-tab title="Control" @click="onClickCPSelectBtn('control')">
+        <b-tab
+          title="Control"
+          @click="onClickCPSelectBtn('control')"
+        >
           <Control />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
-            <div class="d-flex align-items-center" >
-              <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
+            <div class="d-flex align-items-center">
+              <feather-icon
+                icon="CalendarIcon"
+                size="16"
+                style="margin-right:3px"
+              />
               <span>Period</span>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
-                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
-                  <div v-click-outside="onClose" style="display:flex;">
+                <b-form-input
+                  id="popover-manual-1"
+                  v-model="selectedMonth"
+                  style="width:160px"
+                  readonly
+                />
+                <b-popover
+                  ref="popover"
+                  placement="bottomleft"
+                  target="popover-manual-1"
+                  :show.sync="popoverShow"
+                >
+                  <div
+                    v-click-outside="onClose"
+                    style="display:flex;"
+                  >
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeFromChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeFromChange"
+                      />
                     </div>
                     <div>
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeToChange"
+                      />
                     </div>
                   </div>
                 </b-popover>
               </div>
             </div>
-            <b-button-group v-if="tabIndex === 0" class="ml-1">
+            <b-button-group
+              v-if="tabIndex === 0"
+              class="ml-1"
+            >
               <b-button
                 variant="outline-primary"
                 :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
@@ -100,7 +198,10 @@
                 Table
               </b-button>
             </b-button-group>
-            <b-button-group v-if="(tabIndex === 1)" class="ml-1">
+            <b-button-group
+              v-if="(tabIndex === 1)"
+              class="ml-1"
+            >
               <b-button
                 variant="outline-primary"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
@@ -129,7 +230,10 @@
       </b-button>
     </template>
     <create-modal />
-    <modal-request-quote :data="projectElementTeamData" @onSubmit="handleRequestQuote" />
+    <modal-request-quote
+      :data="projectElementTeamData"
+      @onSubmit="handleRequestQuote"
+    />
     <import-modal />
     <import-loader-modal />
   </b-card>
@@ -177,6 +281,9 @@ export default {
     BFormInput,
     BPopover,
   },
+  directives: {
+    ClickOutside
+  },
   props: {
     data: {
       type: Array,
@@ -195,6 +302,33 @@ export default {
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       isChartView: false,
+    }
+  },
+  computed: {
+    selectedWorkElement() {
+      return this.$store.state.globalState.selectedWorkElement
+    },
+    totalProjectHours() {
+      const { selectedNavObj } = this.$store.state.globalState
+      let thours = 0
+      selectedNavObj.children.map(t => {
+        thours += parseInt(t.value, 10)
+        return null
+      })
+      return thours
+    },
+    selectedNavType() {
+      return this.$store.state.globalState.selectedNavObj.type
+    },
+    c_items() {
+      const { selectedNavObj } = this.$store.state.globalState
+      return selectedNavObj
+    },
+    projectElementTeamData() {
+      return this.$store.state.globalState.projectElementTeamData
+    },
+    projectElementPhaseData() {
+      return this.$store.state.globalState.projectElementPhaseData
     }
   },
   methods: {
@@ -255,36 +389,6 @@ export default {
     },
     handleDemandState(tabState) {
       this.demandTabState = tabState
-    }
-  },
-  directives: {
-    ClickOutside
-  },
-  computed: {
-    selectedWorkElement() {
-      return this.$store.state.globalState.selectedWorkElement
-    },
-    totalProjectHours() {
-      const { selectedNavObj } = this.$store.state.globalState
-      let thours = 0
-      selectedNavObj.children.map(t => {
-        thours += parseInt(t.value, 10)
-        return null
-      })
-      return thours
-    },
-    selectedNavType() {
-      return this.$store.state.globalState.selectedNavObj.type
-    },
-    c_items() {
-      const { selectedNavObj } = this.$store.state.globalState
-      return selectedNavObj
-    },
-    projectElementTeamData() {
-      return this.$store.state.globalState.projectElementTeamData
-    },
-    projectElementPhaseData() {
-      return this.$store.state.globalState.projectElementPhaseData
     }
   }
   // computed: {

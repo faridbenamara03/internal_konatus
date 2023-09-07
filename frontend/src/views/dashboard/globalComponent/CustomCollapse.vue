@@ -2,23 +2,44 @@
   <div>
     <div class="d-flex justify-content-between align-items-center">
       <p class="text-capitalize m-0 team-name--text">
-        {{ team.title }}<span class="color-theme-disabled" style="margin-left:5px">(16 hours)</span>
+        {{ team.title }}<span
+          class="color-theme-disabled"
+          style="margin-left:5px"
+        >(16 hours)</span>
       </p>
-      <b-button variant="flat-primary" @click="() => handleCheckAll(team)">
+      <b-button
+        variant="flat-primary"
+        @click="() => handleCheckAll(team)"
+      >
         Select All
       </b-button>
     </div>
     <div class="my-2">
-      <div class="d-flex mt-1 mb-1" style="justify-content:space-between;font-weight:bold;cursor:pointer"
-        @click="toggleOpen">
+      <div
+        class="d-flex mt-1 mb-1"
+        style="justify-content:space-between;font-weight:bold;cursor:pointer"
+        @click="toggleOpen"
+      >
         <div>{{ team.activities.length }} work element</div>
         <div>
-          <feather-icon :icon="isOpen ? 'ChevronDownIcon' : 'ChevronUpIcon'" size="16" class="mr-1" />
+          <feather-icon
+            :icon="isOpen ? 'ChevronDownIcon' : 'ChevronUpIcon'"
+            size="16"
+            class="mr-1"
+          />
         </div>
       </div>
       <template v-if="isOpen">
-        <div class="phase-box mb-1 position-relative" v-for="(activity, jn) in team.activities" :key="jn">
-          <div b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}`"
+        <div
+          v-for="(activity, jn) in team.activities"
+          :key="jn"
+          class="phase-box mb-1 position-relative"
+        >
+          <div
+            v-if="requestedElement.indexOf(activity.activityId) > -1"
+            :id="`tooltip-target-${jn}`"
+            b-tooltip.hover
+            title="Quote requested"
             style="
               box-sizing: border-box;
               border-top: solid 11px rgb(228, 255, 0);
@@ -29,17 +50,27 @@
               position:absolute;
               top:0;
               right:0;
-            " />
-          <div class="bar" :style="`background:${cardBarColorArr[index]}`" />
+            "
+          />
+          <div
+            class="bar"
+            :style="`background:${cardBarColorArr[index]}`"
+          />
           <div class="phase-box--content">
             <div class="d-flex">
-              <div style="width:calc(100% - 20px);cursor:pointer" @click="() => handleActivityDetails(activity, team)">
+              <div
+                style="width:calc(100% - 20px);cursor:pointer"
+                @click="() => handleActivityDetails(activity, team)"
+              >
                 <p class="title">
                   {{ activity.title }}
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox @change="e => onCheckChange(e, activity.activityId)" v-model="activity.isSelected" />
+                <b-form-checkbox
+                  v-model="activity.isSelected"
+                  @change="e => onCheckChange(e, activity.activityId)"
+                />
               </div>
             </div>
             <p class="muted">
@@ -58,11 +89,21 @@
           </div>
         </div>
       </template>
-      <div v-else :style="`position:relative;margin-bottom:${156 + 15 * (team.activities.length - 1)}px`">
-        <div class="phase-box mb-1 w-100"
+      <div
+        v-else
+        :style="`position:relative;margin-bottom:${156 + 15 * (team.activities.length - 1)}px`"
+      >
+        <div
+          v-for="(activity, jn) in team.activities"
+          :key="jn"
+          class="phase-box mb-1 w-100"
           :style="`position:absolute;top:${15 * jn}px;z-index:${1000 - jn};box-shadow: 0px 2px 3px #161d31;`"
-          v-for="(activity, jn) in team.activities" :key="jn">
-          <div b-tooltip.hover title="Quote requested" v-if="requestedElement.indexOf(activity.activityId) > -1" :id="`tooltip-target-${jn}-1`"
+        >
+          <div
+            v-if="requestedElement.indexOf(activity.activityId) > -1"
+            :id="`tooltip-target-${jn}-1`"
+            b-tooltip.hover
+            title="Quote requested"
             style="
               box-sizing: border-box;
               border-top: solid 11px rgb(228, 255, 0);
@@ -73,17 +114,27 @@
               position:absolute;
               top:0;
               right:0;
-            " />
-          <div class="bar" :style="`background:${cardBarColorArr[index]}`" />
+            "
+          />
+          <div
+            class="bar"
+            :style="`background:${cardBarColorArr[index]}`"
+          />
           <div class="phase-box--content">
             <div class="d-flex">
-              <div style="width:calc(100% - 20px);cursor:pointer" @click="() => handleActivityDetails(activity, team)">
+              <div
+                style="width:calc(100% - 20px);cursor:pointer"
+                @click="() => handleActivityDetails(activity, team)"
+              >
                 <p class="title">
                   {{ activity.title }}
                 </p>
               </div>
               <div style="width:20px">
-                <b-form-checkbox @change="e => onCheckChange(e, activity.activityId)" v-model="activity.isSelected" />
+                <b-form-checkbox
+                  v-model="activity.isSelected"
+                  @change="e => onCheckChange(e, activity.activityId)"
+                />
               </div>
             </div>
             <p class="muted">
@@ -102,7 +153,12 @@
           </div>
         </div>
       </div>
-      <b-button v-b-modal.modal-add-new-task-program variant="flat-secondary" class="phase-btn" @click="handleInsertNewWorkElement">
+      <b-button
+        v-b-modal.modal-add-new-task-program
+        variant="flat-secondary"
+        class="phase-btn"
+        @click="handleInsertNewWorkElement"
+      >
         <feather-icon icon="PlusIcon" />
         <span>Insert New Work Element</span>
       </b-button>
@@ -118,6 +174,9 @@ export default {
   components: {
     BFormCheckbox,
     BButton,
+  },
+  directives: {
+    'b-tooltip': BTooltip
   },
   props: {
     team: {
@@ -174,9 +233,6 @@ export default {
         index0: this.index0, index: this.index, state: this.state, team: teamt
       })
     }
-  },
-  directives: {
-    'b-tooltip': BTooltip
   }
 }
 </script>

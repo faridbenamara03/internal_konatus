@@ -1,6 +1,16 @@
 <template>
-  <b-modal id="modal-activity-detail" v-model="show" title="Activity Details" centered no-fade hide-backdrop static
-    ref="activity-detail-modal" @hide="hideModal" size="lg">
+  <b-modal
+    id="modal-activity-detail"
+    ref="activity-detail-modal"
+    v-model="show"
+    title="Activity Details"
+    centered
+    no-fade
+    hide-backdrop
+    static
+    size="lg"
+    @hide="hideModal"
+  >
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
@@ -8,11 +18,20 @@
       </h5>
       <div class="modal-actions">
         <b-button variant="outline-primary">
-          <feather-icon icon="RefreshCwIcon" size="18" />
+          <feather-icon
+            icon="RefreshCwIcon"
+            size="18"
+          />
           <span class="pl-1">External Sync</span>
         </b-button>
-        <b-button variant="outline-primary" @click="hideModal">
-          <feather-icon icon="XIcon" size="18" />
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
         </b-button>
       </div>
     </template>
@@ -27,38 +46,75 @@
         <div style="display: flex">
           <div>
             <div style="text-align: end;">
-              <label v-if="!externalEditable" style="font-size: 14px; color: #898989;text-transform:none">
+              <label
+                v-if="!externalEditable"
+                style="font-size: 14px; color: #898989;text-transform:none"
+              >
                 External System: {{ externalSystem }}
               </label>
               <div v-else>
-                <v-select style="margin-bottom: 3px" :options="['Jira', 'SAP']" v-model="externalSystem" placeholder="Select External System" outlined />
+                <v-select
+                  v-model="externalSystem"
+                  style="margin-bottom: 3px"
+                  :options="['Jira', 'SAP']"
+                  placeholder="Select External System"
+                  outlined
+                />
               </div>
             </div>
-            <p v-if="!externalEditable" style="color: #bbbbbb;font-size: 16px;">
+            <p
+              v-if="!externalEditable"
+              style="color: #bbbbbb;font-size: 16px;"
+            >
               External Activity Id: {{ externalId }}
             </p>
             <div v-else>
-              <b-form-input v-model="externalId" placeholder="Input External Activity Id" />
+              <b-form-input
+                v-model="externalId"
+                placeholder="Input External Activity Id"
+              />
             </div>
           </div>
-          <div style="padding-top: 4px;margin-left: 5px;cursor: pointer;" @click="handleExternalEdit">
-            <feather-icon :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'" style="color: #7367f0" size="20" />
+          <div
+            style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+            @click="handleExternalEdit"
+          >
+            <feather-icon
+              :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
+              style="color: #7367f0"
+              size="20"
+            />
           </div>
         </div>
       </div>
       <div class="form-group btn-group">
-        <b-button v-b-modal.modal-activity-split variant="outline-primary">
-          <feather-icon icon="GitPullRequestIcon" size="18" />
+        <b-button
+          v-b-modal.modal-activity-split
+          variant="outline-primary"
+        >
+          <feather-icon
+            icon="GitPullRequestIcon"
+            size="18"
+          />
           <span class="pl-1">Split</span>
         </b-button>
-        <b-button v-b-modal.modal-activity-merge variant="outline-primary">
-          <feather-icon icon="GitMergeIcon" size="18" />
+        <b-button
+          v-b-modal.modal-activity-merge
+          variant="outline-primary"
+        >
+          <feather-icon
+            icon="GitMergeIcon"
+            size="18"
+          />
           <span class="pl-1">Merge</span>
         </b-button>
       </div>
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon icon="AlignLeftIcon" size="18" />
+          <feather-icon
+            icon="AlignLeftIcon"
+            size="18"
+          />
           <p class="pl-1 m-0 text-uppercase">
             Details
           </p>
@@ -73,7 +129,10 @@
       <div class="form-group">
         <div class="select-box">
           <label>Description</label>
-          <b-form-textarea v-model="selectedActivityData.phase.description" rows="5" />
+          <b-form-textarea
+            v-model="selectedActivityData.phase.description"
+            rows="5"
+          />
         </div>
       </div>
       <!-- <div class="form-group">
@@ -108,7 +167,10 @@
       </div> -->
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon icon="CompassIcon" size="18" />
+          <feather-icon
+            icon="CompassIcon"
+            size="18"
+          />
           <p class="pl-1 m-0 text-uppercase">
             Dependency
           </p>
@@ -117,12 +179,19 @@
       <div class="form-group">
         <div class="select-box">
           <label>Activity</label>
-          <v-select :options="activityList" placeholder="Select Task" outlined />
+          <v-select
+            :options="activityList"
+            placeholder="Select Task"
+            outlined
+          />
         </div>
       </div>
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon icon="PaperclipIcon" size="18" />
+          <feather-icon
+            icon="PaperclipIcon"
+            size="18"
+          />
           <p class="pl-1 m-0 text-uppercase">
             Job
           </p>
@@ -131,12 +200,19 @@
       <div class="form-group">
         <div class="select-box">
           <label>Jobs Available</label>
-          <v-select :options="['Design', 'Program', 'Manage']" placeholder="Select a job" outlined />
+          <v-select
+            :options="['Design', 'Program', 'Manage']"
+            placeholder="Select a job"
+            outlined
+          />
         </div>
       </div>
       <div class="form-group">
         <div class="detail-box">
-          <feather-icon icon="UsersIcon" size="18" />
+          <feather-icon
+            icon="UsersIcon"
+            size="18"
+          />
           <p class="pl-1 m-0 text-uppercase">
             team
           </p>
@@ -145,19 +221,37 @@
       <div class="form-group">
         <div class="select-box">
           <label>Team Assigned</label>
-          <v-select @input="teamSelectHandle" v-model="selectedTeam" :options="c_teamData" placeholder="Select Team"
-            outlined />
+          <v-select
+            v-model="selectedTeam"
+            :options="c_teamData"
+            placeholder="Select Team"
+            outlined
+            @input="teamSelectHandle"
+          />
         </div>
       </div>
       <div class="form-group has-switch">
         <div class="detail-box">
-          <feather-icon icon="BarChart2Icon" size="18" />
+          <feather-icon
+            icon="BarChart2Icon"
+            size="18"
+          />
           <p class="px-1 m-0 text-uppercase">
             effort
           </p>
-          <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd" />
+          <feather-icon
+            icon="PlusIcon"
+            size="18"
+            style="cursor:pointer"
+            @click="onEffortAdd"
+          />
         </div>
-        <b-form-checkbox @change="effortDetailShowToggle" :checked="effortDetailShow" switch inline>
+        <b-form-checkbox
+          :checked="effortDetailShow"
+          switch
+          inline
+          @change="effortDetailShowToggle"
+        >
           Show details
         </b-form-checkbox>
       </div>
@@ -167,35 +261,62 @@
           </div> -->
           <div class="col">
             <label>Total Load</label>
-            <b-form-input :value="totalEffortData.tLoad" readonly />
+            <b-form-input
+              :value="totalEffortData.tLoad"
+              readonly
+            />
           </div>
           <div class="col">
             <label>Total Duration</label>
-            <b-form-input :value="totalEffortData.tDuration" readonly />
+            <b-form-input
+              :value="totalEffortData.tDuration"
+              readonly
+            />
           </div>
           <div class="col">
             <label>Total FTE</label>
-            <b-form-input :value="totalEffortData.tFte" readonly />
+            <b-form-input
+              :value="totalEffortData.tFte"
+              readonly
+            />
           </div>
         </div>
         <div v-if="effortDetailShow">
-          <div class="row" v-for="(t, i) in effortData" :key="i">
+          <div
+            v-for="(t, i) in effortData"
+            :key="i"
+            class="row"
+          >
             <div class="col-6">
               <label>Skillset</label>
-              <v-select :options="['Design Workflow', 'Program Engineering', 'Project Management']" :value="t.skill"
-                placeholder="Select skillset" outlined @input="effortChange('skill', i, $event)" />
+              <v-select
+                :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                :value="t.skill"
+                placeholder="Select skillset"
+                outlined
+                @input="effortChange('skill', i, $event)"
+              />
             </div>
             <div class="col">
               <label>Load</label>
-              <b-form-input :value="t.load" @input="effortChange('load', i, $event)" />
+              <b-form-input
+                :value="t.load"
+                @input="effortChange('load', i, $event)"
+              />
             </div>
             <div class="col">
               <label>Duration</label>
-              <b-form-input :value="t.duration" @input="effortChange('duration', i, $event)" />
+              <b-form-input
+                :value="t.duration"
+                @input="effortChange('duration', i, $event)"
+              />
             </div>
             <div class="col">
               <label>FTE</label>
-              <b-form-input :value="t.fte" @input="effortChange('fte', i, $event)" />
+              <b-form-input
+                :value="t.fte"
+                @input="effortChange('fte', i, $event)"
+              />
             </div>
           </div>
         </div>
@@ -203,15 +324,21 @@
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button variant="outline-primary" @click="hideModal">
+      <b-button
+        variant="outline-primary"
+        @click="hideModal"
+      >
         Cancel
       </b-button>
-      <b-button variant="primary" @click="handleSave">
+      <b-button
+        variant="primary"
+        @click="handleSave"
+      >
         Save
       </b-button>
     </template>
-    <activity-split-modal :selectedActivityData="c_SelectedActivity" />
-    <activity-merge-modal :selectedActivityData="c_SelectedActivity" />
+    <activity-split-modal :selected-activity-data="c_SelectedActivity" />
+    <activity-merge-modal :selected-activity-data="c_SelectedActivity" />
   </b-modal>
 </template>
 

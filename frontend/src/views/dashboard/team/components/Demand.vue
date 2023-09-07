@@ -206,9 +206,6 @@ export default {
       return this.openDetailModal
     }
   },
-  mounted() {
-    this.$store.dispatch('teamState/get_team_demand_data')
-  },
   methods: {
     isUN(data) {
       return isEmpty(data)

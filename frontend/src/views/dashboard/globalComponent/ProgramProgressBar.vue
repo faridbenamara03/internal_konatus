@@ -4,7 +4,10 @@
     <div :style="`width:${width1}px;height:12px;background:${colorArr[type]};`" />
     <div :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`" />
     <div :style="`width:${width2 < 12 ? width2 : 12}px;height:15px;border-top-left-radius:10px;background:#0008;position:absolute;left:0px`" />
-    <div v-if="width2 > 12" :style="`background-color:#0008;width:${width2 - 12}px;height:12px;position:absolute;left:12px;`" />
+    <div
+      v-if="width2 > 12"
+      :style="`background-color:#0008;width:${width2 - 12}px;height:12px;position:absolute;left:12px;`"
+    />
   </div>
 </template>
 
