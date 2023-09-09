@@ -199,26 +199,32 @@ export default {
       selectedPriority: null,
       isOngoingProject: false,
       isOtherOption: false,
-      isStatus: "initial"
+      // isStatus: "initial"
+      isStatus: this.$store.state.portfolioState.optimizeStates
     }
   },
   mounted() {
+    console.log("TIS:", this.isStatus)
   },
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
-      this.isStatus = 'initial'
+      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
+      console.log("TISHD:", this.isStatus)
     },
-    handleStart() {
-      this.isStatus = 'pending'
-      setTimeout(() => {
-        this.isStatus = 'preview'
-      }, 3000)
+    async handleStart() {
+      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'pending')
+      this.isStatus = this.$store.state.portfolioState.optimizeStates
+      console.log("TISHS1:", this.isStatus)
+      await this.$store.dispatch('portfolioState/get_optimized_data')
+      this.isStatus = this.$store.state.portfolioState.optimizeStates
     },
     handlePreview() {
       // this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
-      this.isStatus = 'initial'
+      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
+      this.isStatus = this.$store.state.portfolioState.optimizeStates
+      console.log("TISHP:", this.isStatus)
       this.$refs['my-modal'].hide()
     },
   },

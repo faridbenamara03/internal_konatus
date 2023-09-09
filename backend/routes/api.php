@@ -35,8 +35,10 @@ Route::get('/menu/get_nav_data', [RessourcesController::class, 'nav_data']);
 Route::get('/portfolio/demand', [WorkElementController::class, 'demand']);
 // Route::get('/portfolio/reporting', [WorkElementController::class, 'reporting']);
 Route::get('/portfolio/reporting', [PortfolioDataController::class, 'reporting']);
-
 Route::get('/portfolio/control', [WorkElementController::class, 'control']);
+
+Route::get('/get_optimize', [PortfolioDataController::class, 'optimize']);
+
 Route::get('/program/demand', [ProgramBacklogController::class, 'demand']);
 Route::get('/program/reporting', [ProgramBacklogController::class, 'reporting']);
 Route::get('/program/control', [ProgramBacklogController::class, 'control']);

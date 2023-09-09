@@ -9,7 +9,7 @@
       <b-tabs v-model="tabIndex">
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
-            <span v-if="tabIndex === 0">{{ tableTtle }}</span>
+            <span v-if="tabIndex === 0">{{ tableTitle }}</span>
             <div
               v-if="updateIndex === true && reportingState === 'plan' && tabIndex === 1"
               style="display: flex;align-items: center;color: orange;"
@@ -193,7 +193,7 @@
           @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
         >
           <Demand
-            v-if="tableTtle"
+            v-if="tableTitle"
             :otype="selectedNavType"
             :data="items"
             :fields="fields"
@@ -220,7 +220,8 @@
         >
           <Control
             :data="items.children"
-            :table-title="tableTtle"
+            :controlData="controlData"
+            :table-title="tableTitle"
           />
         </b-tab>
         <template #tabs-end>
@@ -438,9 +439,10 @@ export default {
     },
     items() {
       const { selectedNavObj } = this.$store.state.globalState
+      console.log("STNO:", selectedNavObj)
       return selectedNavObj
     },
-    tableTtle() {
+    tableTitle() {
       const { selectedNavObj } = this.$store.state.globalState
       return selectedNavObj.type ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
     },
@@ -449,10 +451,21 @@ export default {
     },
     demandTableEditable() {
       return this.$store.state.portfolioState.demandTableEditable
+    },
+    demandData() {
+      return this.$store.state.portfolioState.demandData
+    },
+    controlData() {
+      return this.$store.state.portfolioState.controlData
+    },
+    reportingData() {
+      return this.$store.state.portfolioState.reportingData
     }
   },
   mounted() {
     this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
+    this.$store.dispatch('portfolioState/get_portfolio_demand_data')
+    this.$store.dispatch('portfolioState/get_portfolio_control_data')
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)

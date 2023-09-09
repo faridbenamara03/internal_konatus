@@ -1,22 +1,43 @@
 <template>
-  <div v-if="reportingState === 'plan'" class="report">
+  <div
+    v-if="reportingState === 'plan'"
+    class="report"
+  >
     <div class="reporting-side">
       <div>
-        <div class="report-block--head" style="margin-top:50px;">
+        <div
+          class="report-block--head"
+          style="margin-top:50px;"
+        >
           <p class="m-0 text-uppercase">
             {{ data.title }}
           </p>
         </div>
-        <div v-for="(item1, index1) in data.children" :key="index1">
-          <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
-            <feather-icon v-if="item1.children" :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-              size="16" class="mr-1" />
+        <div
+          v-for="(item1, index1) in data.children"
+          :key="index1"
+        >
+          <div
+            class="report-block--head"
+            style="cursor:pointer"
+            @click="onCollapseClick(index1)"
+          >
+            <feather-icon
+              v-if="item1.children"
+              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
+            />
             <p class="m-0 text-uppercase text-overflow-ellipse">
               {{ item1.title }}
             </p>
           </div>
           <template v-if="item1.children && openedCollapse === index1">
-            <div v-for="(item2, index2) in item1.children" :key="index2" class="report-block-child">
+            <div
+              v-for="(item2, index2) in item1.children"
+              :key="index2"
+              class="report-block-child"
+            >
               <p class="m-0 text-uppercase text-overflow-ellipse">
                 {{ item2.title }}
               </p>
@@ -30,19 +51,35 @@
         <div />
         <div class="reporting-content-header--badge">
           <b-button variant="flat-dark">
-            <b-icon icon="diamond-fill" variant="success" />
-            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
             Milestones
           </b-button>
-          <b-button variant="flat-dark" class="badge-demand">
+          <b-button
+            variant="flat-dark"
+            class="badge-demand"
+          >
             <b-icon icon="circle-fill" />
             Demand
           </b-button>
-          <b-button variant="flat-dark" class="badge-engage">
+          <b-button
+            variant="flat-dark"
+            class="badge-engage"
+          >
             <b-icon icon="circle-fill" />
             Engaged
           </b-button>
-          <b-button variant="flat-dark" class="badge-estimate">
+          <b-button
+            variant="flat-dark"
+            class="badge-estimate"
+          >
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
@@ -50,13 +87,24 @@
       </div>
       <div class="reporting-content--body">
         <div
-          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'">
-          <div class="rounded-circle"
-            style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'"
+        >
+          <div
+            class="rounded-circle"
+            style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
+          />
         </div>
         <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            class="date"
+            :class="{ 'active': isToday(date) }"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
+              class="month"
+            >
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -68,71 +116,157 @@
           </div>
         </div>
 
-        <div v-for="(item1, index1) in data.children" :key="index1">
-          <div v-if="onOptimiseIndex() === 'optimise'" class="w-100" style="height:77px">
-            <b-card no-body class="d-flex flex-column justify-content-around"
-              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
+        <div
+          v-for="(item1, index1) in data.children"
+          :key="index1"
+        >
+          <div
+            v-if="onOptimiseIndex() === 'optimise'"
+            class="w-100"
+            style="height:77px"
+          >
+            <b-card
+              no-body
+              class="d-flex flex-column justify-content-around"
+              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa10 : paddingV10[index1 - 1][0]}px`">
-                <ProgramProgressBar :type="0" :width1="index1 === 0 ? da10 : 455"
-                  :width2="index1 === 0 ? 364 - paddingDa10 : 364 - paddingV10[index1 - 1][0]" />
+                <ProgramProgressBar
+                  :type="0"
+                  :width1="index1 === 0 ? da10 : 455"
+                  :width2="index1 === 0 ? 364 - paddingDa10 : 364 - paddingV10[index1 - 1][0]"
+                />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa20 : paddingV10[index1 - 1][1]}px`">
-                <ProgramProgressBar :type="1" :width1="index1 === 0 ? da20 : 536"
-                  :width2="index1 === 0 ? 364 - paddingDa20 : 364 - paddingV10[index1 - 1][1]" />
+                <ProgramProgressBar
+                  :type="1"
+                  :width1="index1 === 0 ? da20 : 536"
+                  :width2="index1 === 0 ? 364 - paddingDa20 : 364 - paddingV10[index1 - 1][1]"
+                />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa30 : paddingV10[index1 - 1][2]}px`">
-                <ProgramProgressBar :type="2" :width1="index1 === 0 ? da30 : 495"
-                  :width2="index1 === 0 ? 364 - paddingDa30 : 364 - paddingV10[index1 - 1][2]" />
+                <ProgramProgressBar
+                  :type="2"
+                  :width1="index1 === 0 ? da30 : 495"
+                  :width2="index1 === 0 ? 364 - paddingDa30 : 364 - paddingV10[index1 - 1][2]"
+                />
               </div>
             </b-card>
           </div>
           <template v-if="onOptimiseIndex() === 'optimise' && item1.children && openedCollapse === index1">
-            <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
-              <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 10px 1px 3px;width:fit-content;">
+            <div
+              v-for="(item2, index2) in item1.children"
+              :key="index2"
+              style="height:51px"
+              class="w-100"
+            >
+              <b-card
+                no-body
+                class="d-flex flex-column justify-content-around"
+                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+              >
                 <div :style="`padding-left:${paddingV0[index2][0]}px`">
-                  <ProjectProgressBar :type="0" :width1="dta0[index2][0]" :width2="dta0[index2][1]" :width3="dta0[index2][2]"
-                    :width4="363 - paddingV0[index2][0]" />
+                  <ProjectProgressBar
+                    :type="0"
+                    :width1="dta0[index2][0]"
+                    :width2="dta0[index2][1]"
+                    :width3="dta0[index2][2]"
+                    :width4="363 - paddingV0[index2][0]"
+                  />
                 </div>
                 <div :style="`padding-left:${paddingV0[index2][1]}px`">
-                  <ProjectProgressBar :type="1" :width1="dta0[index2][3]" :width2="dta0[index2][4]" :width3="dta0[index2][5]"
-                    :width4="363 - paddingV0[index2][1]" />
+                  <ProjectProgressBar
+                    :type="1"
+                    :width1="dta0[index2][3]"
+                    :width2="dta0[index2][4]"
+                    :width3="dta0[index2][5]"
+                    :width4="363 - paddingV0[index2][1]"
+                  />
                 </div>
                 <div :style="`padding-left:${paddingV0[index2][2]}px`">
-                  <ProjectProgressBar :type="2" :width1="dta0[index2][6]" :width2="dta0[index2][7]" :width3="dta0[index2][8]"
-                    :width4="363 - paddingV0[index2][2]" />
+                  <ProjectProgressBar
+                    :type="2"
+                    :width1="dta0[index2][6]"
+                    :width2="dta0[index2][7]"
+                    :width3="dta0[index2][8]"
+                    :width4="363 - paddingV0[index2][2]"
+                  />
                 </div>
               </b-card>
             </div>
           </template>
 
-          <div v-if="onOptimiseIndex() === 'origin'" class="w-100" style="height:77px">
-            <b-card no-body class="d-flex flex-column justify-content-around"
-              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
+          <div
+            v-if="onOptimiseIndex() === 'origin'"
+            class="w-100"
+            style="height:77px"
+          >
+            <b-card
+              no-body
+              class="d-flex flex-column justify-content-around"
+              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1 - 1][0]}px`">
-                <ProgramProgressBar :type="0" :width1="da1"
-                  :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1 - 1][0]" />
+                <ProgramProgressBar
+                  :type="0"
+                  :width1="da1"
+                  :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1 - 1][0]"
+                />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1 - 1][1]}px`">
-                <ProgramProgressBar :type="1" :width1="da2"
-                  :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1 - 1][1]" />
+                <ProgramProgressBar
+                  :type="1"
+                  :width1="da2"
+                  :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1 - 1][1]"
+                />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1 - 1][2]}px`">
-                <ProgramProgressBar :type="2" :width1="da3"
-                  :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1 - 1][2]" />
+                <ProgramProgressBar
+                  :type="2"
+                  :width1="da3"
+                  :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1 - 1][2]"
+                />
               </div>
             </b-card>
           </div>
           <template v-if="onOptimiseIndex() === 'origin' && item1.children && openedCollapse === index1">
-            <div v-for="(item2, index2) in item1.children" :key="index2" style="height:51px" class="w-100">
-              <b-card no-body class="d-flex flex-column justify-content-around" style="height:50px;padding:1px 10px 1px 3px;width:fit-content;">
+            <div
+              v-for="(item2, index2) in item1.children"
+              :key="index2"
+              style="height:51px"
+              class="w-100"
+            >
+              <b-card
+                no-body
+                class="d-flex flex-column justify-content-around"
+                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+              >
                 <div :style="`padding-left:${paddingV[index2][0]}px`">
-                  <ProjectProgressBar :type="0" :width1="dta[index2][0]" :width2="dta[index2][1]" :width3="dta[index2][2]" :width4="363 - paddingV[index2][0]" />
+                  <ProjectProgressBar
+                    :type="0"
+                    :width1="dta[index2][0]"
+                    :width2="dta[index2][1]"
+                    :width3="dta[index2][2]"
+                    :width4="363 - paddingV[index2][0]"
+                  />
                 </div>
                 <div :style="`padding-left:${paddingV[index2][1]}px`">
-                  <ProjectProgressBar :type="1" :width1="dta[index2][3]" :width2="dta[index2][4]" :width3="dta[index2][5]" :width4="363 - paddingV[index2][1]" />
+                  <ProjectProgressBar
+                    :type="1"
+                    :width1="dta[index2][3]"
+                    :width2="dta[index2][4]"
+                    :width3="dta[index2][5]"
+                    :width4="363 - paddingV[index2][1]"
+                  />
                 </div>
                 <div :style="`padding-left:${paddingV[index2][2]}px`">
-                  <ProjectProgressBar :type="2" :width1="dta[index2][6]" :width2="dta[index2][7]" :width3="dta[index2][8]" :width4="363 - paddingV[index2][2]" />
+                  <ProjectProgressBar
+                    :type="2"
+                    :width1="dta[index2][6]"
+                    :width2="dta[index2][7]"
+                    :width3="dta[index2][8]"
+                    :width4="363 - paddingV[index2][2]"
+                  />
                 </div>
               </b-card>
             </div>
@@ -143,8 +277,14 @@
     </div>
     <update-confirm-modal @onUpdate="onUpdate" />
   </div>
-  <div style="width:100%" v-else-if="reportingState === 'cost'">
-    <ReportingCostVue :data="itemsForDemand" :fields="fields" />
+  <div
+    v-else-if="reportingState === 'cost'"
+    style="width:100%"
+  >
+    <ReportingCostVue
+      :data="itemsForDemand"
+      :fields="fields"
+    />
   </div>
 </template>
 

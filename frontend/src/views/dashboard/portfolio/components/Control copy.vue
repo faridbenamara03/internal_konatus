@@ -95,7 +95,7 @@
             <div style="display:flex;justify-content:space-between;">
               <template v-if="collapsedT.indexOf(index1) > -1">
                 <div style="width:100%;text-align:center">
-                  {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
+                  {{ teamD1[index][index1][3] }}
                 </div>
               </template>
               <template v-else>
@@ -104,7 +104,7 @@
                   :key="jndex"
                   style="width:25%;text-align:center"
                 >
-                  {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
+                  {{ teamD1[index][index1][jndex] }}
                 </div>
               </template>
             </div>
@@ -136,15 +136,15 @@
                 </div>
               </div>
               <div
-                v-for="(item, tndex) in teams"
-                :key="tndex"
-                :style="`width:${collapsedT.indexOf(tndex) > -1 ? 120 : 400}px;text-align:center;`"
+                v-for="(item, index) in teams"
+                :key="index"
+                :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`"
                 class="mr-1 ml-1"
               >
                 <div style="display:flex;justify-content:space-between;">
-                  <template v-if="collapsedT.indexOf(tndex) > -1">
+                  <template v-if="collapsedT.indexOf(index) > -1">
                     <div style="width:100%;text-align:center">
-                      {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
+                      {{ teamD[index1][index][3] }}
                     </div>
                   </template>
                   <template v-else>
@@ -153,7 +153,7 @@
                       :key="jndex"
                       style="width:25%;text-align:center"
                     >
-                      {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
+                      {{ teamD[index1][index][jndex] }}
                     </div>
                   </template>
                 </div>
@@ -257,21 +257,91 @@ export default {
       type: Array,
       default: () => [],
     },
-    controlData: {
-      type: Array,
-      default: () => [],
-    }
   },
   data() {
     return {
       collapsedT: [],
       opened: 0,
-      // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
+      teams: ['Job A', 'Job B', 'Job C', 'Job D', 'Job E', 'Job F'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
-      teamD1: [],
-      teamD: [],
+      teamD1: [
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+      ],
+      teamD: [
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+        [
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+          [parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10), parseInt(Math.random() * 30, 10)],
+        ],
+      ],
       percentD: [
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
@@ -280,52 +350,7 @@ export default {
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
       ]
-      // percentD: []
     }
-  },
-  mounted() {
-    const temp = this.controlData.length > 0 ? this.controlData[0].children : []
-    const tempTeams = []
-    const tempTeamData1 = []
-    const tempTeamData = []
-    for (let i = 0; i < temp.length; i += 1) {
-      const item = temp[i]
-      const tempData = []
-      if (item.assignee !== undefined && item.assignee.length > 0) {
-        const tempAssignee = item.assignee
-        for (let j = 0; j < tempAssignee.length; j += 1) {
-          const assignee = tempAssignee[j]
-          if (!tempTeams.includes(assignee.title)) {
-            tempTeams.push(assignee.title)
-          }
-          tempData.push(assignee.data)
-        }
-      }
-      tempTeamData.push(tempData)
-      const tempData1 = []
-      if (item.children !== undefined && item.children.length > 0) {
-        for (let j = 0; j < item.children.length; j += 1) {
-          const tempChildren = item.children[j]
-          const tempChildrenData = []
-          if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
-            for (let k = 0; k < tempChildren.assignee.length; k += 1) {
-              const assignee = tempChildren.assignee[k]
-              if (!tempTeams.includes(assignee.title)) {
-                tempTeams.push(assignee.title)
-              }
-              tempChildrenData.push(assignee.data)
-            }
-          }
-          tempData1.push(tempChildrenData)
-        }
-      }
-      tempTeamData1.push(tempData1)
-    }
-    this.teams = tempTeams
-    this.teamD1 = tempTeamData
-    this.teamD = tempTeamData1
-    console.log("TTD:", tempTeamData)
-    console.log("TTD1:", tempTeamData1)
   },
   methods: {
     onTeamCollapse(i) {
@@ -359,7 +384,7 @@ export default {
     //   // eslint-disable-next-line consistent-return
     //   if (item.title === 'total') { return colorClass }
     // },
-  }
+  },
 }
 </script>
 

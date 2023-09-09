@@ -36,4 +36,11 @@ class PortfolioDataController extends Controller
         }
         return json_encode($reportingData[0]);
     }
+
+    public function optimize(portfolio_data $portfolio_data)
+    {
+        $optimizeData = [];
+        return $optimizeData;
+    }
+    
 }
