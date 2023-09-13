@@ -1,5 +1,13 @@
 <template>
-  <b-modal id="modal-optimize-show" ref="my-modal" title="optimize" centered no-fade hide-backdrop static>
+  <b-modal
+    id="modal-optimize-show"
+    ref="my-modal"
+    title="optimize"
+    centered
+    no-fade
+    hide-backdrop
+    static
+  >
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title text-uppercase">
@@ -26,7 +34,10 @@
         </b-button>
       </div>
     </template>
-    <div v-if="isStatus==='initial'" class="optimize-modal-body">
+    <div
+      v-if="isStatus==='initial'"
+      class="optimize-modal-body"
+    >
       <div class="flex-1">
         <div class="checkbox-slider-group">
           <b-form-checkbox
@@ -41,7 +52,7 @@
             type="range"
             min="0"
             max="1"
-            step="0.1"
+            step="0.25"
           />
         </div>
         <div class="checkbox-slider-group">
@@ -113,22 +124,50 @@
         </div>
       </div>
     </div>
-    <div v-if="isStatus==='pending'" class="optimize-modal-body" style="height: 200px;justify-content: center;align-items: center;">
+    <div
+      v-if="isStatus==='pending'"
+      class="optimize-modal-body"
+      style="height: 200px;justify-content: center;align-items: center;"
+    >
       <div class="flex">
-        <b-spinner id="spinner1" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
-        <b-spinner id="spinner2" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
-        <b-spinner id="spinner3" small label="Small Spinner" type="grow" variant="warning"></b-spinner>
+        <b-spinner
+          id="spinner1"
+          small
+          label="Small Spinner"
+          type="grow"
+          variant="warning"
+        />
+        <b-spinner
+          id="spinner2"
+          small
+          label="Small Spinner"
+          type="grow"
+          variant="warning"
+        />
+        <b-spinner
+          id="spinner3"
+          small
+          label="Small Spinner"
+          type="grow"
+          variant="warning"
+        />
       </div>
     </div>
-    <div v-if="isStatus==='preview'" class="optimize-modal-body" style="flex-direction: column;">
+    <div
+      v-if="isStatus==='preview'"
+      class="optimize-modal-body"
+      style="flex-direction: column;"
+    >
       <div class="flex">
         Changes will affect the projects:
       </div>
-      <div class="flex">
-        New Format (1.28.11.1)
-      </div>
-      <div class="flex">
-        Next Generation (2.29.18.1)
+      <div
+        v-for="(item1, index1) in data.affectProjects"
+        :key="index1"
+      >
+        <div class="flex">
+          {{ item1.title }} ({{ item1.value }})
+        </div>
       </div>
     </div>
 
@@ -199,8 +238,8 @@ export default {
       selectedPriority: null,
       isOngoingProject: false,
       isOtherOption: false,
-      // isStatus: "initial"
-      isStatus: this.$store.state.portfolioState.optimizeStates
+      isStatus: this.$store.state.portfolioState.optimizeStates,
+      affectProjects: this.$store.state.portfolioState.changeProjects
     }
   },
   mounted() {
@@ -210,21 +249,27 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
       this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
-      console.log("TISHD:", this.isStatus)
     },
     async handleStart() {
       this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'pending')
       this.isStatus = this.$store.state.portfolioState.optimizeStates
-      console.log("TISHS1:", this.isStatus)
-      await this.$store.dispatch('portfolioState/get_optimized_data')
+      await this.$store.dispatch('portfolioState/get_optimized_data', {
+        data: {
+          selectedPriority: this.selectedPriority,
+          isOngoingProject: this.isOngoingProject,
+          loadRange: this.loadRange,
+          valueRange: this.valueRange,
+          projectRange: this.projectRange
+        }
+      })
       this.isStatus = this.$store.state.portfolioState.optimizeStates
     },
     handlePreview() {
       // this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
       this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
+      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
       this.isStatus = this.$store.state.portfolioState.optimizeStates
-      console.log("TISHP:", this.isStatus)
       this.$refs['my-modal'].hide()
     },
   },

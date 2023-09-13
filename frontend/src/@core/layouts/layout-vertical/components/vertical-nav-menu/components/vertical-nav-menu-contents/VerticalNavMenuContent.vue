@@ -3,15 +3,15 @@
     <div class="mt-1">
       <b-button-group class="button-group">
         <b-button
-          @click="handleToggle(false)"
           id="jobs"
+          @click="handleToggle(false)"
         >
           Job
         </b-button>
         <b-button
-          @click="handleToggle(true)"
-          class="active"
           id="teams"
+          class="active"
+          @click="handleToggle(true)"
         >
           Unit
         </b-button>

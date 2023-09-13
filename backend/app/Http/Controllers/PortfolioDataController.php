@@ -42,5 +42,5 @@ class PortfolioDataController extends Controller
         $optimizeData = [];
         return $optimizeData;
     }
-    
+
 }

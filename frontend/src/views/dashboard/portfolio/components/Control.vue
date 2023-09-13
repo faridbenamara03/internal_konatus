@@ -324,8 +324,6 @@ export default {
     this.teams = tempTeams
     this.teamD1 = tempTeamData
     this.teamD = tempTeamData1
-    console.log("TTD:", tempTeamData)
-    console.log("TTD1:", tempTeamData1)
   },
   methods: {
     onTeamCollapse(i) {

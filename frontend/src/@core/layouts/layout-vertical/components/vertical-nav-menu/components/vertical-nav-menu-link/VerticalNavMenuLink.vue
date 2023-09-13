@@ -13,7 +13,10 @@
       :style="`background-color:${c_SelectedNavId === item.id ? '#9100ff57' : '#0000'};`"
       @click="onNavItemClick(item)"
     >
-      <nav-menu-icon style="margin-left:23px" :item="item" />
+      <nav-menu-icon
+        style="margin-left:23px"
+        :item="item"
+      />
       <span class="menu-title text-truncate">{{ item.title }}</span>
       <b-badge
         v-if="item.tag"

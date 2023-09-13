@@ -20,7 +20,7 @@
         @click="handleNavItemClick(item)"
       />
       <nav-menu-icon :item="item" />
-      <span class="menu-title text-truncate" >{{ item.title }}</span>
+      <span class="menu-title text-truncate">{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
         pill

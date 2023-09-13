@@ -1,5 +1,8 @@
 <template>
-  <div class="demand-view" :class="{ 'has-chart': isChartView }">
+  <div
+    class="demand-view"
+    :class="{ 'has-chart': isChartView }"
+  >
     <!-- <b-table v-if="!isChartView" :items="data" :fields="fields" :tbody-tr-class="rowClass" responsive>
       <template #cell(show_details)="row">
         <div class="d-flex detail align-center" @click="row.toggleDetails">
@@ -47,11 +50,14 @@
     </b-table> -->
     <div v-if="!isChartView">
       <div
-        style="display:flex;background-color: #283046;height: 40px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);font-weight: bold;">
-        <div style="width: 30%">
-
-        </div>
-        <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%; text-transform: uppercase`">
+        style="display:flex;background-color: #283046;height: 40px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);font-weight: bold;"
+      >
+        <div style="width: 30%" />
+        <div
+          v-for="(item, inded) in c_fileds"
+          :key="inded"
+          :style="`width: ${90 / c_fileds. length}%; text-transform: uppercase`"
+        >
           {{ item }}
         </div>
         <!-- <div style="width: 23%">
@@ -64,15 +70,34 @@
           REAL ESTIMATED
         </div> -->
       </div>
-      <div v-for="(org, oIndex) in data" :key="oIndex" style="color: white">
+      <div
+        v-for="(org, oIndex) in data"
+        :key="oIndex"
+        style="color: white"
+      >
         <div
-          style="display:flex;background-color: #303952; height: 60px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);">
+          style="display:flex;background-color: #303952; height: 60px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);"
+        >
           <div style="width: 30%; padding-left: 30px; text-transform: uppercase;">
-            <feather-icon v-if="org.name === 'Konatus Industries'" icon="ChevronDownIcon" size="16" class="mr-1" />
-            <feather-icon v-if="org.name === 'SPACE HOLDER FOR AN OTHER BU'" icon="PlusIcon" size="16" class="mr-1" />
+            <feather-icon
+              v-if="org.name === 'Konatus Industries'"
+              icon="ChevronDownIcon"
+              size="16"
+              class="mr-1"
+            />
+            <feather-icon
+              v-if="org.name === 'SPACE HOLDER FOR AN OTHER BU'"
+              icon="PlusIcon"
+              size="16"
+              class="mr-1"
+            />
             {{ org.name }}
           </div>
-          <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+          <div
+            v-for="(item, inded) in c_fileds"
+            :key="inded"
+            :style="`width: ${90 / c_fileds. length}%`"
+          >
             {{ org[item] }}
           </div>
           <!-- <div style="width: 23%">
@@ -86,40 +111,79 @@
           </div> -->
         </div>
         <div v-if="org.children">
-          <div v-for="(unit, uIndex) in org.children" :key="uIndex">
-            <div @click="onclickunit(uIndex)"
-              style="display:flex;background-color: #23293a;height: 50px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); cursor: pointer;">
+          <div
+            v-for="(unit, uIndex) in org.children"
+            :key="uIndex"
+          >
+            <div
+              style="display:flex;background-color: #23293a;height: 50px;align-items: center;box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25); cursor: pointer;"
+              @click="onclickunit(uIndex)"
+            >
               <div style="width: 30%; padding-left: 30px;">
-                <feather-icon :icon="unit.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
-                  :style="`color:${unit.state === 'up' ? 'green' : 'red'}`" />
+                <feather-icon
+                  :icon="unit.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'"
+                  class="mr-1"
+                  :style="`color:${unit.state === 'up' ? 'green' : 'red'}`"
+                />
                 {{ unit.name }}
               </div>
-              <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+              <div
+                v-for="(item, inded) in c_fileds"
+                :key="inded"
+                :style="`width: ${90 / c_fileds. length}%`"
+              >
                 {{ unit[item] }}
               </div>
             </div>
             <div v-if="unit.children">
-              <div v-for="(team, tIndex) in unit.children" :key="tIndex">
-                <div @click="onclickunit1(tIndex)" v-if="collapsedItems.indexOf(uIndex) === -1" style="display:flex;height: 50px;align-items: center;background-color: #282e41;">
+              <div
+                v-for="(team, tIndex) in unit.children"
+                :key="tIndex"
+              >
+                <div
+                  v-if="collapsedItems.indexOf(uIndex) === -1"
+                  style="display:flex;height: 50px;align-items: center;background-color: #282e41;"
+                  @click="onclickunit1(tIndex)"
+                >
                   <div style="width: 30%; padding-left: 45px;">
-                    <feather-icon :icon="team.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
-                      :style="`color:${team.state === 'up' ? 'green' : 'red'}`" />
+                    <feather-icon
+                      :icon="team.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'"
+                      class="mr-1"
+                      :style="`color:${team.state === 'up' ? 'green' : 'red'}`"
+                    />
                     {{ team.name }}
                   </div>
-                  <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+                  <div
+                    v-for="(item, inded) in c_fileds"
+                    :key="inded"
+                    :style="`width: ${90 / c_fileds. length}%`"
+                  >
                     {{ team[item] }}
                   </div>
 
                 </div>
                 <div v-if="team.children">
-                  <div v-for="(subteam, stIndex) in team.children" :key="stIndex">
-                    <div v-if="collapsedItems.indexOf(uIndex) === -1 && collapsedItems1.indexOf(tIndex) === -1" style="display:flex;height: 50px;align-items: center;">
+                  <div
+                    v-for="(subteam, stIndex) in team.children"
+                    :key="stIndex"
+                  >
+                    <div
+                      v-if="collapsedItems.indexOf(uIndex) === -1 && collapsedItems1.indexOf(tIndex) === -1"
+                      style="display:flex;height: 50px;align-items: center;"
+                    >
                       <div style="width: 30%; padding-left: 60px;">
-                        <feather-icon :icon="subteam.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'" class="mr-1"
-                          :style="`color:${subteam.state === 'up' ? 'green' : 'red'}`" />
+                        <feather-icon
+                          :icon="subteam.state === 'up' ? 'ArrowUpIcon' : 'ArrowDownIcon'"
+                          class="mr-1"
+                          :style="`color:${subteam.state === 'up' ? 'green' : 'red'}`"
+                        />
                         {{ subteam.name }}
                       </div>
-                      <div v-for="(item, inded) in c_fileds" :key="inded" :style="`width: ${90 / c_fileds. length}%`">
+                      <div
+                        v-for="(item, inded) in c_fileds"
+                        :key="inded"
+                        :style="`width: ${90 / c_fileds. length}%`"
+                      >
                         {{ subteam[item] }}
                       </div>
 
@@ -132,8 +196,17 @@
         </div>
       </div>
     </div>
-    <div v-if="isChartView" class="d-flex flex-column w-100">
-      <b-card v-for="(serie, idx) in series" :key="idx" no-body no-footer class="chart-card">
+    <div
+      v-if="isChartView"
+      class="d-flex flex-column w-100"
+    >
+      <b-card
+        v-for="(serie, idx) in series"
+        :key="idx"
+        no-body
+        no-footer
+        class="chart-card"
+      >
         <b-row>
           <b-col>
             <h2>Chart Title</h2>
@@ -145,11 +218,20 @@
                 {{ formatCurrency(getTotalValue(serie)) }}
               </p>
             </div>
-            <vue-apex-charts type="bar" height="248" :options="chartOptions" :series="serie" />
+            <vue-apex-charts
+              type="bar"
+              height="248"
+              :options="chartOptions"
+              :series="serie"
+            />
           </b-col>
           <b-col>
             <b-row cols="2">
-              <b-col v-for="(color, index) in chartOptions.colors" :key="index" class="mb-1">
+              <b-col
+                v-for="(color, index) in chartOptions.colors"
+                :key="index"
+                class="mb-1"
+              >
                 <div class="d-flex justify-content-between align-center mb-1">
                   <p class="text-capitalize m-0">
                     {{ chartOptions.xaxis.categories[index] }}
@@ -159,7 +241,10 @@
                   </p>
                 </div>
                 <b-progress :max="getTotalValue(serie)">
-                  <b-progress-bar :value="serie[0].data[index]" :style="{ 'background-color': color }" />
+                  <b-progress-bar
+                    :value="serie[0].data[index]"
+                    :style="{ 'background-color': color }"
+                  />
                 </b-progress>
                 <p class="mt-1">
                   {{ formatCurrency(serie[0].data[index]) }}

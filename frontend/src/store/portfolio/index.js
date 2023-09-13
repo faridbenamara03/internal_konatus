@@ -9,6 +9,7 @@ export default {
     demandTableEditable: false,
     optimizeStatus: 'origin',
     optimizeStates: 'initial',
+    changeProjects: [],
     reportingData: [],
     controlData: [],
     demandData: [],
@@ -27,7 +28,6 @@ export default {
     GET_OPTIMIZED_DATA(state, data) {
       state.optimizedData.push(data)
       state.optimizeStates = 'preview'
-      console.log("GET_OPTIMIZED_DATA")
     },
     GET_PORTFOLIO_REPORTING_DATA(state, data) {
       state.reportingData.push(data)
@@ -70,9 +70,9 @@ export default {
         Vue.$toast.error('Failed to get portfolio reporting data.')
       })
     },
-    get_optimized_data() {
+    get_optimized_data(data, params) {
       return new Promise((resolve, reject) => {
-        axios.get('https://konatus-api.onrender.com/api/get_optimize')
+        axios.get('https://konatus-api.onrender.com/api/get_optimize', params.data)
           .then(response => {
             const optimizeData = response.data
             this.commit('portfolioState/GET_OPTIMIZED_DATA', optimizeData)

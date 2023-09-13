@@ -13,20 +13,41 @@
         </div>
       </div>
       <div class="part2">
-        <div class="data-child mr-1 org-uppercase" v-for="(team, index) in c_teams" :key="index">
+        <div
+          v-for="(team, index) in c_teams"
+          :key="index"
+          class="data-child mr-1 org-uppercase"
+        >
           {{ team.title }}
         </div>
       </div>
     </div>
-    <div v-for="(item, index) in c_data_a" :key="index">
+    <div
+      v-for="(item, index) in c_data_a"
+      :key="index"
+    >
       <div class="org-row org-sub-header org-bold org-table-row org-uppercase color-white header-shadow-btm row-header-bg">
         {{ item.title }}
       </div>
-      <div v-for="(item1, index1) in item.children" :key="index1">
-        <div class="org-row org-bold org-sub-header org-table-row org-uppercase color-white row-header-bg border-btm-lgt" :class="{'inner-sdw': index1 === 0}">
+      <div
+        v-for="(item1, index1) in item.children"
+        :key="index1"
+      >
+        <div
+          class="org-row org-bold org-sub-header org-table-row org-uppercase color-white row-header-bg border-btm-lgt"
+          :class="{'inner-sdw': index1 === 0}"
+        >
           <div class="part1">
-            <div class="header mr-1" v-on:click="onCollapseCLick(index1)" style="cursor:pointer">
-              <feather-icon :icon="c_opened === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
+            <div
+              class="header mr-1"
+              style="cursor:pointer"
+              @click="onCollapseCLick(index1)"
+            >
+              <feather-icon
+                :icon="c_opened === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                size="16"
+                class="mr-1"
+              />
               {{ item1.title }}
             </div>
             <div class="child1 mr-1">
@@ -37,13 +58,21 @@
             </div>
           </div>
           <div class="part2">
-            <div v-for="(item2, index2) in item1.data" :key="index2" class="data-child mr-1">
+            <div
+              v-for="(item2, index2) in item1.data"
+              :key="index2"
+              class="data-child mr-1"
+            >
               {{ item2 }}
             </div>
           </div>
         </div>
         <div v-if="index1 === c_opened">
-          <div v-for="(item3, index3) in item1.children" :key="index3" class="org-row org-table-row font-14 border-bottom-dm">
+          <div
+            v-for="(item3, index3) in item1.children"
+            :key="index3"
+            class="org-row org-table-row font-14 border-bottom-dm"
+          >
             <div class="part1">
               <div class="header mr-1 pl-4 org-bold">
                 {{ item3.title }}
@@ -56,7 +85,11 @@
               </div>
             </div>
             <div class="part2">
-              <div v-for="(item4, index4) in item3.data" :key="index4" class="data-child mr-1">
+              <div
+                v-for="(item4, index4) in item3.data"
+                :key="index4"
+                class="data-child mr-1"
+              >
                 {{ item4 }}
               </div>
             </div>
@@ -70,28 +103,44 @@
           Total Team capacity
         </div>
         <div class="child1 mr-1">
-          <div class="d-flex" style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;">
+          <div
+            class="d-flex"
+            style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;"
+          >
             <div style="font-size:12px;color:#FFFFFF80;padding:2px 8px;">
               Info
             </div>
             <div>
-              <feather-icon icon="PlusIcon" style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;" />
+              <feather-icon
+                icon="PlusIcon"
+                style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;"
+              />
             </div>
           </div>
         </div>
         <div class="child2 mr-1">
-          <div class="d-flex" style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;">
+          <div
+            class="d-flex"
+            style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;"
+          >
             <div style="font-size:12px;color:#FFFFFF80;padding:2px 8px;">
               Info
             </div>
             <div>
-              <feather-icon icon="PlusIcon" style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;" />
+              <feather-icon
+                icon="PlusIcon"
+                style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="part2">
-        <div v-for="(item5, index5) in c_total_data" :key="index5" class="data-child mr-1">
+        <div
+          v-for="(item5, index5) in c_total_data"
+          :key="index5"
+          class="data-child mr-1"
+        >
           {{ item5 }}
         </div>
       </div>

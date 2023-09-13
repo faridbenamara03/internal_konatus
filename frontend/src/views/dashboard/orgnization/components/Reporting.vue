@@ -1,22 +1,47 @@
 <template>
-  <div v-if="reportingState === 'plan'" class="unit-report-custom">
+  <div
+    v-if="reportingState === 'plan'"
+    class="unit-report-custom"
+  >
     <div class="unit-reporting-side-custom">
-      <div style="height:124.3px" class="d-flex flex-column justify-content-end">
-        <b-form-select v-model="optionSelect" :options="options" />
+      <div
+        style="height:124.3px"
+        class="d-flex flex-column justify-content-end"
+      >
+        <b-form-select
+          v-model="optionSelect"
+          :options="options"
+        />
       </div>
       <template v-for="(item, index) in datt">
-        <div class="program-title" v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-          :key="`${index}`">
+        <div
+          v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+          :key="`${index}`"
+          class="program-title"
+        >
           <div class="program-title-child">
-            <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
-            <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" />
+            <feather-icon
+              v-if="!collapsed"
+              icon="ChevronDownIcon"
+              style="cursor:pointer"
+              @click="onCollapse"
+            />
+            <feather-icon
+              v-if="collapsed"
+              icon="ChevronUpIcon"
+              style="cursor:pointer"
+              @click="onCollapse"
+            />
             {{ item.title }}
           </div>
         </div>
         <template v-if="!collapsed">
           <template v-for="(item1, index1) in item.children">
-            <div class="program-collapse-header"
-              v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" :key="`${index}-${index1}`">
+            <div
+              v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+              :key="`${index}-${index1}`"
+              class="program-collapse-header"
+            >
               <div class="header-child">
                 <div class="child1">
                   <div class="title">
@@ -29,9 +54,11 @@
               </div>
             </div>
             <template v-for="(item2, index2) in item1.children">
-              <div class="program-collapse-sub-project"
+              <div
                 v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-                :key="`${index}-${index1}-${index2}`">
+                :key="`${index}-${index1}-${index2}`"
+                class="program-collapse-sub-project"
+              >
                 <div class="sub-project">
                   <div class="child1">
                     {{ item2.title }}
@@ -42,10 +69,12 @@
                 </div>
               </div>
               <template v-for="(item3, index3) in item2.phases">
-                <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
-                  class="d-flex flex-column justify-content-around"
+                <div
                   v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-                  :key="`${index}-${index1}-${index2}-${index3}`">
+                  :key="`${index}-${index1}-${index2}-${index3}`"
+                  style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;"
+                  class="d-flex flex-column justify-content-around"
+                >
                   <div class="d-flex justify-content-between ml-5 mr-3">
                     <div>
                       {{ item3.id }}
@@ -63,41 +92,67 @@
     </div>
     <div class="unit-reporting-content-custom">
       <div
-        :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
-        <div class="rounded-circle"
-          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+        :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'"
+      >
+        <div
+          class="rounded-circle"
+          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
+        />
       </div>
       <div class="unit-reporting-content--header">
-        <div class="first-child">
-        </div>
+        <div class="first-child" />
         <div class="unit-reporting-content-header--badge">
           <div class="phase">
             <div class="flag" />
             Phase
           </div>
           <div class="milestones">
-            <b-icon icon="diamond-fill" variant="success" />
-            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
             Milestones
           </div>
           <div class="demand">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Demand
           </div>
           <div class="engaged">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Engaged
           </div>
           <div class="real-estimated">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Real Estimated
           </div>
         </div>
       </div>
       <div class="unit-reporting-content--body-custom">
         <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            class="date"
+            :class="{ 'active': isToday(date) }"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
+              class="month"
+            >
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -110,82 +165,141 @@
         </div>
         <div v-if="!collapsed">
           <template v-for="(item, index) in datt">
-            <div v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'" style="height:89px;"
-              :key="`${index}`">
-              <div class="d-flex flex-column justify-content-around"
-                style="height:88px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;">
+            <div
+              v-if="item.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+              :key="`${index}`"
+              style="height:89px;"
+            >
+              <div
+                class="d-flex flex-column justify-content-around"
+                style="height:88px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;"
+              >
                 <div :style="`padding-left:${item.reportingData.red[0]}px`">
-                  <ProgramProgressBar :type="0" :width1="item.reportingData.red[1]" :width2="item.reportingData.red[2]" />
+                  <ProgramProgressBar
+                    :type="0"
+                    :width1="item.reportingData.red[1]"
+                    :width2="item.reportingData.red[2]"
+                  />
                 </div>
                 <div :style="`padding-left:${item.reportingData.green[0]}px`">
-                  <ProgramProgressBar :type="1" :width1="item.reportingData.green[1]"
-                    :width2="item.reportingData.green[2]" />
+                  <ProgramProgressBar
+                    :type="1"
+                    :width1="item.reportingData.green[1]"
+                    :width2="item.reportingData.green[2]"
+                  />
                 </div>
                 <div :style="`padding-left:${item.reportingData.blue[0]}px`">
-                  <ProgramProgressBar :type="2" :width1="item.reportingData.blue[1]"
-                    :width2="item.reportingData.blue[2]" />
+                  <ProgramProgressBar
+                    :type="2"
+                    :width1="item.reportingData.blue[1]"
+                    :width2="item.reportingData.blue[2]"
+                  />
                 </div>
               </div>
             </div>
             <template v-for="(item1, index1) in item.children">
-              <div style="height:77px" v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-                :key="`${index}-${index1}`">
-                <div class="d-flex flex-column justify-content-around"
-                  style="height:76px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;">
+              <div
+                v-if="item1.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                :key="`${index}-${index1}`"
+                style="height:77px"
+              >
+                <div
+                  class="d-flex flex-column justify-content-around"
+                  style="height:76px;background-color:#283046;border-radius:5px;padding:5px 10px 5px 3px;width:fit-content;"
+                >
                   <div :style="`padding-left:${item1.reportingData.red[0]}px`">
-                    <ProgramProgressBar :type="0" :width1="item1.reportingData.red[1]"
-                      :width2="item1.reportingData.red[2]" />
+                    <ProgramProgressBar
+                      :type="0"
+                      :width1="item1.reportingData.red[1]"
+                      :width2="item1.reportingData.red[2]"
+                    />
                   </div>
                   <div :style="`padding-left:${item1.reportingData.green[0]}px`">
-                    <ProgramProgressBar :type="1" :width1="item1.reportingData.green[1]"
-                      :width2="item1.reportingData.green[2]" />
+                    <ProgramProgressBar
+                      :type="1"
+                      :width1="item1.reportingData.green[1]"
+                      :width2="item1.reportingData.green[2]"
+                    />
                   </div>
                   <div :style="`padding-left:${item1.reportingData.blue[0]}px`">
-                    <ProgramProgressBar :type="2" :width1="item1.reportingData.blue[1]"
-                      :width2="item1.reportingData.blue[2]" />
+                    <ProgramProgressBar
+                      :type="2"
+                      :width1="item1.reportingData.blue[1]"
+                      :width2="item1.reportingData.blue[2]"
+                    />
                   </div>
                 </div>
               </div>
               <template v-for="(item2, index2) in item1.children">
-                <div style="height:77px" v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-                  :key="`${index}-${index1}-${index2}`">
-                  <div class="d-flex flex-column justify-content-around"
-                    style="height:76px;padding:5px 10px 5px 3px;width:fit-content;background-color: #283046;border-radius:5px;">
+                <div
+                  v-if="item2.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
+                  :key="`${index}-${index1}-${index2}`"
+                  style="height:77px"
+                >
+                  <div
+                    class="d-flex flex-column justify-content-around"
+                    style="height:76px;padding:5px 10px 5px 3px;width:fit-content;background-color: #283046;border-radius:5px;"
+                  >
                     <div :style="`padding-left:${item2.reportingData.red[0]}px`">
-                      <ProjectProgressBar :type="0" :width1="item2.reportingData.red[1]"
-                        :width2="item2.reportingData.red[2]" :width3="item2.reportingData.red[3]"
-                        :width4="item2.reportingData.red[4]" />
+                      <ProjectProgressBar
+                        :type="0"
+                        :width1="item2.reportingData.red[1]"
+                        :width2="item2.reportingData.red[2]"
+                        :width3="item2.reportingData.red[3]"
+                        :width4="item2.reportingData.red[4]"
+                      />
                     </div>
                     <div :style="`padding-left:${item2.reportingData.green[0]}px`">
-                      <ProjectProgressBar :type="1" :width1="item2.reportingData.green[1]"
-                        :width2="item2.reportingData.green[2]" :width3="item2.reportingData.green[3]"
-                        :width4="item2.reportingData.green[4]" />
+                      <ProjectProgressBar
+                        :type="1"
+                        :width1="item2.reportingData.green[1]"
+                        :width2="item2.reportingData.green[2]"
+                        :width3="item2.reportingData.green[3]"
+                        :width4="item2.reportingData.green[4]"
+                      />
                     </div>
                     <div :style="`padding-left:${item2.reportingData.blue[0]}px`">
-                      <ProjectProgressBar :type="2" :width1="item2.reportingData.blue[1]"
-                        :width2="item2.reportingData.blue[2]" :width3="item2.reportingData.blue[3]"
-                        :width4="item2.reportingData.blue[4]" />
+                      <ProjectProgressBar
+                        :type="2"
+                        :width1="item2.reportingData.blue[1]"
+                        :width2="item2.reportingData.blue[2]"
+                        :width3="item2.reportingData.blue[3]"
+                        :width4="item2.reportingData.blue[4]"
+                      />
                     </div>
                   </div>
                 </div>
                 <template v-for="(item3, index3) in item2.phases">
-                  <div style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;width:fit-content;"
-                    class="d-flex flex-column justify-content-around"
+                  <div
                     v-if="item3.assigned.indexOf(optionSelect) > -1 || optionSelect === 'show_all'"
-                    :key="`${index}-${index1}-${index2}-${index3}`">
-                    <div class="d-flex flex-column justify-content-around"
-                      style="height:49px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;">
+                    :key="`${index}-${index1}-${index2}-${index3}`"
+                    style="height:51px;background:#1A2239;border-bottom:1px solid #FFF1;width:fit-content;"
+                    class="d-flex flex-column justify-content-around"
+                  >
+                    <div
+                      class="d-flex flex-column justify-content-around"
+                      style="height:49px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;"
+                    >
                       <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.red[0]}px;`">
-                        <ElementProgressBar :type="0" :width1="item3.reportingData.red[1]"
-                          :width2="item3.reportingData.red[2]" />
+                        <ElementProgressBar
+                          :type="0"
+                          :width1="item3.reportingData.red[1]"
+                          :width2="item3.reportingData.red[2]"
+                        />
                       </div>
                       <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.green[0]}px;`">
-                        <ElementProgressBar :type="1" :width1="item3.reportingData.green[1]"
-                          :width2="item3.reportingData.green[2]" />
+                        <ElementProgressBar
+                          :type="1"
+                          :width1="item3.reportingData.green[1]"
+                          :width2="item3.reportingData.green[2]"
+                        />
                       </div>
                       <div :style="`margin-bottom:1px;padding-left:${item3.reportingData.blue[0]}px;`">
-                        <ElementProgressBar :type="2" :width1="item3.reportingData.blue[1]"
-                          :width2="item3.reportingData.blue[2]" />
+                        <ElementProgressBar
+                          :type="2"
+                          :width1="item3.reportingData.blue[1]"
+                          :width2="item3.reportingData.blue[2]"
+                        />
                       </div>
                     </div>
                   </div>
@@ -196,29 +310,65 @@
         </div>
       </div>
     </div>
-    <b-modal id="unit-reporting-update-modal" ref="unit_reporting_update_modal" title="Create New" centered no-fade
-      hide-backdrop>
+    <b-modal
+      id="unit-reporting-update-modal"
+      ref="unit_reporting_update_modal"
+      title="Create New"
+      centered
+      no-fade
+      hide-backdrop
+    >
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">Update</h5>
+        <h5 class="modal-title">
+          Update
+        </h5>
         <div class="modal-actions">
-          <b-button @click="hideModal" variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" />
+          <b-button
+            variant="outline-primary"
+            @click="hideModal"
+          >
+            <feather-icon
+              icon="XIcon"
+              size="18"
+            />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
-        <b-button variant="primary" @click="onUpdate">Update</b-button>
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          variant="primary"
+          @click="onUpdate"
+        >
+          Update
+        </b-button>
       </template>
     </b-modal>
   </div>
-  <div v-else-if="getIndex === 'unit'" class="unit-report-custom">
-    <ReportingCost :data="itemsForReport" :fields="fieldsForReport" />
+  <div
+    v-else-if="getIndex === 'unit'"
+    class="unit-report-custom"
+  >
+    <ReportingCost
+      :data="itemsForReport"
+      :fields="fieldsForReport"
+    />
   </div>
-  <div v-else-if="getIndex === 'teams'" class="unit-report-custom">
-    <ReportingCost :data="itemsForReport1" :fields="fieldsForReport" />
+  <div
+    v-else-if="getIndex === 'teams'"
+    class="unit-report-custom"
+  >
+    <ReportingCost
+      :data="itemsForReport1"
+      :fields="fieldsForReport"
+    />
   </div>
 </template>
 
@@ -241,6 +391,11 @@ export default {
     ProjectProgressBar,
     ElementProgressBar,
     ReportingCost
+  },
+  props: {
+    reportingState: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -791,11 +946,6 @@ export default {
       fieldsForReport: ['budget_team', 'budget_engaged', 'real_estimated'],
       // fieldsForReport: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, 'budget_team', 'budget_engaged', 'real_estimated', { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
     }
-  },
-  props: {
-    reportingState: {
-      type: String,
-    },
   },
   computed: {
     datt() {

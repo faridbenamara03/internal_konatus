@@ -1,45 +1,105 @@
 <template>
-  <b-card no-body footer-tag="footer" class="card-portfolio mb-0">
+  <b-card
+    no-body
+    footer-tag="footer"
+    class="card-portfolio mb-0"
+  >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
           <div />
           <div>
-            <b-button v-if="tabIndex === 0" variant="primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 0"
+              variant="primary"
+            >
+              <feather-icon
+                icon="ArrowDownIcon"
+                size="16"
+              />&nbsp;
               <span>Import</span>
             </b-button>
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
-              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 0"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="UploadIcon"
+                size="16"
+              />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 1" v-b-modal.modal-edit-column class="ml-1"
-              variant="primary">
-              <feather-icon icon="EyeIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 1"
+              v-b-modal.modal-edit-column
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="EyeIcon"
+                size="16"
+              />&nbsp;
               <span>Edit Columns</span>
             </b-button>
             <!-- <b-button v-if="tabIndex === 0 || tabIndex === 1" class="ml-1" variant="primary">
               <feather-icon icon="EyeIcon" size="16" />&nbsp;
               <span>Edit Columns</span>
             </b-button> -->
-            <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
-              <feather-icon icon="Edit2Icon" size="16" />
+            <b-button
+              v-if="tabIndex === 0"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="Edit2Icon"
+                size="16"
+              />
               <span>Edit as table</span>
             </b-button>
-            <b-button v-if="(tabIndex === 1)" v-b-modal.unit-reporting-update-modal class="ml-1" variant="primary">
-              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
+            <b-button
+              v-if="(tabIndex === 1)"
+              v-b-modal.unit-reporting-update-modal
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="RotateCwIcon"
+                size="16"
+              />&nbsp;
               <span>Update</span>
             </b-button>
-            <b-button v-if="tabIndex === 1" class="ml-1" variant="primary">
-              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 1"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="UploadIcon"
+                size="16"
+              />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
-              <feather-icon icon="UploadIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 2"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="UploadIcon"
+                size="16"
+              />&nbsp;
               <span>Export</span>
             </b-button>
-            <b-button v-if="tabIndex === 2" class="ml-1" variant="primary">
-              <feather-icon icon="CommandIcon" size="16" />&nbsp;
+            <b-button
+              v-if="tabIndex === 2"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="CommandIcon"
+                size="16"
+              />&nbsp;
               Manage
             </b-button>
             <!-- <b-button class="ml-1" variant="primary">
@@ -95,54 +155,115 @@
             </div>
           </div>
         </div> -->
-        <b-tab id="demand" title="Demand" @click="onClickCPSelectBtn('demand')" event-key="demand" :class="{ 'has-default-card-bg': !isChartView }">
+        <b-tab
+          id="demand"
+          title="Demand"
+          event-key="demand"
+          :class="{ 'has-default-card-bg': !isChartView }"
+          @click="onClickCPSelectBtn('demand')"
+        >
           <Demand />
         </b-tab>
-        <b-tab id="reporting" title="Reporting" event-key="reporting-cost"
-          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')">
-          <Reporting :reportingState="reportingState" />
+        <b-tab
+          id="reporting"
+          title="Reporting"
+          event-key="reporting-cost"
+          @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
+        >
+          <Reporting :reporting-state="reportingState" />
         </b-tab>
-        <b-tab id="control-table" title="Control" @click="onClickCPSelectBtn('control-table')" class="no-action-bar" event-key="control-table">
-          <Control :isChartView="isChartView" />
+        <b-tab
+          id="control-table"
+          title="Control"
+          class="no-action-bar"
+          event-key="control-table"
+          @click="onClickCPSelectBtn('control-table')"
+        >
+          <Control :is-chart-view="isChartView" />
         </b-tab>
         <template #tabs-end>
           <div class="d-flex ml-auto justify-content-end align-items-center pt-1 pb-1 actions">
             <div class="d-flex align-items-center">
-              <feather-icon icon="CalendarIcon" size="16" style="margin-right:3px" />
-              <div style="white-space:nowrap">Period</div>
+              <feather-icon
+                icon="CalendarIcon"
+                size="16"
+                style="margin-right:3px"
+              />
+              <div style="white-space:nowrap">
+                Period
+              </div>
               <div class="ml-1">
-                <b-form-input style="width:160px" id="popover-manual-1" readonly v-model="selectedMonth" />
-                <b-popover placement="bottomleft" target="popover-manual-1" ref="popover" :show.sync="popoverShow">
-                  <div v-click-outside="onClose" style="display:flex;">
+                <b-form-input
+                  id="popover-manual-1"
+                  v-model="selectedMonth"
+                  style="width:160px"
+                  readonly
+                />
+                <b-popover
+                  ref="popover"
+                  placement="bottomleft"
+                  target="popover-manual-1"
+                  :show.sync="popoverShow"
+                >
+                  <div
+                    v-click-outside="onClose"
+                    style="display:flex;"
+                  >
                     <div class="mr-1">
-                      <month-picker no-default style="width:300px" variant="dark"
-                        @input="onRangeFromChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeFromChange"
+                      />
                     </div>
                     <div>
-                      <month-picker no-default style="width:300px" variant="dark" @input="onRangeToChange"></month-picker>
+                      <month-picker
+                        no-default
+                        style="width:300px"
+                        variant="dark"
+                        @input="onRangeToChange"
+                      />
                     </div>
                   </div>
                 </b-popover>
               </div>
             </div>
-            <b-button-group v-if="(tabIndex === 2)" class="ml-1">
-              <b-button variant="outline-primary" :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
-                @click="handleChangeViewMode(true)">
+            <b-button-group
+              v-if="(tabIndex === 2)"
+              class="ml-1"
+            >
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(true)"
+              >
                 Chart
               </b-button>
-              <b-button variant="outline-primary" :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
-                @click="handleChangeViewMode(false)">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${!isChartView ? '#473ca3' : '#0000'}`"
+                @click="handleChangeViewMode(false)"
+              >
                 Table
               </b-button>
             </b-button-group>
-            <b-button-group v-if="tabIndex === 1" class="ml-1">
-              <b-button variant="outline-primary"
+            <b-button-group
+              v-if="tabIndex === 1"
+              class="ml-1"
+            >
+              <b-button
+                variant="outline-primary"
                 :style="`background-color:${reportingState === 'cost' ? '#473ca3' : '#0000'}`"
-                @click="onClickCPSelectBtn('reporting-cost', 'cost')">
+                @click="onClickCPSelectBtn('reporting-cost', 'cost')"
+              >
                 Cost
               </b-button>
-              <b-button variant="outline-primary" @click="onClickCPSelectBtn('reporting-plan', 'plan')"
-                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`">
+              <b-button
+                variant="outline-primary"
+                :style="`background-color:${reportingState === 'plan' ? '#473ca3' : '#0000'}`"
+                @click="onClickCPSelectBtn('reporting-plan', 'plan')"
+              >
                 Plan
               </b-button>
             </b-button-group>
@@ -155,14 +276,25 @@
       </b-tabs>
     </b-card-body>
     <template #footer>
-      <b-button v-b-modal.modal-create variant="primary">
+      <b-button
+        v-b-modal.modal-create
+        variant="primary"
+      >
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
     <create-modal />
-    <edit-columns-modal :checked-data="activeColumns" @columnChange="columnChange" />
+    <edit-columns-modal
+      :checked-data="activeColumns"
+      @columnChange="columnChange"
+    />
     <optimize-modal />
-    <Drawer @close="toggleCreateNewUnitDrawer" align="right" :closeable="false" :maskClosable="true">
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewUnitDrawer"
+    >
       <div v-if="openCreateNewUnitDrawer">
         <CreateNewUnitDrawer />
       </div>
@@ -206,6 +338,9 @@ export default {
     BPopover,
     CreateNewUnitDrawer,
     Drawer,
+  },
+  directives: {
+    ClickOutside
   },
   props: {
     data: {
@@ -353,9 +488,6 @@ export default {
     handleDemandUpdate() {
       this.$store.commit('orgnizationState/UPDATE_DATA')
     }
-  },
-  directives: {
-    ClickOutside
   }
 }
 </script>

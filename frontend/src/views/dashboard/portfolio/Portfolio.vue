@@ -439,7 +439,6 @@ export default {
     },
     items() {
       const { selectedNavObj } = this.$store.state.globalState
-      console.log("STNO:", selectedNavObj)
       return selectedNavObj
     },
     tableTitle() {
