@@ -3,14 +3,24 @@
     <h3 class="modal-title mb-1">
       Create New Unit
     </h3>
-    <div class="select-group" style="padding-top: 0px">
+    <div
+      class="select-group"
+      style="padding-top: 0px"
+    >
       <div class="select-box">
         <label>Unit Name</label>
-        <b-form-input v-model="unitName" type="text" />
+        <b-form-input
+          v-model="unitName"
+          type="text"
+        />
       </div>
     </div>
     <div>
-      <b-button style="width: 100%" variant="primary" @click="handleCreate">
+      <b-button
+        style="width: 100%"
+        variant="primary"
+        @click="handleCreate"
+      >
         Create
       </b-button>
     </div>
@@ -37,8 +47,8 @@ export default {
     }
   },
   methods: {
-    async handleCreate() {
-      await this.$store.dispatch('globalState/create_new_unit', { unitName: this.unitName })
+    handleCreate() {
+      this.$store.dispatch('globalState/create_new_unit', { unitName: this.unitName })
     }
   },
 }

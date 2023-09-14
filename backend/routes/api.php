@@ -27,10 +27,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/menu/get_nav_data', [RessourcesController::class, 'nav_data']);
+// Route::get('/menu/get_nav_data', [RessourcesController::class, 'nav_data']);
 // Route::get('/menu/get_nav_data', [RessourcesController::class, 'nav_data_test']);
 // Route::get('/menu/get_nav_data', [RessourcesController::class, 'nav_data_new']);
-// Route::get('/menu/get_nav_data', [CompanyDataController::class, 'nav_data']);
+Route::get('/menu/get_nav_data', [CompanyDataController::class, 'nav_data']);
 
 Route::get('/portfolio/demand', [WorkElementController::class, 'demand']);
 // Route::get('/portfolio/reporting', [WorkElementController::class, 'reporting']);

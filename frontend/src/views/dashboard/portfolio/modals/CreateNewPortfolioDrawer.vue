@@ -3,43 +3,66 @@
     <h3 class="modal-title mb-1">
       Create New Portfolio
     </h3>
-    <div class="select-group" style="padding-top: 0px">
+    <div
+      class="select-group"
+      style="padding-top: 0px"
+    >
       <div class="select-box">
         <label>Parent Organization</label>
-        <v-select v-model="parentOrganization" :options="['Konatus Industries']" placeholder="Select Organization"
-          outlined />
+        <v-select
+          v-model="parentOrganization"
+          :options="['Konatus Industries']"
+          placeholder="Select Organization"
+          outlined
+        />
       </div>
       <div class="select-box">
         <label>Portfolio Name</label>
-        <b-form-input v-model="portfolioName" type="text" />
+        <b-form-input
+          v-model="portfolioName"
+          type="text"
+        />
       </div>
       <div class="d-flex justify-content-between select-box">
         <div style="width:48%">
           <div class="select-group--sub mb-0">
             <div class="select-box">
               <label>Start Date</label>
-              <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                :id="`start_date-datepicker`" v-model="startDate"
-                :max="endDate ? endDate : null" />
+              <b-form-datepicker
+                :id="`start_date-datepicker`"
+                v-model="startDate"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                :max="endDate ? endDate : null"
+              />
             </div>
           </div>
         </div>
         <div style="width:48%">
           <div class="select-box">
             <label>End Date</label>
-            <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              :id="`end_date-datepicker`" v-model="endDate"
-              :min="startDate ? startDate : null" />
+            <b-form-datepicker
+              :id="`end_date-datepicker`"
+              v-model="endDate"
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              :min="startDate ? startDate : null"
+            />
           </div>
         </div>
       </div>
       <div class="select-box">
         <label>Portfolio Budget</label>
-        <b-form-input v-model="portfolioBudget" type="number" />
+        <b-form-input
+          v-model="portfolioBudget"
+          type="number"
+        />
       </div>
     </div>
     <div>
-      <b-button style="width: 100%" variant="primary" @click="handleCreate">
+      <b-button
+        style="width: 100%"
+        variant="primary"
+        @click="handleCreate"
+      >
         Create
       </b-button>
     </div>
@@ -72,8 +95,7 @@ export default {
   },
   methods: {
     handleCreate() {
-      this.$store.commit('globalState/CREATE_NEW_PORTFOLIO',
-        { parentOrganization: this.parentOrganization, portfolioName: this.portfolioName, portfolioBudget: this.portfolioBudget })
+      this.$store.dispatch('globalState/create_new_portfolio', { parentOrganization: this.parentOrganization, portfolioName: this.portfolioName, portfolioBudget: this.portfolioBudget })
     }
   },
 }

@@ -907,25 +907,25 @@ export default {
                   {
                     id: 'lone-wolf-user',
                     title: 'Lone Wolf',
-                    parent: 'team-e-team',
+                    parent: 'team-ln-team',
                     type: 'user',
                   },
                   {
                     id: 'telora-varga-user',
                     title: 'Telora Varga',
-                    parent: 'team-e-team',
+                    parent: 'team-ln-team',
                     type: 'user',
                   },
                   {
                     id: 'poke-green-user',
                     title: 'Poke Green',
-                    parent: 'team-e-team',
+                    parent: 'team-ln-team',
                     type: 'user',
                   },
                   {
                     id: 'assen-oliveira-user',
                     title: 'Assen Oliveira',
-                    parent: 'team-e-team',
+                    parent: 'team-ln-team',
                     type: 'user',
                   },
                 ]
@@ -1320,6 +1320,15 @@ export default {
       axios.post('https://konatus-api.onrender.com/api/unit/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_UNIT', newData)
+      }).catch(err => {
+        console.log('error creating new unit --->', err)
+        Vue.$toast.error('Failed to create new unit.')
+      })
+    },
+    create_new_portfolio(payload) {
+      axios.post('https://konatus-api.onrender.com/api/portfolio/create', payload).then(response => {
+        const newData = response.data
+        this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
       }).catch(err => {
         console.log('error creating new unit --->', err)
         Vue.$toast.error('Failed to create new unit.')
