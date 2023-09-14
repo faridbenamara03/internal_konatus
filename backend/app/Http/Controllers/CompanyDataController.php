@@ -66,12 +66,14 @@ class CompanyDataController extends Controller
             $tIndex = 0;
             while($tIndex < count($teams)){
                 $teamArray = (array) $teams[$tIndex];
+                $teamArray['parent'] = $teamArray['unitid'];
                 $teamArray['children'] = [];
                 array_push($organization['children'][$utIndex]['children'], $teamArray);
                 $teamusers = DB::connection("pgsql")->select("select * from team_member_data where teamid = ?", [$teamArray['id']]);
                 $tuIndex = 0;
                 while($tuIndex < count($teamusers)){
                     $userArray = (array) $teamusers[$tuIndex];
+                    $userArray['parent'] = $userArray['teamid'];
                     array_push($organization['children'][$utIndex]['children'][$tIndex]['children'], $userArray);
                     $tuIndex++;
                 }
