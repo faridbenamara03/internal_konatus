@@ -15,12 +15,16 @@
         <span class="pl-1">Select Fields</span>
       </b-button>
     </div> -->
-    <p class="text-uppercase" style="border-bottom: 2px solid #7367f0">
+    <p
+      class="text-uppercase"
+      style="border-bottom: 2px solid #7367f0"
+    >
       {{ progressDescription[0] }}
     </p>
     <!-- </div> -->
     <div
-      class="select-group" style="padding-top: 0px"
+      class="select-group"
+      style="padding-top: 0px"
     >
       <div class="select-box">
         <div class="d-flex">
@@ -30,7 +34,8 @@
               placeholder="Select System"
               :options="['SAP', 'Jira', 'Konatus']"
               :value="step1.system"
-              @customChange="e => handleCustomChange(e, 'system')" />
+              @customChange="e => handleCustomChange(e, 'system')"
+            />
           </div>
           <div class="w-50 pl-1">
             <label>SystemId</label>
@@ -54,7 +59,8 @@
               placeholder="Select Portfolio"
               :options="['Consumer Robots', 'Military Robots']"
               :value="step1.portfolio"
-              @customChange="e => handleCustomChange(e, 'portfolio')" />
+              @customChange="e => handleCustomChange(e, 'portfolio')"
+            />
           </div>
           <div class="w-50 pl-1">
             <label>PortfolioID</label>
@@ -78,7 +84,8 @@
               placeholder="Select Program"
               :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
               :value="step1.program"
-              @customChange="e => handleCustomChange(e, 'program')" />
+              @customChange="e => handleCustomChange(e, 'program')"
+            />
           </div>
           <div class="w-50 pl-1">
             <label>ProgramId</label>
@@ -102,7 +109,8 @@
               placeholder="Select Project"
               :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
               :value="step1.project"
-              @customChange="e => handleCustomChange(e, 'project')" />
+              @customChange="e => handleCustomChange(e, 'project')"
+            />
           </div>
           <div class="w-50 pl-1">
             <label>ProjectId</label>
@@ -128,7 +136,8 @@
               placeholder="Select Sub Project"
               :options="[]"
               :value="step1.subProject"
-              @customChange="e => handleCustomChange(e, 'subProject')" />
+              @customChange="e => handleCustomChange(e, 'subProject')"
+            />
           </div>
           <div class="w-50 pl-1">
             <label>SubProject</label>
@@ -146,7 +155,8 @@
       </div>
     </div>
     <div
-      class="select-group" style="padding-top: 0px"
+      class="select-group"
+      style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -280,7 +290,8 @@
       </div> -->
     </div>
     <div
-      class="select-group" style="padding-top: 0px"
+      class="select-group"
+      style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -293,9 +304,9 @@
         <div class="select-box">
           <label>Date Production Deadline</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="production-datepicker"
             v-model="step3.p_deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
       </div>
@@ -303,18 +314,18 @@
         <div style="width:60%">
           <label>Nature of deadline</label>
           <v-select
+            id="production-datepicker1"
             v-model="step3.n_deadline"
             :options="['desired', 'time to market', 'legal constraint', 'other']"
-            id="production-datepicker1"
             outlined
           />
         </div>
         <div style="width:35%">
           <label>Multiplier</label>
           <v-select
+            id="deadline-multiplier"
             v-model="step3.n_deadline_weight"
             :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="deadline-multiplier"
             outlined
           />
         </div>
@@ -334,9 +345,9 @@
         <div style="width:35%">
           <label>Weight</label>
           <v-select
+            id="customer-ex-weight"
             v-model="step3.customer_ex_weight"
             :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="customer-ex-weight"
             outlined
           />
         </div>
@@ -356,9 +367,9 @@
         <div style="width:35%">
           <label>Weight</label>
           <v-select
+            id="sales-ex-weight"
             v-model="step3.sales_ex_weight"
             :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="sales-ex-weight"
             outlined
           />
         </div>
@@ -378,9 +389,9 @@
         <div style="width:35%">
           <label>Weight</label>
           <v-select
+            id="scoring-weight"
             v-model="step3.scoring_weight"
             :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            id="scoring-weight"
             outlined
           />
         </div>
@@ -390,7 +401,8 @@
       </div>
     </div>
     <div
-      class="select-group" style="padding-top: 0px"
+      class="select-group"
+      style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -399,17 +411,20 @@
         />
         <h5>planning</h5>
       </div>
-      <div v-for="(t, i) in step4.phaseData" :key="i">
+      <div
+        v-for="(t, i) in step4.phaseData"
+        :key="i"
+      >
         <div class="d-flex justify-content-between">
           <div style="width:32%">
             <div class="select-group--sub">
               <div class="select-box mb-2">
                 <label>Select Phase</label>
                 <v-select
+                  v-model="t.phase"
                   style="padding-top:2px"
                   :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
                   placeholder="Select Phase"
-                  v-model="t.phase"
                   outlined
                 />
               </div>
@@ -420,9 +435,9 @@
               <div class="select-box">
                 <label>Phase Start Date</label>
                 <b-form-datepicker
-                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                   :id="`phase_start_date-datepicker${i}`"
                   v-model="t.phase_start_date"
+                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                   :min="i > 0 && step4.phaseData[i - 1].phase_end_date ? step4.phaseData[i - 1].phase_end_date : null"
                   :max="step4.phaseData[i].phase_end_date ? step4.phaseData[i].phase_end_date : null"
                 />
@@ -433,9 +448,9 @@
             <div class="select-box">
               <label>Phase End Date</label>
               <b-form-datepicker
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                 :id="`phase_end_date-datepicker${i}`"
                 v-model="t.phase_end_date"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                 :min="step4.phaseData[i].phase_start_date ? step4.phaseData[i].phase_start_date : null"
                 :max="step4.phaseData[i + 1] && step4.phaseData[i + 1].phase_start_date ? step4.phaseData[i + 1].phase_start_date : null"
               />
@@ -452,7 +467,8 @@
       </b-button>
     </div>
     <div
-      class="select-group" style="padding-top: 0px"
+      class="select-group"
+      style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon

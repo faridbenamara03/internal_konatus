@@ -2,17 +2,42 @@
   <div v-click-outside="hideSelectMenu">
     <b-input-group>
       <template #append>
-        <b-input-group-text @click="dropdownToggle" style="cursor:pointer">
+        <b-input-group-text
+          style="cursor:pointer"
+          @click="dropdownToggle"
+        >
           <feather-icon
             :icon="dropdownOpen ? 'ChevronUpIcon' : 'ChevronDownIcon'"
           />
         </b-input-group-text>
       </template>
-      <b-form-input @focus="showSelectMenu" :value="value" @input="handleChange" :placeholder="placeholder"/>
+      <b-form-input
+        :value="value"
+        :placeholder="placeholder"
+        @focus="showSelectMenu"
+        @input="handleChange"
+      />
     </b-input-group>
-    <div :style="`display:${this.dropdownOpen ? 'block' : 'none'};position:absolute;z-index:10;width:47.5%;`" class="portf-sub-header-bg border-top-0 border border-secondary">
-      <div style="padding-top:7px;padding-bottom:7px" class="create-input-select-mute pr-1 pl-1" v-if="filteredOption.length === 0">options empty</div>
-      <div @click="onSelectClick(item)" style="cursor:pointer;padding-top:7px;padding-bottom:7px" class="pr-1 pl-1 create-input-select-font css-4-hv" v-for="(item, i) in filteredOption" :key="i">{{ item }}</div>
+    <div
+      :style="`display:${this.dropdownOpen ? 'block' : 'none'};position:absolute;z-index:10;width:47.5%;`"
+      class="portf-sub-header-bg border-top-0 border border-secondary"
+    >
+      <div
+        v-if="filteredOption.length === 0"
+        style="padding-top:7px;padding-bottom:7px"
+        class="create-input-select-mute pr-1 pl-1"
+      >
+        options empty
+      </div>
+      <div
+        v-for="(item, i) in filteredOption"
+        :key="i"
+        style="cursor:pointer;padding-top:7px;padding-bottom:7px"
+        class="pr-1 pl-1 create-input-select-font css-4-hv"
+        @click="onSelectClick(item)"
+      >
+        {{ item }}
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +51,9 @@ export default {
     BInputGroup,
     BFormInput,
     BInputGroupText
+  },
+  directives: {
+    ClickOutside
   },
   props: {
     options: {
@@ -74,9 +102,6 @@ export default {
       }
       this.$emit("customChange", e)
     }
-  },
-  directives: {
-    ClickOutside
   }
 }
 </script>

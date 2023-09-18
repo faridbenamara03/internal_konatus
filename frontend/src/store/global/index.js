@@ -1333,6 +1333,16 @@ export default {
         console.log('error creating new unit --->', err)
         Vue.$toast.error('Failed to create new unit.')
       })
+    },
+
+    insert_new_task(payload) {
+      axios.post('https://konatus-api.onrender.com/api/phase/create', payload).then(response => {
+        const newData = response.data
+        this.commit('globalState/INSERT_NEW_TASK', newData)
+      }).catch(err => {
+        console.log('error creating new task --->', err)
+        Vue.$toast.error('Failed to create new task.')
+      })
     }
-  },
+  }
 }

@@ -1,22 +1,43 @@
 <template>
-  <div v-if="reportingState === 'plan'" class="report">
+  <div
+    v-if="reportingState === 'plan'"
+    class="report"
+  >
     <div class="reporting-side">
       <div>
-        <div class="report-block--head" style="margin-top:128px;">
+        <div
+          class="report-block--head"
+          style="margin-top:128px;"
+        >
           <p class="m-0 text-uppercase">
             {{ data.title }}
           </p>
         </div>
-        <div v-for="(item1, index1) in data.children" :key="index1">
-          <div class="report-block--head" style="cursor:pointer" @click="onCollapseClick(index1)">
-            <feather-icon v-if="item1.children"
-              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16" class="mr-1" />
+        <div
+          v-for="(item1, index1) in data.children"
+          :key="index1"
+        >
+          <div
+            class="report-block--head"
+            style="cursor:pointer"
+            @click="onCollapseClick(index1)"
+          >
+            <feather-icon
+              v-if="item1.children"
+              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
+            />
             <p class="ml-1 m-0 text-overflow-ellipse">
               {{ item1.title }}
             </p>
           </div>
           <template v-if="item1.phases">
-            <div v-for="(item2, index2) in item1.phases" :key="index2" class="report-block-child">
+            <div
+              v-for="(item2, index2) in item1.phases"
+              :key="index2"
+              class="report-block-child"
+            >
               <p class="m-0 text-uppercase text-overflow-ellipse">
                 {{ item2.id }} <span style="color:white">({{ item2.progress }})</span>
               </p>
@@ -27,27 +48,46 @@
     </div>
     <div class="reporting-content">
       <div
-        :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'">
-        <div class="rounded-circle"
-          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+        :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'"
+      >
+        <div
+          class="rounded-circle"
+          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
+        />
       </div>
       <div class="reporting-content--header">
         <div />
         <div class="reporting-content-header--badge">
           <b-button variant="flat-dark">
-            <b-icon icon="diamond-fill" variant="success" />
-            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
             Milestones
           </b-button>
-          <b-button variant="flat-dark" class="badge-demand">
+          <b-button
+            variant="flat-dark"
+            class="badge-demand"
+          >
             <b-icon icon="circle-fill" />
             Demand
           </b-button>
-          <b-button variant="flat-dark" class="badge-engage">
+          <b-button
+            variant="flat-dark"
+            class="badge-engage"
+          >
             <b-icon icon="circle-fill" />
             Engaged
           </b-button>
-          <b-button variant="flat-dark" class="badge-estimate">
+          <b-button
+            variant="flat-dark"
+            class="badge-estimate"
+          >
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
@@ -55,8 +95,16 @@
       </div>
       <div class="reporting-content--body">
         <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            class="date"
+            :class="{ 'active': isToday(date) }"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
+              class="month"
+            >
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -68,54 +116,102 @@
           </div>
         </div>
         <div style="height:77px;">
-          <b-card no-body class="d-flex flex-column justify-content-around" style="height:76px;padding:5px 3px;width:fit-content;padding-right:10px;">
+          <b-card
+            no-body
+            class="d-flex flex-column justify-content-around"
+            style="height:76px;padding:5px 3px;width:fit-content;padding-right:10px;"
+          >
             <div :style="`padding-left:${programData[0][0]}px`">
-              <ProgramProgressBar :type="0" :width1="programData[0][1] + 60 - programData[0][0]"
-                :width2="364 - programData[0][0]" />
+              <ProgramProgressBar
+                :type="0"
+                :width1="programData[0][1] + 60 - programData[0][0]"
+                :width2="364 - programData[0][0]"
+              />
             </div>
             <div :style="`padding-left:${programData[1][0]}px`">
-              <ProgramProgressBar :type="1" :width1="programData[1][1] + 60 - programData[1][0]"
-                :width2="364 - programData[1][0]" />
+              <ProgramProgressBar
+                :type="1"
+                :width1="programData[1][1] + 60 - programData[1][0]"
+                :width2="364 - programData[1][0]"
+              />
             </div>
             <div :style="`padding-left:${programData[2][0]}px`">
-              <ProgramProgressBar :type="2" :width1="programData[2][1] + 60 - programData[2][0]"
-                :width2="364 - programData[2][0]" />
+              <ProgramProgressBar
+                :type="2"
+                :width1="programData[2][1] + 60 - programData[2][0]"
+                :width2="364 - programData[2][0]"
+              />
             </div>
           </b-card>
         </div>
-        <div v-for="(item1, index1) in data.children" :key="index1">
+        <div
+          v-for="(item1, index1) in data.children"
+          :key="index1"
+        >
           <div style="height:77px">
-            <div class="d-flex flex-column justify-content-around"
-              style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;width:fit-content;padding-right:10px;">
+            <div
+              class="d-flex flex-column justify-content-around"
+              style="height:76px;padding:5px 3px;background-color: #283046;border-radius:5px;width:fit-content;padding-right:10px;"
+            >
               <div :style="`padding-left:${projectPaddingData[index1][0]}px`">
-                <ProjectProgressBar :type="0" :width1="projectData[index1][0][0]" :width2="projectData[index1][0][1]"
-                  :width3="projectData[index1][0][2]" :width4="363 - projectPaddingData[index1][0]" />
+                <ProjectProgressBar
+                  :type="0"
+                  :width1="projectData[index1][0][0]"
+                  :width2="projectData[index1][0][1]"
+                  :width3="projectData[index1][0][2]"
+                  :width4="363 - projectPaddingData[index1][0]"
+                />
               </div>
               <div :style="`padding-left:${projectPaddingData[index1][1]}px`">
-                <ProjectProgressBar :type="1" :width1="projectData[index1][1][0]" :width2="projectData[index1][1][1]"
-                  :width3="projectData[index1][1][2]" :width4="363 - projectPaddingData[index1][1]" />
+                <ProjectProgressBar
+                  :type="1"
+                  :width1="projectData[index1][1][0]"
+                  :width2="projectData[index1][1][1]"
+                  :width3="projectData[index1][1][2]"
+                  :width4="363 - projectPaddingData[index1][1]"
+                />
               </div>
               <div :style="`padding-left:${projectPaddingData[index1][2]}px`">
-                <ProjectProgressBar :type="2" :width1="projectData[index1][2][0]" :width2="projectData[index1][2][1]"
-                  :width3="projectData[index1][2][2]" :width4="363 - projectPaddingData[index1][2]" />
+                <ProjectProgressBar
+                  :type="2"
+                  :width1="projectData[index1][2][0]"
+                  :width2="projectData[index1][2][1]"
+                  :width3="projectData[index1][2][2]"
+                  :width4="363 - projectPaddingData[index1][2]"
+                />
               </div>
             </div>
           </div>
           <template v-if="item1.phases">
-            <div v-for="(item2, index2) in item1.phases" :key="index2" :style="`height:51px;width:fit-content;`">
-              <div class="d-flex flex-column justify-content-around w-100"
-                style="height:50px;width:500px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;">
+            <div
+              v-for="(item2, index2) in item1.phases"
+              :key="index2"
+              :style="`height:51px;width:fit-content;`"
+            >
+              <div
+                class="d-flex flex-column justify-content-around w-100"
+                style="height:50px;width:500px;padding:0 10px 0 3px;background-color: #283046;border-radius:5px;"
+              >
                 <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][0][0]}px;`">
-                  <ElementProgressBar :type="0" :width1="elementData[index1][index2][0][1]"
-                    :width2="362 - elementData[index1][index2][0][0]" />
+                  <ElementProgressBar
+                    :type="0"
+                    :width1="elementData[index1][index2][0][1]"
+                    :width2="362 - elementData[index1][index2][0][0]"
+                  />
                 </div>
                 <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][1][0]}px;`">
-                  <ElementProgressBar :type="1" :width1="elementData[index1][index2][1][1]"
-                    :width2="362 - elementData[index1][index2][1][0]" />
+                  <ElementProgressBar
+                    :type="1"
+                    :width1="elementData[index1][index2][1][1]"
+                    :width2="362 - elementData[index1][index2][1][0]"
+                  />
                 </div>
                 <div :style="`margin-bottom:1px;padding-left:${elementData[index1][index2][2][0]}px;`">
-                  <ElementProgressBar :type="2" :width1="elementData[index1][index2][2][1]"
-                    :width2="362 - elementData[index1][index2][2][0]" />
+                  <ElementProgressBar
+                    :type="2"
+                    :width1="elementData[index1][index2][2][1]"
+                    :width2="362 - elementData[index1][index2][2][0]"
+                  />
                 </div>
               </div>
             </div>
@@ -123,26 +219,56 @@
         </div>
       </div>
     </div>
-    <b-modal id="program-reporting-plan-update" ref="program_reporting_plan_update" title="Create New" centered no-fade
-      hide-backdrop>
+    <b-modal
+      id="program-reporting-plan-update"
+      ref="program_reporting_plan_update"
+      title="Create New"
+      centered
+      no-fade
+      hide-backdrop
+    >
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">Update</h5>
+        <h5 class="modal-title">
+          Update
+        </h5>
         <div class="modal-actions">
-          <b-button @click="hideModal" variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" />
+          <b-button
+            variant="outline-primary"
+            @click="hideModal"
+          >
+            <feather-icon
+              icon="XIcon"
+              size="18"
+            />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
-        <b-button variant="primary" @click="onUpdate">Update</b-button>
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          variant="primary"
+          @click="onUpdate"
+        >
+          Update
+        </b-button>
       </template>
     </b-modal>
   </div>
-  <div style="width:100%" v-else-if="reportingState === 'cost'">
-    <ReportingCostVue :data="itemsForDemand" :fields="fieldForDemand" />
+  <div
+    v-else-if="reportingState === 'cost'"
+    style="width:100%"
+  >
+    <ReportingCostVue
+      :data="itemsForDemand"
+      :fields="fieldForDemand"
+    />
   </div>
 </template>
 

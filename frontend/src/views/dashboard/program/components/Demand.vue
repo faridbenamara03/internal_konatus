@@ -1,43 +1,93 @@
 <template>
   <div class="project-demand-view">
-    <div v-if="isChartView" style="padding: 40px 15px">
-      <div v-for="(team, index) in teamData" :key="index">
-        <div class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
+    <div
+      v-if="isChartView"
+      style="padding: 40px 15px"
+    >
+      <div
+        v-for="(team, index) in teamData"
+        :key="index"
+      >
+        <div
+          class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
           style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
-          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)">
-          <feather-icon :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16"
-            class="mr-1" />
+          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
+        >
+          <feather-icon
+            :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16"
+            class="mr-1"
+          />
           {{ team.title }}
         </div>
-        <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
-          <div v-for="(item1, index1) in team.phases" :key="index1" class="project-team no-border">
-            <CustomCollapse :team="item1" :index="index1" :index0="index" state="team"
+        <div
+          v-if="openedPhase.indexOf(index) > -1"
+          class="d-flex"
+        >
+          <div
+            v-for="(item1, index1) in team.phases"
+            :key="index1"
+            class="project-team no-border"
+          >
+            <CustomCollapse
+              :team="item1"
+              :index="index1"
+              :index0="index"
+              state="team"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
-              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)" />
+              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+            />
           </div>
         </div>
       </div>
     </div>
-    <div v-else style="padding: 40px 15px">
-      <div v-for="(phase, index) in phaseData" :key="index">
-        <div class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
+    <div
+      v-else
+      style="padding: 40px 15px"
+    >
+      <div
+        v-for="(phase, index) in phaseData"
+        :key="index"
+      >
+        <div
+          class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
           style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
-          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)">
-          <feather-icon :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'" size="16"
-            class="mr-1" />
+          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
+        >
+          <feather-icon
+            :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16"
+            class="mr-1"
+          />
           phase {{ index + 1 }}
         </div>
-        <div class="d-flex" v-if="openedPhase.indexOf(index) > -1">
-          <div v-for="(item1, index1) in phase.teams" :key="index1" class="project-team no-border">
-            <CustomCollapse :team="item1" :index="index1" :index0="index" state="phase"
+        <div
+          v-if="openedPhase.indexOf(index) > -1"
+          class="d-flex"
+        >
+          <div
+            v-for="(item1, index1) in phase.teams"
+            :key="index1"
+            class="project-team no-border"
+          >
+            <CustomCollapse
+              :team="item1"
+              :index="index1"
+              :index0="index"
+              state="phase"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
-              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)" />
+              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+            />
           </div>
         </div>
       </div>
     </div>
-    <activity-detail-modal :is-open="openActivityModal" :selectedActivityData="c_SelectedActivity"
-      @hideModal="hideModal" :teamdata="teamarr" />
+    <activity-detail-modal
+      :is-open="openActivityModal"
+      :selected-activity-data="c_SelectedActivity"
+      :teamdata="teamarr"
+      @hideModal="hideModal"
+    />
     <InsertNewTaskModal />
   </div>
 </template>

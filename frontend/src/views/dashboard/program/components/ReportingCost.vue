@@ -1,13 +1,23 @@
 <template>
-  <div class="demand-view" >
+  <div class="demand-view">
     <div class="border-top border-bottom">
-      <div v-for="(item, index) in data" :key="index" class="d-flex">
-        <div style="flex:4" class="border-right pr-2 pl-2">
+      <div
+        v-for="(item, index) in data"
+        :key="index"
+        class="d-flex"
+      >
+        <div
+          style="flex:4"
+          class="border-right pr-2 pl-2"
+        >
           <div class="border-bottom">
             <div class="row-custom boldTxt">
               <div class="dataitem dataTitleItem d-flex">
-                <div class="mr-1" style="cursor:pointer"
-                  v-on:click="onCollapseHandle(index, computedOpenState.openState)">
+                <div
+                  class="mr-1"
+                  style="cursor:pointer"
+                  @click="onCollapseHandle(index, computedOpenState.openState)"
+                >
                   <div v-if="index === computedOpenState.index && computedOpenState.openState === 'none'">
                     <feather-icon icon="ChevronRightIcon" />
                   </div>
@@ -18,42 +28,98 @@
                 {{ item.name }}
               </div>
             </div>
-            <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-              :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+            <div
+              v-for="(item1, jndex) in item.children"
+              :key="jndex"
+              class="row-custom boldTxt"
+              :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+            >
               <div class="dataitem dataSubTitleItem">
-                <feather-icon :style="`color:${colorArr[jndex]}`" :icon="`${iconArr[jndex]}`" class="mr-1" />{{ item1.name }}
+                <feather-icon
+                  :style="`color:${colorArr[jndex]}`"
+                  :icon="`${iconArr[jndex]}`"
+                  class="mr-1"
+                />{{ item1.name }}
               </div>
             </div>
           </div>
         </div>
-        <div style="flex:3" class="border-right">
-          <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[0] }}</div>
+        <div
+          style="flex:3"
+          class="border-right"
+        >
+          <div
+            v-if="index === 0"
+            class="row-custom"
+          >
+            <div class="dataitem">
+              {{ fields[0] }}
+            </div>
           </div>
-          <div v-else class="row-custom"></div>
-          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.budget_team }}</div>
+          <div
+            v-else
+            class="row-custom"
+          />
+          <div
+            v-for="(item1, jndex) in item.children"
+            :key="jndex"
+            class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+          >
+            <div class="dataitem">
+              {{ item1.budget_team }}
+            </div>
           </div>
         </div>
-        <div style="flex:3" class="border-right">
-          <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[1] }}</div>
+        <div
+          style="flex:3"
+          class="border-right"
+        >
+          <div
+            v-if="index === 0"
+            class="row-custom"
+          >
+            <div class="dataitem">
+              {{ fields[1] }}
+            </div>
           </div>
-          <div v-else class="row-custom"></div>
-          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.budget_engaged }}</div>
+          <div
+            v-else
+            class="row-custom"
+          />
+          <div
+            v-for="(item1, jndex) in item.children"
+            :key="jndex"
+            class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+          >
+            <div class="dataitem">
+              {{ item1.budget_engaged }}
+            </div>
           </div>
         </div>
         <div style="flex:3">
-          <div v-if="index === 0" class="row-custom">
-            <div class="dataitem">{{ fields[2] }}</div>
+          <div
+            v-if="index === 0"
+            class="row-custom"
+          >
+            <div class="dataitem">
+              {{ fields[2] }}
+            </div>
           </div>
-          <div v-else class="row-custom"></div>
-          <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem">{{ item1.real_estimated }}</div>
+          <div
+            v-else
+            class="row-custom"
+          />
+          <div
+            v-for="(item1, jndex) in item.children"
+            :key="jndex"
+            class="row-custom boldTxt"
+            :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+          >
+            <div class="dataitem">
+              {{ item1.real_estimated }}
+            </div>
           </div>
         </div>
       </div>

@@ -1,21 +1,46 @@
 <template>
-    <b-modal id="portfolio-reporting-plan-update" ref="my-modal" title="Create New" centered no-fade hide-backdrop>
-      <!-- Modal Header -->
-      <template #modal-header>
-        <h5 class="modal-title">Update</h5>
-        <div class="modal-actions">
-          <b-button @click="hideModal" variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" />
-          </b-button>
-        </div>
-      </template>
-      <div>Are you sure to update?</div>
-      <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
-        <b-button variant="primary" @click="onUpdate" >Update</b-button>
-      </template>
-    </b-modal>
-  </template>
+  <b-modal
+    id="portfolio-reporting-plan-update"
+    ref="my-modal"
+    title="Create New"
+    centered
+    no-fade
+    hide-backdrop
+  >
+    <!-- Modal Header -->
+    <template #modal-header>
+      <h5 class="modal-title">
+        Update
+      </h5>
+      <div class="modal-actions">
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
+        </b-button>
+      </div>
+    </template>
+    <div>Are you sure to update?</div>
+    <template #modal-footer>
+      <b-button
+        variant="outline-primary"
+        @click="hideModal"
+      >
+        Cancel
+      </b-button>
+      <b-button
+        variant="primary"
+        @click="onUpdate"
+      >
+        Update
+      </b-button>
+    </template>
+  </b-modal>
+</template>
 
   <script>
   import {

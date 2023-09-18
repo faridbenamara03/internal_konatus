@@ -1,25 +1,46 @@
 <template>
-  <b-modal id="modal-loader" ref="loader-modal" v-model="loadershow" title="Import file" centered no-fade hide-backdrop
-    static @hide="hideLoaderModal">
+  <b-modal
+    id="modal-loader"
+    ref="loader-modal"
+    v-model="loadershow"
+    title="Import file"
+    centered
+    no-fade
+    hide-backdrop
+    static
+    @hide="hideLoaderModal"
+  >
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
         Import file
       </h5>
       <div class="modal-actions">
-        <b-button variant="outline-primary" @click="hideLoaderModal">
-          <feather-icon icon="XIcon" size="18" />
+        <b-button
+          variant="outline-primary"
+          @click="hideLoaderModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
         </b-button>
       </div>
     </template>
-    <div class="loader" id="loader-2">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div
+      id="loader-2"
+      class="loader"
+    >
+      <span />
+      <span />
+      <span />
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button variant="outline-primary" @click="hideLoaderModal">
+      <b-button
+        variant="outline-primary"
+        @click="hideLoaderModal"
+      >
         Cancel
       </b-button>
     </template>

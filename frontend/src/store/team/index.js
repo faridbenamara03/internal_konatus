@@ -134,5 +134,15 @@ export default {
         Vue.$toast.error('Failed to get team demand data.')
       })
     },
+    insert_new_task(payload) {
+      axios.get('https://konatus-api.onrender.com/api/team/phase/create', payload).then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/team/phase/create').then(response => {
+        const newTaskData = response.data
+        this.commit('teamState/INSERT_NEW_TASK', newTaskData)
+      }).catch(err => {
+        console.log('error creating team new task ---->', err)
+        Vue.$toast.error('Failed to create team new task.')
+      })
+    }
   },
 }

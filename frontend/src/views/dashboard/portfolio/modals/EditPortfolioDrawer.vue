@@ -3,41 +3,71 @@
     <h3 class="modal-title mb-1">
       Edit {{ selectedType }}
     </h3>
-    <div class="select-group" style="padding-top: 0px">
+    <div
+      class="select-group"
+      style="padding-top: 0px"
+    >
       <div class="select-box">
         <label>Parent Organization</label>
-        <v-select v-model="parentOrganization" :options="['Konatus Industries']" placeholder="Select Organization"
-          outlined />
+        <v-select
+          v-model="parentOrganization"
+          :options="['Konatus Industries']"
+          placeholder="Select Organization"
+          outlined
+        />
       </div>
       <div class="select-box">
         <label>Portfolio Name</label>
-        <b-form-input v-model="portfolioName" @input="onEdit" type="text" />
+        <b-form-input
+          v-model="portfolioName"
+          type="text"
+          @input="onEdit"
+        />
       </div>
       <div class="d-flex justify-content-between select-box">
         <div style="width:48%">
           <div class="select-group--sub mb-0">
             <div class="select-box">
               <label>Start Date</label>
-              <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                :id="`start_date-datepicker`" @input="onEdit" v-model="startDate" :max="endDate ? endDate : null" />
+              <b-form-datepicker
+                :id="`start_date-datepicker`"
+                v-model="startDate"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                :max="endDate ? endDate : null"
+                @input="onEdit"
+              />
             </div>
           </div>
         </div>
         <div style="width:48%">
           <div class="select-box">
             <label>End Date</label>
-            <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              :id="`end_date-datepicker`" @input="onEdit" v-model="endDate" :min="startDate ? startDate : null" />
+            <b-form-datepicker
+              :id="`end_date-datepicker`"
+              v-model="endDate"
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              :min="startDate ? startDate : null"
+              @input="onEdit"
+            />
           </div>
         </div>
       </div>
       <div class="select-box">
         <label>Portfolio Budget</label>
-        <b-form-input v-model="portfolioBudget" @input="onEdit" type="number" />
+        <b-form-input
+          v-model="portfolioBudget"
+          type="number"
+          @input="onEdit"
+        />
       </div>
     </div>
     <div>
-      <b-button :disabled="!edited" style="width: 100%" variant="primary" @click="handleSave">
+      <b-button
+        :disabled="!edited"
+        style="width: 100%"
+        variant="primary"
+        @click="handleSave"
+      >
         Save
       </b-button>
     </div>
@@ -69,6 +99,14 @@ export default {
       endDate: "2023-04-30"
     }
   },
+  computed: {
+    selectedType() {
+      const type = this.$store.state.globalState.selectedNavObj?.type
+      const firstC = type?.charAt(0).toUpperCase()
+      const rslt = firstC + type.slice(1)
+      return rslt
+    }
+  },
   methods: {
     handleSave() {
       this.edited = false
@@ -79,14 +117,6 @@ export default {
     },
     onEdit() {
       this.edited = true
-    }
-  },
-  computed: {
-    selectedType() {
-      const type = this.$store.state.globalState.selectedNavObj?.type
-      const firstC = type?.charAt(0).toUpperCase()
-      const rslt = firstC + type.slice(1)
-      return rslt
     }
   }
 }

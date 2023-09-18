@@ -1,5 +1,14 @@
 <template>
-  <b-modal size="lg" id="modal-edit-column" ref="my-modal" title="Edit Columns" centered no-fade hide-backdrop static>
+  <b-modal
+    id="modal-edit-column"
+    ref="my-modal"
+    size="lg"
+    title="Edit Columns"
+    centered
+    no-fade
+    hide-backdrop
+    static
+  >
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
@@ -15,53 +24,107 @@
           />
           <span class="pl-1">Add New</span>
         </b-button> !-->
-        <b-button variant="outline-primary" @click="hideModal">
-          <feather-icon icon="XIcon" size="18" />
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
         </b-button>
       </div>
     </template>
-    <div class="d-flex" style="border-bottom: 1px solid grey;">
+    <div
+      class="d-flex"
+      style="border-bottom: 1px solid grey;"
+    >
       <div class="col-6 optionBlock">
         <h4>Main</h4>
-        <b-form-checkbox-group id="checkbox-group-1" v-model="selected" :options="mainOptions" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-1"
+          v-model="selected"
+          :options="mainOptions"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Product line</h4>
-        <b-form-checkbox-group id="checkbox-group-2" v-model="selected" :options="options5" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-2"
+          v-model="selected"
+          :options="options5"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
     </div>
-    <div class="d-flex" style="border-bottom: 1px solid grey;">
+    <div
+      class="d-flex"
+      style="border-bottom: 1px solid grey;"
+    >
       <div class="col-6 optionBlock">
         <h4>Key elements</h4>
-        <b-form-checkbox-group id="checkbox-group-3" v-model="selected" :options="options2" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-3"
+          v-model="selected"
+          :options="options2"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Planning</h4>
-        <b-form-checkbox-group id="checkbox-group-4" v-model="selected" :options="options4" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-4"
+          v-model="selected"
+          :options="options4"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
     </div>
     <div class="d-flex">
       <div class="col-6 optionBlock">
         <h4>Meta</h4>
-        <b-form-checkbox-group id="checkbox-group-5" v-model="selected" :options="options1" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-5"
+          v-model="selected"
+          :options="options1"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
-        <b-form-checkbox-group id="checkbox-group-6" v-model="selected" :options="options3" name="columns"
-          class="checkbox-group" stacked />
+        <b-form-checkbox-group
+          id="checkbox-group-6"
+          v-model="selected"
+          :options="options3"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
       </div>
     </div>
     <!-- Modal Footer -->
     <template #modal-footer>
-      <b-button variant="outline-primary" @click="hideModal">
+      <b-button
+        variant="outline-primary"
+        @click="hideModal"
+      >
         Cancel
       </b-button>
-      <b-button variant="primary" @click="handleSave">
+      <b-button
+        variant="primary"
+        @click="handleSave"
+      >
         Save
       </b-button>
     </template>

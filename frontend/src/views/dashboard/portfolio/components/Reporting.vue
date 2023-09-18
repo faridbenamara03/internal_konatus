@@ -130,25 +130,25 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa10 : paddingV10[index1 - 1][0]}px`">
                 <ProgramProgressBar
                   :type="0"
-                  :width1="demand(item1)"
-                  :width2="demand(item1) > 364 ? 364 : demand(item1)"
+                  :width1="index1 === 0 ? da10 : 455"
+                  :width2="index1 === 0 ? 364 - paddingDa10 : 364 - paddingV10[index1 - 1][0]"
                 />
               </div>
-              <div :style="`margin-bottom:5px`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa20 : paddingV10[index1 - 1][1]}px`">
                 <ProgramProgressBar
                   :type="1"
-                  :width1="engage(item1)"
-                  :width2="engage(item1) > 364 ? 364 : engage(item1)"
+                  :width1="index1 === 0 ? da20 : 536"
+                  :width2="index1 === 0 ? 364 - paddingDa20 : 364 - paddingV10[index1 - 1][1]"
                 />
               </div>
-              <div :style="`margin-bottom:5px`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa30 : paddingV10[index1 - 1][2]}px`">
                 <ProgramProgressBar
                   :type="2"
-                  :width1="engage(item1)"
-                  :width2="engage(item1) > 364 ? 364 : engage(item1)"
+                  :width1="index1 === 0 ? da30 : 495"
+                  :width2="index1 === 0 ? 364 - paddingDa30 : 364 - paddingV10[index1 - 1][2]"
                 />
               </div>
             </b-card>
@@ -183,22 +183,13 @@
                     :width4="363 - paddingV0[index2][1]"
                   />
                 </div>
-                <!-- <div :style="`padding-left:${paddingV0[index2][2]}px`">
+                <div :style="`padding-left:${paddingV0[index2][2]}px`">
                   <ProjectProgressBar
                     :type="2"
-                    :width1="dta0[index2][3]"
-                    :width2="dta0[index2][4]"
-                    :width3="dta0[index2][5]"
-                    :width4="363 - paddingV0[index2][1]"
-                  />
-                </div> -->
-                <div :style="`padding-left:${paddingV0[index2][1]}px`">
-                  <ProjectProgressBar
-                    :type="2"
-                    :width1="dta0[index2][3]"
-                    :width2="dta0[index2][4]"
-                    :width3="dta0[index2][5]"
-                    :width4="363 - paddingV0[index2][1]"
+                    :width1="dta0[index2][6]"
+                    :width2="dta0[index2][7]"
+                    :width3="dta0[index2][8]"
+                    :width4="363 - paddingV0[index2][2]"
                   />
                 </div>
               </b-card>
@@ -215,25 +206,25 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px;`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1 - 1][0]}px`">
                 <ProgramProgressBar
                   :type="0"
-                  :width1="demands(item1)"
-                  :width2="demands(item1) > 364 ? 364 : demands(item1)"
+                  :width1="da1"
+                  :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1 - 1][0]"
                 />
               </div>
-              <div :style="`margin-bottom:5px`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1 - 1][1]}px`">
                 <ProgramProgressBar
                   :type="1"
-                  :width1="engage(item1)"
-                  :width2="engage(item1) > 364 ? 364 : engage(item1)"
+                  :width1="da2"
+                  :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1 - 1][1]"
                 />
               </div>
-              <div :style="`margin-bottom:5px`">
+              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1 - 1][2]}px`">
                 <ProgramProgressBar
                   :type="2"
-                  :width1="realEstimate(item1)"
-                  :width2="realEstimate(item1) > 364 ? 364 : realEstimate(item1)"
+                  :width1="da3"
+                  :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1 - 1][2]"
                 />
               </div>
             </b-card>
@@ -346,7 +337,7 @@ export default {
       isOptimiseIndex: this.$store.state.portfolioState.optimizeStatus,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta1: [
-        [93, 125, 184, 151, 248, 183, 224, 270, 207],
+        [193, 125, 184, 151, 248, 183, 224, 270, 207],
         [110, 179, 125, 238, 229, 193, 232, 210, 250],
         [184, 198, 188, 206, 210, 207, 219, 283, 249],
         [181, 164, 137, 224, 188, 172, 242, 272, 208]
@@ -462,7 +453,6 @@ export default {
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   mounted() {
-    console.log("DDD:", this.data)
     const startDate = moment(moment()).subtract(15, 'days')
     const endDate = moment(moment()).add(1, 'M')
     this.reportingDates = [startDate.clone()]
@@ -472,38 +462,6 @@ export default {
     }
   },
   methods: {
-    demands(item) {
-      const demand = parseInt(item.demand, 10)
-      const engage = parseInt(item.engaged, 10)
-      const real = parseInt(item.realEstimated, 10)
-      const interval = this.largest(demand, engage, real, 0) / 45
-      return (demand / interval) * 25
-      // return parseInt(this.data.children[index1].demand, 10)
-    },
-    engage(item) {
-      const demand = parseInt(item.demand, 10)
-      const engage = parseInt(item.engaged, 10)
-      const real = parseInt(item.realEstimated, 10)
-      const interval = this.largest(demand, engage, real, 0) / 45
-      return (engage / interval) * 25
-    },
-    realEstimate(item) {
-      const demand = parseInt(item.demand, 10)
-      const engage = parseInt(item.engaged, 10)
-      const real = parseInt(item.realEstimated, 10)
-      const interval = this.largest(demand, engage, real, 0) / 45
-      return (real / interval) * 25
-    },
-    demandChildren(index1, index2) {
-      return parseInt(this.data.children[index1].children[index2].demand, 10)
-    },
-    engageChildren(index1, index2) {
-      return parseInt(this.data.children[index1].children[index2].engaged, 10)
-    },
-    realestimateChildren(index1, index2) {
-      return parseInt(this.data.children[index1].children[index2].realEstimated, 10)
-    },
-
     onOptimiseIndex() {
       this.isOptimiseIndex = this.$store.state.portfolioState.optimizeStatus
       return this.isOptimiseIndex

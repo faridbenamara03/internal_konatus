@@ -1,13 +1,31 @@
 <template>
-  <b-modal id="modal-add-new-task-program" centered hide-backdrop content-class="shadow" hide-header size="sm" @ok="handleOk">
+  <b-modal
+    id="modal-add-new-task-program"
+    centered
+    hide-backdrop
+    content-class="shadow"
+    hide-header
+    size="sm"
+    @ok="handleOk"
+  >
     <div class="mb-2">
       <b>Insert Work Element</b>
     </div>
-    <b-dropdown class="mb-1" id="checkbox-dropdown" text="Select Options" variant="outline-secondary" toggle-class="form-control" style="width: 100%;">
+    <b-dropdown
+      id="checkbox-dropdown"
+      class="mb-1"
+      text="Select Options"
+      variant="outline-secondary"
+      toggle-class="form-control"
+      style="width: 100%;"
+    >
       <template #button-content>
         <span>{{ selectedOptionsString }}</span>
       </template>
-      <b-dropdown-item v-for="(option, index) in options" :key="option.value">
+      <b-dropdown-item
+        v-for="(option, index) in options"
+        :key="option.value"
+      >
         <b-form-checkbox
           :id="'checkbox_' + index"
           v-model="option.selected"
@@ -20,10 +38,30 @@
     </b-dropdown>
     <!-- <b-form-select id="input-taskId" v-model="taskId" class="mb-1" placeholder="WorK Element Id" :options="['JIRA', 'SAP']" /> -->
     <!-- <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" /> -->
-    <b-form-input id="input-name" v-model="name" placeholder="WorK Element Name" class="mb-1" />
-    <b-form-select id="select-team" v-model="teamttle" class="mb-1" placeholder="Gate" :options="['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F']" />
-    <b-form-select id="input-gate" v-model="gate" class="mb-1" placeholder="Gate" :options="['Gate1', 'Gate2', 'Gate3', 'Gate4']" />
-    <b-form-select v-model="priority" :options="['Highest', 'High', 'Low', 'Lowest']" />
+    <b-form-input
+      id="input-name"
+      v-model="name"
+      placeholder="WorK Element Name"
+      class="mb-1"
+    />
+    <b-form-select
+      id="select-team"
+      v-model="teamttle"
+      class="mb-1"
+      placeholder="Gate"
+      :options="['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F']"
+    />
+    <b-form-select
+      id="input-gate"
+      v-model="gate"
+      class="mb-1"
+      placeholder="Gate"
+      :options="['Gate1', 'Gate2', 'Gate3', 'Gate4']"
+    />
+    <b-form-select
+      v-model="priority"
+      :options="['Highest', 'High', 'Low', 'Lowest']"
+    />
   </b-modal>
 </template>
 
@@ -54,14 +92,14 @@ export default {
     BFormCheckbox,
     BDropdown
   },
+  directives: {
+    'b-modal': VBModal,
+    Ripple,
+  },
   props: {
     phaseV: {
       type: Number
     },
-  },
-  directives: {
-    'b-modal': VBModal,
-    Ripple,
   },
   data() {
     return {
@@ -97,7 +135,7 @@ export default {
         this.$toast.warning('Value is invalid!')
       } else {
         this.$bvModal.hide('modal-add-new-task-program')
-        this.$store.commit('globalState/INSERT_NEW_TASK', {
+        this.$store.dispatch('globalState/insert_new_task', {
           id: this.selectedOptionsString, priority: this.priority, gate: this.gate, name: this.name
         })
         this.taskId = ''
