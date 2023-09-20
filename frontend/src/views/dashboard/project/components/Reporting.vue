@@ -1,5 +1,8 @@
 <template>
-  <div v-if="reportingState === 'plan'" class="report-custom">
+  <div
+    v-if="reportingState === 'plan'"
+    class="report-custom"
+  >
     <div class="reporting-side-custom">
       <div class="program-title">
         <div class="program-title-child">
@@ -12,14 +15,20 @@
           </div> -->
         </div>
       </div>
-      <div class="program-title" style="margin-top:0;box-shadow: 0px -3px 10px 0px rgba(22, 22, 22, 0);margin-top:1px">
+      <div
+        class="program-title"
+        style="margin-top:0;box-shadow: 0px -3px 10px 0px rgba(22, 22, 22, 0);margin-top:1px"
+      >
         <div class="program-title-child">
           <!-- <feather-icon v-if="!collapsed" icon="ChevronDownIcon" style="cursor:pointer" v-on:click="onCollapse" />
           <feather-icon v-if="collapsed" icon="ChevronUpIcon" style="cursor:pointer" v-on:click="onCollapse" /> -->
           Quadruped robot
         </div>
       </div>
-      <div class="program-collapse-header" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-header"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="header-child">
           <div class="child1">
             <div class="title">
@@ -28,35 +37,50 @@
           </div>
         </div>
       </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-sub-project"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="sub-project">
           <div class="child1 ml-1">
             2.29.18.112 <span style="color:white">(10%)</span>
           </div>
         </div>
       </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-sub-project"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="sub-project">
           <div class="child1 ml-1">
             2.29.18.113 <span style="color:white">({{ percentage113 }})</span>
           </div>
         </div>
       </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-sub-project"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="sub-project">
           <div class="child1 ml-1">
             2.29.18.114 <span style="color:white">({{ percentage114 }})</span>
           </div>
         </div>
       </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-sub-project"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="sub-project">
           <div class="child1 ml-1">
             2.29.18.115 <span style="color:white">(100%)</span>
           </div>
         </div>
       </div>
-      <div class="program-collapse-sub-project" style="border-bottom: 1px solid grey">
+      <div
+        class="program-collapse-sub-project"
+        style="border-bottom: 1px solid grey"
+      >
         <div class="sub-project">
           <div class="child1 ml-1">
             2.29.18.116 <span style="color:white">(10%)</span>
@@ -66,41 +90,70 @@
     </div>
     <div class="reporting-content-custom">
       <div
-        :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'">
-        <div class="rounded-circle"
-          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"></div>
+        :style="'position:absolute;height:100%;border-right:2px #BD2020 solid;left:' + leftP + 'px;top:118px;z-index:222'"
+      >
+        <div
+          class="rounded-circle"
+          style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
+        />
       </div>
       <div class="reporting-content--header">
-        <div class="first-child">
-        </div>
+        <div class="first-child" />
         <div class="reporting-content-header--badge">
           <div class="phase">
             <div class="flag" />
             Phase
           </div>
           <div class="milestones">
-            <b-icon icon="diamond-fill" variant="success" />
-            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
             Milestones
           </div>
           <div class="demand">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Real
           </div>
           <div class="engaged">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Engaged
           </div>
           <div class="real-estimated">
-            <b-icon icon="circle-fill" class="flag" />
+            <b-icon
+              icon="circle-fill"
+              class="flag"
+            />
             Estimated
           </div>
         </div>
       </div>
-      <div v-if="this.selected === 1" class="reporting-content--body-custom">
+      <div
+        v-if="this.selected === 1"
+        class="reporting-content--body-custom"
+      >
         <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true" class="month">
+          <div
+            v-for="(date, index) in reportingDates"
+            :key="index"
+            class="date"
+            :class="{ 'active': isToday(date) }"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
+              class="month"
+            >
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -113,110 +166,231 @@
         </div>
         <div v-if="!collapsed">
           <div style="height: 88px">
-            <b-card no-body class="d-flex flex-column justify-content-around" style="height:87px;padding:7px 10px 7px 3px;width:fit-content;">
+            <b-card
+              no-body
+              class="d-flex flex-column justify-content-around"
+              style="height:87px;padding:7px 10px 7px 3px;width:fit-content;"
+            >
               <div :style="`padding-left:${programData[0][0]}px`">
-                <ProgramProgressBar :type="1" :width1="programData[0][1]" :width2="leftP - programData[0][0]" />
+                <ProgramProgressBar
+                  :type="1"
+                  :width1="programData[0][1]"
+                  :width2="leftP - programData[0][0]"
+                />
               </div>
               <div :style="`padding-left:${programData[1][0]}px`">
-                <ProgramProgressBar :type="2" :width1="programData[1][1]" :width2="leftP - programData[1][0]" />
+                <ProgramProgressBar
+                  :type="2"
+                  :width1="programData[1][1]"
+                  :width2="leftP - programData[1][0]"
+                />
               </div>
               <div :style="`padding-left:${programData[2][0]}px`">
-                <ProgramProgressBar :type="0" :width1="programData[2][1]" :width2="leftP - programData[2][0]" />
+                <ProgramProgressBar
+                  :type="0"
+                  :width1="programData[2][1]"
+                  :width2="leftP - programData[2][0]"
+                />
               </div>
             </b-card>
           </div>
           <div style="height:77px">
-            <b-card class="d-flex flex-column justify-content-around" no-body style="height:76px;padding:5px 10px 5px 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+            >
               <div :style="`padding-left:${projectPaddingData[0]}px`">
-                <ProjectProgressBar :type="1" :width1="projectData[0][0]" :width2="projectData[0][1]"
-                  :width3="projectData[0][2]" :width4="leftP - projectPaddingData[0]" />
+                <ProjectProgressBar
+                  :type="1"
+                  :width1="projectData[0][0]"
+                  :width2="projectData[0][1]"
+                  :width3="projectData[0][2]"
+                  :width4="leftP - projectPaddingData[0]"
+                />
               </div>
               <div :style="`padding-left:${projectPaddingData[1]}px`">
-                <ProjectProgressBar :type="2" :width1="projectData[1][0]" :width2="projectData[1][1]"
-                  :width3="projectData[1][2]" :width4="leftP - projectPaddingData[1]" />
+                <ProjectProgressBar
+                  :type="2"
+                  :width1="projectData[1][0]"
+                  :width2="projectData[1][1]"
+                  :width3="projectData[1][2]"
+                  :width4="leftP - projectPaddingData[1]"
+                />
               </div>
               <div :style="`padding-left:${projectPaddingData[2]}px`">
-                <ProjectProgressBar :type="0" :width1="projectData[2][0]" :width2="projectData[2][1]"
-                  :width3="projectData[2][2]" :width4="leftP - projectPaddingData[2]" />
+                <ProjectProgressBar
+                  :type="0"
+                  :width1="projectData[2][0]"
+                  :width2="projectData[2][1]"
+                  :width3="projectData[2][2]"
+                  :width4="leftP - projectPaddingData[2]"
+                />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][0][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[0][0][1]" :width2="leftP - elementData[0][0][0]" />
+                <ElementProgressBar
+                  :type="1"
+                  :width1="elementData[0][0][1]"
+                  :width2="leftP - elementData[0][0][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][1][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[0][1][1]" :width2="leftP - elementData[0][1][0]" />
+                <ElementProgressBar
+                  :type="2"
+                  :width1="elementData[0][1][1]"
+                  :width2="leftP - elementData[0][1][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[0][2][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[0][2][1]" :width2="leftP - elementData[0][2][0]" />
+                <ElementProgressBar
+                  :type="0"
+                  :width1="elementData[0][2][1]"
+                  :width2="leftP - elementData[0][2][0]"
+                />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][0][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[1][0][1]" :width2="leftP - elementData[1][0][0]" />
+                <ElementProgressBar
+                  :type="1"
+                  :width1="elementData[1][0][1]"
+                  :width2="leftP - elementData[1][0][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][1][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[1][1][1]" :width2="leftP - elementData[1][1][0]" />
+                <ElementProgressBar
+                  :type="2"
+                  :width1="elementData[1][1][1]"
+                  :width2="leftP - elementData[1][1][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[1][2][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[1][2][1]" :width2="leftP - elementData[1][2][0]" />
+                <ElementProgressBar
+                  :type="0"
+                  :width1="elementData[1][2][1]"
+                  :width2="leftP - elementData[1][2][0]"
+                />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][0][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[2][0][1]" :width2="leftP - elementData[2][0][0]" />
+                <ElementProgressBar
+                  :type="1"
+                  :width1="elementData[2][0][1]"
+                  :width2="leftP - elementData[2][0][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][1][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[2][1][1]" :width2="leftP - elementData[2][1][0]" />
+                <ElementProgressBar
+                  :type="2"
+                  :width1="elementData[2][1][1]"
+                  :width2="leftP - elementData[2][1][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[2][2][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[2][2][1]" :width2="leftP - elementData[2][2][0]" />
+                <ElementProgressBar
+                  :type="0"
+                  :width1="elementData[2][2][1]"
+                  :width2="leftP - elementData[2][2][0]"
+                />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][0][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[3][0][1]" :width2="leftP - elementData[3][0][0]" />
+                <ElementProgressBar
+                  :type="1"
+                  :width1="elementData[3][0][1]"
+                  :width2="leftP - elementData[3][0][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][1][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[3][1][1]" :width2="leftP - elementData[3][1][0]" />
+                <ElementProgressBar
+                  :type="2"
+                  :width1="elementData[3][1][1]"
+                  :width2="leftP - elementData[3][1][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[3][2][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[3][2][1]" :width2="leftP - elementData[3][2][0]" />
+                <ElementProgressBar
+                  :type="0"
+                  :width1="elementData[3][2][1]"
+                  :width2="leftP - elementData[3][2][0]"
+                />
               </div>
             </b-card>
           </div>
           <div :style="`height:46px;`">
-            <b-card class="d-flex flex-column justify-content-around" no-body
-              style="height:45px;padding:0 10px 0 3px;width:fit-content;">
+            <b-card
+              class="d-flex flex-column justify-content-around"
+              no-body
+              style="height:45px;padding:0 10px 0 3px;width:fit-content;"
+            >
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][0][0]}px;`">
-                <ElementProgressBar :type="1" :width1="elementData[4][0][1]" :width2="leftP - elementData[4][0][0]" />
+                <ElementProgressBar
+                  :type="1"
+                  :width1="elementData[4][0][1]"
+                  :width2="leftP - elementData[4][0][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][1][0]}px;`">
-                <ElementProgressBar :type="2" :width1="elementData[4][1][1]" :width2="leftP - elementData[4][1][0]" />
+                <ElementProgressBar
+                  :type="2"
+                  :width1="elementData[4][1][1]"
+                  :width2="leftP - elementData[4][1][0]"
+                />
               </div>
               <div :style="`margin-bottom:1px;padding-left:${elementData[4][2][0]}px;`">
-                <ElementProgressBar :type="0" :width1="elementData[4][2][1]" :width2="leftP - elementData[4][2][0]" />
+                <ElementProgressBar
+                  :type="0"
+                  :width1="elementData[4][2][1]"
+                  :width2="leftP - elementData[4][2][0]"
+                />
               </div>
             </b-card>
           </div>
         </div>
       </div>
-      <div v-if="this.selected === 2" class="reporting-content--body-custom">
+      <div
+        v-if="this.selected === 2"
+        class="reporting-content--body-custom"
+      >
         <div class="timeline-list">
-          <div v-for="(date, index) in reportingDates1" :key="index" class="date" :class="{ 'active': isToday(date) }">
-            <p v-if="index > 0 ? getMonth(date) != getMonth(reportingDates1[index - 1]) : true" class="month">
+          <div
+            v-for="(date, index) in reportingDates1"
+            :key="index"
+            class="date"
+            :class="{ 'active': isToday(date) }"
+          >
+            <p
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates1[index - 1]) : true"
+              class="month"
+            >
               {{ getMonth(date) }}
             </p>
             <p class="week">
@@ -228,102 +402,240 @@
           </div>
         </div>
         <div v-if="!collapsed">
-          <b-card no-body style="padding: 10px 5px">
+          <b-card
+            no-body
+            style="padding: 10px 5px"
+          >
             <b-card-text class="mb-0">
               Reticulating splines… {{ value1 + '%' }}
             </b-card-text>
             <div class="d-flex">
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="danger"
+                />
                 <div :style="`width:${Math.random() * 100 + 150}px`">
-                  <b-progress value="100%" max="100" variant="danger" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="danger"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="danger"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="danger"
+                />
                 <div :style="`width:${Math.random() * 100 + 150}px`">
-                  <b-progress value="100%" max="100" variant="danger" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="danger"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="danger"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="danger" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="danger"
+                />
                 <div :style="`width:${Math.random() * 100 + 150}px`">
-                  <b-progress value="100%" max="100" variant="danger" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="danger"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="danger" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="danger"
+                />
               </div>
             </div>
             <div class="d-flex">
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="success"
+                />
                 <div :style="`width:${Math.random() * 100 + 200}px`">
-                  <b-progress value="100%" max="100" variant="success" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="success"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="success"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="success"
+                />
                 <div :style="`width:${Math.random() * 100 + 200}px`">
-                  <b-progress value="100%" max="100" variant="success" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="success"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="success"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="success" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="success"
+                />
                 <div :style="`width:${Math.random() * 100 + 200}px`">
-                  <b-progress value="100%" max="100" variant="success" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="success"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="success"
+                />
               </div>
             </div>
             <div class="d-flex">
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="info"
+                />
                 <div :style="`width:${Math.random() * 100 + 250}px`">
-                  <b-progress value="100%" max="100" variant="info" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="info"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="info"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="info"
+                />
                 <div :style="`width:${Math.random() * 100 + 250}px`">
-                  <b-progress value="100%" max="100" variant="info" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="info"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="info"
+                />
               </div>
               <div class="d-flex">
-                <b-icon style="padding-bottom:2px" icon="diamond-fill" variant="info" />
+                <b-icon
+                  style="padding-bottom:2px"
+                  icon="diamond-fill"
+                  variant="info"
+                />
                 <div :style="`width:${Math.random() * 100 + 250}px`">
-                  <b-progress value="100%" max="100" variant="info" />
+                  <b-progress
+                    value="100%"
+                    max="100"
+                    variant="info"
+                  />
                 </div>
-                <b-icon icon="triangle-fill" class="rotate-icon" variant="info" />
+                <b-icon
+                  icon="triangle-fill"
+                  class="rotate-icon"
+                  variant="info"
+                />
               </div>
             </div>
           </b-card>
         </div>
       </div>
     </div>
-    <b-modal id="project-reporting-plan-update" ref="project_reporting_plan_update" title="Create New" centered no-fade
-      hide-backdrop>
+    <b-modal
+      id="project-reporting-plan-update"
+      ref="project_reporting_plan_update"
+      title="Create New"
+      centered
+      no-fade
+      hide-backdrop
+    >
       <!-- Modal Header -->
       <template #modal-header>
-        <h5 class="modal-title">Update</h5>
+        <h5 class="modal-title">
+          Update
+        </h5>
         <div class="modal-actions">
-          <b-button @click="hideModal" variant="outline-primary">
-            <feather-icon icon="XIcon" size="18" />
+          <b-button
+            variant="outline-primary"
+            @click="hideModal"
+          >
+            <feather-icon
+              icon="XIcon"
+              size="18"
+            />
           </b-button>
         </div>
       </template>
       <div>Are you sure to update?</div>
       <template #modal-footer>
-        <b-button variant="outline-primary" @click="hideModal">Cancel</b-button>
-        <b-button variant="primary" @click="onUpdate">Update</b-button>
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          variant="primary"
+          @click="onUpdate"
+        >
+          Update
+        </b-button>
       </template>
     </b-modal>
   </div>
-  <div class="w-100" v-else-if="reportingState === 'cost'">
+  <div
+    v-else-if="reportingState === 'cost'"
+    class="w-100"
+  >
     <ReportingCostVue />
   </div>
 </template>

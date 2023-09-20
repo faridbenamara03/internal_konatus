@@ -312,11 +312,21 @@
       <!-- <b-button v-b-modal.modal-create variant="primary">
         <feather-icon icon="PlusIcon" />
       </b-button> -->
-      <b-button
+      <!-- <b-button
         variant="primary"
         @click="toggle"
+      > -->
+      <b-button
+        variant="primary"
+        @click="toggleCreateNewPortfolioDrawer"
       >
         <feather-icon icon="PlusIcon" />
+      </b-button>
+      <b-button
+        variant="primary"
+        @click="toggleEditPortfolioDrawer"
+      >
+        <feather-icon icon="EditIcon" />
       </b-button>
     </template>
     <Drawer

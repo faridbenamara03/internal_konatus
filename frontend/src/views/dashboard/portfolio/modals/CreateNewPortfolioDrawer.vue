@@ -95,7 +95,14 @@ export default {
   },
   methods: {
     handleCreate() {
-      this.$store.dispatch('globalState/create_new_portfolio', { parentOrganization: this.parentOrganization, portfolioName: this.portfolioName, portfolioBudget: this.portfolioBudget })
+      this.$store.dispatch('globalState/create_new_portfolio',
+      {
+        parentOrganization: this.parentOrganization,
+        portfolioName: this.portfolioName,
+        portfolioBudget: this.portfolioBudget,
+        startDate: this.startDate,
+        endDate: this.endDate
+     })
     }
   },
 }

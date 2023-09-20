@@ -1325,13 +1325,14 @@ export default {
         Vue.$toast.error('Failed to create new unit.')
       })
     },
-    create_new_portfolio(payload) {
+    create_new_portfolio(commit, payload) {
+      console.log("Payload:", payload)
       axios.post('https://konatus-api.onrender.com/api/portfolio/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
       }).catch(err => {
-        console.log('error creating new unit --->', err)
-        Vue.$toast.error('Failed to create new unit.')
+        console.log('error creating new portfolio --->', err)
+        Vue.$toast.error('Failed to create new portfolio.')
       })
     },
 
