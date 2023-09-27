@@ -220,7 +220,6 @@
         >
           <Control
             :data="items.children"
-            :controlData="controlData"
             :table-title="tableTitle"
           />
         </b-tab>

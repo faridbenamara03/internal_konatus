@@ -86,9 +86,9 @@ class ProgramBacklogController extends Controller
     public function demand(Program_Backlog $program_Backlog)
     {
         $programData = "{
-            id: '63d3d79802e5f6e2220b5170',
+            id: '3',
             title: 'Quadruped robot',
-            parent: '63d3d79802e5f6e2220b516e',
+            parent: '1',
             type: 'program',
             priority: 'Highest',
             budget: '91001',
@@ -104,9 +104,9 @@ class ProgramBacklogController extends Controller
             gate: 3,
             children: [
               {
-                id: '63d3d79802e5f6e2220b5175',
+                id: '8',
                 title: 'New Format',
-                parent: '63d3d79802e5f6e2220b5170',
+                parent: '3',
                 type: 'project',
                 priority: 'High',
                 budget: '350000',
@@ -124,8 +124,8 @@ class ProgramBacklogController extends Controller
                 end_date: '2022.12.26',
                 phases: [
                   {
-                    id: '63d3d79802e5f6e2220b517d',
-                    projectId: '63d3d79802e5f6e2220b5175',
+                    id: '16',
+                    projectId: '8',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -133,7 +133,7 @@ class ProgramBacklogController extends Controller
                     },
                     elements: [
                       {
-                        activityId: `63d3d79802e5f6e2220b5186`,
+                        activityId: `25`,
                         title: 'Install software',
                         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                         priority: 'Highest',
@@ -146,7 +146,7 @@ class ProgramBacklogController extends Controller
                         }
                       },
                       {
-                        activityId: '63d3d79802e5f6e2220b5187',
+                        activityId: '26',
                         title: 'Develop control software',
                         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                         priority: 'Highest',
@@ -159,7 +159,7 @@ class ProgramBacklogController extends Controller
                         },
                       },
                       {
-                        activityId: `63d3d79802e5f6e2220b5188`,
+                        activityId: `27`,
                         title: 'Debugging',
                         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                         priority: 'Highest',
@@ -174,8 +174,8 @@ class ProgramBacklogController extends Controller
                     ]
                   },
                   {
-                    id: '63d3d79802e5f6e2220b517e',
-                    projectId: '63d3d79802e5f6e2220b5175',
+                    id: '17',
+                    projectId: '8',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -183,7 +183,7 @@ class ProgramBacklogController extends Controller
                     },
                     elements: [
                       {
-                        activityId: `63d3d79802e5f6e2220b5189`,
+                        activityId: `28`,
                         title: 'Electricity market AI',
                         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                         priority: 'Highest',
@@ -201,7 +201,7 @@ class ProgramBacklogController extends Controller
                         description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                         priority: 'Highest',
                         gate: 2,
-                        assigned: '63d3d79802e5f6e2220b5190',
+                        assigned: '29',
                         effort: {
                           load: 53,
                           duration: 26,
@@ -211,8 +211,8 @@ class ProgramBacklogController extends Controller
                     ]
                   },
                   {
-                    id: '63d3d79802e5f6e2220b517f',
-                    projectId: '63d3d79802e5f6e2220b5175',
+                    id: '18',
+                    projectId: '8',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -221,8 +221,8 @@ class ProgramBacklogController extends Controller
                     elements: []
                   },
                   {
-                    id: '63d3d79802e5f6e2220b5180',
-                    projectId: '63d3d79802e5f6e2220b5175',
+                    id: '19',
+                    projectId: '8',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -244,8 +244,8 @@ class ProgramBacklogController extends Controller
                     ]
                   },
                   {
-                    id: '63d3d79802e5f6e2220b5181',
-                    projectId: '63d3d79802e5f6e2220b5175',
+                    id: '20',
+                    projectId: '8',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -256,9 +256,9 @@ class ProgramBacklogController extends Controller
                 ],
               },
               {
-                id: '63d3d79802e5f6e2220b5176',
+                id: '9',
                 title: 'Enhanced motricity',
-                parent: '63d3d79802e5f6e2220b5170',
+                parent: '3',
                 type: 'project',
                 priority: 'Highest',
                 budget: '82000',
@@ -273,8 +273,8 @@ class ProgramBacklogController extends Controller
                 value: '84',
                 phases: [
                   {
-                    id: '63d3d79802e5f6e2220b5182',
-                    projectId: '63d3d79802e5f6e2220b5176',
+                    id: '21',
+                    projectId: '9',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -283,8 +283,8 @@ class ProgramBacklogController extends Controller
                     elements: []
                   },
                   {
-                    id: '63d3d79802e5f6e2220b5183',
-                    projectId: '63d3d79802e5f6e2220b5176',
+                    id: '22',
+                    projectId: '9',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -295,9 +295,9 @@ class ProgramBacklogController extends Controller
                 ]
               },
               {
-                id: '63d3d79802e5f6e2220b5177',
+                id: '10',
                 title: 'Enhanced autonomy',
-                parent: '63d3d79802e5f6e2220b5170',
+                parent: '3',
                 type: 'project',
                 priority: 'Highest',
                 budget: '98000',
@@ -312,8 +312,8 @@ class ProgramBacklogController extends Controller
                 value: '31',
                 phases: [
                   {
-                    id: '63d3d79802e5f6e2220b5184',
-                    projectId: '63d3d79802e5f6e2220b5177',
+                    id: '23',
+                    projectId: '10',
                     data: {
                       progress: 0,
                       start_date: '2022.11.04',
@@ -324,9 +324,9 @@ class ProgramBacklogController extends Controller
                 ]
               },
               {
-                id: '63d3d79802e5f6e2220b5178',
+                id: '11',
                 title: 'Dual sourcing for Quadruped',
-                parent: '63d3d79802e5f6e2220b5170',
+                parent: '3',
                 type: 'project',
                 priority: 'Lowest',
                 budget: '80000',
@@ -352,9 +352,9 @@ class ProgramBacklogController extends Controller
     {
         $programControlData = [
             "{
-              id: '63d3d79802e5f6e2220b5175',
+              id: '8',
               title: 'New Format',
-              parent: '63d3d79802e5f6e2220b5170',
+              parent: '3',
               type: 'project',
               priority: 'High',
               budget: '350000',
@@ -393,9 +393,9 @@ class ProgramBacklogController extends Controller
               ]
             }",
             "{
-              id: '63d3d79802e5f6e2220b5176',
+              id: '9',
               title: 'Enhanced motricity',
-              parent: '63d3d79802e5f6e2220b5170',
+              parent: '3',
               type: 'project',
               priority: 'Highest',
               budget: '82000',
@@ -411,7 +411,7 @@ class ProgramBacklogController extends Controller
               assignee: [
                 {
                   id: '63d3d79802e5f6e2220b519d',
-                  parent: '63d3d79802e5f6e2220b5190',
+                  parent: '29',
                   title: 'Robert Garcia',
                   type: 'user',
                   data: [8, 12, 14, 12, 12, 11, 9]
@@ -419,9 +419,9 @@ class ProgramBacklogController extends Controller
               ]
             }",
             "{
-              id: '63d3d79802e5f6e2220b5177',
+              id: '10',
               title: 'Enhanced autonomy',
-              parent: '63d3d79802e5f6e2220b5170',
+              parent: '3',
               type: 'project',
               priority: 'Highest',
               budget: '98000',
@@ -437,14 +437,14 @@ class ProgramBacklogController extends Controller
               assignee: [
                 {
                   id: '63d3d79802e5f6e2220b519f',
-                  parent: '63d3d79802e5f6e2220b5190',
+                  parent: '29',
                   title: 'Piren Lopez',
                   type: 'user',
                   data: [8, 12, 14, 12, 12, 11, 9]
                 },
                 {
                   id: '63d3d79802e5f6e2220b51a0',
-                  parent: '63d3d79802e5f6e2220b5190',
+                  parent: '29',
                   title: 'Aden Schmidt',
                   type: 'user',
                   data: [8, 12, 14, 12, 12, 11, 9]
@@ -452,9 +452,9 @@ class ProgramBacklogController extends Controller
               ]
             }",
             "{
-              id: '63d3d79802e5f6e2220b5178',
+              id: '11',
               title: 'Dual sourcing for Quadruped',
-              parent: '63d3d79802e5f6e2220b5170',
+              parent: '3',
               type: 'project',
               priority: 'Lowest',
               budget: '80000',
@@ -476,9 +476,9 @@ class ProgramBacklogController extends Controller
     {
         $programReportingData = [
             "{
-              id: '63d3d79802e5f6e2220b5170',
+              id: '3',
               title: 'Quadruped robot',
-              parent: '63d3d79802e5f6e2220b516e',
+              parent: '1',
               type: 'program',
               priority: 'Highest',
               budget: '91001',
@@ -494,9 +494,9 @@ class ProgramBacklogController extends Controller
               gate: 3,
               children: [
                 {
-                  id: '63d3d79802e5f6e2220b5175',
+                  id: '8',
                   title: 'New Format',
-                  parent: '63d3d79802e5f6e2220b5170',
+                  parent: '3',
                   type: 'project',
                   priority: 'High',
                   budget: '350000',
@@ -514,9 +514,9 @@ class ProgramBacklogController extends Controller
                   end_date: '2022.12.26',
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5176',
+                  id: '9',
                   title: 'Enhanced motricity',
-                  parent: '63d3d79802e5f6e2220b5170',
+                  parent: '3',
                   type: 'project',
                   priority: 'Highest',
                   budget: '82000',
@@ -531,9 +531,9 @@ class ProgramBacklogController extends Controller
                   value: '84',
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5177',
+                  id: '10',
                   title: 'Enhanced autonomy',
-                  parent: '63d3d79802e5f6e2220b5170',
+                  parent: '3',
                   type: 'project',
                   priority: 'Highest',
                   budget: '98000',
@@ -548,9 +548,9 @@ class ProgramBacklogController extends Controller
                   value: '31',
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5178',
+                  id: '11',
                   title: 'Dual sourcing for Quadruped',
-                  parent: '63d3d79802e5f6e2220b5170',
+                  parent: '3',
                   type: 'project',
                   priority: 'Lowest',
                   budget: '80000',

@@ -94,8 +94,8 @@ class ProductLineController extends Controller
               phases: [
                 {
                   title: 'phase-1',
-                  id: '63d3d79802e5f6e2220b517d',
-                  projectId: '63d3d79802e5f6e2220b5175',
+                  id: '16',
+                  projectId: '8',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -103,7 +103,7 @@ class ProductLineController extends Controller
                   },
                   elements: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5186`,
+                      activityId: `25`,
                       title: 'Install software',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -116,7 +116,7 @@ class ProductLineController extends Controller
                       }
                     },
                     {
-                      activityId: '63d3d79802e5f6e2220b5187',
+                      activityId: '26',
                       title: 'Develop control software',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -129,7 +129,7 @@ class ProductLineController extends Controller
                       },
                     },
                     {
-                      activityId: `63d3d79802e5f6e2220b5188`,
+                      activityId: `27`,
                       title: 'Debugging',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -145,8 +145,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-2',
-                  id: '63d3d79802e5f6e2220b517e',
-                  projectId: '63d3d79802e5f6e2220b5175',
+                  id: '17',
+                  projectId: '8',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -154,7 +154,7 @@ class ProductLineController extends Controller
                   },
                   elements: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5189`,
+                      activityId: `28`,
                       title: 'Electricity market AI',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -172,7 +172,7 @@ class ProductLineController extends Controller
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
                       gate: 2,
-                      assigned: '63d3d79802e5f6e2220b5190',
+                      assigned: '29',
                       effort: {
                         load: 53,
                         duration: 26,
@@ -183,8 +183,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-3',
-                  id: '63d3d79802e5f6e2220b517f',
-                  projectId: '63d3d79802e5f6e2220b5175',
+                  id: '18',
+                  projectId: '8',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -194,8 +194,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-4',
-                  id: '63d3d79802e5f6e2220b5180',
-                  projectId: '63d3d79802e5f6e2220b5175',
+                  id: '19',
+                  projectId: '8',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -218,8 +218,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-5',
-                  id: '63d3d79802e5f6e2220b5181',
-                  projectId: '63d3d79802e5f6e2220b5175',
+                  id: '20',
+                  projectId: '8',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -230,15 +230,15 @@ class ProductLineController extends Controller
               ]
             }",
             "{
-              id: '63d3d79802e5f6e2220b5190',
+              id: '29',
               title: 'Team B',
               parent: '63d3d79802e5f6e2220b519b',
               type: 'team',
               phases: [
                 {
                   title: 'phase-6',
-                  id: '63d3d79802e5f6e2220b5182',
-                  projectId: '63d3d79802e5f6e2220b5176',
+                  id: '21',
+                  projectId: '9',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -248,8 +248,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-7',
-                  id: '63d3d79802e5f6e2220b5183',
-                  projectId: '63d3d79802e5f6e2220b5176',
+                  id: '22',
+                  projectId: '9',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -259,8 +259,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-8',
-                  id: '63d3d79802e5f6e2220b5184',
-                  projectId: '63d3d79802e5f6e2220b5177',
+                  id: '23',
+                  projectId: '10',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -270,8 +270,8 @@ class ProductLineController extends Controller
                 },
                 {
                   title: 'phase-9',
-                  id: '63d3d79802e5f6e2220b5185',
-                  projectId: '63d3d79802e5f6e2220b5179',
+                  id: '24',
+                  projectId: '12',
                   data: {
                     progress: 0,
                     start_date: '2022.11.04',
@@ -290,8 +290,8 @@ class ProductLineController extends Controller
         $projectDemandPhaseData = [
             "{
               title: 'phase-1',
-              id: '63d3d79802e5f6e2220b517d',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '16',
+              projectId: '8',
               teams: [
                 {
                   title: 'Team B',
@@ -302,7 +302,7 @@ class ProductLineController extends Controller
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
                       gate: 2,
-                      assigned: '63d3d79802e5f6e2220b5190',
+                      assigned: '29',
                       effort: {
                         load: 53,
                         duration: 26,
@@ -332,7 +332,7 @@ class ProductLineController extends Controller
                   title: 'Team D',
                   activities: [
                     {
-                      activityId: '63d3d79802e5f6e2220b5187',
+                      activityId: '26',
                       title: 'Develop control software',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -345,7 +345,7 @@ class ProductLineController extends Controller
                       },
                     },
                     {
-                      activityId: `63d3d79802e5f6e2220b5188`,
+                      activityId: `27`,
                       title: 'Debugging',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -358,7 +358,7 @@ class ProductLineController extends Controller
                       },
                     },
                     {
-                      activityId: `63d3d79802e5f6e2220b5189`,
+                      activityId: `28`,
                       title: 'Electricity market AI',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -376,7 +376,7 @@ class ProductLineController extends Controller
                   title: 'Team E',
                   activities: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5188`,
+                      activityId: `27`,
                       title: 'Debugging',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -389,7 +389,7 @@ class ProductLineController extends Controller
                       },
                     },
                     {
-                      activityId: `63d3d79802e5f6e2220b5189`,
+                      activityId: `28`,
                       title: 'Electricity market AI',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -411,14 +411,14 @@ class ProductLineController extends Controller
             }",
             "{
               title: 'phase-2',
-              id: '63d3d79802e5f6e2220b517e',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '17',
+              projectId: '8',
               teams: [
                 {
                   title: 'Team B',
                   activities: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5186`,
+                      activityId: `25`,
                       title: 'Install software',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -436,7 +436,7 @@ class ProductLineController extends Controller
                   title: 'Team C',
                   activities: [
                     {
-                      activityId: '63d3d79802e5f6e2220b5187',
+                      activityId: '26',
                       title: 'Develop control software',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -454,7 +454,7 @@ class ProductLineController extends Controller
                   title: 'Team D',
                   activities: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5189`,
+                      activityId: `28`,
                       title: 'Electricity market AI',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -489,7 +489,7 @@ class ProductLineController extends Controller
                   title: 'Team F',
                   activities: [
                     {
-                      activityId: `63d3d79802e5f6e2220b5189`,
+                      activityId: `28`,
                       title: 'Electricity market AI',
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
@@ -507,7 +507,7 @@ class ProductLineController extends Controller
                       description: 'Set up foundations with dimmentiosn 30cm by 50cm.',
                       priority: 'Highest',
                       gate: 2,
-                      assigned: '63d3d79802e5f6e2220b5190',
+                      assigned: '29',
                       effort: {
                         load: 53,
                         duration: 26,
@@ -526,12 +526,12 @@ class ProductLineController extends Controller
     {
         $projectReportingData = [
             "{
-              id: '63d3d79802e5f6e2220b516e',
+              id: '1',
               title: 'Consumer Robots',
               type: 'portfolio',
               children: [
                 {
-                  id: '63d3d79802e5f6e2220b5170',
+                  id: '3',
                   title: 'Quadruped robot',
                   type: 'program',
                   start_date: '2023.1.18',
@@ -545,7 +545,7 @@ class ProductLineController extends Controller
                   progress: 60,
                   children: [
                     {
-                      id: '63d3d79802e5f6e2220b5175',
+                      id: '8',
                       title: 'New Format',
                       type: 'project',
                       progress: 0,
@@ -555,7 +555,7 @@ class ProductLineController extends Controller
                       end_date1: '2023.2.10',
                     },
                     {
-                      id: '63d3d79802e5f6e2220b5176',
+                      id: '9',
                       title: 'Enhanced motricity',
                       type: 'project',
                       progress: 0,
@@ -569,7 +569,7 @@ class ProductLineController extends Controller
                       end_date3: '2023.2.10',
                     },
                     {
-                      id: '63d3d79802e5f6e2220b5177',
+                      id: '10',
                       title: 'Enhanced autonomy',
                       type: 'project',
                       progress: 100,
@@ -583,7 +583,7 @@ class ProductLineController extends Controller
                       end_date3: '2023.2.10',
                     },
                     {
-                      id: '63d3d79802e5f6e2220b5178',
+                      id: '11',
                       title: 'Dual sourcing for Quadruped',
                       type: 'project',
                       progress: 100,
@@ -599,7 +599,7 @@ class ProductLineController extends Controller
                   ]
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5171',
+                  id: '4',
                   title: 'Micro robot observation NBC',
                   type: 'program',
                   start_date: '2023.1.18',
@@ -613,7 +613,7 @@ class ProductLineController extends Controller
                   progress: 60,
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5172',
+                  id: '5',
                   title: 'Handling robot',
                   type: 'program',
                   start_date: '2023.1.18',
@@ -627,7 +627,7 @@ class ProductLineController extends Controller
                   progress: 60,
                 },
                 {
-                  id: '63d3d79802e5f6e2220b5173',
+                  id: '6',
                   title: 'Power & programming station',
                   type: 'program',
                   start_date: '2023.1.18',
@@ -652,8 +652,8 @@ class ProductLineController extends Controller
         $projectControlData = [
             "{
               title: 'phase-1',
-              id: '63d3d79802e5f6e2220b517d',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '16',
+              projectId: '8',
               data: ['24/24', '24/24', '24/24', '24/24', '24/24', '24/24', '28/24'],
               assignee: [
                 {
@@ -681,8 +681,8 @@ class ProductLineController extends Controller
             }",
             "{
               title: 'phase-2',
-              id: '63d3d79802e5f6e2220b517e',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '17',
+              projectId: '8',
               data: ['24/24', '24/24', '24/24', '24/24', '24/24', '24/24', '28/24'],
               assignee: [
                 {
@@ -710,8 +710,8 @@ class ProductLineController extends Controller
             }",
             "{
               title: 'phase-3',
-              id: '63d3d79802e5f6e2220b517f',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '18',
+              projectId: '8',
               data: ['24/24', '24/24', '24/24', '24/24', '24/24', '24/24', '28/24'],
               assignee: [
                 {
@@ -739,8 +739,8 @@ class ProductLineController extends Controller
             }",
             "{
               title: 'phase-4',
-              id: '63d3d79802e5f6e2220b5180',
-              projectId: '63d3d79802e5f6e2220b5175',
+              id: '19',
+              projectId: '8',
               data: {
                 progress: 0,
                 start_date: '2022.11.04',

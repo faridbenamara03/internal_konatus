@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ressources;
 use Illuminate\Http\Request;
 use DB;
-class RessourcesController extends Controller
+class RessourcesController_Org extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -505,7 +505,7 @@ class RessourcesController extends Controller
                 \"type\": \"organization\",
                 \"children\": [
                   {
-                    \"id\": \"63d3d79802e5f6e2220b519b\",
+                    \"id\": \"paris-unit\",
                     \"title\": \"Paris\",
                     \"type\": \"unit\",
                     \"route\": {
@@ -516,9 +516,9 @@ class RessourcesController extends Controller
                     },
                     \"children\": [
                       {
-                        \"id\": \"63d3d79802e5f6e2220b518f\",
-                        \"title\": \"Team A\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-a-team\",
+                        \"title\": \"Sensor & Effector\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -530,35 +530,17 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b5197\",
-                            \"parent\": \"63d3d79802e5f6e2220b518f\",
-                            \"title\": \"Travis Roach\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b5198\",
-                            \"parent\": \"63d3d79802e5f6e2220b518f\",
-                            \"title\": \"Ciaran Bradford\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b5199\",
-                            \"parent\": \"63d3d79802e5f6e2220b518f\",
-                            \"title\": \"George Logan\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b519a\",
-                            \"parent\": \"63d3d79802e5f6e2220b518f\",
-                            \"title\": \"Angelica Russo\",
+                            \"id\": \"teama-roach-user\",
+                            \"parent\": \"team-a-team\",
+                            \"title\": \"Team A\",
                             \"type\": \"user\"
                           }
                         ]
                       },
                       {
-                        \"id\": \"29\",
-                        \"title\": \"Team B\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-b-team\",
+                        \"title\": \"HW & meca\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -570,35 +552,17 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b519d\",
-                            \"parent\": \"29\",
-                            \"title\": \"Robert Garcia\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b519e\",
-                            \"parent\": \"29\",
-                            \"title\": \"Hon Gonzalez\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b519f\",
-                            \"parent\": \"29\",
-                            \"title\": \"Piren Lopez\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a0\",
-                            \"parent\": \"29\",
-                            \"title\": \"Aden Schmidt\",
+                            \"id\": \"teamb-roach-user\",
+                            \"parent\": \"team-a-team\",
+                            \"title\": \"Team B\",
                             \"type\": \"user\"
                           }
                         ]
                       },
                       {
-                        \"id\": \"30\",
-                        \"title\": \"Team C\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-c-team\",
+                        \"title\": \"general SW\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -610,35 +574,17 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b51a1\",
-                            \"parent\": \"30\",
-                            \"title\": \"Roman Weber\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a2\",
-                            \"parent\": \"30\",
-                            \"title\": \"Thomas Miller\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a3\",
-                            \"parent\": \"30\",
-                            \"title\": \"Tim Ruiz\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a4\",
-                            \"parent\": \"30\",
-                            \"title\": \"Jake Williams\",
+                            \"id\": \"teamc-roach-user\",
+                            \"parent\": \"team-c-team\",
+                            \"title\": \"Team C\",
                             \"type\": \"user\"
                           }
                         ]
                       },
                       {
-                        \"id\": \"63d3d79802e5f6e2220b5192\",
-                        \"title\": \"Team D\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-d-team\",
+                        \"title\": \"real time SW\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -650,35 +596,17 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b51a5\",
-                            \"parent\": \"63d3d79802e5f6e2220b5192\",
-                            \"title\": \"Feed Silva\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a6\",
-                            \"parent\": \"63d3d79802e5f6e2220b5192\",
-                            \"title\": \"Nuse Hansen\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a7\",
-                            \"parent\": \"63d3d79802e5f6e2220b5192\",
-                            \"title\": \"Ilias Costa\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51a8\",
-                            \"parent\": \"63d3d79802e5f6e2220b5192\",
-                            \"title\": \"Albert Klein\",
+                            \"id\": \"teamd-roach-user\",
+                            \"parent\": \"team-d-team\",
+                            \"title\": \"Team D\",
                             \"type\": \"user\"
                           }
                         ]
                       },
                       {
-                        \"id\": \"63d3d79802e5f6e2220b5193\",
-                        \"title\": \"Team E\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-e-team\",
+                        \"title\": \"FPGA & ASIC\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -690,35 +618,17 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b51a9\",
-                            \"parent\": \"63d3d79802e5f6e2220b5193\",
-                            \"title\": \"Lone Wolf\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51aa\",
-                            \"parent\": \"63d3d79802e5f6e2220b5193\",
-                            \"title\": \"Telora Varga\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51ab\",
-                            \"parent\": \"63d3d79802e5f6e2220b5193\",
-                            \"title\": \"Poke Green\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51ac\",
-                            \"parent\": \"63d3d79802e5f6e2220b5193\",
-                            \"title\": \"Assen Oliveira\",
+                            \"id\": \"teame-roach-user\",
+                            \"parent\": \"team-e-team\",
+                            \"title\": \"Team E\",
                             \"type\": \"user\"
                           }
                         ]
                       },
                       {
-                        \"id\": \"63d3d79802e5f6e2220b5194\",
-                        \"title\": \"Team FP\",
-                        \"parent\": \"63d3d79802e5f6e2220b519b\",
+                        \"id\": \"team-fp-team\",
+                        \"title\": \"test\",
+                        \"parent\": \"paris-unit\",
                         \"type\": \"team\",
                         \"color\": \"#D68232\",
                         \"route\": {
@@ -730,27 +640,9 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b51ad\",
-                            \"parent\": \"63d3d79802e5f6e2220b5194\",
-                            \"title\": \"Tommie Maier\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51ae\",
-                            \"parent\": \"63d3d79802e5f6e2220b5194\",
-                            \"title\": \"Unifer Keller\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51af\",
-                            \"parent\": \"63d3d79802e5f6e2220b5194\",
-                            \"title\": \"Erik Walter\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51b0\",
-                            \"parent\": \"63d3d79802e5f6e2220b5194\",
-                            \"title\": \"Davin Cruz\",
+                            \"id\": \"teamfp-roach-user\",
+                            \"parent\": \"team-fp-team\",
+                            \"title\": \"Team FP\",
                             \"type\": \"user\"
                           }
                         ]
@@ -758,7 +650,7 @@ class RessourcesController extends Controller
                     ]
                   },
                   {
-                    \"id\": \"63d3d79802e5f6e2220b519c\",
+                    \"id\": \"sofia-unit\",
                     \"title\": \"Sofia\",
                     \"type\": \"unit\",
                     \"route\": {
@@ -769,9 +661,9 @@ class RessourcesController extends Controller
                     },
                     \"children\": [
                       {
-                        \"id\": \"63d3d79802e5f6e2220b5195\",
-                        \"title\": \"Team FS\",
-                        \"parent\": \"63d3d79802e5f6e2220b519c\",
+                        \"id\": \"team-fs-team\",
+                        \"title\": \"test\",
+                        \"parent\": \"sofia-unit\",
                         \"type\": \"team\",
                         \"route\": {
                             \"name\": \"team-view\",
@@ -782,27 +674,9 @@ class RessourcesController extends Controller
                         },
                         \"children\": [
                           {
-                            \"id\": \"63d3d79802e5f6e2220b51b1\",
-                            \"title\": \"Jenny Phillips\",
-                            \"parent\": \"63d3d79802e5f6e2220b5195\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51b2\",
-                            \"title\": \"Solon Collins\",
-                            \"parent\": \"63d3d79802e5f6e2220b5195\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51b3\",
-                            \"title\": \"Welter Christensen\",
-                            \"parent\": \"63d3d79802e5f6e2220b5195\",
-                            \"type\": \"user\"
-                          },
-                          {
-                            \"id\": \"63d3d79802e5f6e2220b51b4\",
-                            \"title\": \"Eden Hahn\",
-                            \"parent\": \"63d3d79802e5f6e2220b5195\",
+                            \"id\": \"teamfs-wolf-user\",
+                            \"title\": \"Team FS\",
+                            \"parent\": \"team-fs-team\",
                             \"type\": \"user\"
                           }
                         ]

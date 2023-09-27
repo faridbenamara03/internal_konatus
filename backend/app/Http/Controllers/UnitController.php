@@ -88,7 +88,7 @@ class UnitController extends Controller
 
     public function demand(Unit $unit)
     {
-        $unitDemandData = [
+        $unitDemandData =
             "{
                 \"id\": \"consumer-robots-portfolio\",
                 \"title\": \"Consumer Robots\",
@@ -161,23 +161,25 @@ class UnitController extends Controller
                     \"data\": [\"15\", \"31\", \"81\", \"104\", \"0\", \"2\", \"13\", \"41\"]
                 }
               ]
-            }"];
+            }";
         return $unitDemandData;
     }
 
     public function reporting(Unit $unit)
     {
 
-        $unitReportingData = [
+        $unitReportingData =
             "{
-                \"id\": \"63d3d79802e5f6e2220b516e\",
+                \"id\": \"1\",
                 \"title\": \"Consumer Robots\",
                 \"type\": \"portfolio\",
+                \"assigned\": [\"Team A\", \"Team B\", \"Team C\", \"Team D\"],
                 \"children\": [
                 {
-                    \"id\": \"63d3d79802e5f6e2220b5170\",
+                    \"id\": \"3\",
                     \"title\": \"Quadruped robot\",
                     \"type\": \"program\",
+                    \"assigned\": [\"Team A\", \"Team B\", \"Team C\"],
                     \"start_date\": \"2023.1.18\",
                     \"end_date\": \"2023.2.12\",
                     \"start_date1\": \"2023.1.18\",
@@ -189,18 +191,46 @@ class UnitController extends Controller
                     \"progress\": 60,
                     \"children\": [
                     {
-                        \"id\": \"63d3d79802e5f6e2220b5175\",
+                        \"id\": \"8\",
                         \"title\": \"New Format\",
+                        \"assigned\": [\"Team A\", \"Team B\"],
                         \"type\": \"project\",
                         \"progress\": 0,
                         \"start_date\": \"2023.1.20\",
                         \"end_date\": \"2023.2.10\",
                         \"start_date1\": \"2023.1.20\",
-                        \"end_date1\": \"2023.2.10\"
+                        \"end_date1\": \"2023.2.10\",
+                        \"phases\": [
+                            {
+                                \"id\": \"phase-1\",
+                                \"projectId\": \"8\",
+                                \"assigned\": [\"Team A\"],
+                                \"progress\": 0
+                            },
+                            {
+                                \"id\": \"phase-2\",
+                                \"projectId\": \"8\",
+                                \"assigned\": [\"Team A\"],
+                                \"progress\": 0
+                            },
+                            {
+                                \"id\": \"phase-3\",
+                                \"projectId\": \"8\",
+                                \"assigned\": [\"Team B\"],
+                                \"progress\": 0
+                            },
+                            {
+                                \"id\": \"phase-4\",
+                                \"assigned\": [\"Team B\"],
+                                \"projectId\": \"8\",
+                                \"progress\": 0
+                            }
+                        ]
                     },
                     {
-                        \"id\": \"63d3d79802e5f6e2220b5176\",
+                        \"id\": \"9\",
                         \"title\": \"Enhanced motricity\",
+                        \"assigned\": [\"Team A\", \"Team C\"],
                         \"type\": \"project\",
                         \"progress\": 0,
                         \"start_date\": \"2023.1.20\",
@@ -210,11 +240,26 @@ class UnitController extends Controller
                         \"start_date2\": \"2023.1.20\",
                         \"end_date2\": \"2023.2.10\",
                         \"start_date3\": \"2023.1.20\",
-                        \"end_date3\": \"2023.2.10\"
+                        \"end_date3\": \"2023.2.10\",
+                        \"phases\": [
+                            {
+                                \"id\": \"phase-6\",
+                                \"projectId\": \"9\",
+                                \"assigned\": [\"Team A\"],
+                                \"progress\": 0
+                            },
+                            {
+                                \"id\": \"phase-7\",
+                                \"projectId\": \"9\",
+                                \"assigned\": [\"Team C\"],
+                                \"progress\": 0
+                            }
+                        ]
                     },
                     {
-                        \"id\": \"63d3d79802e5f6e2220b5177\",
+                        \"id\": \"10\",
                         \"title\": \"Enhanced autonomy\",
+                        \"assigned\": [\"Team B\"],
                         \"type\": \"project\",
                         \"progress\": 100,
                         \"start_date\": \"2023.1.20\",
@@ -227,10 +272,11 @@ class UnitController extends Controller
                         \"end_date3\": \"2023.2.10\"
                     },
                     {
-                        \"id\": \"63d3d79802e5f6e2220b5178\",
+                        \"id\": \"11\",
                         \"title\": \"Dual sourcing for Quadruped\",
                         \"type\": \"project\",
                         \"progress\": 100,
+                        \"assigned\": [\"Team C\"],
                         \"start_date\": \"2023.1.20\",
                         \"end_date\": \"2023.2.10\",
                         \"start_date1\": \"2023.1.20\",
@@ -243,8 +289,9 @@ class UnitController extends Controller
                   ]
                 },
                 {
-                    \"id\": \"63d3d79802e5f6e2220b5171\",
+                    \"id\": \"4\",
                     \"title\": \"Micro robot observation NBC\",
+                    \"assigned\": [\"Team B\", \"Team C\", \"Team D\"],
                     \"type\": \"program\",
                     \"start_date\": \"2023.1.18\",
                     \"end_date\": \"2023.2.12\",
@@ -257,9 +304,10 @@ class UnitController extends Controller
                     \"progress\": 60
                 },
                 {
-                    \"id\": \"63d3d79802e5f6e2220b5172\",
+                    \"id\": \"5\",
                     \"title\": \"Handling robot\",
                     \"type\": \"program\",
+                    \"assigned\": [\"Team B\", \"Team D\"],
                     \"start_date\": \"2023.1.18\",
                     \"end_date\": \"2023.2.12\",
                     \"start_date1\": \"2023.1.18\",
@@ -271,9 +319,10 @@ class UnitController extends Controller
                     \"progress\": 60
                 },
                 {
-                    \"id\": \"63d3d79802e5f6e2220b5173\",
+                    \"id\": \"6\",
                     \"title\": \"Power & programming station\",
                     \"type\": \"program\",
+                    \"assigned\": [\"Team C\", \"Team D\"],
                     \"start_date\": \"2023.1.18\",
                     \"end_date\": \"2023.2.12\",
                     \"start_date1\": \"2023.1.18\",
@@ -285,8 +334,7 @@ class UnitController extends Controller
                     \"progress\": 60
                 }
               ]
-            }"
-        ];
+            }";
         return $unitReportingData;
     }
 
@@ -296,10 +344,10 @@ class UnitController extends Controller
             "{
                 \"teamTitle\": \"Team A\",
                 \"teamCapacity\": [\"100\", \"100\", \"100\", \"100\", \"0\", \"0\", \"75\"],
-                \"series: [
+                \"series\": [
                 {
-                    \"name: \"Travis Roach\",
-                    \"data: [
+                    \"name\": \"Travis Roach\",
+                    \"data\": [
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },
@@ -310,20 +358,20 @@ class UnitController extends Controller
                     ]
                 },
                 {
-                  name: \"Ciaran Bradford\",
-                  data: [
-                    { \"bg\": \"#66C85660\", \"data\": \"8\" },
-                    { \"bg\": \"#66C85660\", \"data\": \"8\" },
-                    { \"bg\": \"#66C85660\", \"data\": \"8\" },
-                    { \"bg\": \"#66C85660\", \"data\": \"8\" },
-                    { \"data\": \"\" },
-                    { \"data\": \"\" },
-                    { \"bg\": \"#66C85660\", \"data\": \"8\" }
-                  ]
+                    \"name\": \"Ciaran Bradford\",
+                    \"data\": [
+                        { \"bg\": \"#66C85660\", \"data\": \"8\" },
+                        { \"bg\": \"#66C85660\", \"data\": \"8\" },
+                        { \"bg\": \"#66C85660\", \"data\": \"8\" },
+                        { \"bg\": \"#66C85660\", \"data\": \"8\" },
+                        { \"data\": \"\" },
+                        { \"data\": \"\" },
+                        { \"bg\": \"#66C85660\", \"data\": \"8\" }
+                    ]
                 },
                 {
-                    \"name: \"George Logan\",
-                    \"data: [
+                    \"name\": \"George Logan\",
+                    \"data\": [
                     { \"bg\": \"#66C85660\", \"data\": \"8\" },
                     { \"bg\": \"#66C85660\", \"data\": \"8\" },
                     { \"bg\": \"#66C85660\", \"data\": \"8\" },
@@ -346,8 +394,8 @@ class UnitController extends Controller
                   ]
                 }
               ]
-            },
-            {
+            }",
+            "{
                 \"teamTitle\": \"Team B\",
                 \"teamCapacity\": [\"100\", \"100\", \"100\", \"100\", \"0\", \"0\", \"75\"],
                 \"series\": [
@@ -400,8 +448,8 @@ class UnitController extends Controller
                     ]
                 }
               ]
-            },
-            {
+            }",
+            "{
                 \"teamTitle\": \"Team C\",
                 \"teamCapacity\": [\"100\", \"100\", \"100\", \"100\", \"0\", \"0\", \"75\"],
                 \"series\": [
@@ -454,8 +502,8 @@ class UnitController extends Controller
                     ]
                 }
               ]
-            },
-            {
+            }",
+            "{
                 \"teamTitle\": \"Team D\",
                 \"teamCapacity\": [\"100\", \"100\", \"100\", \"100\", \"0\", \"0\", \"75\"],
                 \"series\": [
@@ -484,8 +532,8 @@ class UnitController extends Controller
                     ]
                 },
                 {
-                    \"name: \"Ilias Costa\",
-                    \"data: [
+                    \"name\": \"Ilias Costa\",
+                    \"data\": [
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },
                         { \"bg\": \"#66C85660\", \"data\": \"8\" },

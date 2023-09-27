@@ -230,44 +230,44 @@ class TeamController extends Controller
     public function reporting(Team $team)
     {
         $teamReportingData = "{
-            \"id\": \"63d3d79802e5f6e2220b516e\",
+            \"id\": \"1\",
             \"title\": \"Consumer Robots\",
             \"type\": \"portfolio\",
             \"children\": [
               {
-                \"id\": \"63d3d79802e5f6e2220b5170\",
+                \"id\": \"3\",
                 \"title\": \"Quadruped robot\",
-                \"parent\": \"consumer-robots-portfolio\",
+                \"parent\": \"1\",
                 \"type\": \"program\",
                 \"children\": [
                   {
-                    \"id\": \"63d3d79802e5f6e2220b5175\",
+                    \"id\": \"8\",
                     \"title\": \"New Format\",
-                    \"parent\": \"63d3d79802e5f6e2220b5170\",
+                    \"parent\": \"3\",
                     \"type\": \"project\",
                     \"progress\": 0,
                     \"start_date\": \"2023.1.20\",
                     \"end_date\": \"2023.3.12\"
                   },
                   {
-                    \"id\": \"63d3d79802e5f6e2220b5176\",
+                    \"id\": \"9\",
                     \"title\": \"Enhanced motricity\",
-                    \"parent\": \"63d3d79802e5f6e2220b5170\",
+                    \"parent\": \"3\",
                     \"type\": \"project\"
                   },
                   {
-                    \"id\": \"63d3d79802e5f6e2220b5177\",
+                    \"id\": \"10\",
                     \"title\": \"Enhanced autonomy\",
-                    \"parent\": \"63d3d79802e5f6e2220b5170\",
+                    \"parent\": \"3\",
                     \"type\": \"project\",
                     \"progress\": 0,
                     \"start_date\": \"2023.1.20\",
                     \"end_date\": \"2023.3.12\"
                   },
                   {
-                    \"id\": \"63d3d79802e5f6e2220b5178\",
+                    \"id\": \"11\",
                     \"title\": \"Dual sourcing for Quadruped\",
-                    \"parent\": \"63d3d79802e5f6e2220b5170\",
+                    \"parent\": \"3\",
                     \"type\": \"project\",
                     \"progress\": 0,
                     \"start_date\": \"2023.1.20\",
@@ -276,27 +276,27 @@ class TeamController extends Controller
                 ]
               },
               {
-                \"id\": \"63d3d79802e5f6e2220b5171\",
+                \"id\": \"4\",
                 \"title\": \"Micro robot observation NBC\",
-                \"parent\": \"consumer-robots-portfolio\",
+                \"parent\": \"1\",
                 \"type\": \"program\",
                 \"progress\": 0,
                 \"start_date\": \"2023.1.20\",
                 \"end_date\": \"2023.3.12\"
               },
               {
-                \"id\": \"63d3d79802e5f6e2220b5172\",
+                \"id\": \"5\",
                 \"title\": \"Handling robot\",
-                \"parent\": \"consumer-robots-portfolio\",
+                \"parent\": \"1\",
                 \"type\": \"program\",
                 \"progress\": 0,
                 \"start_date\": \"2023.1.20\",
                 \"end_date\": \"2023.3.12\"
               },
               {
-                \"id\": \"63d3d79802e5f6e2220b5173\",
+                \"id\": \"6\",
                 \"title\": \"Power & programming station\",
-                \"parent\": \"consumer-robots-portfolio\",
+                \"parent\": \"1\",
                 \"type\": \"program\"
               }
             ]

@@ -35,16 +35,22 @@ class PortfolioDataController extends Controller
                     while($pjIndex < count($project)){
                         $projectArray = (array) $project[$pjIndex];
                         $projectArray['phases'] = [];
-                        // $projectArray['startDates'] = [];
-                        // $projectArray['endDates'] = [];
-                        // $projectArray['startDate'] = "";
-                        // $projectArray['endDate'] = "";
+                        $projectArray['startDates'] = [];
+                        $projectArray['endDates'] = [];
+                        $projectArray['startDate'] = "";
+                        $projectArray['endDate'] = "";
                         array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'], $projectArray);
                         $phases = DB::connection("pgsql")->select("select * from phase_data where projectid = ?", [$projectArray['id']]);
                         $phIndex = 0;
                         while($phIndex < count($phases)){
                             $phaseArray = (array) $phases[$phIndex];
                             $phaseArray['elements'] = [];
+                            $phaseArray['FTs'] = [];
+                            $phaseArray['DTs'] = [];
+                            $phaseArray['LDs'] = [];
+                            $phaseArray['fte'] = "0";
+                            $phaseArray['duration'] = "0";
+                            $phaseArray['load'] = "0";
                             array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'][$pjIndex]['phases'], $phaseArray);
                             array_push($reportingData[$ptIndex]['children'][$pgIndex]['startDates'], $phaseArray['start_date']);
                             array_push($reportingData[$ptIndex]['children'][$pgIndex]['endDates'], $phaseArray['end_date']);
@@ -55,6 +61,9 @@ class PortfolioDataController extends Controller
                             while($acIndex < count($activities)){
                                 $activityArray = (array) $activities[$acIndex];
                                 array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['elements'], $activityArray);
+                                array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['FTs'], $activityArray['fte']);
+                                array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['LDs'], $activityArray['load']);
+                                array_push($reportingData[$ptIndex]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['DTs'], $activityArray['duration']);
                                 $acIndex++;
                             }
                             $phIndex++;
@@ -85,6 +94,19 @@ class PortfolioDataController extends Controller
                         $reportingData[0]['children'][$pgIndex]['children'][$pjIndex]['startDate'] = $startDate;
                         $reportingData[0]['children'][$pgIndex]['children'][$pjIndex]['endDate'] =  $endDate;
                     }
+                    $phases = $project['phases'];
+                    $phIndex = 0;
+                    while($phIndex < count($phases)){
+                        $phase = $phases[$phIndex];
+                        $FTs = count($phase['FTs']) > 0 ? array_sum($phase['FTs']) / count($phase['FTs']) : 0;
+                        $LDs = count($phase['LDs']) > 0 ? array_sum($phase['LDs']) / count($phase['LDs']) : 0;
+                        $DTs = count($phase['DTs']) > 0 ? array_sum($phase['DTs']) / count($phase['DTs']) : 0;
+                        $reportingData[0]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['fte'] = $FTs;
+                        $reportingData[0]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['duration'] = $DTs;
+                        $reportingData[0]['children'][$pgIndex]['children'][$pjIndex]['phases'][$phIndex]['load'] = $LDs;
+                        $phIndex++;
+
+                    }
                     $pjIndex++;
                 }
                 $pgIndex++;
@@ -94,7 +116,6 @@ class PortfolioDataController extends Controller
             echo $e->getMessage();
             return $e;
         }
-
         return $result;
     }
 

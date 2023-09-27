@@ -17,9 +17,9 @@ return [
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['POST', 'GET'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:5000', 'https://konatus.quikfox-lab.com'],
 
     'allowed_origins_patterns' => [],
 

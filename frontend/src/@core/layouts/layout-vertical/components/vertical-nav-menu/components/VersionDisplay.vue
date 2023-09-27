@@ -1,7 +1,7 @@
 <template>
   <div class="user-nav-group">
     <div class="ver">
-      v 0.9.8
+      v 0.9.10
     </div>
   </div>
 </template>

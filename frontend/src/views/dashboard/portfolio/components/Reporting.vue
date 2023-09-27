@@ -10,11 +10,11 @@
           style="margin-top:50px;"
         >
           <p class="m-0 text-uppercase">
-            {{ data.title }}
+            {{ itemsForDemand[0].title }}
           </p>
         </div>
         <div
-          v-for="(item1, index1) in data.children"
+          v-for="(item1, index1) in itemsForDemand[0].children"
           :key="index1"
         >
           <div
@@ -117,7 +117,7 @@
         </div>
 
         <div
-          v-for="(item1, index1) in data.children"
+          v-for="(item1, index1) in itemsForDemand[0].children"
           :key="index1"
         >
           <div
@@ -130,25 +130,25 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa10 : paddingV10[index1 - 1][0]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="0"
-                  :width1="index1 === 0 ? da10 : 455"
-                  :width2="index1 === 0 ? 364 - paddingDa10 : 364 - paddingV10[index1 - 1][0]"
+                  :width1="getValue(item1, 0, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa20 : paddingV10[index1 - 1][1]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="1"
-                  :width1="index1 === 0 ? da20 : 536"
-                  :width2="index1 === 0 ? 364 - paddingDa20 : 364 - paddingV10[index1 - 1][1]"
+                  :width1="getValue(item1, 1, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa30 : paddingV10[index1 - 1][2]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="2"
-                  :width1="index1 === 0 ? da30 : 495"
-                  :width2="index1 === 0 ? 364 - paddingDa30 : 364 - paddingV10[index1 - 1][2]"
+                  :width1="getValue(item1, 1, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
             </b-card>
@@ -165,31 +165,25 @@
                 class="d-flex flex-column justify-content-around"
                 style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
               >
-                <div :style="`padding-left:${paddingV0[index2][0]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
                     :type="0"
-                    :width1="dta0[index2][0]"
-                    :width2="dta0[index2][1]"
-                    :width3="dta0[index2][2]"
-                    :width4="363 - paddingV0[index2][0]"
+                    :widths="getValue(item2, 0, true)"
+                    :width4="363 - getStartPadding(item2, 0, true)"
                   />
                 </div>
-                <div :style="`padding-left:${paddingV0[index2][1]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
                     :type="1"
-                    :width1="dta0[index2][3]"
-                    :width2="dta0[index2][4]"
-                    :width3="dta0[index2][5]"
-                    :width4="363 - paddingV0[index2][1]"
+                    :widths="getValue(item2, 2, true)"
+                    :width4="363 - getStartPadding(item2, 2, true)"
                   />
                 </div>
-                <div :style="`padding-left:${paddingV0[index2][2]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
                     :type="2"
-                    :width1="dta0[index2][6]"
-                    :width2="dta0[index2][7]"
-                    :width3="dta0[index2][8]"
-                    :width4="363 - paddingV0[index2][2]"
+                    :widths="getValue(item2, 2, true)"
+                    :width4="363 - getStartPadding(item2, 2, true)"
                   />
                 </div>
               </b-card>
@@ -206,25 +200,25 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa1 : paddingV1[index1 - 1][0]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="0"
-                  :width1="da1"
-                  :width2="index1 === 0 ? 364 - paddingDa1 : 364 - paddingV1[index1 - 1][0]"
+                  :width1="getValue(item1, 0, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa2 : paddingV1[index1 - 1][1]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="1"
-                  :width1="da2"
-                  :width2="index1 === 0 ? 364 - paddingDa2 : 364 - paddingV1[index1 - 1][1]"
+                  :width1="getValue(item1, 1, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${index1 === 0 ? paddingDa3 : paddingV1[index1 - 1][2]}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
                   :type="2"
-                  :width1="da3"
-                  :width2="index1 === 0 ? 364 - paddingDa3 : 364 - paddingV1[index1 - 1][2]"
+                  :width1="getValue(item1, 2, false)"
+                  :width2="364 - getStartPadding(item1)"
                 />
               </div>
             </b-card>
@@ -241,31 +235,25 @@
                 class="d-flex flex-column justify-content-around"
                 style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
               >
-                <div :style="`padding-left:${paddingV[index2][0]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
                     :type="0"
-                    :width1="dta[index2][0]"
-                    :width2="dta[index2][1]"
-                    :width3="dta[index2][2]"
-                    :width4="363 - paddingV[index2][0]"
+                    :widths="getValue(item2, 0, true)"
+                    :width4="363 - getStartPadding(item2, 0, true)"
                   />
                 </div>
-                <div :style="`padding-left:${paddingV[index2][1]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
                   <ProjectProgressBar
                     :type="1"
-                    :width1="dta[index2][3]"
-                    :width2="dta[index2][4]"
-                    :width3="dta[index2][5]"
-                    :width4="363 - paddingV[index2][1]"
+                    :widths="getValue(item2, 1, true)"
+                    :width4="363 - getStartPadding(item2, 1, true)"
                   />
                 </div>
-                <div :style="`padding-left:${paddingV[index2][2]}px`">
+                <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
                     :type="2"
-                    :width1="dta[index2][6]"
-                    :width2="dta[index2][7]"
-                    :width3="dta[index2][8]"
-                    :width4="363 - paddingV[index2][2]"
+                    :widths="getValue(item2, 2, true)"
+                    :width4="363 - getStartPadding(item2, 2, true)"
                   />
                 </div>
               </b-card>
@@ -319,10 +307,11 @@ export default {
   props: {
     data: {
       type: Object,
-      default: () => { },
+      default: () => { }
     },
     reportingState: {
-      type: String
+      type: String,
+      default: () => ""
     },
     fields: {
       type: Array,
@@ -453,8 +442,9 @@ export default {
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   mounted() {
-    const startDate = moment(moment()).subtract(15, 'days')
-    const endDate = moment(moment()).add(1, 'M')
+    console.log("ReportingData:", this.itemsForDemand)
+    const startDate = moment(moment()).subtract(15, 'days').startOf('day')
+    const endDate = moment(moment()).add(1, 'M').startOf('day')
     this.reportingDates = [startDate.clone()]
 
     while (startDate.add(1, 'days').diff(endDate) < 0) {
@@ -462,6 +452,79 @@ export default {
     }
   },
   methods: {
+    getValue(item, type, isChild) {
+      let result = 0
+      if (isChild) {
+        if (item.phases) {
+          result = []
+          let phIndex = 0
+          while (phIndex < item.phases.length) {
+            const phase = item.phases[phIndex]
+            const startMoment = moment(phase.start_date, 'YYYY-MM-DD').startOf('day')
+            const endMoment = moment(phase.end_date, 'YYYY-MM-DD').startOf('day')
+            const duration = moment.duration(endMoment.diff(startMoment))
+            const fullValue = this.largest(phase.fte, phase.load, phase.duration, 0) === 0 ? 1 : this.largest(phase.fte, phase.load, phase.duration, 0)
+            const fullWidth = duration.asDays() * 25
+            let barRect = 0
+            if (type === 0) {
+              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.fte / fullValue
+              barRect = typeValue * fullWidth * (phase.progress / 100)
+            } else if (type === 1) {
+              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.duration / fullValue
+              barRect = typeValue * fullWidth * (phase.progress / 100)
+            } else if (type === 2) {
+              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.load / fullValue
+              barRect = typeValue * fullWidth * (phase.progress / 100)
+            }
+            console.log('Phase:', phase, 'FW:', fullWidth, 'BR:', barRect)
+            result.push(barRect)
+            phIndex += 1
+          }
+        }
+        console.log('Item:', item, 'Result:', result)
+      } else {
+        const startMoment = moment(item.startDate, 'YYYY-MM-DD').startOf('day')
+        const endMoment = moment(item.endDate, 'YYYY-MM-DD').startOf('day')
+        const duration = moment.duration(endMoment.diff(startMoment))
+        const fullWidth = duration.asDays() * 25
+        const fullValue = this.largest(item.demand, item.engaged, item.realestimated, 0)
+        if (type === 0) {
+          result = (item.demand / fullValue) * fullWidth
+        } else if (type === 1) {
+          result = (item.engaged / fullValue) * fullWidth
+        } else if (type === 2) {
+          result = (item.realestimated / fullValue) * fullWidth
+        }
+      }
+      return result
+    },
+    getStartPadding(item, type, isChild) {
+      let result = 0
+      if (isChild) {
+        if (item.phases) {
+          const pstarts = []
+          let phIndex = 0
+          while (phIndex < item.phases.length) {
+            const phase = item.phases[phIndex]
+            const startMoment = moment(phase.start_date, 'YYYY-MM-DD').startOf('day')
+            pstarts.push(startMoment)
+            phIndex += 1
+          }
+          const pStartMoment = moment.min(pstarts)
+          const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+          const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : (moment.duration(firstMoment.diff(pStartMoment)).asDays())
+          const pd = duration * 25
+          result = pd
+        }
+      } else {
+        const startMoment = moment(item.startDate, 'YYYY-MM-DD')
+        const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+        const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : (moment.duration(firstMoment.diff(startMoment)).asDays())
+        const pd = duration * 25
+        result = pd
+      }
+      return result
+    },
     onOptimiseIndex() {
       this.isOptimiseIndex = this.$store.state.portfolioState.optimizeStatus
       return this.isOptimiseIndex
