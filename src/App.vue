@@ -7,7 +7,6 @@
     <component :is="layout">
       <router-view />
     </component>
-
     <scroll-to-top v-if="enableScrollToTop" />
   </div>
 </template>
@@ -36,8 +35,8 @@ export default {
     LayoutHorizontal,
     LayoutVertical,
     LayoutFull,
-
     ScrollToTop,
+
   },
   // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
   // Currently, router.currentRoute is not reactive and doesn't trigger any change
@@ -103,4 +102,6 @@ export default {
     }
   },
 }
+
+
 </script>
