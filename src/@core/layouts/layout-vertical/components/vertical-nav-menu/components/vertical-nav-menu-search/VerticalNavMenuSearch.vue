@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     handleToggle(state) {
-      this.$router.push({ path: state ? '/operation' : '/organization' })
+      this.$router.push({ path: state ? '/organization' : '/organization-unit' })
       this.$emit('toggleChange', state)
     },
   },

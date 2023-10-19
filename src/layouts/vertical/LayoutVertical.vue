@@ -22,7 +22,8 @@ export default {
     LayoutVertical,
   },
   mounted() {
-    this.$store.dispatch('globalState/load_nav_data')
+    // this.$store.dispatch('globalState/load_nav_data')
+    this.$store.dispatch('/globalState/load_organization_data')
   },
   data() {
     return {

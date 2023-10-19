@@ -107,6 +107,23 @@
         </div>
         <div class="checkbox-slider-group">
           <b-form-checkbox
+            v-model="isWinRate"
+            class="custom-control-primary mb-1"
+          >
+            Win rate
+          </b-form-checkbox>
+          <b-form-input
+            v-model="winRateRange"
+            class="slider"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            :disabled="!isWinRate"
+          />
+        </div>
+        <div class="checkbox-slider-group">
+          <b-form-checkbox
             v-model="isProject"
             class="custom-control-primary mb-1"
           >
@@ -235,8 +252,10 @@ export default {
       loadRange: 0,
       valueRange: 0,
       projectRange: 0,
+      winRateRange: 0,
       selectedPriority: null,
       isOngoingProject: false,
+      isWinRate: false,
       isOtherOption: false,
       isStatus: this.$store.state.portfolioState.optimizeStates,
       affectProjects: this.$store.state.portfolioState.changeProjects
@@ -259,7 +278,8 @@ export default {
           isOngoingProject: this.isOngoingProject,
           loadRange: this.loadRange,
           valueRange: this.valueRange,
-          projectRange: this.projectRange
+          projectRange: this.projectRange,
+          winRateRange: this.winRateRange
         }
       })
       this.isStatus = this.$store.state.portfolioState.optimizeStates

@@ -836,9 +836,9 @@ export default {
     selectedNavId: '',
     selectedNavObj: {},
     optimiseState: 'origin',
-    globalOperationData: [],
     globalOrganizationData: [],
-    globalOrganizationData1: [],
+    globalOrganizationUnitData: [],
+    globalOrganizationUnitData1: [],
     projectElementTeamData: [],
     projectElementPhaseData: [],
     chartXAxisData: [
@@ -934,7 +934,7 @@ export default {
           }
         )
         dt.children = cdn
-        state.globalOrganizationData = dt
+        state.globalOrganizationUnitData = dt
         const u1 = !state.openCreateNewPortfolioDrawer
         const u2 = !state.openCreateNewUnitDrawer
         state.openCreateNewPortfolioDrawer = u1
@@ -1232,10 +1232,14 @@ export default {
       // }
       state.globalOperationData.children.push(data)
     },
+    LOAD_ORGANIZATION_DATA(state, orgData) {
+      state.globalOrganizationData = orgData
+    },
+
     LOAD_NAV_DATA(state, globalAllData) {
-      state.globalOperationData = globalAllData.navData
-      state.globalOrganizationData = globalAllData.orgData
-      state.globalOrganizationData1 = globalAllData.orgData1
+      state.globalOrganizationData = globalAllData.navData
+      state.globalOrganizationUnitData = globalAllData.orgData
+      state.globalOrganizationUnitData1 = globalAllData.orgData1
 
       state.globalData.push(globalAllData.navData)
       state.globalData.push(globalAllData.orgData)
@@ -1306,8 +1310,18 @@ export default {
     },
   },
   actions: {
-    load_nav_data() {
-      axios.get('https://konatus-api.onrender.com/api/menu/get_nav_data').then(response => {
+    load_org_data() {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
+        // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
+          const globalOrgData = response.data
+          this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
+        }).catch(err => {
+          console.log('error getting orgnaizations data ---->', err)
+          Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    load_nav_data(orgId) {
+      axios.get(`https://api.konatus.site/v1/api/menu/get_nav_data?orgId=${orgId}`).then(response => {
       // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
         const globalAllData = response.data
         this.commit('globalState/LOAD_NAV_DATA', globalAllData)
