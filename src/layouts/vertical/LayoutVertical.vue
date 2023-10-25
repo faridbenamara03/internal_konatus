@@ -21,14 +21,14 @@ export default {
     AppCustomizer,
     LayoutVertical,
   },
-  mounted() {
-    // this.$store.dispatch('globalState/load_nav_data')
-    this.$store.dispatch('/globalState/load_organization_data')
-  },
   data() {
     return {
       showCustomizer: $themeConfig.layout.customizer,
     }
+  },
+  mounted() {
+    this.$store.dispatch('globalState/load_org_data')
+    // this.$store.dispatch('globalState/load_org_unit_data')
   },
 }
 </script>

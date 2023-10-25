@@ -1232,10 +1232,12 @@ export default {
       // }
       state.globalOperationData.children.push(data)
     },
-    LOAD_ORGANIZATION_DATA(state, orgData) {
+    LOAD_ORG_UNIT_DATA(state, orgData) {
+      state.globalOrganizationUnitData = orgData
+    },
+    LOAD_ORG_DATA(state, orgData) {
       state.globalOrganizationData = orgData
     },
-
     LOAD_NAV_DATA(state, globalAllData) {
       state.globalOrganizationData = globalAllData.navData
       state.globalOrganizationUnitData = globalAllData.orgData
@@ -1311,12 +1313,22 @@ export default {
   },
   actions: {
     load_org_data() {
-      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
-        // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
+      // axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
+      axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
           console.log('error getting orgnaizations data ---->', err)
+          Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    load_org_unit_data() {
+      // axios.get('https://api.konatus.site/v1/api/menu/get_organization_units').then(response => {
+      axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
+          const globalOrgUnitData = response.data
+          this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
+        }).catch(err => {
+          console.log('error getting orgnaizations units data ---->', err)
           Vue.$toast.error('Failed to load orgnaizations data.')
         })
     },
@@ -1331,7 +1343,7 @@ export default {
       })
     },
     create_new_unit(payload) {
-      axios.post('https://konatus-api.onrender.com/api/unit/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/unit/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_UNIT', newData)
       }).catch(err => {
@@ -1341,7 +1353,7 @@ export default {
     },
     create_new_portfolio(commit, payload) {
       console.log("Payload:", payload)
-      axios.post('https://konatus-api.onrender.com/api/portfolio/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
       }).catch(err => {
@@ -1351,7 +1363,7 @@ export default {
     },
 
     insert_new_task(payload) {
-      axios.post('https://konatus-api.onrender.com/api/phase/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/phase/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/INSERT_NEW_TASK', newData)
       }).catch(err => {

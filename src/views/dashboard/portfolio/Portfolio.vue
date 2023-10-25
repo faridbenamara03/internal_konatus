@@ -471,9 +471,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
-    this.$store.dispatch('portfolioState/get_portfolio_demand_data')
-    this.$store.dispatch('portfolioState/get_portfolio_control_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_demand_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)
