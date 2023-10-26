@@ -111,10 +111,15 @@ export default {
   },
   methods: {
     handleNavItemClick(data) {
-      // console.log('---->>>>>>>>>>>>>>>>>>>', data)????
+      console.log('GroupNavItem---->>>>>>>>>>>>>>>>>>>', data)
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
       this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+      const baseUrl = `/organization/${data.orgId}/portfolio`
+      const currentUrl = this.$router.history.current.path
+      if (baseUrl === currentUrl) return
+      this.$router.push(baseUrl)
+      // this.$store.dispatch('globalState/load_org_data')
     },
   },
 }

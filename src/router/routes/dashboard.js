@@ -10,7 +10,7 @@ export default [
     component: () => import('@/views/dashboard/ecommerce/Ecommerce.vue'),
   },
   {
-    path: '/operation/portfolio',
+    path: '/organization/:orgId/portfolio',
     name: 'dashboard-portfolio',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },

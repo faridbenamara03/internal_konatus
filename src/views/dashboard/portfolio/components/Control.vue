@@ -283,8 +283,11 @@ export default {
       // percentD: []
     }
   },
-  mounted() {
-    const temp = this.controlData.length > 0 ? this.controlData[0].children : []
+  async mounted() {
+    console.log("CDT:", this.data.id)
+    await this.$store.dispatch('portfolioState/get_portfolio_control_data', { portId: this.data.id })
+    const { controlData } = this.$store.state.portfolioState
+    const temp = controlData.length > 0 ? controlData[0].children : []
     const tempTeams = []
     const tempTeamData1 = []
     const tempTeamData = []

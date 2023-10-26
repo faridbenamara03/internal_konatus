@@ -218,8 +218,12 @@
           class="no-action-bar"
           @click="onClickCPSelectBtn('control')"
         >
-          <Control
+          <!-- <Control
             :data="items.children"
+            :table-title="tableTitle"
+          /> -->
+          <Control
+            :data="items"
             :table-title="tableTitle"
           />
         </b-tab>
@@ -448,6 +452,7 @@ export default {
     },
     items() {
       const { selectedNavObj } = this.$store.state.globalState
+      console.log("SelectedNavObj:", selectedNavObj)
       return selectedNavObj
     },
     tableTitle() {

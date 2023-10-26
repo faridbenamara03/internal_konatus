@@ -40,34 +40,43 @@ export default {
     },
   },
   actions: {
-    get_portfolio_reporting_data() {
-      axios.get('https://konatus-api.onrender.com/api/portfolio/reporting').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/portfolio/reporting').then(response => {
-        const portfolioReportingData = response.data
-        this.commit('portfolioState/GET_PORTFOLIO_REPORTING_DATA', portfolioReportingData)
-      }).catch(err => {
-        console.log('error getting portfolio reporting data ---->', err)
-        Vue.$toast.error('Failed to get portfolio reporting data.')
+    get_portfolio_reporting_data(ctx, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost/konatus-me/public/api/portfolio/reporting?portId=${payload.portId}`).then(response => {
+          const portfolioReportingData = response.data
+          this.commit('portfolioState/GET_PORTFOLIO_REPORTING_DATA', portfolioReportingData)
+          resolve()
+        }).catch(err => {
+          console.log('error getting portfolio reporting data ---->', err)
+          Vue.$toast.error('Failed to get portfolio reporting data.')
+          reject(err)
+        })
       })
     },
-    get_portfolio_demand_data() {
-      axios.get('https://konatus-api.onrender.com/api/portfolio/demand').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/portfolio/demand').then(response => {
-        const portfolioDemandData = response.data
-        this.commit('portfolioState/GET_PORTFOLIO_DEMAND_DATA', portfolioDemandData)
-      }).catch(err => {
-        console.log('error getting portfolio reporting data ---->', err)
-        Vue.$toast.error('Failed to get portfolio reporting data.')
+    get_portfolio_demand_data(ctx, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost/konatus-me/public/api/portfolio/demand?portId=${payload.portId}`).then(response => {
+          const portfolioDemandData = response.data
+          this.commit('portfolioState/GET_PORTFOLIO_DEMAND_DATA', portfolioDemandData)
+          resolve()
+        }).catch(err => {
+          console.log('error getting portfolio demand data ---->', err)
+          Vue.$toast.error('Failed to get portfolio demand data.')
+          reject(err)
+        })
       })
     },
-    get_portfolio_control_data() {
-      axios.get('https://konatus-api.onrender.com/api/portfolio/control').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/portfolio/control').then(response => {
-        const portfolioControlData = response.data
-        this.commit('portfolioState/GET_PORTFOLIO_CONTROL_DATA', portfolioControlData)
-      }).catch(err => {
-        console.log('error getting portfolio reporting data ---->', err)
-        Vue.$toast.error('Failed to get portfolio reporting data.')
+    get_portfolio_control_data(ctx, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost/konatus-me/public/api/portfolio/control?portId=${payload.portId}`).then(response => {
+          const portfolioControlData = response.data
+          this.commit('portfolioState/GET_PORTFOLIO_CONTROL_DATA', portfolioControlData)
+          resolve()
+        }).catch(err => {
+          console.log('error getting portfolio control data ---->', err)
+          Vue.$toast.error('Failed to get portfolio control data.')
+          reject(err)
+        })
       })
     },
     get_optimized_data(data, params) {
