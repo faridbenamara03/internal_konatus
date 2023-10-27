@@ -451,9 +451,15 @@ export default {
       const urls = ['demand-team', 'demand-phase']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(`/demand-${tabState}`) })
+        const baseUrl = urlArr.join('/').concat(`/demand-${tabState}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       } else {
-        this.$router.push({ path: this.$route.path.concat(`/demand-${tabState}`) })
+        const baseUrl = this.$route.path.concat(`/demand-${tabState}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       }
     },
     onClickCPSelectBtn(url, value) {
@@ -462,9 +468,15 @@ export default {
       const urls = ['demand-team', 'demand-phase', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+        const baseUrl = urlArr.join('/').concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       } else {
-        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+        const baseUrl = this.$route.path.concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       }
     },
   }

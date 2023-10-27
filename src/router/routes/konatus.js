@@ -76,48 +76,84 @@ export default [
   {
     // path: '/operation/portfolio/:portfolioId',
     path: '/organization/:orgId/portfolio/:portfolioId',
+    name: 'portfolio-view-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId',
+    path: '/organization/:orgId/portfolio',
     name: 'portfolio-view',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     // path: '/operation/portfolio/:portfolioId/demand-table',
     path: '/organization/:orgId/portfolio/:portfolioId/demand-table',
+    name: 'portfolio-table-view-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId/demand-table',
+    path: '/organization/:orgId/portfolio/demand-table',
     name: 'portfolio-table-view',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     // path: '/operation/portfolio/:portfolioId/demand-chart',
     path: '/organization/:orgId/portfolio/:portfolioId/demand-chart',
+    name: 'portfolio-chart-view-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId/demand-chart',
+    path: '/organization/:orgId/portfolio/demand-chart',
     name: 'portfolio-chart-view',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     // path: '/operation/portfolio/:portfolioId/reporting-cost',
     path: '/organization/:orgId/portfolio/:portfolioId/reporting-cost',
+    name: 'portfolio-reporting-cost-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId/reporting-cost',
+    path: '/organization/:orgId/portfolio/reporting-cost',
     name: 'portfolio-reporting-cost',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     // path: '/operation/portfolio/:portfolioId/reporting-plan',
     path: '/organization/:orgId/portfolio/:portfolioId/reporting-plan',
+    name: 'portfolio-reporting-plan-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId/reporting-plan',
+    path: '/organization/:orgId/portfolio/reporting-plan',
     name: 'portfolio-reporting-plan',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     // path: '/operation/portfolio/:portfolioId/control',
     path: '/organization/:orgId/portfolio/:portfolioId/control',
+    name: 'portfolio-control-with-id',
+    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  },
+  {
+    // path: '/operation/portfolio/:portfolioId/control',
+    path: '/organization/:orgId/portfolio/control',
     name: 'portfolio-control',
     component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
   },
   {
     path: '/organization',
-    name: 'operation-view',
+    name: 'organization-view',
     // component: () => import('@/views/welcome.vue'),
   },
 
   {
     path: '/organization-unit',
-    name: 'organization-view',
+    name: 'organization-unit-view',
     // component: () => import('@/views/welcome.vue'),
   },
   {

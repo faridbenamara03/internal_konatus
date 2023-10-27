@@ -322,7 +322,7 @@ export default {
     return {
       reportingDates: [],
       openedCollapse: 0,
-      itemsForReporting: this.$store.state.portfolioState.reportingData,
+      itemsForReporting: this.$store.state.globalState.portfolioReportingData,
       isOptimiseIndex: this.$store.state.portfolioState.optimizeStatus,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta1: [
@@ -442,8 +442,6 @@ export default {
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   mounted() {
-    console.log("RDT:", this.data.id)
-    this.$store.dispatch('portfolioState/get_portfolio_reporting_data', { portId: this.data.id })
     const startDate = moment(moment()).subtract(15, 'days').startOf('day')
     const endDate = moment(moment()).add(1, 'M').startOf('day')
     this.reportingDates = [startDate.clone()]

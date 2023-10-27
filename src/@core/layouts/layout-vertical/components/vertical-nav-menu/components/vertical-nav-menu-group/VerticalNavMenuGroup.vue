@@ -114,12 +114,19 @@ export default {
       console.log('GroupNavItem---->>>>>>>>>>>>>>>>>>>', data)
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
-      this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
-      const baseUrl = `/organization/${data.orgId}/portfolio`
+      // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+      this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+      let baseUrl = ''
+      if (data.type === 'company') {
+        baseUrl = `/organization/${data.orgId}/portfolio`
+      } else if (data.type === 'portfolio') {
+        baseUrl = `/organization/${data.orgId}/portfolio/${data.id}`
+      } else if (data.type === 'program') {
+        baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.id}`
+      }
       const currentUrl = this.$router.history.current.path
       if (baseUrl === currentUrl) return
       this.$router.push(baseUrl)
-      // this.$store.dispatch('globalState/load_org_data')
     },
   },
 }

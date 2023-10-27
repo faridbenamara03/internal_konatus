@@ -5,12 +5,12 @@ import VueRouter from 'vue-router'
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 import apps from './routes/apps'
-import dashboard from './routes/dashboard'
-import uiElements from './routes/ui-elements/index'
+// import dashboard from './routes/dashboard'
+// import uiElements from './routes/ui-elements/index'
 import pages from './routes/pages'
-import chartsMaps from './routes/charts-maps'
-import formsTable from './routes/forms-tables'
-import others from './routes/others'
+// import chartsMaps from './routes/charts-maps'
+// import formsTable from './routes/forms-tables'
+// import others from './routes/others'
 import konatus from './routes/konatus'
 
 Vue.use(VueRouter)
@@ -22,14 +22,14 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   },
   routes: [
-    { path: '/', redirect: { name: 'dashboard-portfolio' } },
+    { path: '/', redirect: { name: 'organization-view' } },
     ...apps,
-    ...dashboard,
+    // ...dashboard,
     ...pages,
-    ...chartsMaps,
-    ...formsTable,
-    ...uiElements,
-    ...others,
+    // ...chartsMaps,
+    // ...formsTable,
+    // ...uiElements,
+    // ...others,
     ...konatus,
     {
       path: '/404',

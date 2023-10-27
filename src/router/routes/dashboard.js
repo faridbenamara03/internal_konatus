@@ -9,9 +9,9 @@ export default [
     name: 'dashboard-ecommerce',
     component: () => import('@/views/dashboard/ecommerce/Ecommerce.vue'),
   },
-  {
-    path: '/organization/:orgId/portfolio',
-    name: 'dashboard-portfolio',
-    component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
-  },
+  // {
+  //   path: '/organization/',
+  //   name: 'dashboard-portfolio',
+  //   component: () => import('@/views/dashboard/portfolio/Portfolio.vue'),
+  // },
 ]
