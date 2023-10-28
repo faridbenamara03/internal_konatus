@@ -1350,7 +1350,8 @@ export default {
   },
   actions: {
     get_from_selected_nav_id(ctx, payload) {
-      axios.get(`http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
+      // axios.get(`http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
+      axios.get(`https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
         const resData = { navData: payload.data, portData: response.data }
         this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
       }).catch(err => {
@@ -1359,8 +1360,8 @@ export default {
       })
     },
     load_org_data() {
-      // axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
-      axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
@@ -1369,8 +1370,8 @@ export default {
         })
     },
     load_org_unit_data() {
-      // axios.get('https://api.konatus.site/v1/api/menu/get_organization_units').then(response => {
-      axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organization_units').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
           const globalOrgUnitData = response.data
           this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
         }).catch(err => {

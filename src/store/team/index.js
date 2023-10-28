@@ -113,7 +113,7 @@ export default {
   },
   actions: {
     get_team_reporting_data() {
-      axios.get('https://konatus-api.onrender.com/api/team/reporting').then(response => {
+      axios.get('https://api.konatus.site/v1/api/team/reporting').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/team/reporting').then(response => {
         const teamReportingData = response.data
         console.log("TRDT:", teamReportingData)
@@ -124,7 +124,7 @@ export default {
       })
     },
     get_team_demand_data() {
-      axios.get('https://konatus-api.onrender.com/api/team/demand').then(response => {
+      axios.get('https://api.konatus.site/v1/api/team/demand').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/team/demand').then(response => {
         const teamDemandData = response.data
         console.log("TDDT:", teamDemandData)
@@ -135,7 +135,7 @@ export default {
       })
     },
     insert_new_task(payload) {
-      axios.get('https://konatus-api.onrender.com/api/team/phase/create', payload).then(response => {
+      axios.get('https://api.konatus.site/v1/api/team/phase/create', payload).then(response => {
       // axios.get('http://localhost/konatus-me/public/api/team/phase/create').then(response => {
         const newTaskData = response.data
         this.commit('teamState/INSERT_NEW_TASK', newTaskData)

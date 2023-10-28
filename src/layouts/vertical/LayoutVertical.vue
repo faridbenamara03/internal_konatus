@@ -28,7 +28,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('globalState/load_org_data')
-    // this.$store.dispatch('globalState/load_org_unit_data')
+    this.$store.dispatch('globalState/load_org_unit_data')
   },
 }
 </script>

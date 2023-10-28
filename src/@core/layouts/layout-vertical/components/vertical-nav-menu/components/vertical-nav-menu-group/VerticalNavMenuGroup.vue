@@ -115,7 +115,6 @@ export default {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
       // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
-      this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
       let baseUrl = ''
       if (data.type === 'company') {
         baseUrl = `/organization/${data.orgId}/portfolio`
@@ -126,6 +125,7 @@ export default {
       }
       const currentUrl = this.$router.history.current.path
       if (baseUrl === currentUrl) return
+      this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
       this.$router.push(baseUrl)
     },
   },
