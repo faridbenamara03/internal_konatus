@@ -362,9 +362,15 @@ export default {
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+        const baseUrl = urlArr.join('/').concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       } else {
-        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+        const baseUrl = this.$route.path.concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       }
     },
     handleChangeViewMode(mode) {
@@ -372,9 +378,15 @@ export default {
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(mode ? '/demand-chart' : '/demand-table') })
+        const baseUrl = urlArr.join('/').concat(mode ? '/demand-chart' : '/demand-table')
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       } else {
-        this.$router.push({ path: this.$route.path.concat(mode ? '/demand-chart' : '/demand-table') })
+        const baseUrl = this.$route.path.concat(mode ? '/demand-chart' : '/demand-table')
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       }
       this.isChartView = mode
     },

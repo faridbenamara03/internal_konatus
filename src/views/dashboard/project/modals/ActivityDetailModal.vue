@@ -177,6 +177,19 @@
         </div>
       </div>
       <div class="form-group">
+        <b-button
+          variant="outline-primary"
+        >
+          Edit Priority
+        </b-button>
+        &nbsp;&nbsp;
+        <b-button
+          variant="outline-primary"
+        >
+          Edit Phase
+        </b-button>
+      </div>
+      <div class="form-group">
         <div class="select-box">
           <label>Activity</label>
           <v-select

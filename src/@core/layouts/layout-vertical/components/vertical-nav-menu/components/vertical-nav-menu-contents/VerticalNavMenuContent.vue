@@ -43,7 +43,6 @@ export default {
     },
   },
   mounted() {
-    console.log('VerticalNavMenuContent')
     this.$store.dispatch('orgnizationState/get_unit_reporting_data')
     this.$store.dispatch('orgnizationState/get_unit_demand_data')
     this.$store.dispatch('orgnizationState/get_unit_control_data')
@@ -51,7 +50,7 @@ export default {
   methods: {
     handleToggle(state) {
       const url = window.location.href
-      const pattern = /\/organization\/?/ // Update the pattern to match your specific requirement
+      const pattern = /\/organization-unit\/?/ // Update the pattern to match your specific requirement
 
       if (pattern.test(url)) {
         const parts = url.split('/')
@@ -89,9 +88,9 @@ export default {
           }
 
           if (unitId !== '') {
-            baseUrl = `/organization/unit/${unitId}/reporting-cost`
+            baseUrl = `/organization-unit/unit/${unitId}/reporting-cost`
           } else {
-            baseUrl = `/organization/unit/paris/reporting-cost`
+            baseUrl = `/organization-unit/unit/paris/reporting-cost`
           }
           this.$router.push(baseUrl)
           let m = 0

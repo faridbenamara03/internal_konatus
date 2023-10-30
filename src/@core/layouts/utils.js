@@ -6,6 +6,7 @@ import { computed } from '@vue/composition-api'
  * Return which component to render based on it's data/context
  * @param {Object} item nav menu item
  */
+
 export const resolveVerticalNavMenuItemComponent = item => {
   if (item.header) return 'vertical-nav-menu-header'
   if (item.children) return 'vertical-nav-menu-group'

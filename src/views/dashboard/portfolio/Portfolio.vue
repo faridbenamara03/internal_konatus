@@ -195,7 +195,7 @@
           <Demand
             v-if="tableTitle"
             :otype="selectedNavType"
-            :data="items"
+            :data="demandData"
             :fields="fields"
             :is-chart-view="isChartView"
           />
@@ -206,7 +206,7 @@
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
         >
           <Reporting
-            :data="items"
+            :data="reportingData"
             :otype="selectedNavType"
             :reporting-state="reportingState"
             :fields="fields"
@@ -218,8 +218,12 @@
           class="no-action-bar"
           @click="onClickCPSelectBtn('control')"
         >
-          <Control
+          <!-- <Control
             :data="items.children"
+            :table-title="tableTitle"
+          /> -->
+          <Control
+            :data="controlData"
             :table-title="tableTitle"
           />
         </b-tab>
@@ -461,19 +465,19 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     demandData() {
-      return this.$store.state.portfolioState.demandData
+      return this.$store.state.globalState.portfolioDemandData[0]
     },
     controlData() {
-      return this.$store.state.portfolioState.controlData
+      return this.$store.state.globalState.portfolioControlData
     },
     reportingData() {
-      return this.$store.state.portfolioState.reportingData
+      return this.$store.state.globalState.portfolioReportingData[0]
     }
   },
   mounted() {
-    this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
-    this.$store.dispatch('portfolioState/get_portfolio_demand_data')
-    this.$store.dispatch('portfolioState/get_portfolio_control_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_demand_data', { portId: selectedNavObj.id, type: selectedNavObj.type })
+    // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     this.fields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)
@@ -584,9 +588,15 @@ export default {
       const urls = ['demand-table', 'demand-chart', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+        const baseUrl = urlArr.join('/').concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       } else {
-        this.$router.push({ path: this.$route.path.concat(`/${url}`) })
+        const baseUrl = this.$route.path.concat(`/${url}`)
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push({ path: baseUrl })
       }
     },
   }

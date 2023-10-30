@@ -4,7 +4,7 @@
       <div style="width:100%;background-color:#1A2239;height:40px" />
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
-          Consumer Robots
+          {{ data.title }}
         </div>
         <div class="part2 mr-2">
           <div
@@ -284,7 +284,8 @@ export default {
     }
   },
   mounted() {
-    const temp = this.controlData.length > 0 ? this.controlData[0].children : []
+    console.log("CDT:", this.data)
+    const temp = this.data.length > 0 ? this.data[0].children : []
     const tempTeams = []
     const tempTeamData1 = []
     const tempTeamData = []

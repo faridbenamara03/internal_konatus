@@ -183,7 +183,10 @@ export default {
   computed: {
     comptNavMenuItems() {
       const data = [{ search: true }]
-      data.push(...store.state.globalState.globalData)
+      const globalData = []
+      globalData.push(this.$store.state.globalState.globalOrganizationData[0])
+      globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
+      data.push(...globalData)
       return data
     },
     getIndex() {
@@ -191,7 +194,10 @@ export default {
     },
     getNavJobMenuItems() {
       const data = [{ search: true }]
-      data.push(...store.state.globalState.globalData1)
+      const globalData = []
+      globalData.push(this.$store.state.globalState.globalOrganizationData[0])
+      globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
+      data.push(...globalData)
       return data
     }
   },

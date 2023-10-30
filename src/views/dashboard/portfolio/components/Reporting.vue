@@ -10,11 +10,11 @@
           style="margin-top:50px;"
         >
           <p class="m-0 text-uppercase">
-            {{ itemsForDemand[0].title }}
+            {{ itemsForReporting[0].title }}
           </p>
         </div>
         <div
-          v-for="(item1, index1) in itemsForDemand[0].children"
+          v-for="(item1, index1) in itemsForReporting[0].children"
           :key="index1"
         >
           <div
@@ -117,7 +117,7 @@
         </div>
 
         <div
-          v-for="(item1, index1) in itemsForDemand[0].children"
+          v-for="(item1, index1) in itemsForReporting[0].children"
           :key="index1"
         >
           <div
@@ -270,7 +270,7 @@
     style="width:100%"
   >
     <ReportingCostVue
-      :data="itemsForDemand"
+      :data="itemsForReporting"
       :fields="fields"
     />
   </div>
@@ -322,7 +322,7 @@ export default {
     return {
       reportingDates: [],
       openedCollapse: 0,
-      itemsForDemand: this.$store.state.portfolioState.reportingData,
+      itemsForReporting: this.$store.state.globalState.portfolioReportingData,
       isOptimiseIndex: this.$store.state.portfolioState.optimizeStatus,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta1: [
@@ -442,7 +442,6 @@ export default {
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   mounted() {
-    console.log("ReportingData:", this.itemsForDemand)
     const startDate = moment(moment()).subtract(15, 'days').startOf('day')
     const endDate = moment(moment()).add(1, 'M').startOf('day')
     this.reportingDates = [startDate.clone()]

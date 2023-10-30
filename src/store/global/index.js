@@ -836,11 +836,14 @@ export default {
     selectedNavId: '',
     selectedNavObj: {},
     optimiseState: 'origin',
-    globalOperationData: [],
     globalOrganizationData: [],
-    globalOrganizationData1: [],
+    globalOrganizationUnitData: [],
+    globalOrganizationUnitData1: [],
     projectElementTeamData: [],
     projectElementPhaseData: [],
+    portfolioDemandData: [],
+    portfolioReportingData: [],
+    portfolioControlData: [],
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),
@@ -934,7 +937,7 @@ export default {
           }
         )
         dt.children = cdn
-        state.globalOrganizationData = dt
+        state.globalOrganizationUnitData = dt
         const u1 = !state.openCreateNewPortfolioDrawer
         const u2 = !state.openCreateNewUnitDrawer
         state.openCreateNewPortfolioDrawer = u1
@@ -955,6 +958,33 @@ export default {
               id: `${data.portfolioName.toLowerCase()}-program`,
               title: 'sample program',
               type: 'program'
+            }
+          ]
+        })
+        dt.children = chld
+        state.globalOperationData = dt
+        const u1 = !state.openCreateNewPortfolioDrawer
+        const u2 = !state.openCreateNewUnitDrawer
+        state.openCreateNewPortfolioDrawer = u1
+        state.openCreateNewUnitDrawer = u2
+      } else {
+        Vue.$toast.warning('Please input correctly.')
+      }
+    },
+    CREATE_NEW_PROJECT(state, data) {
+      if (!!data.parentOrganization && !!data.projectName && !!data.projectBudget) {
+        const dt = { ...state.globalData[0] }
+        const chld = dt.children
+        chld.push({
+          id: `${data.projectName.toLowerCase()}-project`,
+          title: data.projectName,
+          budget: data.projectName,
+          type: 'project',
+          children: [
+            {
+              id: `${data.projectName.toLowerCase()}-phase`,
+              title: 'sample phase',
+              type: 'phase'
             }
           ]
         })
@@ -1109,6 +1139,13 @@ export default {
       // .todo axios request
       // dispatch('sumit_team_request_quote')
     },
+    SAVE_SELECTED_NAV_DATA(state, payload) {
+      state.selectedNavId = payload.navData.id
+      state.selectedNavObj = payload.navData
+      state.portfolioDemandData = JSON.parse(payload.portData.demand)
+      state.portfolioReportingData = JSON.parse(payload.portData.reporting)
+      state.portfolioControlData = JSON.parse(payload.portData.control)
+    },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id
       state.selectedNavObj = navObj
@@ -1232,10 +1269,16 @@ export default {
       // }
       state.globalOperationData.children.push(data)
     },
+    LOAD_ORG_UNIT_DATA(state, orgData) {
+      state.globalOrganizationUnitData = orgData
+    },
+    LOAD_ORG_DATA(state, orgData) {
+      state.globalOrganizationData = orgData
+    },
     LOAD_NAV_DATA(state, globalAllData) {
-      state.globalOperationData = globalAllData.navData
-      state.globalOrganizationData = globalAllData.orgData
-      state.globalOrganizationData1 = globalAllData.orgData1
+      state.globalOrganizationData = globalAllData.navData
+      state.globalOrganizationUnitData = globalAllData.orgData
+      state.globalOrganizationUnitData1 = globalAllData.orgData1
 
       state.globalData.push(globalAllData.navData)
       state.globalData.push(globalAllData.orgData)
@@ -1306,8 +1349,38 @@ export default {
     },
   },
   actions: {
-    load_nav_data() {
-      axios.get('https://konatus-api.onrender.com/api/menu/get_nav_data').then(response => {
+    get_from_selected_nav_id(ctx, payload) {
+      // axios.get(`http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
+      axios.get(`https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
+        const resData = { navData: payload.data, portData: response.data }
+        this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
+      }).catch(err => {
+        console.log('error getting portfolio data ---->', err)
+        Vue.$toast.error('Failed to load portfolio data.')
+      })
+    },
+    load_org_data() {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
+          const globalOrgData = response.data
+          this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
+        }).catch(err => {
+          console.log('error getting orgnaizations data ---->', err)
+          Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    load_org_unit_data() {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organization_units').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
+          const globalOrgUnitData = response.data
+          this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
+        }).catch(err => {
+          console.log('error getting orgnaizations units data ---->', err)
+          Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    load_nav_data(orgId) {
+      axios.get(`https://api.konatus.site/v1/api/menu/get_nav_data?orgId=${orgId}`).then(response => {
       // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
         const globalAllData = response.data
         this.commit('globalState/LOAD_NAV_DATA', globalAllData)
@@ -1317,7 +1390,7 @@ export default {
       })
     },
     create_new_unit(payload) {
-      axios.post('https://konatus-api.onrender.com/api/unit/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/unit/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_UNIT', newData)
       }).catch(err => {
@@ -1327,7 +1400,7 @@ export default {
     },
     create_new_portfolio(commit, payload) {
       console.log("Payload:", payload)
-      axios.post('https://konatus-api.onrender.com/api/portfolio/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
       }).catch(err => {
@@ -1335,9 +1408,18 @@ export default {
         Vue.$toast.error('Failed to create new portfolio.')
       })
     },
-
+    create_new_project(commit, payload) {
+      console.log("Payload:", payload)
+      axios.post('https://api.konatus.site/v1/api/project/create', payload).then(response => {
+        const newData = response.data
+        this.commit('globalState/CREATE_NEW_PROJECT', newData)
+      }).catch(err => {
+        console.log('error creating new portfolio --->', err)
+        Vue.$toast.error('Failed to create new portfolio.')
+      })
+    },
     insert_new_task(payload) {
-      axios.post('https://konatus-api.onrender.com/api/phase/create', payload).then(response => {
+      axios.post('https://api.konatus.site/v1/api/phase/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/INSERT_NEW_TASK', newData)
       }).catch(err => {
