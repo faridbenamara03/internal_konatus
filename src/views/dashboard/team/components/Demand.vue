@@ -55,7 +55,7 @@
               <div
                 v-b-modal.task-detail-modal
                 style="width:calc(100% - 20px);cursor:pointer;"
-                @click="taskDetailMethod(activity)"
+                @click="taskDetailMethod(activity, phase)"
               >
                 <p
                   v-if="isUN(activity.title)"
@@ -103,87 +103,26 @@
       </b-button>
     </div>
     <insert-new-task-modal :phase-id="phaseIdToInsert" />
-    <b-modal
-      id="task-detail-modal"
-      ref="t-d-modal"
-      :visible="c_openDetailModal"
-      title="Work Element Detail"
-      centered
-      no-fade
-    >
-      <template #modal-header>
-        <h5 class="modal-title">
-          Work Element Detail
-        </h5>
-      </template>
-      <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">
-          Work Element ID
-        </div>
-        <div>
-          <b-form-input
-            v-model="taskDetail.activityId"
-            style="width:300px"
-          />
-        </div>
-      </div>
-      <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">
-          PRIORITY
-        </div>
-        <div>
-          <v-select
-            v-model="taskDetail.priority"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            style="width:300px"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex mb-1">
-        <div style="width:150px;font-weight:bold;padding-top:9px">
-          GATE
-        </div>
-        <div>
-          <v-select
-            v-model="taskDetail.gate"
-            :options="['1', '2', '3', '4', '5']"
-            style="width:300px"
-            outlined
-          />
-        </div>
-      </div>
-      <template #modal-footer>
-        <b-button
-          variant="outline-primary"
-          @click="hideDetailModal"
-        >Cancel</b-button>
-        <b-button
-          variant="primary"
-          @click="hideDetailModal"
-        >Update</b-button>
-      </template>
-    </b-modal>
+    <activity-detail-modal :is-open="openActivityModal" :selectedActivityData="taskDetail"
+      @hideModal="hideModal" :teamdata="teamarr" />
   </div>
 </template>
 
 <script>
 import {
-  BButton, BFormCheckbox, BModal, BFormInput, BTooltip
+  BButton, BFormCheckbox, BTooltip
 } from 'bootstrap-vue'
 import moment from 'moment'
-import vSelect from 'vue-select'
 import { isEmpty } from '@/views/utils'
 import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
+import ActivityDetailModal from '../../project/modals/ActivityDetailModal.vue'
 
 export default {
   components: {
-    BModal,
     BButton,
     BFormCheckbox,
     InsertNewTaskModal,
-    vSelect,
-    BFormInput,
+    ActivityDetailModal,
     BTooltip
   },
   props: {
@@ -191,10 +130,13 @@ export default {
       type: Object,
       default: () => {},
     },
+    teamData: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      openActivityModal: false,
       selectedActivity: {},
       phaseIdToInsert: null,
       openDetailModal: false,
@@ -202,9 +144,12 @@ export default {
     }
   },
   computed: {
-    c_openDetailModal() {
-      return this.openDetailModal
-    }
+    openActivityModal() {
+      return this.$store.state.globalState.activityDetailModalOpen
+    },
+    teamarr() {
+      return this.teamData.map(team => team.title)
+    },
   },
   methods: {
     isUN(data) {
@@ -216,9 +161,6 @@ export default {
     handleRequestQuote(res) {
       console.log(res)
     },
-    hideModal() {
-      this.openActivityModal = false
-    },
     handleSelectAll(dt) {
       this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)
     },
@@ -228,9 +170,13 @@ export default {
     hideDetailModal() {
       this.$refs['t-d-modal'].hide()
     },
-    taskDetailMethod(task) {
-      this.taskDetail = task
-    }
+    taskDetailMethod(activity) {
+      this.taskDetail = { phase: activity }
+      this.$store.commit('globalState/OPEN_ACTIVITY_DETAIL_MODAL')
+    },
+    hideModal() {
+      this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
+    },
   },
 }
 </script>
