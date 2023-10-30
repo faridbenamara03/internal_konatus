@@ -38,6 +38,8 @@ export default {
     ScrollToTop,
 
   },
+
+
   // ! We can move this computed: layout & contentLayoutType once we get to use Vue 3
   // Currently, router.currentRoute is not reactive and doesn't trigger any change
   computed: {
@@ -95,6 +97,7 @@ export default {
     watch(windowWidth, val => {
       store.commit('app/UPDATE_WINDOW_WIDTH', val)
     })
+
 
     return {
       skinClasses,
