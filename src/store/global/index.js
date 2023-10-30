@@ -1379,16 +1379,16 @@ export default {
           Vue.$toast.error('Failed to load orgnaizations data.')
         })
     },
-    load_nav_data(orgId) {
-      axios.get(`https://api.konatus.site/v1/api/menu/get_nav_data?orgId=${orgId}`).then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
-        const globalAllData = response.data
-        this.commit('globalState/LOAD_NAV_DATA', globalAllData)
-      }).catch(err => {
-        console.log('error getting nav data ---->', err)
-        Vue.$toast.error('Failed to load navigation data.')
-      })
-    },
+    // load_nav_data(orgId) {
+    //   axios.get(`https://api.konatus.site/v1/api/menu/get_nav_data?orgId=${orgId}`).then(response => {
+    //   // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
+    //     const globalAllData = response.data
+    //     this.commit('globalState/LOAD_NAV_DATA', globalAllData)
+    //   }).catch(err => {
+    //     console.log('error getting nav data ---->', err)
+    //     Vue.$toast.error('Failed to load navigation data.')
+    //   })
+    // },
     create_new_unit(payload) {
       axios.post('https://api.konatus.site/v1/api/unit/create', payload).then(response => {
         const newData = response.data
