@@ -141,11 +141,11 @@
             </b-button>
           </b-button-group>
         </div> -->
-        <b-tab
-          title="Demand"
-          @click="onClickCPSelectBtn('demand')"
-        >
-          <Demand :data="c_team_demand_data" />
+        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
+          <Demand
+            :data="c_team_demand_data"
+            :team-data="projectElementTeamData"
+          />
         </b-tab>
         <b-tab
           title="Reporting"
@@ -327,6 +327,7 @@ export default {
       rangeArray: [],
       reportingState: 'cost',
       arr4chart: [],
+      projectElementTeamData: this.$store.state.globalState.teamsState,
     }
   },
   computed: {
