@@ -186,7 +186,8 @@ export default {
       const globalData = []
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
       globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
-      data.push(...globalData)
+      data.push(...globalData.filter(Boolean))
+
       return data
     },
     getIndex() {
@@ -197,7 +198,8 @@ export default {
       const globalData = []
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
       globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
-      data.push(...globalData)
+      data.push(...globalData.filter(Boolean))
+
       return data
     }
   },
