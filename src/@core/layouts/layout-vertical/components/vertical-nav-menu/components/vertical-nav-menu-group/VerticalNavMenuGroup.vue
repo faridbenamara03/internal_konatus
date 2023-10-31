@@ -113,25 +113,38 @@ export default {
   methods: {
     checkShow(item) {
       const result = this.canViewVerticalNavMenuGroup(item) ? item.isoperation === this.isActive : true
-      console.log("Item:", item, "ISActive:", this.isActive, "Result:", result)
       return result
     },
     handleNavItemClick(data) {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
-      // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
       let baseUrl = ''
-      if (data.type === 'company') {
-        baseUrl = `/organization/${data.orgId}/portfolio`
-      } else if (data.type === 'portfolio') {
-        baseUrl = `/organization/${data.orgId}/portfolio/${data.id}`
-      } else if (data.type === 'program') {
-        baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.id}`
+      if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
+        this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+        if (data.type === 'unit') {
+          baseUrl = `/organization-unit/unit/${data.id}`
+          const currentUrl = this.$router.history.current.path
+          if (baseUrl === currentUrl) return
+          this.$router.push(baseUrl)
+        } else if (data.type === 'team') {
+          baseUrl = `/organization-unit/unit/${data.unitid}/team/${data.id}`
+          const currentUrl = this.$router.history.current.path
+          if (baseUrl === currentUrl) return
+          this.$router.push(baseUrl)
+        }
+      } else {
+        if (data.type === 'company') {
+          baseUrl = `/organization/${data.orgId}/portfolio`
+        } else if (data.type === 'portfolio') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.id}`
+        } else if (data.type === 'program') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.id}`
+        }
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+        this.$router.push(baseUrl)
       }
-      const currentUrl = this.$router.history.current.path
-      if (baseUrl === currentUrl) return
-      this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
-      this.$router.push(baseUrl)
     },
   },
 }

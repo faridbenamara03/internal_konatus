@@ -116,7 +116,6 @@ export default {
       axios.get('https://api.konatus.site/v1/api/team/reporting').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/team/reporting').then(response => {
         const teamReportingData = response.data
-        console.log("TRDT:", teamReportingData)
         this.commit('teamState/GET_REPORTING_DATA', teamReportingData)
       }).catch(err => {
         console.log('error getting team reporting data ---->', err)
@@ -127,7 +126,6 @@ export default {
       axios.get('https://api.konatus.site/v1/api/team/demand').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/team/demand').then(response => {
         const teamDemandData = response.data
-        console.log("TDDT:", teamDemandData)
         this.commit('teamState/GET_DEMAND_DATA', teamDemandData)
       }).catch(err => {
         console.log('error getting team demand data ---->', err)

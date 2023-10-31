@@ -141,7 +141,10 @@
             </b-button>
           </b-button-group>
         </div> -->
-        <b-tab title="Demand" @click="onClickCPSelectBtn('demand')">
+        <b-tab
+          title="Demand"
+          @click="onClickCPSelectBtn('demand')"
+        >
           <Demand
             :data="c_team_demand_data"
             :team-data="projectElementTeamData"
@@ -336,9 +339,8 @@ export default {
     }
   },
   mounted() {
-    console.log("AAAA")
-    // this.$store.dispatch('teamState/get_team_demand_data')
-    // this.$store.dispatch('teamState/get_team_reporting_data')
+    this.$store.dispatch('teamState/get_team_demand_data')
+    this.$store.dispatch('teamState/get_team_reporting_data')
   },
   methods: {
     onClickCPSelectBtn(url, value) {

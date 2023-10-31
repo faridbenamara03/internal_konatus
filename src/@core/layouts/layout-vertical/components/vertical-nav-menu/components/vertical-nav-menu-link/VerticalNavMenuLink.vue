@@ -75,11 +75,15 @@ export default {
   },
   methods: {
     onNavItemClick(data) {
-      this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
-      const baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
-      const currentUrl = this.$router.history.current.path
-      if (baseUrl === currentUrl) return
-      this.$router.push(baseUrl)
+      if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
+        this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+      } else {
+        this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+        const baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
+        const currentUrl = this.$router.history.current.path
+        if (baseUrl === currentUrl) return
+        this.$router.push(baseUrl)
+      }
     }
   }
 }
