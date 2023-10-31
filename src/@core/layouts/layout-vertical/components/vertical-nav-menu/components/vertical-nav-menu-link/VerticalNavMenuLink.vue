@@ -75,7 +75,6 @@ export default {
   },
   methods: {
     onNavItemClick(data) {
-      console.log('NavItemClick>>>>>>>>>>', data)
       this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
       const baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
       const currentUrl = this.$router.history.current.path

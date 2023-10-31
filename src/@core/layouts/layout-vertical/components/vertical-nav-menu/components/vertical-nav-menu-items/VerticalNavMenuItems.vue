@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     toggleChange(state) {
+      console.log("STate:", state)
       this.isActive = state
     },
   },

@@ -1,6 +1,7 @@
 <template>
+  <!-- v-if="checkShow(item)" -->
   <li
-    v-if="canViewVerticalNavMenuGroup(item) && (item.hasOwnProperty('isOperation') ? item.isOperation === isActive : true)"
+    v-if="canViewVerticalNavMenuGroup(item) && (item.hasOwnProperty('isoperation') ? item.isoperation === isActive : true)"
     class="nav-item has-sub"
     :class="{
       'open': isOpen,
@@ -110,8 +111,12 @@ export default {
     }
   },
   methods: {
+    checkShow(item) {
+      const result = this.canViewVerticalNavMenuGroup(item) ? item.isoperation === this.isActive : true
+      console.log("Item:", item, "ISActive:", this.isActive, "Result:", result)
+      return result
+    },
     handleNavItemClick(data) {
-      console.log('GroupNavItem---->>>>>>>>>>>>>>>>>>>', data)
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()
       // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)

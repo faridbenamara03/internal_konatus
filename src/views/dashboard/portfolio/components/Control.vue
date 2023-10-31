@@ -284,7 +284,6 @@ export default {
     }
   },
   mounted() {
-    console.log("CDT:", this.data)
     const temp = this.data.length > 0 ? this.data[0].children : []
     const tempTeams = []
     const tempTeamData1 = []

@@ -838,7 +838,7 @@ export default {
     optimiseState: 'origin',
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
-    globalOrganizationUnitData1: [],
+    globalOrganizationTeamData: [],
     projectElementTeamData: [],
     projectElementPhaseData: [],
     portfolioDemandData: [],
@@ -1272,6 +1272,9 @@ export default {
     LOAD_ORG_UNIT_DATA(state, orgData) {
       state.globalOrganizationUnitData = orgData
     },
+    LOAD_ORG_TEAM_DATA(state, orgData) {
+      state.globalOrganizationTeamData = orgData
+    },
     LOAD_ORG_DATA(state, orgData) {
       state.globalOrganizationData = orgData
     },
@@ -1374,6 +1377,16 @@ export default {
       // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
           const globalOrgUnitData = response.data
           this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
+        }).catch(err => {
+          console.log('error getting orgnaizations units data ---->', err)
+          Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    load_org_team_data() {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organization_teams').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_teams').then(response => {
+          const globalOrgTeamData = response.data
+          this.commit('globalState/LOAD_ORG_TEAM_DATA', globalOrgTeamData)
         }).catch(err => {
           console.log('error getting orgnaizations units data ---->', err)
           Vue.$toast.error('Failed to load orgnaizations data.')

@@ -92,7 +92,10 @@ export default {
           } else {
             baseUrl = `/organization-unit/unit/paris/reporting-cost`
           }
-          this.$router.push(baseUrl)
+          const currentUrl = this.$router.history.current.path
+          if (baseUrl !== currentUrl) {
+            this.$router.push(baseUrl)
+          }
           let m = 0
           const stateCheck = setInterval(() => {
             const tableElement = document.getElementById('reporting___BV_tab_button__')
