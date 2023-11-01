@@ -30,7 +30,7 @@ export default {
   actions: {
     get_optimized_data(data, params) {
       return new Promise((resolve, reject) => {
-        axios.get('https://konatus-api.onrender.com/api/get_optimize', params.data)
+        axios.get('https://api.konatus.site/v1/api/get_optimize', params.data)
           .then(response => {
             const optimizeData = response.data
             this.commit('portfolioState/GET_OPTIMIZED_DATA', optimizeData)

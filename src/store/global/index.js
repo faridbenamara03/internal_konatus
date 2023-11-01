@@ -1412,7 +1412,6 @@ export default {
       })
     },
     create_new_portfolio(commit, payload) {
-      console.log("Payload:", payload)
       axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
@@ -1422,7 +1421,6 @@ export default {
       })
     },
     create_new_project(commit, payload) {
-      console.log("Payload:", payload)
       axios.post('https://api.konatus.site/v1/api/project/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PROJECT', newData)
