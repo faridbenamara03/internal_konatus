@@ -13,6 +13,8 @@
       v-bind="linkProps"
       class="d-flex align-items-center"
       :class="{'m-0': (item.type === 'organization' || item.type === 'company' || item.type === 'organization-unit')}"
+      :id="`nav-${item.type}-${item.id}`"
+      v-b-tooltip.hover.top="item.type === 'program' ? getHours(item.id) : ''"
     >
       <div :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
       <feather-icon
@@ -48,7 +50,9 @@
 </template>
 
 <script>
-import { BLink, BBadge, BCollapse } from 'bootstrap-vue'
+import {
+  BLink, BBadge, BCollapse, VBTooltip
+} from 'bootstrap-vue'
 import { resolveVerticalNavMenuItemComponent as resolveNavItemComponent } from '@core/layouts/utils'
 import { useUtils as useI18nUtils } from '@core/libs/i18n'
 import { useUtils as useAclUtils } from '@core/libs/acl'
@@ -69,6 +73,9 @@ export default {
     BBadge,
     BCollapse,
     NavMenuIcon,
+  },
+  directives: {
+    'b-tooltip': VBTooltip,
   },
   mixins: [mixinVerticalNavMenuGroup],
   props: {
@@ -145,6 +152,9 @@ export default {
         this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
         this.$router.push(baseUrl)
       }
+    },
+    getHours(id) {
+      return `${id}00 hours`
     },
   },
 }

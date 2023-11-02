@@ -196,6 +196,7 @@
             :options="activityList"
             placeholder="Select Task"
             outlined
+            multiple
           />
         </div>
       </div>

@@ -11,6 +11,31 @@
     <div class="mb-2">
       <b>{{ phaseId }}</b>
     </div>
+    <b-dropdown
+      id="checkbox-dropdown"
+      class="mb-1"
+      text="Select Options"
+      variant="outline-secondary"
+      toggle-class="form-control"
+      style="width: 100%;"
+    >
+      <template #button-content>
+        <span>{{ selectedOptionsString }}</span>
+      </template>
+      <b-dropdown-item
+        v-for="(option, index) in options"
+        :key="option.value"
+      >
+        <b-form-checkbox
+          :id="'checkbox_' + index"
+          v-model="option.selected"
+          :value="option.value"
+          class="m-0"
+        >
+          {{ option.label }}
+        </b-form-checkbox>
+      </b-dropdown-item>
+    </b-dropdown>
     <b-form-input
       id="input-elementId"
       v-model="elementId"
@@ -44,7 +69,7 @@
 
 <script>
 import {
-  BModal, VBModal, BFormInput, BFormSelect
+  BModal, VBModal, BFormInput, BFormSelect, BDropdown, BFormCheckbox
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { isEmpty } from '../../../utils'
@@ -53,7 +78,9 @@ export default {
   components: {
     BModal,
     BFormInput,
-    BFormSelect
+    BFormSelect,
+    BDropdown,
+    BFormCheckbox
   },
   directives: {
     'b-modal': VBModal,
@@ -66,10 +93,25 @@ export default {
   },
   data() {
     return {
+      taskId: 'JIRA',
       elementId: '',
       priority: 'High',
-      gate: ''
+      gate: '',
+      selectedOptions: '',
+      options: [
+        { label: 'Jira', value: 'Jira' },
+        { label: 'SAP', value: 'SAP' },
+      ]
     }
+  },
+  computed: {
+    selectedOptionsString() {
+      const selectedOptions = this.options
+        .filter(option => option.selected)
+        .map(option => option.value)
+        .join('+')
+      return selectedOptions
+    },
   },
   methods: {
     handleOk(e) {
