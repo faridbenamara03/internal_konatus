@@ -87,7 +87,7 @@
       </div>
       <div class="reporting-content--body">
         <div
-          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 365 + 'px;top:122px;z-index:222'"
+          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 400 + 'px;top:122px;z-index:222'"
         >
           <div
             class="rounded-circle"
@@ -132,23 +132,26 @@
             >
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 0, false) > 0"
                   :type="0"
                   :width1="getValue(item1, 0, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 1, false) > 0"
                   :type="1"
                   :width1="getValue(item1, 1, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 1, false) > 0"
                   :type="2"
                   :width1="getValue(item1, 1, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
             </b-card>
@@ -167,23 +170,26 @@
               >
                 <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 0, true) > 0"
                     :type="0"
                     :widths="getValue(item2, 0, true)"
-                    :width4="363 - getStartPadding(item2, 0, true)"
+                    :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
                   />
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 2, true) > 0"
                     :type="1"
                     :widths="getValue(item2, 2, true)"
-                    :width4="363 - getStartPadding(item2, 2, true)"
+                    :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
                   />
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 2, true) > 0"
                     :type="2"
                     :widths="getValue(item2, 2, true)"
-                    :width4="363 - getStartPadding(item2, 2, true)"
+                    :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
                   />
                 </div>
               </b-card>
@@ -202,23 +208,26 @@
             >
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 0, false) > 0"
                   :type="0"
                   :width1="getValue(item1, 0, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 1, false) > 0"
                   :type="1"
                   :width1="getValue(item1, 1, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
               <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
                 <ProgramProgressBar
+                  v-if="getValue(item1, 2, false) > 0"
                   :type="2"
                   :width1="getValue(item1, 2, false)"
-                  :width2="364 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1)"
                 />
               </div>
             </b-card>
@@ -237,23 +246,26 @@
               >
                 <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 0, true) > 0"
                     :type="0"
                     :widths="getValue(item2, 0, true)"
-                    :width4="363 - getStartPadding(item2, 0, true)"
+                    :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
                   />
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 1, true) > 0"
                     :type="1"
                     :widths="getValue(item2, 1, true)"
-                    :width4="363 - getStartPadding(item2, 1, true)"
+                    :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
                   />
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
+                    v-if="getValue(item2, 2, true) > 0"
                     :type="2"
                     :widths="getValue(item2, 2, true)"
-                    :width4="363 - getStartPadding(item2, 2, true)"
+                    :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
                   />
                 </div>
               </b-card>
@@ -469,18 +481,18 @@ export default {
               const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.fte / fullValue
               barRect = typeValue * fullWidth * (phase.progress / 100)
             } else if (type === 1) {
-              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.duration / fullValue
+              const typeValue = (phase.duration / fullValue) === 0 ? 1 : phase.duration / fullValue
               barRect = typeValue * fullWidth * (phase.progress / 100)
             } else if (type === 2) {
-              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.load / fullValue
+              const typeValue = (phase.load / fullValue) === 0 ? 1 : phase.load / fullValue
               barRect = typeValue * fullWidth * (phase.progress / 100)
             }
-            console.log('Phase:', phase, 'FW:', fullWidth, 'BR:', barRect)
+            // console.log('Phase:', phase, 'FW:', fullWidth, 'BR:', barRect)
             result.push(barRect)
             phIndex += 1
           }
         }
-        console.log('Item:', item, 'Result:', result)
+        // console.log('Item:', item, 'Result:', result)
       } else {
         const startMoment = moment(item.startDate, 'YYYY-MM-DD').startOf('day')
         const endMoment = moment(item.endDate, 'YYYY-MM-DD').startOf('day')
@@ -511,14 +523,14 @@ export default {
           }
           const pStartMoment = moment.min(pstarts)
           const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-          const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : (moment.duration(firstMoment.diff(pStartMoment)).asDays())
+          const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : 0
           const pd = duration * 25
           result = pd
         }
       } else {
         const startMoment = moment(item.startDate, 'YYYY-MM-DD')
         const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-        const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : (moment.duration(firstMoment.diff(startMoment)).asDays())
+        const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
         const pd = duration * 25
         result = pd
       }

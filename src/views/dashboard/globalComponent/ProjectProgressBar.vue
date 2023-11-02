@@ -4,7 +4,10 @@
       v-for="(width, index) in widths"
       :key="index"
     >
-      <div class="d-flex">
+      <div
+        v-if="width > 0"
+        class="d-flex"
+      >
         <b-icon
           style="padding-bottom:2px"
           icon="diamond-fill"
@@ -81,7 +84,10 @@
         :variant="typeArr[type]"
       />
     </div> -->
-    <div :style="`background-color:#0008;width:${width4}px;height:14px;position:absolute;left:0px;top:-1px`" />
+    <div
+      v-if="width4 > 0"
+      :style="`background-color:#0008;width:${width4}px;height:14px;position:absolute;left:0px;top:-1px`"
+    />
   </div>
 </template>
 

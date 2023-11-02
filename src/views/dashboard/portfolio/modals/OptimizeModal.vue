@@ -272,6 +272,7 @@ export default {
     async handleStart() {
       this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'pending')
       this.isStatus = this.$store.state.portfolioState.optimizeStates
+      const navObj = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('portfolioState/get_optimized_data', {
         data: {
           selectedPriority: this.selectedPriority,
@@ -279,7 +280,9 @@ export default {
           loadRange: this.loadRange,
           valueRange: this.valueRange,
           projectRange: this.projectRange,
-          winRateRange: this.winRateRange
+          winRateRange: this.winRateRange,
+          portId: navObj.id,
+          type: navObj.type
         }
       })
       this.isStatus = this.$store.state.portfolioState.optimizeStates
