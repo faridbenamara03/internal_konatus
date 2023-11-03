@@ -13,15 +13,21 @@
       v-bind="linkProps"
       class="d-flex align-items-center"
       :class="{'m-0': (item.type === 'organization' || item.type === 'company' || item.type === 'organization-unit')}"
+      @click="handleNavItemClick(item)"
     >
-      <div :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`" />
+      <div
+        :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`"
+      />
       <feather-icon
         :icon="isOpen ? 'ChevronDownIcon' : 'ChevronRightIcon'"
         size="16"
-        @click="handleNavItemClick(item)"
       />
-      <nav-menu-icon :item="item" />
-      <span class="menu-title text-truncate">{{ item.title }}</span>
+      <nav-menu-icon
+        :item="item"
+      />
+      <span
+        class="menu-title text-truncate"
+      >{{ item.title }}</span>
       <b-badge
         v-if="item.tag"
         pill

@@ -80,7 +80,8 @@ export default {
       } else {
         const baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
         const currentUrl = this.$router.history.current.path
-        if (baseUrl === currentUrl || currentUrl.indexOf('/project') > 0) return
+        // if (baseUrl === currentUrl || currentUrl.indexOf('/project') > 0) return
+        if (baseUrl === currentUrl) return
         this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
         this.$router.push(baseUrl)
       }
