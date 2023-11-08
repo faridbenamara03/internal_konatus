@@ -267,7 +267,7 @@ import { isEmpty } from "@/views/utils"
 import ModalRequestQuote from '../globalComponent/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
-import CreateDrawer from './modals/CreateDrawer.vue'
+import CreateDrawer from './modals/CreateNewProgramDrawer.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'

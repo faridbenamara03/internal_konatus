@@ -36,7 +36,7 @@
         class="pr-1 pl-1 create-input-select-font css-4-hv"
         @click="onSelectClick(item)"
       >
-        {{ item }}
+        {{ item.title }}
       </div>
     </div>
   </div>

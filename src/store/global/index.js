@@ -40,379 +40,6 @@ const weekNumbersArr = betweenMonths => {
   return labelArr
 }
 
-const globalOperationDataInsertedProgram = {
-  id: 'konatus-industries-company',
-  title: 'Konatus Industries',
-  resource: 'konatus',
-  isOperation: true,
-  type: 'company',
-  children: [
-    {
-      id: 'consumer-robots-portfolio',
-      title: 'Consumer Robots',
-      type: 'portfolio',
-      priority: 'Highest',
-      budget: '210000',
-      deadline: '06/02/2023',
-      engaged: '215800',
-      quote: '210000',
-      demand: '319200',
-      realEstimated: '210100',
-      authorised: '124500',
-      spent: '21600',
-      value: '331', // ?
-      next_gate: '03/01/2022', // ?
-      route: {
-        name: 'portfolio-view',
-        params: {
-          portfolioId: 'consumer-robots',
-        },
-      },
-      children: [
-        {
-          id: 'quadruped-robot-program',
-          title: 'Quadruped robot',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          priority: 'Highest',
-          budget: '91001',
-          deadline: '06/01/2023',
-          engaged: '21800',
-          quote: '89000',
-          demand: '19200',
-          realEstimated: '10100',
-          authorised: '14500',
-          spent: '11600',
-          value: '331',
-          next_gate: '03/01/2022',
-          gate: 3, // for unit demand page
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'consumer-robots',
-              programId: 'quadruped-robot',
-            },
-          },
-          children: [
-            {
-              id: 'new-format-project',
-              title: 'New Format',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              route: {
-                name: 'project-view',
-                params: {
-                  portfolioId: 'consumer-robots',
-                  programId: 'quadruped-robot',
-                  projectId: 'new-format',
-                },
-              },
-              priority: 'High',
-              budget: '350000',
-              deadline: '06/01/2021',
-              engaged: '22450',
-              quote: '61900',
-              demand: '91800',
-              realEstimated: '235200',
-              authorised: '232100',
-              spent: '41800',
-              value: '64',
-              next_gate: '03/01/2022',
-              progress: 64,
-              start_date: '2022.11.6',
-              end_date: '2022.12.26',
-              // phases: [
-              //   'phase-1',
-              //   'phase-2',
-              //   'phase-3',
-              //   'phase-4',
-              //   'phase-5'
-              // ],
-            },
-            {
-              id: 'enhanced-motricity-project',
-              title: 'Enhanced motricity',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '82000',
-              deadline: '03/28/2021',
-              engaged: '46450',
-              quote: '54900',
-              demand: '98500',
-              realEstimated: '431700',
-              authorised: '39600',
-              spent: '61400',
-              next_gate: '06/02/2022',
-              value: '84',
-              // phases: [
-              //   'phase-6',
-              //   'phase-7'
-              // ]
-            },
-            {
-              id: 'enhanced-autonomy-project',
-              title: 'Enhanced autonomy',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '98000',
-              deadline: '06/01/2021',
-              engaged: '450',
-              quote: '45900',
-              demand: '72400',
-              realEstimated: '82000',
-              authorised: '31000',
-              spent: '21300',
-              next_gate: '07/01/2022',
-              value: '31',
-              // phases: [
-              //   'phase-8'
-              // ]
-            },
-            {
-              id: 'dual-sourcing-for-quadruped-project',
-              title: 'Dual sourcing for Quadruped',
-              parent: 'quadruped-robot-program',
-              type: 'project',
-              priority: 'Lowest',
-              budget: '80000',
-              deadline: '12/31/2021',
-              engaged: '450',
-              quote: '41550',
-              demand: '91500',
-              realEstimated: '211200',
-              authorised: '18800',
-              spent: '31100',
-              value: '3',
-              next_gate: '08/02/2022',
-              // phases: []
-            },
-          ]
-        },
-        {
-          id: 'new-created-program-program',
-          title: 'New Created Program',
-          type: 'program',
-
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          spent: '100',
-          value: '100',
-          next_gate: '06/02/2022',
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'consumer-robots',
-              programId: 'new-created-program',
-            },
-          },
-          children: [
-            {
-              id: 'project-in-new-program-program',
-              title: 'Project in New Program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '82000',
-              deadline: '03/28/2021',
-              engaged: '46450',
-              quote: '54900',
-              demand: '98500',
-              realEstimated: '431700',
-              authorised: '39600',
-              spent: '61400',
-              value: '84',
-              next_gate: '06/02/2022',
-              route: {
-                name: 'program-view',
-                params: {
-                  portfolioId: 'consumer-robots',
-                  programId: 'new-created-program',
-                  projectId: 'project-in-new-program'
-                },
-              },
-              phases: []
-            },
-          ]
-        },
-        {
-          id: 'micro-robot-observation-nbc-program',
-          title: 'Micro robot observation NBC',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          spent: '100',
-          value: '100',
-          next_gate: '06/02/2022',
-          // children: []
-        },
-        {
-          id: 'handling-robot-program',
-          title: 'Handling robot',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          priority: 'lowest',
-          budget: '150',
-          deadline: '05/20/2018',
-          engaged: '450',
-          quote: '292.5',
-          demand: '300',
-          realEstimated: '320',
-          authorised: '1000',
-          spent: '100',
-          value: '100',
-          next_gate: '06/02/2022',
-        },
-        {
-          id: 'power-&-programming-station-program',
-          title: 'Power & programming station',
-          parent: 'consumer-robots-portfolio',
-          type: 'program',
-          priority: 'Low',
-          budget: '1200',
-          deadline: '03/24/2018',
-          engaged: '450',
-          quote: '550',
-          demand: '1500',
-          realEstimated: '1800',
-          authorised: '900',
-          spent: '100',
-          value: '10',
-          next_gate: '06/02/2022',
-        },
-      ]
-    },
-    {
-      id: 'military-robots-portfolio',
-      title: 'Military Robots',
-      type: 'portfolio',
-      priority: 'Highest',
-      budget: '21000',
-      deadline: '06/01/2021',
-      engaged: '12800',
-      quote: '21000',
-      demand: '19200',
-      realEstimated: '10100',
-      authorised: '14500',
-      spent: '16000',
-      value: '331',
-      next_gate: '03/01/2022',
-      route: {
-        name: 'portfolio-view',
-        params: {
-          portfolioId: 'military-robots',
-        },
-      },
-      children: [
-        {
-          id: 'attacking-robot-program',
-          title: 'Attacking robot',
-          parent: 'military-robots-portfolio',
-          type: 'program',
-          priority: 'Highest',
-          budget: '21000',
-          deadline: '06/01/2021',
-          engaged: '12800',
-          quote: '11000',
-          demand: '19200',
-          realEstimated: '10100',
-          authorised: '4500',
-          spent: '8600',
-          value: '331',
-          next_gate: '03/01/2022',
-          route: {
-            name: 'program-view',
-            params: {
-              portfolioId: 'military-robots',
-              programId: 'attacking-robot',
-            },
-          },
-          children: [
-            {
-              id: 'rocket-launcher-project',
-              title: 'Rocket launcher',
-              parent: 'attacking-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '11000',
-              deadline: '06/01/2021',
-              engaged: '12800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-            {
-              id: 'location-system-project',
-              title: 'Location system',
-              parent: 'attacking-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '21000',
-              engaged: '9800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-            {
-              id: 'target-lock-project',
-              title: 'Target lock',
-              parent: 'attacking-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '21000',
-              engaged: '9800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-            {
-              id: 'estimation-device-program',
-              title: 'Estimation device',
-              parent: 'attacking-robot-program',
-              type: 'project',
-              priority: 'Highest',
-              budget: '21000',
-              engaged: '9800',
-              quote: '22000',
-              demand: '19200',
-              realEstimated: '10100',
-              authorised: '14500',
-              spent: '11600',
-              value: '331',
-              next_gate: '03/01/2022',
-            },
-          ],
-        },
-      ]
-    },
-  ]
-}
-
 const teamsState = [
   {
     title: 'Team A',
@@ -978,31 +605,62 @@ export default {
       }
     },
     CREATE_NEW_PROJECT(state, data) {
-      if (!!data.parentOrganization && !!data.projectName && !!data.projectBudget) {
-        const dt = { ...state.globalData[0] }
-        const chld = dt.children
-        chld.push({
-          id: `${data.projectName.toLowerCase()}-project`,
-          title: data.projectName,
-          budget: data.projectName,
-          type: 'project',
-          children: [
-            {
-              id: `${data.projectName.toLowerCase()}-phase`,
-              title: 'sample phase',
-              type: 'phase'
-            }
-          ]
-        })
-        dt.children = chld
-        state.globalOperationData = dt
-        const u1 = !state.openCreateNewPortfolioDrawer
-        const u2 = !state.openCreateNewUnitDrawer
-        state.openCreateNewPortfolioDrawer = u1
-        state.openCreateNewUnitDrawer = u2
-      } else {
-        Vue.$toast.warning('Please input correctly.')
-      }
+      // if (!!data.parentOrganization && !!data.projectName && !!data.projectBudget) {
+      //   const dt = { ...state.globalData[0] }
+      //   const chld = dt.children
+      //   chld.push({
+      //     id: `${data.projectName.toLowerCase()}-project`,
+      //     title: data.projectName,
+      //     budget: data.projectName,
+      //     type: 'project',
+      //     children: [
+      //       {
+      //         id: `${data.projectName.toLowerCase()}-phase`,
+      //         title: 'sample phase',
+      //         type: 'phase'
+      //       }
+      //     ]
+      //   })
+      //   dt.children = chld
+      //   state.globalOperationData = dt
+      //   const u1 = !state.openCreateNewPortfolioDrawer
+      //   const u2 = !state.openCreateNewUnitDrawer
+      //   state.openCreateNewPortfolioDrawer = u1
+      //   state.openCreateNewUnitDrawer = u2
+      // } else {
+      //   Vue.$toast.warning('Please input correctly.')
+      // }
+      console.log("NewProjectData:", data)
+      const u1 = !state.openCreateNewProjectDrawer
+      state.openCreateNewProjectDrawer = u1
+    },
+    CREATE_NEW_PROGRAM(state, data) {
+      // if (!!data.parentOrganization && !!data.projectName && !!data.projectBudget) {
+      //   const dt = { ...state.globalData[0] }
+      //   const chld = dt.children
+      //   chld.push({
+      //     id: `${data.projectName.toLowerCase()}-project`,
+      //     title: data.projectName,
+      //     budget: data.projectName,
+      //     type: 'project',
+      //     children: [
+      //       {
+      //         id: `${data.projectName.toLowerCase()}-phase`,
+      //         title: 'sample phase',
+      //         type: 'phase'
+      //       }
+      //     ]
+      //   })
+      //   dt.children = chld
+      //   state.globalOperationData = dt
+      //   const u1 = !state.openCreateNewProgramDrawer
+      //   state.openCreateNewProgramDrawer = u1
+      // } else {
+      //   Vue.$toast.warning('Please input correctly.')
+      // }
+      console.log("NewProgramData:", data)
+      const u1 = !state.openCreateNewProgramDrawer
+      state.openCreateNewProgramDrawer = u1
     },
     TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
       const u = state.openEditPortfolioDrawer
@@ -1306,13 +964,13 @@ export default {
     WOEK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity
     },
-    ADD_PROJECT(state) {
-      Vue.$toast.success("New program added")
-      state.globalData = [globalOperationDataInsertedProgram, state.globalData[1]]
-      state.projectElementTeamData = []
-      state.projectElementPhaseData = []
-      // this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
-    },
+    // ADD_PROJECT(state) {
+    //   Vue.$toast.success("New program added")
+    //   state.globalData = [globalOperationDataInsertedProgram, state.globalData[1]]
+    //   state.projectElementTeamData = []
+    //   state.projectElementPhaseData = []
+    //   // this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
+    // },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
       state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
       state.parentTeamTitle = data.team
@@ -1398,16 +1056,6 @@ export default {
           Vue.$toast.error('Failed to load orgnaizations data.')
         })
     },
-    // load_nav_data(orgId) {
-    //   axios.get(`https://api.konatus.site/v1/api/menu/get_nav_data?orgId=${orgId}`).then(response => {
-    //   // axios.get('http://localhost/konatus-me/public/api/menu/get_nav_data').then(response => {
-    //     const globalAllData = response.data
-    //     this.commit('globalState/LOAD_NAV_DATA', globalAllData)
-    //   }).catch(err => {
-    //     console.log('error getting nav data ---->', err)
-    //     Vue.$toast.error('Failed to load navigation data.')
-    //   })
-    // },
     create_new_unit(payload) {
       axios.post('https://api.konatus.site/v1/api/unit/create', payload).then(response => {
         const newData = response.data
@@ -1427,12 +1075,35 @@ export default {
       })
     },
     create_new_project(commit, payload) {
-      axios.post('https://api.konatus.site/v1/api/project/create', payload).then(response => {
-        const newData = response.data
-        this.commit('globalState/CREATE_NEW_PROJECT', newData)
-      }).catch(err => {
-        console.log('error creating new portfolio --->', err)
-        Vue.$toast.error('Failed to create new portfolio.')
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/CREATE_NEW_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new project ---->', err)
+            Vue.$toast.error('Failed to create new project.')
+            reject(err)
+          })
+      })
+    },
+    create_new_program(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/program/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/CREATE_NEW_PROGRAM', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new program ---->', err)
+            Vue.$toast.error('Failed to create new program.')
+            reject(err)
+          })
       })
     },
     insert_new_task(payload) {
