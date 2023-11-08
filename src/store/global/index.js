@@ -866,6 +866,8 @@ export default {
     openCreateNewPortfolioDrawer: false,
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
+    openCreateNewProgramDrawer: false,
+    openCreateNewProjectDrawer: false,
     parentIndexForInsertElement: {},
     parentTeamTitle: ''
   },
@@ -873,8 +875,12 @@ export default {
     TOGGLE_CREATE_NEW_DRAWER(state) {
       const u1 = !state.openCreateNewPortfolioDrawer
       const u2 = !state.openCreateNewUnitDrawer
+      const u3 = !state.openCreateNewProgramDrawer
+      const u4 = !state.openCreateNewProjectDrawer
       state.openCreateNewPortfolioDrawer = u1
       state.openCreateNewUnitDrawer = u2
+      state.openCreateNewProgramDrawer = u3
+      state.openCreateNewProjectDrawer = u4
     },
     CREATE_NEW_UNIT(state, data) {
       if (!data.unitName) {

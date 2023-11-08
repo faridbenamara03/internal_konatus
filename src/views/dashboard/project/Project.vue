@@ -247,13 +247,22 @@
     </b-card-body>
     <template #footer>
       <b-button
-        v-b-modal.modal-create
         variant="primary"
+        @click="toggleCreateNewProjectDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
-    <create-modal />
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewProjectDrawer"
+    >
+      <div v-if="openCreateNewProjectDrawer">
+        <CreateDrawer />
+      </div>
+    </Drawer>
     <modal-request-quote
       :data="projectElementTeamData"
       @onSubmit="handleRequestQuote"
@@ -279,11 +288,12 @@ import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
 import { isEmpty } from "@/views/utils"
+import Drawer from "vue-simple-drawer"
 import ModalRequestQuote from '../globalComponent/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
-import CreateModal from './modals/CreateModal.vue'
 import Demand from './components/Demand.vue'
+import CreateDrawer from './modals/CreateDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
@@ -302,7 +312,8 @@ export default {
     ImportModal,
     ImportLoaderModal,
     ModalRequestQuote,
-    CreateModal,
+    Drawer,
+    CreateDrawer,
     MonthPicker,
     BFormInput,
     BPopover,
@@ -393,11 +404,17 @@ export default {
   computed: {
     selectedWorkElement() {
       return this.$store.state.globalState.selectedWorkElement
-    }
+    },
+    openCreateNewProjectDrawer() {
+      return this.$store.state.globalState.openCreateNewProjectDrawer
+    },
   },
   methods: {
     isUN(data) {
       return isEmpty(data)
+    },
+    toggleCreateNewProjectDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
     },
     onRangeFromChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
