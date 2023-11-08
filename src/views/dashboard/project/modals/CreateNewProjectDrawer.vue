@@ -28,11 +28,11 @@
             <label>Program</label>
             <InputSelect
               placeholder="Select Program"
-              :options="[{title: 'Quadrupted robot', id: '63d3d79802e5f6e2220b5170'},
-                         {title: 'Micro robot observation NBC', id: '63d3d79802e5f6e2220b5171'},
-                         {title: 'Power & programming station', id: '63d3d79802e5f6e2220b5173'},
-                         {title: 'Attacking robot', id: '63d3d79802e5f6e2220b5174'},
-                         {title: 'Handling robot', id: '63d3d79802e5f6e2220b5172'}]"
+              :options="[{title: 'Quadrupted robot', id: '3'},
+                         {title: 'Micro robot observation NBC', id: '4'},
+                         {title: 'Power & programming station', id: '6'},
+                         {title: 'Attacking robot', id: '7'},
+                         {title: 'Handling robot', id: '5'}]"
               :value="step1.program === null ? null : step1.program.title"
               @customChange="e => handleCustomChange(e, 'program')"
             />
