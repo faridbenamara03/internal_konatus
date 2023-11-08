@@ -28,7 +28,7 @@
             <label>Portfolio</label>
             <InputSelect
               placeholder="Select Portfolio"
-              :options="[{ title: 'Consumer Robots', id: '63d3d79802e5f6e2220b516e'}, { title: 'Military Robots', id: '63d3d79802e5f6e2220b516f'}]"
+              :options="[{ title: 'Consumer Robots', id: '1'}, { title: 'Military Robots', id: '2'}]"
               :value="step1.portfolio === null ? null : step1.portfolio.title"
               @customChange="e => handleCustomChange(e, 'portfolio')"
             />
