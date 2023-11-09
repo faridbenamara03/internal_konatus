@@ -28,11 +28,7 @@
             <label>Program</label>
             <InputSelect
               placeholder="Select Program"
-              :options="[{title: 'Quadrupted robot', id: '3'},
-                         {title: 'Micro robot observation NBC', id: '4'},
-                         {title: 'Power & programming station', id: '6'},
-                         {title: 'Attacking robot', id: '7'},
-                         {title: 'Handling robot', id: '5'}]"
+              :options="getAllPrograms()"
               :value="step1.program === null ? null : step1.program.title"
               @customChange="e => handleCustomChange(e, 'program')"
             />
@@ -212,6 +208,9 @@ export default {
       years: ['2022', '2023', '2024', '2025'],
     }
   },
+  async mounted() {
+    await this.$store.dispatch('globalState/get_all_programs')
+  },
   methods: {
     async handleSave() {
       const newProjectData = {
@@ -228,6 +227,10 @@ export default {
       })
       await this.$store.dispatch('globalState/load_org_data')
       this.$refs['my-modal'].hide()
+    },
+    getAllPrograms() {
+      const pgs = Array.from(this.$store.state.globalState.allProgData)
+      return pgs
     },
     handleAddPhase() {
       if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {

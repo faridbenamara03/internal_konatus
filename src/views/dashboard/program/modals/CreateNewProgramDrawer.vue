@@ -28,7 +28,7 @@
             <label>Portfolio</label>
             <InputSelect
               placeholder="Select Portfolio"
-              :options="[{ title: 'Consumer Robots', id: '1'}, { title: 'Military Robots', id: '2'}]"
+              :options="getAllPorts()"
               :value="step1.portfolio === null ? null : step1.portfolio.title"
               @customChange="e => handleCustomChange(e, 'portfolio')"
             />
@@ -219,6 +219,9 @@ export default {
       years: ['2022', '2023', '2024', '2025'],
     }
   },
+  async mounted() {
+    await this.$store.dispatch('globalState/get_all_portfolios')
+  },
   methods: {
     async handleSave() {
       const newProgramData = {
@@ -235,6 +238,10 @@ export default {
       })
       await this.$store.dispatch('globalState/load_org_data')
       this.$refs['my-modal'].hide()
+    },
+    getAllPorts() {
+      const pts = Array.from(this.$store.state.globalState.allPortData)
+      return pts
     },
     handleAddPhase() {
       if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {
