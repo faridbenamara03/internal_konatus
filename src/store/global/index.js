@@ -1012,8 +1012,8 @@ export default {
       })
     },
     load_org_data() {
-      // axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
-      axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
@@ -1061,8 +1061,8 @@ export default {
     },
     get_all_portfolios() {
       return new Promise((resolve, reject) => {
-        // axios.post('https://api.konatus.site/v1/api/portfolio/all')
-        axios.get('http://localhost/konatus-me/public/api/portfolio/all')
+        axios.post('https://api.konatus.site/v1/api/portfolio/all')
+        // axios.get('http://localhost/konatus-me/public/api/portfolio/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PORTFOLIO_DATA', newData)
@@ -1077,8 +1077,8 @@ export default {
     },
     get_all_programs() {
       return new Promise((resolve, reject) => {
-        // axios.post('https://api.konatus.site/v1/api/program/all')
-        axios.get('http://localhost/konatus-me/public/api/program/all')
+        axios.post('https://api.konatus.site/v1/api/program/all')
+        // axios.get('http://localhost/konatus-me/public/api/program/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PROGRAM_DATA', newData)
@@ -1093,8 +1093,8 @@ export default {
     },
     create_new_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        // axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
-        axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
+        axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/CREATE_NEW_PROJECT', newData)
@@ -1109,8 +1109,8 @@ export default {
     },
     create_new_program(commit, payload) {
       return new Promise((resolve, reject) => {
-        // axios.post('https://api.konatus.site/v1/api/program/create', payload.data)
-        axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
+        axios.post('https://api.konatus.site/v1/api/program/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/CREATE_NEW_PROGRAM', newData)
