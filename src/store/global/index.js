@@ -1061,7 +1061,7 @@ export default {
     },
     get_all_portfolios() {
       return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/portfolio/all')
+        axios.get('https://api.konatus.site/v1/api/portfolio/all')
         // axios.get('http://localhost/konatus-me/public/api/portfolio/all')
           .then(response => {
             const newData = response.data
@@ -1077,7 +1077,7 @@ export default {
     },
     get_all_programs() {
       return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/program/all')
+        axios.get('https://api.konatus.site/v1/api/program/all')
         // axios.get('http://localhost/konatus-me/public/api/program/all')
           .then(response => {
             const newData = response.data
