@@ -218,7 +218,7 @@ export default {
         step1: this.step1,
         step2: this.step2
       }
-      if (this.step1.program === null || this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null ) {
+      if (this.step1.program === null || this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
         this.$toast.error('Please input all correctly')
       } else {
         const navObj = this.$store.state.globalState.selectedNavObj

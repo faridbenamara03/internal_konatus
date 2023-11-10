@@ -277,8 +277,8 @@
     </b-card-body>
     <template #footer>
       <b-button
-        v-b-modal.modal-create
         variant="primary"
+        @click="toggleCreateNewUnitDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>

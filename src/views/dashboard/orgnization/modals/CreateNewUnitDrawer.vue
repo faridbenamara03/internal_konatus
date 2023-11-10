@@ -8,11 +8,24 @@
       style="padding-top: 0px"
     >
       <div class="select-box">
-        <label>Unit Name</label>
-        <b-form-input
-          v-model="unitName"
-          type="text"
-        />
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Organizations</label>
+            <InputSelect
+              placeholder="Select Organization"
+              :options="getAllOrgs()"
+              :value="organization === null ? null : organization.title"
+              @customChange="e => handleOrgChange(e)"
+            />
+          </div>
+          <div class="w-50">
+            <label>Unit Name</label>
+            <b-form-input
+              v-model="unitName"
+              type="text"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div>
@@ -31,12 +44,14 @@
 import {
   BButton, BFormInput
 } from 'bootstrap-vue'
+import InputSelect from './InputSelect.vue'
 // import vSelect from 'vue-select'
 
 export default {
   components: {
     BButton,
     BFormInput,
+    InputSelect
     // vSelect,
   },
   props: {
@@ -44,12 +59,32 @@ export default {
   data() {
     return {
       unitName: '',
+      organization: null
     }
   },
+  async mounted() {
+    await this.$store.dispatch('globalState/get_all_organizations')
+  },
   methods: {
-    handleCreate() {
-      this.$store.dispatch('globalState/create_new_unit', { unitName: this.unitName })
-    }
+    async handleCreate() {
+      if (this.unitName === null || this.unitName === '' || this.organization === null) {
+        this.$toast.error('Please input all correctly.')
+      } else {
+        await this.$store.dispatch('globalState/create_new_unit', {
+          unitName: this.unitName,
+          orgId: this.organization.id
+        })
+        await this.$store.dispatch('globalState/load_org_unit_data')
+        this.$refs['my-modal'].hide()
+      }
+    },
+    getAllOrgs() {
+      const orgs = Array.from(this.$store.state.globalState.allOrgData)
+      return orgs
+    },
+    handleOrgChange(e) {
+      this.organization = e
+    },
   },
 }
 </script>

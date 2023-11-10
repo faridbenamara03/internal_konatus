@@ -32,6 +32,7 @@ export default {
     this.$store.dispatch('globalState/load_org_team_data')
     this.$store.dispatch('globalState/get_all_portfolios')
     this.$store.dispatch('globalState/get_all_programs')
+    this.$store.dispatch('globalState/get_all_organizations')
   },
 }
 </script>

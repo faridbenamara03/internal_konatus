@@ -103,8 +103,12 @@
       </b-button>
     </div>
     <insert-new-task-modal :phase-id="phaseIdToInsert" />
-    <activity-detail-modal :is-open="openActivityModal" :selectedActivityData="taskDetail"
-      @hideModal="hideModal" :teamdata="teamarr" />
+    <activity-detail-modal
+      :is-open="openActivityModal"
+      :selected-activity-data="taskDetail"
+      :teamdata="teamarr"
+      @hideModal="hideModal"
+    />
   </div>
 </template>
 

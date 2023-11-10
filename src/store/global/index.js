@@ -473,6 +473,7 @@ export default {
     portfolioControlData: [],
     allPortData: [],
     allProgData: [],
+    allOrgData: [],
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),
@@ -512,72 +513,75 @@ export default {
       state.openCreateNewProjectDrawer = u4
     },
     CREATE_NEW_UNIT(state, data) {
-      if (!data.unitName) {
-        Vue.$toast.warning('Please input correctly.')
-      } else {
-        const dt = { ...state.globalData[1] }
-        const cdn = dt.children
-        cdn.push(
-          {
-            id: `${data.unitName.toLowerCase()}-unit`,
-            title: data.unitName,
-            type: 'unit',
-            route: {
-              name: 'unit-view',
-              params: {
-                unitId: data.unitName.toLowerCase(),
-              },
-            },
-            children: [
-              {
-                id: 'team-ln-team',
-                title: 'Team LN',
-                parent: 'lyon-unit',
-                type: 'team',
-                route: {
-                  name: 'team-view',
-                  params: {
-                    unitId: 'lyon',
-                    teamId: 'team-ln',
-                  },
-                },
-                children: [
-                  {
-                    id: 'lone-wolf-user',
-                    title: 'Lone Wolf',
-                    parent: 'team-ln-team',
-                    type: 'user',
-                  },
-                  {
-                    id: 'telora-varga-user',
-                    title: 'Telora Varga',
-                    parent: 'team-ln-team',
-                    type: 'user',
-                  },
-                  {
-                    id: 'poke-green-user',
-                    title: 'Poke Green',
-                    parent: 'team-ln-team',
-                    type: 'user',
-                  },
-                  {
-                    id: 'assen-oliveira-user',
-                    title: 'Assen Oliveira',
-                    parent: 'team-ln-team',
-                    type: 'user',
-                  },
-                ]
-              }
-            ]
-          }
-        )
-        dt.children = cdn
-        state.globalOrganizationUnitData = dt
-        const u1 = !state.openCreateNewPortfolioDrawer
-        const u2 = !state.openCreateNewUnitDrawer
-        state.openCreateNewPortfolioDrawer = u1
-        state.openCreateNewUnitDrawer = u2
-      }
+      // if (!data.unitName) {
+      //   Vue.$toast.warning('Please input correctly.')
+      // } else {
+      //   const dt = { ...state.globalData[1] }
+      //   const cdn = dt.children
+      //   cdn.push(
+      //     {
+      //       id: `${data.unitName.toLowerCase()}-unit`,
+      //       title: data.unitName,
+      //       type: 'unit',
+      //       route: {
+      //         name: 'unit-view',
+      //         params: {
+      //           unitId: data.unitName.toLowerCase(),
+      //         },
+      //       },
+      //       children: [
+      //         {
+      //           id: 'team-ln-team',
+      //           title: 'Team LN',
+      //           parent: 'lyon-unit',
+      //           type: 'team',
+      //           route: {
+      //             name: 'team-view',
+      //             params: {
+      //               unitId: 'lyon',
+      //               teamId: 'team-ln',
+      //             },
+      //           },
+      //           children: [
+      //             {
+      //               id: 'lone-wolf-user',
+      //               title: 'Lone Wolf',
+      //               parent: 'team-ln-team',
+      //               type: 'user',
+      //             },
+      //             {
+      //               id: 'telora-varga-user',
+      //               title: 'Telora Varga',
+      //               parent: 'team-ln-team',
+      //               type: 'user',
+      //             },
+      //             {
+      //               id: 'poke-green-user',
+      //               title: 'Poke Green',
+      //               parent: 'team-ln-team',
+      //               type: 'user',
+      //             },
+      //             {
+      //               id: 'assen-oliveira-user',
+      //               title: 'Assen Oliveira',
+      //               parent: 'team-ln-team',
+      //               type: 'user',
+      //             },
+      //           ]
+      //         }
+      //       ]
+      //     }
+      //   )
+      //   dt.children = cdn
+      //   state.globalOrganizationUnitData = dt
+      //   const u1 = !state.openCreateNewPortfolioDrawer
+      //   const u2 = !state.openCreateNewUnitDrawer
+      //   state.openCreateNewPortfolioDrawer = u1
+      //   state.openCreateNewUnitDrawer = u2
+      // }
+      console.log("NewUnitData:", data)
+      const u1 = !state.openCreateNewUnitDrawer
+      state.openCreateNewUnitDrawer = u1
     },
     CREATE_NEW_PORTFOLIO(state, data) {
       if (!!data.parentOrganization && !!data.portfolioName && !!data.portfolioBudget) {
@@ -646,6 +650,9 @@ export default {
     },
     LOAD_ALL_PROGRAM_DATA(state, data) {
       state.allProgData = data
+    },
+    LOAD_ALL_ORGANIZATION_DATA(state, data) {
+      state.allOrgData = data
     },
     TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
       const u = state.openEditPortfolioDrawer
@@ -1041,7 +1048,7 @@ export default {
           Vue.$toast.error('Failed to load orgnaizations data.')
         })
     },
-    create_new_unit(payload) {
+    create_new_unit(commit, payload) {
       axios.post('https://api.konatus.site/v1/api/unit/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_UNIT', newData)
@@ -1091,6 +1098,22 @@ export default {
           })
       })
     },
+    get_all_organizations() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/organization/all')
+        // axios.get('http://localhost/konatus-me/public/api/organization/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_ORGANIZATION_DATA', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all organization data ---->', err)
+            Vue.$toast.error('Failed to get all organization data.')
+            reject(err)
+          })
+      })
+    },
     create_new_project(commit, payload) {
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
@@ -1123,13 +1146,20 @@ export default {
           })
       })
     },
-    insert_new_task(payload) {
-      axios.post('https://api.konatus.site/v1/api/phase/create', payload).then(response => {
-        const newData = response.data
-        this.commit('globalState/INSERT_NEW_TASK', newData)
-      }).catch(err => {
-        console.log('error creating new task --->', err)
-        Vue.$toast.error('Failed to create new task.')
+    insert_new_task(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/INSERT_NEW_TASK', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new task ---->', err)
+            Vue.$toast.error('Failed to create new task.')
+            reject(err)
+          })
       })
     }
   }
