@@ -176,6 +176,15 @@
                       />
                     </div>
                   </div>
+                  <div>
+                    <b-button
+                      style="width: 100%"
+                      variant="primary"
+                      @click="handleDone"
+                    >
+                      Done
+                    </b-button>
+                  </div>
                 </b-popover>
               </div>
             </div>
@@ -350,6 +359,20 @@ export default {
     isUN(data) {
       return isEmpty(data)
     },
+    async handleDone() {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data: {
+          id: navObj.id,
+          type: navObj.type,
+          startMonth: this.rangeArray[0],
+          endMonth: this.rangeArray[1]
+        }
+      })
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+        this.popoverShow = false
+      }
+    },
     toggleCreateNewProgramDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
     },
@@ -362,9 +385,9 @@ export default {
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-        this.popoverShow = false
-      }
+      // if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+      //   this.popoverShow = false
+      // }
     },
     // ontabchange() {
     //   const urlArr = this.$route.path.split('/')

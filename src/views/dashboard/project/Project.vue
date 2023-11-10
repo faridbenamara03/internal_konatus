@@ -200,6 +200,15 @@
                       />
                     </div>
                   </div>
+                  <div>
+                    <b-button
+                      style="width: 100%"
+                      variant="primary"
+                      @click="handleDone"
+                    >
+                      Done
+                    </b-button>
+                  </div>
                 </b-popover>
               </div>
             </div>
@@ -413,6 +422,20 @@ export default {
     isUN(data) {
       return isEmpty(data)
     },
+    async handleDone() {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data: {
+          id: navObj.id,
+          type: navObj.type,
+          startMonth: this.rangeArray[0],
+          endMonth: this.rangeArray[1]
+        }
+      })
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+        this.popoverShow = false
+      }
+    },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
     },
@@ -431,11 +454,11 @@ export default {
       this.rangeArray[1] = v
       this.arr4chart[1] = `${value.year}-${value.monthIndex}-15`
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-        const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
-        this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
-        this.popoverShow = false
-      }
+      // if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+      //   const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
+      //   this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
+      //   this.popoverShow = false
+      // }
     },
     getBetweenMonthsArr(startD, endD) {
       const startDate = moment(startD)

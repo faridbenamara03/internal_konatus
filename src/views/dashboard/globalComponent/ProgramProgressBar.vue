@@ -35,7 +35,23 @@ export default {
   },
   data() {
     return {
-      colorArr: ['#ea5455', '#28c76f', '#00cfe8']
+      colorArr: ['#ea5455', '#28c76f', '#00cfe8'],
+      windowHeight: window.innerHeight
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize)
+    })
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
+
+  methods: {
+    onResize() {
+      this.windowHeight = window.innerHeight
     }
   }
 }

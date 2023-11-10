@@ -235,7 +235,7 @@
                 size="16"
                 style="margin-right:3px"
               />
-              <span>Period</span>
+              <span>Period</span> <!-- ?????-->
               <div class="ml-1">
                 <b-form-input
                   id="popover-manual-1"
@@ -269,6 +269,15 @@
                         @input="onRangeToChange"
                       />
                     </div>
+                  </div>
+                  <div>
+                    <b-button
+                      style="width: 100%"
+                      variant="primary"
+                      @click="handleDone"
+                    >
+                      Done
+                    </b-button>
                   </div>
                 </b-popover>
               </div>
@@ -484,6 +493,20 @@ export default {
     })
   },
   methods: {
+    async handleDone() {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data: {
+          id: navObj.id,
+          type: navObj.type,
+          startMonth: this.rangeArray[0],
+          endMonth: this.rangeArray[1]
+        }
+      })
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+        this.popoverShow = false
+      }
+    },
     showOptimizeModal() {
       this.$refs.optimizeModal.$refs['my-modal'].show()
     },
@@ -534,9 +557,6 @@ export default {
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-        this.popoverShow = false
-      }
     },
     handleChangeViewMode(mode) {
       const urlArr = this.$route.path.split('/')

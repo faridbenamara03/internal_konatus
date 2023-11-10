@@ -94,7 +94,10 @@
             style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
           />
         </div>
-        <div class="timeline-list">
+        <div
+          class="timeline-list"
+          :style="`width:${windowWidth / 2 }px`"
+        >
           <div
             v-for="(date, index) in reportingDates"
             :key="index"
@@ -334,6 +337,7 @@ export default {
     return {
       reportingDates: [],
       openedCollapse: 0,
+      windowWidth: window.innerWidth,
       itemsForReporting: this.$store.state.globalState.portfolioReportingData,
       isOptimiseIndex: this.$store.state.portfolioState.optimizeStatus,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
@@ -453,6 +457,9 @@ export default {
     }
     // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
   mounted() {
     const startDate = moment(moment()).subtract(15, 'days').startOf('day')
     const endDate = moment(moment()).add(1, 'M').startOf('day')
@@ -461,8 +468,15 @@ export default {
     while (startDate.add(1, 'days').diff(endDate) < 0) {
       this.reportingDates.push(startDate.clone())
     }
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize)
+    })
   },
   methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth
+      console.log("WW:", this.windowWidth)
+    },
     getValue(item, type, isChild) {
       let result = 0
       if (isChild) {
