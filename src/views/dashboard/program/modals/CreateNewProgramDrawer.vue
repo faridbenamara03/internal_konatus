@@ -228,16 +228,20 @@ export default {
         step1: this.step1,
         step2: this.step2
       }
-      const navObj = this.$store.state.globalState.selectedNavObj
-      await this.$store.dispatch('globalState/create_new_program', {
-        data: {
-          ...newProgramData,
-          portId: navObj.id,
-          type: navObj.type
-        }
-      })
-      await this.$store.dispatch('globalState/load_org_data')
-      this.$refs['my-modal'].hide()
+      if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null || this.step2.next_gate === null) {
+        this.$toast.error('Please input all correctly.')
+      } else {
+        const navObj = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/create_new_program', {
+          data: {
+            ...newProgramData,
+            portId: navObj.id,
+            type: navObj.type
+          }
+        })
+        await this.$store.dispatch('globalState/load_org_data')
+        this.$refs['my-modal'].hide()
+      }
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)

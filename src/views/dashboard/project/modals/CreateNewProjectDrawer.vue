@@ -203,6 +203,7 @@ export default {
         phase: null,
         budgetOpen: 0,
         date: null,
+        title: null
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -217,16 +218,20 @@ export default {
         step1: this.step1,
         step2: this.step2
       }
-      const navObj = this.$store.state.globalState.selectedNavObj
-      await this.$store.dispatch('globalState/create_new_project', {
-        data: {
-          ...newProjectData,
-          portId: navObj.id,
-          type: navObj.type
-        }
-      })
-      await this.$store.dispatch('globalState/load_org_data')
-      this.$refs['my-modal'].hide()
+      if (this.step1.program === null || this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null ) {
+        this.$toast.error('Please input all correctly')
+      } else {
+        const navObj = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/create_new_project', {
+          data: {
+            ...newProjectData,
+            portId: navObj.id,
+            type: navObj.type
+          }
+        })
+        await this.$store.dispatch('globalState/load_org_data')
+        this.$refs['my-modal'].hide()
+      }
     },
     getAllPrograms() {
       const pgs = Array.from(this.$store.state.globalState.allProgData)
