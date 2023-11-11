@@ -168,7 +168,7 @@ export default {
     VerticalNavMenuItems,
     BLink,
     BImg,
-    VerticalNavUserMenu,
+    VerticalNavUserMenu
   },
   props: {
     isVerticalMenuActive: {
