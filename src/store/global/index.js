@@ -1154,7 +1154,7 @@ export default {
     },
     insert_new_task(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/phase/create', payload.data)
+        axios.post('https://api.konatus.site/v1/api/phase/create', payload)
         // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
