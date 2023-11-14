@@ -51,14 +51,14 @@
         <div class="select-box">
           <label>Title</label>
           <b-form-input
-            v-model="step2.title"
+            v-model="data.title"
             type="text"
           />
         </div>
         <div class="select-box">
           <label>Priority</label>
           <v-select
-            v-model="step2.priority"
+            v-model="data.priority"
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Highest"
             outlined
@@ -69,14 +69,14 @@
         <div class="select-box">
           <label>Demand</label>
           <b-form-input
-            v-model="step2.demand"
+            v-model="data.demand"
             type="number"
           />
         </div>
         <div class="select-box">
           <label>Quote</label>
           <b-form-input
-            v-model="step2.quote"
+            v-model="data.quote"
             type="number"
           />
         </div>
@@ -85,14 +85,14 @@
         <div class="select-box">
           <label>Authorized</label>
           <b-form-input
-            v-model="step2.authorized"
+            v-model="data.authorized"
             type="number"
           />
         </div>
         <div class="select-box">
           <label>RealEstimated</label>
           <b-form-input
-            v-model="step2.realestimated"
+            v-model="data.realestimated"
             type="number"
           />
         </div>
@@ -101,14 +101,14 @@
         <div class="select-box">
           <label>Engaged</label>
           <b-form-input
-            v-model="step2.engaged"
+            v-model="data.engaged"
             type="number"
           />
         </div>
         <div class="select-box">
           <label>Spent</label>
           <b-form-input
-            v-model="step2.spent"
+            v-model="data.spent"
             type="number"
           />
         </div>
@@ -117,14 +117,14 @@
         <div class="select-box">
           <label>Budget</label>
           <b-form-input
-            v-model="step2.budget"
+            v-model="data.budget"
             type="number"
           />
         </div>
         <div class="select-box">
           <label>Value</label>
           <b-form-input
-            v-model="step2.value"
+            v-model="data.value"
             type="number"
           />
         </div>
@@ -134,7 +134,7 @@
           <label>Deadline</label>
           <b-form-datepicker
             id="program_deadline"
-            v-model="step2.deadline"
+            v-model="data.deadline"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
@@ -142,7 +142,7 @@
           <label>Next_Gate</label>
           <b-form-datepicker
             id="program_nextgate"
-            v-model="step2.next_gate"
+            v-model="data.next_gate"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
@@ -154,7 +154,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Save
+        Update
       </b-button>
     </div>
   </div>
@@ -183,6 +183,7 @@ export default {
   },
   data() {
     return {
+      title: '',
       curIndex: 1,
       step1: {
         system: null,
@@ -214,17 +215,13 @@ export default {
   },
   methods: {
     async handleSave() {
-      const newProjectData = {
-        step1: this.step1,
-        step2: this.step2
-      }
-      if (this.step1.program === null || this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
+      if (this.data.title === null || this.data.deadline === null || this.data.next_gate === null || this.data.priority === null) {
         this.$toast.error('Please input all correctly')
       } else {
         const navObj = this.$store.state.globalState.selectedNavObj
-        await this.$store.dispatch('globalState/create_new_project', {
+        await this.$store.dispatch('globalState/update_project', {
           data: {
-            ...newProjectData,
+            ...this.data,
             portId: navObj.id,
             type: navObj.type
           }

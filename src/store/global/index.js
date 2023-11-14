@@ -640,6 +640,9 @@ export default {
       const u1 = !state.openCreateNewProjectDrawer
       state.openCreateNewProjectDrawer = u1
     },
+    UPDATE_PROJECT(state, data) {
+      console.log("UpdateProjectData:", data)
+    },
     CREATE_NEW_PROGRAM(state, data) {
       console.log("NewProgramData:", data)
       const u1 = !state.openCreateNewProgramDrawer
@@ -1139,6 +1142,22 @@ export default {
           .catch(err => {
             console.log('error creating new project ---->', err)
             Vue.$toast.error('Failed to create new project.')
+            reject(err)
+          })
+      })
+    },
+    update_project(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/project/update', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/project/update', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/UPDATE_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error updating project ---->', err)
+            Vue.$toast.error('Failed to update project.')
             reject(err)
           })
       })
