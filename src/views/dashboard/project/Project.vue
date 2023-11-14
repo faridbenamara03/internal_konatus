@@ -426,6 +426,8 @@ export default {
       const navObj = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data: {
+          id: navObj.id,
+          type: navObj.type,
           nav: navObj,
           startMonth: this.rangeArray[0],
           endMonth: this.rangeArray[1]

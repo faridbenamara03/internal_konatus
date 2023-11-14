@@ -1012,7 +1012,7 @@ export default {
       // axios.get(`http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`).then(response => {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
-        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.nav.id}&type=${payload.data.nav.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
+        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -1021,7 +1021,7 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.nav.id}&type=${payload.data.nav.type}`
+        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
