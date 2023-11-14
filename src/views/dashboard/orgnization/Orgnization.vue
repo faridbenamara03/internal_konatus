@@ -434,7 +434,6 @@ export default {
   },
   methods: {
     triggerTabChange(tabKey) {
-      console.log(this.$route.query.activeTab)
       this.$root.$emit('bv::toggle::tab', tabKey)
     },
     toggleCreateNewUnitDrawer() {
