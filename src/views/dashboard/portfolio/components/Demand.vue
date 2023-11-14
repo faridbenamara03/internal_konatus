@@ -154,10 +154,16 @@
                   </div>
                 </div>
                 <div class="part3 d-flex justify-content-center">
-                  <b-button variant="flat-primary">
+                  <b-button
+                    variant="flat-primary"
+                    @click="toggleEditProjectDrawerOpen"
+                  >
                     <feather-icon icon="Edit2Icon" />
                   </b-button>
-                  <b-button variant="flat-primary">
+                  <b-button
+                    variant="flat-primary"
+                    @click="toggleDrawerOpen"
+                  >
                     <feather-icon icon="DollarSignIcon" />
                   </b-button>
                   <!-- <b-button variant="flat-primary">
@@ -383,6 +389,16 @@
         <EditDrawer />
       </div>
     </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleEditProjectDrawerOpen"
+    >
+      <div v-if="editProjectDrawerOpen">
+        <EditProjectDrawer />
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -396,6 +412,7 @@ import VueApexCharts from 'vue-apexcharts'
 import vSelect from 'vue-select'
 import BudgetDrawer from '../modals/BudgetDrawer.vue'
 import EditDrawer from '../modals/EditDrawer.vue'
+import EditProjectDrawer from '../modals/EditProjectDrawer.vue'
 
 export default {
   components: {
@@ -413,7 +430,8 @@ export default {
     vSelect,
     Drawer,
     BudgetDrawer,
-    EditDrawer
+    EditDrawer,
+    EditProjectDrawer
   },
   props: {
     data: {
@@ -436,6 +454,7 @@ export default {
     return {
       budgetDrawerOpen: false,
       editDrawerOpen: false,
+      editProjectDrawerOpen: false,
       opened: 0,
       chartOptions: {
         chart: {
@@ -612,6 +631,9 @@ export default {
     },
     toggleEditDrawerOpen() {
       this.editDrawerOpen = !this.editDrawerOpen
+    },
+    toggleEditProjectDrawerOpen() {
+      this.editProjectDrawerOpen = !this.editProjectDrawerOpen
     },
     onCollapseCLick(index) {
       if (index === this.opened) {

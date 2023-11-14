@@ -1,13 +1,13 @@
 <template>
   <div style="width:600px">
     <h3 class="modal-title mb-1">
-      Edit program
+      Edit project
     </h3>
     <p
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      update program
+      Edit project
     </p>
     <div
       class="select-group"
@@ -25,24 +25,14 @@
             />
           </div>
           <div class="w-50">
-            <label>Portfolio</label>
+            <label>Program</label>
             <InputSelect
-              placeholder="Select Portfolio"
-              :options="getAllPorts()"
-              :value="step1.portfolio === null ? null : step1.portfolio.title"
-              @customChange="e => handleCustomChange(e, 'portfolio')"
+              placeholder="Select Program"
+              :options="getAllPrograms()"
+              :value="step1.program === null ? null : step1.program.title"
+              @customChange="e => handleCustomChange(e, 'program')"
             />
           </div>
-        </div>
-      </div>
-      <div class="select-box">
-        <div class="d-flex">
-          <!-- <div class="w-50 pl-1">
-            <label>PortfolioID</label>
-            <b-form-input
-              v-model="step1.portfolioId"
-            />
-          </div> -->
         </div>
       </div>
     </div>
@@ -164,7 +154,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Update
+        Save
       </b-button>
     </div>
   </div>
@@ -196,10 +186,9 @@ export default {
       curIndex: 1,
       step1: {
         system: null,
-        portfolio: null,
+        program: null
       },
       step2: {
-        title: null,
         priority: null,
         value: 0,
         budget: 0,
@@ -214,27 +203,28 @@ export default {
         phase: null,
         budgetOpen: 0,
         date: null,
+        title: null
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
     }
   },
   async mounted() {
-    await this.$store.dispatch('globalState/get_all_portfolios')
+    await this.$store.dispatch('globalState/get_all_programs')
   },
   methods: {
     async handleSave() {
-      const newProgramData = {
+      const newProjectData = {
         step1: this.step1,
         step2: this.step2
       }
-      if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null || this.step2.next_gate === null) {
-        this.$toast.error('Please input all correctly.')
+      if (this.step1.program === null || this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
+        this.$toast.error('Please input all correctly')
       } else {
         const navObj = this.$store.state.globalState.selectedNavObj
-        await this.$store.dispatch('globalState/create_new_program', {
+        await this.$store.dispatch('globalState/create_new_project', {
           data: {
-            ...newProgramData,
+            ...newProjectData,
             portId: navObj.id,
             type: navObj.type
           }
@@ -243,9 +233,9 @@ export default {
         this.$refs['my-modal'].hide()
       }
     },
-    getAllPorts() {
-      const pts = Array.from(this.$store.state.globalState.allPortData)
-      return pts
+    getAllPrograms() {
+      const pgs = Array.from(this.$store.state.globalState.allProgData)
+      return pgs
     },
     handleAddPhase() {
       if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {
