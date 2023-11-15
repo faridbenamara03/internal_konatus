@@ -83,9 +83,9 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Authorized</label>
+          <label>Authorised</label>
           <b-form-input
-            v-model="data.authorized"
+            v-model="data.authorised"
             type="number"
           />
         </div>

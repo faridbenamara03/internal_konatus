@@ -475,7 +475,7 @@ export default {
   methods: {
     onResize() {
       this.windowWidth = window.innerWidth
-      console.log("WW:", this.windowWidth)
+      // console.log("WW:", this.windowWidth)
     },
     getValue(item, type, isChild) {
       let result = 0

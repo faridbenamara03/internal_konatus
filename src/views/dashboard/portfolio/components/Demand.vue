@@ -59,7 +59,7 @@
             <div class="part3 d-flex justify-content-center">
               <b-button
                 variant="flat-primary"
-                @click="toggleEditDrawerOpen"
+                @click="toggleEditDrawerOpen(item)"
               >
                 <feather-icon icon="Edit2Icon" />
               </b-button>
@@ -386,7 +386,9 @@
       @close="toggleEditDrawerOpen"
     >
       <div v-if="editDrawerOpen">
-        <EditDrawer />
+        <EditDrawer
+          :data="selectedProgram"
+        />
       </div>
     </Drawer>
     <Drawer
@@ -631,7 +633,8 @@ export default {
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
     },
-    toggleEditDrawerOpen() {
+    toggleEditDrawerOpen(item) {
+      this.selectedProgram = item
       this.editDrawerOpen = !this.editDrawerOpen
     },
     toggleEditProjectDrawerOpen(item) {

@@ -262,7 +262,7 @@ export default {
     }
   },
   mounted() {
-    console.log("TIS:", this.isStatus)
+    // console.log("TIS:", this.isStatus)
   },
   methods: {
     hideModal() {
