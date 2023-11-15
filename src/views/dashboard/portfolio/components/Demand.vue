@@ -24,7 +24,7 @@
       </div>
       <div v-if="otype !== 'program'">
         <div
-          v-for="(item, index) in this.c_data"
+          v-for="(item, index) in c_data"
           :key="index"
         >
           <div
@@ -86,7 +86,14 @@
                 <div
                   class="part1 portf-bold pl-2"
                   style="padding-top:7px"
+                  @click="onCollapseProjectCLick(index1)"
                 >
+                  <feather-icon
+                    v-if="item1.phases"
+                    :icon="openedPj === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                    size="16"
+                    class="mr-1"
+                  />
                   {{ item1.title }}
                 </div>
                 <div class="part2">
@@ -169,6 +176,24 @@
                   <!-- <b-button variant="flat-primary">
                     <feather-icon icon="ChevronsRightIcon" />
                   </b-button> -->
+                </div>
+              </div>
+              <div v-if="openedPj === index1">
+                <div
+                  v-for="(item2, index2) in item1.phases"
+                  :key="index2"
+                >
+                  <div
+                    class="portf-row portf-table-row font-14 border-bottom-dm"
+                    :class="{ 'inner-sdw': index2 === 0 }"
+                  >
+                    <div
+                      class="part1 portf-bold pl-2"
+                      style="padding-top:7px"
+                    >
+                      {{ item2.title }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -460,6 +485,7 @@ export default {
       editDrawerOpen: false,
       editProjectDrawerOpen: false,
       opened: 0,
+      openedPj: 0,
       chartOptions: {
         chart: {
           type: 'bar',
@@ -647,6 +673,14 @@ export default {
       } else {
         this.opened = index
       }
+    },
+    onCollapseProjectCLick(index) {
+      if (index === this.openedPj) {
+        this.openedPj = -1
+      } else {
+        this.openedPj = index
+      }
+      console.log("CPJ:", this.openedPj)
     },
     dateFormat(date) {
       if (date) return moment(new Date(date)).format('MM-DD-YYYY')

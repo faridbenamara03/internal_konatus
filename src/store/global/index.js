@@ -809,6 +809,7 @@ export default {
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = JSON.parse(payload.portData.demand)
+      console.log("PTD:", state.portfolioDemandData)
       state.portfolioReportingData = JSON.parse(payload.portData.reporting)
       state.portfolioControlData = JSON.parse(payload.portData.control)
     },
