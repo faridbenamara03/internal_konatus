@@ -15,9 +15,42 @@
             </b-button> -->
             <div v-if="tabIndex === 0">
               <b-button
-                v-b-modal.modal-import
+                v-if="demandTableEditable"
                 class="ml-1"
                 variant="primary"
+              >
+                <feather-icon
+                  icon="ArrowDownIcon"
+                  size="16"
+                />&nbsp;
+                <span>Add WE</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="LayersIcon"
+                  size="16"
+                />&nbsp;
+                <span>Update</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="SettingsIcon"
+                  size="16"
+                />&nbsp;
+                <span>Optimize</span>
+              </b-button>
+              <b-button
+                class="ml-1"
+                variant="primary"
+                @click="onDemandTableEditableClick"
               >
                 <feather-icon
                   icon="EditIcon"
@@ -26,6 +59,7 @@
                 <span>Edit as table</span>
               </b-button>
               <b-button
+                v-if="!demandTableEditable"
                 v-b-modal.modal-import
                 class="ml-1"
                 variant="primary"
@@ -37,6 +71,7 @@
                 <span>Import</span>
               </b-button>
               <b-button
+                v-if="!demandTableEditable"
                 class="ml-1"
                 variant="primary"
               >
@@ -47,6 +82,7 @@
                 <span>Export</span>
               </b-button>
               <b-button
+                v-if="!demandTableEditable"
                 v-b-modal.modal-request-quote
                 :disabled="selectedWorkElement.length === 0"
                 class="ml-1"
@@ -162,9 +198,15 @@
           @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-team')"
         >
           <Demand
+            v-if="!demandTableEditable"
             :team-data="projectElementTeamData"
             :tab-state="demandTabState"
             :phase-data="projectElementPhaseData"
+          />
+          <TableEditable
+            v-if="demandTableEditable"
+            :data="projectDemandEditableData"
+            :fields="c_fields"
           />
         </b-tab>
         <b-tab
@@ -324,6 +366,7 @@ import ModalRequestQuote from '../globalComponent/RequestQuoteModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import Demand from './components/Demand.vue'
+import TableEditable from './components/TableEditable.vue'
 import CreateDrawer from './modals/CreateNewProjectDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
@@ -337,6 +380,7 @@ export default {
     BCardBody,
     BTabs,
     BTab,
+    TableEditable,
     Demand,
     Reporting,
     Control,
@@ -374,6 +418,7 @@ export default {
       rangeArray: [],
       arr4chart: [],
       isChartView: false,
+      c_fields: ["portfolio", "program", "name program", "project id", "name project", "idactel", "priority", "gate", "load e", "load r/e", "fte e", "fte r", "spent", "rest to do r/e", "% acc r/e", "load r/e", "% acc r/e", "rest to do", "fte r/e", "startdate r", "enddate r", "new startdate r", "new enddate r"],
       items: [
         {
           name: 'Quadruped robot',
@@ -439,6 +484,12 @@ export default {
     openCreateNewProjectDrawer() {
       return this.$store.state.globalState.openCreateNewProjectDrawer
     },
+    demandTableEditable() {
+      return this.$store.state.globalState.projectDemandTableEditable
+    },
+    projectDemandEditableData() {
+      return this.$store.state.globalState.projectDemandEditableData
+    }
   },
   methods: {
     isUN(data) {
@@ -458,6 +509,9 @@ export default {
       if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
         this.popoverShow = false
       }
+    },
+    onDemandTableEditableClick() {
+      this.$store.dispatch('globalState/get_project_table_editable')
     },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')

@@ -460,6 +460,8 @@ export default {
     projectReportingData: {},
     demandTeamData: {},
     activityDetailModalOpen: false,
+    projectDemandTableEditable: false,
+    projectDemandEditableData: [],
     selectedNavId: '',
     selectedNavObj: {},
     optimiseState: 'origin',
@@ -958,6 +960,10 @@ export default {
       // state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
       // state.projectReportingData = globalOperationData.children[0].children[0];
     },
+    UPDATE_PROJECT_DEMAND_TABLE_EDITABLE(state, data) {
+      state.projectDemandEditableData = data
+      state.projectDemandTableEditable = !state.projectDemandTableEditable
+    },
     IMPORT_WBS_2(state) {
       setTimeout(() => {
         state.projectElementTeamData = teamsState
@@ -1219,6 +1225,16 @@ export default {
             Vue.$toast.error('Failed to create new task.')
             reject(err)
           })
+      })
+    },
+    get_project_table_editable() {
+      axios.post('https://api.konatus.site/v1/api/project/editable').then(response => {
+      // axios.post('http://localhost/konatus-me/public/api/project/editable').then(response => {
+        const newData = response.data
+        this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
+      }).catch(err => {
+        console.log('error loading project demand editable --->', err)
+        Vue.$toast.error('Failed to load project demand editable data.')
       })
     }
   }
