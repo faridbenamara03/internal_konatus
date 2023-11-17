@@ -433,10 +433,10 @@ export default {
         { title: "fte D", key: "fte_d" },
         { title: "fte E", key: "fte_e" },
         { title: "fte R", key: "fte_r" },
-        { title: "startdate D", key: "startdate_D" },
-        { title: "enddate D", key: "enddate_D" },
-        { title: "new startdate E", key: "new_startdate_E" },
-        { title: "new enddate E", key: "new_enddate_E" },
+        { title: "startdate D", key: "startdate_d" },
+        { title: "enddate D", key: "enddate_d" },
+        { title: "new startdate E", key: "new_startdate_e" },
+        { title: "new enddate E", key: "new_enddate_e" },
       ],
       items: [
         {

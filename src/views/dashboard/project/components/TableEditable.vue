@@ -6,15 +6,12 @@
       class="portf-demand-view"
     >
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
-        <div class="part2">
-          <div
-            v-for="(ft, fi) in fields"
-            :key="fi"
-            class="data-child mr-1 portf-uppercase pr-1"
-            :style="`width:${100 / fields.length}%`"
-          >
-            {{ ft.title }}
-          </div>
+        <div
+          v-for="(ft, fi) in fields"
+          :key="fi"
+          class="data-child mr-1 portf-uppercase pr-1"
+        >
+          <span :style="`display:block;width:100px`">{{ ft.title }}</span>
         </div>
       </div>
       <div>
@@ -23,19 +20,24 @@
           :key="index"
         >
           <div
-            class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
+            class="portf-row portf-bold portf-sub-header portf-table-row color-white border-btm-lgt"
             :class="{ 'inner-sdw': index === 0 }"
           >
-            <div class="part2">
-              <div
-                v-for="(ft, fi) in fields"
-                :key="fi"
-                class="data-child mr-1 pr-1"
-                :style="`width:${100 / fields.length}%`"
+            <div
+              v-for="(ft, fi) in fields"
+              :key="fi"
+              class="data-child mr-1 pr-1"
+            >
+              <span
+                v-if="ft.key === 'startdate_d' || ft.key === 'enddate_d' || ft.key === 'new_startdate_e' || ft.key === 'new_enddate_e'"
+                :style="`display:block;width:100px`"
               >
-                <span v-if="ft.key === 'startdate_D' || ft.key === 'enddate_D' || ft.key === 'new_startdate_e' || ft.key === 'new_enddate_e'">{{ dateFormat(item[ft.key]) }}</span>
-                <span v-else>{{ item[ft.key] }}</span> -->
-              </div>
+                {{ dateFormat(item[ft.key]) }}
+              </span>
+              <span
+                v-else
+                :style="`display:block;width:100px`"
+              >{{ item[ft.key] }}</span>
             </div>
           </div>
         </div>
@@ -64,6 +66,7 @@ export default {
   },
   methods: {
     dateFormat(date) {
+      console.log("Date:", date)
       if (date) return moment(new Date(date)).format('MM-DD-YYYY')
       return null
     },
