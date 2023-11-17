@@ -35,6 +35,12 @@
                 {{ dateFormat(item[ft.key]) }}
               </span>
               <span
+                v-else-if="ft.key === 'acc_r_e'"
+                :style="`display:block;width:100px`"
+              >
+                {{ item[ft.key] }}%
+              </span>
+              <span
                 v-else
                 :style="`display:block;width:100px`"
               >{{ item[ft.key] }}</span>

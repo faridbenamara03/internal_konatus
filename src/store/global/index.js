@@ -461,7 +461,9 @@ export default {
     demandTeamData: {},
     activityDetailModalOpen: false,
     projectDemandTableEditable: false,
+    projectReportingTableEditable: false,
     projectDemandEditableData: [],
+    projectReportingEditableData: [],
     selectedNavId: '',
     selectedNavObj: {},
     optimiseState: 'origin',
@@ -964,6 +966,10 @@ export default {
       state.projectDemandEditableData = data
       state.projectDemandTableEditable = !state.projectDemandTableEditable
     },
+    UPDATE_PROJECT_REPORTING_TABLE_EDITABLE(state, data) {
+      state.projectReportingEditableData = data
+      state.projectReportingTableEditable = !state.projectReportingTableEditable
+    },
     IMPORT_WBS_2(state) {
       setTimeout(() => {
         state.projectElementTeamData = teamsState
@@ -1227,14 +1233,24 @@ export default {
           })
       })
     },
-    get_project_table_editable() {
-      axios.get('https://api.konatus.site/v1/api/project/editable').then(response => {
-      // axios.post('http://localhost/konatus-me/public/api/project/editable').then(response => {
+    get_project_demand_editable() {
+      axios.get('https://api.konatus.site/v1/api/project/demand/editable').then(response => {
+      // axios.post('http://localhost/konatus-me/public/api/project/demand/editable').then(response => {
         const newData = response.data
         this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
       }).catch(err => {
         console.log('error loading project demand editable --->', err)
         Vue.$toast.error('Failed to load project demand editable data.')
+      })
+    },
+    get_project_reporting_editable() {
+      axios.get('https://api.konatus.site/v1/api/project/reporting/editable').then(response => {
+      // axios.post('http://localhost/konatus-me/public/api/project/reporting/editable').then(response => {
+        const newData = response.data
+        this.commit('globalState/UPDATE_PROJECT_REPORTING_TABLE_EDITABLE', newData)
+      }).catch(err => {
+        console.log('error loading project reporting editable --->', err)
+        Vue.$toast.error('Failed to load project reporting editable data.')
       })
     }
   }

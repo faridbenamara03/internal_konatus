@@ -97,9 +97,9 @@
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button
-                v-b-modal.project-reporting-plan-update
                 class="mr-1"
                 variant="primary"
+                @click="onReportingTableEditableClick"
               >
                 <feather-icon
                   icon="EditIcon"
@@ -108,6 +108,7 @@
                 <span>Edit as table</span>
               </b-button>
               <b-button
+                v-if="!reportingTableEditable"
                 v-b-modal.project-reporting-plan-update
                 class="mr-1"
                 variant="primary"
@@ -119,6 +120,7 @@
                 <span>Update</span>
               </b-button>
               <b-button
+                v-if="!reportingTableEditable"
                 class="mr-1"
                 variant="primary"
               >
@@ -128,12 +130,35 @@
                 />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button variant="primary">
+              <b-button
+                v-if="!reportingTableEditable"
+                variant="primary"
+              >
                 <feather-icon
                   icon="ArrowRightIcon"
                   size="16"
                 />&nbsp;
                 Next Phase
+              </b-button>
+              <b-button
+                v-if="reportingTableEditable"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="SettingsIcon"
+                  size="16"
+                />&nbsp;
+                Update and Recalculate
+              </b-button>
+              <b-button
+                v-if="reportingTableEditable"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="Edit2Icon"
+                  size="16"
+                />&nbsp;
+                Recalculate
               </b-button>
             </div>
             <div v-if="tabIndex === 2">
@@ -206,14 +231,22 @@
           <TableEditable
             v-if="demandTableEditable"
             :data="projectDemandEditableData"
-            :fields="c_fields"
+            :fields="d_fields"
           />
         </b-tab>
         <b-tab
           title="Reporting"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
         >
-          <Reporting :reporting-state="reportingState" />
+          <Reporting
+            v-if="!reportingTableEditable"
+            :reporting-state="reportingState"
+          />
+          <TableEditable
+            v-if="reportingTableEditable"
+            :data="projectReportingEditableData"
+            :fields="r_fields"
+          />
         </b-tab>
         <b-tab
           title="Control"
@@ -418,7 +451,7 @@ export default {
       rangeArray: [],
       arr4chart: [],
       isChartView: false,
-      c_fields: [{ title: "portfolio", key: "portfolio" },
+      d_fields: [{ title: "portfolio", key: "portfolio" },
         { title: "program", key: "program" },
         { title: "name program", key: "program_name" },
         { title: "project id", key: "project" },
@@ -438,61 +471,25 @@ export default {
         { title: "new startdate E", key: "new_startdate_e" },
         { title: "new enddate E", key: "new_enddate_e" },
       ],
-      items: [
-        {
-          name: 'Quadruped robot',
-          priority: 'Highest',
-          budget: '1100',
-          deadline: '06/01/2021',
-          children: [
-            {
-              name: 'New format',
-              priority: 'High',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Enhanced motricity',
-              priority: 'Highest',
-              budget: '240',
-              deadline: '03/28/2021',
-            },
-            {
-              name: 'Enhanced authonomy',
-              priority: 'Highest',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Dual sourcing for Q',
-              priority: 'Lowest',
-              budget: '150',
-              deadline: '12/31/2021',
-            },
-          ],
-        },
-        {
-          name: 'micro robot observation nbc',
-          priority: 'High',
-          budget: '13633.69',
-          deadline: '05/20/2018',
-        },
-        {
-          name: 'handling robot',
-          priority: 'Low',
-          budget: '13076.28',
-          deadline: '03/24/2018',
-        },
-        {
-          name: 'power and programing station',
-          priority: 'Lowest',
-          budget: '12336.17',
-          deadline: '12/03/2017',
-        },
-        {
-          name: 'total',
-          budget: '40146.14',
-        }
+      r_fields: [{ title: "portfolio", key: "portfolio" },
+        { title: "program", key: "program" },
+        { title: "name program", key: "program_name" },
+        { title: "project id", key: "project" },
+        { title: "name project", key: "project_name" },
+        { title: "idactel", key: "idactel" },
+        { title: "priority", key: "priority" },
+        { title: "gate", key: "gate" },
+        { title: "load E", key: "load_e" },
+        { title: "load R/E", key: "load_r_e" },
+        { title: "fte E", key: "fte_e" },
+        { title: "fte R", key: "fte_r" },
+        { title: "spent", key: "spent" },
+        { title: "rest to do R/E", key: "rest_todo_r_e" },
+        { title: "acc R/E", key: "acc_r_e" },
+        { title: "startdate R", key: "startdate_r" },
+        { title: "enddate R", key: "enddate_r" },
+        { title: "new startdate R", key: "new_startdate_r" },
+        { title: "new enddate R", key: "new_enddate_r" },
       ],
     }
   },
@@ -506,8 +503,14 @@ export default {
     demandTableEditable() {
       return this.$store.state.globalState.projectDemandTableEditable
     },
+    reportingTableEditable() {
+      return this.$store.state.globalState.projectReportingTableEditable
+    },
     projectDemandEditableData() {
       return this.$store.state.globalState.projectDemandEditableData
+    },
+    projectReportingEditableData() {
+      return this.$store.state.globalState.projectReportingEditableData
     }
   },
   methods: {
@@ -530,7 +533,10 @@ export default {
       }
     },
     onDemandTableEditableClick() {
-      this.$store.dispatch('globalState/get_project_table_editable')
+      this.$store.dispatch('globalState/get_project_demand_editable')
+    },
+    onReportingTableEditableClick() {
+      this.$store.dispatch('globalState/get_project_reporting_editable')
     },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
