@@ -97,6 +97,7 @@
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button
+                v-if="reportingState === 'plan'"
                 class="mr-1"
                 variant="primary"
                 @click="onReportingTableEditableClick"
@@ -504,7 +505,7 @@ export default {
       return this.$store.state.globalState.projectDemandTableEditable
     },
     reportingTableEditable() {
-      return this.$store.state.globalState.projectReportingTableEditable
+      return this.$store.state.globalState.projectReportingTableEditable && this.reportingState === 'plan'
     },
     projectDemandEditableData() {
       return this.$store.state.globalState.projectDemandEditableData
