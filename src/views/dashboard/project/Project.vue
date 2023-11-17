@@ -20,6 +20,17 @@
                 variant="primary"
               >
                 <feather-icon
+                  icon="EditIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as table</span>
+              </b-button>
+              <b-button
+                v-b-modal.modal-import
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
                   icon="ArrowDownIcon"
                   size="16"
                 />&nbsp;
@@ -49,6 +60,17 @@
               </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
+              <b-button
+                v-b-modal.project-reporting-plan-update
+                class="mr-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EditIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as table</span>
+              </b-button>
               <b-button
                 v-b-modal.project-reporting-plan-update
                 class="mr-1"

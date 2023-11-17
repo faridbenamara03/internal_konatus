@@ -680,7 +680,6 @@ export default {
       } else {
         this.openedPj = index
       }
-      console.log("CPJ:", this.openedPj)
     },
     dateFormat(date) {
       if (date) return moment(new Date(date)).format('MM-DD-YYYY')

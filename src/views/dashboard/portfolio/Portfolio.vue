@@ -124,6 +124,17 @@
                 variant="primary"
               >
                 <feather-icon
+                  icon="EditIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as table</span>
+              </b-button>
+              <b-button
+                v-b-modal.portfolio-reporting-plan-update
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
                   icon="RotateCwIcon"
                   size="16"
                 />&nbsp;
