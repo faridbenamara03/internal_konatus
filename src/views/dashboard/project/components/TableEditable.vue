@@ -13,7 +13,7 @@
             class="data-child mr-1 portf-uppercase pr-1"
             :style="`width:${100 / fields.length}%`"
           >
-            {{ ft }}
+            {{ ft.title }}
           </div>
         </div>
       </div>
@@ -33,9 +33,8 @@
                 class="data-child mr-1 pr-1"
                 :style="`width:${100 / fields.length}%`"
               >
-                <span v-if="ft === 'priority'">{{ item[ft] }}</span>
-                <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else>{{ formatCurrency(item[ft]) }}</span>
+                <span v-if="ft.key === 'startdate_D' || ft.key === 'enddate_D' || ft.key === 'new_startdate_e' || ft.key === 'new_enddate_e'">{{ dateFormat(item[ft.key]) }}</span>
+                <span v-else>{{ item[ft.key] }}</span> -->
               </div>
             </div>
           </div>

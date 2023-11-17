@@ -1228,7 +1228,7 @@ export default {
       })
     },
     get_project_table_editable() {
-      axios.post('https://api.konatus.site/v1/api/project/editable').then(response => {
+      axios.get('https://api.konatus.site/v1/api/project/editable').then(response => {
       // axios.post('http://localhost/konatus-me/public/api/project/editable').then(response => {
         const newData = response.data
         this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
