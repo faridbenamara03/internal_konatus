@@ -20,7 +20,7 @@
                 variant="primary"
               >
                 <feather-icon
-                  icon="ArrowDownIcon"
+                  icon="PlusIcon"
                   size="16"
                 />&nbsp;
                 <span>Add WE</span>
@@ -31,10 +31,10 @@
                 variant="primary"
               >
                 <feather-icon
-                  icon="LayersIcon"
+                  icon="Edit3Icon"
                   size="16"
                 />&nbsp;
-                <span>Update</span>
+                <span>{{ decodeURIComponent("%3CO%3E update") }}</span>
               </b-button>
               <b-button
                 v-if="demandTableEditable"
@@ -42,10 +42,10 @@
                 variant="primary"
               >
                 <feather-icon
-                  icon="SettingsIcon"
+                  icon="SunriseIcon"
                   size="16"
                 />&nbsp;
-                <span>Optimize</span>
+                <span>{{ decodeURIComponent("%3CO%3E optimize") }}</span>
               </b-button>
               <b-button
                 class="ml-1"
@@ -146,7 +146,7 @@
                 variant="primary"
               >
                 <feather-icon
-                  icon="SettingsIcon"
+                  icon="RefreshCwIcon"
                   size="16"
                 />&nbsp;
                 Update and Recalculate
@@ -156,7 +156,7 @@
                 variant="primary"
               >
                 <feather-icon
-                  icon="Edit2Icon"
+                  icon="RotateCcwIcon"
                   size="16"
                 />&nbsp;
                 Recalculate
