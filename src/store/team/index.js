@@ -84,30 +84,31 @@ export default {
       state.teamDemandData.phases = a
     },
     INSERT_NEW_TASK(state, data) {
-      const { phaseId, element } = data
-      const a = state.teamDemandData.phases.map(t => {
-        if (t.id === phaseId) {
-          t.elements.push(
-            {
-              activityId: element.elementId,
-              title: 'New inserted element',
-              description: 'New inserted element description.',
-              priority: element.priority,
-              phase: phaseId,
-              gate: element.gate,
-              assigned: t.assigned,
-              effort: {
-                load: 53,
-                duration: 26,
-                fte: 80
-              }
-            }
-          )
-          return t
-        }
-        return t
-      })
-      state.teamDemandData.phases = a
+      // const { phaseId, element } = data
+      // const a = state.teamDemandData.phases.map(t => {
+      //   if (t.id === phaseId) {
+      //     t.elements.push(
+      //       {
+      //         activityId: element.elementId,
+      //         title: 'New inserted element',
+      //         description: 'New inserted element description.',
+      //         priority: element.priority,
+      //         phase: phaseId,
+      //         gate: element.gate,
+      //         assigned: t.assigned,
+      //         effort: {
+      //           load: 53,
+      //           duration: 26,
+      //           fte: 80
+      //         }
+      //       }
+      //     )
+      //     return t
+      //   }
+      //   return t
+      // })
+      // state.teamDemandData.phases = a
+      console.log("InsertTaskData:", data)
       Vue.$toast.success('Task inserted successfully.')
     },
   },

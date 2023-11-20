@@ -991,42 +991,43 @@ export default {
       state.parentTeamTitle = data.team
     },
     INSERT_NEW_TASK(state, data) {
-      const {
-        id, priority, gate, name
-      } = data
-      if (state.parentIndexForInsertElement.state === "team") {
-        const t = state.teamsState[state.parentIndexForInsertElement.index0]?.phases[state.parentIndexForInsertElement.index]?.activities
-        t.push(
-          {
-            title: name,
-            priority,
-            gate,
-            activityId: id,
-            description: 'New inserted element description.',
-            effort: {
-              load: 53,
-              duration: 26,
-              fte: 80
-            },
-          }
-        )
-      } else {
-        const t = state.phaseState[state.parentIndexForInsertElement.index0]?.teams[state.parentIndexForInsertElement.index]?.activities
-        t.push(
-          {
-            title: name,
-            priority,
-            gate,
-            activityId: id,
-            description: 'New inserted element description.',
-            effort: {
-              load: 53,
-              duration: 26,
-              fte: 80
-            },
-          }
-        )
-      }
+      // const {
+      //   id, priority, gate, name
+      // } = data
+      // if (state.parentIndexForInsertElement.state === "team") {
+      //   const t = state.teamsState[state.parentIndexForInsertElement.index0]?.phases[state.parentIndexForInsertElement.index]?.activities
+      //   t.push(
+      //     {
+      //       title: name,
+      //       priority,
+      //       gate,
+      //       activityId: id,
+      //       description: 'New inserted element description.',
+      //       effort: {
+      //         load: 53,
+      //         duration: 26,
+      //         fte: 80
+      //       },
+      //     }
+      //   )
+      // } else {
+      //   const t = state.phaseState[state.parentIndexForInsertElement.index0]?.teams[state.parentIndexForInsertElement.index]?.activities
+      //   t.push(
+      //     {
+      //       title: name,
+      //       priority,
+      //       gate,
+      //       activityId: id,
+      //       description: 'New inserted element description.',
+      //       effort: {
+      //         load: 53,
+      //         duration: 26,
+      //         fte: 80
+      //       },
+      //     }
+      //   )
+      // }
+      console.log("NewTask:", data)
       Vue.$toast.success('Task inserted successfully.')
     },
   },

@@ -46,7 +46,7 @@
                 />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
-              <b-button
+              <!-- <b-button
                 class="ml-1"
                 variant="primary"
                 @click="onDemandTableEditableClick"
@@ -56,7 +56,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit as table</span>
-              </b-button>
+              </b-button> -->
               <b-button
                 v-if="!demandTableEditable"
                 variant="primary"
@@ -118,7 +118,7 @@
                 />&nbsp;
                 <span>Show optimised</span>
               </b-button>
-              <b-button
+              <!-- <b-button
                 v-b-modal.portfolio-reporting-plan-update
                 class="ml-1"
                 variant="primary"
@@ -128,7 +128,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit as table</span>
-              </b-button>
+              </b-button> -->
               <b-button
                 v-b-modal.portfolio-reporting-plan-update
                 class="ml-1"
@@ -630,7 +630,7 @@ export default {
         if (baseUrl === currentUrl) return
         this.$router.push({ path: baseUrl })
       }
-    },
+    }
   }
 }
 </script>
