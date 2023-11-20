@@ -48,7 +48,7 @@
               </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
-              <b-button
+              <!-- <b-button
                 v-b-modal.program-reporting-plan-update
                 class="mr-1"
                 variant="primary"
@@ -58,7 +58,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit as table</span>
-              </b-button>
+              </b-button> -->
               <b-button
                 v-b-modal.program-reporting-plan-update
                 class="mr-1"
