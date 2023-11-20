@@ -46,17 +46,50 @@
                 />&nbsp;
                 <span>Edit Columns</span>
               </b-button>
-              <!-- <b-button
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="PlusIcon"
+                  size="16"
+                />&nbsp;
+                <span>Add WE</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="Edit3Icon"
+                  size="16"
+                />&nbsp;
+                <span>{{ decodeURIComponent("%3CO%3E update") }}</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="SunriseIcon"
+                  size="16"
+                />&nbsp;
+                <span>{{ decodeURIComponent("%3CO%3E optimize") }}</span>
+              </b-button>
+              <b-button
                 class="ml-1"
                 variant="primary"
                 @click="onDemandTableEditableClick"
               >
                 <feather-icon
-                  icon="Edit2Icon"
+                  icon="EditIcon"
                   size="16"
                 />&nbsp;
                 <span>Edit as table</span>
-              </b-button> -->
+              </b-button>
               <b-button
                 v-if="!demandTableEditable"
                 variant="primary"
@@ -71,7 +104,39 @@
             </div>
             <div v-if="tabIndex === 1">
               <b-button
-                v-if="updateIndex === true && reportingState === 'plan'"
+                v-if="reportingState === 'plan'"
+                class="mr-1"
+                variant="primary"
+                @click="onReportingTableEditableClick"
+              >
+                <feather-icon
+                  icon="EditIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as table</span>
+              </b-button>
+              <b-button
+                v-if="reportingTableEditable"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="RefreshCwIcon"
+                  size="16"
+                />&nbsp;
+                Update and Recalculate
+              </b-button>
+              <b-button
+                v-if="reportingTableEditable"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="RotateCcwIcon"
+                  size="16"
+                />&nbsp;
+                Recalculate
+              </b-button>
+              <b-button
+                v-if="updateIndex === true && reportingState === 'plan' && !reportingTableEditable"
                 class="ml-1"
                 variant="primary"
                 @click="onClickAction('accept')"
@@ -83,7 +148,7 @@
                 <span>Accept</span>
               </b-button>
               <b-button
-                v-if="updateIndex === true && reportingState === 'plan'"
+                v-if="updateIndex === true && reportingState === 'plan' && !reportingTableEditable"
                 class="ml-1"
                 variant="primary"
                 @click="onClickAction('reject')"
@@ -95,7 +160,7 @@
                 <span>Reject</span>
               </b-button>
               <b-button
-                v-if="updateIndex === true && reportingState === 'plan' && originIndex"
+                v-if="updateIndex === true && reportingState === 'plan' && originIndex && !reportingTableEditable"
                 class="ml-1"
                 variant="primary"
                 @click="onClickAction('origin')"
@@ -107,7 +172,7 @@
                 <span>Show original</span>
               </b-button>
               <b-button
-                v-if="updateIndex === true && reportingState === 'plan' && !originIndex"
+                v-if="updateIndex === true && reportingState === 'plan' && !originIndex && !reportingTableEditable"
                 class="ml-1"
                 variant="primary"
                 @click="onClickAction('optimise')"
@@ -130,6 +195,7 @@
                 <span>Edit as table</span>
               </b-button> -->
               <b-button
+                v-if="!reportingTableEditable"
                 v-b-modal.portfolio-reporting-plan-update
                 class="ml-1"
                 variant="primary"
@@ -141,6 +207,7 @@
                 <span>Update</span>
               </b-button>
               <b-button
+                v-if="!reportingTableEditable"
                 class="ml-1"
                 variant="primary"
               >
@@ -151,6 +218,7 @@
                 <span>Export</span>
               </b-button>
               <b-button
+                v-if="!reportingTableEditable"
                 v-b-modal.modal-edit-column
                 class="ml-1"
                 variant="primary"
@@ -204,11 +272,16 @@
           @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
         >
           <Demand
-            v-if="tableTitle"
+            v-if="tableTitle && !demandTableEditable"
             :otype="selectedNavType"
             :data="demandData"
             :fields="fields"
             :is-chart-view="isChartView"
+          />
+          <TableEditable
+            v-if="demandTableEditable"
+            :data="projectDemandEditableData"
+            :fields="d_fields"
           />
         </b-tab>
         <b-tab
@@ -217,11 +290,17 @@
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
         >
           <Reporting
+            v-if="!reportingTableEditable"
             :data="reportingData"
             :otype="selectedNavType"
             :reporting-state="reportingState"
             :fields="fields"
             @update-clicked="handleToggleUpdateHide"
+          />
+          <TableEditable
+            v-if="reportingTableEditable"
+            :data="projectReportingEditableData"
+            :fields="r_fields"
           />
         </b-tab>
         <b-tab
@@ -415,9 +494,11 @@ import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
 import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
 import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
+import TableEditable from './components/TableEditable.vue'
 
 export default {
   components: {
+    TableEditable,
     BButton,
     BButtonGroup,
     BCard,
@@ -461,6 +542,46 @@ export default {
       open: false,
       updateIndex: false,
       originIndex: true,
+      d_fields: [{ title: "portfolio", key: "portfolio" },
+        { title: "program", key: "program" },
+        { title: "name program", key: "program_name" },
+        { title: "project id", key: "project" },
+        { title: "name project", key: "project_name" },
+        { title: "idactel", key: "idactel" },
+        { title: "priority", key: "priority" },
+        { title: "gate", key: "gate" },
+        { title: "load D", key: "load_d" },
+        { title: "load E", key: "load_e" },
+        { title: "load R/E", key: "load_r_e" },
+        { title: "rest to do R/E", key: "rest_todo_r_e" },
+        { title: "fte D", key: "fte_d" },
+        { title: "fte E", key: "fte_e" },
+        { title: "fte R", key: "fte_r" },
+        { title: "startdate D", key: "startdate_d" },
+        { title: "enddate D", key: "enddate_d" },
+        { title: "new startdate E", key: "new_startdate_e" },
+        { title: "new enddate E", key: "new_enddate_e" },
+      ],
+      r_fields: [{ title: "portfolio", key: "portfolio" },
+        { title: "program", key: "program" },
+        { title: "name program", key: "program_name" },
+        { title: "project id", key: "project" },
+        { title: "name project", key: "project_name" },
+        { title: "idactel", key: "idactel" },
+        { title: "priority", key: "priority" },
+        { title: "gate", key: "gate" },
+        { title: "load E", key: "load_e" },
+        { title: "load R/E", key: "load_r_e" },
+        { title: "fte E", key: "fte_e" },
+        { title: "fte R", key: "fte_r" },
+        { title: "spent", key: "spent" },
+        { title: "rest to do R/E", key: "rest_todo_r_e" },
+        { title: "acc R/E", key: "acc_r_e" },
+        { title: "startdate R", key: "startdate_r" },
+        { title: "enddate R", key: "enddate_r" },
+        { title: "new startdate R", key: "new_startdate_r" },
+        { title: "new enddate R", key: "new_enddate_r" },
+      ]
     }
   },
   computed: {
@@ -482,7 +603,16 @@ export default {
       return this.$store.state.globalState.selectedNavObj?.type
     },
     demandTableEditable() {
-      return this.$store.state.portfolioState.demandTableEditable
+      return this.$store.state.globalState.projectDemandTableEditable
+    },
+    reportingTableEditable() {
+      return this.$store.state.globalState.projectReportingTableEditable && this.reportingState === 'plan'
+    },
+    projectDemandEditableData() {
+      return this.$store.state.globalState.projectDemandEditableData
+    },
+    projectReportingEditableData() {
+      return this.$store.state.globalState.projectReportingEditableData
     },
     demandData() {
       return this.$store.state.globalState.portfolioDemandData[0]
@@ -589,8 +719,14 @@ export default {
       this.fields = temp
       this.activeColumns = columns
     },
+    // onDemandTableEditableClick() {
+    //   this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
+    // },
     onDemandTableEditableClick() {
-      this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
+      this.$store.dispatch('globalState/get_project_demand_editable')
+    },
+    onReportingTableEditableClick() {
+      this.$store.dispatch('globalState/get_project_reporting_editable')
     },
     onClose() {
       this.popoverShow = false
