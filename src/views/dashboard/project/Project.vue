@@ -374,6 +374,16 @@
       align="right"
       :closeable="false"
       :mask-closable="true"
+      @close="toggleEditPortfolioDrawer"
+    >
+      <div v-if="openEditPortfolioDrawer">
+        <EditPortfolioDrawer />
+      </div>
+    </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
       @close="toggleCreateNewProjectDrawer"
     >
       <div v-if="openCreateNewProjectDrawer">
@@ -415,7 +425,8 @@ import CreateDrawer from './modals/CreateNewProjectDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
-import CreateNewPortfolioDrawer from '../portfolio/modals/CreateDrawer.vue'
+import CreateNewPortfolioDrawer from '../portfolio/modals/CreateNewPortfolioDrawer.vue'
+import EditPortfolioDrawer from '../portfolio/modals/EditPortfolioDrawer.vue'
 
 export default {
   components: {
@@ -438,7 +449,8 @@ export default {
     BFormInput,
     BPopover,
     InsertNewTaskModal,
-    CreateNewPortfolioDrawer
+    CreateNewPortfolioDrawer,
+    EditPortfolioDrawer
   },
   directives: {
     ClickOutside
@@ -516,6 +528,9 @@ export default {
     openCreateNewPortfolioDrawer() {
       return this.$store.state.globalState.openCreateNewPortfolioDrawer
     },
+    openEditPortfolioDrawer() {
+      return this.$store.state.globalState.openEditPortfolioDrawer
+    },
     demandTableEditable() {
       return this.$store.state.globalState.projectDemandTableEditable
     },
@@ -532,6 +547,9 @@ export default {
   methods: {
     isUN(data) {
       return isEmpty(data)
+    },
+    toggleEditPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     },
     async handleDone() {
       const navObj = this.$store.state.globalState.selectedNavObj

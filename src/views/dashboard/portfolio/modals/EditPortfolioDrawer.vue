@@ -1,7 +1,8 @@
 <template>
   <div style="width:500px">
     <h3 class="modal-title mb-1">
-      Edit {{ selectedType }}
+      <!-- Edit {{ selectedType }} -->
+      Edit Portfolio
     </h3>
     <div
       class="select-group"

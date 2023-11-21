@@ -263,6 +263,16 @@
       align="right"
       :closeable="false"
       :mask-closable="true"
+      @close="toggleEditPortfolioDrawer"
+    >
+      <div v-if="openEditPortfolioDrawer">
+        <EditPortfolioDrawer />
+      </div>
+    </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
       @close="toggleCreateNewProgramDrawer"
     >
       <div v-if="openCreateNewProgramDrawer">
@@ -301,7 +311,8 @@ import CreateDrawer from './modals/CreateNewProgramDrawer.vue'
 import Demand from './components/Demand.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
-import CreateNewPortfolioDrawer from '../portfolio/modals/CreateDrawer.vue'
+import CreateNewPortfolioDrawer from '../portfolio/modals/CreateNewPortfolioDrawer.vue'
+import EditPortfolioDrawer from '../portfolio/modals/EditPortfolioDrawer.vue'
 
 export default {
   // CreateModal,
@@ -323,7 +334,8 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
-    CreateNewPortfolioDrawer
+    CreateNewPortfolioDrawer,
+    EditPortfolioDrawer
   },
   directives: {
     ClickOutside
@@ -354,6 +366,9 @@ export default {
     },
     openCreateNewPortfolioDrawer() {
       return this.$store.state.globalState.openCreateNewPortfolioDrawer
+    },
+    openEditPortfolioDrawer() {
+      return this.$store.state.globalState.openEditPortfolioDrawer
     },
     selectedWorkElement() {
       return this.$store.state.globalState.selectedWorkElement
