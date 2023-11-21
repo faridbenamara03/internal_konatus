@@ -65,9 +65,9 @@
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleDrawerOpen"
+                @click="toggleCreateNewProgramDrawer"
               >
-                <feather-icon icon="DollarSignIcon" />
+                <feather-icon icon="PlusIcon" />
               </b-button>
               <!-- <b-button variant="flat-primary">
                 <feather-icon icon="ChevronsRightIcon" />
@@ -169,9 +169,9 @@
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleDrawerOpen"
+                    @click="toggleCreateNewProjectDrawer"
                   >
-                    <feather-icon icon="DollarSignIcon" />
+                    <feather-icon icon="PlusIcon" />
                   </b-button>
                   <!-- <b-button variant="flat-primary">
                     <feather-icon icon="ChevronsRightIcon" />
@@ -428,6 +428,26 @@
         />
       </div>
     </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewProgramDrawer"
+    >
+      <div v-if="openCreateNewProgramDrawer">
+        <CreateNewProgramDrawer />
+      </div>
+    </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewProjectDrawer"
+    >
+      <div v-if="openCreateNewProjectDrawer">
+        <CreateNewProjectDrawer />
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -442,6 +462,8 @@ import vSelect from 'vue-select'
 import BudgetDrawer from '../modals/BudgetDrawer.vue'
 import EditDrawer from '../modals/EditDrawer.vue'
 import EditProjectDrawer from '../modals/EditProjectDrawer.vue'
+import CreateNewProgramDrawer from '../../program/modals/CreateNewProgramDrawer.vue'
+import CreateNewProjectDrawer from '../../project/modals/CreateNewProjectDrawer.vue'
 
 export default {
   components: {
@@ -460,7 +482,9 @@ export default {
     Drawer,
     BudgetDrawer,
     EditDrawer,
-    EditProjectDrawer
+    EditProjectDrawer,
+    CreateNewProgramDrawer,
+    CreateNewProjectDrawer
   },
   props: {
     data: {
@@ -547,6 +571,12 @@ export default {
     }
   },
   computed: {
+    openCreateNewProgramDrawer() {
+      return this.$store.state.globalState.openCreateNewProgramDrawer
+    },
+    openCreateNewProjectDrawer() {
+      return this.$store.state.globalState.openCreateNewProjectDrawer
+    },
     c_fields() {
       return this.fields.slice(1, this.fields.length - 1)
     },
@@ -656,6 +686,12 @@ export default {
     }
   },
   methods: {
+    toggleCreateNewProjectDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
+    },
+    toggleCreateNewProgramDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+    },
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
     },

@@ -516,6 +516,18 @@ export default {
       state.openCreateNewProgramDrawer = u3
       state.openCreateNewProjectDrawer = u4
     },
+    TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER(state) {
+      const u1 = !state.openCreateNewPortfolioDrawer
+      state.openCreateNewPortfolioDrawer = u1
+    },
+    TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state) {
+      const u1 = !state.openCreateNewProgramDrawer
+      state.openCreateNewProgramDrawer = u1
+    },
+    TOGGLE_CREATE_NEW_PROJECT_DRAWER(state) {
+      const u1 = !state.openCreateNewProjectDrawer
+      state.openCreateNewProjectDrawer = u1
+    },
     CREATE_NEW_UNIT(state, data) {
       // if (!data.unitName) {
       //   Vue.$toast.warning('Please input correctly.')
@@ -670,13 +682,14 @@ export default {
     },
     TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
       const u = state.openEditPortfolioDrawer
-      if (!u) {
-        if (state.selectedNavObj.type === 'portfolio') {
-          state.openEditPortfolioDrawer = !u
-        }
-      } else {
-        state.openEditPortfolioDrawer = !u
-      }
+      state.openEditPortfolioDrawer = !u
+      // if (!u) {
+      //   if (state.selectedNavObj.type === 'portfolio') {
+      //     state.openEditPortfolioDrawer = !u
+      //   }
+      // } else {
+      //   state.openEditPortfolioDrawer = !u
+      // }
     },
     EDIT_PORTFOLIO(state, data) {
       if (!!data.portfolio && !!data.portfolioBudget) {

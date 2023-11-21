@@ -364,6 +364,16 @@
       align="right"
       :closeable="false"
       :mask-closable="true"
+      @close="toggleCreateNewPortfolioDrawer"
+    >
+      <div v-if="openCreateNewPortfolioDrawer">
+        <CreateNewPortfolioDrawer />
+      </div>
+    </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
       @close="toggleCreateNewProjectDrawer"
     >
       <div v-if="openCreateNewProjectDrawer">
@@ -405,6 +415,7 @@ import CreateDrawer from './modals/CreateNewProjectDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
+import CreateNewPortfolioDrawer from '../portfolio/modals/CreateDrawer.vue'
 
 export default {
   components: {
@@ -426,7 +437,8 @@ export default {
     MonthPicker,
     BFormInput,
     BPopover,
-    InsertNewTaskModal
+    InsertNewTaskModal,
+    CreateNewPortfolioDrawer
   },
   directives: {
     ClickOutside
@@ -501,6 +513,9 @@ export default {
     openCreateNewProjectDrawer() {
       return this.$store.state.globalState.openCreateNewProjectDrawer
     },
+    openCreateNewPortfolioDrawer() {
+      return this.$store.state.globalState.openCreateNewPortfolioDrawer
+    },
     demandTableEditable() {
       return this.$store.state.globalState.projectDemandTableEditable
     },
@@ -541,6 +556,9 @@ export default {
     },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+    },
+    toggleCreateNewPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
     onRangeFromChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
