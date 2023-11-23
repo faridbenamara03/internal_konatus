@@ -13,6 +13,7 @@
           <div>
             <div v-if="(tabIndex === 0)">
               <b-button
+                v-if="!demandTableEditable"
                 v-b-modal.modal-import
                 class="ml-1"
                 variant="primary"
@@ -24,6 +25,7 @@
                 <span>Import</span>
               </b-button>
               <b-button
+                v-if="!demandTableEditable"
                 class="ml-1"
                 variant="primary"
               >
@@ -34,7 +36,7 @@
                 <span>Export</span>
               </b-button>
               <b-button
-                v-if="(tabIndex === 0)"
+                v-if="tabIndex === 0 && !demandTableEditable"
                 v-b-modal.modal-request-quote
                 :disabled="selectedWorkElement.length === 0"
                 class="ml-1"
@@ -45,6 +47,50 @@
                   size="16"
                 />&nbsp;
                 <span>Request Quote</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="PlusIcon"
+                  size="16"
+                />&nbsp;
+                <span>Add WE</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="Edit3Icon"
+                  size="16"
+                />&nbsp;
+                <span>{{ decodeURIComponent("%3CO%3E update") }}</span>
+              </b-button>
+              <b-button
+                v-if="demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="SunriseIcon"
+                  size="16"
+                />&nbsp;
+                <span>{{ decodeURIComponent("%3CO%3E optimize") }}</span>
+              </b-button>
+              <b-button
+                class="ml-1"
+                variant="primary"
+                @click="onDemandTableEditableClick"
+              >
+                <feather-icon
+                  icon="EditIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as table</span>
               </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
@@ -111,7 +157,7 @@
           :class="{'border-0': !projectElementTeamData.length}"
           @click="onClickCPSelectBtn(isChartView ? 'demand-chart' : 'demand-table')"
         >
-          <div
+          <!-- <div
             v-if="!projectElementTeamData.length"
             class="no-data"
           >
@@ -121,11 +167,23 @@
             />
             <p>No activities for this project yet.<br>
               Finish setting up the project by creating a elementary activity or importing your data in .wbs format</p>
-          </div>
-          <Demand
+          </div> -->
+          <!-- <Demand
             :team-data="projectElementTeamData"
             :is-chart-view="isChartView"
             :phase-data="projectElementPhaseData"
+          /> -->
+          <Demand
+            v-if="tableTitle && !demandTableEditable"
+            :otype="selectedNavType"
+            :data="demandData"
+            :fields="fields"
+            :is-chart-view="isChartView"
+          />
+          <TableEditable
+            v-if="demandTableEditable"
+            :data="projectDemandEditableData"
+            :fields="d_fields"
           />
         </b-tab>
         <b-tab
@@ -358,6 +416,26 @@ export default {
       selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       isChartView: false,
+      d_fields: [{ title: "portfolio", key: "portfolio" },
+        { title: "program", key: "program" },
+        { title: "name program", key: "program_name" },
+        { title: "project id", key: "project" },
+        { title: "name project", key: "project_name" },
+        { title: "idactel", key: "idactel" },
+        { title: "priority", key: "priority" },
+        { title: "gate", key: "gate" },
+        { title: "load D", key: "load_d" },
+        { title: "load E", key: "load_e" },
+        { title: "load R/E", key: "load_r_e" },
+        { title: "rest to do R/E", key: "rest_todo_r_e" },
+        { title: "fte D", key: "fte_d" },
+        { title: "fte E", key: "fte_e" },
+        { title: "fte R", key: "fte_r" },
+        { title: "startdate D", key: "startdate_d" },
+        { title: "enddate D", key: "enddate_d" },
+        { title: "new startdate E", key: "new_startdate_e" },
+        { title: "new enddate E", key: "new_enddate_e" },
+      ],
     }
   },
   computed: {
@@ -373,6 +451,19 @@ export default {
     selectedWorkElement() {
       return this.$store.state.globalState.selectedWorkElement
     },
+    projectDemandEditableData() {
+      return this.$store.state.globalState.projectDemandEditableData
+    },
+    selectedNavType() {
+      return this.$store.state.globalState.selectedNavObj?.type
+    },
+    demandTableEditable() {
+      return this.$store.state.globalState.projectDemandTableEditable
+    },
+    tableTitle() {
+      const { selectedNavObj } = this.$store.state.globalState
+      return selectedNavObj.type ? `${selectedNavObj.type}: ${selectedNavObj.title}` : ''
+    },
     totalProjectHours() {
       const { selectedNavObj } = this.$store.state.globalState
       let thours = 0
@@ -382,8 +473,8 @@ export default {
       })
       return thours
     },
-    selectedNavType() {
-      return this.$store.state.globalState.selectedNavObj.type
+    demandData() {
+      return this.$store.state.globalState.portfolioDemandData[0]
     },
     c_items() {
       const { selectedNavObj } = this.$store.state.globalState
@@ -399,6 +490,9 @@ export default {
   methods: {
     isUN(data) {
       return isEmpty(data)
+    },
+    onDemandTableEditableClick() {
+      this.$store.dispatch('globalState/get_project_demand_editable')
     },
     async handleDone() {
       const navObj = this.$store.state.globalState.selectedNavObj

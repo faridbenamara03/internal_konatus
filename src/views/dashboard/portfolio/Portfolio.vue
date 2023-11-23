@@ -719,9 +719,6 @@ export default {
       this.fields = temp
       this.activeColumns = columns
     },
-    // onDemandTableEditableClick() {
-    //   this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
-    // },
     onDemandTableEditableClick() {
       this.$store.dispatch('globalState/get_project_demand_editable')
     },
