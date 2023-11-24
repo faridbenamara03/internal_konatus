@@ -174,7 +174,7 @@ export default {
       ],
       options2: [
         { text: 'Priority', value: 'priority' },
-        // { text: 'Demand', value: 'demand' },
+        { text: 'Win Rate', value: 'winrate' },
         // { text: 'Authorised', value: 'authorised' },
       ],
       options3: [

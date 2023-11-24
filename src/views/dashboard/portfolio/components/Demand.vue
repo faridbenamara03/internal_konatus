@@ -151,6 +151,13 @@
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <div
+                        v-else-if="ft === 'winrate'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ item1.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                      </div>
+                      <div
                         v-else
                         class="mr-1"
                         style="margin-top:6px;"
@@ -722,6 +729,7 @@ export default {
       return null
     },
     formatCurrency(value) {
+      if (value === undefined || value === null) return 0
       return new Intl.NumberFormat(undefined, {
         style: 'currency',
         currency: 'EUR',
