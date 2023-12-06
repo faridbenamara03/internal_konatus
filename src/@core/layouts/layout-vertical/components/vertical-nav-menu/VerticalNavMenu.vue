@@ -187,6 +187,7 @@ export default {
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
       globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
       data.push(...globalData.filter(Boolean))
+      console.log("ComptNavMenuItems:", data)
       return data
     },
     getIndex() {

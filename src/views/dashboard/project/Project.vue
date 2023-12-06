@@ -573,7 +573,7 @@ export default {
       this.$store.dispatch('globalState/get_project_reporting_editable')
     },
     toggleCreateNewProjectDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

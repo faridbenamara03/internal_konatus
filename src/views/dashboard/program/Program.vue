@@ -510,7 +510,7 @@ export default {
       }
     },
     toggleCreateNewProgramDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

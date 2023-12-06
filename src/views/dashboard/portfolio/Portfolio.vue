@@ -682,7 +682,7 @@ export default {
       this.updateIndex = false
     },
     toggleCreateNewPortfolioDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
     toggleEditPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')

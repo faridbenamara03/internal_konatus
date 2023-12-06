@@ -437,7 +437,7 @@ export default {
       this.$root.$emit('bv::toggle::tab', tabKey)
     },
     toggleCreateNewUnitDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_DRAWER')
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_UNIT_DRAWER')
     },
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
