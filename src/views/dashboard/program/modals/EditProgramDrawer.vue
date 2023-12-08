@@ -3,53 +3,109 @@
     <h3 class="modal-title mb-1">
       Edit
     </h3>
-    <!-- <div class="modal-actions">
-      <b-button
-        style="width: 200px"
-        variant="outline-primary"
-      >
-        <feather-icon
-          icon="SettingsIcon"
-          size="18"
-        />
-        <span class="pl-1">Select Fields</span>
-      </b-button>
-    </div> -->
     <p
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      {{ progressDescription[0] }}
+      Edit a new Program or Project
     </p>
-    <!-- </div> -->
     <div
       class="select-group"
       style="padding-top: 0px"
     >
-      <div class="select-box">
-        <div class="d-flex">
-          <div class="w-50">
-            <label>Nomenclature System</label>
-            <InputSelect
-              placeholder="Select System"
-              :options="['SAP', 'Jira', 'Konatus']"
-              :value="step1.system"
-              @customChange="e => handleCustomChange(e, 'system')"
-            />
-          </div>
-          <div class="w-50 pl-1">
-            <label>SystemId</label>
-            <b-form-input
-              v-model="step1.systemId"
-            />
+      <div
+        class="select-group"
+        style="padding-top: 0px"
+      >
+        <div class="select-box">
+          <div class="d-flex">
+            <div class="w-50">
+              <label>Nomenclature System</label>
+              <InputSelect
+                placeholder="Select System"
+                :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
+                :value="step1.system === null ? null : step1.system.title"
+                @customChange="e => handleCustomChange(e, 'system')"
+              />
+            </div>
           </div>
         </div>
-        <!-- <v-select
-          v-model="step1.system"
-          :options="['SAP', 'Jira', 'Konatus']"
-          placeholder="Select System"
-          outlined
-        /> -->
+        <div class="select-box">
+          <div class="d-flex">
+            <div class="w-50">
+              <label>Portfolio</label>
+              <InputSelect
+                placeholder="Select Portfolio"
+                :options="getAllPorts()"
+                :value="step1.portfolio === null ? null : step1.portfolio.title"
+                @customChange="e => handleCustomChange(e, 'portfolio')"
+              />
+            </div>
+            <div class="w-50 pl-1">
+              <label>PortfolioID</label>
+              <b-form-input
+                v-model="step1.portfolioId"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="select-box">
+          <div class="d-flex">
+            <div class="w-50">
+              <label>Program</label>
+              <InputSelect
+                placeholder="Select Program"
+                :options="getAllProgs()"
+                :value="step1.program === null ? null : step1.program.title"
+                @customChange="e => handleCustomChange(e, 'program')"
+              />
+            </div>
+            <div class="w-50 pl-1">
+              <label>ProgramID</label>
+              <b-form-input
+                v-model="step1.programId"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="select-box">
+          <div class="d-flex">
+            <div class="w-50">
+              <label>Project</label>
+              <InputSelect
+                placeholder="Select Project"
+                :options="getAllProjects()"
+                :value="step1.project === null ? null : step1.project.title"
+                @customChange="e => handleCustomChange(e, 'project')"
+              />
+            </div>
+            <div class="w-50 pl-1">
+              <label>ProjectID</label>
+              <b-form-input
+                v-model="step1.projectId"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="select-box">
+          <div class="d-flex">
+            <div class="w-50">
+              <label>Sub Project(Optional)</label>
+              <InputSelect
+                placeholder="Select Sub Project"
+                :options="getAllProjects()"
+                :value="step1.subproject === null ? null : step1.subproject.title"
+                @customChange="e => handleCustomChange(e, 'subproject')"
+              />
+            </div>
+            <div class="w-50 pl-1">
+              <label>SubProject</label>
+              <b-form-input
+                v-model="step1.subProjectId"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="select-box">
         <div class="d-flex">

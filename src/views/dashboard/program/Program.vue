@@ -302,6 +302,7 @@
     <template #footer>
       <b-button
         variant="primary"
+        class="fixed-create-button"
         @click="toggleCreateNewProgramDrawer"
       >
         <feather-icon icon="PlusIcon" />
@@ -515,6 +516,9 @@ export default {
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
+    toggleEditPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
+    },
     onRangeFromChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
@@ -622,6 +626,18 @@ export default {
 .popover-body {
   position: absolute;
   left: -576px;
+}
+.fixed-create-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 80px!important; /* Distance from right */
+  z-index: 1000;
+}
+.fixed-edit-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 140px!important; /* Distance from right */
+  z-index: 1000;
 }
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
 @import "@core/scss/vue/pages/dashboard-project.scss";

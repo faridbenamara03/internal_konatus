@@ -411,21 +411,16 @@
       </b-tabs>
     </b-card-body>
     <template #footer>
-      <!-- <b-button v-b-modal.modal-create variant="primary">
-        <feather-icon icon="PlusIcon" />
-      </b-button> -->
-      <!-- <b-button
-        variant="primary"
-        @click="toggle"
-      > -->
       <b-button
         variant="primary"
+        class="fixed-create-button"
         @click="toggleCreateNewPortfolioDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>
       <b-button
         variant="primary"
+        class="fixed-edit-button"
         @click="toggleEditPortfolioDrawer"
       >
         <feather-icon icon="EditIcon" />
@@ -775,6 +770,18 @@ export default {
 }
 .mask {
   background: #000 !important;
+}
+.fixed-create-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 140px!important; /* Distance from right */
+  z-index: 1000;
+}
+.fixed-edit-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 80px!important; /* Distance from right */
+  z-index: 1000;
 }
 $--simple-drawer-bg-color: #212739;
 @import "~vue-simple-drawer/src/index";

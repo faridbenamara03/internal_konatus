@@ -7,7 +7,7 @@
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      Add new program
+      Create a new Program or Project
     </p>
     <div
       class="select-group"
@@ -24,6 +24,10 @@
               @customChange="e => handleCustomChange(e, 'system')"
             />
           </div>
+        </div>
+      </div>
+      <div class="select-box">
+        <div class="d-flex">
           <div class="w-50">
             <label>Portfolio</label>
             <InputSelect
@@ -33,16 +37,69 @@
               @customChange="e => handleCustomChange(e, 'portfolio')"
             />
           </div>
-        </div>
-      </div>
-      <div class="select-box">
-        <div class="d-flex">
-          <!-- <div class="w-50 pl-1">
+          <div class="w-50 pl-1">
             <label>PortfolioID</label>
             <b-form-input
               v-model="step1.portfolioId"
             />
-          </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="select-box">
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Program</label>
+            <InputSelect
+              placeholder="Select Program"
+              :options="getAllProgs()"
+              :value="step1.program === null ? null : step1.program.title"
+              @customChange="e => handleCustomChange(e, 'program')"
+            />
+          </div>
+          <div class="w-50 pl-1">
+            <label>ProgramID</label>
+            <b-form-input
+              v-model="step1.programId"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="select-box">
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Project</label>
+            <InputSelect
+              placeholder="Select Project"
+              :options="getAllProjects()"
+              :value="step1.project === null ? null : step1.project.title"
+              @customChange="e => handleCustomChange(e, 'project')"
+            />
+          </div>
+          <div class="w-50 pl-1">
+            <label>ProjectID</label>
+            <b-form-input
+              v-model="step1.projectId"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="select-box">
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Sub Project(Optional)</label>
+            <InputSelect
+              placeholder="Select Sub Project"
+              :options="getAllProjects()"
+              :value="step1.subproject === null ? null : step1.subproject.title"
+              @customChange="e => handleCustomChange(e, 'subproject')"
+            />
+          </div>
+          <div class="w-50 pl-1">
+            <label>SubProject</label>
+            <b-form-input
+              v-model="step1.subProjectId"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -197,6 +254,13 @@ export default {
       step1: {
         system: null,
         portfolio: null,
+        program: null,
+        project: null,
+        subproject: null,
+        portfolioId: null,
+        programId: null,
+        projectId: null,
+        subProjectId: null
       },
       step2: {
         title: null,
@@ -244,6 +308,14 @@ export default {
       }
     },
     getAllPorts() {
+      const pts = Array.from(this.$store.state.globalState.allPortData)
+      return pts
+    },
+    getAllProgs() {
+      const pts = Array.from(this.$store.state.globalState.allPortData)
+      return pts
+    },
+    getAllProjects() {
       const pts = Array.from(this.$store.state.globalState.allPortData)
       return pts
     },

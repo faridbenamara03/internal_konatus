@@ -506,16 +506,6 @@ export default {
     parentTeamTitle: ''
   },
   mutations: {
-    // TOGGLE_CREATE_NEW_DRAWER(state) {
-    //   const u1 = !state.openCreateNewPortfolioDrawer
-    //   const u2 = !state.openCreateNewUnitDrawer
-    //   const u3 = !state.openCreateNewProgramDrawer
-    //   const u4 = !state.openCreateNewProjectDrawer
-    //   state.openCreateNewPortfolioDrawer = u1
-    //   state.openCreateNewUnitDrawer = u2
-    //   state.openCreateNewProgramDrawer = u3
-    //   state.openCreateNewProjectDrawer = u4
-    // },
     TOGGLE_CREATE_NEW_UNIT_DRAWER(state) {
       const u2 = !state.openCreateNewUnitDrawer
       state.openCreateNewUnitDrawer = u2
@@ -829,10 +819,9 @@ export default {
     SAVE_SELECTED_NAV_DATA(state, payload) {
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
-      state.portfolioDemandData = JSON.parse(payload.portData.demand)
-      console.log("PTD:", state.portfolioDemandData)
-      state.portfolioReportingData = JSON.parse(payload.portData.reporting)
-      state.portfolioControlData = JSON.parse(payload.portData.control)
+      state.portfolioDemandData = payload.portData.demand
+      state.portfolioReportingData = payload.portData.reporting
+      state.portfolioControlData = payload.portData.control
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id

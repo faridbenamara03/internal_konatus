@@ -355,6 +355,7 @@
     <template #footer>
       <b-button
         variant="primary"
+        class="fixed-create-button"
         @click="toggleCreateNewProjectDrawer"
       >
         <feather-icon icon="PlusIcon" />
@@ -421,7 +422,7 @@ import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import Demand from './components/Demand.vue'
 import TableEditable from './components/TableEditable.vue'
-import CreateDrawer from './modals/CreateNewProjectDrawer.vue'
+import CreateDrawer from '../program/modals/CreateNewProgramDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
@@ -698,6 +699,18 @@ export default {
 .popover-body {
   position: absolute;
   left: -576px;
+}
+.fixed-create-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 80px!important; /* Distance from right */
+  z-index: 1000;
+}
+.fixed-edit-button {
+  position: fixed!important;;
+  bottom: 20px!important; /* Distance from bottom */
+  right: 140px!important; /* Distance from right */
+  z-index: 1000;
 }
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
 @import "@core/scss/vue/pages/dashboard-project.scss";
