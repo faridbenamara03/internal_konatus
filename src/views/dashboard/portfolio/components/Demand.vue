@@ -22,7 +22,296 @@
           </div>
         </div>
       </div>
-      <div v-if="otype !== 'program'">
+      <div v-if="otype === 'company'">
+        <div
+          v-for="(item, index) in c_data"
+          :key="index"
+        >
+          <div
+            class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
+            :class="{ 'inner-sdw': index === 0 }"
+          >
+            <div
+              class="part1 portf-uppercase"
+              style="cursor:pointer"
+              @click="onCollapseClick(index)"
+            >
+              <feather-icon
+                v-if="item.children"
+                :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                size="16"
+                class="mr-1"
+              />
+              {{ item.title }}
+            </div>
+            <div class="part2">
+              <div
+                v-for="(ft, fi) in c_fields"
+                :key="fi"
+                class="data-child mr-1 pr-1"
+                :style="`width:${100 / c_fields.length}%`"
+              >
+                <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else>{{ formatCurrency(item[ft]) }}</span>
+              </div>
+            </div>
+            <div class="part3 d-flex justify-content-center">
+              <b-button
+                variant="flat-primary"
+                @click="toggleEditPortfolioDrawerOpen(item)"
+              >
+                <feather-icon icon="Edit2Icon" />
+              </b-button>
+              <b-button
+                variant="flat-primary"
+                @click="toggleCreateNewPortfolioDrawer"
+              >
+                <feather-icon icon="PlusIcon" />
+              </b-button>
+            </div>
+          </div>
+          <div v-if="opened === index">
+            <div
+              v-for="(item1, index1) in item.children"
+              :key="index1+10"
+            >
+              <div
+                class="portf-row portf-table-row font-14 border-bottom-dm"
+                :class="{ 'inner-sdw': index1 === 0 }"
+              >
+                <div
+                  class="part1 portf-bold pl-2"
+                  style="padding-top:7px"
+                  @click="onCollapseProgramClick(index1)"
+                >
+                  <feather-icon
+                    v-if="item1.children"
+                    :icon="openedPg === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                    size="16"
+                    class="mr-1"
+                  />
+                  {{ item1.title }}
+                </div>
+                <div class="part2">
+                  <div
+                    v-for="(ft, fi) in c_fields"
+                    :key="fi"
+                    class="data-child mr-1"
+                    :style="`width:${100 / c_fields.length}%`"
+                  >
+                    <div v-if="demandTableEditable">
+                      <v-select
+                        v-if="ft === 'priority'"
+                        v-model="item1[ft]"
+                        :options="['Highest', 'High', 'Low', 'Lowest']"
+                        outlined
+                      />
+                      <b-form-input
+                        v-else-if="ft === 'deadline'"
+                        v-model="item1[ft]"
+                        style="text-align:end"
+                      />
+                      <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                        <b-form-input
+                          v-model="item1[ft]"
+                          type="number"
+                          style="text-align:end"
+                        />
+                        <b-input-group-append>
+                          <b-input-group-text class="bg-transparent font-weight-bold">
+                            €
+                          </b-input-group-text>
+                        </b-input-group-append>
+                      </b-input-group>
+                      <div
+                        v-else
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ formatCurrency(item1[ft]) }}
+                      </div>
+                    </div>
+                    <div v-else>
+                      <div
+                        v-if="ft === 'priority'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ item1[ft] }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'deadline'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ dateFormat(item1[ft]) }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'winrate'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ item1.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                      </div>
+                      <div
+                        v-else
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ formatCurrency(item1[ft]) }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="part3 d-flex justify-content-center">
+                  <b-button
+                    variant="flat-primary"
+                    @click="toggleEditProgramDrawerOpen(item1)"
+                  >
+                    <feather-icon icon="Edit2Icon" />
+                  </b-button>
+                  <b-button
+                    variant="flat-primary"
+                    @click="toggleCreateNewProgramDrawer"
+                  >
+                    <feather-icon icon="PlusIcon" />
+                  </b-button>
+                </div>
+              </div>
+              <div v-if="openedPg === index1">
+                <div
+                  v-for="(item2, index2) in item1.children"
+                  :key="index2+100"
+                >
+                  <div
+                    class="portf-row portf-table-row font-14 border-bottom-dm"
+                    :class="{ 'inner-sdw': index2 === 0 }"
+                  >
+                    <div
+                      class="part1 portf-bold pl-2"
+                      style="padding-top:7px"
+                      @click="onCollapseProjectClick(index2)"
+                    >
+                      <feather-icon
+                        v-if="item2.phases"
+                        :icon="openedPj === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                        size="16"
+                        class="mr-1"
+                      />
+                      {{ item2.title }}
+                    </div>
+                    <div class="part2">
+                      <div
+                        v-for="(ft, fi) in c_fields"
+                        :key="fi"
+                        class="data-child mr-1"
+                        :style="`width:${100 / c_fields.length}%`"
+                      >
+                        <div v-if="demandTableEditable">
+                          <v-select
+                            v-if="ft === 'priority'"
+                            v-model="item2[ft]"
+                            :options="['Highest', 'High', 'Low', 'Lowest']"
+                            outlined
+                          />
+                          <b-form-input
+                            v-else-if="ft === 'deadline'"
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
+                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                            <b-form-input
+                              v-model="item2[ft]"
+                              type="number"
+                              style="text-align:end"
+                            />
+                            <b-input-group-append>
+                              <b-input-group-text class="bg-transparent font-weight-bold">
+                                €
+                              </b-input-group-text>
+                            </b-input-group-append>
+                          </b-input-group>
+                          <div
+                            v-else
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
+                        </div>
+                        <div v-else>
+                          <div
+                            v-if="ft === 'priority'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ item2[ft] }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'deadline'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'winrate'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ item2.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                          </div>
+                          <div
+                            v-else
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="part3 d-flex justify-content-center">
+                      <b-button
+                        variant="flat-primary"
+                        @click="toggleEditProjectDrawerOpen(item2)"
+                      >
+                        <feather-icon icon="Edit2Icon" />
+                      </b-button>
+                      <b-button
+                        variant="flat-primary"
+                        @click="toggleCreateNewProjectDrawer"
+                      >
+                        <feather-icon icon="PlusIcon" />
+                      </b-button>
+                    </div>
+                  </div>
+                  <div v-if="openedPj === index2">
+                    <div
+                      v-for="(item3, index3) in item2.phases"
+                      :key="index3+1000"
+                    >
+                      <div
+                        class="portf-row portf-table-row font-14 border-bottom-dm"
+                        :class="{ 'inner-sdw': index3 === 0 }"
+                      >
+                        <div
+                          class="part1 portf-bold pl-2"
+                          style="padding-top:7px"
+                        >
+                          {{ item3.title }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="otype === 'portfolio'">
         <div
           v-for="(item, index) in c_data"
           :key="index"
@@ -207,7 +496,7 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <!-- <div v-else>
         <div
           class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
           :class="{ 'inner-sdw': index === 0 }"
@@ -308,7 +597,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
         <div class="part1 portf-uppercase">
           Total
@@ -415,9 +704,9 @@
       align="right"
       :closeable="false"
       :mask-closable="true"
-      @close="toggleEditDrawerOpen"
+      @close="toggleEditProgramDrawerOpen"
     >
-      <div v-if="editDrawerOpen">
+      <div v-if="editProgramDrawerOpen">
         <EditDrawer
           :data="selectedProgram"
         />
@@ -432,6 +721,18 @@
       <div v-if="editProjectDrawerOpen">
         <EditProjectDrawer
           :data="selectedProject"
+        />
+      </div>
+    </Drawer>
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleEditPortfolioDrawerOpen"
+    >
+      <div v-if="editPortfolioDrawerOpen">
+        <EditPortfolioDrawer
+          :data="selectedPortfolio"
         />
       </div>
     </Drawer>
@@ -513,10 +814,12 @@ export default {
   data() {
     return {
       budgetDrawerOpen: false,
-      editDrawerOpen: false,
+      editProgramDrawerOpen: false,
       editProjectDrawerOpen: false,
+      editPortfolioDrawerOpen: false,
       opened: 0,
       openedPj: 0,
+      openedPg: 0,
       chartOptions: {
         chart: {
           type: 'bar',
@@ -602,6 +905,26 @@ export default {
           let spent = 0
           if (t.children) {
             t.children.map(t1 => {
+              if (t1.children) {
+                t1.children.map(t2 => {
+                  budget += parseInt(t2.budget ? t2.budget : 0, 10)
+                  engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                  quote += parseInt(t2.quote ? t2.quote : 0, 10)
+                  demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                  realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                  authorised += parseInt(t2.authorised ? t2.authorised : 0, 10)
+                  spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                  return null
+                })
+              } else {
+                budget += t1.budget
+                engaged += t1.engaged
+                quote += t1.quote
+                demand += t1.demand
+                realEstimated += t1.realEstimated
+                authorised += t1.authorised
+                spent += t1.spent
+              }
               budget += parseInt(t1.budget ? t1.budget : 0, 10)
               engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
               quote += parseInt(t1.quote ? t1.quote : 0, 10)
@@ -693,6 +1016,9 @@ export default {
     }
   },
   methods: {
+    toggleCreateNewPortfolioDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
+    },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
     },
@@ -702,22 +1028,33 @@ export default {
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
     },
-    toggleEditDrawerOpen(item) {
+    toggleEditPortfolioDrawerOpen(item) {
+      this.selectedPortfolio = item
+      this.editPortfolioDrawerOpen = !this.editPortfolioDrawerOpen
+    },
+    toggleEditProgramDrawerOpen(item) {
       this.selectedProgram = item
-      this.editDrawerOpen = !this.editDrawerOpen
+      this.editProgramDrawerOpen = !this.editProgramDrawerOpen
     },
     toggleEditProjectDrawerOpen(item) {
       this.selectedProject = item
       this.editProjectDrawerOpen = !this.editProjectDrawerOpen
     },
-    onCollapseCLick(index) {
+    onCollapseClick(index) {
       if (index === this.opened) {
         this.opened = -1
       } else {
         this.opened = index
       }
     },
-    onCollapseProjectCLick(index) {
+    onCollapseProgramClick(index) {
+      if (index === this.openedPg) {
+        this.openedPg = -1
+      } else {
+        this.openedPg = index
+      }
+    },
+    onCollapseProjectClick(index) {
       if (index === this.openedPj) {
         this.openedPj = -1
       } else {

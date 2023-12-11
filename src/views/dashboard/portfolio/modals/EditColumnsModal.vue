@@ -76,6 +76,17 @@
           class="checkbox-group"
           stacked
         />
+        <label>WinRate</label>
+        <v-select
+          v-model="winrate"
+          :options="option_winrate"
+          outlined
+        />
+        <b-form-select
+          id="win-rate"
+          v-model="winrate"
+          :options="options_winrate"
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Planning</h4>
@@ -133,14 +144,16 @@
 
 <script>
 import {
-  BButton, BFormCheckboxGroup, BModal,
+  BButton, BFormCheckboxGroup, BModal
 } from 'bootstrap-vue'
+import vSelect from 'vue-select'
 
 export default {
   components: {
     BButton,
     BFormCheckboxGroup,
     BModal,
+    vSelect
   },
   props: {
     data: {
@@ -174,9 +187,10 @@ export default {
       ],
       options2: [
         { text: 'Priority', value: 'priority' },
-        { text: 'Win Rate', value: 'winrate' },
+        // { text: 'Win Rate', value: 'winrate' },
         // { text: 'Authorised', value: 'authorised' },
       ],
+      option_winrate: ['0', '1', '2', '3', '4', '5', '100'],
       options3: [
         { text: 'Product Deadline', value: 'deadline' },
         { text: 'Nature of deadline', value: 'natureOfDeadline' },
