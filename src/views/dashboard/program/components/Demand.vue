@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- <div v-if="otype !== 'program'"> -->
-      <div v-if="otype === 'program'">
+      <div>
         <div
           v-for="(item, index) in c_data"
           :key="index"
@@ -38,7 +38,7 @@
               @click="onCollapseCLick(index)"
             >
               <feather-icon
-                v-if="item.children"
+                v-if="item.phases"
                 :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -77,7 +77,7 @@
           </div>
           <div v-if="opened === index">
             <div
-              v-for="(item1, index1) in item.children"
+              v-for="(item1, index1) in item.phases"
               :key="index1"
             >
               <div
@@ -87,253 +87,14 @@
                 <div
                   class="part1 portf-bold pl-2"
                   style="padding-top:7px"
-                  @click="onCollapseProjectCLick(index1)"
                 >
-                  <feather-icon
-                    v-if="item1.phases"
-                    :icon="openedPj === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-                    size="16"
-                    class="mr-1"
-                  />
                   {{ item1.title }}
                 </div>
-                <div class="part2">
-                  <div
-                    v-for="(ft, fi) in c_fields"
-                    :key="fi"
-                    class="data-child mr-1"
-                    :style="`width:${100 / c_fields.length}%`"
-                  >
-                    <div v-if="demandTableEditable">
-                      <v-select
-                        v-if="ft === 'priority'"
-                        v-model="item1[ft]"
-                        :options="['Highest', 'High', 'Low', 'Lowest']"
-                        outlined
-                      />
-                      <b-form-input
-                        v-else-if="ft === 'deadline'"
-                        v-model="item1[ft]"
-                        style="text-align:end"
-                      />
-                      <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
-                        <b-form-input
-                          v-model="item1[ft]"
-                          type="number"
-                          style="text-align:end"
-                        />
-                        <b-input-group-append>
-                          <b-input-group-text class="bg-transparent font-weight-bold">
-                            €
-                          </b-input-group-text>
-                        </b-input-group-append>
-                      </b-input-group>
-                      <div
-                        v-else
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
-                    </div>
-                    <div v-else>
-                      <div
-                        v-if="ft === 'priority'"
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ item1[ft] }}
-                      </div>
-                      <div
-                        v-else-if="ft === 'deadline'"
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ dateFormat(item1[ft]) }}
-                      </div>
-                      <div
-                        v-else
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="part3 d-flex justify-content-center">
-                  <b-button
-                    variant="flat-primary"
-                    @click="toggleEditProjectDrawerOpen(item1)"
-                  >
-                    <feather-icon icon="Edit2Icon" />
-                  </b-button>
-                  <b-button
-                    variant="flat-primary"
-                    @click="toggleCreateNewProjectDrawer"
-                  >
-                    <feather-icon icon="PlusIcon" />
-                  </b-button>
-                  <!-- <b-button variant="flat-primary">
-                    <feather-icon icon="ChevronsRightIcon" />
-                  </b-button> -->
-                </div>
-              </div>
-              <div v-if="openedPj === index1">
-                <div
-                  v-for="(item2, index2) in item1.phases"
-                  :key="index2"
-                >
-                  <div
-                    class="portf-row portf-table-row font-14 border-bottom-dm"
-                    :class="{ 'inner-sdw': index2 === 0 }"
-                  >
-                    <div
-                      class="part1 portf-bold pl-2"
-                      style="padding-top:7px"
-                    >
-                      {{ item2.title }}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div v-else>
-        <div
-          class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
-          :class="{ 'inner-sdw': index === 0 }"
-        >
-          <div class="part1 portf-uppercase">
-            {{ data.title }}
-          </div>
-          <div class="part2">
-            <div
-              v-for="(ft, fi) in c_fields"
-              :key="fi"
-              class="data-child mr-1 pr-1"
-              :style="`width:${100 / c_fields.length}%`"
-            >
-              <span v-if="ft === 'priority'">{{ data[ft] }}</span>
-              <span v-else-if="ft === 'deadline'">{{ dateFormat(data[ft]) }}</span>
-              <span v-else>{{ formatCurrency(data[ft]) }}</span>
-            </div>
-          </div>
-        </div>
-        <div
-          v-for="(item, index) in this.c_data"
-          :key="index"
-        >
-          <div
-            class="portf-row portf-table-row font-14 border-bottom-dm"
-            :class="{ 'inner-sdw': index === 0 }"
-          >
-            <div
-              class="part1 portf-bold pl-2"
-              style="padding-top:7px"
-            >
-              {{ item.title }}
-            </div>
-            <div class="part2">
-              <div
-                v-for="(ft, fi) in c_fields"
-                :key="fi"
-                class="data-child mr-1"
-                :style="`width:${100 / c_fields.length}%`"
-              >
-                <div v-if="demandTableEditable">
-                  <v-select
-                    v-if="ft === 'priority'"
-                    v-model="item[ft]"
-                    :options="['Highest', 'High', 'Low', 'Lowest']"
-                    outlined
-                  />
-                  <b-form-input
-                    v-else-if="ft === 'deadline'"
-                    v-model="item[ft]"
-                    style="text-align:end"
-                  />
-                  <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
-                    <b-form-input
-                      v-model="item[ft]"
-                      type="number"
-                      style="text-align:end"
-                    />
-                    <b-input-group-append>
-                      <b-input-group-text class="bg-transparent font-weight-bold">
-                        €
-                      </b-input-group-text>
-                    </b-input-group-append>
-                  </b-input-group>
-                  <div
-                    v-else
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ formatCurrency(item[ft]) }}
-                  </div>
-                </div>
-                <div v-else>
-                  <div
-                    v-if="ft === 'priority'"
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ item[ft] }}
-                  </div>
-                  <div
-                    v-else-if="ft === 'deadline'"
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ dateFormat(item[ft]) }}
-                  </div>
-                  <div
-                    v-else
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ formatCurrency(item[ft]) }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
-        <div class="part1 portf-uppercase">
-          Total
-        </div>
-        <div class="part2">
-          <div class="data-child mr-1 portf-uppercase pr-1" v-for="(ft, fi) in c_fields" :key="fi"
-            :style="`width:${100 / c_fields.length}%`">
-            <div v-if="ft === 'budget'">
-              {{ formatCurrency(c_totalBudget) }}
-            </div>
-            <div v-else-if="ft === 'engaged'">
-              {{ formatCurrency(c_totalEngaged) }}
-            </div>
-            <div v-else-if="ft === 'quote'">
-              {{ formatCurrency(c_totalQuote) }}
-            </div>
-            <div v-else-if="ft === 'demand'">
-              {{ formatCurrency(c_totalDemand) }}
-            </div>
-            <div v-else-if="ft === 'realEstimated'">
-              {{ formatCurrency(c_totalReal) }}
-            </div>
-            <div v-else-if="ft === 'authorised'">
-              {{ formatCurrency(c_totalAuthor) }}
-            </div>
-            <div v-else-if="ft === 'spent'">
-              {{ formatCurrency(c_totalSpent) }}
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
     <div
       v-if="isChartView"
@@ -454,12 +215,11 @@
 
 <script>
 import {
-  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BInputGroup, BInputGroupAppend, BInputGroupText
+  BButton, BCard, BRow, BCol, BProgress, BProgressBar
 } from 'bootstrap-vue'
 import moment from 'moment'
 import Drawer from "vue-simple-drawer"
 import VueApexCharts from 'vue-apexcharts'
-import vSelect from 'vue-select'
 import BudgetDrawer from '../../portfolio/modals/BudgetDrawer.vue'
 import EditDrawer from '../../portfolio/modals/EditDrawer.vue'
 import EditProjectDrawer from '../../portfolio/modals/EditProjectDrawer.vue'
@@ -470,16 +230,11 @@ export default {
   components: {
     BButton,
     BCard,
-    BFormInput,
     BRow,
     BCol,
     BProgress,
     BProgressBar,
     VueApexCharts,
-    BInputGroup,
-    BInputGroupAppend,
-    BInputGroupText,
-    vSelect,
     Drawer,
     BudgetDrawer,
     EditDrawer,
@@ -624,6 +379,7 @@ export default {
           nd.spent = spent
           return nd
         })
+        console.log("NDT:", ndt)
         return ndt
       }
       return []
