@@ -90,15 +90,20 @@
           v-model="phases"
           :options="option_phases"
           outlined
+          @input="onPhaseSelect"
         />
-        <b-form-checkbox-group
+        <div class="mt-2">
+          <p>Phase Start Date: {{ phaseStartDate }}</p>
+          <p>Phase End Date: {{ phaseEndDate }}</p>
+        </div>
+        <!-- <b-form-checkbox-group
           id="checkbox-group-4"
           v-model="selected"
           :options="options4"
           name="columns"
           class="checkbox-group mt-1"
           stacked
-        />
+        /> -->
       </div>
     </div>
     <div class="d-flex">
@@ -168,6 +173,8 @@ export default {
   },
   data() {
     return {
+      phaseStartDate: 0,
+      phaseEndDate: 0,
       selected: [],
       mainOptions: [
         { text: 'Budget', value: 'budget' },
@@ -191,7 +198,9 @@ export default {
         { text: 'Current Phase', value: 'currentPhase' }
       ],
       option_phases: this.$store.state.globalState.allPhaseTitleData,
-      option_winrate: ['0', '1', '2', '3', '4', '5', '100'],
+      option_winrate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+        36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 67, 68, 69, 70, 71, 72, 73, 74, 75,
+        76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
       options3: [
         { text: 'Product Deadline', value: 'deadline' },
         { text: 'Nature of deadline', value: 'natureOfDeadline' },
@@ -199,10 +208,10 @@ export default {
         { text: 'Sales Ex', value: 'salesEx' },
         { text: 'Scoring', value: 'scoring' },
       ],
-      options4: [
-        { text: 'Phase start date', value: 'phaseStartDate' },
-        { text: 'Phase end date', value: 'phaseEndDate' },
-      ],
+      // options4: [
+      //   { text: 'Phase start date', value: 'phaseStartDate' },
+      //   { text: 'Phase end date', value: 'phaseEndDate' },
+      // ],
       options5: [
         { text: 'Head of the product portfolio', value: 'portfolioHead' },
         { text: 'Product manager', value: 'productManager' },
@@ -224,6 +233,16 @@ export default {
       this.$emit('columnChange', this.selected)
       this.$refs['my-modal'].hide()
     },
+    onPhaseSelect(selectedPhase) {
+      const { allPhaseData } = this.$store.state.globalState
+      console.log("selected:", selectedPhase)
+      const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
+      console.log("filtered:", selectedData)
+      if (selectedData) {
+        this.phaseStartDate = selectedData[0].start_date
+        this.phaseEndDate = selectedData[0].end_date
+      }
+    }
   },
 }
 </script>

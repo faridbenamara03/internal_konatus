@@ -312,12 +312,12 @@ export default {
       return pts
     },
     getAllProgs() {
-      const pts = Array.from(this.$store.state.globalState.allPortData)
-      return pts
+      const pgs = Array.from(this.$store.state.globalState.allProgData)
+      return pgs
     },
     getAllProjects() {
-      const pts = Array.from(this.$store.state.globalState.allPortData)
-      return pts
+      const pjs = Array.from(this.$store.state.globalState.allProjData)
+      return pjs
     },
     handleAddPhase() {
       if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {
@@ -334,7 +334,7 @@ export default {
     },
     handleCustomChange(e, field) {
       this.step1[field] = e
-    },
+    }
   },
 }
 </script>

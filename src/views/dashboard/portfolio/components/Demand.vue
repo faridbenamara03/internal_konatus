@@ -323,7 +323,7 @@
             <div
               class="part1 portf-uppercase"
               style="cursor:pointer"
-              @click="onCollapseCLick(index)"
+              @click="onCollapseClick(index)"
             >
               <feather-icon
                 v-if="item.children"
@@ -375,13 +375,13 @@
                 <div
                   class="part1 portf-bold pl-2"
                   style="padding-top:7px"
-                  @click="onCollapseProjectCLick(index1)"
+                  @click="onCollapseProjectClick(index1)"
                 >
                   <feather-icon
                     v-if="item1.phases"
                     :icon="openedPj === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
-                    class="mr-1"
+                    class="mr-1 ml-1"
                   />
                   {{ item1.title }}
                 </div>
@@ -484,7 +484,7 @@
                     :class="{ 'inner-sdw': index2 === 0 }"
                   >
                     <div
-                      class="part1 portf-bold pl-2"
+                      class="part1 portf-bold pl-2 ml-3"
                       style="padding-top:7px"
                     >
                       {{ item2.title }}

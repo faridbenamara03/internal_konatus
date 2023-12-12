@@ -33,6 +33,7 @@ export default {
     this.$store.dispatch('globalState/get_all_phases')
     this.$store.dispatch('globalState/get_all_portfolios')
     this.$store.dispatch('globalState/get_all_programs')
+    this.$store.dispatch('globalState/get_all_projects')
     this.$store.dispatch('globalState/get_all_organizations')
   },
 }

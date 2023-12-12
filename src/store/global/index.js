@@ -479,6 +479,7 @@ export default {
     allPhaseTitleData: [],
     allPortData: [],
     allProgData: [],
+    allProjData: [],
     allOrgData: [],
     chartXAxisData: [
       '',
@@ -680,6 +681,9 @@ export default {
     },
     LOAD_ALL_PROGRAM_DATA(state, data) {
       state.allProgData = data
+    },
+    LOAD_ALL_PROJECT_DATA(state, data) {
+      state.allProjData = data
     },
     LOAD_ALL_ORGANIZATION_DATA(state, data) {
       state.allOrgData = data
@@ -1166,6 +1170,22 @@ export default {
           .catch(err => {
             console.log('error getting all program data ---->', err)
             Vue.$toast.error('Failed to get all program data.')
+            reject(err)
+          })
+      })
+    },
+    get_all_projects() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/project/all')
+        // axios.get('http://localhost/konatus-me/public/api/project/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_PROJECT_DATA', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all project data ---->', err)
+            Vue.$toast.error('Failed to get all project data.')
             reject(err)
           })
       })
