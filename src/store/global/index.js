@@ -1041,8 +1041,8 @@ export default {
     get_from_selected_nav_id(ctx, payload) {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
-        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
-        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
+        baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
+        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -1051,8 +1051,8 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        baseUrl = `https://api.konatus.site/v1/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`
-        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/get_data?id=${payload.data.id}&type=${payload.data.type}`
+        baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}`
+        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -1063,8 +1063,8 @@ export default {
       }
     },
     load_org_data() {
-      axios.get('https://api.konatus.site/v1/api/menu/get_organizations').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/get_organizations').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/organizations').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
@@ -1073,8 +1073,8 @@ export default {
         })
     },
     load_org_unit_data() {
-      axios.get('https://api.konatus.site/v1/api/menu/get_organization_units').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_units').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/organization_units').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/organization_units').then(response => {
           const globalOrgUnitData = response.data
           this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
         }).catch(err => {
@@ -1083,8 +1083,8 @@ export default {
         })
     },
     load_org_team_data() {
-      axios.get('https://api.konatus.site/v1/api/menu/get_organization_teams').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/get_organization_teams').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/organization_teams').then(response => {
+      // axios.get('http://localhost/konatus-me/public/api/menu/organization_teams').then(response => {
           const globalOrgTeamData = response.data
           this.commit('globalState/LOAD_ORG_TEAM_DATA', globalOrgTeamData)
         }).catch(err => {
