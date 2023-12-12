@@ -476,6 +476,7 @@ export default {
     portfolioReportingData: [],
     portfolioControlData: [],
     allPhaseData: [],
+    allPhaseTitleData: [],
     allPortData: [],
     allProgData: [],
     allOrgData: [],
@@ -668,6 +669,11 @@ export default {
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       state.allPhaseData = data
+      const pTitleData = []
+      data.forEach(t => {
+        pTitleData.push(t.title)
+      })
+      state.allPhaseTitleData = pTitleData
     },
     LOAD_ALL_PORTFOLIO_DATA(state, data) {
       state.allPortData = data
@@ -1126,8 +1132,8 @@ export default {
             resolve()
           })
           .catch(err => {
-            console.log('error getting all portfolio data ---->', err)
-            Vue.$toast.error('Failed to get all portfolio data.')
+            console.log('error getting all phase data ---->', err)
+            Vue.$toast.error('Failed to get all phase data.')
             reject(err)
           })
       })

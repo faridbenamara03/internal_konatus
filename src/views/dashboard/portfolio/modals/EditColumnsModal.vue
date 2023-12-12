@@ -190,7 +190,7 @@ export default {
         { text: 'Priority', value: 'priority' },
         { text: 'Current Phase', value: 'currentPhase' }
       ],
-      option_phases: this.$store.globalState.allPhaseData,
+      option_phases: this.$store.state.globalState.allPhaseTitleData,
       option_winrate: ['0', '1', '2', '3', '4', '5', '100'],
       options3: [
         { text: 'Product Deadline', value: 'deadline' },
