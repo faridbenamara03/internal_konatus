@@ -82,20 +82,21 @@
           :options="option_winrate"
           outlined
         />
-        <b-form-select
-          id="win-rate"
-          v-model="winrate"
-          :options="options_winrate"
-        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Planning</h4>
+        <label>Phase</label>
+        <v-select
+          v-model="phases"
+          :options="option_phases"
+          outlined
+        />
         <b-form-checkbox-group
           id="checkbox-group-4"
           v-model="selected"
           :options="options4"
           name="columns"
-          class="checkbox-group"
+          class="checkbox-group mt-1"
           stacked
         />
       </div>
@@ -187,9 +188,9 @@ export default {
       ],
       options2: [
         { text: 'Priority', value: 'priority' },
-        // { text: 'Win Rate', value: 'winrate' },
-        // { text: 'Authorised', value: 'authorised' },
+        { text: 'Current Phase', value: 'currentPhase' }
       ],
+      option_phases: this.$store.globalState.allPhaseData,
       option_winrate: ['0', '1', '2', '3', '4', '5', '100'],
       options3: [
         { text: 'Product Deadline', value: 'deadline' },
@@ -199,7 +200,6 @@ export default {
         { text: 'Scoring', value: 'scoring' },
       ],
       options4: [
-        { text: 'Phase', value: 'phase' },
         { text: 'Phase start date', value: 'phaseStartDate' },
         { text: 'Phase end date', value: 'phaseEndDate' },
       ],

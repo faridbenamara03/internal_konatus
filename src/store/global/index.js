@@ -475,6 +475,7 @@ export default {
     portfolioDemandData: [],
     portfolioReportingData: [],
     portfolioControlData: [],
+    allPhaseData: [],
     allPortData: [],
     allProgData: [],
     allOrgData: [],
@@ -664,6 +665,9 @@ export default {
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
       Vue.$toast.error('Program created successfully.')
+    },
+    LOAD_ALL_PHASE_DATA(state, data) {
+      state.allPhaseData = data
     },
     LOAD_ALL_PORTFOLIO_DATA(state, data) {
       state.allPortData = data
@@ -1110,6 +1114,22 @@ export default {
       }).catch(err => {
         console.log('error creating new portfolio --->', err)
         Vue.$toast.error('Failed to create new portfolio.')
+      })
+    },
+    get_all_phases() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/phase/all')
+        // axios.get('http://localhost/konatus-me/public/api/portfolio/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_PHASE_DATA', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all portfolio data ---->', err)
+            Vue.$toast.error('Failed to get all portfolio data.')
+            reject(err)
+          })
       })
     },
     get_all_portfolios() {

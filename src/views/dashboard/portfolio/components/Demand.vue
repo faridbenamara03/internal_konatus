@@ -197,7 +197,7 @@
                         v-if="item2.phases"
                         :icon="openedPj === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
-                        class="mr-1"
+                        class="mr-1 ml-1"
                       />
                       {{ item2.title }}
                     </div>
@@ -297,7 +297,7 @@
                         :class="{ 'inner-sdw': index3 === 0 }"
                       >
                         <div
-                          class="part1 portf-bold pl-2"
+                          class="part1 portf-bold pl-2 ml-3"
                           style="padding-top:7px"
                         >
                           {{ item3.title }}

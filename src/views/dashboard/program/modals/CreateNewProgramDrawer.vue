@@ -284,7 +284,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('globalState/get_all_portfolios')
+    // await this.$store.dispatch('globalState/get_all_portfolios')
   },
   methods: {
     async handleSave() {
