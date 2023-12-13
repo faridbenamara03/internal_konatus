@@ -174,9 +174,9 @@
       <div class="select-box">
         <label>Date Production Deadline</label>
         <b-form-datepicker
-          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           id="example-datepicker"
           v-model="step2.date"
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
         />
       </div>
     </div>
@@ -195,17 +195,17 @@
         <div class="select-box">
           <label>Date Production Deadline</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="production-datepicker"
             v-model="step3.p_deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
         <div class="select-box">
           <label>Nature of deadline</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="production-datepicker1"
             v-model="step3.n_deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
       </div>
@@ -263,17 +263,17 @@
         <div class="select-box">
           <label>Date Next Gate Demand</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="date_next_gate-datepicker1"
             v-model="step4.date_next_gate"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
         <div class="select-box">
           <label>Date Ready for Test Demand</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="date_next_gate-datepicker2"
             v-model="step4.date_ready_test"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
       </div>
@@ -281,9 +281,9 @@
         <div class="select-box mb-0">
           <label>Date Production Demand</label>
           <b-form-datepicker
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
             id="date_next_gate-datepicker3"
             v-model="step4.date_production"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
         <div class="select-box m-0" />

@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="part3 d-flex justify-content-center">
-              <b-button
+              <!-- <b-button
                 variant="flat-primary"
                 @click="toggleEditPortfolioDrawerOpen(item)"
               >
@@ -68,7 +68,7 @@
                 @click="toggleCreateNewPortfolioDrawer"
               >
                 <feather-icon icon="PlusIcon" />
-              </b-button>
+              </b-button> -->
             </div>
           </div>
           <div v-if="opened === index">
@@ -167,13 +167,13 @@
                 <div class="part3 d-flex justify-content-center">
                   <b-button
                     variant="flat-primary"
-                    @click="toggleEditProgramDrawerOpen(item1)"
+                    @click="toggleEditProgramDrawerOpen(item1, 'program')"
                   >
                     <feather-icon icon="Edit2Icon" />
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProgramDrawer"
+                    @click="toggleCreateNewProgramDrawer('program')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
@@ -275,13 +275,13 @@
                     <div class="part3 d-flex justify-content-center">
                       <b-button
                         variant="flat-primary"
-                        @click="toggleEditProjectDrawerOpen(item2)"
+                        @click="toggleEditProgramDrawerOpen(item2, 'project')"
                       >
                         <feather-icon icon="Edit2Icon" />
                       </b-button>
                       <b-button
                         variant="flat-primary"
-                        @click="toggleCreateNewProjectDrawer"
+                        @click="toggleCreateNewProgramDrawer('project')"
                       >
                         <feather-icon icon="PlusIcon" />
                       </b-button>
@@ -348,19 +348,16 @@
             <div class="part3 d-flex justify-content-center">
               <b-button
                 variant="flat-primary"
-                @click="toggleEditDrawerOpen(item)"
+                @click="toggleEditProgramDrawerOpen(item, 'program')"
               >
                 <feather-icon icon="Edit2Icon" />
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewProgramDrawer"
+                @click="toggleCreateNewProgramDrawer('program')"
               >
                 <feather-icon icon="PlusIcon" />
               </b-button>
-              <!-- <b-button variant="flat-primary">
-                <feather-icon icon="ChevronsRightIcon" />
-              </b-button> -->
             </div>
           </div>
           <div v-if="opened === index">
@@ -459,19 +456,16 @@
                 <div class="part3 d-flex justify-content-center">
                   <b-button
                     variant="flat-primary"
-                    @click="toggleEditProjectDrawerOpen(item1)"
+                    @click="toggleEditProgramDrawerOpen(item1, 'project')"
                   >
                     <feather-icon icon="Edit2Icon" />
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProjectDrawer"
+                    @click="toggleCreateNewProgramDrawer('project')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
-                  <!-- <b-button variant="flat-primary">
-                    <feather-icon icon="ChevronsRightIcon" />
-                  </b-button> -->
                 </div>
               </div>
               <div v-if="openedPj === index1">
@@ -496,139 +490,6 @@
           </div>
         </div>
       </div>
-      <!-- <div v-else>
-        <div
-          class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
-          :class="{ 'inner-sdw': index === 0 }"
-        >
-          <div class="part1 portf-uppercase">
-            {{ data.title }}
-          </div>
-          <div class="part2">
-            <div
-              v-for="(ft, fi) in c_fields"
-              :key="fi"
-              class="data-child mr-1 pr-1"
-              :style="`width:${100 / c_fields.length}%`"
-            >
-              <span v-if="ft === 'priority'">{{ data[ft] }}</span>
-              <span v-else-if="ft === 'deadline'">{{ dateFormat(data[ft]) }}</span>
-              <span v-else>{{ formatCurrency(data[ft]) }}</span>
-            </div>
-          </div>
-        </div>
-        <div
-          v-for="(item, index) in this.c_data"
-          :key="index"
-        >
-          <div
-            class="portf-row portf-table-row font-14 border-bottom-dm"
-            :class="{ 'inner-sdw': index === 0 }"
-          >
-            <div
-              class="part1 portf-bold pl-2"
-              style="padding-top:7px"
-            >
-              {{ item.title }}
-            </div>
-            <div class="part2">
-              <div
-                v-for="(ft, fi) in c_fields"
-                :key="fi"
-                class="data-child mr-1"
-                :style="`width:${100 / c_fields.length}%`"
-              >
-                <div v-if="demandTableEditable">
-                  <v-select
-                    v-if="ft === 'priority'"
-                    v-model="item[ft]"
-                    :options="['Highest', 'High', 'Low', 'Lowest']"
-                    outlined
-                  />
-                  <b-form-input
-                    v-else-if="ft === 'deadline'"
-                    v-model="item[ft]"
-                    style="text-align:end"
-                  />
-                  <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
-                    <b-form-input
-                      v-model="item[ft]"
-                      type="number"
-                      style="text-align:end"
-                    />
-                    <b-input-group-append>
-                      <b-input-group-text class="bg-transparent font-weight-bold">
-                        €
-                      </b-input-group-text>
-                    </b-input-group-append>
-                  </b-input-group>
-                  <div
-                    v-else
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ formatCurrency(item[ft]) }}
-                  </div>
-                </div>
-                <div v-else>
-                  <div
-                    v-if="ft === 'priority'"
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ item[ft] }}
-                  </div>
-                  <div
-                    v-else-if="ft === 'deadline'"
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ dateFormat(item[ft]) }}
-                  </div>
-                  <div
-                    v-else
-                    class="mr-1"
-                    style="margin-top:6px;"
-                  >
-                    {{ formatCurrency(item[ft]) }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="portf-row portf-bold portf-table-header portf-uppercase" style="font-size:18px">
-        <div class="part1 portf-uppercase">
-          Total
-        </div>
-        <div class="part2">
-          <div class="data-child mr-1 portf-uppercase pr-1" v-for="(ft, fi) in c_fields" :key="fi"
-            :style="`width:${100 / c_fields.length}%`">
-            <div v-if="ft === 'budget'">
-              {{ formatCurrency(c_totalBudget) }}
-            </div>
-            <div v-else-if="ft === 'engaged'">
-              {{ formatCurrency(c_totalEngaged) }}
-            </div>
-            <div v-else-if="ft === 'quote'">
-              {{ formatCurrency(c_totalQuote) }}
-            </div>
-            <div v-else-if="ft === 'demand'">
-              {{ formatCurrency(c_totalDemand) }}
-            </div>
-            <div v-else-if="ft === 'realEstimated'">
-              {{ formatCurrency(c_totalReal) }}
-            </div>
-            <div v-else-if="ft === 'authorised'">
-              {{ formatCurrency(c_totalAuthor) }}
-            </div>
-            <div v-else-if="ft === 'spent'">
-              {{ formatCurrency(c_totalSpent) }}
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
     <div
       v-if="isChartView"
@@ -707,20 +568,9 @@
       @close="toggleEditProgramDrawerOpen"
     >
       <div v-if="editProgramDrawerOpen">
-        <EditDrawer
-          :data="selectedProgram"
-        />
-      </div>
-    </Drawer>
-    <Drawer
-      align="right"
-      :closeable="false"
-      :mask-closable="true"
-      @close="toggleEditProjectDrawerOpen"
-    >
-      <div v-if="editProjectDrawerOpen">
-        <EditProjectDrawer
-          :data="selectedProject"
+        <EditProgramDrawer
+          :data="selectedObject"
+          :otype="selectedType"
         />
       </div>
     </Drawer>
@@ -743,17 +593,9 @@
       @close="toggleCreateNewProgramDrawer"
     >
       <div v-if="openCreateNewProgramDrawer">
-        <CreateNewProgramDrawer />
-      </div>
-    </Drawer>
-    <Drawer
-      align="right"
-      :closeable="false"
-      :mask-closable="true"
-      @close="toggleCreateNewProjectDrawer"
-    >
-      <div v-if="openCreateNewProjectDrawer">
-        <CreateNewProjectDrawer />
+        <CreateNewProgramDrawer
+          :otype="selectedType"
+        />
       </div>
     </Drawer>
   </div>
@@ -768,10 +610,8 @@ import Drawer from "vue-simple-drawer"
 import VueApexCharts from 'vue-apexcharts'
 import vSelect from 'vue-select'
 import BudgetDrawer from '../modals/BudgetDrawer.vue'
-import EditDrawer from '../modals/EditDrawer.vue'
-import EditProjectDrawer from '../modals/EditProjectDrawer.vue'
 import CreateNewProgramDrawer from '../../program/modals/CreateNewProgramDrawer.vue'
-import CreateNewProjectDrawer from '../../project/modals/CreateNewProjectDrawer.vue'
+import EditProgramDrawer from '../../program/modals/EditProgramDrawer.vue'
 
 export default {
   components: {
@@ -789,10 +629,8 @@ export default {
     vSelect,
     Drawer,
     BudgetDrawer,
-    EditDrawer,
-    EditProjectDrawer,
-    CreateNewProgramDrawer,
-    CreateNewProjectDrawer
+    EditProgramDrawer,
+    CreateNewProgramDrawer
   },
   props: {
     data: {
@@ -815,7 +653,6 @@ export default {
     return {
       budgetDrawerOpen: false,
       editProgramDrawerOpen: false,
-      editProjectDrawerOpen: false,
       editPortfolioDrawerOpen: false,
       opened: 0,
       openedPj: 0,
@@ -883,9 +720,6 @@ export default {
   computed: {
     openCreateNewProgramDrawer() {
       return this.$store.state.globalState.openCreateNewProgramDrawer
-    },
-    openCreateNewProjectDrawer() {
-      return this.$store.state.globalState.openCreateNewProjectDrawer
     },
     c_fields() {
       return this.fields.slice(1, this.fields.length - 1)
@@ -1019,10 +853,8 @@ export default {
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
-    toggleCreateNewProjectDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
-    },
-    toggleCreateNewProgramDrawer() {
+    toggleCreateNewProgramDrawer(type) {
+      this.selectedType = type
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     toggleDrawerOpen() {
@@ -1032,13 +864,10 @@ export default {
       this.selectedPortfolio = item
       this.editPortfolioDrawerOpen = !this.editPortfolioDrawerOpen
     },
-    toggleEditProgramDrawerOpen(item) {
-      this.selectedProgram = item
+    toggleEditProgramDrawerOpen(item, type) {
+      this.selectedObject = item
+      this.selectedType = type
       this.editProgramDrawerOpen = !this.editProgramDrawerOpen
-    },
-    toggleEditProjectDrawerOpen(item) {
-      this.selectedProject = item
-      this.editProjectDrawerOpen = !this.editProjectDrawerOpen
     },
     onCollapseClick(index) {
       if (index === this.opened) {

@@ -504,7 +504,6 @@ export default {
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
     openCreateNewProgramDrawer: false,
-    openCreateNewProjectDrawer: false,
     parentIndexForInsertElement: {},
     parentTeamTitle: ''
   },
@@ -520,10 +519,6 @@ export default {
     TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state) {
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
-    },
-    TOGGLE_CREATE_NEW_PROJECT_DRAWER(state) {
-      const u1 = !state.openCreateNewProjectDrawer
-      state.openCreateNewProjectDrawer = u1
     },
     CREATE_NEW_UNIT(state, data) {
       // if (!data.unitName) {
@@ -652,21 +647,21 @@ export default {
       console.log("NewProjectData:", data)
       const u1 = !state.openCreateNewProjectDrawer
       state.openCreateNewProjectDrawer = u1
-      Vue.$toast.error('Project created successfully.')
+      Vue.$toast.success('Project created successfully.')
     },
     UPDATE_PROJECT(state, data) {
-      Vue.$toast.error('Project updated successfully.')
+      Vue.$toast.success('Project updated successfully.')
       console.log("UpdateProjectData:", data)
     },
     UPDATE_PROGRAM(state, data) {
-      Vue.$toast.error('Program updated successfully.')
+      Vue.$toast.success('Program updated successfully.')
       console.log("UpdateProgramData:", data)
     },
     CREATE_NEW_PROGRAM(state, data) {
       console.log("NewProgramData:", data)
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
-      Vue.$toast.error('Program created successfully.')
+      Vue.$toast.success('Program created successfully.')
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       state.allPhaseData = data
@@ -1239,12 +1234,13 @@ export default {
       })
     },
     update_program(commit, payload) {
+      console.log("PAYLOADDATA:", payload.data)
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/program/update', payload.data)
         // axios.post('http://localhost/konatus-me/public/api/program/update', payload.data)
           .then(response => {
             const newData = response.data
-            this.commit('globalState/UPDATE_PROGAM', newData)
+            this.commit('globalState/UPDATE_PROGRAM', newData)
             resolve()
           })
           .catch(err => {

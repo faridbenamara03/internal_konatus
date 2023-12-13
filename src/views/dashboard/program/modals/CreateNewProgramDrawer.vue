@@ -150,9 +150,9 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Authorized</label>
+          <label>Authorised</label>
           <b-form-input
-            v-model="step2.authorized"
+            v-model="step2.authorised"
             type="number"
           />
         </div>
@@ -247,6 +247,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    otype: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {
@@ -257,10 +261,10 @@ export default {
         program: null,
         project: null,
         subproject: null,
-        portfolioId: null,
-        programId: null,
-        projectId: null,
-        subProjectId: null
+        portfolioId: 0,
+        programId: 0,
+        projectId: 0,
+        subProjectId: 0
       },
       step2: {
         title: null,
@@ -273,7 +277,7 @@ export default {
         realestimated: 0,
         spent: 0,
         demand: 0,
-        authorized: 0,
+        authorised: 0,
         engaged: 0,
         phase: null,
         budgetOpen: 0,
@@ -284,6 +288,7 @@ export default {
     }
   },
   async mounted() {
+    console.log("ODT:", this.otype)
     await this.$store.dispatch('globalState/get_all_portfolios')
   },
   methods: {
@@ -295,16 +300,21 @@ export default {
       if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null || this.step2.next_gate === null) {
         this.$toast.error('Please input all correctly.')
       } else {
-        const navObj = this.$store.state.globalState.selectedNavObj
-        await this.$store.dispatch('globalState/create_new_program', {
-          data: {
-            ...newProgramData,
-            portId: navObj.id,
-            type: navObj.type
-          }
-        })
+        if (this.otype === 'program') {
+          await this.$store.dispatch('globalState/create_new_program', {
+            data: {
+              ...newProgramData
+            }
+          })
+        } else {
+          await this.$store.dispatch('globalState/create_new_project', {
+            data: {
+              ...newProgramData
+            }
+          })
+        }
         await this.$store.dispatch('globalState/load_org_data')
-        this.$refs['my-modal'].hide()
+        // this.$refs['my-modal'].hide()
       }
     },
     getAllPorts() {

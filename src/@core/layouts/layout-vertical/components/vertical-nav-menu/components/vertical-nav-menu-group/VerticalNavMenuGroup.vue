@@ -147,7 +147,7 @@ export default {
         }
       } else {
         if (data.type === 'company') {
-          baseUrl = `/organization/${data.orgId}/portfolio`
+          baseUrl = `/organization/${data.id}/portfolio`
         } else if (data.type === 'portfolio') {
           baseUrl = `/organization/${data.orgId}/portfolio/${data.id}`
         } else if (data.type === 'program') {

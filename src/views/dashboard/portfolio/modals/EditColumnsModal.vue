@@ -96,14 +96,6 @@
           <p>Phase Start Date: {{ phaseStartDate }}</p>
           <p>Phase End Date: {{ phaseEndDate }}</p>
         </div>
-        <!-- <b-form-checkbox-group
-          id="checkbox-group-4"
-          v-model="selected"
-          :options="options4"
-          name="columns"
-          class="checkbox-group mt-1"
-          stacked
-        /> -->
       </div>
     </div>
     <div class="d-flex">
@@ -235,9 +227,7 @@ export default {
     },
     onPhaseSelect(selectedPhase) {
       const { allPhaseData } = this.$store.state.globalState
-      console.log("selected:", selectedPhase)
       const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
-      console.log("filtered:", selectedData)
       if (selectedData) {
         this.phaseStartDate = selectedData[0].start_date
         this.phaseEndDate = selectedData[0].end_date

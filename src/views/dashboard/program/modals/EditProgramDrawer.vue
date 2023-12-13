@@ -1,109 +1,28 @@
 <template>
   <div style="width:600px">
     <h3 class="modal-title mb-1">
-      Edit
+      Edit program or project
     </h3>
     <p
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      Edit a new Program or Project
+      Edit program or project
     </p>
     <div
       class="select-group"
       style="padding-top: 0px"
     >
-      <div
-        class="select-group"
-        style="padding-top: 0px"
-      >
-        <div class="select-box">
-          <div class="d-flex">
-            <div class="w-50">
-              <label>Nomenclature System</label>
-              <InputSelect
-                placeholder="Select System"
-                :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
-                :value="step1.system === null ? null : step1.system.title"
-                @customChange="e => handleCustomChange(e, 'system')"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="select-box">
-          <div class="d-flex">
-            <div class="w-50">
-              <label>Portfolio</label>
-              <InputSelect
-                placeholder="Select Portfolio"
-                :options="getAllPorts()"
-                :value="step1.portfolio === null ? null : step1.portfolio.title"
-                @customChange="e => handleCustomChange(e, 'portfolio')"
-              />
-            </div>
-            <div class="w-50 pl-1">
-              <label>PortfolioID</label>
-              <b-form-input
-                v-model="step1.portfolioId"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="select-box">
-          <div class="d-flex">
-            <div class="w-50">
-              <label>Program</label>
-              <InputSelect
-                placeholder="Select Program"
-                :options="getAllProgs()"
-                :value="step1.program === null ? null : step1.program.title"
-                @customChange="e => handleCustomChange(e, 'program')"
-              />
-            </div>
-            <div class="w-50 pl-1">
-              <label>ProgramID</label>
-              <b-form-input
-                v-model="step1.programId"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="select-box">
-          <div class="d-flex">
-            <div class="w-50">
-              <label>Project</label>
-              <InputSelect
-                placeholder="Select Project"
-                :options="getAllProjects()"
-                :value="step1.project === null ? null : step1.project.title"
-                @customChange="e => handleCustomChange(e, 'project')"
-              />
-            </div>
-            <div class="w-50 pl-1">
-              <label>ProjectID</label>
-              <b-form-input
-                v-model="step1.projectId"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="select-box">
-          <div class="d-flex">
-            <div class="w-50">
-              <label>Sub Project(Optional)</label>
-              <InputSelect
-                placeholder="Select Sub Project"
-                :options="getAllProjects()"
-                :value="step1.subproject === null ? null : step1.subproject.title"
-                @customChange="e => handleCustomChange(e, 'subproject')"
-              />
-            </div>
-            <div class="w-50 pl-1">
-              <label>SubProject</label>
-              <b-form-input
-                v-model="step1.subProjectId"
-              />
-            </div>
+      <div class="select-box">
+        <div class="d-flex">
+          <div class="w-50">
+            <label>Nomenclature System</label>
+            <InputSelect
+              placeholder="Select System"
+              :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
+              :value="step1.system === null ? null : step1.system.title"
+              @customChange="e => handleCustomChange(e, 'system')"
+            />
           </div>
         </div>
       </div>
@@ -113,8 +32,8 @@
             <label>Portfolio</label>
             <InputSelect
               placeholder="Select Portfolio"
-              :options="['Consumer Robots', 'Military Robots']"
-              :value="step1.portfolio"
+              :options="getAllPorts()"
+              :value="step1.portfolio === null ? null : step1.portfolio.title"
               @customChange="e => handleCustomChange(e, 'portfolio')"
             />
           </div>
@@ -122,15 +41,10 @@
             <label>PortfolioID</label>
             <b-form-input
               v-model="step1.portfolioId"
+              @customChange="e => handleCustomChange(e, 'portfolioId')"
             />
           </div>
         </div>
-        <!-- <v-select
-          v-model="step1.portfolio"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
-          placeholder="Select Portfolio"
-          outlined
-        /> -->
       </div>
       <div class="select-box">
         <div class="d-flex">
@@ -138,24 +52,19 @@
             <label>Program</label>
             <InputSelect
               placeholder="Select Program"
-              :options="['Quadrupted robot', 'New program', 'Hardened quadruped', 'Handling robot']"
-              :value="step1.program"
+              :options="getAllProgs()"
+              :value="step1.program === null ? null : step1.program.title"
               @customChange="e => handleCustomChange(e, 'program')"
             />
           </div>
           <div class="w-50 pl-1">
-            <label>ProgramId</label>
+            <label>ProgramID</label>
             <b-form-input
               v-model="step1.programId"
+              @customChange="e => handleCustomChange(e, 'programId')"
             />
           </div>
         </div>
-        <!-- <v-select
-          v-model="step1.program"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
-          placeholder="Select Program"
-          outlined
-        /> -->
       </div>
       <div class="select-box">
         <div class="d-flex">
@@ -163,36 +72,29 @@
             <label>Project</label>
             <InputSelect
               placeholder="Select Project"
-              :options="['Full Model Design', 'Enhanced motricity', 'Enhanced authonomy', 'Dual sourcing for Quadruped']"
-              :value="step1.project"
+              :options="getAllProjects()"
+              :value="step1.project === null ? null : step1.project.title"
               @customChange="e => handleCustomChange(e, 'project')"
             />
           </div>
           <div class="w-50 pl-1">
-            <label>ProjectId</label>
+            <label>ProjectID</label>
             <b-form-input
               v-model="step1.projectId"
+              @customChange="e => handleCustomChange(e, 'projectId')"
             />
           </div>
         </div>
-        <!-- <v-select
-          v-model="step1.project"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
-          placeholder="Select Project"
-          outlined
-        /> -->
       </div>
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
-            <div class="d-flex justify-content-between">
-              <label>Sub Project(Optional)</label>
-            </div>
+            <label>Sub Project(Optional)</label>
             <InputSelect
               placeholder="Select Sub Project"
-              :options="[]"
-              :value="step1.subProject"
-              @customChange="e => handleCustomChange(e, 'subProject')"
+              :options="getAllProjects()"
+              :value="step1.subproject === null ? null : step1.subproject.title"
+              @customChange="e => handleCustomChange(e, 'subproject')"
             />
           </div>
           <div class="w-50 pl-1">
@@ -202,12 +104,6 @@
             />
           </div>
         </div>
-        <!-- <v-select
-          v-model="step1.subProject"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
-          placeholder="Select Sub Project"
-          outlined
-        /> -->
       </div>
     </div>
     <div
@@ -223,69 +119,12 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Priority</label>
-          <v-select
-            v-model="step2.priority"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Highest"
-            outlined
-          />
-        </div>
-        <div class="select-box">
-          <label>Value</label>
+          <label>Title</label>
           <b-form-input
-            v-model="step2.value"
-            type="number"
+            v-model="step2.title"
+            type="text"
           />
         </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Budget demand</label>
-          <b-form-input
-            v-model="step2.budget_demand"
-            type="number"
-          />
-          <!-- <v-select
-            v-model="step2.budget_demand"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Highest"
-            outlined
-          /> -->
-        </div>
-        <div class="select-box">
-          <label>Unit</label>
-          <v-select
-            v-model="step2.unit1"
-            :options="['hours', '$']"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Budget autorized</label>
-          <b-form-input
-            v-model="step2.budget_autorized"
-            type="number"
-          />
-          <!-- <v-select
-            v-model="step2.budget_demand"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Highest"
-            outlined
-          /> -->
-        </div>
-        <div class="select-box">
-          <label>Unit</label>
-          <v-select
-            v-model="step2.unit2"
-            :options="['hours', '$']"
-            outlined
-          />
-        </div>
-      </div>
-      <!-- <div class="select-group--sub">
         <div class="select-box">
           <label>Priority</label>
           <v-select
@@ -295,10 +134,51 @@
             outlined
           />
         </div>
+      </div>
+      <div class="select-group--sub">
         <div class="select-box">
-          <label>Value</label>
+          <label>Demand</label>
           <b-form-input
-            v-model="step2.value"
+            v-model="step2.demand"
+            type="number"
+          />
+        </div>
+        <div class="select-box">
+          <label>Quote</label>
+          <b-form-input
+            v-model="step2.quote"
+            type="number"
+          />
+        </div>
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Authorised</label>
+          <b-form-input
+            v-model="step2.authorised"
+            type="number"
+          />
+        </div>
+        <div class="select-box">
+          <label>RealEstimated</label>
+          <b-form-input
+            v-model="step2.realestimated"
+            type="number"
+          />
+        </div>
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Engaged</label>
+          <b-form-input
+            v-model="step2.engaged"
+            type="number"
+          />
+        </div>
+        <div class="select-box">
+          <label>Spent</label>
+          <b-form-input
+            v-model="step2.spent"
             type="number"
           />
         </div>
@@ -312,303 +192,29 @@
           />
         </div>
         <div class="select-box">
-          <label>Budget Engaged / Quote</label>
+          <label>Value</label>
           <b-form-input
-            v-model="step2.quote"
+            v-model="step2.value"
             type="number"
-            outlined
           />
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Current Phase</label>
-          <v-select
-            v-model="step2.phase"
-            :options="['research', 'evaluation', 'development', 'testing', 'deployment', 'maintenance']"
-            placeholder="Research"
-            outlined
-          />
-        </div>
-        <div class="select-box">
-          <label>Budget Open</label>
-          <b-form-input
-            v-model="step2.budgetOpen"
-            type="number"
-          />
-          <v-select
-            v-model="step2.budgetOpen"
-            :options="['0', '100']"
-            placeholder="0"
-            outlined
-          />
-        </div>
-      </div> -->
-    </div>
-    <div
-      class="select-group"
-      style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="KeyIcon"
-          size="20"
-        />
-        <h5>Rationale</h5>
-      </div>
-      <div class="select-group--sub mb-1">
-        <div class="select-box">
-          <label>Date Production Deadline</label>
+          <label>Deadline</label>
           <b-form-datepicker
-            id="production-datepicker"
-            v-model="step3.p_deadline"
+            id="program_deadline"
+            v-model="step2.deadline"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Nature of deadline</label>
-          <v-select
-            id="production-datepicker1"
-            v-model="step3.n_deadline"
-            :options="['desired', 'time to market', 'legal constraint', 'other']"
-            outlined
-          />
-        </div>
-        <div style="width:35%">
-          <label>Multiplier</label>
-          <v-select
-            id="deadline-multiplier"
-            v-model="step3.n_deadline_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Customer Ex ({{ step3.customer_ex }})</label>
-          <b-form-input
-            id="range-customer"
-            v-model="step3.customer_ex"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            id="customer-ex-weight"
-            v-model="step3.customer_ex_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Sales Ex ({{ step3.sales_ex }})</label>
-          <b-form-input
-            id="range-sales"
-            v-model="step3.sales_ex"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            id="sales-ex-weight"
-            v-model="step3.sales_ex_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            outlined
-          />
-        </div>
-      </div>
-      <div class="d-flex justify-content-between mb-1">
-        <div style="width:60%">
-          <label>Scoring ({{ step3.scoring }})</label>
-          <b-form-input
-            id="range-scoring"
-            v-model="step3.scoring"
-            class="slider pt-1"
-            type="range"
-            min="0"
-            max="10"
-          />
-        </div>
-        <div style="width:35%">
-          <label>Weight</label>
-          <v-select
-            id="scoring-weight"
-            v-model="step3.scoring_weight"
-            :options="[0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4]"
-            outlined
-          />
-        </div>
-      </div>
-      <div>
-        Final project score: {{ projectTotalScore }}
-      </div>
-    </div>
-    <div
-      class="select-group"
-      style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="FileTextIcon"
-          size="20"
-        />
-        <h5>planning</h5>
-      </div>
-      <div
-        v-for="(t, i) in step4.phaseData"
-        :key="i"
-      >
-        <div class="d-flex justify-content-between">
-          <div style="width:32%">
-            <div class="select-group--sub">
-              <div class="select-box mb-2">
-                <label>Select Phase</label>
-                <v-select
-                  v-model="t.phase"
-                  style="padding-top:2px"
-                  :options="['Phase 1', 'Phase 2', 'Phase 3', 'Phase 4']"
-                  placeholder="Select Phase"
-                  outlined
-                />
-              </div>
-            </div>
-          </div>
-          <div style="width:32%">
-            <div class="select-group--sub mb-0">
-              <div class="select-box">
-                <label>Phase Start Date</label>
-                <b-form-datepicker
-                  :id="`phase_start_date-datepicker${i}`"
-                  v-model="t.phase_start_date"
-                  :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                  :min="i > 0 && step4.phaseData[i - 1].phase_end_date ? step4.phaseData[i - 1].phase_end_date : null"
-                  :max="step4.phaseData[i].phase_end_date ? step4.phaseData[i].phase_end_date : null"
-                />
-              </div>
-            </div>
-          </div>
-          <div style="width:32%">
-            <div class="select-box">
-              <label>Phase End Date</label>
-              <b-form-datepicker
-                :id="`phase_end_date-datepicker${i}`"
-                v-model="t.phase_end_date"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                :min="step4.phaseData[i].phase_start_date ? step4.phaseData[i].phase_start_date : null"
-                :max="step4.phaseData[i + 1] && step4.phaseData[i + 1].phase_start_date ? step4.phaseData[i + 1].phase_start_date : null"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <b-button
-        style="width: 100%"
-        variant="primary"
-        @click="handleAddPhase"
-      >
-        Add phase
-      </b-button>
-    </div>
-    <div
-      class="select-group"
-      style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="LayersIcon"
-          size="20"
-        />
-        <h5>Product line</h5>
-      </div>
-      <div class="select-group--sub">
         <div class="select-box">
-          <label>Head of the product portfolio</label>
-          <b-form-input
-            v-model="step5.head_product_portfolio"
+          <label>Next_Gate</label>
+          <b-form-datepicker
+            id="program_nextgate"
+            v-model="step2.next_gate"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
-          <!-- <v-select
-            v-model="step5.head_product_portfolio"
-            :options="['SAP', 'Jira', 'Konatus']"
-            placeholder="Select System"
-            outlined
-          /> -->
-        </div>
-        <div class="select-box">
-          <label>Product manager</label>
-          <b-form-input
-            v-model="step5.product_manager"
-          />
-          <!-- <v-select
-            v-model="step5.product_manager"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Select Portfolio"
-            outlined
-          /> -->
-        </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Architect</label>
-          <b-form-input
-            v-model="step5.architect"
-          />
-          <!-- <v-select
-            v-model="step5.architect"
-            :options="['SAP', 'Jira', 'Konatus']"
-            placeholder="Select System"
-            outlined
-          /> -->
-        </div>
-        <div class="select-box">
-          <label>Head of program direction</label>
-          <b-form-input
-            v-model="step5.head_program_direction"
-          />
-          <!-- <v-select
-            v-model="step5.head_program_direction"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Select Portfolio"
-            outlined
-          /> -->
-        </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Program director</label>
-          <b-form-input
-            v-model="step5.program_director"
-          />
-          <!-- <v-select
-            v-model="step5.architect"
-            :options="['SAP', 'Jira', 'Konatus']"
-            placeholder="Select System"
-            outlined
-          /> -->
-        </div>
-        <div class="select-box">
-          <label>Project manager</label>
-          <b-form-input
-            v-model="step5.project_manager"
-          />
-          <!-- <v-select
-            v-model="step5.head_program_direction"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
-            placeholder="Select Portfolio"
-            outlined
-          /> -->
         </div>
       </div>
     </div>
@@ -618,7 +224,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Save
+        Update
       </b-button>
     </div>
   </div>
@@ -641,96 +247,136 @@ export default {
   },
   props: {
     data: {
-      type: Array,
+      type: Array || Object,
       default: () => [],
     },
+    otype: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {
+      title: '',
       curIndex: 1,
-      progressDescription: [
-        'SELECT OR ADD A NEW PORTFOLIO',
-        'fill the Key elements',
-        'rationale',
-        'fill the planning',
-        'fill the product line',
-        'Almost finished! Fill the budget',
-      ],
       step1: {
-        system: '',
-        portfolio: '',
-        program: '',
-        project: '',
-        subProject: '',
+        system: null,
+        program: null,
+        portfolio: null,
+        project: null,
+        subproject: null,
+        portfolioId: 0,
+        programId: 0,
+        projectId: 0,
       },
       step2: {
         priority: null,
         value: 0,
         budget: 0,
         quote: 0,
+        deadline: null,
+        next_gate: null,
+        realestimated: 0,
+        spent: 0,
+        demand: 0,
+        authorised: 0,
+        engaged: 0,
         phase: null,
         budgetOpen: 0,
         date: null,
-      },
-      step3: {
-        p_deadline: null,
-        n_deadline: null,
-        n_deadline_weight: 0,
-        customer_ex: 0,
-        customer_ex_weight: 0,
-        sales_ex: 0,
-        sales_ex_weight: 0,
-        scoring: 0,
-        scoring_weight: 0,
-      },
-      step4: {
-        phaseData: [
-          {
-            phase: null,
-            phase_start_date: null,
-            phase_end_date: null
-          }
-        ]
-      },
-      step5: {
-        head_product_portfolio: null,
-        product_manager: null,
-        architect: null,
-        head_program_direction: null,
-        program_director: null,
-        project_manager: null,
-      },
-      step6: {
-        portfolio: null,
-        period_start_year: null,
-        period_start_month: null,
-        period_end_year: null,
-        period_end_month: null,
-        budget: 0,
-        currency: 'unit',
+        title: null
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      years: ['2022', '2023'],
+      years: ['2022', '2023', '2024', '2025'],
     }
   },
-  computed: {
-    projectTotalScore() {
-      return this.step3.n_deadline_weight * ((this.step3.customer_ex * this.step3.customer_ex_weight) + ((this.step3.sales_ex * this.step3.sales_ex_weight)) + ((this.step3.scoring * this.step3.scoring_weight)))
-    }
+  watch: {
+      data: {
+          immediate: true,
+          handler(newVal) {
+              this.initializeData(newVal)
+          },
+      },
+  },
+  async mounted() {
+    await this.$store.dispatch('globalState/get_all_programs')
   },
   methods: {
-    handleSave() {
-      const data = {
-        step1: this.step1,
-        step2: this.step2,
-        step3: this.step3,
-        step4: this.step4,
-        step5: this.step5,
-        step6: this.step6
+    initializeData(data) {
+      console.log("Initi", data)
+      this.step1.portfolioId = data.portfolioid || 0
+      this.step2.title = data.title
+      this.step2.budget = data.budget
+      this.step2.priority = data.priority
+      this.step2.deadline = data.deadline
+      this.step2.next_gate = data.next_gate
+      this.step2.spent = data.spent
+      this.step2.value = data.value
+      this.step2.engaged = data.engaged
+      this.step2.demand = data.demand
+      this.step2.quote = data.quote
+      this.step2.authorised = data.authorised
+      this.step2.realestimated = data.realestimated
+      const allPts = this.getAllPorts()
+      const allPgs = this.getAllProgs()
+      const allPjs = this.getAllProjects()
+      const portfolios = allPts.filter(port => port.id === data.portfolioid)
+      if (portfolios.length > 0) {
+        [this.step1.portfolio] = portfolios
       }
-      this.$store.commit('globalState/OPERATION_NEW_SAVE', data)
-      this.$store.commit('globalState/ADD_PROJECT')
-      this.$refs['my-modal'].hide()
+      if (data.type === "program") {
+        this.step1.programId = data.id || 0
+        const programs = allPgs.filter(pg => pg.id === data.id)
+        if (programs.length > 0) {
+          [this.step1.program] = programs
+        }
+      } else if (data.type === "project") {
+        this.step1.programId = data.progid
+        const programs = allPgs.filter(pg => pg.id === data.progid)
+        if (programs.length > 0) {
+          [this.step1.program] = programs
+        }
+        this.step1.projectId = data.id || 0
+        const projects = allPjs.filter(pj => pj.id === data.id)
+        if (projects.length > 0) {
+          [this.step1.project] = projects
+        }
+      }
+    },
+    async handleSave() {
+      if (this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
+        this.$toast.error('Please input all correctly')
+      } else {
+        if (this.otype === 'program') {
+          await this.$store.dispatch('globalState/update_program', {
+            data: {
+              step1: this.step1,
+              step2: this.step2
+            }
+          })
+        } else if (this.otype === 'project') {
+          await this.$store.dispatch('globalState/update_project', {
+            data: {
+              step1: this.step1,
+              step2: this.step2
+            }
+          })
+        }
+        await this.$store.dispatch('globalState/load_org_data')
+        // this.$refs['my-modal'].hide()
+      }
+    },
+    getAllPorts() {
+      const pts = Array.from(this.$store.state.globalState.allPortData)
+      return pts
+    },
+    getAllProgs() {
+      const pgs = Array.from(this.$store.state.globalState.allProgData)
+      return pgs
+    },
+    getAllProjects() {
+      const pjs = Array.from(this.$store.state.globalState.allProjData)
+      return pjs
     },
     handleAddPhase() {
       if (this.step4.phaseData[this.step4.phaseData.length - 1].phase_start_date === null) {

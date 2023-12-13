@@ -60,13 +60,13 @@
             <div class="part3 d-flex justify-content-center">
               <b-button
                 variant="flat-primary"
-                @click="toggleEditDrawerOpen(item)"
+                @click="toggleEditProgramDrawerOpen(item, 'project')"
               >
                 <feather-icon icon="Edit2Icon" />
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewProjectDrawer"
+                @click="toggleCreateNewProgramDrawer('project')"
               >
                 <feather-icon icon="PlusIcon" />
               </b-button>
@@ -170,23 +170,12 @@
       align="right"
       :closeable="false"
       :mask-closable="true"
-      @close="toggleEditDrawerOpen"
+      @close="toggleEditProgramDrawerOpen"
     >
-      <div v-if="editDrawerOpen">
-        <EditDrawer
-          :data="selectedProgram"
-        />
-      </div>
-    </Drawer>
-    <Drawer
-      align="right"
-      :closeable="false"
-      :mask-closable="true"
-      @close="toggleEditProjectDrawerOpen"
-    >
-      <div v-if="editProjectDrawerOpen">
-        <EditProjectDrawer
-          :data="selectedProject"
+      <div v-if="editProgramDrawerOpen">
+        <EditProgramDrawer
+          :data="selectedObject"
+          :otype="selectedType"
         />
       </div>
     </Drawer>
@@ -197,17 +186,9 @@
       @close="toggleCreateNewProgramDrawer"
     >
       <div v-if="openCreateNewProgramDrawer">
-        <CreateNewProgramDrawer />
-      </div>
-    </Drawer>
-    <Drawer
-      align="right"
-      :closeable="false"
-      :mask-closable="true"
-      @close="toggleCreateNewProjectDrawer"
-    >
-      <div v-if="openCreateNewProjectDrawer">
-        <CreateNewProjectDrawer />
+        <CreateNewProgramDrawer
+          :otype="selectedType"
+        />
       </div>
     </Drawer>
   </div>
@@ -221,10 +202,8 @@ import moment from 'moment'
 import Drawer from "vue-simple-drawer"
 import VueApexCharts from 'vue-apexcharts'
 import BudgetDrawer from '../../portfolio/modals/BudgetDrawer.vue'
-import EditDrawer from '../../portfolio/modals/EditDrawer.vue'
-import EditProjectDrawer from '../../portfolio/modals/EditProjectDrawer.vue'
+import EditProgramDrawer from '../modals/EditProgramDrawer.vue'
 import CreateNewProgramDrawer from '../modals/CreateNewProgramDrawer.vue'
-import CreateNewProjectDrawer from '../../project/modals/CreateNewProjectDrawer.vue'
 
 export default {
   components: {
@@ -237,10 +216,8 @@ export default {
     VueApexCharts,
     Drawer,
     BudgetDrawer,
-    EditDrawer,
-    EditProjectDrawer,
-    CreateNewProgramDrawer,
-    CreateNewProjectDrawer
+    EditProgramDrawer,
+    CreateNewProgramDrawer
   },
   props: {
     data: {
@@ -262,8 +239,8 @@ export default {
   data() {
     return {
       budgetDrawerOpen: false,
-      editDrawerOpen: false,
-      editProjectDrawerOpen: false,
+      editProgramDrawerOpen: false,
+      selectedType: null,
       opened: 0,
       openedPj: 0,
       chartOptions: {
@@ -330,9 +307,6 @@ export default {
     openCreateNewProgramDrawer() {
       return this.$store.state.globalState.openCreateNewProgramDrawer
     },
-    openCreateNewProjectDrawer() {
-      return this.$store.state.globalState.openCreateNewProjectDrawer
-    },
     c_fields() {
       return this.fields.slice(1, this.fields.length - 1)
     },
@@ -379,7 +353,6 @@ export default {
           nd.spent = spent
           return nd
         })
-        console.log("NDT:", ndt)
         return ndt
       }
       return []
@@ -443,22 +416,19 @@ export default {
     }
   },
   methods: {
-    toggleCreateNewProjectDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
-    },
-    toggleCreateNewProgramDrawer() {
+    toggleCreateNewProgramDrawer(type) {
+      console.log("Selected type before update:", this.selectedType) // Debugging
+      this.selectedType = type
+      console.log("Selected type after update:", this.selectedType)
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
     },
-    toggleEditDrawerOpen(item) {
-      this.selectedProgram = item
-      this.editDrawerOpen = !this.editDrawerOpen
-    },
-    toggleEditProjectDrawerOpen(item) {
-      this.selectedProject = item
-      this.editProjectDrawerOpen = !this.editProjectDrawerOpen
+    toggleEditProgramDrawerOpen(item, type) {
+      this.selectedObject = item
+      this.selectedType = type
+      this.editProgramDrawerOpen = !this.editProgramDrawerOpen
     },
     onCollapseCLick(index) {
       if (index === this.opened) {

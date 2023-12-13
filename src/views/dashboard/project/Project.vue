@@ -388,7 +388,7 @@
       @close="toggleCreateNewProjectDrawer"
     >
       <div v-if="openCreateNewProjectDrawer">
-        <CreateDrawer />
+        <CreateProgramDrawer />
       </div>
     </Drawer>
     <modal-request-quote
@@ -422,7 +422,7 @@ import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import Demand from './components/Demand.vue'
 import TableEditable from './components/TableEditable.vue'
-import CreateDrawer from '../program/modals/CreateNewProgramDrawer.vue'
+import CreateProgramDrawer from '../program/modals/CreateNewProgramDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
@@ -445,7 +445,7 @@ export default {
     ImportLoaderModal,
     ModalRequestQuote,
     Drawer,
-    CreateDrawer,
+    CreateProgramDrawer,
     MonthPicker,
     BFormInput,
     BPopover,
@@ -574,7 +574,7 @@ export default {
       this.$store.dispatch('globalState/get_project_reporting_editable')
     },
     toggleCreateNewProjectDrawer() {
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROJECT_DRAWER')
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

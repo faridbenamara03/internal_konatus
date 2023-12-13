@@ -452,7 +452,7 @@
       :mask-closable="true"
       @close="toggleEditPortfolioDrawer"
     >
-      <div v-if="openEditPortfolioDrawer && selectedNavType === 'portfolio'">
+      <div v-if="openEditPortfolioDrawer && (selectedNavType === 'portfolio' || selectedNavType === 'company')">
         <EditPortfolioDrawer />
       </div>
     </Drawer>
