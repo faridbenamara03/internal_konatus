@@ -516,9 +516,13 @@ export default {
       const u1 = !state.openCreateNewPortfolioDrawer
       state.openCreateNewPortfolioDrawer = u1
     },
-    TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state) {
+    TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state, payload) {
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
+      if (payload) {
+        state.selectedProgramObject = payload.item
+        state.selectedProgramType = payload.type
+      }
     },
     CREATE_NEW_UNIT(state, data) {
       // if (!data.unitName) {
@@ -666,6 +670,7 @@ export default {
     LOAD_ALL_PHASE_DATA(state, data) {
       state.allPhaseData = data
       const pTitleData = []
+      pTitleData.push("Not Selected")
       data.forEach(t => {
         pTitleData.push(t.title)
       })

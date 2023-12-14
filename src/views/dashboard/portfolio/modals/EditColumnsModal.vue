@@ -80,6 +80,7 @@
         <v-select
           v-model="winrate"
           :options="option_winrate"
+          :disabled="winrateSelectable"
           outlined
         />
       </div>
@@ -168,6 +169,7 @@ export default {
       phaseStartDate: 0,
       phaseEndDate: 0,
       selected: [],
+      winrateSelectable: false,
       mainOptions: [
         { text: 'Budget', value: 'budget' },
         { text: 'Value', value: 'value' },
@@ -226,6 +228,13 @@ export default {
       this.$refs['my-modal'].hide()
     },
     onPhaseSelect(selectedPhase) {
+      if (selectedPhase !== "Not Selected") {
+        this.winrate = 100
+        this.winrateSelectable = true
+      } else {
+        this.winrate = 0
+        this.winrateSelectable = false
+      }
       const { allPhaseData } = this.$store.state.globalState
       const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
       if (selectedData) {

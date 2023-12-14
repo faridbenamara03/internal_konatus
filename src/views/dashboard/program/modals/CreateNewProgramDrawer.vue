@@ -244,8 +244,8 @@ export default {
   },
   props: {
     data: {
-      type: Array,
-      default: () => [],
+      type: Object,
+      default: () => {},
     },
     otype: {
       type: String,
@@ -287,11 +287,59 @@ export default {
       years: ['2022', '2023', '2024', '2025'],
     }
   },
+  watch: {
+      data: {
+          immediate: true,
+          handler(newVal) {
+            this.initializeData(newVal) // ??
+          },
+      },
+  },
   async mounted() {
-    console.log("ODT:", this.otype)
     await this.$store.dispatch('globalState/get_all_portfolios')
   },
   methods: {
+    initializeData(data) {
+      const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
+      this.step1.portfolioId = initData.portfolioid || 0
+      this.step2.title = initData.title
+      this.step2.budget = initData.budget
+      this.step2.priority = initData.priority
+      this.step2.deadline = initData.deadline
+      this.step2.next_gate = initData.next_gate
+      this.step2.spent = initData.spent
+      this.step2.value = initData.value
+      this.step2.engaged = initData.engaged
+      this.step2.demand = initData.demand
+      this.step2.quote = initData.quote
+      this.step2.authorised = initData.authorised
+      this.step2.realestimated = initData.realestimated
+      const allPts = this.getAllPorts()
+      const allPgs = this.getAllProgs()
+      const allPjs = this.getAllProjects()
+      const portfolios = allPts.filter(port => port.id === initData.portfolioid)
+      if (portfolios.length > 0) {
+        [this.step1.portfolio] = portfolios
+      }
+      if (initData.type === "program") {
+        this.step1.programId = initData.id || 0
+        const programs = allPgs.filter(pg => pg.id === initData.id)
+        if (programs.length > 0) {
+          [this.step1.program] = programs
+        }
+      } else if (initData.type === "project") {
+        this.step1.programId = initData.progid
+        const programs = allPgs.filter(pg => pg.id === initData.progid)
+        if (programs.length > 0) {
+          [this.step1.program] = programs
+        }
+        this.step1.projectId = initData.id || 0
+        const projects = allPjs.filter(pj => pj.id === initData.id)
+        if (projects.length > 0) {
+          [this.step1.project] = projects
+        }
+      }
+    },
     async handleSave() {
       const newProgramData = {
         step1: this.step1,

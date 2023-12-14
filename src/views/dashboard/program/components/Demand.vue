@@ -66,7 +66,7 @@
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewProgramDrawer('project')"
+                @click="toggleCreateNewProgramDrawer(item, 'project')"
               >
                 <feather-icon icon="PlusIcon" />
               </b-button>
@@ -187,6 +187,7 @@
     >
       <div v-if="openCreateNewProgramDrawer">
         <CreateNewProgramDrawer
+          :data="selectedObject"
           :otype="selectedType"
         />
       </div>
@@ -416,11 +417,11 @@ export default {
     }
   },
   methods: {
-    toggleCreateNewProgramDrawer(type) {
-      console.log("Selected type before update:", this.selectedType) // Debugging
+    toggleCreateNewProgramDrawer(item, type) {
+      this.selectedObject = item
       this.selectedType = type
-      console.log("Selected type after update:", this.selectedType)
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+      const payload = { item, type }
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER', payload)
     },
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen

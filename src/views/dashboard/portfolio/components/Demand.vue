@@ -173,7 +173,7 @@
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProgramDrawer('program')"
+                    @click="toggleCreateNewProgramDrawer(item1, 'program')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
@@ -281,7 +281,7 @@
                       </b-button>
                       <b-button
                         variant="flat-primary"
-                        @click="toggleCreateNewProgramDrawer('project')"
+                        @click="toggleCreateNewProgramDrawer(item2, 'project')"
                       >
                         <feather-icon icon="PlusIcon" />
                       </b-button>
@@ -354,7 +354,7 @@
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewProgramDrawer('program')"
+                @click="toggleCreateNewProgramDrawer(item, 'program')"
               >
                 <feather-icon icon="PlusIcon" />
               </b-button>
@@ -462,7 +462,7 @@
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProgramDrawer('project')"
+                    @click="toggleCreateNewProgramDrawer(item1, 'project')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
@@ -594,6 +594,7 @@
     >
       <div v-if="openCreateNewProgramDrawer">
         <CreateNewProgramDrawer
+          :data="selectedObject"
           :otype="selectedType"
         />
       </div>
@@ -853,9 +854,11 @@ export default {
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
-    toggleCreateNewProgramDrawer(type) {
+    toggleCreateNewProgramDrawer(item, type) {
+      this.selectedObject = item
       this.selectedType = type
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+      const payload = { item, type }
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER', payload)
     },
     toggleDrawerOpen() {
       this.budgetDrawerOpen = !this.budgetDrawerOpen
