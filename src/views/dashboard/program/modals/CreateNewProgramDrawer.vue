@@ -17,12 +17,19 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Nomenclature System</label>
-            <InputSelect
+            <v-select
+              v-model="step1.system"
+              :options="['SAP', 'Jira', 'Konatus']"
+              placeholder="Select System"
+              outlined
+              multiple
+            />
+            <!-- <InputSelect
               placeholder="Select System"
               :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
               :value="step1.system === null ? null : step1.system.title"
               @customChange="e => handleCustomChange(e, 'system')"
-            />
+            /> -->
           </div>
         </div>
       </div>
@@ -129,6 +136,7 @@
             :options="['Highest', 'High', 'Low', 'Lowest']"
             placeholder="Highest"
             outlined
+            multiple
           />
         </div>
       </div>
