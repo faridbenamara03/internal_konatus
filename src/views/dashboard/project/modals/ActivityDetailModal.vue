@@ -53,12 +53,19 @@
                 External System: {{ externalSystem }}
               </label>
               <div v-else>
-                <v-select
+                <!-- <v-select
                   v-model="externalSystem"
                   style="margin-bottom: 3px"
                   :options="['Jira', 'SAP']"
                   placeholder="Select External System"
                   outlined
+                /> -->
+                <v-select
+                  v-model="externalSystem"
+                  :options="['SAP', 'Jira', 'Konatus']"
+                  placeholder="Select External System"
+                  outlined
+                  multiple
                 />
               </div>
             </div>
