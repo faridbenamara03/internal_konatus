@@ -79,6 +79,7 @@
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
                 :class="{ 'inner-sdw': index1 === 0 }"
+                :style="`background-color:${!selectedObject ? '#0000' : item1.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
               >
                 <div
                   class="part1 portf-bold pl-2"
@@ -187,6 +188,7 @@
                   <div
                     class="portf-row portf-table-row font-14 border-bottom-dm"
                     :class="{ 'inner-sdw': index2 === 0 }"
+                    :style="`background-color:${!selectedObject ? '#0000' : item2.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
                   >
                     <div
                       class="part1 portf-bold pl-2"
@@ -319,6 +321,7 @@
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
             :class="{ 'inner-sdw': index === 0 }"
+            :style="`background-color:${!selectedObject ? '#0000' : item.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
           >
             <div
               class="part1 portf-uppercase"
@@ -364,6 +367,7 @@
             <div
               v-for="(item1, index1) in item.children"
               :key="index1"
+              :style="`background-color:${!selectedObject ? '#0000' : item1.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
             >
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
@@ -868,6 +872,7 @@ export default {
       this.editPortfolioDrawerOpen = !this.editPortfolioDrawerOpen
     },
     toggleEditProgramDrawerOpen(item, type) {
+      console.log("Item:", item, "Type:", type)
       this.selectedObject = item
       this.selectedType = type
       this.editProgramDrawerOpen = !this.editProgramDrawerOpen

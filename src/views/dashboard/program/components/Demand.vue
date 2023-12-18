@@ -31,6 +31,7 @@
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
             :class="{ 'inner-sdw': index === 0 }"
+            :style="`background-color:${!selectedObject ? '#0000' : item.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
           >
             <div
               class="part1 portf-uppercase"
