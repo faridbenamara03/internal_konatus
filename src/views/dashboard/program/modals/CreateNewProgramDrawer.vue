@@ -7,7 +7,7 @@
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      Create a new Program or Project
+      Add a project or sub-project
     </p>
     <div
       class="select-group"

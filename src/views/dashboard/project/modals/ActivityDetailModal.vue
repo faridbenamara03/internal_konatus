@@ -50,7 +50,7 @@
                 v-if="!externalEditable"
                 style="font-size: 14px; color: #898989;text-transform:none"
               >
-                External System: {{ externalSystem }}
+                External System: {{ externalSystem ? externalSystem[0] : "" }}
               </label>
               <div v-else>
                 <!-- <v-select
