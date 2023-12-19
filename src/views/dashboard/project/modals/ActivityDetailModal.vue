@@ -410,7 +410,7 @@ export default {
       ],
       effortDetailShow: true,
       externalEditable: false,
-      externalSystem: "Jira",
+      externalSystem: ["Jira"],
       externalId: "JR-12345"
     }
   },

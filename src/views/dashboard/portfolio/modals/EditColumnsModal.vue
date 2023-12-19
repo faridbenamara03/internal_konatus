@@ -182,10 +182,10 @@ export default {
       ],
       options1: [
         { text: 'Nomenclature System', value: 'nomenclatureSystem' },
-        { text: 'Portfolio', value: 'portfolio' },
-        { text: 'Program', value: 'program' },
-        { text: 'Project', value: 'project' },
-        { text: 'Sub project', value: 'subProject' },
+        // { text: 'Portfolio', value: 'portfolio' },
+        // { text: 'Program', value: 'program' },
+        // { text: 'Project', value: 'project' },
+        // { text: 'Sub project', value: 'subProject' },
       ],
       options2: [
         { text: 'Priority', value: 'priority' },
