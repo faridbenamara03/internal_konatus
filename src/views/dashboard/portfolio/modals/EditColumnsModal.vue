@@ -102,13 +102,24 @@
     <div class="d-flex">
       <div class="col-6 optionBlock">
         <h4>Meta</h4>
-        <b-form-checkbox-group
+        <!-- <b-form-checkbox-group
           id="checkbox-group-5"
           v-model="selected"
           :options="options1"
           name="columns"
           class="checkbox-group"
           stacked
+        /> -->
+        <v-select
+          v-model="externalSystem"
+          :options="['SAP', 'Jira', 'Konatus']"
+          placeholder="Select External System"
+          outlined
+          multiple
+        />
+        <b-form-input
+          v-model="externalId"
+          placeholder="Input External Activity Id"
         />
       </div>
       <div class="col-6 optionBlock">
@@ -181,7 +192,7 @@ export default {
         { text: 'Spend', value: 'spend' },
       ],
       options1: [
-        { text: 'Nomenclature System', value: 'nomenclatureSystem' },
+        // { text: 'Nomenclature System', value: 'nomenclatureSystem' },
         // { text: 'Portfolio', value: 'portfolio' },
         // { text: 'Program', value: 'program' },
         // { text: 'Project', value: 'project' },

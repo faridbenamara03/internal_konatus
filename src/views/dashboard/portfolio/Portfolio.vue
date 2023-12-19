@@ -414,17 +414,17 @@
       <b-button
         variant="primary"
         class="fixed-create-button"
-        @click="toggleCreateNewPortfolioDrawer"
+        @click="toggleCreateNewProgramDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>
-      <b-button
+      <!-- <b-button
         variant="primary"
         class="fixed-edit-button"
         @click="toggleEditPortfolioDrawer"
       >
         <feather-icon icon="EditIcon" />
-      </b-button>
+      </b-button> -->
     </template>
     <Drawer
       align="right"
@@ -437,6 +437,18 @@
       </div>
     </Drawer>
     <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewProgramDrawer"
+    >
+      <div v-if="openCreateNewProgramDrawer">
+        <CreateNewProgramDrawer
+          :otype="project"
+        />
+      </div>
+    </Drawer>
+    <!-- <Drawer
       align="right"
       :closeable="false"
       :mask-closable="true"
@@ -455,7 +467,7 @@
       <div v-if="openEditPortfolioDrawer && (selectedNavType === 'portfolio' || selectedNavType === 'company')">
         <EditPortfolioDrawer />
       </div>
-    </Drawer>
+    </Drawer> -->
     <optimize-modal
       ref="optimizeModal"
       @toggleUpdate="handleToggleUpdateShow"
@@ -487,9 +499,11 @@ import Control from './components/Control.vue'
 import CreateDrawer from './modals/CreateDrawer.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
-import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
-import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
+// import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
+// import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
 import TableEditable from './components/TableEditable.vue'
+import CreateNewProgramDrawer from '../program/modals/CreateNewProgramDrawer.vue'
+// import EditProgramDrawer from '../program/modals/EditProgramDrawer.vue'
 
 export default {
   components: {
@@ -511,8 +525,10 @@ export default {
     Welcome,
     Drawer,
     CreateDrawer,
-    CreateNewPortfolioDrawer,
-    EditPortfolioDrawer
+    // CreateNewPortfolioDrawer,
+    // EditPortfolioDrawer
+    // EditProgramDrawer,
+    CreateNewProgramDrawer
   },
   directives: {
     ClickOutside
@@ -535,6 +551,8 @@ export default {
       rangeArray: [],
       reportingState: 'cost',
       open: false,
+      openCreateNewProgramDrawer: false,
+      openEditProgramDrawer: false,
       updateIndex: false,
       originIndex: true,
       d_fields: [{ title: "portfolio", key: "portfolio" },
@@ -675,6 +693,9 @@ export default {
     },
     handleToggleUpdateHide() {
       this.updateIndex = false
+    },
+    toggleCreateNewProgramDrawer() {
+      this.openCreateNewProgramDrawer = !this.openCreateNewProgramDrawer
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
