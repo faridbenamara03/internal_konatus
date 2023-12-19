@@ -94,8 +94,24 @@
           @input="onPhaseSelect"
         />
         <div class="mt-2">
-          <p>Phase Start Date: {{ phaseStartDate }}</p>
-          <p>Phase End Date: {{ phaseEndDate }}</p>
+          <b-form-checkbox
+            v-model="isSelectedStartDate"
+            name="check-button"
+            switch
+            inline
+            @change="handleStartDateChange"
+          >
+            <p>Phase Start Date: {{ phaseStartDate }}</p>
+          </b-form-checkbox>
+          <b-form-checkbox
+            v-model="isSelectedEndDate"
+            name="check-button"
+            switch
+            inline
+            @change="handleEndDateChange"
+          >
+            <p>Phase End Date: {{ phaseEndDate }}</p>
+          </b-form-checkbox>
         </div>
       </div>
     </div>
@@ -120,6 +136,7 @@
         <b-form-input
           v-model="externalId"
           placeholder="Input External Activity Id"
+          class="mt-2"
         />
       </div>
       <div class="col-6 optionBlock">
@@ -154,7 +171,7 @@
 
 <script>
 import {
-  BButton, BFormCheckboxGroup, BModal
+  BButton, BFormCheckboxGroup, BModal, BFormInput, BFormCheckbox
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -163,6 +180,8 @@ export default {
     BButton,
     BFormCheckboxGroup,
     BModal,
+    BFormCheckbox,
+    BFormInput,
     vSelect
   },
   props: {
@@ -198,6 +217,8 @@ export default {
         // { text: 'Project', value: 'project' },
         // { text: 'Sub project', value: 'subProject' },
       ],
+      externalId: "JR-12345",
+      externalSystem: ["Jira"],
       options2: [
         { text: 'Priority', value: 'priority' },
         { text: 'Current Phase', value: 'currentPhase' }
@@ -231,6 +252,26 @@ export default {
     this.selected = this.checkedData
   },
   methods: {
+    handleStartDateChange() {
+      if (this.isSelectedStartDate && this.phaseStartDate) {
+        if (!this.selected.includes('phaseStartDate')) {
+          this.selected.push('phaseStartDate')
+        }
+        this.$store.commit('globalState/SELECT_PHASE_START_DATE', this.phaseStartDate)
+      } else if (this.selected.includes('phaseStartDate')) {
+          this.selected = this.selected.filter(item => item !== 'phaseStartDate')
+      }
+    },
+    handleEndDateChange() {
+      if (this.isSelectedEndDate && this.phaseEndDate) {
+        if (!this.selected.includes('phaseEndDate')) {
+          this.selected.push('phaseEndDate')
+        }
+        this.$store.commit('globalState/SELECT_PHASE_END_DATE', this.phaseEndDate)
+      } else if (this.selected.includes('phaseEndDate')) {
+          this.selected = this.selected.filter(item => item !== 'phaseEndDate')
+      }
+    },
     hideModal() {
       this.$refs['my-modal'].hide()
     },
@@ -251,6 +292,10 @@ export default {
       if (selectedData) {
         this.phaseStartDate = selectedData[0].start_date
         this.phaseEndDate = selectedData[0].end_date
+      }
+      if (!this.selected.includes('winrate')) {
+        this.selected.push('winrate')
+        this.$store.commit('globalState/SELECT_WIN_RATE', this.winrate)
       }
     }
   },

@@ -53,6 +53,9 @@
               >
                 <span v-if="ft === 'priority'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
+                <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -125,6 +128,8 @@
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
+                      <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                      <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                       <div
                         v-else
                         class="mr-1"
@@ -153,8 +158,10 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ item1.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                        {{ getSelectedWinRate }}
                       </div>
+                      <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                      <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                       <div
                         v-else
                         class="mr-1"
@@ -262,8 +269,10 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ item2.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                            {{ getSelectedWinRate }}
                           </div>
+                          <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                          <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                           <div
                             v-else
                             class="mr-1"
@@ -345,6 +354,9 @@
               >
                 <span v-if="ft === 'priority'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
+                <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -445,8 +457,10 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ item1.phases.length > 0 ? 100 : parseInt(Math.random()*100) }}
+                        {{ getSelectedWinRate }}
                       </div>
+                      <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                      <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                       <div
                         v-else
                         class="mr-1"
@@ -726,7 +740,17 @@ export default {
     openCreateNewProgramDrawer() {
       return this.$store.state.globalState.openCreateNewProgramDrawer
     },
+    getSelectedWinRate() {
+      return this.$store.state.globalState.selectedWinRate
+    },
+    getPhaseStartDate() {
+      return this.$store.state.globalState.selectedPhaseStartDate
+    },
+    getPhaseEndDate() {
+      return this.$store.state.globalState.selectedPhaseEndDate
+    },
     c_fields() {
+      console.log("Fields:", this.fields)
       return this.fields.slice(1, this.fields.length - 1)
     },
     demandTableEditable() {

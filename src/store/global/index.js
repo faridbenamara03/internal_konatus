@@ -481,6 +481,9 @@ export default {
     allProgData: [],
     allProjData: [],
     allOrgData: [],
+    selectedPhaseEndDate: 0,
+    selectedPhaseStartDate: 0,
+    selectedWinRate: 0,
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),
@@ -515,6 +518,15 @@ export default {
     TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER(state) {
       const u1 = !state.openCreateNewPortfolioDrawer
       state.openCreateNewPortfolioDrawer = u1
+    },
+    SELECT_PHASE_START_DATE(state, payload) {
+      state.selectedPhaseStartDate = payload
+    },
+    SELECT_PHASE_END_DATE(state, payload) {
+      state.selectedPhaseEndDate = payload
+    },
+    SELECT_WIN_RATE(state, payload) {
+      state.selectedWinRate = payload
     },
     TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state, payload) {
       const u1 = !state.openCreateNewProgramDrawer
