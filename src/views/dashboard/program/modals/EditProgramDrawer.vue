@@ -57,18 +57,22 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Program</label>
-            <InputSelect
+            <!-- <InputSelect
               placeholder="Select Program"
               :options="getAllProgs()"
               :value="step1.program === null ? null : step1.program.title"
               @customChange="e => handleCustomChange(e, 'program')"
+            /> -->
+            <b-form-input
+              v-model="step1.program"
+              placeholder="Select Program"
+              :disabled="data.type === 'program' ? false : true"
             />
           </div>
           <div class="w-50 pl-1">
             <label>ProgramID</label>
             <b-form-input
               v-model="step1.programId"
-              @customChange="e => handleCustomChange(e, 'programId')"
             />
           </div>
         </div>
@@ -77,11 +81,16 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Project</label>
-            <InputSelect
+            <!-- <InputSelect
               placeholder="Select Project"
               :options="getAllProjects()"
               :value="step1.project === null ? null : step1.project.title"
               @customChange="e => handleCustomChange(e, 'project')"
+            /> -->
+            <b-form-input
+              v-model="step1.project"
+              placeholder="Select Project"
+              :disabled="data.type === 'project' ? false : true"
             />
           </div>
           <div class="w-50 pl-1">
@@ -97,11 +106,10 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Sub Project(Optional)</label>
-            <InputSelect
+            <b-form-input
+              v-model="step1.subproject"
               placeholder="Select Sub Project"
-              :options="getAllProjects()"
-              :value="step1.subproject === null ? null : step1.subproject.title"
-              @customChange="e => handleCustomChange(e, 'subproject')"
+              :disabled="data.type === 'subproject' ? false : true"
             />
           </div>
           <div class="w-50 pl-1">
@@ -125,6 +133,13 @@
         <h5>Key elements</h5>
       </div>
       <div class="select-group--sub">
+        <div class="select-box">
+          <label>Title</label>
+          <b-form-input
+            v-model="step2.title"
+            type="text"
+          />
+        </div>
         <div class="select-box">
           <label>Priority</label>
           <v-select
@@ -327,19 +342,21 @@ export default {
       if (data.type === "program") {
         this.step1.programId = data.id || 0
         const programs = allPgs.filter(pg => pg.id === data.id)
+        console.log("Programs:", programs)
         if (programs.length > 0) {
-          [this.step1.program] = programs
+          this.step1.program = programs[0].title
         }
       } else if (data.type === "project") {
         this.step1.programId = data.progid
         const programs = allPgs.filter(pg => pg.id === data.progid)
         if (programs.length > 0) {
-          [this.step1.program] = programs
+          this.step1.program = programs[0].title
         }
         this.step1.projectId = data.id || 0
         const projects = allPjs.filter(pj => pj.id === data.id)
+        console.log("Programs:", programs, "Projects:", projects)
         if (projects.length > 0) {
-          [this.step1.project] = projects
+          this.step1.project = projects[0].title
         }
       }
     },
