@@ -979,7 +979,8 @@ export default {
       state.globalOrganizationTeamData = orgData
     },
     LOAD_ORG_DATA(state, orgData) {
-      state.globalOrganizationData = orgData
+      // state.globalOrganizationData = orgData
+      state.globalOrganizationData.push(orgData)
     },
     LOAD_NAV_DATA(state, globalAllData) {
       state.globalOrganizationData = globalAllData.navData
