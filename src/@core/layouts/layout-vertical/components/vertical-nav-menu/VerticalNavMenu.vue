@@ -185,7 +185,7 @@ export default {
       const data = [{ search: true }]
       const globalData = []
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
-      globalData.push(this.$store.state.globalState.globalOrganizationUnitData)
+      globalData.push(this.$store.state.globalState.globalOrganizationUnitData[0])
       data.push(...globalData.filter(Boolean))
       return data
     },
@@ -196,7 +196,7 @@ export default {
       const data = [{ search: true }]
       const globalData = []
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
-      globalData.push(this.$store.state.globalState.globalOrganizationTeamData)
+      globalData.push(this.$store.state.globalState.globalOrganizationTeamData[0])
       data.push(...globalData.filter(Boolean))
       return data
     }
