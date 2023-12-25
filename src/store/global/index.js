@@ -973,10 +973,12 @@ export default {
       state.globalOperationData.children.push(data)
     },
     LOAD_ORG_UNIT_DATA(state, orgData) {
-      state.globalOrganizationUnitData = orgData
+      // state.globalOrganizationUnitData = orgData
+      state.globalOrganizationUnitData.push(orgData)
     },
     LOAD_ORG_TEAM_DATA(state, orgData) {
-      state.globalOrganizationTeamData = orgData
+      // state.globalOrganizationTeamData = orgData
+      state.globalOrganizationTeamData.push(orgData)
     },
     LOAD_ORG_DATA(state, orgData) {
       // state.globalOrganizationData = orgData
