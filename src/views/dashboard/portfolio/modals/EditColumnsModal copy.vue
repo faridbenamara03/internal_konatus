@@ -76,38 +76,57 @@
           class="checkbox-group"
           stacked
         />
-        <!-- <label>WinRate</label>
+        <label>WinRate</label>
         <v-select
           v-model="winrate"
           :options="option_winrate"
           :disabled="winrateSelectable"
           outlined
-        /> -->
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Planning</h4>
-        <b-form-checkbox-group
-          id="checkbox-group-4"
-          v-model="selected"
-          :options="options4"
-          name="columns"
-          class="checkbox-group"
-          stacked
+        <label>Phase</label>
+        <v-select
+          v-model="phases"
+          :options="option_phases"
+          outlined
+          @input="onPhaseSelect"
         />
+        <div class="mt-2">
+          <b-form-checkbox
+            v-model="isSelectedStartDate"
+            name="check-button"
+            switch
+            inline
+            @change="handleStartDateChange"
+          >
+            <p>Phase Start Date: {{ phaseStartDate }}</p>
+          </b-form-checkbox>
+          <b-form-checkbox
+            v-model="isSelectedEndDate"
+            name="check-button"
+            switch
+            inline
+            @change="handleEndDateChange"
+          >
+            <p>Phase End Date: {{ phaseEndDate }}</p>
+          </b-form-checkbox>
+        </div>
       </div>
     </div>
     <div class="d-flex">
       <div class="col-6 optionBlock">
         <h4>Meta</h4>
-        <b-form-checkbox-group
+        <!-- <b-form-checkbox-group
           id="checkbox-group-5"
           v-model="selected"
           :options="options1"
           name="columns"
           class="checkbox-group"
           stacked
-        />
-        <!-- <v-select
+        /> -->
+        <v-select
           v-model="externalSystem"
           :options="['SAP', 'Jira', 'Konatus']"
           placeholder="Select External System"
@@ -118,7 +137,7 @@
           v-model="externalId"
           placeholder="Input External Activity Id"
           class="mt-2"
-        /> -->
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
@@ -152,20 +171,18 @@
 
 <script>
 import {
-  BButton, BFormCheckboxGroup, BModal,
-  //  BFormInput,
-  //  BFormCheckbox
+  BButton, BFormCheckboxGroup, BModal, BFormInput, BFormCheckbox
 } from 'bootstrap-vue'
-// import vSelect from 'vue-select'
+import vSelect from 'vue-select'
 
 export default {
   components: {
     BButton,
     BFormCheckboxGroup,
     BModal,
-    // BFormCheckbox,
-    // BFormInput,
-    // vSelect
+    BFormCheckbox,
+    BFormInput,
+    vSelect
   },
   props: {
     data: {
@@ -205,7 +222,7 @@ export default {
       externalSystem: ["Jira"],
       options2: [
         { text: 'Priority', value: 'priority' },
-        { text: 'WinRate', value: 'winrate' }
+        { text: 'Current Phase', value: 'currentPhase' }
       ],
       option_phases: this.$store.state.globalState.allPhaseTitleData,
       option_winrate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
