@@ -628,13 +628,13 @@ export default {
       return this.$store.state.globalState.projectReportingEditableData
     },
     demandData() {
-      return this.$store.state.globalState.portfolioDemandData[0]
+      return this.$store.state.globalState.portfolioDemandData
     },
     controlData() {
       return this.$store.state.globalState.portfolioControlData
     },
     reportingData() {
-      return this.$store.state.globalState.portfolioReportingData[0]
+      return this.$store.state.globalState.portfolioReportingData
     }
   },
   mounted() {

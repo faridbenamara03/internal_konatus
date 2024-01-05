@@ -757,6 +757,7 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     c_data() {
+      console.log("DDD:", this.data)
       if (this.data.children) {
         const ndt = this.data.children.map(t => {
           let budget = 0
@@ -896,7 +897,6 @@ export default {
       this.editPortfolioDrawerOpen = !this.editPortfolioDrawerOpen
     },
     toggleEditProgramDrawerOpen(item, type) {
-      console.log("Item:", item, "Type:", type)
       this.selectedObject = item
       this.selectedType = type
       this.editProgramDrawerOpen = !this.editProgramDrawerOpen

@@ -843,7 +843,6 @@ export default {
       // dispatch('sumit_team_request_quote')
     },
     SAVE_SELECTED_NAV_DATA(state, payload) {
-      console.log("Payload:", payload)
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand
@@ -1255,7 +1254,6 @@ export default {
       })
     },
     update_program(commit, payload) {
-      console.log("PAYLOADDATA:", payload.data)
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/program/update', payload.data)
         // axios.post('http://localhost/konatus-me/public/api/program/update', payload.data)

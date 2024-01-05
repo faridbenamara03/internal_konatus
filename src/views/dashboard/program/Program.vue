@@ -475,7 +475,7 @@ export default {
       return thours
     },
     demandData() {
-      return this.$store.state.globalState.portfolioDemandData[0]
+      return this.$store.state.globalState.portfolioDemandData
     },
     c_items() {
       const { selectedNavObj } = this.$store.state.globalState
