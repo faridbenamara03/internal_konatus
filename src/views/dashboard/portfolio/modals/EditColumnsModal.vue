@@ -107,7 +107,7 @@
           class="checkbox-group"
           stacked
         />
-        <!-- <v-select
+        <v-select
           v-model="externalSystem"
           :options="['SAP', 'Jira', 'Konatus']"
           placeholder="Select External System"
@@ -118,7 +118,7 @@
           v-model="externalId"
           placeholder="Input External Activity Id"
           class="mt-2"
-        /> -->
+        />
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
@@ -153,10 +153,10 @@
 <script>
 import {
   BButton, BFormCheckboxGroup, BModal,
-  //  BFormInput,
+   BFormInput,
   //  BFormCheckbox
 } from 'bootstrap-vue'
-// import vSelect from 'vue-select'
+import vSelect from 'vue-select'
 
 export default {
   components: {
@@ -164,8 +164,8 @@ export default {
     BFormCheckboxGroup,
     BModal,
     // BFormCheckbox,
-    // BFormInput,
-    // vSelect
+    BFormInput,
+    vSelect
   },
   props: {
     data: {
