@@ -1,5 +1,4 @@
 <template>
-  <!-- v-if="checkShow(item)" -->
   <li
     v-if="canViewVerticalNavMenuGroup(item) && (item.hasOwnProperty('isoperation') ? item.isoperation === isActive : true)"
     class="nav-item has-sub"
@@ -18,7 +17,7 @@
       @click="handleNavItemClick(item)"
     >
       <div
-        :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId ? '#9100ff57' : '#0000'};cursor:pointer`"
+        :style="`position:absolute;width:100%;height:45px;background-color:${item.id === c_SelectedNavId && item.type === c_SelectedNavType ? '#9100ff57' : '#0000'};cursor:pointer`"
       />
       <feather-icon
         :icon="isOpen ? 'ChevronDownIcon' : 'ChevronRightIcon'"
@@ -94,6 +93,9 @@ export default {
   computed: {
     c_SelectedNavId() {
       return this.$store.state.globalState.selectedNavId
+    },
+    c_SelectedNavType() {
+      return this.$store.state.globalState.selectedNavObj.type
     }
   },
   setup(props) {
@@ -124,10 +126,6 @@ export default {
     }
   },
   methods: {
-    checkShow(item) {
-      const result = this.canViewVerticalNavMenuGroup(item) ? item.isoperation === this.isActive : true
-      return result
-    },
     handleNavItemClick(data) {
       this.updateGroupOpen(!this.isOpen)
       this.updateIsActive()

@@ -903,7 +903,6 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     c_data() {
-      console.log("DDD:", this.data)
       if (this.data.children) {
         const ndt = this.data.children.map(t => {
           let budget = 0
@@ -914,7 +913,6 @@ export default {
           let authorised = 0
           let spent = 0
           if (t.children) {
-            console.log("T.Children", t.children)
             t.children.map(t1 => {
               if (t1.children) {
                 t1.children.map(t2 => {

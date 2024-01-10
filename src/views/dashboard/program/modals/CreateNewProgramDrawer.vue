@@ -31,6 +31,13 @@
               @customChange="e => handleCustomChange(e, 'system')"
             /> -->
           </div>
+          <div class="w-50 pl-1">
+            <label>SystemID</label>
+            <b-form-input
+              v-model="step1.systemId"
+              @customChange="e => handleCustomChange(e, 'systemId')"
+            />
+          </div>
         </div>
       </div>
       <div class="select-box">

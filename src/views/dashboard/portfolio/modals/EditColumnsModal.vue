@@ -107,18 +107,44 @@
           class="checkbox-group"
           stacked
         />
-        <v-select
-          v-model="externalSystem"
-          :options="['SAP', 'Jira', 'Konatus']"
-          placeholder="Select External System"
-          outlined
-          multiple
-        />
-        <b-form-input
-          v-model="externalId"
-          placeholder="Input External Activity Id"
-          class="mt-2"
-        />
+        <div class="d-flex">
+          <div class="col-1">
+            <b-form-checkbox
+              v-model="isSelectedExSystem"
+              name="check-button"
+              inline
+              @change="handleSelectExSystemChange"
+            />
+          </div>
+          <div class="col-11">
+            <v-select
+              v-model="externalSystem"
+              :options="['SAP', 'Jira', 'Konatus']"
+              placeholder="Select External System"
+              :disabled="isSelectedExSystem"
+              outlined
+              multiple
+            />
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="col-1 mt-2">
+            <b-form-checkbox
+              v-model="isSelectedExId"
+              name="check-button"
+              inline
+              @change="handleSelectExIdChange"
+            />
+          </div>
+          <div class="col-11">
+            <b-form-input
+              v-model="externalId"
+              placeholder="Input External Activity Id"
+              class="mt-2"
+              :disabled="isSelectedExId"
+            />
+          </div>
+        </div>
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
@@ -154,7 +180,7 @@
 import {
   BButton, BFormCheckboxGroup, BModal,
    BFormInput,
-  //  BFormCheckbox
+   BFormCheckbox
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -163,7 +189,7 @@ export default {
     BButton,
     BFormCheckboxGroup,
     BModal,
-    // BFormCheckbox,
+    BFormCheckbox,
     BFormInput,
     vSelect
   },
@@ -183,6 +209,8 @@ export default {
       phaseEndDate: 0,
       selected: [],
       winrateSelectable: false,
+      isSelectedExId: false,
+      isSelectedExSystem: false,
       mainOptions: [
         { text: 'Budget', value: 'budget' },
         { text: 'Value', value: 'value' },
@@ -238,25 +266,11 @@ export default {
     this.selected = this.checkedData
   },
   methods: {
-    handleStartDateChange() {
-      if (this.isSelectedStartDate && this.phaseStartDate) {
-        if (!this.selected.includes('phaseStartDate')) {
-          this.selected.push('phaseStartDate')
-        }
-        this.$store.commit('globalState/SELECT_PHASE_START_DATE', this.phaseStartDate)
-      } else if (this.selected.includes('phaseStartDate')) {
-          this.selected = this.selected.filter(item => item !== 'phaseStartDate')
-      }
+    handleSelectExIdChange() {
+      console.log("ExId:", this.isSelectedExId)
     },
-    handleEndDateChange() {
-      if (this.isSelectedEndDate && this.phaseEndDate) {
-        if (!this.selected.includes('phaseEndDate')) {
-          this.selected.push('phaseEndDate')
-        }
-        this.$store.commit('globalState/SELECT_PHASE_END_DATE', this.phaseEndDate)
-      } else if (this.selected.includes('phaseEndDate')) {
-          this.selected = this.selected.filter(item => item !== 'phaseEndDate')
-      }
+    handleSelectExSystemChange() {
+      console.log("ExSystem:", this.isSelectedExSystem)
     },
     hideModal() {
       this.$refs['my-modal'].hide()
