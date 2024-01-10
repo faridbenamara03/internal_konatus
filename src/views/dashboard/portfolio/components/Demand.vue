@@ -203,7 +203,7 @@
                       @click="onCollapseProjectClick(index2)"
                     >
                       <feather-icon
-                        v-if="item2.phases"
+                        v-if="item2.children"
                         :icon="openedPj === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
                         class="mr-1 ml-1"
@@ -300,7 +300,7 @@
                   </div>
                   <div v-if="openedPj === index2">
                     <div
-                      v-for="(item3, index3) in item2.phases"
+                      v-for="(item3, index3) in item2.children"
                       :key="index3+1000"
                     >
                       <div
@@ -312,6 +312,79 @@
                           style="padding-top:7px"
                         >
                           {{ item3.title }}
+                        </div>
+                        <div class="part2">
+                          <div
+                            v-for="(ft, fi) in c_fields"
+                            :key="fi"
+                            class="data-child mr-1"
+                            :style="`width:${100 / c_fields.length}%`"
+                          >
+                            <div v-if="demandTableEditable">
+                              <v-select
+                                v-if="ft === 'priority'"
+                                v-model="item3[ft]"
+                                :options="['Highest', 'High', 'Low', 'Lowest']"
+                                outlined
+                              />
+                              <b-form-input
+                                v-else-if="ft === 'deadline'"
+                                v-model="item3[ft]"
+                                style="text-align:end"
+                              />
+                              <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                                <b-form-input
+                                  v-model="item3[ft]"
+                                  type="number"
+                                  style="text-align:end"
+                                />
+                                <b-input-group-append>
+                                  <b-input-group-text class="bg-transparent font-weight-bold">
+                                    €
+                                  </b-input-group-text>
+                                </b-input-group-append>
+                              </b-input-group>
+                              <div
+                                v-else
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ formatCurrency(item3[ft]) }}
+                              </div>
+                            </div>
+                            <div v-else>
+                              <div
+                                v-if="ft === 'priority'"
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ item3[ft] }}
+                              </div>
+                              <div
+                                v-else-if="ft === 'deadline'"
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ dateFormat(item3[ft]) }}
+                              </div>
+                              <div
+                                v-else-if="ft === 'winrate'"
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ getSelectedWinRate }}
+                              </div>
+                              <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                              <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
+                              <div
+                                v-else
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ formatCurrency(item3[ft]) }}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -391,7 +464,7 @@
                   @click="onCollapseProjectClick(index1)"
                 >
                   <feather-icon
-                    v-if="item1.phases"
+                    v-if="item1.children"
                     :icon="openedPj === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1 ml-1"
@@ -488,7 +561,7 @@
               </div>
               <div v-if="openedPj === index1">
                 <div
-                  v-for="(item2, index2) in item1.phases"
+                  v-for="(item2, index2) in item1.children"
                   :key="index2"
                 >
                   <div
@@ -500,6 +573,79 @@
                       style="padding-top:7px"
                     >
                       {{ item2.title }}
+                    </div>
+                    <div class="part2">
+                      <div
+                        v-for="(ft, fi) in c_fields"
+                        :key="fi"
+                        class="data-child mr-1"
+                        :style="`width:${100 / c_fields.length}%`"
+                      >
+                        <div v-if="demandTableEditable">
+                          <v-select
+                            v-if="ft === 'priority'"
+                            v-model="item2[ft]"
+                            :options="['Highest', 'High', 'Low', 'Lowest']"
+                            outlined
+                          />
+                          <b-form-input
+                            v-else-if="ft === 'deadline'"
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
+                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                            <b-form-input
+                              v-model="item2[ft]"
+                              type="number"
+                              style="text-align:end"
+                            />
+                            <b-input-group-append>
+                              <b-input-group-text class="bg-transparent font-weight-bold">
+                                €
+                              </b-input-group-text>
+                            </b-input-group-append>
+                          </b-input-group>
+                          <div
+                            v-else
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
+                        </div>
+                        <div v-else>
+                          <div
+                            v-if="ft === 'priority'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ item2[ft] }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'deadline'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'winrate'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ getSelectedWinRate }}
+                          </div>
+                          <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
+                          <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
+                          <div
+                            v-else
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -768,6 +914,7 @@ export default {
           let authorised = 0
           let spent = 0
           if (t.children) {
+            console.log("T.Children", t.children)
             t.children.map(t1 => {
               if (t1.children) {
                 t1.children.map(t2 => {
