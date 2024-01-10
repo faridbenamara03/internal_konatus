@@ -34,7 +34,8 @@
                   icon="Edit3Icon"
                   size="16"
                 />&nbsp;
-                <span>{{ decodeURIComponent("%3CO%3E update") }}</span>
+                <!-- <span>{{ decodeURIComponent("%3CO%3E update") }}</span> -->
+                <span>Update</span>
               </b-button>
               <b-button
                 v-if="demandTableEditable"
@@ -45,7 +46,7 @@
                   icon="SunriseIcon"
                   size="16"
                 />&nbsp;
-                <span>{{ decodeURIComponent("%3CO%3E optimize") }}</span>
+                <span>Optimize</span>
               </b-button>
               <b-button
                 class="ml-1"
