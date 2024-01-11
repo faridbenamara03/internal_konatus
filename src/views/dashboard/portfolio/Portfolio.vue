@@ -66,7 +66,7 @@
                   icon="Edit3Icon"
                   size="16"
                 />&nbsp;
-                <span>{{ decodeURIComponent("%3CO%3E update") }}</span>
+                <span>Update</span>
               </b-button>
               <b-button
                 v-if="demandTableEditable"
@@ -77,7 +77,7 @@
                   icon="SunriseIcon"
                   size="16"
                 />&nbsp;
-                <span>{{ decodeURIComponent("%3CO%3E optimize") }}</span>
+                <span>Optimize</span>
               </b-button>
               <b-button
                 class="ml-1"
@@ -736,7 +736,8 @@ export default {
       this.activeColumns = columns
     },
     onDemandTableEditableClick() {
-      this.$store.dispatch('globalState/get_project_demand_editable')
+      // this.$store.dispatch('globalState/get_project_demand_editable')
+      this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
     },
     onReportingTableEditableClick() {
       this.$store.dispatch('globalState/get_project_reporting_editable')
