@@ -623,25 +623,25 @@ export default {
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
-      const portfolios = allPts.filter(port => port.id === data.portfolioid)
+      const portfolios = allPts.filter(port => port.id === `${data.portfolioid}`)
       if (portfolios.length > 0) {
         [this.step1.portfolio] = portfolios
       }
       if (data.type === "program") {
         this.step1.programId = data.id || 0
-        const programs = allPgs.filter(pg => pg.id === data.id)
+        const programs = allPgs.filter(pg => pg.id === `${data.id}`)
         console.log("Programs:", programs)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
       } else if (data.type === "project") {
         this.step1.programId = data.progid
-        const programs = allPgs.filter(pg => pg.id === data.progid)
+        const programs = allPgs.filter(pg => pg.id === `${data.progid}`)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
         this.step1.projectId = data.id || 0
-        const projects = allPjs.filter(pj => pj.id === data.id)
+        const projects = allPjs.filter(pj => pj.id === `${data.id}`)
         console.log("Programs:", programs, "Projects:", projects)
         if (projects.length > 0) {
           this.step1.project = projects[0].title
