@@ -355,7 +355,7 @@
                             <div v-else>
                               <div
                                 v-if="ft === 'priority'"
-                                class="mr-5"
+                                class="mr-3"
                                 style="margin-top:6px;"
                               >
                                 {{ priorities[item3[ft] - 1] }}
