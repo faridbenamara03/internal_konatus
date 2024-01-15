@@ -107,7 +107,7 @@
           class="checkbox-group"
           stacked
         />
-        <div class="d-flex">
+        <!-- <div class="d-flex">
           <div class="col-1">
             <b-form-checkbox
               v-model="isSelectedExSystem"
@@ -126,8 +126,8 @@
               multiple
             />
           </div>
-        </div>
-        <div class="d-flex">
+        </div> -->
+        <!-- <div class="d-flex">
           <div class="col-1 mt-2">
             <b-form-checkbox
               v-model="isSelectedExId"
@@ -144,7 +144,7 @@
               :disabled="isSelectedExId"
             />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
@@ -179,19 +179,19 @@
 <script>
 import {
   BButton, BFormCheckboxGroup, BModal,
-   BFormInput,
-   BFormCheckbox
+  //  BFormInput,
+  //  BFormCheckbox
 } from 'bootstrap-vue'
-import vSelect from 'vue-select'
+// import vSelect from 'vue-select'
 
 export default {
   components: {
     BButton,
     BFormCheckboxGroup,
     BModal,
-    BFormCheckbox,
-    BFormInput,
-    vSelect
+    // BFormCheckbox,
+    // BFormInput,
+    // vSelect
   },
   props: {
     data: {
