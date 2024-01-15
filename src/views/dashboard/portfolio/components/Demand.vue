@@ -51,7 +51,7 @@
                 class="data-child mr-1 pr-1"
                 :style="`width:${100 / c_fields.length}%`"
               >
-                <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+                <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
                 <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
@@ -108,7 +108,7 @@
                       <v-select
                         v-if="ft === 'priority'"
                         v-model="item1[ft]"
-                        :options="['Highest', 'High', 'Low', 'Lowest']"
+                        :options="priorities"
                         outlined
                       />
                       <b-form-input
@@ -116,7 +116,7 @@
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
-                      <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
+                      <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -144,7 +144,7 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ item1[ft] }}
+                        {{ priorities[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'deadline'"
@@ -221,7 +221,7 @@
                           <v-select
                             v-if="ft === 'priority'"
                             v-model="item2[ft]"
-                            :options="['Highest', 'High', 'Low', 'Lowest']"
+                            :options="priorities"
                             outlined
                           />
                           <b-form-input
@@ -229,7 +229,7 @@
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
-                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
+                          <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -255,7 +255,7 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ item2[ft] }}
+                            {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'deadline'"
@@ -308,7 +308,7 @@
                         :class="{ 'inner-sdw': index3 === 0 }"
                       >
                         <div
-                          class="part1 portf-bold pl-2 ml-3"
+                          class="part1 portf-bold pl-2 ml-2"
                           style="padding-top:7px"
                         >
                           {{ item3.title }}
@@ -324,7 +324,7 @@
                               <v-select
                                 v-if="ft === 'priority'"
                                 v-model="item3[ft]"
-                                :options="['Highest', 'High', 'Low', 'Lowest']"
+                                :options="priorities"
                                 outlined
                               />
                               <b-form-input
@@ -332,7 +332,7 @@
                                 v-model="item3[ft]"
                                 style="text-align:end"
                               />
-                              <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
+                              <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
                                 <b-form-input
                                   v-model="item3[ft]"
                                   type="number"
@@ -355,21 +355,21 @@
                             <div v-else>
                               <div
                                 v-if="ft === 'priority'"
-                                class="mr-1"
+                                class="mr-5"
                                 style="margin-top:6px;"
                               >
-                                {{ item3[ft] }}
+                                {{ priorities[item3[ft] - 1] }}
                               </div>
                               <div
                                 v-else-if="ft === 'deadline'"
-                                class="mr-1"
+                                class="mr-3"
                                 style="margin-top:6px;"
                               >
                                 {{ dateFormat(item3[ft]) }}
                               </div>
                               <div
                                 v-else-if="ft === 'winrate'"
-                                class="mr-1"
+                                class="mr-3"
                                 style="margin-top:6px;"
                               >
                                 {{ getSelectedWinRate }}
@@ -378,7 +378,7 @@
                               <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                               <div
                                 v-else
-                                class="mr-1"
+                                class="mr-3"
                                 style="margin-top:6px;"
                               >
                                 {{ formatCurrency(item3[ft]) }}
@@ -425,7 +425,7 @@
                 class="data-child mr-1 pr-1"
                 :style="`width:${100 / c_fields.length}%`"
               >
-                <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+                <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
                 <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
@@ -482,7 +482,7 @@
                       <v-select
                         v-if="ft === 'priority'"
                         v-model="item1[ft]"
-                        :options="['Highest', 'High', 'Low', 'Lowest']"
+                        :options="priorities"
                         outlined
                       />
                       <b-form-input
@@ -490,7 +490,7 @@
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
-                      <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
+                      <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -516,7 +516,7 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ item1[ft] }}
+                        {{ priorities[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'deadline'"
@@ -585,7 +585,7 @@
                           <v-select
                             v-if="ft === 'priority'"
                             v-model="item2[ft]"
-                            :options="['Highest', 'High', 'Low', 'Lowest']"
+                            :options="priorities"
                             outlined
                           />
                           <b-form-input
@@ -593,7 +593,7 @@
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
-                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                          <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand'">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -619,7 +619,7 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ item2[ft] }}
+                            {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'deadline'"
@@ -822,6 +822,7 @@ export default {
       opened: 0,
       openedPj: 0,
       openedPg: 0,
+      priorities: ['Highest', 'High', 'Low', 'Lowest'],
       chartOptions: {
         chart: {
           type: 'bar',
@@ -864,7 +865,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorised', 'spent'],
+          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorized', 'spent'],
           labels: {
             formatter: val => `€${val}`
           }
@@ -910,7 +911,7 @@ export default {
           let quote = 0
           let demand = 0
           let realEstimated = 0
-          let authorised = 0
+          let authorized = 0
           let spent = 0
           if (t.children) {
             t.children.map(t1 => {
@@ -921,7 +922,7 @@ export default {
                   quote += parseInt(t2.quote ? t2.quote : 0, 10)
                   demand += parseInt(t2.demand ? t2.demand : 0, 10)
                   realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
-                  authorised += parseInt(t2.authorised ? t2.authorised : 0, 10)
+                  authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
                   spent += parseInt(t2.spent ? t2.spent : 0, 10)
                   return null
                 })
@@ -931,7 +932,7 @@ export default {
                 quote += t1.quote
                 demand += t1.demand
                 realEstimated += t1.realEstimated
-                authorised += t1.authorised
+                authorized += t1.authorized
                 spent += t1.spent
               }
               budget += parseInt(t1.budget ? t1.budget : 0, 10)
@@ -939,7 +940,7 @@ export default {
               quote += parseInt(t1.quote ? t1.quote : 0, 10)
               demand += parseInt(t1.demand ? t1.demand : 0, 10)
               realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-              authorised += parseInt(t1.authorised ? t1.authorised : 0, 10)
+              authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
               spent += parseInt(t1.spent ? t1.spent : 0, 10)
               return null
             })
@@ -949,7 +950,7 @@ export default {
             quote = t.quote
             demand = t.demand
             realEstimated = t.realEstimated
-            authorised = t.authorised
+            authorized = t.authorized
             spent = t.spent
           }
           const nd = { ...t }
@@ -958,7 +959,7 @@ export default {
           nd.quote = quote
           nd.demand = demand
           nd.realEstimated = realEstimated
-          nd.authorised = authorised
+          nd.authorized = authorized
           nd.spent = spent
           return nd
         })
@@ -1011,7 +1012,7 @@ export default {
     c_totalAuthor() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += t.authorised ? parseInt(t.authorised, 10) : 0
+        bd += t.authorized ? parseInt(t.authorized, 10) : 0
       })
       return bd
     },
