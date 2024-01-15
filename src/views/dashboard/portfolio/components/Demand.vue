@@ -105,18 +105,25 @@
                     :style="`width:${100 / c_fields.length}%`"
                   >
                     <div v-if="demandTableEditable">
+                      <div
+                        v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ formatCurrency(item1[ft]) }}
+                      </div>
                       <v-select
-                        v-if="ft === 'priority'"
+                        v-else-if="ft === 'priority'"
                         v-model="item1[ft]"
                         :options="priorities"
                         outlined
                       />
                       <b-form-input
-                        v-else-if="ft === 'deadline'"
+                        v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
-                      <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
+                      <b-input-group v-else>
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -128,15 +135,6 @@
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
-                      <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
-                      <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
-                      <div
-                        v-else
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
                     </div>
                     <div v-else>
                       <div
@@ -147,7 +145,7 @@
                         {{ priorities[item1[ft] - 1] }}
                       </div>
                       <div
-                        v-else-if="ft === 'deadline'"
+                        v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -160,8 +158,6 @@
                       >
                         {{ getSelectedWinRate }}
                       </div>
-                      <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
-                      <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                       <div
                         v-else
                         class="mr-1"
@@ -218,18 +214,26 @@
                         :style="`width:${100 / c_fields.length}%`"
                       >
                         <div v-if="demandTableEditable">
+                          <div
+                            v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
                           <v-select
-                            v-if="ft === 'priority'"
+                            v-else-if="ft === 'priority'"
                             v-model="item2[ft]"
                             :options="priorities"
                             outlined
                           />
                           <b-form-input
-                            v-else-if="ft === 'deadline'"
+                            v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
-                          <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
+                          <!-- <b-input-group v-else-if="ft === 'authorized' || ft === 'winrate' || ft === 'prev_engaged' || ft === 'quote_engaged' || ft === 'value' || ft === 'demand' || ft === 'budget' || ft === 'description' || ft === 'architect' || ft === 'product_manager'"> -->
+                          <b-input-group v-else>
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -241,13 +245,6 @@
                               </b-input-group-text>
                             </b-input-group-append>
                           </b-input-group>
-                          <div
-                            v-else
-                            class="mr-1"
-                            style="margin-top:6px;"
-                          >
-                            {{ formatCurrency(item2[ft]) }}
-                          </div>
                         </div>
                         <div v-else>
                           <div
@@ -258,7 +255,7 @@
                             {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'deadline'"
+                            v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -271,8 +268,6 @@
                           >
                             {{ getSelectedWinRate }}
                           </div>
-                          <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
-                          <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                           <div
                             v-else
                             class="mr-1"
@@ -321,18 +316,25 @@
                             :style="`width:${100 / c_fields.length}%`"
                           >
                             <div v-if="demandTableEditable">
+                              <div
+                                v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ formatCurrency(item2[ft]) }}
+                              </div>
                               <v-select
-                                v-if="ft === 'priority'"
+                                v-else-if="ft === 'priority'"
                                 v-model="item3[ft]"
                                 :options="priorities"
                                 outlined
                               />
                               <b-form-input
-                                v-else-if="ft === 'deadline'"
+                                v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                                 v-model="item3[ft]"
                                 style="text-align:end"
                               />
-                              <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
+                              <b-input-group v-else>
                                 <b-form-input
                                   v-model="item3[ft]"
                                   type="number"
@@ -344,13 +346,6 @@
                                   </b-input-group-text>
                                 </b-input-group-append>
                               </b-input-group>
-                              <div
-                                v-else
-                                class="mr-1"
-                                style="margin-top:6px;"
-                              >
-                                {{ formatCurrency(item3[ft]) }}
-                              </div>
                             </div>
                             <div v-else>
                               <div
@@ -361,7 +356,7 @@
                                 {{ priorities[item3[ft] - 1] }}
                               </div>
                               <div
-                                v-else-if="ft === 'deadline'"
+                                v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -374,8 +369,6 @@
                               >
                                 {{ getSelectedWinRate }}
                               </div>
-                              <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
-                              <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                               <div
                                 v-else
                                 class="mr-3"
@@ -479,18 +472,25 @@
                     :style="`width:${100 / c_fields.length}%`"
                   >
                     <div v-if="demandTableEditable">
+                      <div
+                        v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ formatCurrency(item2[ft]) }}
+                      </div>
                       <v-select
-                        v-if="ft === 'priority'"
+                        v-else-if="ft === 'priority'"
                         v-model="item1[ft]"
                         :options="priorities"
                         outlined
                       />
                       <b-form-input
-                        v-else-if="ft === 'deadline'"
+                        v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
-                      <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand' || ft === 'budget'">
+                      <b-input-group v-else>
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -502,13 +502,6 @@
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
-                      <div
-                        v-else
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
                     </div>
                     <div v-else>
                       <div
@@ -582,18 +575,25 @@
                         :style="`width:${100 / c_fields.length}%`"
                       >
                         <div v-if="demandTableEditable">
+                          <div
+                            v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ formatCurrency(item2[ft]) }}
+                          </div>
                           <v-select
-                            v-if="ft === 'priority'"
+                            v-else-if="ft === 'priority'"
                             v-model="item2[ft]"
                             :options="priorities"
                             outlined
                           />
                           <b-form-input
-                            v-else-if="ft === 'deadline'"
+                            v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
-                          <b-input-group v-else-if="ft === 'authorized' || ft === 'spent' || ft === 'demand'">
+                          <b-input-group v-else>
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -605,13 +605,6 @@
                               </b-input-group-text>
                             </b-input-group-append>
                           </b-input-group>
-                          <div
-                            v-else
-                            class="mr-1"
-                            style="margin-top:6px;"
-                          >
-                            {{ formatCurrency(item2[ft]) }}
-                          </div>
                         </div>
                         <div v-else>
                           <div
@@ -622,7 +615,7 @@
                             {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'deadline'"
+                            v-else-if="ft === 'deadline' || ft === 'phaseStartDate' || ft === 'phaseEndDate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -635,8 +628,6 @@
                           >
                             {{ getSelectedWinRate }}
                           </div>
-                          <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
-                          <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
                           <div
                             v-else
                             class="mr-1"
