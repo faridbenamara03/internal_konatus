@@ -229,7 +229,7 @@
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
-                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                          <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -332,7 +332,7 @@
                                 v-model="item3[ft]"
                                 style="text-align:end"
                               />
-                              <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand'">
+                              <b-input-group v-else-if="ft === 'authorised' || ft === 'spent' || ft === 'demand' || ft === 'budget' ">
                                 <b-form-input
                                   v-model="item3[ft]"
                                   type="number"
