@@ -159,30 +159,37 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Demand</label>
+          <label>Budget</label>
+          <b-form-input
+            v-model="step2.budget"
+            type="number"
+          />
+        </div>
+        <div class="select-box">
+          <label>Budget Demand</label>
           <b-form-input
             v-model="step2.demand"
             type="number"
           />
         </div>
-        <div class="select-box">
+        <!-- <div class="select-box">
           <label>Description</label>
           <b-form-input
             v-model="step2.description"
             type="string"
           />
-        </div>
+        </div> -->
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Authorised</label>
+          <label>Budget Engaged</label>
           <b-form-input
-            v-model="step2.authorised"
+            v-model="step2.engaged"
             type="number"
           />
         </div>
         <div class="select-box">
-          <label>RealEstimated</label>
+          <label>Budget Real Estimated</label>
           <b-form-input
             v-model="step2.realestimated"
             type="number"
@@ -191,14 +198,14 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Engaged</label>
+          <label>Budget Authorized</label>
           <b-form-input
-            v-model="step2.engaged"
+            v-model="step2.authorized"
             type="number"
           />
         </div>
         <div class="select-box">
-          <label>Spent</label>
+          <label>Budget Spent</label>
           <b-form-input
             v-model="step2.spent"
             type="number"
@@ -207,37 +214,13 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget</label>
-          <b-form-input
-            v-model="step2.budget"
-            type="number"
-          />
-        </div>
-        <div class="select-box">
           <label>Value</label>
           <b-form-input
             v-model="step2.value"
             type="number"
           />
         </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Deadline</label>
-          <b-form-datepicker
-            id="program_deadline"
-            v-model="step2.deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
-        <div class="select-box">
-          <label>Next_Gate</label>
-          <b-form-datepicker
-            id="program_nextgate"
-            v-model="step2.next_gate"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
+        <div class="select-box" />
       </div>
     </div>
     <div
@@ -253,18 +236,17 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
+          <label>Nature of deadline</label>
+          <b-form-input
+            id="nature_deadline"
+            v-model="step3.n_deadline"
+          />
+        </div>
+        <div class="select-box">
           <label>Date Production Deadline</label>
           <b-form-datepicker
             id="production-datepicker"
             v-model="step3.p_deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
-        <div class="select-box">
-          <label>Nature of deadline</label>
-          <b-form-datepicker
-            id="production-datepicker1"
-            v-model="step3.n_deadline"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
@@ -554,7 +536,7 @@ export default {
         realestimated: 0,
         spent: 0,
         demand: 0,
-        authorised: 0,
+        authorized: 0,
         engaged: 0,
         phase: null,
         budgetOpen: 0,
@@ -618,7 +600,7 @@ export default {
       this.step2.engaged = data.engaged
       this.step2.demand = data.demand
       this.step2.quote = data.quote
-      this.step2.authorised = data.authorised
+      this.step2.authorized = data.authorized
       this.step2.realestimated = data.realestimated
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()

@@ -213,13 +213,12 @@ export default {
       isSelectedExSystem: false,
       mainOptions: [
         { text: 'Budget', value: 'budget' },
+        { text: 'Budget Demand', value: 'budget_demand' },
+        { text: 'Budget Engaged', value: 'budget_engaged' },
+        { text: 'Budget Real Estimated', value: 'budget_realEstimated' },
+        { text: 'Budget Authorized', value: 'budget_authorized' },
+        { text: 'Budget Spent', value: 'budget_spent' },
         { text: 'Value', value: 'value' },
-        // { text: 'Quote', value: 'quote' },
-        { text: 'Engaged', value: 'engaged' },
-        { text: 'Previous engaged', value: 'previousEngaged' },
-        { text: 'Quote + engaged', value: 'quoteEngaged' },
-        { text: 'Real estimated', value: 'realEstimated' },
-        { text: 'Spend', value: 'spend' },
       ],
       options1: [
         { text: 'Description', value: 'description' },
