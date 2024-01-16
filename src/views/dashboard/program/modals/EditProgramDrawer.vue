@@ -330,35 +330,6 @@
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-        <div class="select-box m-0">
-          <label>Phase</label>
-          <v-select
-            v-model="phases"
-            :options="option_phases"
-            outlined
-            @input="onPhaseSelect"
-          />
-          <div class="mt-2">
-            <b-form-checkbox
-              v-model="isSelectedStartDate"
-              name="check-button"
-              switch
-              inline
-              @change="handleStartDateChange"
-            >
-              <p>Phase Start Date: {{ phaseStartDate }}</p>
-            </b-form-checkbox>
-            <b-form-checkbox
-              v-model="isSelectedEndDate"
-              name="check-button"
-              switch
-              inline
-              @change="handleEndDateChange"
-            >
-              <p>Phase End Date: {{ phaseEndDate }}</p>
-            </b-form-checkbox>
-          </div>
-        </div>
       </div>
     </div>
     <div
@@ -546,11 +517,6 @@ export default {
     return {
       title: '',
       curIndex: 1,
-      option_phases: this.$store.state.globalState.allPhaseTitleData,
-      phaseStartDate: 0,
-      phaseEndDate: 0,
-      isSelectedEndDate: false,
-      isSelectedStartDate: false,
       step1: {
         system: null,
         program: null,
@@ -663,45 +629,6 @@ export default {
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
-      }
-    },
-    handleStartDateChange() {
-      if (this.isSelectedStartDate && this.phaseStartDate) {
-        if (!this.selected.includes('phaseStartDate')) {
-          this.selected.push('phaseStartDate')
-        }
-        this.$store.commit('globalState/SELECT_PHASE_START_DATE', this.phaseStartDate)
-      } else if (this.selected.includes('phaseStartDate')) {
-          this.selected = this.selected.filter(item => item !== 'phaseStartDate')
-      }
-    },
-    handleEndDateChange() {
-      if (this.isSelectedEndDate && this.phaseEndDate) {
-        if (!this.selected.includes('phaseEndDate')) {
-          this.selected.push('phaseEndDate')
-        }
-        this.$store.commit('globalState/SELECT_PHASE_END_DATE', this.phaseEndDate)
-      } else if (this.selected.includes('phaseEndDate')) {
-          this.selected = this.selected.filter(item => item !== 'phaseEndDate')
-      }
-    },
-    onPhaseSelect(selectedPhase) {
-      if (selectedPhase !== "Not Selected") {
-        this.winrate = 100
-        this.winrateSelectable = true
-      } else {
-        this.winrate = 0
-        this.winrateSelectable = false
-      }
-      const { allPhaseData } = this.$store.state.globalState
-      const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
-      if (selectedData) {
-        this.phaseStartDate = selectedData[0].start_date
-        this.phaseEndDate = selectedData[0].end_date
-      }
-      if (!this.selected.includes('winrate')) {
-        this.selected.push('winrate')
-        this.$store.commit('globalState/SELECT_WIN_RATE', this.winrate)
       }
     },
     async handleSave() {

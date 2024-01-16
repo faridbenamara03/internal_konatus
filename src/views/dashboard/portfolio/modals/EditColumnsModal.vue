@@ -88,11 +88,28 @@
         <h4>Planning</h4>
         <b-form-checkbox-group
           id="checkbox-group-4"
-          v-model="selected"
+          v-model="selectedPhase"
           :options="options4"
           name="columns"
           class="checkbox-group"
           stacked
+        />
+        <label>Phase Start Date</label>
+        <v-select
+          v-model="phaseStartDate"
+          :options="option_phases"
+          outlined
+          :disabled="selectedPhase.includes('phase') ? true : false"
+          @input="onPhaseSelect"
+        />
+        <label>Phase End Date</label>
+        <v-select
+          v-model="phaseEndDate"
+          class="pb-2"
+          :options="option_phases"
+          outlined
+          :disabled="selectedPhase.includes('phase') ? true : false"
+          @input="onPhaseSelect"
         />
       </div>
     </div>
@@ -182,7 +199,7 @@ import {
   //  BFormInput,
   //  BFormCheckbox
 } from 'bootstrap-vue'
-// import vSelect from 'vue-select'
+import vSelect from 'vue-select'
 
 export default {
   components: {
@@ -191,7 +208,7 @@ export default {
     BModal,
     // BFormCheckbox,
     // BFormInput,
-    // vSelect
+    vSelect
   },
   props: {
     data: {
@@ -208,6 +225,7 @@ export default {
       phaseStartDate: 0,
       phaseEndDate: 0,
       selected: [],
+      selectedPhase: [],
       winrateSelectable: false,
       isSelectedExId: false,
       isSelectedExSystem: false,
@@ -235,7 +253,8 @@ export default {
         { text: 'Priority', value: 'priority' },
         { text: 'WinRate', value: 'winrate' }
       ],
-      option_phases: this.$store.state.globalState.allPhaseTitleData,
+      // option_phases: this.$store.state.globalState.allPhaseTitleData,
+      option_phases: ['Not Selected', 'phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10'],
       option_winrate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
         36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 67, 68, 69, 70, 71, 72, 73, 74, 75,
         76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
@@ -248,9 +267,9 @@ export default {
         { text: 'ROI', value: 'roi' },
       ],
       options4: [
-        { text: 'Phase', value: 'phase' },
-        { text: 'Phase start date', value: 'phaseStartDate' },
-        { text: 'Phase end date', value: 'phaseEndDate' },
+        { text: 'Next Phase', value: 'phase' },
+        // { text: 'Phase start date', value: 'phaseStartDate' },
+        // { text: 'Phase end date', value: 'phaseEndDate' },
       ],
       options5: [
         { text: 'Head of the product portfolio', value: 'portfolioHead' },
