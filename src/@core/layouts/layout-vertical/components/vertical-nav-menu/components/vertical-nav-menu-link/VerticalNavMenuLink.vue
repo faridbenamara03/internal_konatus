@@ -78,7 +78,12 @@ export default {
       if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
         this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
       } else {
-        const baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
+        let baseUrl = ''
+        if (data.type === 'project') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
+        } else if (data.type === 'subproject') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.projectId}/subproject/${data.id}`
+        }
         const currentUrl = this.$router.history.current.path
         // if (baseUrl === currentUrl || currentUrl.indexOf('/project') > 0) return
         if (baseUrl === currentUrl) return

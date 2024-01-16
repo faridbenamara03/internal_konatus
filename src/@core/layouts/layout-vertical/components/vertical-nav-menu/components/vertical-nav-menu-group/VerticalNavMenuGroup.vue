@@ -150,6 +150,8 @@ export default {
           baseUrl = `/organization/${data.orgId}/portfolio/${data.id}`
         } else if (data.type === 'program') {
           baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.id}`
+        } else if (data.type === 'project') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
         }
         const currentUrl = this.$router.history.current.path
         if (baseUrl === currentUrl) return

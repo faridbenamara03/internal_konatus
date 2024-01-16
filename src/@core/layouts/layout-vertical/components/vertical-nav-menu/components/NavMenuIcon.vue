@@ -44,6 +44,9 @@ export default {
         case 'project':
           this.icon = 'FolderPlusIcon'
           break
+        case 'subproject':
+          this.icon = 'FolderPlusIcon'
+          break
         case 'team':
           this.icon = 'UsersIcon'
           break
