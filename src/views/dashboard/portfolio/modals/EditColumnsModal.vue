@@ -212,7 +212,7 @@ export default {
       isSelectedExId: false,
       isSelectedExSystem: false,
       mainOptions: [
-        { text: 'Budget', value: 'budget' },
+        // { text: 'Budget', value: 'budget' },
         { text: 'Budget Demand', value: 'budget_demand' },
         { text: 'Budget Engaged', value: 'budget_engaged' },
         { text: 'Budget Real Estimated', value: 'budget_realEstimated' },
@@ -222,7 +222,8 @@ export default {
       ],
       options1: [
         { text: 'Description', value: 'description' },
-        // { text: 'Nomenclature System', value: 'nomenclatureSystem' },
+        { text: 'Nomenclature System', value: 'nomenclatureSystem' },
+        { text: 'System ID', value: 'systemId' },
         // { text: 'Portfolio', value: 'portfolio' },
         // { text: 'Program', value: 'program' },
         // { text: 'Project', value: 'project' },

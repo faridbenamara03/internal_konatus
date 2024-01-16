@@ -73,13 +73,14 @@
             <b-form-input
               v-model="step1.program"
               placeholder="Select Program"
-              :disabled="data.type === 'program' ? false : true"
+              :disabled="true"
             />
           </div>
           <div class="w-50 pl-1">
             <label>ProgramID</label>
             <b-form-input
               v-model="step1.programId"
+              :disabled="true"
             />
           </div>
         </div>
@@ -97,14 +98,14 @@
             <b-form-input
               v-model="step1.project"
               placeholder="Select Project"
-              :disabled="data.type === 'project' ? false : true"
+              :disabled="true"
             />
           </div>
           <div class="w-50 pl-1">
             <label>ProjectID</label>
             <b-form-input
               v-model="step1.projectId"
-              @customChange="e => handleCustomChange(e, 'projectId')"
+              :disabled="true"
             />
           </div>
         </div>
@@ -116,13 +117,14 @@
             <b-form-input
               v-model="step1.subproject"
               placeholder="Select Sub Project"
-              :disabled="data.type === 'subproject' ? false : true"
+              :disabled="true"
             />
           </div>
           <div class="w-50 pl-1">
             <label>SubProject</label>
             <b-form-input
               v-model="step1.subProjectId"
+              :disabled="true"
             />
           </div>
         </div>
@@ -159,16 +161,16 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget</label>
+          <label>Budget Demand</label>
           <b-form-input
-            v-model="step2.budget"
+            v-model="step2.demand"
             type="number"
           />
         </div>
         <div class="select-box">
-          <label>Budget Demand</label>
+          <label>Value</label>
           <b-form-input
-            v-model="step2.demand"
+            v-model="step2.value"
             type="number"
           />
         </div>
@@ -212,7 +214,7 @@
           />
         </div>
       </div>
-      <div class="select-group--sub">
+      <!-- <div class="select-group--sub">
         <div class="select-box">
           <label>Value</label>
           <b-form-input
@@ -221,7 +223,7 @@
           />
         </div>
         <div class="select-box" />
-      </div>
+      </div> -->
     </div>
     <div
       class="select-group"
@@ -328,7 +330,35 @@
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-        <div class="select-box m-0" />
+        <div class="select-box m-0">
+          <label>Phase</label>
+          <v-select
+            v-model="phases"
+            :options="option_phases"
+            outlined
+            @input="onPhaseSelect"
+          />
+          <div class="mt-2">
+            <b-form-checkbox
+              v-model="isSelectedStartDate"
+              name="check-button"
+              switch
+              inline
+              @change="handleStartDateChange"
+            >
+              <p>Phase Start Date: {{ phaseStartDate }}</p>
+            </b-form-checkbox>
+            <b-form-checkbox
+              v-model="isSelectedEndDate"
+              name="check-button"
+              switch
+              inline
+              @change="handleEndDateChange"
+            >
+              <p>Phase End Date: {{ phaseEndDate }}</p>
+            </b-form-checkbox>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -516,6 +546,11 @@ export default {
     return {
       title: '',
       curIndex: 1,
+      option_phases: this.$store.state.globalState.allPhaseTitleData,
+      phaseStartDate: 0,
+      phaseEndDate: 0,
+      isSelectedEndDate: false,
+      isSelectedStartDate: false,
       step1: {
         system: null,
         program: null,
@@ -628,6 +663,45 @@ export default {
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
+      }
+    },
+    handleStartDateChange() {
+      if (this.isSelectedStartDate && this.phaseStartDate) {
+        if (!this.selected.includes('phaseStartDate')) {
+          this.selected.push('phaseStartDate')
+        }
+        this.$store.commit('globalState/SELECT_PHASE_START_DATE', this.phaseStartDate)
+      } else if (this.selected.includes('phaseStartDate')) {
+          this.selected = this.selected.filter(item => item !== 'phaseStartDate')
+      }
+    },
+    handleEndDateChange() {
+      if (this.isSelectedEndDate && this.phaseEndDate) {
+        if (!this.selected.includes('phaseEndDate')) {
+          this.selected.push('phaseEndDate')
+        }
+        this.$store.commit('globalState/SELECT_PHASE_END_DATE', this.phaseEndDate)
+      } else if (this.selected.includes('phaseEndDate')) {
+          this.selected = this.selected.filter(item => item !== 'phaseEndDate')
+      }
+    },
+    onPhaseSelect(selectedPhase) {
+      if (selectedPhase !== "Not Selected") {
+        this.winrate = 100
+        this.winrateSelectable = true
+      } else {
+        this.winrate = 0
+        this.winrateSelectable = false
+      }
+      const { allPhaseData } = this.$store.state.globalState
+      const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
+      if (selectedData) {
+        this.phaseStartDate = selectedData[0].start_date
+        this.phaseEndDate = selectedData[0].end_date
+      }
+      if (!this.selected.includes('winrate')) {
+        this.selected.push('winrate')
+        this.$store.commit('globalState/SELECT_WIN_RATE', this.winrate)
       }
     },
     async handleSave() {
