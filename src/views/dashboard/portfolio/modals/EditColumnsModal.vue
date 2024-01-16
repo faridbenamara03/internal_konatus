@@ -317,7 +317,6 @@ export default {
       if (selectedData) {
         this.phaseStartDate = selectedData[0].start_date
         this.phaseEndDate = selectedData[0].end_date
-        
       }
       if (!this.selected.includes('winrate')) {
         this.selected.push('winrate')
