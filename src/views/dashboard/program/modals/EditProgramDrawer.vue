@@ -166,10 +166,10 @@
           />
         </div>
         <div class="select-box">
-          <label>Quote</label>
+          <label>Description</label>
           <b-form-input
-            v-model="step2.quote"
-            type="number"
+            v-model="step2.description"
+            type="string"
           />
         </div>
       </div>
@@ -548,7 +548,7 @@ export default {
         priority: null,
         value: 0,
         budget: 0,
-        quote: 0,
+        description: null,
         deadline: null,
         next_gate: null,
         realestimated: 0,

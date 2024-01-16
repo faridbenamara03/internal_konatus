@@ -267,7 +267,7 @@ export default {
       collapsedT: [],
       opened: 0,
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
-      c_fields: ['priority', 'value', 'budget', 'quote', 'next_gate'],
+      c_fields: ['priority', 'value', 'budget', 'next_gate'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [],
