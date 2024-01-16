@@ -88,7 +88,7 @@
         <h4>Planning</h4>
         <b-form-checkbox-group
           id="checkbox-group-4"
-          v-model="selectedPhase"
+          v-model="selected"
           :options="options4"
           name="columns"
           class="checkbox-group"
@@ -99,8 +99,8 @@
           v-model="phaseStartDate"
           :options="option_phases"
           outlined
-          :disabled="selectedPhase.includes('phase') ? true : false"
-          @input="onPhaseSelect"
+          :disabled="selected.includes('phase') ? true : false"
+          @input="onPhaseSelect(phaseStartDate, 1)"
         />
         <label>Phase End Date</label>
         <v-select
@@ -108,8 +108,8 @@
           class="pb-2"
           :options="option_phases"
           outlined
-          :disabled="selectedPhase.includes('phase') ? true : false"
-          @input="onPhaseSelect"
+          :disabled="selected.includes('phase') ? true : false"
+          @input="onPhaseSelect(phaseEndDate, 2)"
         />
       </div>
     </div>
@@ -225,7 +225,6 @@ export default {
       phaseStartDate: 0,
       phaseEndDate: 0,
       selected: [],
-      selectedPhase: [],
       winrateSelectable: false,
       isSelectedExId: false,
       isSelectedExSystem: false,
@@ -267,7 +266,7 @@ export default {
         { text: 'ROI', value: 'roi' },
       ],
       options4: [
-        { text: 'Next Phase', value: 'phase' },
+        { text: 'Next Phase', value: 'nextphase' },
         // { text: 'Phase start date', value: 'phaseStartDate' },
         // { text: 'Phase end date', value: 'phaseEndDate' },
       ],
@@ -298,19 +297,27 @@ export default {
       this.$emit('columnChange', this.selected)
       this.$refs['my-modal'].hide()
     },
-    onPhaseSelect(selectedPhase) {
+    onPhaseSelect(selectedPhase, type) {
       if (selectedPhase !== "Not Selected") {
         this.winrate = 100
         this.winrateSelectable = true
       } else {
         this.winrate = 0
         this.winrateSelectable = false
+        if (type === 1) {
+          if (!this.selected.includes('phaseStartDate')) {
+            this.selected.push('phaseStartDate')
+          }
+        } else if (!this.selected.includes('phaseEndDate')) {
+            this.selected.push('phaseEndDate')
+        }
       }
       const { allPhaseData } = this.$store.state.globalState
       const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
       if (selectedData) {
         this.phaseStartDate = selectedData[0].start_date
         this.phaseEndDate = selectedData[0].end_date
+        
       }
       if (!this.selected.includes('winrate')) {
         this.selected.push('winrate')
