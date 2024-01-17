@@ -6,7 +6,7 @@ export default {
   state: {
     loaderModalShow: false,
     teamReportingData: {},
-    teamDemandData: {},
+    teamDemandData: {}
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
@@ -142,6 +142,6 @@ export default {
         console.log('error creating team new task ---->', err)
         Vue.$toast.error('Failed to create team new task.')
       })
-    }
+    },
   },
 }

@@ -221,14 +221,14 @@
         </div> -->
         <b-tab
           title="Demand"
-          :class="{'border-0': !projectElementTeamData.length}"
+          :class="{'border-0': !demandTeamsData.length}"
           @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-team')"
         >
           <Demand
             v-if="!demandTableEditable"
-            :team-data="projectElementTeamData"
+            :team-data="demandTeamsData"
             :tab-state="demandTabState"
-            :phase-data="projectElementPhaseData"
+            :phase-data="demandPhasesData"
           />
           <TableEditable
             v-if="demandTableEditable"
@@ -544,6 +544,18 @@ export default {
     },
     projectReportingEditableData() {
       return this.$store.state.globalState.projectReportingEditableData
+    },
+    demandTeamsData() {
+      return this.$store.state.globalState.portfolioDemandData.teams
+    },
+    demandPhasesData() {
+      return this.$store.state.globalState.portfolioDemandData.phases
+    },
+    controlData() {
+      return this.$store.state.globalState.portfolioControlData
+    },
+    reportingData() {
+      return this.$store.state.globalState.portfolioReportingData
     }
   },
   methods: {
