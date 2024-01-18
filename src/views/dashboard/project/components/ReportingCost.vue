@@ -1,44 +1,89 @@
 <template>
   <div class="demand-view">
     <div class="w-100 p-1">
-      <vue-apex-charts type="line" height="400" :options="chartOptions" :series="series" />
+      <vue-apex-charts
+        type="line"
+        height="400"
+        :options="chartOptions"
+        :series="series"
+      />
     </div>
     <b-card class="mr-5 ml-5">
-      <div style="font-weight:bold" class="table-wrap p-1">
-        <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="work-e">
+      <div
+        style="font-weight:bold"
+        class="table-wrap p-1"
+      >
+        <div
+          style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+          class="work-e"
+        >
           WORK ELEMENT
         </div>
         <div class="data-p">
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             TEAM
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             BUDGET
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             BUDGET ENGAGED
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             SPENT
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             % SPEND VS LINE TIME
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             REAL ESTIMATED
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             $ ACCOMPLISHED
           </div>
-          <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="chld">
+          <div
+            style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+            class="chld"
+          >
             % ACCOMPLISHED vs SPEND
           </div>
         </div>
       </div>
-      <div v-for="(item, i) in tableData" :key="i" class="pt-2 pb-2 pl-1 pr-1"
-        :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`">
-        <div style="color:white;" class="table-wrap">
-          <div style="font-weight:bold;" class="work-e">
+      <div
+        v-for="(item, i) in tableData"
+        :key="i"
+        class="pt-2 pb-2 pl-1 pr-1"
+        :style="`background-color:${i % 2 === 0 ? '#303952' : '#283046'};border-left:solid ${bColors[i]} 4px`"
+      >
+        <div
+          style="color:white;"
+          class="table-wrap"
+        >
+          <div
+            style="font-weight:bold;"
+            class="work-e"
+          >
             {{ item[0] }}
           </div>
           <div class="data-p">

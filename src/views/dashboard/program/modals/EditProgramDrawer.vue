@@ -153,7 +153,7 @@
           <label>Priority</label>
           <v-select
             v-model="step2.priority"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Highest"
             outlined
           />
@@ -357,7 +357,7 @@
           <label>Product Manager</label>
           <v-select
             v-model="step5.product_manager"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -377,7 +377,7 @@
           <label>Head of Program Direction</label>
           <v-select
             v-model="step5.head_program_direction"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -388,7 +388,7 @@
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -411,7 +411,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step6.portfolio"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="priorityOptions"
           placeholder="Select Portfolio"
           outlined
         />
@@ -515,6 +515,7 @@ export default {
   },
   data() {
     return {
+      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       title: '',
       curIndex: 1,
       step1: {
@@ -589,43 +590,42 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("Initi", data)
-      this.step1.portfolioId = data.portfolioid || 0
-      this.step2.title = data.title
-      this.step2.budget = data.budget
-      this.step2.priority = data.priority
-      this.step2.deadline = data.deadline
-      this.step2.next_gate = data.next_gate
-      this.step2.spent = data.spent
-      this.step2.value = data.value
-      this.step2.engaged = data.engaged
-      this.step2.demand = data.demand
-      this.step2.quote = data.quote
-      this.step2.authorized = data.authorized
-      this.step2.realestimated = data.realestimated
+      console.log("InitData:", data)
+      const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
+      this.step1.portfolioId = initData.portfolioid || 0
+      this.step2.title = initData.title
+      this.step2.budget = initData.budget
+      this.step2.priority = this.priorityOptions[initData.priority - 1]
+      this.step2.deadline = initData.deadline
+      this.step2.next_gate = initData.next_gate
+      this.step2.spent = initData.spent
+      this.step2.value = initData.value
+      this.step2.engaged = initData.engaged
+      this.step2.demand = initData.demand
+      this.step2.quote = initData.quote
+      this.step2.authorized = initData.authorized
+      this.step2.realestimated = initData.realestimated
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
-      const portfolios = allPts.filter(port => port.id === `${data.portfolioid}`)
+      const portfolios = allPts.filter(port => port.id === `${initData.portfolioid}`)
       if (portfolios.length > 0) {
         [this.step1.portfolio] = portfolios
       }
-      if (data.type === "program") {
-        this.step1.programId = data.id || 0
-        const programs = allPgs.filter(pg => pg.id === `${data.id}`)
-        console.log("Programs:", programs)
+      if (initData.type === "program") {
+        this.step1.programId = initData.id || 0
+        const programs = allPgs.filter(pg => pg.id === `${initData.id}`)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
-      } else if (data.type === "project") {
-        this.step1.programId = data.progid
-        const programs = allPgs.filter(pg => pg.id === `${data.progid}`)
+      } else if (initData.type === "project") {
+        this.step1.programId = initData.progid
+        const programs = allPgs.filter(pg => pg.id === `${initData.progid}`)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
         this.step1.projectId = data.id || 0
-        const projects = allPjs.filter(pj => pj.id === `${data.id}`)
-        console.log("Programs:", programs, "Projects:", projects)
+        const projects = allPjs.filter(pj => pj.id === `${initData.id}`)
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }

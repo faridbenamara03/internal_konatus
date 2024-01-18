@@ -140,7 +140,7 @@
           <label>Priority</label>
           <v-select
             v-model="step2.priority"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Highest"
             outlined
             multiple
@@ -364,7 +364,7 @@
           <label>Product Manager</label>
           <v-select
             v-model="step5.product_manager"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -384,7 +384,7 @@
           <label>Head of Program Direction</label>
           <v-select
             v-model="step5.head_program_direction"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -395,7 +395,7 @@
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
-            :options="['Highest', 'High', 'Low', 'Lowest']"
+            :options="priorityOptions"
             placeholder="Select Portfolio"
             outlined
           />
@@ -418,7 +418,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="step6.portfolio"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="priorityOptions"
           placeholder="Select Portfolio"
           outlined
         />
@@ -522,6 +522,7 @@ export default {
   },
   data() {
     return {
+      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       curIndex: 1,
       step1: {
         system: null,
@@ -597,42 +598,46 @@ export default {
   methods: {
     initializeData(data) {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
-      this.step1.portfolioId = initData.portfolioid || 0
-      this.step2.title = initData.title
-      this.step2.budget = initData.budget
-      this.step2.priority = initData.priority
-      this.step2.deadline = initData.deadline
-      this.step2.next_gate = initData.next_gate
-      this.step2.spent = initData.spent
-      this.step2.value = initData.value
-      this.step2.engaged = initData.engaged
-      this.step2.demand = initData.demand
-      this.step2.quote = initData.quote
-      this.step2.authorised = initData.authorised
-      this.step2.realestimated = initData.realestimated
-      const allPts = this.getAllPorts()
-      const allPgs = this.getAllProgs()
-      const allPjs = this.getAllProjects()
-      const portfolios = allPts.filter(port => port.id === initData.portfolioid)
-      if (portfolios.length > 0) {
-        [this.step1.portfolio] = portfolios
-      }
-      if (initData.type === "program") {
-        this.step1.programId = initData.id || 0
-        const programs = allPgs.filter(pg => pg.id === initData.id)
-        if (programs.length > 0) {
-          [this.step1.program] = programs
+      if (initData === undefined) {
+        this.step1.portfolio = this.$store.state.globalState.selectedNavObj
+      } else {
+        this.step1.portfolioId = initData.portfolioid || 0
+        this.step2.title = initData.title
+        this.step2.budget = initData.budget
+        this.step2.priority = this.priorityOptions[initData.priority - 1]
+        this.step2.deadline = initData.deadline
+        this.step2.next_gate = initData.next_gate
+        this.step2.spent = initData.spent
+        this.step2.value = initData.value
+        this.step2.engaged = initData.engaged
+        this.step2.demand = initData.demand
+        this.step2.quote = initData.quote
+        this.step2.authorised = initData.authorised
+        this.step2.realestimated = initData.realestimated
+        const allPts = this.getAllPorts()
+        const allPgs = this.getAllProgs()
+        const allPjs = this.getAllProjects()
+        const portfolios = allPts.filter(port => port.id === initData.portfolioid)
+        if (portfolios.length > 0) {
+          [this.step1.portfolio] = portfolios
         }
-      } else if (initData.type === "project") {
-        this.step1.programId = initData.progid
-        const programs = allPgs.filter(pg => pg.id === initData.progid)
-        if (programs.length > 0) {
-          [this.step1.program] = programs
-        }
-        this.step1.projectId = initData.id || 0
-        const projects = allPjs.filter(pj => pj.id === initData.id)
-        if (projects.length > 0) {
-          [this.step1.project] = projects
+        if (initData.type === "program") {
+          this.step1.programId = initData.id || 0
+          const programs = allPgs.filter(pg => pg.id === initData.id)
+          if (programs.length > 0) {
+            [this.step1.program] = programs
+          }
+        } else if (initData.type === "project") {
+          this.step1.programId = initData.progid
+          const programs = allPgs.filter(pg => pg.id === initData.progid)
+          if (programs.length > 0) {
+            [this.step1.program] = programs
+          }
+          this.step1.projectId = initData.id || 0
+          const projects = allPjs.filter(pj => pj.id === initData.id)
+          if (projects.length > 0) {
+            [this.step1.project] = projects
+          }
         }
       }
     },
