@@ -99,6 +99,7 @@
           v-model="phaseStartDate"
           :options="option_phases"
           outlined
+          multiple
           :disabled="selected.includes('phase') ? true : false"
           @input="onPhaseSelect(phaseStartDate, 1)"
         />
@@ -108,6 +109,7 @@
           class="pb-2"
           :options="option_phases"
           outlined
+          multiple
           :disabled="selected.includes('phase') ? true : false"
           @input="onPhaseSelect(phaseEndDate, 2)"
         />

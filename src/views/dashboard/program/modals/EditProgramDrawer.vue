@@ -590,7 +590,6 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("InitData:", data)
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       this.step1.portfolioId = initData.portfolioid || 0
       this.step2.title = initData.title
@@ -608,24 +607,25 @@ export default {
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
-      const portfolios = allPts.filter(port => port.id === `${initData.portfolioid}`)
+      const portfolios = allPts.filter(port => port.id === initData.portfolioid)
       if (portfolios.length > 0) {
         [this.step1.portfolio] = portfolios
+        console.log("SPSP:", this.step1.portfolio)
       }
       if (initData.type === "program") {
         this.step1.programId = initData.id || 0
-        const programs = allPgs.filter(pg => pg.id === `${initData.id}`)
+        const programs = allPgs.filter(pg => pg.id === initData.id)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
       } else if (initData.type === "project") {
         this.step1.programId = initData.progid
-        const programs = allPgs.filter(pg => pg.id === `${initData.progid}`)
+        const programs = allPgs.filter(pg => pg.id === initData.progid)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
         this.step1.projectId = data.id || 0
-        const projects = allPjs.filter(pj => pj.id === `${initData.id}`)
+        const projects = allPjs.filter(pj => pj.id === initData.id)
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
