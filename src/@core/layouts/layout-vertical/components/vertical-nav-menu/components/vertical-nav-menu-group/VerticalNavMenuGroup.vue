@@ -138,7 +138,7 @@ export default {
           if (baseUrl === currentUrl) return
           this.$router.push(baseUrl)
         } else if (data.type === 'team') {
-          baseUrl = `/organization-unit/unit/${data.unitid}/team/${data.id}`
+          baseUrl = `/organization-unit/unit/${data.parent}/team/${data.id}`
           const currentUrl = this.$router.history.current.path
           if (baseUrl === currentUrl) return
           this.$router.push(baseUrl)

@@ -156,11 +156,11 @@ export default [
     // component: () => import('@/views/welcome.vue'),
   },
 
-  {
-    path: '/organization-unit',
-    name: 'organization-unit-view',
-    // component: () => import('@/views/welcome.vue'),
-  },
+  // {
+  //   path: '/organization-unit',
+  //   name: 'organization-unit-view',
+  //   // component: () => import('@/views/welcome.vue'),
+  // },
   {
     path: '/organization-unit/unit/:unitId',
     name: 'unit-view',

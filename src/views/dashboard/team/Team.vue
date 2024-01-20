@@ -1,6 +1,7 @@
 <template>
+  <!-- v-if="!isUN(c_team_demand_data.phases)" -->
   <b-card
-    v-if="!isUN(c_team_demand_data.phases)"
+    v-if="!isUN(c_team_demand_data.children)"
     no-body
     footer-tag="footer"
     class="card-portfolio card-project mb-0"
