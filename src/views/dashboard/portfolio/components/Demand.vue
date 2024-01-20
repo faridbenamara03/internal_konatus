@@ -638,6 +638,20 @@
                         </div>
                       </div>
                     </div>
+                    <div class="part3 d-flex justify-content-center">
+                      <b-button
+                        variant="flat-primary"
+                        @click="toggleEditProgramDrawerOpen(item2, 'subproject')"
+                      >
+                        <feather-icon icon="Edit2Icon" />
+                      </b-button>
+                      <b-button
+                        variant="flat-primary"
+                        @click="toggleCreateNewProgramDrawer(item2, 'subproject')"
+                      >
+                        <feather-icon icon="PlusIcon" />
+                      </b-button>
+                    </div>
                   </div>
                 </div>
               </div>
