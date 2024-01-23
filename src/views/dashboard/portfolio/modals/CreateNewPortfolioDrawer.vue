@@ -151,7 +151,7 @@
 
 <script>
 import {
-  BButton, BFormInput, BFormDatepicker
+  BButton, BFormInput, BFormDatepicker, BInputGroupPrepend
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -160,6 +160,7 @@ export default {
     BButton,
     BFormInput,
     vSelect,
+    BInputGroupPrepend,
     BFormDatepicker
   },
   props: {

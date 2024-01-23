@@ -127,14 +127,12 @@
       <div class="select-box">
         <label>Budget</label>
         <b-input-group>
-          <b-input-group-prepend>
-            <v-select
-              v-model="currency"
-              :options="['EUR', 'USD']"
-              placeholder="unit"
-              outlined
-            />
-          </b-input-group-prepend>
+          <v-select
+            v-model="currency"
+            :options="['EUR', 'USD']"
+            placeholder="unit"
+            outlined
+          />
           <b-form-input
             v-model="budget"
             placeholder="300"
@@ -157,7 +155,7 @@
 
 <script>
 import {
-  BButton, BFormInput, BFormDatepicker
+  BButton, BFormInput, BFormDatepicker, BInputGroup,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -166,13 +164,13 @@ export default {
     BButton,
     BFormInput,
     BFormDatepicker,
+    BInputGroup,
     vSelect,
   },
   props: {
   },
   data() {
     return {
-      portfolioName: this.$store.state.globalState.selectedNavObj?.title,
       portfolioBudget: this.$store.state.globalState.selectedNavObj?.budget,
       edited: false,
       parentOrganization: "Konatus Industries",
@@ -191,6 +189,15 @@ export default {
     }
   },
   computed: {
+    portfolioName() {
+      if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') {
+        return this.$store.state.globalState.selectedNavObj.title
+      }
+      const portId = this.$store.state.globalState.selectedNavObj.portfolioId
+      const ports = this.$store.state.globalState.allPortData.filter(item => item.id === portId)
+      if (ports.length > 0) return ports[0].title
+      return ''
+    },
     selectedType() {
       const type = this.$store.state.globalState.selectedNavObj?.type
       const firstC = type?.charAt(0).toUpperCase()
