@@ -125,6 +125,14 @@
         <label class="notice">Period duration: 12 months</label>
       </div>
       <div class="select-box">
+        <b-button
+          variant="primary"
+          @click="handleAdd"
+        >
+          Add
+        </b-button>
+      </div>
+      <div class="select-box">
         <label>Budget</label>
         <b-input-group>
           <v-select
@@ -138,6 +146,18 @@
             placeholder="300"
           />
         </b-input-group>
+      </div>
+      <div class="select-box">
+        <span v-if="inputedBudgets.length > 0" >
+          Budgets:
+        </span>
+        <span v-for="(item, index) of inputedBudgets"
+          :key="index">
+          <div class="d-flex">
+            <label>{{item.amount}}</label>
+            <label>{{item.currency === 'USD' ? '$' : '€'}}</label>
+          </div>
+        </span>
       </div>
     </div>
     <div>
@@ -174,6 +194,7 @@ export default {
       portfolioBudget: this.$store.state.globalState.selectedNavObj?.budget,
       edited: false,
       parentOrganization: "Konatus Industries",
+      inputedBudgets: [],
       startDate: "2023-01-13",
       endDate: "2023-04-30",
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
@@ -206,6 +227,14 @@ export default {
     }
   },
   methods: {
+    handleAdd() {
+      const item = {
+        currency: this.currency,
+        amount: this.budget
+      }
+      this.inputedBudgets.push(item)
+      this.budget = 0
+    },
     handleSave() {
       this.edited = false
       this.$store.commit('globalState/EDIT_PORTFOLIO',

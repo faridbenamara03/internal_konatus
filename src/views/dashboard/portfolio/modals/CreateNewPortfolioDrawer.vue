@@ -120,21 +120,39 @@
         <label class="notice">Period duration: 12 months</label>
       </div>
       <div class="select-box">
+        <b-button
+          variant="primary"
+          @click="handleAdd"
+        >
+          Add
+        </b-button>
+      </div>
+      <div class="select-box">
         <label>Budget</label>
         <b-input-group>
-          <b-input-group-prepend>
-            <v-select
-              v-model="currency"
-              :options="['EUR', 'USD']"
-              placeholder="unit"
-              outlined
-            />
-          </b-input-group-prepend>
+          <v-select
+            v-model="currency"
+            :options="['EUR', 'USD']"
+            placeholder="unit"
+            outlined
+          />
           <b-form-input
             v-model="budget"
             placeholder="300"
           />
         </b-input-group>
+      </div>
+      <div class="select-box">
+        <span v-if="inputedBudgets.length > 0" >
+          Budgets:
+        </span>
+        <span v-for="(item, index) of inputedBudgets"
+          :key="index">
+          <div class="d-flex">
+            <label>{{item.amount}}</label>
+            <label>{{item.currency === 'USD' ? '$' : '€'}}</label>
+          </div>
+        </span>
       </div>
     </div>
     <div>
@@ -151,7 +169,8 @@
 
 <script>
 import {
-  BButton, BFormInput, BFormDatepicker, BInputGroupPrepend
+  BButton, BFormInput, BFormDatepicker, BInputGroup
+  //  BInputGroupPrepend
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -160,7 +179,7 @@ export default {
     BButton,
     BFormInput,
     vSelect,
-    BInputGroupPrepend,
+    BInputGroup,
     BFormDatepicker
   },
   props: {
@@ -177,6 +196,7 @@ export default {
       period_start_month: null,
       period_end_year: null,
       period_end_month: null,
+      inputedBudgets: [],
       budget: 0,
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       currency: 'unit',
@@ -186,6 +206,14 @@ export default {
     }
   },
   methods: {
+    handleAdd() {
+      const item = {
+        currency: this.currency,
+        amount: this.budget
+      }
+      this.inputedBudgets.push(item)
+      this.budget = 0
+    },
     handleCreate() {
       this.$store.dispatch('globalState/create_new_portfolio',
       {
