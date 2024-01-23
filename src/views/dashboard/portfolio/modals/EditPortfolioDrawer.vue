@@ -62,6 +62,86 @@
         />
       </div>
     </div>
+    <div
+      class="select-group"
+      style="padding-top: 0px"
+    >
+      <div class="notice-box">
+        <feather-icon
+          icon="DollarSignIcon"
+          size="20"
+        />
+        <h5>budget</h5>
+      </div>
+      <div class="select-box">
+        <label>Portfolio</label>
+        <v-select
+          v-model="portfolio"
+          :options="priorityOptions"
+          placeholder="Select Portfolio"
+          outlined
+        />
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Period start</label>
+          <div class="d-flex">
+            <v-select
+              v-model="period_start_year"
+              :options="years"
+              class="mr-1"
+              :placeholder="years[0]"
+              outlined
+            />
+            <v-select
+              v-model="period_start_month"
+              :options="months"
+              :placeholder="months[0]"
+              outlined
+            />
+          </div>
+        </div>
+        <div class="divider" />
+        <div class="select-box">
+          <label>Period End</label>
+          <div class="d-flex">
+            <v-select
+              v-model="period_end_year"
+              :options="years"
+              class="mr-1"
+              :placeholder="years[0]"
+              outlined
+            />
+            <v-select
+              v-model="period_end_month"
+              :options="months"
+              :placeholder="months[0]"
+              outlined
+            />
+          </div>
+        </div>
+      </div>
+      <div class="select-box d-flex justify-content-center">
+        <label class="notice">Period duration: 12 months</label>
+      </div>
+      <div class="select-box">
+        <label>Budget</label>
+        <b-input-group>
+          <b-input-group-prepend>
+            <v-select
+              v-model="currency"
+              :options="['EUR', 'USD']"
+              placeholder="unit"
+              outlined
+            />
+          </b-input-group-prepend>
+          <b-form-input
+            v-model="budget"
+            placeholder="300"
+          />
+        </b-input-group>
+      </div>
+    </div>
     <div>
       <b-button
         :disabled="!edited"
@@ -97,7 +177,17 @@ export default {
       edited: false,
       parentOrganization: "Konatus Industries",
       startDate: "2023-01-13",
-      endDate: "2023-04-30"
+      endDate: "2023-04-30",
+      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      years: ['2022', '2023', '2024', '2025'],
+      currency: 'unit',
+      budget: 0,
+      portfolio: null,
+      period_start_year: null,
+      period_start_month: null,
+      period_end_year: null,
+      period_end_month: null
     }
   },
   computed: {

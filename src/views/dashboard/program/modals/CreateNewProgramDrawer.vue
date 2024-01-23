@@ -7,7 +7,7 @@
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      Add a project or sub-project
+      {{ otype === 'program' ? 'Add a program' : 'Add a project or sub-project'}}
     </p>
     <div
       class="select-group"
@@ -143,7 +143,6 @@
             :options="priorityOptions"
             placeholder="Highest"
             outlined
-            multiple
           />
         </div>
       </div>
@@ -403,86 +402,6 @@
         <div class="select-box m-0" />
       </div>
     </div>
-    <div
-      class="select-group"
-      style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="DollarSignIcon"
-          size="20"
-        />
-        <h5>budget</h5>
-      </div>
-      <div class="select-box">
-        <label>Portfolio</label>
-        <v-select
-          v-model="step6.portfolio"
-          :options="priorityOptions"
-          placeholder="Select Portfolio"
-          outlined
-        />
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Period start</label>
-          <div class="d-flex">
-            <v-select
-              v-model="step6.period_start_year"
-              :options="years"
-              class="mr-1"
-              :placeholder="years[0]"
-              outlined
-            />
-            <v-select
-              v-model="step6.period_start_month"
-              :options="months"
-              :placeholder="months[0]"
-              outlined
-            />
-          </div>
-        </div>
-        <div class="divider" />
-        <div class="select-box">
-          <label>Period End</label>
-          <div class="d-flex">
-            <v-select
-              v-model="step6.period_end_year"
-              :options="years"
-              class="mr-1"
-              :placeholder="years[0]"
-              outlined
-            />
-            <v-select
-              v-model="step6.period_end_month"
-              :options="months"
-              :placeholder="months[0]"
-              outlined
-            />
-          </div>
-        </div>
-      </div>
-      <div class="select-box d-flex justify-content-center">
-        <label class="notice">Period duration: 12 months</label>
-      </div>
-      <div class="select-box">
-        <label>Budget</label>
-        <b-input-group>
-          <b-input-group-prepend>
-            <v-select
-              v-model="step6.currency"
-              :options="['EUR', 'USD']"
-              placeholder="unit"
-              outlined
-            />
-          </b-input-group-prepend>
-          <b-form-input
-            v-model="step6.budget"
-            placeholder="300"
-          />
-        </b-input-group>
-      </div>
-    </div>
     <div>
       <b-button
         style="width: 100%"
@@ -570,15 +489,6 @@ export default {
         architect: null,
         head_program_direction: null,
         program_director: null,
-      },
-      step6: {
-        portfolio: null,
-        period_start_year: null,
-        period_start_month: null,
-        period_end_year: null,
-        period_end_month: null,
-        budget: 0,
-        currency: 'unit',
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],

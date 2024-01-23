@@ -448,7 +448,7 @@
         />
       </div>
     </Drawer>
-    <!-- <Drawer
+    <Drawer
       align="right"
       :closeable="false"
       :mask-closable="true"
@@ -467,7 +467,7 @@
       <div v-if="openEditPortfolioDrawer && (selectedNavType === 'portfolio' || selectedNavType === 'company')">
         <EditPortfolioDrawer />
       </div>
-    </Drawer> -->
+    </Drawer>
     <optimize-modal
       ref="optimizeModal"
       @toggleUpdate="handleToggleUpdateShow"
@@ -499,8 +499,8 @@ import Control from './components/Control.vue'
 import CreateDrawer from './modals/CreateDrawer.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
-// import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
-// import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
+import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
+import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
 import TableEditable from './components/TableEditable.vue'
 import CreateNewProgramDrawer from '../program/modals/CreateNewProgramDrawer.vue'
 // import EditProgramDrawer from '../program/modals/EditProgramDrawer.vue'
@@ -525,8 +525,8 @@ export default {
     Welcome,
     Drawer,
     CreateDrawer,
-    // CreateNewPortfolioDrawer,
-    // EditPortfolioDrawer
+    CreateNewPortfolioDrawer,
+    EditPortfolioDrawer,
     // EditProgramDrawer,
     CreateNewProgramDrawer
   },
