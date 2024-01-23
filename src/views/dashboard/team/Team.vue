@@ -336,7 +336,12 @@ export default {
   },
   computed: {
     c_team_demand_data() {
-      return this.$store.state.teamState.teamDemandData
+      const teamDData = this.$store.state.teamState.teamDemandData
+      console.log('teamData', teamDData, 'ID', this.$store.state.globalState.selectedNavObj.id)
+      const teamData = teamDData.filter(item => item.id === this.$store.state.globalState.selectedNavObj.id)
+      console.log('TD', teamData)
+      if (teamData.length > 0) return teamData[0]
+      return []
     }
   },
   mounted() {

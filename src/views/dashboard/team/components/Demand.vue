@@ -7,7 +7,7 @@
     >
       <div class="d-flex justify-content-between align-items-center">
         <p class="text-capitalize m-0 team-name--text">
-          {{ phase.id }}
+          Phase {{ phase.id }}
           <span style="color:#303952;margin-left:4px">
             ({{ phase.time ? phase.time : 0 }} hours)
           </span>
