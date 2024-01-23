@@ -308,10 +308,6 @@
           class="no-action-bar"
           @click="onClickCPSelectBtn('control')"
         >
-          <!-- <Control
-            :data="items.children"
-            :table-title="tableTitle"
-          /> -->
           <Control
             :data="controlData"
             :table-title="tableTitle"

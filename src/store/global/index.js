@@ -431,7 +431,7 @@ export default {
       // dispatch('sumit_team_request_quote')
     },
     SAVE_SELECTED_NAV_DATA(state, payload) {
-      console.log("PNV:", payload.navData)
+      console.log("PNV:", payload.navData, "PPD:", payload.portData)
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand

@@ -53,7 +53,7 @@
         </div>
       </div>
       <div
-        v-for="(item, index) in data"
+        v-for="(item, index) in data.children"
         :key="index"
       >
         <div
@@ -80,7 +80,7 @@
               class="data-child mr-1"
               :style="`width:${100 / c_fields.length}%`"
             >
-              <span v-if="ft === 'priority'">{{ item[ft] }}</span>
+              <span v-if="ft === 'priority'">{{ priorityOptions[item[ft] - 1] }}</span>
               <span v-else-if="ft === 'next_gate'">{{ dateFormat(item[ft]) }}</span>
               <span v-else-if="ft === 'value'">{{ item[ft] }}</span>
               <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
@@ -129,7 +129,7 @@
                   class="data-child mr-1"
                   :style="`width:${100 / c_fields.length}%`"
                 >
-                  <span v-if="ft === 'priority'">{{ item1[ft] }}</span>
+                  <span v-if="ft === 'priority'">{{ priorityOptions[item1[ft] - 1] }}</span>
                   <span v-else-if="ft === 'next_gate'">{{ dateFormat(item1[ft]) }}</span>
                   <span v-else-if="ft === 'value'">{{ item1[ft] }}</span>
                   <span v-else>{{ item1[ft] ? formatCurrency(item1[ft]) : '' }}</span>
@@ -266,12 +266,15 @@ export default {
     return {
       collapsedT: [],
       opened: 0,
+      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
-      c_fields: ['priority', 'value', 'budget', 'next_gate'],
+      // c_fields: ['priority', 'value', 'budget', 'next_gate'],
+      c_fields: ['priority', 'value', 'budget'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [],
       teamD: [],
+      teams: [],
       percentD: [
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
@@ -283,49 +286,59 @@ export default {
       // percentD: []
     }
   },
-  mounted() {
-    const temp = this.data.length > 0 ? this.data[0].children : []
-    const tempTeams = []
-    const tempTeamData1 = []
-    const tempTeamData = []
-    for (let i = 0; i < temp.length; i += 1) {
-      const item = temp[i]
-      const tempData = []
-      if (item.assignee !== undefined && item.assignee.length > 0) {
-        const tempAssignee = item.assignee
-        for (let j = 0; j < tempAssignee.length; j += 1) {
-          const assignee = tempAssignee[j]
-          if (!tempTeams.includes(assignee.title)) {
-            tempTeams.push(assignee.title)
-          }
-          tempData.push(assignee.data)
-        }
-      }
-      tempTeamData.push(tempData)
-      const tempData1 = []
-      if (item.children !== undefined && item.children.length > 0) {
-        for (let j = 0; j < item.children.length; j += 1) {
-          const tempChildren = item.children[j]
-          const tempChildrenData = []
-          if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
-            for (let k = 0; k < tempChildren.assignee.length; k += 1) {
-              const assignee = tempChildren.assignee[k]
-              if (!tempTeams.includes(assignee.title)) {
-                tempTeams.push(assignee.title)
-              }
-              tempChildrenData.push(assignee.data)
-            }
-          }
-          tempData1.push(tempChildrenData)
-        }
-      }
-      tempTeamData1.push(tempData1)
-    }
-    this.teams = tempTeams
-    this.teamD1 = tempTeamData
-    this.teamD = tempTeamData1
+  watch: {
+      data: {
+          immediate: true,
+          handler(newVal) {
+            this.initializeData(newVal) // ??
+          },
+      },
   },
   methods: {
+    initializeData(data) {
+      console.log("TDD:", data)
+      const temp = data.children
+      const tempTeams = []
+      const tempTeamData1 = []
+      const tempTeamData = []
+      for (let i = 0; i < temp.length; i += 1) {
+        const item = temp[i]
+        const tempData = []
+        if (item.assignee !== undefined && item.assignee.length > 0) {
+          const tempAssignee = item.assignee
+          for (let j = 0; j < tempAssignee.length; j += 1) {
+            const assignee = tempAssignee[j]
+            if (!tempTeams.includes(assignee.title)) {
+              tempTeams.push(assignee.title)
+            }
+            tempData.push(assignee.data)
+          }
+        }
+        tempTeamData.push(tempData)
+        const tempData1 = []
+        if (item.children !== undefined && item.children.length > 0) {
+          for (let j = 0; j < item.children.length; j += 1) {
+            const tempChildren = item.children[j]
+            const tempChildrenData = []
+            if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
+              for (let k = 0; k < tempChildren.assignee.length; k += 1) {
+                const assignee = tempChildren.assignee[k]
+                if (!tempTeams.includes(assignee.title)) {
+                  tempTeams.push(assignee.title)
+                }
+                tempChildrenData.push(assignee.data)
+              }
+            }
+            tempData1.push(tempChildrenData)
+          }
+        }
+        tempTeamData1.push(tempData1)
+      }
+      console.log("TempTeams:", tempTeams, "TTD:", tempTeamData, "TTD1:", tempTeamData1)
+      this.teams = tempTeams
+      this.teamD1 = tempTeamData
+      this.teamD = tempTeamData1
+    },
     onTeamCollapse(i) {
       const index = this.collapsedT.findIndex(x => x === i)
       if (index > -1) {
