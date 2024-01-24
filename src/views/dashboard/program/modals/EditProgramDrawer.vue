@@ -217,16 +217,6 @@
           />
         </div>
       </div>
-      <!-- <div class="select-group--sub">
-        <div class="select-box">
-          <label>Value</label>
-          <b-form-input
-            v-model="step2.value"
-            type="number"
-          />
-        </div>
-        <div class="select-box" />
-      </div> -->
     </div>
     <div class="select-group--sub">
       <div class="select-box">
