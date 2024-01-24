@@ -331,7 +331,7 @@ export default {
         this.$store.commit('globalState/SELECT_WIN_RATE', this.winrate)
       }
     }
-  },
+  }
 }
 </script>
 
