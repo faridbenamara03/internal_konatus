@@ -161,7 +161,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Demand</label>
+          <label>Budget Demand</label>
           <b-form-input
             v-model="step2.demand"
             type="number"
@@ -184,7 +184,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Engaged</label>
+          <label>Budget Engaged</label>
           <b-form-input
             v-model="step2.engaged"
             type="number"
@@ -192,7 +192,7 @@
           />
         </div>
         <div class="select-box">
-          <label>RealEstimated</label>
+          <label>Budget Real Estimated</label>
           <b-form-input
             v-model="step2.realestimated"
             type="number"
@@ -202,14 +202,14 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Authorized</label>
+          <label>Budget Authorized</label>
           <b-form-input
             v-model="step2.authorized"
             type="number"
           />
         </div>
         <div class="select-box">
-          <label>Spent</label>
+          <label>Budget Spent</label>
           <b-form-input
             v-model="step2.spent"
             type="number"
