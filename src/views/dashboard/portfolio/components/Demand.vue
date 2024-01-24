@@ -902,7 +902,6 @@ export default {
       return this.$store.state.globalState.selectedPhaseEndDate
     },
     c_fields() {
-      console.log("Fields:", this.fields)
       return this.fields.slice(1, this.fields.length - 1)
     },
     demandTableEditable() {

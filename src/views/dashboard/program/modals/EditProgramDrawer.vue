@@ -161,7 +161,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget Demand</label>
+          <label>Demand</label>
           <b-form-input
             v-model="step2.demand"
             type="number"
@@ -184,33 +184,36 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget Engaged</label>
+          <label>Engaged</label>
           <b-form-input
             v-model="step2.engaged"
             type="number"
+            :disabled="true"
           />
         </div>
         <div class="select-box">
-          <label>Budget Real Estimated</label>
+          <label>RealEstimated</label>
           <b-form-input
             v-model="step2.realestimated"
             type="number"
+            :disabled="true"
           />
         </div>
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget Authorized</label>
+          <label>Authorized</label>
           <b-form-input
             v-model="step2.authorized"
             type="number"
           />
         </div>
         <div class="select-box">
-          <label>Budget Spent</label>
+          <label>Spent</label>
           <b-form-input
             v-model="step2.spent"
             type="number"
+            :disabled="true"
           />
         </div>
       </div>
@@ -225,6 +228,25 @@
         <div class="select-box" />
       </div> -->
     </div>
+    <div class="select-group--sub">
+      <div class="select-box">
+        <label>Deadline</label>
+        <b-form-datepicker
+          id="program_deadline"
+          v-model="step2.deadline"
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+        />
+      </div>
+      <div class="select-box">
+        <label>Next_Gate</label>
+        <b-form-datepicker
+          id="program_nextgate"
+          v-model="step2.next_gate"
+          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          :disabled="true"
+        />
+      </div>
+    </div>    
     <div
       class="select-group"
       style="padding-top: 0px"

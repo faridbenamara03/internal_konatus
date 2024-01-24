@@ -303,6 +303,12 @@ export default {
       if (selectedPhase !== "Not Selected") {
         this.winrate = 100
         this.winrateSelectable = true
+        if (!this.selected.includes('phaseStartDate')) {
+          this.selected.push('phaseStartDate')
+        }
+        if (!this.selected.includes('phaseEndDate')) {
+            this.selected.push('phaseEndDate')
+        }
       } else {
         this.winrate = 0
         this.winrateSelectable = false
