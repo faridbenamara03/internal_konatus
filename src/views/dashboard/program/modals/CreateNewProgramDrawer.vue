@@ -24,12 +24,6 @@
               outlined
               multiple
             />
-            <!-- <InputSelect
-              placeholder="Select System"
-              :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
-              :value="step1.system === null ? null : step1.system.title"
-              @customChange="e => handleCustomChange(e, 'system')"
-            /> -->
           </div>
           <div class="w-50 pl-1">
             <label>SystemID</label>
@@ -578,7 +572,6 @@ export default {
           })
         }
         await this.$store.dispatch('globalState/load_org_data')
-        // this.$refs['my-modal'].hide()
       }
     },
     getAllPorts() {

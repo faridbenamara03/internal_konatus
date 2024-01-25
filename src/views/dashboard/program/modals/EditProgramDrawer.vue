@@ -174,13 +174,6 @@
             type="number"
           />
         </div>
-        <!-- <div class="select-box">
-          <label>Description</label>
-          <b-form-input
-            v-model="step2.description"
-            type="string"
-          />
-        </div> -->
       </div>
       <div class="select-group--sub">
         <div class="select-box">
@@ -236,7 +229,7 @@
           :disabled="true"
         />
       </div>
-    </div>    
+    </div>
     <div
       class="select-group"
       style="padding-top: 0px"
