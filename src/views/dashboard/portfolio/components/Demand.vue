@@ -645,12 +645,12 @@
                       >
                         <feather-icon icon="Edit2Icon" />
                       </b-button>
-                      <b-button
+                      <!-- <b-button
                         variant="flat-primary"
                         @click="toggleCreateNewProgramDrawer(item2, 'subproject')"
                       >
                         <feather-icon icon="PlusIcon" />
-                      </b-button>
+                      </b-button> -->
                     </div>
                   </div>
                 </div>

@@ -315,6 +315,7 @@
             id="date_next_gate-datepicker1"
             v-model="step4.date_next_gate"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            :disabled="true"
           />
         </div>
         <div class="select-box">
@@ -323,6 +324,7 @@
             id="date_next_gate-datepicker2"
             v-model="step4.date_ready_test"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            :disabled="true"
           />
         </div>
       </div>
@@ -333,6 +335,7 @@
             id="date_next_gate-datepicker3"
             v-model="step4.date_production"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            :disabled="true"
           />
         </div>
       </div>

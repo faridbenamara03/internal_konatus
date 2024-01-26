@@ -77,7 +77,7 @@
         <label>Portfolio</label>
         <v-select
           v-model="portfolio"
-          :options="priorityOptions"
+          :options="getAllPorts"
           placeholder="Select Portfolio"
           outlined
         />
@@ -234,6 +234,10 @@ export default {
       }
       this.inputedBudgets.push(item)
       this.budget = 0
+    },
+    getAllPorts() {
+      const pts = Array.from(this.$store.state.globalState.allPortData)
+      return pts
     },
     handleSave() {
       this.edited = false
