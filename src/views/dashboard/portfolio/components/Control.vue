@@ -296,7 +296,6 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("TDD:", data)
       const temp = data.children
       const tempTeams = []
       const tempTeamData1 = []
@@ -334,7 +333,6 @@ export default {
         }
         tempTeamData1.push(tempData1)
       }
-      console.log("TempTeams:", tempTeams, "TTD:", tempTeamData, "TTD1:", tempTeamData1)
       this.teams = tempTeams
       this.teamD1 = tempTeamData
       this.teamD = tempTeamData1

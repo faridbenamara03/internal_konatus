@@ -123,7 +123,7 @@
           <div class="w-50 pl-1">
             <label>SubProject</label>
             <b-form-input
-              v-model="step1.subProjectId"
+              v-model="step1.subprojectId"
               :disabled="true"
             />
           </div>
@@ -455,6 +455,7 @@ export default {
         portfolioId: 0,
         programId: 0,
         projectId: 0,
+        subprojectId: 0
       },
       step2: {
         priority: null,
@@ -529,7 +530,6 @@ export default {
       const portfolios = allPts.filter(port => port.id === initData.portfolioid)
       if (portfolios.length > 0) {
         [this.step1.portfolio] = portfolios
-        console.log("SPSP:", this.step1.portfolio)
       }
       if (initData.type === "program") {
         this.step1.programId = initData.id || 0
@@ -548,6 +548,19 @@ export default {
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
+      } else if (initData.type === "subproject") {
+        this.step1.programId = initData.progid
+        const programs = allPgs.filter(pg => pg.id === initData.progid)
+        if (programs.length > 0) {
+          this.step1.program = programs[0].title
+        }
+        this.step1.projectId = initData.projid
+        const projects = allPjs.filter(pj => pj.id === initData.projid)
+        if (projects.length > 0) {
+          this.step1.project = projects[0].title
+        }
+        this.step1.subprojectId = initData.id
+        this.step1.subproject = initData.title
       }
     },
     async handleSave() {

@@ -504,7 +504,6 @@ export default {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       if (initData === undefined) {
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
-        console.log("TYpe: ", this.$store.state.globalState.selectedNavObj.type)
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
       } else {
         this.step1.portfolioId = initData.portfolioid || 0
