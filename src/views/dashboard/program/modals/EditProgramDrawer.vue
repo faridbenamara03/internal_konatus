@@ -13,16 +13,10 @@
       class="select-group"
       style="padding-top: 0px"
     >
-      <div class="select-box">
+      <!-- <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
             <label>Nomenclature System</label>
-            <!-- <InputSelect
-              placeholder="Select System"
-              :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
-              :value="step1.system === null ? null : step1.system.title"
-              @customChange="e => handleCustomChange(e, 'system')"
-            /> -->
             <v-select
               v-model="step1.system"
               :options="['SAP', 'Jira', 'Konatus']"
@@ -39,7 +33,95 @@
             />
           </div>
         </div>
+      </div> -->
+      <div class="select-box">
+        <div class="d-flex">
+          <div class="w-50">
+            <label
+              v-if="!externalEditable"
+              style="font-size: 14px; color: #898989;text-transform:none"
+            >
+              External System: {{ externalSystem ? externalSystem[0] : "" }}
+            </label>
+            <div v-else>
+              <v-select
+                v-model="externalSystem"
+                :options="['SAP', 'Jira', 'Konatus']"
+                placeholder="Select External System"
+                outlined
+                multiple
+              />
+            </div>
+          </div>
+          <div class="w-50 d-flex">
+            <p
+              v-if="!externalEditable"
+              style="color: #bbbbbb;font-size: 16px;"
+            >
+              External Activity Id: {{ externalId }}
+            </p>
+            <div v-else>
+              <b-form-input
+                v-model="externalId"
+                placeholder="Input External Activity Id"
+              />
+            </div>
+            <div
+              style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+              @click="handleExternalEdit"
+            >
+              <feather-icon
+                :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
+                style="color: #7367f0"
+                size="20"
+              />
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- <div class="d-flex">
+        <div>
+          <div style="text-align: end;">
+            <label
+              v-if="!externalEditable"
+              style="font-size: 14px; color: #898989;text-transform:none"
+            >
+              External System: {{ externalSystem ? externalSystem[0] : "" }}
+            </label>
+            <div v-else>
+              <v-select
+                v-model="externalSystem"
+                :options="['SAP', 'Jira', 'Konatus']"
+                placeholder="Select External System"
+                outlined
+                multiple
+              />
+            </div>
+          </div>
+          <p
+            v-if="!externalEditable"
+            style="color: #bbbbbb;font-size: 16px;"
+          >
+            External Activity Id: {{ externalId }}
+          </p>
+          <div v-else>
+            <b-form-input
+              v-model="externalId"
+              placeholder="Input External Activity Id"
+            />
+          </div>
+        </div>
+        <div
+          style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+          @click="handleExternalEdit"
+        >
+          <feather-icon
+            :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
+            style="color: #7367f0"
+            size="20"
+          />
+        </div>
+      </div> -->
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
@@ -449,6 +531,9 @@ export default {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       title: '',
       curIndex: 1,
+      externalEditable: false,
+      externalSystem: ["Jira"],
+      externalId: "JR-12345",
       step1: {
         system: null,
         program: null,
@@ -565,6 +650,9 @@ export default {
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
       }
+    },
+    handleExternalEdit() {
+      this.externalEditable = !this.externalEditable
     },
     async handleSave() {
       if (this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
