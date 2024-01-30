@@ -300,7 +300,7 @@
       </div>
     </div>
     <div
-      v-if="otype !== 'program' || otype !== 'portfolio'"
+      v-if="otype !== 'program' && otype !== 'portfolio'"
       class="select-group"
       style="padding-top: 0px"
     >
