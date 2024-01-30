@@ -273,7 +273,7 @@
           inline
           @change="effortDetailShowToggle"
         >
-          Show details
+          Add Skillset (Optional)
         </b-form-checkbox>
       </div>
       <div class="form-group">
@@ -313,12 +313,13 @@
               <v-select
                 :options="['Design Workflow', 'Program Engineering', 'Project Management']"
                 :value="t.skill"
+                v-model="externalSystem"
                 placeholder="Select skillset"
                 outlined
                 @input="effortChange('skill', i, $event)"
               />
             </div>
-            <div class="col">
+            <!-- <div class="col">
               <label>Load</label>
               <b-form-input
                 :value="t.load"
@@ -338,7 +339,7 @@
                 :value="t.fte"
                 @input="effortChange('fte', i, $event)"
               />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

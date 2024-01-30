@@ -212,22 +212,24 @@
       </div>
     </div>
     <div class="select-group--sub">
-      <div class="select-box">
-        <label>Deadline</label>
-        <b-form-datepicker
-          id="program_deadline"
-          v-model="step2.deadline"
-          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-        />
-      </div>
-      <div class="select-box">
-        <label>Next_Gate</label>
-        <b-form-datepicker
-          id="program_nextgate"
-          v-model="step2.next_gate"
-          :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          :disabled="true"
-        />
+      <div class="d-flex">
+        <div class="select-box w-50">
+          <label>Deadline</label>
+          <b-form-datepicker
+            id="program_deadline"
+            v-model="step2.deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          />
+        </div>
+        <div class="select-box w-50">
+          <label>Next_Gate</label>
+          <b-form-datepicker
+            id="program_nextgate"
+            v-model="step2.next_gate"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+            :disabled="true"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -298,6 +300,7 @@
       </div>
     </div>
     <div
+      v-if="otype !== 'program' || otype !== 'portfolio'"
       class="select-group"
       style="padding-top: 0px"
     >

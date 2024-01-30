@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve --port 5000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dashboard": "parse-dashboard --config dashboard-config-li.json"
+    "dashboard": "parse-dashboard --config dashboard-config-li.json",
+    "ionic:build": "npm run build",
+    "ionic:serve": "npm run serve"
   },
   "dependencies": {
     "@casl/ability": "4.1.6",

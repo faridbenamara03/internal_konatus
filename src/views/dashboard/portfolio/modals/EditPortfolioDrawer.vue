@@ -125,14 +125,6 @@
         <label class="notice">Period duration: 12 months</label>
       </div>
       <div class="select-box">
-        <b-button
-          variant="primary"
-          @click="handleAdd"
-        >
-          Add
-        </b-button>
-      </div>
-      <div class="select-box">
         <label>Budget</label>
         <b-input-group>
           <v-select
@@ -146,6 +138,14 @@
             placeholder="300"
           />
         </b-input-group>
+      </div>
+      <div class="select-box">
+        <b-button
+          variant="primary"
+          @click="handleAdd"
+        >
+          Add
+        </b-button>
       </div>
       <div class="select-box">
         <span v-if="inputedBudgets.length > 0" >

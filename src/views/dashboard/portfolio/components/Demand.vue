@@ -56,6 +56,7 @@
                 <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
                 <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
                 <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
+                <span v-else-if="ft === 'architect'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -159,6 +160,13 @@
                         {{ getSelectedWinRate }}
                       </div>
                       <div
+                        v-else-if="ft === 'architect'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ item1[ft] }}
+                      </div>
+                      <div
                         v-else
                         class="mr-1"
                         style="margin-top:6px;"
@@ -177,7 +185,7 @@
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProgramDrawer(item1, 'program')"
+                    @click="toggleCreateNewProgramDrawer(item1, 'project')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
@@ -287,7 +295,7 @@
                       </b-button>
                       <b-button
                         variant="flat-primary"
-                        @click="toggleCreateNewProgramDrawer(item2, 'project')"
+                        @click="toggleCreateNewProgramDrawer(item2, 'subproject')"
                       >
                         <feather-icon icon="PlusIcon" />
                       </b-button>
@@ -437,6 +445,7 @@
                 <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
                 <span v-else-if="ft === 'phaseStartDate'">{{ getPhaseStartDate }}</span>
                 <span v-else-if="ft === 'phaseEndDate'">{{ getPhaseEndDate }}</span>
+                <span v-else-if="ft === 'architect'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -449,7 +458,7 @@
               </b-button>
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewProgramDrawer(item, 'program')"
+                @click="toggleCreateNewProgramDrawer(item, 'project')"
               >
                 <feather-icon icon="PlusIcon" />
               </b-button>
@@ -560,7 +569,7 @@
                   </b-button>
                   <b-button
                     variant="flat-primary"
-                    @click="toggleCreateNewProgramDrawer(item1, 'project')"
+                    @click="toggleCreateNewProgramDrawer(item1, 'subproject')"
                   >
                     <feather-icon icon="PlusIcon" />
                   </b-button>
@@ -641,6 +650,13 @@
                             style="margin-top:6px;"
                           >
                             {{ getSelectedWinRate }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'architect'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ item1[ft] }}
                           </div>
                           <div
                             v-else

@@ -7,7 +7,7 @@
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      {{ otype === 'portfolio' ? 'Add a program' : 'Add a project or sub-project'}}
+      {{ otype === 'portfolio' || 'program' ? 'Add a program' : otype ==='project' ? 'Add a project' : otype === 'subproject' ? 'Add a sub-project' : ''}}
     </p>
     <div
       class="select-group"
@@ -505,6 +505,7 @@ export default {
       if (initData === undefined) {
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
+        if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
       } else {
         this.step1.portfolioId = initData.portfolioid || 0
         this.step2.title = initData.title
