@@ -432,6 +432,7 @@ export default {
       return dt
     },
     c_SelectedActivity() {
+      console.log("selectedActivityData:", this.selectedActivityData)
       return this.selectedActivityData
     },
     activityList() {

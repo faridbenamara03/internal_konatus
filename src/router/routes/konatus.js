@@ -65,12 +65,12 @@ export default [
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
-    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-table',
+    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-team',
     name: 'program-demand-table-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
-    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-chart',
+    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-phase',
     name: 'program-demand-chart-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },

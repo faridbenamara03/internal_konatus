@@ -152,6 +152,7 @@ export default {
     },
     handleActivityDetails(phase, team) {
       this.selectedActivity = { team, phase }
+      console.log('sAct:', this.selectedActivity)
       this.$store.commit('globalState/OPEN_ACTIVITY_DETAIL_MODAL')
     },
     hideModal() {
