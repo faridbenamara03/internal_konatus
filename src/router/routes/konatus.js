@@ -62,32 +62,32 @@ export default [
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/',
     name: 'program-view',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-table',
     name: 'program-demand-table-view',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-chart',
     name: 'program-demand-chart-view',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/reporting-cost',
     name: 'program-demand-reporting-cost',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/reporting-plan',
     name: 'program-demand-reporting-plan',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
     path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/control',
     name: 'program-demand-control',
-    component: () => import('@/views/dashboard/program/Program.vue'),
+    component: () => import('@/views/dashboard/project/Project.vue'),
   },
 
   {

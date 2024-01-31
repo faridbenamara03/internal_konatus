@@ -655,7 +655,7 @@ export default {
       this.externalEditable = !this.externalEditable
     },
     async handleSave() {
-      if (this.step2.title === null || this.step2.deadline === null || this.step2.next_gate === null || this.step2.priority === null) {
+      if (this.step2.title === null) {
         this.$toast.error('Please input all correctly')
       } else {
         if (this.otype === 'program') {
