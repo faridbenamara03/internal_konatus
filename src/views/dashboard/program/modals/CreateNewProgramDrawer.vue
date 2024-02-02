@@ -1,14 +1,17 @@
 <template>
   <div style="width:600px">
-    <h3 class="modal-title mb-1">
-      Create New
+    <h3
+      class="modal-title mb-1 text-uppercase"
+      style="border-bottom: 2px solid #7367f0"
+    >
+      {{ otype ==='project' ? 'Add a project or sub project' : otype === 'subproject' ? 'Add a sub-project' : 'Add a program'}}
     </h3>
-    <p
+    <!-- <p
       class="text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-      {{ otype === 'portfolio' || 'program' ? 'Add a program' : otype ==='project' ? 'Add a project' : otype === 'subproject' ? 'Add a sub-project' : ''}}
-    </p>
+      {{ otype === 'portfolio' || 'program' ? 'Add a program' : otype ==='project' ? 'Add a project or sub project' : otype === 'subproject' ? 'Add a sub-project' : ''}}
+    </p> -->
     <div
       class="select-group"
       style="padding-top: 0px"
@@ -19,7 +22,7 @@
             <label>Nomenclature System</label>
             <v-select
               v-model="step1.system"
-              :options="['SAP', 'Jira', 'Konatus']"
+              :options="['SAP', 'Jira', 'P6']"
               placeholder="Select System"
               outlined
               multiple
@@ -95,12 +98,21 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Sub Project(Optional)</label>
-            <InputSelect
-              placeholder="Select Sub Project"
-              :options="getAllProjects()"
-              :value="step1.subproject === null ? null : step1.subproject.title"
-              @customChange="e => handleCustomChange(e, 'subproject')"
-            />
+            <div v-if="this.otype === 'project'">
+              <b-form-input
+                v-model="step1.subproject.title"
+                placeholder="Enter SubProject name"
+              />
+            </div>
+            <div v-else-if="this.otype !== 'project'">
+              <InputSelect
+                placeholder="Enter SubProject name"
+                :options="getAllProjects()"
+                :value="step1.subproject === null ? null : step1.subproject.title"
+                :disabled="true"
+                @customChange="e => handleCustomChange(e, 'subproject')"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>SubProject</label>
@@ -142,22 +154,6 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget Demand</label>
-          <b-form-input
-            v-model="step2.demand"
-            type="number"
-          />
-        </div>
-        <div class="select-box">
-          <label>Quote</label>
-          <b-form-input
-            v-model="step2.quote"
-            type="number"
-          />
-        </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
           <label>Budget Authorised</label>
           <b-form-input
             v-model="step2.authorised"
@@ -189,10 +185,10 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box">
-          <label>Budget</label>
+        <div class="select-box w-50">
+          <label>Budget Demand</label>
           <b-form-input
-            v-model="step2.budget"
+            v-model="step2.demand"
             type="number"
           />
         </div>
@@ -214,11 +210,11 @@
           />
         </div>
         <div class="select-box">
-          <label>Next_Gate</label>
-          <b-form-datepicker
-            id="program_nextgate"
-            v-model="step2.next_gate"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          <label>Next Phase</label>
+          <b-form-input
+            id="program_nextphase"
+            v-model="step2.next_phase"
+            :disabled="true"
           />
         </div>
       </div>
@@ -245,10 +241,9 @@
         </div>
         <div class="select-box">
           <label>Nature of deadline</label>
-          <b-form-datepicker
-            id="production-datepicker1"
+          <b-form-input
+            id="nature_deadline"
             v-model="step3.n_deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
       </div>
@@ -393,7 +388,35 @@
             outlined
           />
         </div>
-        <div class="select-box m-0" />
+        <div class="select-box mb-0">
+          <label>Head of Architect</label>
+          <v-select
+            v-model="step5.head_architect"
+            :options="priorityOptions"
+            placeholder="Select Head of Architect"
+            outlined
+          />
+        </div>
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box mb-0">
+          <label>Sponsor</label>
+          <v-select
+            v-model="step5.sponsor"
+            :options="priorityOptions"
+            placeholder="Select Sponsor"
+            outlined
+          />
+        </div>
+        <div class="select-box mb-0">
+          <label>Product Line</label>
+          <v-select
+            v-model="step5.product_line"
+            :options="priorityOptions"
+            placeholder="Select Product Line"
+            outlined
+          />
+        </div>
       </div>
     </div>
     <div>
@@ -453,9 +476,9 @@ export default {
         priority: null,
         value: 0,
         budget: 0,
-        quote: 0,
+        // quote: 0,
         deadline: null,
-        next_gate: null,
+        next_phase: null,
         realestimated: 0,
         spent: 0,
         demand: 0,
@@ -483,6 +506,9 @@ export default {
         architect: null,
         head_program_direction: null,
         program_director: null,
+        product_line: null,
+        sponsor: null,
+        head_architect: null
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -507,17 +533,17 @@ export default {
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
         if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
       } else {
+        this.otype = this.$store.state.globalState.selectedProgramType
         this.step1.portfolioId = initData.portfolioid || 0
         this.step2.title = initData.title
-        this.step2.budget = initData.budget
         this.step2.priority = this.priorityOptions[initData.priority - 1]
         this.step2.deadline = initData.deadline
-        this.step2.next_gate = initData.next_gate
+        this.step2.next_phase = initData.next_gate
         this.step2.spent = initData.spent
         this.step2.value = initData.value
         this.step2.engaged = initData.engaged
-        this.step2.demand = initData.demand
-        this.step2.quote = initData.quote
+        this.step2.demand = initData.budget
+        // this.step2.quote = initData.quote
         this.step2.authorised = initData.authorised
         this.step2.realestimated = initData.realestimated
         const allPts = this.getAllPorts()
@@ -556,7 +582,7 @@ export default {
         step5: this.step5,
         step6: this.step6
       }
-      if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null || this.step2.next_gate === null) {
+      if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
         this.$toast.error('Please input all correctly.')
       } else {
         if (this.otype === 'program') {

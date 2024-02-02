@@ -1,14 +1,11 @@
 <template>
   <div style="width:600px">
-    <h3 class="modal-title mb-1">
-      Edit program or project
-    </h3>
-    <p
-      class="text-uppercase"
+    <h3
+      class="modal-title mb-1 text-uppercase"
       style="border-bottom: 2px solid #7367f0"
     >
-    {{ otype === 'program' ? 'Edit a program' : 'Edit a project or sub-project'}}
-    </p>
+      {{ otype === 'program' ? 'Edit a program' : otype === 'project' ? 'Edit a project' : otype === 'subproject' ? 'Edit a sub-project' : '' }}
+    </h3>
     <div
       class="select-group"
       style="padding-top: 0px"
@@ -304,11 +301,10 @@
           />
         </div>
         <div class="select-box w-50">
-          <label>Next_Gate</label>
-          <b-form-datepicker
-            id="program_nextgate"
-            v-model="step2.next_gate"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          <label>Next_Phase</label>
+          <b-form-input
+            id="program_nextphase"
+            v-model="step2.next_phase"
             :disabled="true"
           />
         </div>
@@ -441,7 +437,7 @@
           <label>Head of Product Portfolio</label>
           <v-select
             v-model="step5.head_product_portfolio"
-            :options="['SAP', 'Jira', 'Konatus']"
+            :options="['SAP', 'Jira', 'P6']"
             placeholder="Select System"
             outlined
           />
@@ -462,7 +458,7 @@
           <v-select
             v-model="step5.architect"
             :options="['SAP', 'Jira', 'Konatus']"
-            placeholder="Select System"
+            placeholder="Select Architect"
             outlined
           />
         </div>
@@ -471,7 +467,7 @@
           <v-select
             v-model="step5.head_program_direction"
             :options="priorityOptions"
-            placeholder="Select Portfolio"
+            placeholder="Select Head of Program Direction"
             outlined
           />
         </div>
@@ -482,11 +478,39 @@
           <v-select
             v-model="step5.program_director"
             :options="priorityOptions"
-            placeholder="Select Portfolio"
+            placeholder="Select Program Director"
             outlined
           />
         </div>
-        <div class="select-box m-0" />
+        <div class="select-box m-0" >
+          <label>Head of Architect</label>
+          <v-select
+            v-model="step5.head_architect"
+            :options="priorityOptions"
+            placeholder="Select Head of Architect"
+            outlined
+          />
+        </div>
+      </div>
+      <div class="select-group--sub">
+        <div class="select-box mb-0">
+          <label>Sponsor</label>
+          <v-select
+            v-model="step5.sponsor"
+            :options="priorityOptions"
+            placeholder="Select Sponsor"
+            outlined
+          />
+        </div>
+        <div class="select-box m-0" >
+          <label>Product Line</label>
+          <v-select
+            v-model="step5.product_line"
+            :options="priorityOptions"
+            placeholder="Select Product Line"
+            outlined
+          />
+        </div>
       </div>
     </div>
     <div>
@@ -551,7 +575,7 @@ export default {
         budget: 0,
         description: null,
         deadline: null,
-        next_gate: null,
+        next_phase: null,
         realestimated: 0,
         spent: 0,
         demand: 0,
@@ -580,6 +604,10 @@ export default {
         architect: null,
         head_program_direction: null,
         program_director: null,
+        sponsor: null,
+        head_architect: null,
+        product_line: null
+
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -599,17 +627,16 @@ export default {
   methods: {
     initializeData(data) {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
+      this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
       this.step2.title = initData.title
-      this.step2.budget = initData.budget
       this.step2.priority = this.priorityOptions[initData.priority - 1]
       this.step2.deadline = initData.deadline
-      this.step2.next_gate = initData.next_gate
+      this.step2.next_phase = initData.next_gate
       this.step2.spent = initData.spent
       this.step2.value = initData.value
       this.step2.engaged = initData.engaged
-      this.step2.demand = initData.demand
-      this.step2.quote = initData.quote
+      this.step2.demand = initData.budget
       this.step2.authorized = initData.authorized
       this.step2.realestimated = initData.realestimated
       const allPts = this.getAllPorts()

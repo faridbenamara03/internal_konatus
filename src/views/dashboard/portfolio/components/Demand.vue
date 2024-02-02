@@ -66,13 +66,13 @@
                 @click="toggleEditPortfolioDrawerOpen(item)"
               >
                 <feather-icon icon="Edit2Icon" />
-              </b-button>
+              </b-button> -->
               <b-button
                 variant="flat-primary"
-                @click="toggleCreateNewPortfolioDrawer"
+                @click="toggleCreateNewProgramDrawer(item, 'program')"
               >
                 <feather-icon icon="PlusIcon" />
-              </b-button> -->
+              </b-button>
             </div>
           </div>
           <div v-if="opened === index">
@@ -107,7 +107,7 @@
                   >
                     <div v-if="demandTableEditable">
                       <div
-                        v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                        v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -223,7 +223,7 @@
                       >
                         <div v-if="demandTableEditable">
                           <div
-                            v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                            v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -325,7 +325,7 @@
                           >
                             <div v-if="demandTableEditable">
                               <div
-                                v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                                v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
                                 class="mr-1"
                                 style="margin-top:6px;"
                               >
@@ -496,7 +496,7 @@
                   >
                     <div v-if="demandTableEditable">
                       <div
-                        v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                        v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -599,7 +599,7 @@
                       >
                         <div v-if="demandTableEditable">
                           <div
-                            v-if="ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
+                            v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -938,11 +938,9 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     c_data() {
-      if (this.data.children) {
+      if (this.data.type === 'portfolio' && this.data.children) {
         const ndt = this.data.children.map(t => {
-          let budget = 0
           let engaged = 0
-          let quote = 0
           let demand = 0
           let realEstimated = 0
           let authorized = 0
@@ -951,9 +949,7 @@ export default {
             t.children.map(t1 => {
               if (t1.children) {
                 t1.children.map(t2 => {
-                  budget += parseInt(t2.budget ? t2.budget : 0, 10)
                   engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
-                  quote += parseInt(t2.quote ? t2.quote : 0, 10)
                   demand += parseInt(t2.demand ? t2.demand : 0, 10)
                   realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
                   authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
@@ -961,17 +957,13 @@ export default {
                   return null
                 })
               } else {
-                budget += t1.budget
                 engaged += t1.engaged
-                quote += t1.quote
                 demand += t1.demand
                 realEstimated += t1.realEstimated
                 authorized += t1.authorized
                 spent += t1.spent
               }
-              budget += parseInt(t1.budget ? t1.budget : 0, 10)
               engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-              quote += parseInt(t1.quote ? t1.quote : 0, 10)
               demand += parseInt(t1.demand ? t1.demand : 0, 10)
               realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
               authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
@@ -979,18 +971,14 @@ export default {
               return null
             })
           } else {
-            budget = t.budget
             engaged = t.engaged
-            quote = t.quote
             demand = t.demand
             realEstimated = t.realEstimated
             authorized = t.authorized
             spent = t.spent
           }
           const nd = { ...t }
-          nd.budget = budget
           nd.engaged = engaged
-          nd.quote = quote
           nd.demand = demand
           nd.realEstimated = realEstimated
           nd.authorized = authorized
@@ -999,12 +987,69 @@ export default {
         })
         return ndt
       }
-      return []
+      const ndt = this.data.children.map(t => {
+        let engaged = 0
+        let demand = 0
+        let realEstimated = 0
+        let authorized = 0
+        let spent = 0
+        if (t.children) {
+          t.children.map(t1 => {
+            if (t1.children) {
+              t1.children.map(t2 => {
+                if (t2.children) {
+                  t2.children.map(t3 => {
+                    engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    realEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    return null
+                  })
+                  return null
+                }
+                engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                return null
+              })
+            } else {
+              engaged += t1.engaged
+              demand += t1.demand
+              realEstimated += t1.realEstimated
+              authorized += t1.authorized
+              spent += t1.spent
+            }
+            engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+            demand += parseInt(t1.demand ? t1.demand : 0, 10)
+            realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+            authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
+            spent += parseInt(t1.spent ? t1.spent : 0, 10)
+            return null
+          })
+        } else {
+          engaged = t.engaged
+          demand = t.demand
+          realEstimated = t.realEstimated
+          authorized = t.authorized
+          spent = t.spent
+        }
+        const nd = { ...t }
+        nd.engaged = engaged
+        nd.demand = demand
+        nd.realEstimated = realEstimated
+        nd.authorized = authorized
+        nd.spent = spent
+        return nd
+      })
+      return ndt
     },
     c_totalBudget() {
       let bd = 0
       this.c_data.forEach(t => {
-        bd += t.budget ? parseInt(t.budget, 10) : 0
+        bd += t.demand ? parseInt(t.demand, 10) : 0
       })
       return bd
     },
@@ -1070,7 +1115,7 @@ export default {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER', payload)
     },
     toggleDrawerOpen() {
-      this.budgetDrawerOpen = !this.budgetDrawerOpen
+      this.demandDrawerOpen = !this.demandDrawerOpen
     },
     toggleEditPortfolioDrawerOpen(item) {
       this.selectedPortfolio = item

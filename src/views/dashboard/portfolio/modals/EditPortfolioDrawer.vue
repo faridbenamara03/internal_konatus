@@ -25,7 +25,7 @@
           @input="onEdit"
         />
       </div>
-      <div class="d-flex justify-content-between select-box">
+      <!-- <div class="d-flex justify-content-between select-box">
         <div style="width:48%">
           <div class="select-group--sub mb-0">
             <div class="select-box">
@@ -60,7 +60,7 @@
           type="number"
           @input="onEdit"
         />
-      </div>
+      </div> -->
     </div>
     <div
       class="select-group"
@@ -127,25 +127,23 @@
       <div class="select-box">
         <label>Budget</label>
         <b-input-group>
-          <v-select
+          <!-- <v-select
             v-model="currency"
             :options="['EUR', 'USD']"
             placeholder="unit"
             outlined
-          />
+          /> -->
           <b-form-input
             v-model="budget"
             placeholder="300"
           />
+          <b-button
+            variant="primary"
+            @click="handleAdd"
+          >
+            Add
+          </b-button>
         </b-input-group>
-      </div>
-      <div class="select-box">
-        <b-button
-          variant="primary"
-          @click="handleAdd"
-        >
-          Add
-        </b-button>
       </div>
       <div class="select-box">
         <span v-if="inputedBudgets.length > 0" >
@@ -175,7 +173,7 @@
 
 <script>
 import {
-  BButton, BFormInput, BFormDatepicker, BInputGroup,
+  BButton, BFormInput, BInputGroup
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -183,7 +181,7 @@ export default {
   components: {
     BButton,
     BFormInput,
-    BFormDatepicker,
+    // BFormDatepicker,
     BInputGroup,
     vSelect,
   },

@@ -537,7 +537,7 @@ export default {
   },
   data() {
     return {
-      activeColumns: ['priority', 'budget', 'deadline'],
+      activeColumns: ['priority', 'demand', 'deadline'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
       tabIndex: 0,

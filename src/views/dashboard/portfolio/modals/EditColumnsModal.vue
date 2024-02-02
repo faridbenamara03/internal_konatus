@@ -66,7 +66,7 @@
       class="d-flex"
       style="border-bottom: 1px solid grey;"
     >
-      <div class="col-6 optionBlock">
+      <div class="col-4 optionBlock">
         <h4>Key elements</h4>
         <b-form-checkbox-group
           id="checkbox-group-3"
@@ -84,7 +84,18 @@
           outlined
         /> -->
       </div>
-      <div class="col-6 optionBlock">
+      <div class="col-4 optionBlock">
+        <h4>Phases</h4>
+        <b-form-checkbox-group
+          id="checkbox-group-8"
+          v-model="selected"
+          :options="options6"
+          name="columns"
+          class="checkbox-group"
+          stacked
+        />
+      </div>
+      <div class="col-4 optionBlock">
         <h4>Planning</h4>
         <b-form-checkbox-group
           id="checkbox-group-4"
@@ -202,6 +213,7 @@ import {
   //  BFormCheckbox
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
+import moment from 'moment'
 
 export default {
   components: {
@@ -231,12 +243,11 @@ export default {
       isSelectedExId: false,
       isSelectedExSystem: false,
       mainOptions: [
-        // { text: 'Budget', value: 'budget' },
-        { text: 'Budget Demand', value: 'budget_demand' },
-        { text: 'Budget Engaged', value: 'budget_engaged' },
-        { text: 'Budget Real Estimated', value: 'budget_realEstimated' },
-        { text: 'Budget Authorized', value: 'budget_authorized' },
-        { text: 'Budget Spent', value: 'budget_spent' },
+        { text: 'Budget Demand', value: 'demand' },
+        { text: 'Budget Engaged', value: 'engaged' },
+        { text: 'Budget Real Estimated', value: 'realEstimated' },
+        { text: 'Budget Authorized', value: 'authorized' },
+        { text: 'Budget Spent', value: 'spent' },
         { text: 'Value', value: 'value' },
       ],
       options1: [
@@ -280,6 +291,13 @@ export default {
         { text: 'Head of program direction', value: 'directionHead' },
         { text: 'Program director', value: 'programDirector' },
         { text: 'Project manager', value: 'projectManager' },
+        { text: 'Head of architect', value: 'architectHead' },
+        { text: 'Head of architect', value: 'architectHead' },
+        { text: 'Sponsor', value: 'sponsor' },
+        { text: 'Product line', value: 'productLine' },
+      ],
+      options6: [
+        { text: 'Current Phase', value: 'currentPhase' },
       ]
     }
   },
@@ -296,10 +314,11 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("INITData:", data)
       const { allPhaseData } = this.$store.state.globalState
+      console.log(data)
       const phases = allPhaseData.map(item => {
-        const temp = `${item.id} ${item.title}`
+        const tmpDate = moment(new Date(item.start_date)).format('MM/DD/YYYY')
+        const temp = `Phase ${item.id}: ${tmpDate})`
         return temp
       })
       this.option_phases.push(...phases)
