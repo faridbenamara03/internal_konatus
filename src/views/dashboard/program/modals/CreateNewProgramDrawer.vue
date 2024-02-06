@@ -100,7 +100,7 @@
             <label>Sub Project(Optional)</label>
             <div v-if="this.otype === 'project'">
               <b-form-input
-                v-model="step1.subproject.title"
+                v-model="this.subProjectTitle"
                 placeholder="Enter SubProject name"
               />
             </div>
@@ -343,7 +343,7 @@
           <label>Head of Product Portfolio</label>
           <v-select
             v-model="step5.head_product_portfolio"
-            :options="['SAP', 'Jira', 'Konatus']"
+            :options="['SAP', 'Jira', 'P6']"
             placeholder="Select System"
             outlined
           />
@@ -363,7 +363,7 @@
           <label>Architect</label>
           <v-select
             v-model="step5.architect"
-            :options="['SAP', 'Jira', 'Konatus']"
+            :options="['SAP', 'Jira', 'P6']"
             placeholder="Select System"
             outlined
           />
@@ -460,6 +460,7 @@ export default {
     return {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       curIndex: 1,
+      subProjectTitle: null,
       step1: {
         system: null,
         portfolio: null,
@@ -580,7 +581,8 @@ export default {
         step3: this.step3,
         step4: this.step4,
         step5: this.step5,
-        step6: this.step6
+        step6: this.step6,
+        subProjectTitle: this.subProjectTitle,
       }
       if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
         this.$toast.error('Please input all correctly.')

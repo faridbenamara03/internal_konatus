@@ -19,7 +19,7 @@
             <label>Nomenclature System</label>
             <InputSelect
               placeholder="Select System"
-              :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'Konatus', id: '3'}]"
+              :options="[{ title: 'SAP', id: '1'}, { title: 'Jira', id: '2'}, { title: 'P6', id: '3'}]"
               :value="step1.system === null ? null : step1.system.title"
               @customChange="e => handleCustomChange(e, 'system')"
             />

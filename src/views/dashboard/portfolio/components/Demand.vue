@@ -993,57 +993,94 @@ export default {
         let realEstimated = 0
         let authorized = 0
         let spent = 0
-        if (t.children) {
+        if (t.children && t.children.length > 0) {
+          const updatedT1s = []
           t.children.map(t1 => {
-            if (t1.children) {
+            const updatedT1 = { ...t1 }
+            let t1Engaged = 0
+            let t1Demand = 0
+            let t1RealEstimated = 0
+            let t1Authorized = 0
+            let t1Spent = 0
+
+            if (t1.children && t1.children.length > 0) {
+              const updatedT2s = []
               t1.children.map(t2 => {
-                if (t2.children) {
+                const updatedT2 = { ...t2 }
+                if (t2.children && t2.children.length > 0) {
+                  let t2Engaged = 0
+                  let t2Demand = 0
+                  let t2RealEstimated = 0
+                  let t2Authorized = 0
+                  let t2Spent = 0
                   t2.children.map(t3 => {
                     engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     realEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
                     authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
                     spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t2Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    t2Demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    t2RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    t2Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    t2Spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t1Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    t1Demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    t1RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    t1Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    t1Spent += parseInt(t3.spent ? t3.spent : 0, 10)
                     return null
                   })
-                  return null
+                  updatedT2.engaged = t2Engaged
+                  updatedT2.demand = t2Demand
+                  updatedT2.realEstimated = t2RealEstimated
+                  updatedT2.authorized = t2Authorized
+                  updatedT2.spent = t2Spent
+                } else {
+                  engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                  demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                  realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                  authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                  spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                  t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                  t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                  t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                  t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                  t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
                 }
-                engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
-                demand += parseInt(t2.demand ? t2.demand : 0, 10)
-                realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
-                authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
-                spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                console.log("updatedT2:", updatedT2)
+                updatedT2s.push(updatedT2)
                 return null
               })
+              updatedT1.engaged = t1Engaged
+              updatedT1.demand = t1Demand
+              updatedT1.realEstimated = t1RealEstimated
+              updatedT1.authorized = t1Authorized
+              updatedT1.spent = t1Spent
+              updatedT1.children = updatedT2s
             } else {
-              engaged += t1.engaged
-              demand += t1.demand
-              realEstimated += t1.realEstimated
-              authorized += t1.authorized
-              spent += t1.spent
+              engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+              demand += parseInt(t1.demand ? t1.demand : 0, 10)
+              realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+              authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
+              spent += parseInt(t1.spent ? t1.spent : 0, 10)
             }
-            engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-            demand += parseInt(t1.demand ? t1.demand : 0, 10)
-            realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-            authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
-            spent += parseInt(t1.spent ? t1.spent : 0, 10)
+            console.log('updatedT1:', updatedT1)
+            updatedT1s.push(updatedT1)
             return null
           })
-        } else {
-          engaged = t.engaged
-          demand = t.demand
-          realEstimated = t.realEstimated
-          authorized = t.authorized
-          spent = t.spent
+          const nd = { ...t }
+          nd.engaged = engaged
+          nd.demand = demand
+          nd.realEstimated = realEstimated
+          nd.authorized = authorized
+          nd.spent = spent
+          nd.children = updatedT1s
+          return nd
         }
-        const nd = { ...t }
-        nd.engaged = engaged
-        nd.demand = demand
-        nd.realEstimated = realEstimated
-        nd.authorized = authorized
-        nd.spent = spent
-        return nd
+        return t
       })
+      console.log("NDT:", ndt)
       return ndt
     },
     c_totalBudget() {
