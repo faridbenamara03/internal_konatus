@@ -292,7 +292,6 @@ export default {
         { text: 'Program director', value: 'programDirector' },
         { text: 'Project manager', value: 'projectManager' },
         { text: 'Head of architect', value: 'architectHead' },
-        { text: 'Head of architect', value: 'architectHead' },
         { text: 'Sponsor', value: 'sponsor' },
         { text: 'Product line', value: 'productLine' },
       ],
