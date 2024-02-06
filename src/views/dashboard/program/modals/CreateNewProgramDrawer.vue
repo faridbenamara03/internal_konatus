@@ -378,7 +378,7 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
@@ -387,7 +387,7 @@
             outlined
           />
         </div>
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Head of Architect</label>
           <v-select
             v-model="step5.head_architect"
@@ -398,7 +398,7 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Sponsor</label>
           <v-select
             v-model="step5.sponsor"
@@ -407,7 +407,7 @@
             outlined
           />
         </div>
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Product Line</label>
           <v-select
             v-model="step5.product_line"

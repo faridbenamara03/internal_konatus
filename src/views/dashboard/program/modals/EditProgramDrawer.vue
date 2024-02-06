@@ -300,7 +300,7 @@
           />
         </div>
         <div class="select-box w-50">
-          <label>Next_Phase</label>
+          <label>Next Phase</label>
           <b-form-input
             id="program_nextphase"
             v-model="step2.next_phase"
@@ -311,7 +311,6 @@
     </div>
     <div
       class="select-group"
-      style="padding-top: 0px"
     >
       <div class="notice-box">
         <feather-icon
@@ -472,7 +471,7 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
@@ -481,7 +480,7 @@
             outlined
           />
         </div>
-        <div class="select-box m-0" >
+        <div class="select-box" >
           <label>Head of Architect</label>
           <v-select
             v-model="step5.head_architect"
@@ -492,7 +491,7 @@
         </div>
       </div>
       <div class="select-group--sub">
-        <div class="select-box mb-0">
+        <div class="select-box">
           <label>Sponsor</label>
           <v-select
             v-model="step5.sponsor"
@@ -501,7 +500,7 @@
             outlined
           />
         </div>
-        <div class="select-box m-0" >
+        <div class="select-box" >
           <label>Product Line</label>
           <v-select
             v-model="step5.product_line"
