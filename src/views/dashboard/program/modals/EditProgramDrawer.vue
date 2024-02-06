@@ -43,7 +43,7 @@
             <div v-else>
               <v-select
                 v-model="externalSystem"
-                :options="['SAP', 'Jira', 'Konatus']"
+                :options="['SAP', 'Jira', 'P6']"
                 placeholder="Select External System"
                 outlined
                 multiple
