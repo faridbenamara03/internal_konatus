@@ -25,7 +25,6 @@
               :options="['SAP', 'Jira', 'P6']"
               placeholder="Select System"
               outlined
-              multiple
             />
           </div>
           <div class="w-50 pl-1">

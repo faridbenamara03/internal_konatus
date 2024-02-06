@@ -34,19 +34,18 @@
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
-            <label
+            <div class="d-flex"
               v-if="!externalEditable"
               style="font-size: 14px; color: #898989;text-transform:none"
             >
-              External System: {{ externalSystem ? externalSystem[0] : "" }}
-            </label>
+              External System: {{ exSystemString }}
+            </div>
             <div v-else>
               <v-select
                 v-model="externalSystem"
                 :options="['SAP', 'Jira', 'P6']"
                 placeholder="Select External System"
                 outlined
-                multiple
               />
             </div>
           </div>
@@ -556,8 +555,10 @@ export default {
       title: '',
       curIndex: 1,
       externalEditable: false,
-      externalSystem: ["Jira"],
+      externalSystems: ["Jira"],
+      externalSystem: "Jira",
       externalId: "JR-12345",
+      exSystemString: '',
       step1: {
         system: null,
         program: null,
@@ -678,8 +679,14 @@ export default {
         this.step1.subproject = initData.title
       }
     },
+    onlyUnique(value, index, array) {
+      return array.indexOf(value) === index
+    },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
+      this.externalSystems.push(this.externalSystem)
+      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+      this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
       if (this.step2.title === null) {
