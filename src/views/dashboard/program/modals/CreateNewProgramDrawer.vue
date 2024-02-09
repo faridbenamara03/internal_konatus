@@ -6,12 +6,6 @@
     >
       {{ otype ==='project' ? 'Add a project or sub project' : otype === 'subproject' ? 'Add a sub-project' : 'Add a program'}}
     </h3>
-    <!-- <p
-      class="text-uppercase"
-      style="border-bottom: 2px solid #7367f0"
-    >
-      {{ otype === 'portfolio' || 'program' ? 'Add a program' : otype ==='project' ? 'Add a project or sub project' : otype === 'subproject' ? 'Add a sub-project' : ''}}
-    </p> -->
     <div
       class="select-group"
       style="padding-top: 0px"
@@ -19,20 +13,44 @@
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
-            <label>Nomenclature System</label>
-            <v-select
-              v-model="step1.system"
-              :options="['SAP', 'Jira', 'P6']"
-              placeholder="Select System"
-              outlined
-            />
+            <div class="d-flex"
+              v-if="!externalEditable"
+              style="font-size: 14px; color: #898989;text-transform:none"
+            >
+              External System: {{ exSystemString }}
+            </div>
+            <div v-else>
+              <v-select
+                v-model="externalSystem"
+                :options="['SAP', 'Jira', 'P6']"
+                placeholder="Select System"
+                outlined
+              />
+            </div>
           </div>
-          <div class="w-50 pl-1">
-            <label>SystemID</label>
-            <b-form-input
-              v-model="step1.systemId"
-              @customChange="e => handleCustomChange(e, 'systemId')"
-            />
+          <div class="w-50 d-flex">
+            <p
+              v-if="!externalEditable"
+              style="color: #bbbbbb;font-size: 16px;"
+            >
+              External Activity Id: {{ externalId }}
+            </p>
+            <div v-else>
+              <b-form-input
+                v-model="externalId"
+                placeholder="Input External Activity Id"
+              />
+            </div>
+            <div
+              style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+              @click="handleExternalEdit"
+            >
+              <feather-icon
+                :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
+                style="color: #7367f0"
+                size="20"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -153,9 +171,9 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Budget Authorised</label>
+          <label>Budget Authorized</label>
           <b-form-input
-            v-model="step2.authorised"
+            v-model="step2.authorized"
             type="number"
           />
         </div>
@@ -282,7 +300,17 @@
             max="10"
           />
         </div>
-        <div class="select-box m-0" />
+        <div class="select-box m-0">
+          <label>ROI</label>
+          <b-form-input
+            id="range-roi"
+            v-model="step3.roi"
+            class="slider"
+            type="range"
+            min="0"
+            max="10"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -298,32 +326,21 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Date Next Gate Demand</label>
+          <label>Phase Start Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker1"
-            v-model="step4.date_next_gate"
+            v-model="step4.phase_start_date"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
         <div class="select-box">
-          <label>Date Ready for Test Demand</label>
+          <label>Phase End Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker2"
-            v-model="step4.date_ready_test"
+            v-model="step4.phase_end_date"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box mb-0">
-          <label>Date Production Demand</label>
-          <b-form-datepicker
-            id="date_next_gate-datepicker3"
-            v-model="step4.date_production"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
-        <div class="select-box m-0" />
       </div>
     </div>
     <div
@@ -417,6 +434,24 @@
           />
         </div>
       </div>
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Project Manager</label>
+          <v-select
+            v-model="step5.project_manager"
+            :options="priorityOptions"
+            placeholder="Select Sponsor"
+            outlined
+          />
+        </div>
+        <div class="select-box">
+          <label>WinRate</label>
+          <b-form-input
+            v-model="step5.winrate"
+            placeholder="Input External Activity Id"
+          />
+        </div>
+      </div>
     </div>
     <div>
       <b-button
@@ -460,6 +495,11 @@ export default {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       curIndex: 1,
       subProjectTitle: null,
+      externalEditable: false,
+      externalSystems: ["Jira"],
+      externalSystem: "Jira",
+      externalId: "JR-12345",
+      exSystemString: '',
       step1: {
         system: null,
         portfolio: null,
@@ -473,6 +513,7 @@ export default {
       },
       step2: {
         title: null,
+        description: null,
         priority: null,
         value: 0,
         budget: 0,
@@ -482,7 +523,7 @@ export default {
         realestimated: 0,
         spent: 0,
         demand: 0,
-        authorised: 0,
+        authorized: 0,
         engaged: 0,
         phase: null,
         budgetOpen: 0,
@@ -494,21 +535,23 @@ export default {
         customer_ex: 0,
         sales_ex: 0,
         scoring: 0,
+        roi: 0,
       },
       step4: {
-        date_next_gate: null,
-        date_ready_test: null,
-        date_production: null,
+        phase_start_date: null,
+        phase_end_date: null
       },
       step5: {
         head_product_portfolio: null,
         product_manager: null,
+        project_manager: null,
         architect: null,
         head_program_direction: null,
         program_director: null,
         product_line: null,
         sponsor: null,
-        head_architect: null
+        head_architect: null,
+        winrate: 0
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -544,7 +587,7 @@ export default {
         this.step2.engaged = initData.engaged
         this.step2.demand = initData.budget
         // this.step2.quote = initData.quote
-        this.step2.authorised = initData.authorised
+        this.step2.authorized = initData.authorized
         this.step2.realestimated = initData.realestimated
         const allPts = this.getAllPorts()
         const allPgs = this.getAllProgs()
@@ -573,6 +616,12 @@ export default {
         }
       }
     },
+    handleExternalEdit() {
+      this.externalEditable = !this.externalEditable
+      this.externalSystems.push(this.externalSystem)
+      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+      this.exSystemString = this.externalSystems.toString()
+    },
     async handleSave() {
       const newProgramData = {
         step1: this.step1,
@@ -582,6 +631,7 @@ export default {
         step5: this.step5,
         step6: this.step6,
         subProjectTitle: this.subProjectTitle,
+        type: this.otype
       }
       if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
         this.$toast.error('Please input all correctly.')

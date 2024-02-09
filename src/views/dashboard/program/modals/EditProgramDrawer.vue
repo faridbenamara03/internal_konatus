@@ -10,27 +10,6 @@
       class="select-group"
       style="padding-top: 0px"
     >
-      <!-- <div class="select-box">
-        <div class="d-flex">
-          <div class="w-50">
-            <label>Nomenclature System</label>
-            <v-select
-              v-model="step1.system"
-              :options="['SAP', 'Jira', 'Konatus']"
-              placeholder="Select System"
-              outlined
-              multiple
-            />
-          </div>
-          <div class="w-50 pl-1">
-            <label>SystemID</label>
-            <b-form-input
-              v-model="step1.systemId"
-              @customChange="e => handleCustomChange(e, 'systemId')"
-            />
-          </div>
-        </div>
-      </div> -->
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
@@ -44,7 +23,7 @@
               <v-select
                 v-model="externalSystem"
                 :options="['SAP', 'Jira', 'P6']"
-                placeholder="Select External System"
+                placeholder="Select System"
                 outlined
               />
             </div>
@@ -75,49 +54,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="d-flex">
-        <div>
-          <div style="text-align: end;">
-            <label
-              v-if="!externalEditable"
-              style="font-size: 14px; color: #898989;text-transform:none"
-            >
-              External System: {{ externalSystem ? externalSystem[0] : "" }}
-            </label>
-            <div v-else>
-              <v-select
-                v-model="externalSystem"
-                :options="['SAP', 'Jira', 'Konatus']"
-                placeholder="Select External System"
-                outlined
-                multiple
-              />
-            </div>
-          </div>
-          <p
-            v-if="!externalEditable"
-            style="color: #bbbbbb;font-size: 16px;"
-          >
-            External Activity Id: {{ externalId }}
-          </p>
-          <div v-else>
-            <b-form-input
-              v-model="externalId"
-              placeholder="Input External Activity Id"
-            />
-          </div>
-        </div>
-        <div
-          style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-          @click="handleExternalEdit"
-        >
-          <feather-icon
-            :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
-            style="color: #7367f0"
-            size="20"
-          />
-        </div>
-      </div> -->
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
@@ -389,32 +325,19 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Date Next Gate Demand</label>
+          <label>Phase Start Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker1"
-            v-model="step4.date_next_gate"
+            v-model="step4.phase_start_date"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            :disabled="true"
           />
         </div>
         <div class="select-box">
-          <label>Date Ready for Test Demand</label>
+          <label>Phase End Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker2"
-            v-model="step4.date_ready_test"
+            v-model="step4.phase_end_date"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            :disabled="true"
-          />
-        </div>
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box mb-0">
-          <label>Date Production Demand</label>
-          <b-form-datepicker
-            id="date_next_gate-datepicker3"
-            v-model="step4.date_production"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-            :disabled="true"
           />
         </div>
       </div>
@@ -511,6 +434,24 @@
         </div>
       </div>
     </div>
+    <div class="select-group--sub">
+      <div class="select-box">
+        <label>Project Manager</label>
+        <v-select
+          v-model="step5.project_manager"
+          :options="priorityOptions"
+          placeholder="Select Sponsor"
+          outlined
+        />
+      </div>
+      <div class="select-box">
+        <label>WinRate</label>
+        <b-form-input
+          v-model="step5.winrate"
+          placeholder="Input WinRate"
+        />
+      </div>
+    </div>
     <div>
       <b-button
         style="width: 100%"
@@ -592,11 +533,11 @@ export default {
         customer_ex: 0,
         sales_ex: 0,
         scoring: 0,
+        roi: 0
       },
       step4: {
-        date_next_gate: null,
-        date_ready_test: null,
-        date_production: null,
+        phase_start_date: null,
+        phase_end_date: null
       },
       step5: {
         head_product_portfolio: null,
@@ -606,8 +547,9 @@ export default {
         program_director: null,
         sponsor: null,
         head_architect: null,
-        product_line: null
-
+        product_line: null,
+        project_manager: null,
+        winrate: 0
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -677,9 +619,6 @@ export default {
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
       }
-    },
-    onlyUnique(value, index, array) {
-      return array.indexOf(value) === index
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
