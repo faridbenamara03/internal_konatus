@@ -1090,7 +1090,6 @@ export default {
                   t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
                   t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
                 }
-                console.log("updatedT2:", updatedT2)
                 updatedT2s.push(updatedT2)
                 return null
               })
@@ -1107,7 +1106,6 @@ export default {
               authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
               spent += parseInt(t1.spent ? t1.spent : 0, 10)
             }
-            console.log('updatedT1:', updatedT1)
             updatedT1s.push(updatedT1)
             return null
           })
@@ -1122,7 +1120,6 @@ export default {
         }
         return t
       })
-      console.log("NDT:", ndt)
       return ndt
     },
     c_totalBudget() {

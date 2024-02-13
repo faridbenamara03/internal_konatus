@@ -125,144 +125,31 @@ export default {
       }
     },
     CREATE_NEW_UNIT(state, data) {
-      // if (!data.unitName) {
-      //   Vue.$toast.warning('Please input correctly.')
-      // } else {
-      //   const dt = { ...state.globalData[1] }
-      //   const cdn = dt.children
-      //   cdn.push(
-      //     {
-      //       id: `${data.unitName.toLowerCase()}-unit`,
-      //       title: data.unitName,
-      //       type: 'unit',
-      //       route: {
-      //         name: 'unit-view',
-      //         params: {
-      //           unitId: data.unitName.toLowerCase(),
-      //         },
-      //       },
-      //       children: [
-      //         {
-      //           id: 'team-ln-team',
-      //           title: 'Team LN',
-      //           parent: 'lyon-unit',
-      //           type: 'team',
-      //           route: {
-      //             name: 'team-view',
-      //             params: {
-      //               unitId: 'lyon',
-      //               teamId: 'team-ln',
-      //             },
-      //           },
-      //           children: [
-      //             {
-      //               id: 'lone-wolf-user',
-      //               title: 'Lone Wolf',
-      //               parent: 'team-ln-team',
-      //               type: 'user',
-      //             },
-      //             {
-      //               id: 'telora-varga-user',
-      //               title: 'Telora Varga',
-      //               parent: 'team-ln-team',
-      //               type: 'user',
-      //             },
-      //             {
-      //               id: 'poke-green-user',
-      //               title: 'Poke Green',
-      //               parent: 'team-ln-team',
-      //               type: 'user',
-      //             },
-      //             {
-      //               id: 'assen-oliveira-user',
-      //               title: 'Assen Oliveira',
-      //               parent: 'team-ln-team',
-      //               type: 'user',
-      //             },
-      //           ]
-      //         }
-      //       ]
-      //     }
-      //   )
-      //   dt.children = cdn
-      //   state.globalOrganizationUnitData = dt
-      //   const u1 = !state.openCreateNewPortfolioDrawer
-      //   const u2 = !state.openCreateNewUnitDrawer
-      //   state.openCreateNewPortfolioDrawer = u1
-      //   state.openCreateNewUnitDrawer = u2
-      // }
-      console.log("NewUnitData:", data)
       const u1 = !state.openCreateNewUnitDrawer
       state.openCreateNewUnitDrawer = u1
+      console.log(data)
     },
     CREATE_NEW_PORTFOLIO(state, data) {
-      if (!!data.parentOrganization && !!data.portfolioName && !!data.portfolioBudget) {
-        const dt = { ...state.globalData[0] }
-        const chld = dt.children
-        chld.push({
-          id: `${data.portfolioName.toLowerCase()}-portfolio`,
-          title: data.portfolioName,
-          budget: data.portfolioBudget,
-          type: 'portfolio',
-          children: [
-            {
-              id: `${data.portfolioName.toLowerCase()}-program`,
-              title: 'sample program',
-              type: 'program'
-            }
-          ]
-        })
-        dt.children = chld
-        state.globalOperationData = dt
-        const u1 = !state.openCreateNewPortfolioDrawer
-        const u2 = !state.openCreateNewUnitDrawer
-        state.openCreateNewPortfolioDrawer = u1
-        state.openCreateNewUnitDrawer = u2
-      } else {
-        Vue.$toast.warning('Please input correctly.')
-      }
+      console.log(data)
+      Vue.$toast.success('Portfolio created successfully.')
+      this.dispatch('load_org_data')
     },
     CREATE_NEW_PROJECT(state, data) {
-      // if (!!data.parentOrganization && !!data.projectName && !!data.projectBudget) {
-      //   const dt = { ...state.globalData[0] }
-      //   const chld = dt.children
-      //   chld.push({
-      //     id: `${data.projectName.toLowerCase()}-project`,
-      //     title: data.projectName,
-      //     budget: data.projectName,
-      //     type: 'project',
-      //     children: [
-      //       {
-      //         id: `${data.projectName.toLowerCase()}-phase`,
-      //         title: 'sample phase',
-      //         type: 'phase'
-      //       }
-      //     ]
-      //   })
-      //   dt.children = chld
-      //   state.globalOperationData = dt
-      //   const u1 = !state.openCreateNewPortfolioDrawer
-      //   const u2 = !state.openCreateNewUnitDrawer
-      //   state.openCreateNewPortfolioDrawer = u1
-      //   state.openCreateNewUnitDrawer = u2
-      // } else {
-      //   Vue.$toast.warning('Please input correctly.')
-      // }
-      console.log("NewProjectData:", data)
+      console.log(data)
       const u1 = !state.openCreateNewProjectDrawer
       state.openCreateNewProjectDrawer = u1
       Vue.$toast.success('Project created successfully.')
     },
     UPDATE_PROJECT(state, data) {
       Vue.$toast.success('Project updated successfully.')
-      console.log("UpdateProjectData:", data)
+      console.log(data)
     },
     UPDATE_PROGRAM(state, data) {
       Vue.$toast.success('Program updated successfully.')
-      console.log("UpdateProgramData:", data)
+      console.log(data)
     },
     CREATE_NEW_PROGRAM(state, data) {
-      console.log("NewProgramData:", data)
+      console.log(data)
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
       Vue.$toast.success('Program created successfully.')
@@ -291,13 +178,6 @@ export default {
     TOGGLE_EDIT_PORTFOLIO_DRAWER(state) {
       const u = state.openEditPortfolioDrawer
       state.openEditPortfolioDrawer = !u
-      // if (!u) {
-      //   if (state.selectedNavObj.type === 'portfolio') {
-      //     state.openEditPortfolioDrawer = !u
-      //   }
-      // } else {
-      //   state.openEditPortfolioDrawer = !u
-      // }
     },
     EDIT_PORTFOLIO(state, data) {
       if (!!data.portfolio && !!data.portfolioBudget) {
@@ -328,36 +208,9 @@ export default {
       Vue.$toast.success("Saved Successfully!")
     },
     HANDLE_ACTIVITY_SPLIT() {
-      // let index = -1
-      // state.teamsState.forEach((t, i) => {
-      //   if (t.title === data.teamTitle) index = i
-      // })
-      // const sate = { ...state.teamsState[index] }
-      // const newPhases = []
-      // sate.phases.forEach(t => {
-      //   if (t.activityId === data.phase.activityId) {
-      //     newPhases.push(data.newA1, data.newA2)
-      //   } else {
-      //     newPhases.push(t)
-      //   }
-      // })
-      // state.teamsState[index].phases = newPhases
       Vue.$toast.success('Splitted Successfully!')
     },
     HANDLE_ACTIVITY_MERGE() {
-      // let index = -1
-      // state.teamsState.forEach((t, i) => {
-      //   if (t.title === data.teamTitle) index = i
-      // })
-      // const sate = { ...state.teamsState[0] }
-      // const newPhases = [data.merged]
-      // console.log(sate, data)
-      // sate.phases.forEach(t => {
-      //   if (t.activityId !== data.toMergeId1 && t.activityId !== data.toMergeId2) {
-      //     newPhases.push(t)
-      //   }
-      // })
-      // state.teamsState[0].phases = newPhases
       Vue.$toast.success('Merged Successfully!')
     },
     DELETE_PORTFOLIO() {
@@ -532,71 +385,25 @@ export default {
     },
     OPERATION_NEW_SAVE(state, data) {
       console.log(state, data)
-      // {
-      //   id: '1.28.11.1.15',
-      //   title: 'Precise movement & control',
-      //   type: 'project',
-
-      //   priority: 'Lowest',
-      //   budget: '2500',
-      //   deadline: '12/31/2021',
-      //   engaged: '450',
-      //   quote: '550',
-      //   next_gate: '06/02/2022',
-      //   demand: '1500',
-      //   realEstimated: '1200',
-      //   authorised: '800',
-      //   value: '100',
-      //   spent: '100',
-      // },
-      // const portfolioD = {
-      //   id: Vue.faker().random.number(50),
-      //   title: 'Consumer Robots',
-      //   type: 'portfolio',
-
-      //   priority: 'Highest',
-      //   budget: '10000',
-      //   deadline: '06/01/2021',
-      //   engaged: '1800',
-      //   quote: '2200',
-      //   demand: '9200',
-      //   realEstimated: '10100',
-      //   authorised: '4500',
-      //   spent: '1600',
-
-      //   route: {
-      //     name: 'portfolio-view',
-      //     params: {
-      //       portfolioId: 'consumer-robots',
-      //     },
-      //   },
-      // }
       state.globalOperationData.children.push(data)
     },
     LOAD_ORG_UNIT_DATA(state, orgData) {
-      // state.globalOrganizationUnitData = orgData
       state.globalOrganizationUnitData.push(orgData)
     },
     LOAD_ORG_TEAM_DATA(state, orgData) {
-      // state.globalOrganizationTeamData = orgData
       state.globalOrganizationTeamData.push(orgData)
     },
     LOAD_ORG_DATA(state, orgData) {
-      // state.globalOrganizationData = orgData
       state.globalOrganizationData.push(orgData)
     },
     LOAD_NAV_DATA(state, globalAllData) {
       state.globalOrganizationData = globalAllData.navData
       state.globalOrganizationUnitData = globalAllData.orgData
       state.globalOrganizationUnitData1 = globalAllData.orgData1
-
       state.globalData.push(globalAllData.navData)
       state.globalData.push(globalAllData.orgData)
       state.globalData1.push(globalAllData.navData)
       state.globalData1.push(globalAllData.orgData1)
-      // state.globalData = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData)]
-      // state.globalData1 = [JSON.parse(globalAllData.navData), JSON.parse(globalAllData.orgData1)]
-      // state.projectReportingData = globalOperationData.children[0].children[0];
     },
     UPDATE_PROJECT_DEMAND_TABLE_EDITABLE(state, data) {
       state.projectDemandEditableData = data
@@ -608,8 +415,6 @@ export default {
     },
     IMPORT_WBS_2(state) {
       setTimeout(() => {
-        // state.projectElementTeamData = teamsState
-        // state.projectElementPhaseData = phaseState
         state.projectElementTeamData = []
         state.projectElementPhaseData = []
       }, 1000)
@@ -617,55 +422,12 @@ export default {
     WOEK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity
     },
-    // ADD_PROJECT(state) {
-    //   Vue.$toast.success("New program added")
-    //   state.globalData = [globalOperationDataInsertedProgram, state.globalData[1]]
-    //   state.projectElementTeamData = []
-    //   state.projectElementPhaseData = []
-    //   // this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
-    // },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
       state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
       state.parentTeamTitle = data.team
     },
     INSERT_NEW_TASK(state, data) {
-      // const {
-      //   id, priority, gate, name
-      // } = data
-      // if (state.parentIndexForInsertElement.state === "team") {
-      //   const t = state.teamsState[state.parentIndexForInsertElement.index0]?.phases[state.parentIndexForInsertElement.index]?.activities
-      //   t.push(
-      //     {
-      //       title: name,
-      //       priority,
-      //       gate,
-      //       activityId: id,
-      //       description: 'New inserted element description.',
-      //       effort: {
-      //         load: 53,
-      //         duration: 26,
-      //         fte: 80
-      //       },
-      //     }
-      //   )
-      // } else {
-      //   const t = state.phaseState[state.parentIndexForInsertElement.index0]?.teams[state.parentIndexForInsertElement.index]?.activities
-      //   t.push(
-      //     {
-      //       title: name,
-      //       priority,
-      //       gate,
-      //       activityId: id,
-      //       description: 'New inserted element description.',
-      //       effort: {
-      //         load: 53,
-      //         duration: 26,
-      //         fte: 80
-      //       },
-      //     }
-      //   )
-      // }
-      console.log("NewTask:", data)
+      console.log(data)
       Vue.$toast.success('Task inserted successfully.')
     },
   },
@@ -674,7 +436,6 @@ export default {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
-        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -684,7 +445,6 @@ export default {
         })
       } else {
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}`
-        // baseUrl = `http://localhost/konatus-me/public/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -696,7 +456,6 @@ export default {
     },
     load_org_data() {
       axios.get('https://api.konatus.site/v1/api/menu/organizations').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
@@ -706,7 +465,6 @@ export default {
     },
     load_org_unit_data() {
       axios.get('https://api.konatus.site/v1/api/menu/organization_units').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/organization_units').then(response => {
           const globalOrgUnitData = response.data
           this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
         }).catch(err => {
@@ -736,7 +494,6 @@ export default {
     },
     create_new_portfolio(commit, payload) {
       axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
-      // axios.post('http://localhost/konatus-me/public/api/portfolio/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
       }).catch(err => {

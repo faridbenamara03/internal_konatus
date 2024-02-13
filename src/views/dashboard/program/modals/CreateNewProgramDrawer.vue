@@ -77,12 +77,20 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Program</label>
-            <InputSelect
-              placeholder="Select Program"
-              :options="getAllProgs()"
-              :value="step1.program === null ? null : step1.program.title"
-              @customChange="e => handleCustomChange(e, 'program')"
-            />
+            <div v-if="otype =='program' && otype === 'portfolio'">
+              <b-form-input
+                v-model="step1.programTitle"
+                placeholder="Enter Program name"
+              />
+            </div>
+            <div v-else>
+              <InputSelect
+                placeholder="Select Program"
+                :options="getAllProgs()"
+                :value="step1.program === null ? null : step1.program.title"
+                @customChange="e => handleCustomChange(e, 'program')"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>ProgramID</label>
@@ -96,12 +104,20 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Project</label>
-            <InputSelect
-              placeholder="Select Project"
-              :options="getAllProjects()"
-              :value="step1.project === null ? null : step1.project.title"
-              @customChange="e => handleCustomChange(e, 'project')"
-            />
+            <div v-if="otype === 'project'">
+              <b-form-input
+                v-model="step1.projectTitle"
+                placeholder="Enter Project name"
+              />
+            </div>
+            <div v-else>
+              <InputSelect
+                placeholder="Select Project"
+                :options="getAllProjects()"
+                :value="step1.project === null ? null : step1.project.title"
+                @customChange="e => handleCustomChange(e, 'project')"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>ProjectID</label>

@@ -158,14 +158,22 @@
         </span>
       </div>
     </div>
-    <div>
+    <div class="d-flex">
       <b-button
+        class="w-50"
         :disabled="!edited"
-        style="width: 100%"
         variant="primary"
         @click="handleSave"
       >
         Save
+      </b-button>
+      <b-button
+        class="ml-1 w-50"
+        :disabled="!edited"
+        variant="primary"
+        @click="handleDelete"
+      >
+        Delete
       </b-button>
     </div>
   </div>
@@ -236,6 +244,12 @@ export default {
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)
       return pts
+    },
+    handleDelete() {
+      const data = {
+        portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
+      }
+      this.$store.dispatch('globalState/delete_portfolio', { data })
     },
     handleSave() {
       this.edited = false
