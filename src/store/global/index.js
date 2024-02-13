@@ -360,6 +360,18 @@ export default {
       // state.teamsState[0].phases = newPhases
       Vue.$toast.success('Merged Successfully!')
     },
+    DELETE_PORTFOLIO() {
+      Vue.$toast.success('Portfolio Deleted Successfully!')
+    },
+    DELETE_PROGRAM() {
+      Vue.$toast.success('Program Deleted Successfully!')
+    },
+    DELETE_PROJECT() {
+      Vue.$toast.success('Project Deleted Successfully!')
+    },
+    DELETE_SUBPROJECT() {
+      Vue.$toast.success('SubProject Deleted Successfully!')
+    },
     HANDLE_TEAM_DEMAND_UPDATE() {
       Vue.$toast.success('Updated Successfully!')
     },
@@ -910,6 +922,68 @@ export default {
       }).catch(err => {
         console.log('error loading project reporting editable --->', err)
         Vue.$toast.error('Failed to load project reporting editable data.')
+      })
+    },
+    delete_portfolio(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete('https://api.konatus.site/v1/api/portfolio/delete', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/DELETE_PORTFOLIO', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error deleting portfolio ---->', err)
+            Vue.$toast.error('Failed to delete portfolio.')
+            reject(err)
+          })
+      })
+    },
+    delete_program(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete('https://api.konatus.site/v1/api/program/delete', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/DELETE_PROGRAM', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error deleting program ---->', err)
+            Vue.$toast.error('Failed to delete program.')
+            reject(err)
+          })
+      })
+    },
+    delete_project(commit, payload) {
+      console.log('ProjectPayload:', payload)
+      return new Promise((resolve, reject) => {
+        axios.delete('https://api.konatus.site/v1/api/project/delete', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/DELETE_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error deleting project ---->', err)
+            Vue.$toast.error('Failed to delete project.')
+            reject(err)
+          })
+      })
+    },
+    delete_subproject(commit, payload) {
+      console.log('SubPayload:', payload)
+      return new Promise((resolve, reject) => {
+        axios.delete('https://api.konatus.site/v1/api/subproject/delete', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/DELETE_SUBPROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error deleting subproject ---->', err)
+            Vue.$toast.error('Failed to delete subproject.')
+            reject(err)
+          })
       })
     }
   }

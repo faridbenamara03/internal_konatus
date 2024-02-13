@@ -69,6 +69,12 @@
               </b-button> -->
               <b-button
                 variant="flat-primary"
+                @click="handleDeleteItem(item, 'portfolio')"
+              >
+                <feather-icon icon="TrashIcon" />
+              </b-button>
+              <b-button
+                variant="flat-primary"
                 @click="toggleCreateNewProgramDrawer(item, 'program')"
               >
                 <feather-icon icon="PlusIcon" />
@@ -177,6 +183,12 @@
                   </div>
                 </div>
                 <div class="part3 d-flex justify-content-center">
+                  <b-button
+                    variant="flat-primary"
+                    @click="handleDeleteItem(item1, 'program')"
+                  >
+                    <feather-icon icon="TrashIcon" />
+                  </b-button>
                   <b-button
                     variant="flat-primary"
                     @click="toggleEditProgramDrawerOpen(item1, 'program')"
@@ -289,6 +301,12 @@
                     <div class="part3 d-flex justify-content-center">
                       <b-button
                         variant="flat-primary"
+                        @click="handleDeleteItem(item2, 'project')"
+                      >
+                        <feather-icon icon="TrashIcon" />
+                      </b-button>
+                      <b-button
+                        variant="flat-primary"
                         @click="toggleEditProgramDrawerOpen(item2, 'project')"
                       >
                         <feather-icon icon="Edit2Icon" />
@@ -390,6 +408,12 @@
                         <div class="part3 d-flex justify-content-center">
                           <b-button
                             variant="flat-primary"
+                            @click="handleDeleteItem(item3, 'subproject')"
+                          >
+                            <feather-icon icon="TrashIcon" />
+                          </b-button>
+                          <b-button
+                            variant="flat-primary"
                             @click="toggleEditProgramDrawerOpen(item3, 'subproject')"
                           >
                             <feather-icon icon="Edit2Icon" />
@@ -450,6 +474,12 @@
               </div>
             </div>
             <div class="part3 d-flex justify-content-center">
+              <b-button
+                variant="flat-primary"
+                @click="handleDeleteItem(item, 'program')"
+              >
+                <feather-icon icon="TrashIcon" />
+              </b-button>
               <b-button
                 variant="flat-primary"
                 @click="toggleEditProgramDrawerOpen(item, 'program')"
@@ -563,6 +593,12 @@
                 <div class="part3 d-flex justify-content-center">
                   <b-button
                     variant="flat-primary"
+                    @click="handleDeleteItem(item1, 'project')"
+                  >
+                    <feather-icon icon="TrashIcon" />
+                  </b-button>
+                  <b-button
+                    variant="flat-primary"
                     @click="toggleEditProgramDrawerOpen(item1, 'project')"
                   >
                     <feather-icon icon="Edit2Icon" />
@@ -669,6 +705,12 @@
                       </div>
                     </div>
                     <div class="part3 d-flex justify-content-center">
+                      <b-button
+                        variant="flat-primary"
+                        @click="handleDeleteItem(item2, 'subproject')"
+                      >
+                        <feather-icon icon="TrashIcon" />
+                      </b-button>
                       <b-button
                         variant="flat-primary"
                         @click="toggleEditProgramDrawerOpen(item2, 'subproject')"
@@ -1142,6 +1184,25 @@ export default {
     }
   },
   methods: {
+    handleDeleteItem(item, type) {
+      console.log('handleDeleteItem=> item:', item, 'type:', type)
+      switch (type) {
+        case 'portfolio':
+          this.$store.dispatch('globalState/delete_portfolio', { id: item.id })
+          break
+        case 'program':
+          this.$store.dispatch('globalState/delete_program', { id: item.id })
+          break
+        case 'project':
+          this.$store.dispatch('globalState/delete_project', { id: item.id })
+          break
+        case 'subproject':
+          this.$store.dispatch('globalState/delete_subproject', { id: item.id })
+          break
+        default:
+          break
+      }
+    },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
