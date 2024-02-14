@@ -333,7 +333,7 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Phase Start Date</label>
+          <label>Phase 1 Start Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker1"
             v-model="step4.phase_start_date"
@@ -341,7 +341,7 @@
           />
         </div>
         <div class="select-box">
-          <label>Phase End Date</label>
+          <label>{{ this.lastPhase === undefined ? 'Last Phase' : this.lastPhase.title }} End Date</label>
           <b-form-datepicker
             id="date_next_gate-datepicker2"
             v-model="step4.phase_end_date"
@@ -495,6 +495,7 @@ export default {
     return {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       title: '',
+      lastPhase: {},
       curIndex: 1,
       externalEditable: false,
       externalSystems: ["Jira"],
@@ -621,6 +622,9 @@ export default {
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
       }
+      const phases = this.$store.state.globalState.allPhaseData
+      phases.sort((a, b) => a.id - b.id)
+      this.lastPhase = phases.at(-1)
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable

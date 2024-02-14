@@ -163,7 +163,6 @@ export default {
     LOAD_ALL_PHASE_DATA(state, data) {
       state.allPhaseData = data
       const pTitleData = []
-      pTitleData.push("Not Selected")
       data.forEach(t => {
         pTitleData.push(t.title)
       })
@@ -557,7 +556,6 @@ export default {
     get_all_phases() {
       return new Promise((resolve, reject) => {
         axios.get('https://api.konatus.site/v1/api/phase/all')
-        // axios.get('http://localhost/konatus-me/public/api/portfolio/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PHASE_DATA', newData)

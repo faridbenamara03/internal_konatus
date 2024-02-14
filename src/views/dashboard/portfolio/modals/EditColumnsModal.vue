@@ -137,44 +137,6 @@
           class="checkbox-group"
           stacked
         />
-        <!-- <div class="d-flex">
-          <div class="col-1">
-            <b-form-checkbox
-              v-model="isSelectedExSystem"
-              name="check-button"
-              inline
-              @change="handleSelectExSystemChange"
-            />
-          </div>
-          <div class="col-11">
-            <v-select
-              v-model="externalSystem"
-              :options="['SAP', 'Jira', 'Konatus']"
-              placeholder="Select External System"
-              :disabled="isSelectedExSystem"
-              outlined
-              multiple
-            />
-          </div>
-        </div> -->
-        <!-- <div class="d-flex">
-          <div class="col-1 mt-2">
-            <b-form-checkbox
-              v-model="isSelectedExId"
-              name="check-button"
-              inline
-              @change="handleSelectExIdChange"
-            />
-          </div>
-          <div class="col-11">
-            <b-form-input
-              v-model="externalId"
-              placeholder="Input External Activity Id"
-              class="mt-2"
-              :disabled="isSelectedExId"
-            />
-          </div>
-        </div> -->
       </div>
       <div class="col-6 optionBlock">
         <h4>Rationale</h4>
@@ -213,7 +175,7 @@ import {
   //  BFormCheckbox
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
-import moment from 'moment'
+// import moment from 'moment'
 
 export default {
   components: {
@@ -265,9 +227,7 @@ export default {
         { text: 'Priority', value: 'priority' },
         { text: 'WinRate', value: 'winrate' }
       ],
-      // option_phases: this.$store.state.globalState.allPhaseTitleData,
-      // option_phases: ['Not Selected', 'phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'phase9', 'phase10'],
-      option_phases: ['Not Selected'],
+      option_phases: this.$store.state.globalState.allPhaseTitleData,
       option_winrate: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
         36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 67, 68, 69, 70, 71, 72, 73, 74, 75,
         76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
@@ -313,14 +273,7 @@ export default {
   },
   methods: {
     initializeData(data) {
-      const { allPhaseData } = this.$store.state.globalState
       console.log(data)
-      const phases = allPhaseData.map(item => {
-        const tmpDate = moment(new Date(item.start_date)).format('MM/DD/YYYY')
-        const temp = `Phase ${item.id}: ${tmpDate})`
-        return temp
-      })
-      this.option_phases.push(...phases)
     },
     handleSelectExIdChange() {
       console.log("ExId:", this.isSelectedExId)
@@ -336,36 +289,16 @@ export default {
       this.$refs['my-modal'].hide()
     },
     onPhaseSelect(selectedPhase, type) {
-      if (selectedPhase !== "Not Selected") {
-        this.winrate = 100
-        this.winrateSelectable = true
-        if (!this.selected.includes('phaseStartDate')) {
-          this.selected.push('phaseStartDate')
-        }
-        if (!this.selected.includes('phaseEndDate')) {
-            this.selected.push('phaseEndDate')
-        }
-      } else {
-        this.winrate = 0
-        this.winrateSelectable = false
+      selectedPhase.forEach(t => {
+        let item = ''
         if (type === 1) {
-          if (!this.selected.includes('phaseStartDate')) {
-            this.selected.push('phaseStartDate')
-          }
-        } else if (!this.selected.includes('phaseEndDate')) {
-            this.selected.push('phaseEndDate')
+          item = `${t.toLowerCase()}startdate`
+        } else {
+          item = `${t.toLowerCase()}enddate`
         }
-      }
-      const { allPhaseData } = this.$store.state.globalState
-      const selectedData = allPhaseData.filter(phase => phase.title === selectedPhase)
-      if (selectedData) {
-        this.phaseStartDate = selectedData[0].start_date
-        this.phaseEndDate = selectedData[0].end_date
-      }
-      if (!this.selected.includes('winrate')) {
-        this.selected.push('winrate')
-        this.$store.commit('globalState/SELECT_WIN_RATE', this.winrate)
-      }
+        console.log("IT:", item)
+        this.selected.push(item)
+      })
     }
   }
 }
