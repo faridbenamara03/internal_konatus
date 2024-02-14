@@ -116,6 +116,7 @@
                 :options="getAllProjects()"
                 :value="step1.project === null ? null : step1.project.title"
                 @customChange="e => handleCustomChange(e, 'project')"
+                :disabled="true"
               />
             </div>
           </div>
@@ -512,6 +513,7 @@ export default {
       curIndex: 1,
       subProjectTitle: null,
       projectTitle: null,
+      programTitle: null,
       externalEditable: false,
       externalSystems: ["Jira"],
       externalSystem: "Jira",
@@ -650,6 +652,7 @@ export default {
         step6: this.step6,
         subProjectTitle: this.subProjectTitle,
         projectTitle: this.projectTitle,
+        programTitle: this.programTitle,
         type: this.otype
       }
       if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
@@ -703,6 +706,20 @@ export default {
       }
     },
     handleCustomChange(e, field) {
+      console.log('cc:', e, ':', field)
+      switch (field) {
+        case 'portfolio':
+          this.step1.portfolioId = e.id
+          break
+        case 'program':
+          this.step1.programId = e.id
+          break
+        case 'project':
+          this.step1.projectId = e.id
+          break
+        default:
+          break
+      }
       this.step1[field] = e
     }
   },
