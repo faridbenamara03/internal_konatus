@@ -136,9 +136,15 @@ export default {
     },
     CREATE_NEW_PROJECT(state, data) {
       console.log(data)
-      const u1 = !state.openCreateNewProjectDrawer
-      state.openCreateNewProjectDrawer = u1
+      const u1 = !state.openCreateNewProgramDrawer
+      state.openCreateNewProgramDrawer = u1
       Vue.$toast.success('Project created successfully.')
+    },
+    CREATE_NEW_SUBPROJECT(state, data) {
+      console.log(data)
+      const u1 = !state.openCreateNewProgramDrawer
+      state.openCreateNewProgramDrawer = u1
+      Vue.$toast.success('SubProject created successfully.')
     },
     UPDATE_PROJECT(state, data) {
       Vue.$toast.success('Project updated successfully.')
@@ -501,6 +507,53 @@ export default {
         Vue.$toast.error('Failed to create new portfolio.')
       })
     },
+    create_new_program(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/program/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/CREATE_NEW_PROGRAM', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new program ---->', err)
+            Vue.$toast.error('Failed to create new program.')
+            reject(err)
+          })
+      })
+    },
+    create_new_project(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
+        // axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/CREATE_NEW_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new project ---->', err)
+            Vue.$toast.error('Failed to create new project.')
+            reject(err)
+          })
+      })
+    },
+    create_new_subproject(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/subproject/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/CREATE_NEW_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error creating new subproject ---->', err)
+            Vue.$toast.error('Failed to create new project.')
+            reject(err)
+          })
+      })
+    },
     get_all_phases() {
       return new Promise((resolve, reject) => {
         axios.get('https://api.konatus.site/v1/api/phase/all')
@@ -581,22 +634,6 @@ export default {
           })
       })
     },
-    create_new_project(commit, payload) {
-      return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/project/create', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
-          .then(response => {
-            const newData = response.data
-            this.commit('globalState/CREATE_NEW_PROJECT', newData)
-            resolve()
-          })
-          .catch(err => {
-            console.log('error creating new project ---->', err)
-            Vue.$toast.error('Failed to create new project.')
-            reject(err)
-          })
-      })
-    },
     update_project(commit, payload) {
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/update', payload.data)
@@ -625,22 +662,6 @@ export default {
           .catch(err => {
             console.log('error updating program ---->', err)
             Vue.$toast.error('Failed to update progam.')
-            reject(err)
-          })
-      })
-    },
-    create_new_program(commit, payload) {
-      return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/program/create', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
-          .then(response => {
-            const newData = response.data
-            this.commit('globalState/CREATE_NEW_PROGRAM', newData)
-            resolve()
-          })
-          .catch(err => {
-            console.log('error creating new program ---->', err)
-            Vue.$toast.error('Failed to create new program.')
             reject(err)
           })
       })

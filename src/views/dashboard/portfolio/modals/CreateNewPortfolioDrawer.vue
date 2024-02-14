@@ -11,7 +11,7 @@
         <label>Parent Organization</label>
         <v-select
           v-model="parentOrganization"
-          :options="['Konatus Industries']"
+          :options="['Konatus Industrie']"
           placeholder="Select Organization"
           outlined
         />

@@ -77,7 +77,7 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Program</label>
-            <div v-if="otype =='program' && otype === 'portfolio'">
+            <div v-if="otype === 'program' || otype === 'portfolio'">
               <b-form-input
                 v-model="step1.programTitle"
                 placeholder="Enter Program name"
@@ -106,7 +106,7 @@
             <label>Project</label>
             <div v-if="otype === 'project'">
               <b-form-input
-                v-model="step1.projectTitle"
+                v-model="this.projectTitle"
                 placeholder="Enter Project name"
               />
             </div>
@@ -131,13 +131,13 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Sub Project(Optional)</label>
-            <div v-if="this.otype === 'project'">
+            <div v-if="this.otype === 'subproject'">
               <b-form-input
                 v-model="this.subProjectTitle"
                 placeholder="Enter SubProject name"
               />
             </div>
-            <div v-else-if="this.otype !== 'project'">
+            <div v-else-if="this.otype !== 'subproject'">
               <InputSelect
                 placeholder="Enter SubProject name"
                 :options="getAllProjects()"
@@ -511,6 +511,7 @@ export default {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       curIndex: 1,
       subProjectTitle: null,
+      projectTitle: null,
       externalEditable: false,
       externalSystems: ["Jira"],
       externalSystem: "Jira",
@@ -586,6 +587,7 @@ export default {
   },
   methods: {
     initializeData(data) {
+      console.log("INITD:", data, "OTYPE:", this.otype)
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       if (initData === undefined) {
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
@@ -647,6 +649,7 @@ export default {
         step5: this.step5,
         step6: this.step6,
         subProjectTitle: this.subProjectTitle,
+        projectTitle: this.projectTitle,
         type: this.otype
       }
       if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
@@ -658,8 +661,14 @@ export default {
               ...newProgramData
             }
           })
-        } else {
+        } else if (this.otype === 'project') {
           await this.$store.dispatch('globalState/create_new_project', {
+            data: {
+              ...newProgramData
+            }
+          })
+        } else if (this.otype === 'subproject') {
+          await this.$store.dispatch('globalState/create_new_subproject', {
             data: {
               ...newProgramData
             }
