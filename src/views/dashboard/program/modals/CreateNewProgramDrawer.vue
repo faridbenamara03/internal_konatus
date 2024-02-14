@@ -531,7 +531,6 @@ export default {
         subProjectId: 0
       },
       step2: {
-        title: null,
         description: null,
         priority: null,
         value: 0,
@@ -597,8 +596,11 @@ export default {
         if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
       } else {
         this.otype = this.$store.state.globalState.selectedProgramType
+        if (this.otype === 'program') this.programTitle = initData.title
+        else if (this.otype === 'project') this.projectTitle = initData.title
+        else if (this.otype === 'subproject') this.subProjectTitle = initData.title        
         this.step1.portfolioId = initData.portfolioid || 0
-        this.step2.title = initData.title
+        this.step2.description = initData.description
         this.step2.priority = this.priorityOptions[initData.priority - 1]
         this.step2.deadline = initData.deadline
         this.step2.next_phase = initData.next_gate
@@ -706,7 +708,6 @@ export default {
       }
     },
     handleCustomChange(e, field) {
-      console.log('cc:', e, ':', field)
       switch (field) {
         case 'portfolio':
           this.step1.portfolioId = e.id
