@@ -157,9 +157,9 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Title</label>
+          <label>Description</label>
           <b-form-input
-            v-model="step2.title"
+            v-model="step2.description"
             type="text"
           />
         </div>
@@ -224,18 +224,15 @@
           />
         </div>
       </div>
-    </div>
-    <div class="select-group--sub">
-      <div class="d-flex">
-        <div class="select-box w-50">
-          <label>Deadline</label>
-          <b-form-datepicker
-            id="program_deadline"
-            v-model="step2.deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>WinRate</label>
+          <b-form-input
+            v-model="step5.winrate"
+            placeholder="Input WinRate"
           />
         </div>
-        <div class="select-box w-50">
+        <div class="select-box">
           <label>Next Phase</label>
           <b-form-input
             id="program_nextphase"
@@ -244,15 +241,16 @@
           />
         </div>
       </div>
-      <div class="select-group-sub">
-        <div class="select-box">
-          <label>WinRate</label>
-          <b-form-input
-            v-model="step5.winrate"
-            placeholder="Input External Activity Id"
+      <div class="select-group--sub">
+        <div class="select-box w-50">
+          <label>Deadline</label>
+          <b-form-datepicker
+            id="program_deadline"
+            v-model="step2.deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-        <div class="select-box" />
+        <div class="select-box w-50" />
       </div>
     </div>
     <div
@@ -443,18 +441,18 @@
           />
         </div>
       </div>
-    </div>
-    <div class="select-group--sub">
-      <div class="select-box">
-        <label>Project Manager</label>
-        <v-select
-          v-model="step5.project_manager"
-          :options="priorityOptions"
-          placeholder="Select Project Manager"
-          outlined
-        />
+      <div class="select-group--sub">
+        <div class="select-box">
+          <label>Project Manager</label>
+          <v-select
+            v-model="step5.project_manager"
+            :options="priorityOptions"
+            placeholder="Select Project Manager"
+            outlined
+          />
+        </div>
+        <div class="select-box w-50" />
       </div>
-      <div class="select-box" />
     </div>
     <div>
       <b-button
@@ -575,7 +573,7 @@ export default {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
-      this.step2.title = initData.title
+      this.step2.description = initData.description
       this.step2.priority = this.priorityOptions[initData.priority - 1]
       this.step2.deadline = initData.deadline
       this.step2.next_phase = initData.next_gate
