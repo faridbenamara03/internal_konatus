@@ -257,7 +257,7 @@
           <label>WinRate</label>
           <b-form-input
             v-model="step5.winrate"
-            placeholder="Input External Activity Id"
+            placeholder="Input WinRate"
           />
         </div>
         <div class="select-box" />
