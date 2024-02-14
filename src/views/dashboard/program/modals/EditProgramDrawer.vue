@@ -244,6 +244,16 @@
           />
         </div>
       </div>
+      <div class="select-group-sub">
+        <div class="select-box">
+          <label>WinRate</label>
+          <b-form-input
+            v-model="step5.winrate"
+            placeholder="Input External Activity Id"
+          />
+        </div>
+        <div class="select-box" />
+      </div>
     </div>
     <div
       class="select-group"
@@ -440,17 +450,11 @@
         <v-select
           v-model="step5.project_manager"
           :options="priorityOptions"
-          placeholder="Select Sponsor"
+          placeholder="Select Project Manager"
           outlined
         />
       </div>
-      <div class="select-box">
-        <label>WinRate</label>
-        <b-form-input
-          v-model="step5.winrate"
-          placeholder="Input WinRate"
-        />
-      </div>
+      <div class="select-box" />
     </div>
     <div>
       <b-button

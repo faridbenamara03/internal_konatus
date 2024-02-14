@@ -1183,22 +1183,37 @@ export default {
   methods: {
     handleDeleteItem(item, type) {
       console.log('handleDeleteItem=> item:', item, 'type:', type)
-      switch (type) {
-        case 'portfolio':
-          this.$store.dispatch('globalState/delete_portfolio', { id: item.id })
-          break
-        case 'program':
-          this.$store.dispatch('globalState/delete_program', { id: item.id })
-          break
-        case 'project':
-          this.$store.dispatch('globalState/delete_project', { id: item.id })
-          break
-        case 'subproject':
-          this.$store.dispatch('globalState/delete_subproject', { id: item.id })
-          break
-        default:
-          break
-      }
+      this.$bvModal
+        .msgBoxConfirm('Please confirm that you want to delete this.', {
+          title: 'Please Confirm',
+          size: 'sm',
+          okVariant: 'primary',
+          okTitle: 'Yes',
+          cancelTitle: 'No',
+          cancelVariant: 'outline-secondary',
+          hideHeaderClose: false,
+          centered: true,
+        })
+        .then(value => {
+          if (value) {
+            switch (type) {
+              case 'portfolio':
+                this.$store.dispatch('globalState/delete_portfolio', { id: item.id })
+                break
+              case 'program':
+                this.$store.dispatch('globalState/delete_program', { id: item.id })
+                break
+              case 'project':
+                this.$store.dispatch('globalState/delete_project', { id: item.id })
+                break
+              case 'subproject':
+                this.$store.dispatch('globalState/delete_subproject', { id: item.id })
+                break
+              default:
+                break
+            }
+          }
+        })
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

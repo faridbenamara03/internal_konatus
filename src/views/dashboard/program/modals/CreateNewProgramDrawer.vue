@@ -252,6 +252,16 @@
           />
         </div>
       </div>
+      <div class="select-group-sub">
+        <div class="select-box">
+          <label>WinRate</label>
+          <b-form-input
+            v-model="step5.winrate"
+            placeholder="Input External Activity Id"
+          />
+        </div>
+        <div class="select-box" />
+      </div>
     </div>
     <div
       class="select-group"
@@ -457,17 +467,11 @@
           <v-select
             v-model="step5.project_manager"
             :options="priorityOptions"
-            placeholder="Select Sponsor"
+            placeholder="Select Project Manager"
             outlined
           />
         </div>
-        <div class="select-box">
-          <label>WinRate</label>
-          <b-form-input
-            v-model="step5.winrate"
-            placeholder="Input External Activity Id"
-          />
-        </div>
+        <div class="select-box" />
       </div>
     </div>
     <div>
@@ -651,7 +655,6 @@ export default {
         step3: this.step3,
         step4: this.step4,
         step5: this.step5,
-        step6: this.step6,
         subProjectTitle: this.subProjectTitle,
         projectTitle: this.projectTitle,
         programTitle: this.programTitle,

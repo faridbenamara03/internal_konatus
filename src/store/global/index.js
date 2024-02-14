@@ -735,7 +735,7 @@ export default {
     delete_project(commit, payload) {
       console.log('ProjectPayload:', payload)
       return new Promise((resolve, reject) => {
-        axios.delete('https://api.konatus.site/v1/api/project/delete', payload)
+        axios.post('https://api.konatus.site/v1/api/project/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PROJECT', newData)
