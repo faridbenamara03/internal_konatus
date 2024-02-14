@@ -170,9 +170,9 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Title</label>
+          <label>Description</label>
           <b-form-input
-            v-model="step2.title"
+            v-model="step2.description"
             type="text"
           />
         </div>
