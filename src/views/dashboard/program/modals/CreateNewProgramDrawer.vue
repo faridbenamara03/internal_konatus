@@ -598,7 +598,7 @@ export default {
         this.otype = this.$store.state.globalState.selectedProgramType
         if (this.otype === 'program') this.programTitle = initData.title
         else if (this.otype === 'project') this.projectTitle = initData.title
-        else if (this.otype === 'subproject') this.subProjectTitle = initData.title        
+        else if (this.otype === 'subproject') this.subProjectTitle = initData.title
         this.step1.portfolioId = initData.portfolioid || 0
         this.step2.description = initData.description
         this.step2.priority = this.priorityOptions[initData.priority - 1]
