@@ -173,7 +173,7 @@
         variant="primary"
         @click="handleDelete"
       >
-        Delete
+        <feather-icon icon="TrashIcon" />&nbsp;&nbsp;<span>Delete</span>
       </b-button>
     </div>
   </div>
