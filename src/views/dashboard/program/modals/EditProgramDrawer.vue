@@ -494,6 +494,7 @@ export default {
   data() {
     return {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      nDeadlineOptions: ['Desired', 'Time to Market', 'Legal Constraint', 'Other'],
       title: '',
       lastPhase: {},
       curIndex: 1,
