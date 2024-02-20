@@ -731,7 +731,6 @@ export default {
       })
     },
     delete_project(commit, payload) {
-      console.log('ProjectPayload:', payload)
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/delete', payload)
           .then(response => {
@@ -747,7 +746,6 @@ export default {
       })
     },
     delete_subproject(commit, payload) {
-      console.log('SubPayload:', payload)
       return new Promise((resolve, reject) => {
         axios.delete('https://api.konatus.site/v1/api/subproject/delete', payload)
           .then(response => {

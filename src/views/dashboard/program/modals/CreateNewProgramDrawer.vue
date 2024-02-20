@@ -108,6 +108,7 @@
               <b-form-input
                 v-model="this.projectTitle"
                 placeholder="Enter Project name"
+                type="text"
               />
             </div>
             <div v-else>
@@ -135,6 +136,7 @@
             <div v-if="this.otype === 'subproject'">
               <b-form-input
                 v-model="this.subProjectTitle"
+                type="text"
                 placeholder="Enter SubProject name"
               />
             </div>

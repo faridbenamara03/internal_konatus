@@ -117,15 +117,16 @@ export default {
       this.inputedBudgets.push(item)
       this.budget = 0
     },
-    handleCreate() {
-      this.$store.dispatch('globalState/create_new_portfolio',
-      {
+    async handleCreate() {
+      await this.$store.dispatch('globalState/create_new_portfolio', {
         parentOrganization: this.parentOrganization,
         portfolioName: this.portfolioName,
         portfolioBudget: this.portfolioBudget,
         startDate: this.startDate,
         endDate: this.endDate
-     })
+      })
+      await this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
+      await this.$store.dispatch('globalState/load_org_data')
     }
   },
 }
