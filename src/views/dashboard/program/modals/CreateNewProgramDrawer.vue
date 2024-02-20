@@ -654,6 +654,7 @@ export default {
       this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
+      console.log('PJT:', this.projectTitle)
       const newProgramData = {
         step1: this.step1,
         step2: this.step2,

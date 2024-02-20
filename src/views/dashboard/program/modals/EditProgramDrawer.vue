@@ -266,10 +266,12 @@
       <div class="select-group--sub">
         <div class="select-box">
           <label>Nature of deadline</label>
-          <b-form-input
-            id="nature_deadline"
+          <b-form-datepicker
+            id="nature-datepicker"
             v-model="step3.n_deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
+        />
         </div>
         <div class="select-box">
           <label>Date Production Deadline</label>
