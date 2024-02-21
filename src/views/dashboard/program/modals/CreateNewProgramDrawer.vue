@@ -608,17 +608,17 @@ export default {
         // else if (this.otype === 'project') this.projectTitle = initData.title
         // else if (this.otype === 'subproject') this.subProjectTitle = initData.title
         this.step1.portfolioId = initData.portfolioid || 0
-        this.step2.description = initData.description
-        this.step2.priority = this.priorityOptions[initData.priority - 1]
-        this.step2.deadline = initData.deadline
-        this.step2.next_phase = initData.next_gate
-        this.step2.spent = initData.spent
-        this.step2.value = initData.value
-        this.step2.engaged = initData.engaged
-        this.step2.demand = initData.budget
+        this.step2.description = initData.description || ''
+        this.step2.priority = this.priorityOptions[initData.priority - 1] || 0
+        this.step2.deadline = initData.deadline || 0
+        this.step2.next_phase = initData.next_gate || 0
+        this.step2.spent = initData.spent || 0
+        this.step2.value = initData.value || 0
+        this.step2.engaged = initData.engaged || 0
+        this.step2.demand = initData.demand || 0
         // this.step2.quote = initData.quote
-        this.step2.authorized = initData.authorized
-        this.step2.realestimated = initData.realestimated
+        this.step2.authorized = initData.authorized || 0
+        this.step2.realestimated = initData.realestimated || 0
         const allPts = this.getAllPorts()
         const allPgs = this.getAllProgs()
         const allPjs = this.getAllProjects()

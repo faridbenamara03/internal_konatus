@@ -685,6 +685,7 @@ export default {
       })
     },
     update_project(commit, payload) {
+      console.log("PPP:", payload)
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/update', payload.data)
           .then(response => {

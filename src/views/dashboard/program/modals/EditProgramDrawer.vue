@@ -506,20 +506,21 @@ export default {
       exSystemString: '',
       step1: {
         system: null,
-        program: null,
         portfolio: null,
+        program: null,
         project: null,
         subproject: null,
         portfolioId: 0,
         programId: 0,
         projectId: 0,
-        subprojectId: 0
+        subProjectId: 0
       },
       step2: {
+        description: null,
         priority: null,
         value: 0,
         budget: 0,
-        description: null,
+        // quote: 0,
         deadline: null,
         next_phase: null,
         realestimated: 0,
@@ -530,7 +531,6 @@ export default {
         phase: null,
         budgetOpen: 0,
         date: null,
-        title: null
       },
       step3: {
         p_deadline: null,
@@ -538,7 +538,7 @@ export default {
         customer_ex: 0,
         sales_ex: 0,
         scoring: 0,
-        roi: 0
+        roi: 0,
       },
       step4: {
         phase_start_date: null,
@@ -547,13 +547,13 @@ export default {
       step5: {
         head_product_portfolio: null,
         product_manager: null,
+        project_manager: null,
         architect: null,
         head_program_direction: null,
         program_director: null,
+        product_line: null,
         sponsor: null,
         head_architect: null,
-        product_line: null,
-        project_manager: null,
         winrate: 0
       },
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -576,16 +576,16 @@ export default {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
-      this.step2.description = initData.description
-      this.step2.priority = this.priorityOptions[initData.priority - 1]
-      this.step2.deadline = initData.deadline
-      this.step2.next_phase = initData.next_gate
-      this.step2.spent = initData.spent
-      this.step2.value = initData.value
-      this.step2.engaged = initData.engaged
-      this.step2.demand = initData.budget
-      this.step2.authorized = initData.authorized
-      this.step2.realestimated = initData.realestimated
+      this.step2.description = initData.description || ''
+      this.step2.priority = this.priorityOptions[initData.priority - 1] || 0
+      this.step2.deadline = initData.deadline || 0
+      this.step2.next_phase = initData.next_gate || 0
+      this.step2.spent = initData.spent || 0
+      this.step2.value = initData.value || 0
+      this.step2.engaged = initData.engaged || 0
+      this.step2.demand = initData.demand || 0
+      this.step2.authorized = initData.authorized || 0
+      this.step2.realestimated = initData.realestimated || 0
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
