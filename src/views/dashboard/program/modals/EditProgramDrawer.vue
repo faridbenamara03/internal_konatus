@@ -271,7 +271,6 @@
             v-model="step3.n_deadline"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
-        />
         </div>
         <div class="select-box">
           <label>Date Production Deadline</label>
@@ -636,35 +635,51 @@ export default {
       this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
-      if (this.step2.title === null) {
-        this.$toast.error('Please input all correctly')
-      } else {
-        if (this.otype === 'program') {
-          await this.$store.dispatch('globalState/update_program', {
-            data: {
-              step1: this.step1,
-              step2: this.step2,
-              step3: this.step3,
-              step4: this.step4,
-              step5: this.step5,
-              step6: this.step6
-            }
-          })
-        } else if (this.otype === 'project') {
-          await this.$store.dispatch('globalState/update_project', {
-            data: {
-              step1: this.step1,
-              step2: this.step2,
-              step3: this.step3,
-              step4: this.step4,
-              step5: this.step5,
-              step6: this.step6
-            }
-          })
-        }
-        await this.$store.dispatch('globalState/load_org_data')
-        // this.$refs['my-modal'].hide()
+      if (this.otype === 'program') {
+        await this.$store.dispatch('globalState/update_program', {
+          data: {
+            step1: this.step1,
+            step2: this.step2,
+            step3: this.step3,
+            step4: this.step4,
+            step5: this.step5,
+            step6: this.step6,
+            id: this.step1.programId,
+            type: 'program'
+          }
+        })
+      } else if (this.otype === 'project') {
+        await this.$store.dispatch('globalState/update_project', {
+          data: {
+            step1: this.step1,
+            step2: this.step2,
+            step3: this.step3,
+            step4: this.step4,
+            step5: this.step5,
+            step6: this.step6,
+            id: this.step1.projectId,
+            type: 'project'
+          }
+        })
+      } else if (this.otype === 'subproject') {
+        await this.$store.dispatch('globalState/update_subproject', {
+          data: {
+            step1: this.step1,
+            step2: this.step2,
+            step3: this.step3,
+            step4: this.step4,
+            step5: this.step5,
+            step6: this.step6,
+            id: this.step1.subprojectId,
+            type: 'subproject'
+          }
+        })
       }
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
+      this.$store.commit('globalState/TOGGLE_EDIT_PROGRAM_DRAWER')
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)

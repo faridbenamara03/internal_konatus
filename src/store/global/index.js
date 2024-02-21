@@ -95,6 +95,7 @@ export default {
     openCreateNewUnitDrawer: false,
     openEditPortfolioDrawer: false,
     openCreateNewProgramDrawer: false,
+    openEditProgramDrawer: false,
     parentIndexForInsertElement: {},
     parentTeamTitle: ''
   },
@@ -124,6 +125,14 @@ export default {
         state.selectedProgramType = payload.type
       }
     },
+    TOGGLE_EDIT_PROGRAM_DRAWER(state, payload) {
+      const u1 = !state.openEditProgramDrawer
+      state.openEditProgramDrawer = u1
+      if (payload) {
+        state.selectedProgramObject = payload.item
+        state.selectedProgramType = payload.type
+      }
+    },
     CREATE_NEW_UNIT(state, data) {
       const u1 = !state.openCreateNewUnitDrawer
       state.openCreateNewUnitDrawer = u1
@@ -132,7 +141,6 @@ export default {
     CREATE_NEW_PORTFOLIO(state, data) {
       console.log(data)
       Vue.$toast.success('Portfolio created successfully.')
-      this.dispatch('load_org_data')
     },
     CREATE_NEW_PROJECT(state, data) {
       console.log(data)
@@ -152,6 +160,14 @@ export default {
     },
     UPDATE_PROGRAM(state, data) {
       Vue.$toast.success('Program updated successfully.')
+      console.log(data)
+    },
+    UPDATE_PORTFOLIO(state, data) {
+      Vue.$toast.success('Portfolio updated successfully.')
+      console.log(data)
+    },
+    UPDATE_SUBPROJECT(state, data) {
+      Vue.$toast.success('SubProject updated successfully.')
       console.log(data)
     },
     CREATE_NEW_PROGRAM(state, data) {
@@ -498,12 +514,18 @@ export default {
       })
     },
     create_new_portfolio(commit, payload) {
-      axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
-        const newData = response.data
-        this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
-      }).catch(err => {
-        console.log('error creating new portfolio --->', err)
-        Vue.$toast.error('Failed to create new portfolio.')
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
+          const newData = response.data
+          this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
+          this.dispatch('load_org_data').then(() => {
+            resolve()
+          })
+        }).catch(err => {
+          console.log('error creating new portfolio --->', err)
+          Vue.$toast.error('Failed to create new portfolio.')
+          reject(err)
+        })
       })
     },
     create_new_program(commit, payload) {
@@ -632,10 +654,39 @@ export default {
           })
       })
     },
+    update_portfolio(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/portfolio/update', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/UPDATE_PORTFOLIO', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error updating portfolio ---->', err)
+            Vue.$toast.error('Failed to update portfolio.')
+            reject(err)
+          })
+      })
+    },
+    update_subproject(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/subproject/update', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/UPDATE_SUBPROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error updating subproject ---->', err)
+            Vue.$toast.error('Failed to update subproject.')
+            reject(err)
+          })
+      })
+    },
     update_project(commit, payload) {
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/update', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/project/update', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/UPDATE_PROJECT', newData)
@@ -702,7 +753,7 @@ export default {
     },
     delete_portfolio(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.delete('https://api.konatus.site/v1/api/portfolio/delete', payload)
+        axios.post('https://api.konatus.site/v1/api/portfolio/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PORTFOLIO', newData)
@@ -717,7 +768,7 @@ export default {
     },
     delete_program(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.delete('https://api.konatus.site/v1/api/program/delete', payload)
+        axios.post('https://api.konatus.site/v1/api/program/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PROGRAM', newData)
@@ -747,7 +798,7 @@ export default {
     },
     delete_subproject(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.delete('https://api.konatus.site/v1/api/subproject/delete', payload)
+        axios.post('https://api.konatus.site/v1/api/subproject/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_SUBPROJECT', newData)

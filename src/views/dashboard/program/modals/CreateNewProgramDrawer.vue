@@ -106,7 +106,7 @@
             <label>Project</label>
             <div v-if="otype === 'project'">
               <b-form-input
-                v-model="this.projectTitle"
+                v-model="projectTitle"
                 placeholder="Enter Project name"
                 type="text"
               />
@@ -519,9 +519,9 @@ export default {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
       curIndex: 1,
       lastPhase: null,
-      subProjectTitle: null,
-      projectTitle: null,
-      programTitle: null,
+      subProjectTitle: '',
+      projectTitle: '',
+      programTitle: '',
       externalEditable: false,
       externalSystems: ["Jira"],
       externalSystem: "Jira",
@@ -656,7 +656,6 @@ export default {
       this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
-      console.log('PJT:', this.projectTitle)
       const newProgramData = {
         step1: this.step1,
         step2: this.step2,
@@ -668,30 +667,33 @@ export default {
         programTitle: this.programTitle,
         type: this.otype
       }
-      if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
-        this.$toast.error('Please input all correctly.')
-      } else {
-        if (this.otype === 'program') {
-          await this.$store.dispatch('globalState/create_new_program', {
-            data: {
-              ...newProgramData
-            }
-          })
-        } else if (this.otype === 'project') {
-          await this.$store.dispatch('globalState/create_new_project', {
-            data: {
-              ...newProgramData
-            }
-          })
-        } else if (this.otype === 'subproject') {
-          await this.$store.dispatch('globalState/create_new_subproject', {
-            data: {
-              ...newProgramData
-            }
-          })
-        }
-        await this.$store.dispatch('globalState/load_org_data')
+      // if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
+      //   this.$toast.error('Please input all correctly.')
+      // } else
+      if (this.otype === 'program') {
+        await this.$store.dispatch('globalState/create_new_program', {
+          data: {
+            ...newProgramData
+          }
+        })
+      } else if (this.otype === 'project') {
+        await this.$store.dispatch('globalState/create_new_project', {
+          data: {
+            ...newProgramData
+          }
+        })
+      } else if (this.otype === 'subproject') {
+        await this.$store.dispatch('globalState/create_new_subproject', {
+          data: {
+            ...newProgramData
+          }
+        })
       }
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)

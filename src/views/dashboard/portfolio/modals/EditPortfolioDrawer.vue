@@ -136,6 +136,7 @@
           <b-form-input
             v-model="budget"
             placeholder="300"
+            @input="onEdit"
           />
           <b-button
             variant="primary"
@@ -212,19 +213,28 @@ export default {
       period_start_year: null,
       period_start_month: null,
       period_end_year: null,
-      period_end_month: null
+      period_end_month: null,
+      portfolioName: ''
     }
   },
+  watch: {
+      data: {
+          immediate: true,
+          handler(newVal) {
+              this.initializeData(newVal)
+          },
+      },
+  },
   computed: {
-    portfolioName() {
-      if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') {
-        return this.$store.state.globalState.selectedNavObj.title
-      }
-      const portId = this.$store.state.globalState.selectedNavObj.portfolioId
-      const ports = this.$store.state.globalState.allPortData.filter(item => item.id === portId)
-      if (ports.length > 0) return ports[0].title
-      return ''
-    },
+    // portfolioName() {
+    //   if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') {
+    //     return this.$store.state.globalState.selectedNavObj.title
+    //   }
+    //   const portId = this.$store.state.globalState.selectedNavObj.portfolioId
+    //   const ports = this.$store.state.globalState.allPortData.filter(item => item.id === portId)
+    //   if (ports.length > 0) return ports[0].title
+    //   return ''
+    // },
     selectedType() {
       const type = this.$store.state.globalState.selectedNavObj?.type
       const firstC = type?.charAt(0).toUpperCase()
@@ -233,6 +243,16 @@ export default {
     }
   },
   methods: {
+    initializeData(data) {
+      console.log("Init:", data)
+      if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') {
+        this.portfolioName = this.$store.state.globalState.selectedNavObj.title
+      } else {
+        const portId = this.$store.state.globalState.selectedNavObj.portfolioId
+        const ports = this.$store.state.globalState.allPortData.filter(item => item.id === portId)
+        if (ports.length > 0) this.portfolioName = ports[0].title
+      }
+    },
     handleAdd() {
       const item = {
         currency: this.currency,
@@ -245,18 +265,33 @@ export default {
       const pts = Array.from(this.$store.state.globalState.allPortData)
       return pts
     },
-    handleDelete() {
-      const data = {
+    async handleDelete() {
+      const payloads = {
         portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
       }
-      this.$store.dispatch('globalState/delete_portfolio', { data })
+      await this.$store.dispatch('globalState/delete_portfolio', { payloads })
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
+      await this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     },
-    handleSave() {
-      this.edited = false
-      this.$store.commit('globalState/EDIT_PORTFOLIO',
-        {
-          portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
-        })
+    async handleSave() {
+      await this.$store.dispatch('globalState/update_portfolio', {
+        data: {
+          id: this.$store.state.globalState.selectedNavObj.type === 'portfolio' ? this.$store.state.globalState.selectedNavObj.id : this.$store.state.globalState.selectedNavObj.portfolioId,
+          parentOrganization: this.parentOrganization,
+          portfolioName: this.portfolioName,
+          portfolioBudget: this.portfolioBudget,
+          startDate: this.startDate,
+          endDate: this.endDate
+        }
+      })
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
+      await this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     },
     onEdit() {
       this.edited = true

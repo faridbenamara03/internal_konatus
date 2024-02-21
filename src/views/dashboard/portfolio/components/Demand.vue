@@ -802,7 +802,7 @@
       :mask-closable="true"
       @close="toggleEditProgramDrawerOpen"
     >
-      <div v-if="editProgramDrawerOpen">
+      <div v-if="openEditProgramDrawerOpen">
         <EditProgramDrawer
           :data="selectedObject"
           :otype="selectedType"
@@ -955,6 +955,9 @@ export default {
     }
   },
   computed: {
+    openEditProgramDrawerOpen() {
+      return this.$store.state.globalState.openEditProgramDrawer
+    },
     openCreateNewProgramDrawer() {
       return this.$store.state.globalState.openCreateNewProgramDrawer
     },
@@ -1206,6 +1209,7 @@ export default {
               default:
                 break
             }
+            this.$store.dispatch('globalState/load_org_data')
           }
         })
     },
@@ -1228,7 +1232,8 @@ export default {
     toggleEditProgramDrawerOpen(item, type) {
       this.selectedObject = item
       this.selectedType = type
-      this.editProgramDrawerOpen = !this.editProgramDrawerOpen
+      const payload = { item, type }
+      this.$store.commit('globalState/TOGGLE_EDIT_PROGRAM_DRAWER', payload)
     },
     onCollapseClick(index) {
       if (index === this.opened) {
