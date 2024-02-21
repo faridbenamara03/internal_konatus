@@ -52,9 +52,9 @@
                 :style="`width:${100 / c_fields.length}%`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
-                <span v-else-if="ft === 'architect'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -128,6 +128,11 @@
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
+                      <b-form-input
+                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                        v-model="item1[ft]"
+                        style="text-align:end"
+                      />
                       <b-input-group v-else>
                         <b-form-input
                           v-model="item1[ft]"
@@ -161,10 +166,10 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ getSelectedWinRate }}
+                        {{ item1[ft] }}
                       </div>
                       <div
-                        v-else-if="ft === 'architect'"
+                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -251,6 +256,11 @@
                             style="text-align:end"
                           />
                           <!-- <b-input-group v-else-if="ft === 'authorized' || ft === 'winrate' || ft === 'prev_engaged' || ft === 'quote_engaged' || ft === 'value' || ft === 'demand' || ft === 'budget' || ft === 'description' || ft === 'architect' || ft === 'product_manager'"> -->
+                          <b-form-input
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
                           <b-input-group v-else>
                             <b-form-input
                               v-model="item2[ft]"
@@ -284,7 +294,14 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ getSelectedWinRate }}
+                            {{ item2[ft] }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ item2[ft] }}
                           </div>
                           <div
                             v-else
@@ -345,7 +362,7 @@
                                 class="mr-1"
                                 style="margin-top:6px;"
                               >
-                                {{ formatCurrency(item2[ft]) }}
+                                {{ formatCurrency(item3[ft]) }}
                               </div>
                               <v-select
                                 v-else-if="ft === 'priority'"
@@ -355,6 +372,11 @@
                               />
                               <b-form-input
                                 v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                                v-model="item3[ft]"
+                                style="text-align:end"
+                              />
+                              <b-form-input
+                                v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
                                 v-model="item3[ft]"
                                 style="text-align:end"
                               />
@@ -391,7 +413,14 @@
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
-                                {{ getSelectedWinRate }}
+                                {{ item[ft] }}
+                              </div>
+                              <div
+                                v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                                class="mr-3"
+                                style="margin-top:6px;"
+                              >
+                                {{ item3[ft] }}
                               </div>
                               <div
                                 v-else
@@ -464,8 +493,8 @@
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate'">{{ getSelectedWinRate }}</span>
-                <span v-else-if="ft === 'architect'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -526,7 +555,7 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ formatCurrency(item2[ft]) }}
+                        {{ formatCurrency(item1[ft]) }}
                       </div>
                       <v-select
                         v-else-if="ft === 'priority'"
@@ -536,6 +565,11 @@
                       />
                       <b-form-input
                         v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                        v-model="item1[ft]"
+                        style="text-align:end"
+                      />
+                      <b-form-input
+                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
                         v-model="item1[ft]"
                         style="text-align:end"
                       />
@@ -572,7 +606,14 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ getSelectedWinRate }}
+                        {{ item1[ft] }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ item1[ft] }}
                       </div>
                       <div
                         v-else
@@ -646,6 +687,11 @@
                             v-model="item2[ft]"
                             style="text-align:end"
                           />
+                          <b-form-input
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
                           <b-input-group v-else>
                             <b-form-input
                               v-model="item2[ft]"
@@ -682,11 +728,11 @@
                             {{ getSelectedWinRate }}
                           </div>
                           <div
-                            v-else-if="ft === 'architect'"
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ item1[ft] }}
+                            {{ item2[ft] }}
                           </div>
                           <div
                             v-else
@@ -1024,6 +1070,7 @@ export default {
           nd.spent = spent
           return nd
         })
+        console.log("PNDT:", ndt)
         return ndt
       }
       const ndt = this.data.children.map(t => {
@@ -1117,6 +1164,7 @@ export default {
         }
         return t
       })
+      console.log("NDT:", ndt)
       return ndt
     },
     c_totalBudget() {
