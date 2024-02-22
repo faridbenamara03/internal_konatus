@@ -23,7 +23,7 @@
             @click="onCollapseClick(index1)"
           >
             <feather-icon
-              v-if="item1.children"
+              v-if="item1 !== undefined && item1.children"
               :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
               size="16"
               class="mr-1"
@@ -32,7 +32,7 @@
               {{ item1.title }}
             </p>
           </div>
-          <template v-if="item1.children && openedCollapse === index1">
+          <template v-if="item1 !== undefined && item1.children && openedCollapse === index1">
             <div
               v-for="(item2, index2) in item1.children"
               :key="index2"
@@ -120,7 +120,7 @@
         </div>
 
         <div
-          v-for="(item1, index1) in itemsForReporting[0].children"
+          v-for="(item1, index1) in itemsForReporting.children"
           :key="index1"
         >
           <div
@@ -159,7 +159,7 @@
               </div>
             </b-card>
           </div>
-          <template v-if="onOptimiseIndex() === 'optimise' && item1.children && openedCollapse === index1">
+          <template v-if="onOptimiseIndex() === 'optimise' && item1 !== undefined && item1.children && openedCollapse === index1">
             <div
               v-for="(item2, index2) in item1.children"
               :key="index2"
@@ -235,7 +235,7 @@
               </div>
             </b-card>
           </div>
-          <template v-if="onOptimiseIndex() === 'origin' && item1.children && openedCollapse === index1">
+          <template v-if="onOptimiseIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
             <div
               v-for="(item2, index2) in item1.children"
               :key="index2"
