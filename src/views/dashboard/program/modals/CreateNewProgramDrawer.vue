@@ -79,8 +79,9 @@
             <label>Program</label>
             <div v-if="otype === 'program' || otype === 'portfolio'">
               <b-form-input
-                v-model="step1.programTitle"
+                v-model="programTitle"
                 placeholder="Enter Program name"
+                type="text"
               />
             </div>
             <div v-else>
@@ -135,7 +136,7 @@
             <label>Sub Project(Optional)</label>
             <div v-if="this.otype === 'subproject'">
               <b-form-input
-                v-model="this.subProjectTitle"
+                v-model="subProjectTitle"
                 type="text"
                 placeholder="Enter SubProject name"
               />
@@ -667,6 +668,23 @@ export default {
         programTitle: this.programTitle,
         type: this.otype
       }
+      if (this.step2.deadline === null || this.step2.deadline === 0) {
+        this.$toast.error('Please select correct deadline.')
+        return
+      }
+      if (this.otype === 'program' && this.step1.portfolioId === 0) {
+        this.$toast.error('Please select correct portfolio.')
+        return
+      }
+      if (this.otype === 'project' && this.step1.programId === 0) {
+        this.$toast.error('Please select correct program.')
+        return
+      }
+      if (this.otype === 'subproject' && this.step1.projectId === 0) {
+        this.$toast.error('Please select correct project.')
+        return
+      }
+
       // if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
       //   this.$toast.error('Please input all correctly.')
       // } else
@@ -693,7 +711,7 @@ export default {
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
       })
-      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+      // this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)
