@@ -10,11 +10,11 @@
           style="margin-top:50px;"
         >
           <p class="m-0 text-uppercase">
-            {{ itemsForReporting[0].title }}
+            {{ itemsForReporting.title }}
           </p>
         </div>
         <div
-          v-for="(item1, index1) in itemsForReporting[0].children"
+          v-for="(item1, index1) in itemsForReporting.children"
           :key="index1"
         >
           <div

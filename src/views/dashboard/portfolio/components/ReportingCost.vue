@@ -7,7 +7,7 @@
       </b-button>
     </div> -->
     <div class="border-top border-bottom">
-      <div v-for="(item, index) in data" :key="index" class="d-flex">
+      <div v-for="(item, index) in data.children" :key="index" class="d-flex">
         <div style="flex:6" class="border-right pr-2 pl-2">
           <div class="border-bottom">
             <div class="row-custom boldTxt">

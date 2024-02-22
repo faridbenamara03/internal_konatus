@@ -630,6 +630,7 @@ export default {
       return this.$store.state.globalState.portfolioControlData
     },
     reportingData() {
+      console.log('ReportingData:', this.$store.state.globalState.portfolioReportingData)
       return this.$store.state.globalState.portfolioReportingData
     }
   },

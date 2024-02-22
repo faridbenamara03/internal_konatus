@@ -504,6 +504,9 @@ export default {
       externalSystem: "Jira",
       externalId: "JR-12345",
       exSystemString: '',
+      programTitle: '',
+      projectTitle: '',
+      subprojectTitle: '',
       step1: {
         system: null,
         portfolio: null,
