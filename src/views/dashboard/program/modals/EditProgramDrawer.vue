@@ -70,6 +70,7 @@
             <b-form-input
               v-model="step1.portfolioId"
               @customChange="e => handleCustomChange(e, 'portfolioId')"
+              :disabled="true"
             />
           </div>
         </div>
