@@ -410,7 +410,7 @@
       <b-button
         variant="primary"
         class="fixed-create-button"
-        @click="toggleCreateNewProgramDrawer"
+        @click="toggleOpenDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>
@@ -547,7 +547,6 @@ export default {
       rangeArray: [],
       reportingState: 'cost',
       open: false,
-      openCreateNewProgramDrawer: false,
       openEditProgramDrawer: false,
       updateIndex: false,
       originIndex: true,
@@ -596,6 +595,9 @@ export default {
   computed: {
     openCreateNewPortfolioDrawer() {
       return this.$store.state.globalState.openCreateNewPortfolioDrawer
+    },
+    openCreateNewProgramDrawer() {
+      return this.$store.state.globalState.openCreateNewProgramDrawer
     },
     openEditPortfolioDrawer() {
       return this.$store.state.globalState.openEditPortfolioDrawer
@@ -691,8 +693,16 @@ export default {
     handleToggleUpdateHide() {
       this.updateIndex = false
     },
+    toggleOpenDrawer() {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      if (navObj.type === 'company') {
+        this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
+      } else if (navObj.type === 'portfolio') {
+        this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+      }
+    },
     toggleCreateNewProgramDrawer() {
-      this.openCreateNewProgramDrawer = !this.openCreateNewProgramDrawer
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

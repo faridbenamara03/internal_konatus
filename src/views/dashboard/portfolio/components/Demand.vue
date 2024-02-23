@@ -1224,10 +1224,11 @@ export default {
     }
   },
   methods: {
-    handleDeleteItem(item, type) {
+    async handleDeleteItem(item, type) {
       console.log('handleDeleteItem=> item:', item, 'type:', type)
-      this.$bvModal
-        .msgBoxConfirm('Please confirm that you want to delete this.', {
+      try {
+        // Show confirmation dialog and wait for user action
+        const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
           title: 'Please Confirm',
           size: 'sm',
           okVariant: 'primary',
@@ -1237,30 +1238,33 @@ export default {
           hideHeaderClose: false,
           centered: true,
         })
-        .then(value => {
-          if (value) {
-            switch (type) {
-              case 'portfolio':
-                this.$store.dispatch('globalState/delete_portfolio', { id: item.id })
-                break
-              case 'program':
-                this.$store.dispatch('globalState/delete_program', { id: item.id })
-                break
-              case 'project':
-                this.$store.dispatch('globalState/delete_project', { id: item.id })
-                break
-              case 'subproject':
-                this.$store.dispatch('globalState/delete_subproject', { id: item.id })
-                break
-              default:
-                break
-            }
-            const data = this.$store.state.globalState.selectedNavObj
-            this.$store.dispatch('globalState/get_from_selected_nav_id', {
-              data
-            })
+        if (value) {
+          // If user confirms deletion, handle it based on the type
+          switch (type) {
+            case 'portfolio':
+              await this.$store.dispatch('globalState/delete_portfolio', { id: item.id })
+              break
+            case 'program':
+              await this.$store.dispatch('globalState/delete_program', { id: item.id })
+              break
+            case 'project':
+              await this.$store.dispatch('globalState/delete_project', { id: item.id })
+              break
+            case 'subproject':
+              await this.$store.dispatch('globalState/delete_subproject', { id: item.id })
+              break
+            default:
+              // Handle any other cases or do nothing
+              break
           }
-        })
+          // After deletion, refresh data based on the current navigation selection
+          const data = this.$store.state.globalState.selectedNavObj
+          await this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+        }
+      } catch (error) {
+        console.error('Error in handleDeleteItem:', error)
+        // Optionally handle any errors, e.g., show an error message
+      }
     },
     toggleCreateNewPortfolioDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')

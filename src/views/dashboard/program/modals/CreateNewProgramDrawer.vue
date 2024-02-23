@@ -604,6 +604,7 @@ export default {
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
         if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
+        this.step1.portfolioId = this.$store.state.globalState.selectedNavObj.type === 'portfolio' ? this.$store.state.globalState.selectedNavObj.id : 0
       } else {
         this.otype = this.$store.state.globalState.selectedProgramType
         // if (this.otype === 'program') this.programTitle = initData.title
@@ -627,6 +628,7 @@ export default {
         const portfolios = allPts.filter(port => port.id === initData.portfolioid)
         if (portfolios.length > 0) {
           [this.step1.portfolio] = portfolios
+          this.step1.portfolioId = this.step1.portfolio.id
         }
         if (initData.type === "program") {
           this.step1.programId = initData.id || 0
@@ -675,6 +677,10 @@ export default {
         return
       }
       if (this.otype === 'program' && this.step1.portfolioId === 0) {
+        this.$toast.error('Please select correct portfolio.')
+        return
+      }
+      if (this.otype === 'portfolio' && this.step1.portfolioId === 0) {
         this.$toast.error('Please select correct portfolio.')
         return
       }
