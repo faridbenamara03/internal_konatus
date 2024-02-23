@@ -650,7 +650,7 @@ export default {
       const phases = this.$store.state.globalState.allPhaseData
       phases.sort((a, b) => a.id - b.id)
       this.lastPhase = phases.at(-1)
-      if(this.otype === null) this.otype = 'company';
+      if (this.otype === null) this.otype = 'company'
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
