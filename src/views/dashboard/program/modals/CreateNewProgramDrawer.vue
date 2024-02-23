@@ -69,6 +69,7 @@
             <label>PortfolioID</label>
             <b-form-input
               v-model="step1.portfolioId"
+              :disabled="true"
             />
           </div>
         </div>
@@ -97,6 +98,7 @@
             <label>ProgramID</label>
             <b-form-input
               v-model="step1.programId"
+              :disabled="true"
             />
           </div>
         </div>
@@ -126,6 +128,7 @@
             <label>ProjectID</label>
             <b-form-input
               v-model="step1.projectId"
+              :disabled="true"
             />
           </div>
         </div>
@@ -155,6 +158,7 @@
             <label>SubProject</label>
             <b-form-input
               v-model="step1.subProjectId"
+              :disabled="true"
             />
           </div>
         </div>
