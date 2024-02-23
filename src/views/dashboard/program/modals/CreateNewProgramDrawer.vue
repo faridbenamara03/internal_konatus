@@ -690,7 +690,7 @@ export default {
       // if (this.step1.portfolio === null || this.step2.title === null || this.step2.priority === null || this.step2.deadline === null) {
       //   this.$toast.error('Please input all correctly.')
       // } else
-      if (this.otype === 'program') {
+      if (this.otype === 'program' || this.otype === 'portfolio' || this.otype === 'company') {
         await this.$store.dispatch('globalState/create_new_program', {
           data: {
             ...newProgramData
