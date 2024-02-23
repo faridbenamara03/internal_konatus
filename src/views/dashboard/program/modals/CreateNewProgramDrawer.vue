@@ -79,7 +79,7 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Program</label>
-            <div v-if="otype === 'program' || otype === 'portfolio'">
+            <div v-if="otype === 'program' || otype === 'portfolio' || otype === 'company'">
               <b-form-input
                 v-model="programTitle"
                 placeholder="Enter Program name"
@@ -344,7 +344,7 @@
       </div>
     </div>
     <div
-      v-if="otype !== 'program' && otype !== 'portfolio' && otype !== null"
+      v-if="otype !== 'program' && otype !== 'portfolio' && otype !== null && otype !== 'company'"
       class="select-group"
       style="padding-top: 0px"
     >
@@ -650,6 +650,7 @@ export default {
       const phases = this.$store.state.globalState.allPhaseData
       phases.sort((a, b) => a.id - b.id)
       this.lastPhase = phases.at(-1)
+      if(this.otype === null) this.otype = 'company';
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
