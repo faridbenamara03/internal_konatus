@@ -63,6 +63,7 @@
               :options="getAllPorts()"
               :value="step1.portfolio === null ? null : step1.portfolio.title"
               @customChange="e => handleCustomChange(e, 'portfolio')"
+              :disabled="true"
             />
           </div>
           <div class="w-50 pl-1">
@@ -91,6 +92,7 @@
                 :options="getAllProgs()"
                 :value="step1.program === null ? null : step1.program.title"
                 @customChange="e => handleCustomChange(e, 'program')"
+                :disabled="true"
               />
             </div>
           </div>
@@ -206,6 +208,7 @@
           <b-form-input
             v-model="step2.realestimated"
             type="number"
+            :disabled="true"
           />
         </div>
       </div>
@@ -215,6 +218,7 @@
           <b-form-input
             v-model="step2.engaged"
             type="number"
+            :disabled="true"
           />
         </div>
         <div class="select-box">
@@ -222,6 +226,7 @@
           <b-form-input
             v-model="step2.spent"
             type="number"
+            :disabled="true"
           />
         </div>
       </div>
@@ -243,11 +248,10 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Deadline</label>
-          <b-form-datepicker
-            id="program_deadline"
-            v-model="step2.deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+          <label>WinRate</label>
+          <b-form-input
+            v-model="step5.winrate"
+            placeholder="Input WinRate"
           />
         </div>
         <div class="select-box">
@@ -258,16 +262,6 @@
             :disabled="true"
           />
         </div>
-      </div>
-      <div class="select-group-sub">
-        <div class="select-box w-50">
-          <label>WinRate</label>
-          <b-form-input
-            v-model="step5.winrate"
-            placeholder="Input WinRate"
-          />
-        </div>
-        <div class="select-box" />
       </div>
     </div>
     <div
@@ -283,18 +277,18 @@
       </div>
       <div class="select-group--sub">
         <div class="select-box">
-          <label>Date Production Deadline</label>
-          <b-form-datepicker
-            id="production-datepicker"
-            v-model="step3.p_deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
-        <div class="select-box">
           <label>Nature of deadline</label>
           <b-form-input
             id="nature_deadline"
             v-model="step3.n_deadline"
+          />
+        </div>
+        <div class="select-box">
+          <label>Deadline</label>
+          <b-form-datepicker
+            id="program_deadline"
+            v-model="step2.deadline"
+            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
       </div>

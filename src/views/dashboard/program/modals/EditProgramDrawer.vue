@@ -242,17 +242,6 @@
           />
         </div>
       </div>
-      <div class="select-group--sub">
-        <div class="select-box w-50">
-          <label>Deadline</label>
-          <b-form-datepicker
-            id="program_deadline"
-            v-model="step2.deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-          />
-        </div>
-        <div class="select-box w-50" />
-      </div>
     </div>
     <div
       class="select-group"
@@ -265,20 +254,21 @@
         <h5>RationalE</h5>
       </div>
       <div class="select-group--sub">
-        <div class="select-box">
-          <label>Nature of deadline</label>
+        <div class="select-box w-50">
+          <label>Deadline</label>
           <b-form-datepicker
-            id="nature-datepicker"
-            v-model="step3.n_deadline"
+            id="program_deadline"
+            v-model="step2.deadline"
             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
           />
         </div>
-        <div class="select-box">
-          <label>Date Production Deadline</label>
-          <b-form-datepicker
-            id="production-datepicker"
-            v-model="step3.p_deadline"
-            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+        <div class="select-box w-50" >
+          <label>Nature of deadline</label>
+          <v-select
+            v-model="step3.n_deadline"
+            :options="nDeadlineOptions"
+            placeholder="Select Nature of deadline"
+            outlined
           />
         </div>
       </div>
@@ -496,7 +486,8 @@ export default {
   data() {
     return {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
-      nDeadlineOptions: ['Desired', 'Time to Market', 'Legal Constraint', 'Other'],
+      // nDeadlineOptions: ['Desired', 'Time to Market', 'Legal Constraint', 'Other'],
+      nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       title: '',
       lastPhase: {},
       curIndex: 1,
@@ -639,6 +630,22 @@ export default {
       this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
+      if (this.step2.deadline === null || this.step2.deadline === 0) {
+        this.$toast.error('Please select correct deadline.')
+        return
+      }
+      if (this.otype === 'program' && this.step1.portfolioId === 0) {
+        this.$toast.error('Please select correct portfolio.')
+        return
+      }
+      if (this.otype === 'project' && this.step1.programId === 0) {
+        this.$toast.error('Please select correct program.')
+        return
+      }
+      if (this.otype === 'subproject' && this.step1.projectId === 0) {
+        this.$toast.error('Please select correct project.')
+        return
+      }
       if (this.otype === 'program') {
         await this.$store.dispatch('globalState/update_program', {
           data: {

@@ -1070,7 +1070,6 @@ export default {
           nd.spent = spent
           return nd
         })
-        console.log("PNDT:", ndt)
         return ndt
       }
       const ndt = this.data.children.map(t => {
@@ -1164,7 +1163,6 @@ export default {
         }
         return t
       })
-      console.log("NDT:", ndt)
       return ndt
     },
     c_totalBudget() {
@@ -1257,7 +1255,10 @@ export default {
               default:
                 break
             }
-            this.$store.dispatch('globalState/load_org_data')
+            const data = this.$store.state.globalState.selectedNavObj
+            this.$store.dispatch('globalState/get_from_selected_nav_id', {
+              data
+            })
           }
         })
     },

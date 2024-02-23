@@ -54,6 +54,7 @@ export default {
     projectReportingEditableData: [],
     selectedNavId: '',
     selectedNavObj: {},
+    natureDeadLines: [],
     optimiseState: 'origin',
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
@@ -175,6 +176,9 @@ export default {
       const u1 = !state.openCreateNewProgramDrawer
       state.openCreateNewProgramDrawer = u1
       Vue.$toast.success('Program created successfully.')
+    },
+    LOAD_ALL_NATURE_DEADLINE(state, data) {
+      state.natureDeadLines = data
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       state.allPhaseData = data
@@ -586,6 +590,21 @@ export default {
           .catch(err => {
             console.log('error getting all phase data ---->', err)
             Vue.$toast.error('Failed to get all phase data.')
+            reject(err)
+          })
+      })
+    },
+    get_all_nature_deadlines() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/nature/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_NATURE_DEADLINE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all nature deadlines data ---->', err)
+            Vue.$toast.error('Failed to get all nature deadlines data.')
             reject(err)
           })
       })

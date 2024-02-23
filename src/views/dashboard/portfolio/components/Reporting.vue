@@ -478,6 +478,7 @@ export default {
       // console.log("WW:", this.windowWidth)
     },
     getValue(item, type, isChild) {
+      console.log("Item:", item)
       let result = 0
       if (isChild) {
         if (item.phases) {

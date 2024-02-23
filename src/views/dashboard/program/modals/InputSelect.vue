@@ -13,12 +13,14 @@
       </template>
       <b-form-input
         :value="value"
+        :disabled="disabled"
         :placeholder="placeholder"
         @focus="showSelectMenu"
         @input="handleChange"
       />
     </b-input-group>
     <div
+      v-if="disabled !== true"
       :style="`display:${this.dropdownOpen ? 'block' : 'none'};position:absolute;z-index:10;width:47.5%;`"
       class="portf-sub-header-bg border-top-0 border border-secondary"
     >
@@ -68,6 +70,10 @@ export default {
       type: String,
       default: () => '',
     },
+    disabled: {
+      type: Boolean,
+      default: () => true
+    }
   },
   data() {
     return {
