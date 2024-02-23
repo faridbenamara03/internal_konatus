@@ -344,7 +344,7 @@
       </div>
     </div>
     <div
-      v-if="otype !== 'program' && otype !== 'portfolio'"
+      v-if="otype !== 'program' && otype !== 'portfolio' && otype !== null"
       class="select-group"
       style="padding-top: 0px"
     >
