@@ -278,9 +278,11 @@
       <div class="select-group--sub">
         <div class="select-box">
           <label>Nature of deadline</label>
-          <b-form-input
-            id="nature_deadline"
+          <v-select
             v-model="step3.n_deadline"
+            :options="nDeadlineOptions"
+            placeholder="Select Nature of deadline"
+            outlined
           />
         </div>
         <div class="select-box">
@@ -516,6 +518,7 @@ export default {
   data() {
     return {
       priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       curIndex: 1,
       lastPhase: null,
       subProjectTitle: '',
