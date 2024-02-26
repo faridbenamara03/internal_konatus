@@ -261,11 +261,10 @@
           <div
             v-else
           >
-            <label>Next Phase</label>
+            <label>Current Phase</label>
             <b-form-input
               id="program_nextphase"
               v-model="step2.next_phase"
-              :disabled="true"
             />
           </div>
         </div>

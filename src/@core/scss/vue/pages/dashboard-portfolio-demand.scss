@@ -52,6 +52,7 @@
     }
     .part1 {
       width: 20%;
+      min-width: 200px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -60,6 +61,7 @@
       display: flex;
       width: 70%;
       .data-child {
+        width: 300px;
         text-align: end;
       }
     }
@@ -67,7 +69,8 @@
       display: flex;
       justify-content: end;
       width: 10%;
-      .data-child {
+      min-width: 150px;
+        .data-child {
         width: 30%;
       }
     }

@@ -8,19 +8,20 @@
       class="portf-demand-view"
     >
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
-        <div class="part1">
+        <div class="part1" :style="`min-width: 200px`">
           <!-- Consumer Robots -->
         </div>
-        <div class="part2">
+        <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
           <div
             v-for="(ft, fi) in c_fields"
             :key="fi"
             class="data-child mr-1 portf-uppercase pr-1"
-            :style="`width:${100 / c_fields.length}%`"
+            :style="`min-width:200px`"
           >
             {{ ft }}
           </div>
         </div>
+        <div class="part3" :style="`margin-left: 200px`" />
       </div>
       <div v-if="otype === 'company'">
         <div
@@ -44,12 +45,12 @@
               />
               {{ item.title }}
             </div>
-            <div class="part2">
+            <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
               <div
                 v-for="(ft, fi) in c_fields"
                 :key="fi"
                 class="data-child mr-1 pr-1"
-                :style="`width:${100 / c_fields.length}%`"
+                :style="`min-width:200px`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
@@ -58,7 +59,7 @@
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
-            <div class="part3 d-flex justify-content-center">
+            <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
               <!-- <b-button
                 variant="flat-primary"
                 @click="toggleEditPortfolioDrawerOpen(item)"
@@ -85,7 +86,7 @@
               :key="index1+10"
             >
               <div
-                class="portf-row portf-table-row font-14 border-bottom-dm"
+                class="portf-row portf-table-row font-14"
                 :class="{ 'inner-sdw': index1 === 0 }"
                 :style="`background-color:${!selectedObject ? '#0000' : item1.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
               >
@@ -102,12 +103,12 @@
                   />
                   {{ item1.title }}
                 </div>
-                <div class="part2">
+                <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
                   <div
                     v-for="(ft, fi) in c_fields"
                     :key="fi"
                     class="data-child mr-1"
-                    :style="`width:${100 / c_fields.length}%`"
+                    :style="`min-width:200px`"
                   >
                     <div v-if="demandTableEditable">
                       <div
@@ -185,7 +186,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="part3 d-flex justify-content-center">
+                <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
                   <b-button
                     variant="flat-primary"
                     @click="handleDeleteItem(item1, 'program')"
@@ -212,7 +213,7 @@
                   :key="index2+100"
                 >
                   <div
-                    class="portf-row portf-table-row font-14 border-bottom-dm"
+                    class="portf-row portf-table-row font-14"
                     :class="{ 'inner-sdw': index2 === 0 }"
                     :style="`background-color:${!selectedObject ? '#0000' : item2.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
                   >
@@ -229,12 +230,12 @@
                       />
                       {{ item2.title }}
                     </div>
-                    <div class="part2">
+                    <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
                       <div
                         v-for="(ft, fi) in c_fields"
                         :key="fi"
                         class="data-child mr-1"
-                        :style="`width:${100 / c_fields.length}%`"
+                        :style="`min-width:200px`"
                       >
                         <div v-if="demandTableEditable">
                           <div
@@ -313,7 +314,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="part3 d-flex justify-content-center">
+                    <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
                       <b-button
                         variant="flat-primary"
                         @click="handleDeleteItem(item2, 'project')"
@@ -340,7 +341,7 @@
                       :key="index3+1000"
                     >
                       <div
-                        class="portf-row portf-table-row font-14 border-bottom-dm"
+                        class="portf-row portf-table-row font-14"
                         :class="{ 'inner-sdw': index3 === 0 }"
                       >
                         <div
@@ -349,12 +350,12 @@
                         >
                           {{ item3.title }}
                         </div>
-                        <div class="part2">
+                        <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
                           <div
                             v-for="(ft, fi) in c_fields"
                             :key="fi"
                             class="data-child mr-1"
-                            :style="`width:${100 / c_fields.length}%`"
+                            :style="`min-width:200px`"
                           >
                             <div v-if="demandTableEditable">
                               <div
@@ -432,7 +433,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="part3 d-flex justify-content-center">
+                        <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
                           <b-button
                             variant="flat-primary"
                             @click="handleDeleteItem(item3, 'subproject')"
@@ -484,12 +485,12 @@
               />
               {{ item.title }}
             </div>
-            <div class="part2">
+            <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
               <div
                 v-for="(ft, fi) in c_fields"
                 :key="fi"
                 class="data-child mr-1 pr-1"
-                :style="`width:${100 / c_fields.length}%`"
+                :style="`min-width:200px`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
@@ -498,7 +499,7 @@
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
-            <div class="part3 d-flex justify-content-center">
+            <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
               <b-button
                 variant="flat-primary"
                 @click="handleDeleteItem(item, 'program')"
@@ -525,8 +526,9 @@
               :key="index1"
               :style="`background-color:${!selectedObject ? '#0000' : item1.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
             >
+            <!-- border-bottom-dm -->
               <div
-                class="portf-row portf-table-row font-14 border-bottom-dm"
+                class="portf-row portf-table-row font-14"
                 :class="{ 'inner-sdw': index1 === 0 }"
               >
                 <div
@@ -542,12 +544,12 @@
                   />
                   {{ item1.title }}
                 </div>
-                <div class="part2">
+                <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
                   <div
                     v-for="(ft, fi) in c_fields"
                     :key="fi"
                     class="data-child mr-1"
-                    :style="`width:${100 / c_fields.length}%`"
+                    :style="`min-width:200px`"
                   >
                     <div v-if="demandTableEditable">
                       <div
@@ -625,7 +627,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="part3 d-flex justify-content-center">
+                <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
                   <b-button
                     variant="flat-primary"
                     @click="handleDeleteItem(item1, 'project')"
@@ -652,7 +654,7 @@
                   :key="index2"
                 >
                   <div
-                    class="portf-row portf-table-row font-14 border-bottom-dm"
+                    class="portf-row portf-table-row font-14"
                     :class="{ 'inner-sdw': index2 === 0 }"
                   >
                     <div
@@ -661,12 +663,12 @@
                     >
                       {{ item2.title }}
                     </div>
-                    <div class="part2">
+                    <div class="part2" :style="`min-width: ${200 * c_fields.length}px`">
                       <div
                         v-for="(ft, fi) in c_fields"
                         :key="fi"
                         class="data-child mr-1"
-                        :style="`width:${100 / c_fields.length}%`"
+                        :style="`min-width:200px`"
                       >
                         <div v-if="demandTableEditable">
                           <div
@@ -744,7 +746,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="part3 d-flex justify-content-center">
+                    <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
                       <b-button
                         variant="flat-primary"
                         @click="handleDeleteItem(item2, 'subproject')"

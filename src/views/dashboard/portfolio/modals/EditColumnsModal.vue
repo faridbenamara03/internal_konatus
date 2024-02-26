@@ -111,7 +111,7 @@
           :options="option_phases"
           outlined
           multiple
-          :disabled="selected.includes('phase') ? true : false"
+          :disabled="selected.includes('nextphase') ? true : false"
           @input="onPhaseSelect(phaseStartDate, 1)"
         />
         <label>Phase End Date</label>
@@ -121,7 +121,7 @@
           :options="option_phases"
           outlined
           multiple
-          :disabled="selected.includes('phase') ? true : false"
+          :disabled="selected.includes('nextphase') ? true : false"
           @input="onPhaseSelect(phaseEndDate, 2)"
         />
       </div>
@@ -201,6 +201,8 @@ export default {
       phaseStartDate: 0,
       phaseEndDate: 0,
       selected: [],
+      selectedPhaseStart: [],
+      selectedPhaseEnd: [],
       winrateSelectable: false,
       isSelectedExId: false,
       isSelectedExSystem: false,
@@ -273,6 +275,7 @@ export default {
   },
   methods: {
     initializeData(data) {
+      this.selectedPhase = []
       console.log(data)
     },
     handleSelectExIdChange() {
@@ -285,20 +288,35 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleSave() {
+      if (this.selectedPhaseStart.length > 0) {
+        this.selected.push(...this.selectedPhaseStart)
+      } else {
+        this.selected = this.selected.filter(item => item.indexOf('startdate') <= 0)
+      }
+      if (this.selectedPhaseEnd.length > 0) {
+        this.selected.push(...this.selectedPhaseEnd)
+      } else {
+        this.selected = this.selected.filter(item => item.indexOf('enddate') <= 0)
+      }
       this.$emit('columnChange', this.selected)
       this.$refs['my-modal'].hide()
     },
     onPhaseSelect(selectedPhase, type) {
-      selectedPhase.forEach(t => {
-        let item = ''
-        if (type === 1) {
-          item = `${t.toLowerCase()}startdate`
-        } else {
-          item = `${t.toLowerCase()}enddate`
-        }
-        console.log("IT:", item)
-        this.selected.push(item)
-      })
+      if (selectedPhase.length === 0) {
+        if (type === 1) this.selectedPhaseStart = []
+        if (type === 2) this.selectedPhaseEnd = []
+      } else {
+        selectedPhase.forEach(t => {
+          let item = ''
+          if (type === 1) {
+            item = `${t.toLowerCase()}startdate`
+            this.selectedPhaseStart.push(item)
+          } else {
+            item = `${t.toLowerCase()}enddate`
+            this.selectedPhaseEnd.push(item)
+          }
+        })
+      }
     }
   }
 }
