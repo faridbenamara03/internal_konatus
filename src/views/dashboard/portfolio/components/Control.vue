@@ -266,7 +266,7 @@ export default {
     return {
       collapsedT: [],
       opened: 0,
-      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       // c_fields: ['priority', 'value', 'budget', 'next_gate'],
       c_fields: ['priority', 'value', 'budget'],

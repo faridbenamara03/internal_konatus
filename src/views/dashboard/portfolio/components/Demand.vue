@@ -939,7 +939,7 @@ export default {
       opened: 0,
       openedPj: 0,
       openedPg: 0,
-      priorities: ['Highest', 'High', 'Low', 'Lowest'],
+      priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       chartOptions: {
         chart: {
           type: 'bar',

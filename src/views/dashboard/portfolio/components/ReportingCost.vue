@@ -136,7 +136,7 @@ export default {
   },
   data() {
     return {
-      priorities: ['Highest', 'High', 'Low', 'Lowest'],
+      priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       colorArr: ['darkgreen', 'darkred', 'darkcyan'],
       iconArr: ['ArrowUpIcon', 'ArrowDownIcon', 'MinusIcon'],
       collapseOpen: { index: 0, openState: 'flex' },

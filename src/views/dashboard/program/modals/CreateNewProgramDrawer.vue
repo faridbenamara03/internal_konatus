@@ -255,12 +255,19 @@
           />
         </div>
         <div class="select-box">
-          <label>Next Phase</label>
-          <b-form-input
-            id="program_nextphase"
-            v-model="step2.next_phase"
-            :disabled="true"
+          <div
+            v-if="otype === 'program' || otype === 'portfolio' || otype === 'company'"
           />
+          <div
+            v-else
+          >
+            <label>Next Phase</label>
+            <b-form-input
+              id="program_nextphase"
+              v-model="step2.next_phase"
+              :disabled="true"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -517,7 +524,7 @@ export default {
   },
   data() {
     return {
-      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       curIndex: 1,
       lastPhase: null,

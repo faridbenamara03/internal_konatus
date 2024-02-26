@@ -181,9 +181,11 @@ export default {
       state.natureDeadLines = data
     },
     LOAD_ALL_PHASE_DATA(state, data) {
-      state.allPhaseData = data
+      let phaseData = data
+      phaseData = phaseData.sort((a, b) => a.id - b.id)
+      state.allPhaseData = phaseData
       const pTitleData = []
-      data.forEach(t => {
+      phaseData.forEach(t => {
         pTitleData.push(t.title)
       })
       state.allPhaseTitleData = pTitleData

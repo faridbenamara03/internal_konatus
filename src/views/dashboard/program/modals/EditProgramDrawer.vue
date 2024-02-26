@@ -485,7 +485,7 @@ export default {
   },
   data() {
     return {
-      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       // nDeadlineOptions: ['Desired', 'Time to Market', 'Legal Constraint', 'Other'],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       title: '',

@@ -204,7 +204,7 @@ export default {
       inputedBudgets: [],
       startDate: "2023-01-13",
       endDate: "2023-04-30",
-      priorityOptions: ['Highest', 'High', 'Low', 'Lowest'],
+      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
       currency: 'unit',
