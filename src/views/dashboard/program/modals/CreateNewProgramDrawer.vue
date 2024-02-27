@@ -396,8 +396,8 @@
           <label>Head of Product Portfolio</label>
           <v-select
             v-model="step5.head_product_portfolio"
-            :options="['SAP', 'Jira', 'P6']"
-            placeholder="Select System"
+            :options="headProductPortOptions"
+            placeholder="Select Head of Product Portfolios"
             outlined
           />
         </div>
@@ -405,8 +405,8 @@
           <label>Product Manager</label>
           <v-select
             v-model="step5.product_manager"
-            :options="priorityOptions"
-            placeholder="Select Portfolio"
+            :options="productManagerOptions"
+            placeholder="Select Product Manager"
             outlined
           />
         </div>
@@ -416,8 +416,8 @@
           <label>Architect</label>
           <v-select
             v-model="step5.architect"
-            :options="['SAP', 'Jira', 'P6']"
-            placeholder="Select System"
+            :options="architectOptions"
+            placeholder="Select Architect"
             outlined
           />
         </div>
@@ -425,8 +425,8 @@
           <label>Head of Program Direction</label>
           <v-select
             v-model="step5.head_program_direction"
-            :options="priorityOptions"
-            placeholder="Select Portfolio"
+            :options="headProgramDirectorOptions"
+            placeholder="Select Head of Program Direction"
             outlined
           />
         </div>
@@ -436,8 +436,8 @@
           <label>Program Director</label>
           <v-select
             v-model="step5.program_director"
-            :options="priorityOptions"
-            placeholder="Select Portfolio"
+            :options="programDirectorOptions"
+            placeholder="Select Program Director"
             outlined
           />
         </div>
@@ -445,7 +445,7 @@
           <label>Head of Architect</label>
           <v-select
             v-model="step5.head_architect"
-            :options="priorityOptions"
+            :options="headProgramArchitectOptions"
             placeholder="Select Head of Architect"
             outlined
           />
@@ -456,7 +456,7 @@
           <label>Sponsor</label>
           <v-select
             v-model="step5.sponsor"
-            :options="priorityOptions"
+            :options="sponsorOptons"
             placeholder="Select Sponsor"
             outlined
           />
@@ -465,7 +465,7 @@
           <label>Product Line</label>
           <v-select
             v-model="step5.product_line"
-            :options="priorityOptions"
+            :options="productLineOptions"
             placeholder="Select Product Line"
             outlined
           />
@@ -476,7 +476,7 @@
           <label>Project Manager</label>
           <v-select
             v-model="step5.project_manager"
-            :options="priorityOptions"
+            :options="projectManagerOptions"
             placeholder="Select Project Manager"
             outlined
           />
@@ -525,6 +525,15 @@ export default {
     return {
       priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
+      sponsorOptons: this.$store.state.globalState.sponsors,
+      productLineOptions: this.$store.state.globalState.productlines,
+      headProductPortOptions: this.$store.state.globalState.hproductportfolios,
+      productManagerOptions: this.$store.state.globalState.productmanagers,
+      headProgramArchitectOptions: this.$store.state.globalState.hprogramarchitects,
+      architectOptions: this.$store.state.globalState.architects,
+      headProgramDirectorOptions: this.$store.state.globalState.hprogramdirectors,
+      programDirectorOptions: this.$store.state.globalState.programdirectors,
+      projectManagerOptions: this.$store.state.globalState.projectmanagers,
       curIndex: 1,
       lastPhase: null,
       subProjectTitle: '',

@@ -70,6 +70,15 @@ export default {
     allProgData: [],
     allProjData: [],
     allOrgData: [],
+    sponsors: [],
+    productlines: [],
+    hproductportfolios: [],
+    productmanagers: [],
+    hprogramarchitects: [],
+    architects: [],
+    hprogramdirectors: [],
+    projectmanagers: [],
+    programdirectors: [],
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
@@ -124,6 +133,8 @@ export default {
       if (payload) {
         state.selectedProgramObject = payload.item
         state.selectedProgramType = payload.type
+      } else {
+        state.selectedProgramType = "program"
       }
     },
     TOGGLE_EDIT_PROGRAM_DRAWER(state, payload) {
@@ -179,6 +190,18 @@ export default {
     },
     LOAD_ALL_NATURE_DEADLINE(state, data) {
       state.natureDeadLines = data
+    },
+    LOAD_ALL_OPTION_DATAS(state, data) {
+      if (data === undefined) return
+      state.sponsors = data.sponsor.filter((value, index, array) => array.indexOf(value) === index)
+      state.productlines = data.productline.filter((value, index, array) => array.indexOf(value) === index)
+      state.hproductportfolios = data.headproductportfolio.filter((value, index, array) => array.indexOf(value) === index)
+      state.productmanagers = data.productmanager.filter((value, index, array) => array.indexOf(value) === index)
+      state.hprogramarchitects = data.headprogramarchitect.filter((value, index, array) => array.indexOf(value) === index)
+      state.hprogramdirectors = data.headprogramdirector.filter((value, index, array) => array.indexOf(value) === index)
+      state.architects = data.architect.filter((value, index, array) => array.indexOf(value) === index)
+      state.programdirectors = data.programdirector.filter((value, index, array) => array.indexOf(value) === index)
+      state.projectmanagers = data.projectmanager.filter((value, index, array) => array.indexOf(value) === index)
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       let phaseData = data
@@ -592,6 +615,21 @@ export default {
           .catch(err => {
             console.log('error getting all phase data ---->', err)
             Vue.$toast.error('Failed to get all phase data.')
+            reject(err)
+          })
+      })
+    },
+    get_all_option_datas() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/options/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_OPTION_DATAS', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all option data ---->', err)
+            Vue.$toast.error('Failed to get all option data.')
             reject(err)
           })
       })
