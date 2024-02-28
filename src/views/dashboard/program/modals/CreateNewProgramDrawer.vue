@@ -13,45 +13,40 @@
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
-            <div class="d-flex"
-              v-if="!externalEditable"
-              style="font-size: 14px; color: #898989;text-transform:none"
-            >
-              External System: {{ exSystemString }}
-            </div>
-            <div v-else>
-              <v-select
-                v-model="externalSystem"
-                :options="['SAP', 'Jira', 'P6']"
-                placeholder="Select System"
-                outlined
-              />
-            </div>
+            <label>External System</label>
+            <v-select
+              v-model="externalSystem"
+              :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+              placeholder="Select External System"
+              outlined
+              @input="updateExternalID"
+            />
           </div>
-          <div class="w-50 d-flex">
-            <p
-              v-if="!externalEditable"
-              style="color: #bbbbbb;font-size: 16px;"
-            >
-              External Activity Id: {{ externalId }}
-            </p>
-            <div v-else>
+          <div class="w-50 pl-1">
+            <label>Activity ID</label>
+            <div class="d-flex">
               <b-form-input
                 v-model="externalId"
                 placeholder="Input External Activity Id"
               />
-            </div>
-            <div
-              style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-              @click="handleExternalEdit"
-            >
-              <feather-icon
-                :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
-                style="color: #7367f0"
-                size="20"
-              />
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleAddExternal"
+              >
+                <feather-icon
+                  :icon="'PlusIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
             </div>
           </div>
+        </div>
+        <div
+          v-if="exSystemString !== ''"
+          class="d-flex mt-2"
+          style="font-size: 14px; color: #898989;text-transform:none">
+            External System: {{ exSystemString }}
         </div>
       </div>
       <div class="select-box">
@@ -540,9 +535,9 @@ export default {
       projectTitle: '',
       programTitle: '',
       externalEditable: false,
-      externalSystems: ["Jira"],
+      externalSystems: [],
       externalSystem: "Jira",
-      externalId: "JR-12345",
+      externalId: "JIRA-",
       exSystemString: '',
       step1: {
         system: null,
@@ -668,6 +663,45 @@ export default {
       phases.sort((a, b) => a.id - b.id)
       this.lastPhase = phases.at(-1)
       if (this.otype === null) this.otype = 'company'
+      let extype = ''
+      switch (this.otype) {
+        case 'program':
+          extype = 'PROG'
+          break
+        case 'project':
+          extype = 'PROJ'
+          break
+        case 'subproject':
+          extype = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      const value = this.externalSystem
+      this.externalId = `${value.toUpperCase()}-${extype}-`
+    },
+    handleAddExternal() {
+      this.externalSystems.push(this.externalId)
+      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+      this.exSystemString = this.externalSystems.toString()
+    },
+    updateExternalID() {
+      let type = ''
+      switch (this.otype) {
+        case 'program':
+          type = 'PROG'
+          break
+        case 'project':
+          type = 'PROJ'
+          break
+        case 'subproject':
+          type = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      const value = this.externalSystem
+      this.externalId = `${value.toUpperCase()}-${type}-`
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
@@ -685,7 +719,8 @@ export default {
         subProjectTitle: this.subProjectTitle,
         projectTitle: this.projectTitle,
         programTitle: this.programTitle,
-        type: this.otype
+        type: this.otype,
+        externalSystems: this.externalSystems
       }
       if (this.step2.deadline === null || this.step2.deadline === 0) {
         this.$toast.error('Please select correct deadline.')

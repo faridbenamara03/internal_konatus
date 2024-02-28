@@ -13,43 +13,52 @@
       <div class="select-box">
         <div class="d-flex">
           <div class="w-50">
-            <div class="d-flex"
-              v-if="!externalEditable"
-              style="font-size: 14px; color: #898989;text-transform:none"
-            >
-              External System: {{ exSystemString }}
-            </div>
-            <div v-else>
-              <v-select
-                v-model="externalSystem"
-                :options="['SAP', 'Jira', 'P6']"
-                placeholder="Select System"
-                outlined
-              />
-            </div>
+            <label>External System</label>
+            <v-select
+              v-model="externalSystem"
+              :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+              placeholder="Select External System"
+              outlined
+              @input="updateExternalID"
+            />
           </div>
-          <div class="w-50 d-flex">
-            <p
-              v-if="!externalEditable"
-              style="color: #bbbbbb;font-size: 16px;"
-            >
-              External Activity Id: {{ externalId }}
-            </p>
-            <div v-else>
+          <div class="w-50 pl-1">
+            <label>Activity ID</label>
+            <div class="d-flex">
               <b-form-input
                 v-model="externalId"
                 placeholder="Input External Activity Id"
               />
-            </div>
-            <div
-              style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-              @click="handleExternalEdit"
-            >
-              <feather-icon
-                :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
-                style="color: #7367f0"
-                size="20"
-              />
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleAddExternal"
+              >
+                <feather-icon
+                  :icon="'PlusIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleUpdateExternal"
+              >
+                <feather-icon
+                  :icon="'PenIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleDeleteExternal"
+              >
+                <feather-icon
+                  :icon="'TrashIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -496,14 +505,13 @@ export default {
       headProgramDirectorOptions: this.$store.state.globalState.hprogramdirectors,
       programDirectorOptions: this.$store.state.globalState.programdirectors,
       projectManagerOptions: this.$store.state.globalState.projectmanagers,
+      externalSystems: this.$store.state.globalState.externalSystemData,
       title: '',
       lastPhase: {},
       curIndex: 1,
       externalEditable: false,
-      externalSystems: ["Jira"],
+      externalId: this.$store.state.globalState.externalSystemData !== undefined ? this.$store.state.globalState.externalSystemData.jira_idprogram : "",
       externalSystem: "Jira",
-      externalId: "JR-12345",
-      exSystemString: '',
       programTitle: '',
       projectTitle: '',
       subprojectTitle: '',
@@ -602,6 +610,7 @@ export default {
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
+        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
       } else if (initData.type === "project") {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
@@ -613,6 +622,7 @@ export default {
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
+        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
       } else if (initData.type === "subproject") {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
@@ -626,16 +636,79 @@ export default {
         }
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
+        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.subprojectId })
       }
       const phases = this.$store.state.globalState.allPhaseData
       phases.sort((a, b) => a.id - b.id)
       this.lastPhase = phases.at(-1)
     },
-    handleExternalEdit() {
-      this.externalEditable = !this.externalEditable
-      this.externalSystems.push(this.externalSystem)
+    updateExternalID() {
+      switch (this.externalSystem) {
+        case 'Jira':
+          this.externalId = this.externalSystemData.jira_idprogram
+          break
+        case 'SAP':
+          this.externalId = this.externalSystemData.sap_idprogram
+          break
+        case 'Devops':
+          this.externalId = this.externalSystemData.devops_idprogram
+          break
+        case 'primavera':
+          this.externalId = this.externalSystemData.primavera_idprogram
+          break
+        case 'Deviprop':
+          this.externalId = this.externalSystemData.deviprop_idprogram
+          break
+        default:
+          break
+      }
+    },
+    handleAddExternal() {
+      this.externalSystems.push(this.externalId)
       this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
       this.exSystemString = this.externalSystems.toString()
+    },
+    handleUpdateExternal() {
+      switch (this.externalSystem) {
+        case 'Jira':
+          this.externalSystems.jira_idprogram = this.externalId
+          break
+        case 'SAP':
+          this.externalSystems.sap_idprogram = this.externalId
+          break
+        case 'Devops':
+          this.externalSystems.devops_idprogram = this.externalId
+          break
+        case 'Deviprop':
+          this.externalSystems.deviprop_idprogram = this.externalId
+          break
+        case 'primavera':
+          this.externalSystems.primavera_idprogram = this.externalId
+          break
+        default:
+          break
+      }
+    },
+    handleDeleteExternal() {
+      switch (this.externalSystem) {
+        case 'Jira':
+          this.externalSystems.jira_idprogram = ""
+          break
+        case 'SAP':
+          this.externalSystems.sap_idprogram = ""
+          break
+        case 'Devops':
+          this.externalSystems.devops_idprogram = ""
+          break
+        case 'Deviprop':
+          this.externalSystems.deviprop_idprogram = ""
+          break
+        case 'primavera':
+          this.externalSystems.primavera_idprogram = ""
+          break
+        default:
+          break
+      }
     },
     async handleSave() {
       if (this.step2.deadline === null || this.step2.deadline === 0) {
@@ -662,8 +735,8 @@ export default {
             step3: this.step3,
             step4: this.step4,
             step5: this.step5,
-            step6: this.step6,
             id: this.step1.programId,
+            externalSystems: this.externalSystems,
             type: 'program'
           }
         })
@@ -675,7 +748,7 @@ export default {
             step3: this.step3,
             step4: this.step4,
             step5: this.step5,
-            step6: this.step6,
+            externalSystems: this.externalSystems,
             id: this.step1.projectId,
             type: 'project'
           }
@@ -688,7 +761,7 @@ export default {
             step3: this.step3,
             step4: this.step4,
             step5: this.step5,
-            step6: this.step6,
+            externalSystems: this.externalSystems,
             id: this.step1.subprojectId,
             type: 'subproject'
           }

@@ -56,6 +56,7 @@ export default {
     selectedNavObj: {},
     natureDeadLines: [],
     optimiseState: 'origin',
+    externalSystemData: [],
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
     globalOrganizationTeamData: [],
@@ -212,6 +213,9 @@ export default {
         pTitleData.push(t.title)
       })
       state.allPhaseTitleData = pTitleData
+    },
+    LOAD_EXTERNAL_SYSTEMS(state, data) {
+      state.externalSystemData = data
     },
     LOAD_ALL_PORTFOLIO_DATA(state, data) {
       state.allPortData = data
@@ -649,6 +653,21 @@ export default {
           })
       })
     },
+    get_external_systems(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/external/get', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_EXTERNAL_SYSTEMS', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting external systems ---->', err)
+            Vue.$toast.error('Failed to get external systems.')
+            reject(err)
+          })
+      })
+    },
     get_all_portfolios() {
       return new Promise((resolve, reject) => {
         axios.get('https://api.konatus.site/v1/api/portfolio/all')
@@ -744,7 +763,6 @@ export default {
       })
     },
     update_project(commit, payload) {
-      console.log("PPP:", payload)
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/project/update', payload.data)
           .then(response => {
