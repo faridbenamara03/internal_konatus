@@ -712,6 +712,7 @@ export default {
       this.exSystemString = this.externalSystems.toString()
     },
     async handleSave() {
+      this.step2.priority = this.priorityOptions.indexOf(this.step2.priority) + 1
       const newProgramData = {
         step1: this.step1,
         step2: this.step2,
@@ -732,16 +733,25 @@ export default {
         this.$toast.error('Please select correct portfolio.')
         return
       }
-      if (this.otype === 'portfolio' && this.step1.portfolioId === 0) {
-        this.$toast.error('Please select correct portfolio.')
+      if (this.otype === 'program' && this.programTitle === '') {
+        this.$toast.error('Please input correct program name.')
         return
       }
+
       if (this.otype === 'project' && this.step1.programId === 0) {
         this.$toast.error('Please select correct program.')
         return
       }
+      if (this.otype === 'project' && this.projectTitle === '') {
+        this.$toast.error('Please input correct project name.')
+        return
+      }
       if (this.otype === 'subproject' && this.step1.projectId === 0) {
         this.$toast.error('Please select correct project.')
+        return
+      }
+      if (this.otype === 'subproject' && this.subprojectTitle === '') {
+        this.$toast.error('Please input correct subproject name.')
         return
       }
 

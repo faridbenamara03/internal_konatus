@@ -735,6 +735,7 @@ export default {
       }
     },
     async handleSave() {
+      this.step2.priority = this.priorityOptions.indexOf(this.step2.priority) + 1
       if (this.step2.deadline === null || this.step2.deadline === 0) {
         this.$toast.error('Please select correct deadline.')
         return
@@ -751,7 +752,7 @@ export default {
         this.$toast.error('Please select correct project.')
         return
       }
-      if (this.otype === 'program') {
+      if (this.otype === 'program' && this.step1.program !== '') {
         await this.$store.dispatch('globalState/update_program', {
           data: {
             step1: this.step1,
@@ -765,7 +766,7 @@ export default {
           }
         })
         await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
-      } else if (this.otype === 'project') {
+      } else if (this.otype === 'project' && this.step1.project !== '') {
         await this.$store.dispatch('globalState/update_project', {
           data: {
             step1: this.step1,
@@ -779,7 +780,7 @@ export default {
           }
         })
         await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
-      } else if (this.otype === 'subproject') {
+      } else if (this.otype === 'subproject' && this.step1.subproject !== '') {
         await this.$store.dispatch('globalState/update_subproject', {
           data: {
             step1: this.step1,
