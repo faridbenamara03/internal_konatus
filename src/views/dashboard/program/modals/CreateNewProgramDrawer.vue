@@ -610,7 +610,9 @@ export default {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.otype)
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
+      console.log("Inited:", initData)
       if (initData === undefined) {
+        console.log("Selected:", initData)
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
         if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
@@ -620,7 +622,7 @@ export default {
         // if (this.otype === 'program') this.programTitle = initData.title
         // else if (this.otype === 'project') this.projectTitle = initData.title
         // else if (this.otype === 'subproject') this.subProjectTitle = initData.title
-        this.step1.portfolioId = initData.portfolioid || 0
+        this.step1.portfolioId = initData.type === 'portfolio' ? initData.id : initData.portfolioid || 0
         this.step2.description = initData.description || ''
         this.step2.priority = this.priorityOptions[initData.priority - 1] || 0
         this.step2.deadline = initData.deadline || 0
@@ -635,7 +637,7 @@ export default {
         const allPts = this.getAllPorts()
         const allPgs = this.getAllProgs()
         const allPjs = this.getAllProjects()
-        const portfolios = allPts.filter(port => port.id === initData.portfolioid)
+        const portfolios = allPts.filter(port => port.id === this.step1.portfolioId)
         if (portfolios.length > 0) {
           [this.step1.portfolio] = portfolios
           this.step1.portfolioId = this.step1.portfolio.id
