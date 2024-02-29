@@ -394,6 +394,7 @@
             :options="headProductPortOptions"
             placeholder="Select Head of Product Portfolios"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -403,6 +404,7 @@
             :options="productManagerOptions"
             placeholder="Select Product Manager"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -414,6 +416,7 @@
             :options="architectOptions"
             placeholder="Select Architect"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -423,6 +426,7 @@
             :options="headProgramDirectorOptions"
             placeholder="Select Head of Program Direction"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -434,6 +438,7 @@
             :options="programDirectorOptions"
             placeholder="Select Program Director"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -443,6 +448,7 @@
             :options="headProgramArchitectOptions"
             placeholder="Select Head of Architect"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -454,6 +460,7 @@
             :options="sponsorOptons"
             placeholder="Select Sponsor"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -463,6 +470,7 @@
             :options="productLineOptions"
             placeholder="Select Product Line"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -474,6 +482,7 @@
             :options="projectManagerOptions"
             placeholder="Select Project Manager"
             outlined
+            taggable
           />
         </div>
         <div class="select-box" />

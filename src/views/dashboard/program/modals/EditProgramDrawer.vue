@@ -360,6 +360,7 @@
             :options="headProductPortOptions"
             placeholder="Select Head of Product Portfolios"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -369,6 +370,7 @@
             :options="productManagerOptions"
             placeholder="Select Product Manager"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -380,6 +382,7 @@
             :options="architectOptions"
             placeholder="Select Architect"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -389,6 +392,7 @@
             :options="headProgramDirectorOptions"
             placeholder="Select Head of Program Direction"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -400,6 +404,7 @@
             :options="programDirectorOptions"
             placeholder="Select Program Director"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -409,6 +414,7 @@
             :options="headProgramArchitectOptions"
             placeholder="Select Head of Architect"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -420,6 +426,7 @@
             :options="sponsorOptons"
             placeholder="Select Sponsor"
             outlined
+            taggable
           />
         </div>
         <div class="select-box">
@@ -429,6 +436,7 @@
             :options="productLineOptions"
             placeholder="Select Product Line"
             outlined
+            taggable
           />
         </div>
       </div>
@@ -440,6 +448,7 @@
             :options="projectManagerOptions"
             placeholder="Select Project Manager"
             outlined
+            taggable
           />
         </div>
         <div class="select-box" />
@@ -587,6 +596,15 @@ export default {
       this.step2.demand = initData.demand || 0
       this.step2.authorized = initData.authorized || 0
       this.step2.realestimated = initData.realestimated || 0
+      this.step5.sponsor = initData.sponsor || ''
+      this.step5.head_product_portfolio = initData.portfolioHead || ''
+      this.step5.product_manager = initData.productManager || ''
+      this.step5.product_line = initData.product_line || ''
+      this.step5.head_program_direction = initData.directionHead || ''
+      this.step5.architect = initData.architect || ''
+      this.step5.head_architect = initData.architectHead || ''
+      this.step5.program_director = initData.programDirector || ''
+      this.step5.project_manager = initData.projectManager || ''
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
