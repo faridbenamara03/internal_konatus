@@ -31,20 +31,10 @@
               />
               <div
                 style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
-                @click="handleAddExternal"
-              >
-                <feather-icon
-                  :icon="'PlusIcon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
-              </div>
-              <div
-                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
                 @click="handleUpdateExternal"
               >
                 <feather-icon
-                  :icon="'PenIcon'"
+                  :icon="'SaveIcon'"
                   style="color: #7367f0"
                   size="20"
                 />
@@ -583,7 +573,7 @@ export default {
     await this.$store.dispatch('globalState/get_all_programs')
   },
   methods: {
-    initializeData(data) {
+    async initializeData(data) {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
       this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
@@ -610,7 +600,7 @@ export default {
         if (programs.length > 0) {
           this.step1.program = programs[0].title
         }
-        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
       } else if (initData.type === "project") {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
@@ -622,7 +612,7 @@ export default {
         if (projects.length > 0) {
           this.step1.project = projects[0].title
         }
-        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
       } else if (initData.type === "subproject") {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
@@ -636,31 +626,52 @@ export default {
         }
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
-        this.$store.dispatch('globalState/get_external_systems', { id: this.step1.subprojectId })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.subprojectId })
       }
       const phases = this.$store.state.globalState.allPhaseData
       phases.sort((a, b) => a.id - b.id)
       this.lastPhase = phases.at(-1)
+      this.externalSystems = this.$store.state.globalState.externalSystemData
+      this.externalId = this.externalSystems.jira_idprogram
     },
     updateExternalID() {
       switch (this.externalSystem) {
         case 'Jira':
-          this.externalId = this.externalSystemData.jira_idprogram
+          this.externalId = this.externalSystems.jira_idprogram
           break
         case 'SAP':
-          this.externalId = this.externalSystemData.sap_idprogram
+          this.externalId = this.externalSystems.sap_idprogram
           break
         case 'Devops':
-          this.externalId = this.externalSystemData.devops_idprogram
+          this.externalId = this.externalSystems.devops_idprogram
           break
         case 'primavera':
-          this.externalId = this.externalSystemData.primavera_idprogram
+          this.externalId = this.externalSystems.primavera_idprogram
           break
         case 'Deviprop':
-          this.externalId = this.externalSystemData.deviprop_idprogram
+          this.externalId = this.externalSystems.deviprop_idprogram
           break
         default:
           break
+      }
+      console.log("ExId:", this.externalId)
+      if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
+        let type = ''
+        switch (this.otype) {
+          case 'program':
+            type = 'PROG'
+            break
+          case 'project':
+            type = 'PROJ'
+            break
+          case 'subproject':
+            type = 'SUBPROJ'
+            break
+          default:
+            break
+        }
+        const value = this.externalSystem
+        this.externalId = `${value.toUpperCase()}-${type}-`
       }
     },
     handleAddExternal() {
@@ -689,25 +700,38 @@ export default {
           break
       }
     },
-    handleDeleteExternal() {
-      switch (this.externalSystem) {
-        case 'Jira':
-          this.externalSystems.jira_idprogram = ""
-          break
-        case 'SAP':
-          this.externalSystems.sap_idprogram = ""
-          break
-        case 'Devops':
-          this.externalSystems.devops_idprogram = ""
-          break
-        case 'Deviprop':
-          this.externalSystems.deviprop_idprogram = ""
-          break
-        case 'primavera':
-          this.externalSystems.primavera_idprogram = ""
-          break
-        default:
-          break
+    async handleDeleteExternal() {
+      const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
+        title: 'Please Confirm',
+        size: 'sm',
+        okVariant: 'primary',
+        okTitle: 'Yes',
+        cancelTitle: 'No',
+        cancelVariant: 'outline-secondary',
+        hideHeaderClose: false,
+        centered: true,
+      })
+      if (value) {
+        switch (this.externalSystem) {
+          case 'Jira':
+            this.externalSystems.jira_idprogram = ""
+            break
+          case 'SAP':
+            this.externalSystems.sap_idprogram = ""
+            break
+          case 'Devops':
+            this.externalSystems.devops_idprogram = ""
+            break
+          case 'Deviprop':
+            this.externalSystems.deviprop_idprogram = ""
+            break
+          case 'primavera':
+            this.externalSystems.primavera_idprogram = ""
+            break
+          default:
+            break
+        }
+        this.externalId = ""
       }
     },
     async handleSave() {
@@ -740,6 +764,7 @@ export default {
             type: 'program'
           }
         })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
       } else if (this.otype === 'project') {
         await this.$store.dispatch('globalState/update_project', {
           data: {
@@ -753,6 +778,7 @@ export default {
             type: 'project'
           }
         })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
       } else if (this.otype === 'subproject') {
         await this.$store.dispatch('globalState/update_subproject', {
           data: {
@@ -766,11 +792,13 @@ export default {
             type: 'subproject'
           }
         })
+        await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.subprojectId })
       }
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
       })
+
       this.$store.commit('globalState/TOGGLE_EDIT_PROGRAM_DRAWER')
     },
     getAllPorts() {

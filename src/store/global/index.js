@@ -655,7 +655,7 @@ export default {
     },
     get_external_systems(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.get('https://api.konatus.site/v1/api/external/get', payload)
+        axios.get(`https://api.konatus.site/v1/api/external/get?id=${payload.id}`)
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_EXTERNAL_SYSTEMS', newData)
