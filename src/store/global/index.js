@@ -551,9 +551,7 @@ export default {
         axios.post('https://api.konatus.site/v1/api/portfolio/create', payload).then(response => {
           const newData = response.data
           this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
-          this.dispatch('load_org_data').then(() => {
-            resolve()
-          })
+          resolve()
         }).catch(err => {
           console.log('error creating new portfolio --->', err)
           Vue.$toast.error('Failed to create new portfolio.')
