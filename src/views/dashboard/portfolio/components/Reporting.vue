@@ -133,28 +133,28 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 0, false) > 0"
                   :type="0"
                   :width1="getValue(item1, 0, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 0, false)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 1, false) > 0"
                   :type="1"
                   :width1="getValue(item1, 1, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 1, false)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 1, false) > 0"
                   :type="2"
                   :width1="getValue(item1, 1, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 1, false)"
                 />
               </div>
             </b-card>
@@ -209,28 +209,28 @@
               class="d-flex flex-column justify-content-around"
               style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
             >
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 0, false) > 0"
                   :type="0"
                   :width1="getValue(item1, 0, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 0, false)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 1, false) > 0"
                   :type="1"
                   :width1="getValue(item1, 1, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 1, false)"
                 />
               </div>
-              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1)}px`">
+              <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
                 <ProgramProgressBar
                   v-if="getValue(item1, 2, false) > 0"
                   :type="2"
                   :width1="getValue(item1, 2, false)"
-                  :width2="397 - getStartPadding(item1)"
+                  :width2="397 - getStartPadding(item1, 2, false)"
                 />
               </div>
             </b-card>
@@ -486,41 +486,44 @@ export default {
           let phIndex = 0
           while (phIndex < item.phases.length) {
             const phase = item.phases[phIndex]
-            const startMoment = moment(phase.start_date, 'YYYY-MM-DD').startOf('day')
-            const endMoment = moment(phase.end_date, 'YYYY-MM-DD').startOf('day')
-            const duration = moment.duration(endMoment.diff(startMoment))
-            const fullValue = this.largest(phase.fte, phase.load, phase.duration, 0) === 0 ? 1 : this.largest(phase.fte, phase.load, phase.duration, 0)
-            const fullWidth = duration.asDays() * 25
-            let barRect = 0
+            let startMoment = 0
+            let endMoment = 0
             if (type === 0) {
-              const typeValue = (phase.fte / fullValue) === 0 ? 1 : phase.fte / fullValue
-              barRect = typeValue * fullWidth * (phase.progress / 100)
+              startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+              endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
             } else if (type === 1) {
-              const typeValue = (phase.duration / fullValue) === 0 ? 1 : phase.duration / fullValue
-              barRect = typeValue * fullWidth * (phase.progress / 100)
+              startMoment = moment(phase.start_date_engaged, 'YYYY-MM-DD').startOf('day')
+              endMoment = moment(phase.end_date_engaged, 'YYYY-MM-DD').startOf('day')
             } else if (type === 2) {
-              const typeValue = (phase.load / fullValue) === 0 ? 1 : phase.load / fullValue
-              barRect = typeValue * fullWidth * (phase.progress / 100)
+              startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+              endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
-            // console.log('Phase:', phase, 'FW:', fullWidth, 'BR:', barRect)
-            result.push(barRect)
+            const duration = moment.duration(endMoment.diff(startMoment))
+            result.push(duration.asDays() * 25)
             phIndex += 1
           }
         }
-        // console.log('Item:', item, 'Result:', result)
       } else {
-        const startMoment = moment(item.startDate, 'YYYY-MM-DD').startOf('day')
-        const endMoment = moment(item.endDate, 'YYYY-MM-DD').startOf('day')
-        const duration = moment.duration(endMoment.diff(startMoment))
-        const fullWidth = duration.asDays() * 25
-        const fullValue = this.largest(item.demand, item.engaged, item.realestimated, 0)
-        if (type === 0) {
-          result = (item.demand / fullValue) * fullWidth
-        } else if (type === 1) {
-          result = (item.engaged / fullValue) * fullWidth
-        } else if (type === 2) {
-          result = (item.realestimated / fullValue) * fullWidth
+        let startMoment = 0
+        let endMoment = 0
+        switch (type) {
+          case 0:
+            startMoment = moment(item.start_date_demand, 'YYYY-MM-DD').startOf('day')
+            endMoment = moment(item.end_date_demand, 'YYYY-MM-DD').startOf('day')
+            break
+          case 1:
+            startMoment = moment(item.start_date_engaged, 'YYYY-MM-DD').startOf('day')
+            endMoment = moment(item.end_date_engaged, 'YYYY-MM-DD').startOf('day')
+            break
+          case 2:
+            startMoment = moment(item.start_date_reel, 'YYYY-MM-DD').startOf('day')
+            endMoment = moment(item.end_date_reel, 'YYYY-MM-DD').startOf('day')
+            break
+          default:
+            break
         }
+        const duration = moment.duration(endMoment.diff(startMoment))
+        result = duration.asDays() * 25
       }
       return result
     },
@@ -530,9 +533,16 @@ export default {
         if (item.phases) {
           const pstarts = []
           let phIndex = 0
+          let startMoment
           while (phIndex < item.phases.length) {
             const phase = item.phases[phIndex]
-            const startMoment = moment(phase.start_date, 'YYYY-MM-DD').startOf('day')
+            if (type === 0) {
+              startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+            } else if (type === 1) {
+              startMoment = moment(phase.start_date_engaged, 'YYYY-MM-DD').startOf('day')
+            } else if (type === 2) {
+              startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+            }
             pstarts.push(startMoment)
             phIndex += 1
           }
@@ -543,11 +553,23 @@ export default {
           result = pd
         }
       } else {
-        const startMoment = moment(item.startDate, 'YYYY-MM-DD')
+        let startMoment
+        switch (type) {
+          case 0:
+            startMoment = moment(item.start_date_demand, 'YYYY-MM-DD')
+            break
+          case 1:
+            startMoment = moment(item.start_date_engaged, 'YYYY-MM-DD')
+            break
+          case 2:
+            startMoment = moment(item.start_date_reel, 'YYYY-MM-DD')
+            break
+          default:
+            break
+        }
         const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
         const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
-        const pd = duration * 25
-        result = pd
+        result = duration * 25
       }
       return result
     },

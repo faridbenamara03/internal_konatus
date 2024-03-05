@@ -78,17 +78,22 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Program</label>
-            <!-- <InputSelect
-              placeholder="Select Program"
-              :options="getAllProgs()"
-              :value="step1.program === null ? null : step1.program.title"
-              @customChange="e => handleCustomChange(e, 'program')"
-            /> -->
-            <b-form-input
-              v-model="step1.program"
-              placeholder="Select Program"
-              :disabled="true"
-            />
+            <div v-if="otype === 'program' || otype === 'portfolio' || otype === 'company'">
+              <b-form-input
+                v-model="programTitle"
+                placeholder="Enter Program name"
+                type="text"
+              />
+            </div>
+            <div v-else>
+              <InputSelect
+                placeholder="Select Program"
+                :options="getAllProgs()"
+                :value="step1.program === null ? null : step1.program.title"
+                @customChange="e => handleCustomChange(e, 'program')"
+                :disabled="true"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>ProgramID</label>
@@ -103,17 +108,22 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Project</label>
-            <!-- <InputSelect
-              placeholder="Select Project"
-              :options="getAllProjects()"
-              :value="step1.project === null ? null : step1.project.title"
-              @customChange="e => handleCustomChange(e, 'project')"
-            /> -->
-            <b-form-input
-              v-model="step1.project"
-              placeholder="Select Project"
-              :disabled="true"
-            />
+            <div v-if="otype === 'project'">
+              <b-form-input
+                v-model="projectTitle"
+                placeholder="Enter Project name"
+                type="text"
+              />
+            </div>
+            <div v-else>
+              <InputSelect
+                placeholder="Select Project"
+                :options="getAllProjects()"
+                :value="step1.project === null ? null : step1.project.title"
+                @customChange="e => handleCustomChange(e, 'project')"
+                :disabled="true"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>ProjectID</label>
@@ -128,16 +138,27 @@
         <div class="d-flex">
           <div class="w-50">
             <label>Sub Project(Optional)</label>
-            <b-form-input
-              v-model="step1.subproject"
-              placeholder="Select Sub Project"
-              :disabled="true"
-            />
+            <div v-if="this.otype === 'subproject'">
+              <b-form-input
+                v-model="subProjectTitle"
+                type="text"
+                placeholder="Enter SubProject name"
+              />
+            </div>
+            <div v-else-if="this.otype !== 'subproject'">
+              <InputSelect
+                placeholder="Enter SubProject name"
+                :options="getAllProjects()"
+                :value="step1.subproject === null ? null : step1.subproject.title"
+                :disabled="true"
+                @customChange="e => handleCustomChange(e, 'subproject')"
+              />
+            </div>
           </div>
           <div class="w-50 pl-1">
             <label>SubProject</label>
             <b-form-input
-              v-model="step1.subprojectId"
+              v-model="step1.subProjectId"
               :disabled="true"
             />
           </div>
@@ -617,6 +638,7 @@ export default {
         const programs = allPgs.filter(pg => pg.id === initData.id)
         if (programs.length > 0) {
           this.step1.program = programs[0].title
+          this.programTitle = programs[0].title
         }
         await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.programId })
       } else if (initData.type === "project") {
@@ -629,6 +651,7 @@ export default {
         const projects = allPjs.filter(pj => pj.id === initData.id)
         if (projects.length > 0) {
           this.step1.project = projects[0].title
+          this.projectTitle = projects[0].title
         }
         await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.projectId })
       } else if (initData.type === "subproject") {
@@ -644,6 +667,7 @@ export default {
         }
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
+        this.subprojectTitle = initData.title
         await this.$store.dispatch('globalState/get_external_systems', { id: this.step1.subprojectId })
       }
       const phases = this.$store.state.globalState.allPhaseData
@@ -780,6 +804,7 @@ export default {
             step5: this.step5,
             id: this.step1.programId,
             externalSystems: this.externalSystems,
+            programTitle: this.programTitle,
             type: 'program'
           }
         })
@@ -794,6 +819,7 @@ export default {
             step5: this.step5,
             externalSystems: this.externalSystems,
             id: this.step1.projectId,
+            projectTitle: this.projectTitle,
             type: 'project'
           }
         })
@@ -808,6 +834,7 @@ export default {
             step5: this.step5,
             externalSystems: this.externalSystems,
             id: this.step1.subprojectId,
+            subprojectTitle: this.subProjectTitle,
             type: 'subproject'
           }
         })
@@ -817,7 +844,7 @@ export default {
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
       })
-
+      await this.$store.dispatch('globalState/load_org_data')
       this.$store.commit('globalState/TOGGLE_EDIT_PROGRAM_DRAWER')
     },
     getAllPorts() {

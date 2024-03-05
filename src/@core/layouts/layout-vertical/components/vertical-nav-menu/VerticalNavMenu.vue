@@ -203,11 +203,9 @@ export default {
   },
   methods: {
     toggleCreateNewDrawer() {
-      console.log("CNP")
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
     toggleEditPortfolioDrawer() {
-      console.log("ENP")
       this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
     }
   },

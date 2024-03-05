@@ -41,7 +41,7 @@
           <div v-else class="row-custom"></div>
           <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
             :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-            <div class="dataitem"> {{ item2 === 'priority' ? priorities[item1[item2]] : item2 === 'deadline' || item2 === 'phase1startdate' || item2 == 'phase1enddate' || item2 === 'phase2startdate' || item2 == 'phase2enddate' || item2 === 'phase3startdate' || item2 == 'phase3enddate' || item2 === 'phase4startdate' || item2 == 'phase4enddate' ? dateFormat(item1[item2]) : item2 === 'architect' || item2 === 'portfolioHead' || item2 === 'productManager' || item2 === 'directionHead' || item2 === 'programDirector' || item2 === 'projectManager' || item2 === 'architectHead' || item2 === 'sponsor' || item2 === 'productLine' ? item1[item2] : formatCurrency(item1[item2]) }}</div>
+            <div class="dataitem"> {{ item2 === 'priority' ? priorities[item1[item2] - 1] : item2 === 'deadline' || item2 === 'phase1startdate' || item2 == 'phase1enddate' || item2 === 'phase2startdate' || item2 == 'phase2enddate' || item2 === 'phase3startdate' || item2 == 'phase3enddate' || item2 === 'phase4startdate' || item2 == 'phase4enddate' ? dateFormat(item1[item2]) : item2 === 'architect' || item2 === 'portfolioHead' || item2 === 'productManager' || item2 === 'directionHead' || item2 === 'programDirector' || item2 === 'projectManager' || item2 === 'architectHead' || item2 === 'sponsor' || item2 === 'productLine' ? item1[item2] : formatCurrency(item1[item2]) }}</div>
           </div>
         </div>
         <!-- <div style="flex:3" class="border-right">

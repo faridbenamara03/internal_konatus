@@ -791,6 +791,7 @@ export default {
         data
       })
       // this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
+      await this.$store.dispatch('globalState/load_org_data')
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)

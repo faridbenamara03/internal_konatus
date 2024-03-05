@@ -79,7 +79,11 @@ export default {
         this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
       } else {
         let baseUrl = ''
-        if (data.type === 'project') {
+        if (data.type === 'portfolo') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}`
+        } else if (data.type === 'program') {
+          baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}`
+        } else if (data.type === 'project') {
           baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.id}`
         } else if (data.type === 'subproject') {
           baseUrl = `/organization/${data.orgId}/portfolio/${data.portfolioId}/program/${data.programId}/project/${data.projectId}/subproject/${data.id}`

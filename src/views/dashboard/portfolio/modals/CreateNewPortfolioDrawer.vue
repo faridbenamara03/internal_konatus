@@ -130,6 +130,7 @@ export default {
         data
       })
       await this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
+      await this.$store.commit('globalState/load_org_data')
     }
   },
 }
