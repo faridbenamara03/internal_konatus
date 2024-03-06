@@ -479,6 +479,7 @@ export default {
         if (item.phases) {
           result = []
           let phIndex = 0
+          let totalWidth = 0
           while (phIndex < item.phases.length) {
             const phase = item.phases[phIndex]
             let startMoment = 0
@@ -494,7 +495,10 @@ export default {
               endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
             const duration = moment.duration(endMoment.diff(startMoment))
-            result.push(duration.asDays() * 25)
+            if (duration.asDays() === 0) result.push(8)
+            if (totalWidth >= 100) return result
+            totalWidth += duration.asDays() * 8
+            result.push(duration.asDays() * 8)
             phIndex += 1
           }
         }
@@ -518,9 +522,12 @@ export default {
             break
         }
         const duration = moment.duration(endMoment.diff(startMoment))
-        result = duration.asDays() * 25
+        if (duration.asDays() === 0) {
+          result = 8
+        } else {
+          result = duration.asDays() * 8
+        }
       }
-      console.log("ItemValue:", item.title, "ReturnValue:", result, "isChild:", isChild, "Type:", type)
       return result
     },
     getStartPadding(item, type, isChild) {
