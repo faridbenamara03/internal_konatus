@@ -173,7 +173,6 @@
               >
                 <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 0, true) > 0"
                     :type="0"
                     :widths="getValue(item2, 0, true)"
                     :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
@@ -181,7 +180,6 @@
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 2, true) > 0"
                     :type="1"
                     :widths="getValue(item2, 2, true)"
                     :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
@@ -189,7 +187,6 @@
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 2, true) > 0"
                     :type="2"
                     :widths="getValue(item2, 2, true)"
                     :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"

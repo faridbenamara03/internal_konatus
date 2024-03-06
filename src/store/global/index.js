@@ -366,6 +366,7 @@ export default {
       state.portfolioControlData = payload.portData.control
     },
     GET_OPTIMIZED_DATA(state, payload) {
+      console.log("PPPPP:", payload)
       state.portfolioReportingData = payload
       state.optimizeStates = 'preview'
     },
