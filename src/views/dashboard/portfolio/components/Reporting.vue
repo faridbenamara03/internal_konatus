@@ -86,14 +86,14 @@
         </div>
       </div>
       <div class="reporting-content--body">
-        <div
+        <!-- <div
           :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 400 + 'px;top:122px;z-index:222'"
         >
           <div
             class="rounded-circle"
             style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
           />
-        </div>
+        </div> -->
         <div
           class="timeline-list"
           :style="`width:${windowWidth / 2 }px`"
@@ -249,7 +249,6 @@
               >
                 <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 0, true) > 0"
                     :type="0"
                     :widths="getValue(item2, 0, true)"
                     :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
@@ -257,7 +256,6 @@
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 1, true) > 0"
                     :type="1"
                     :widths="getValue(item2, 1, true)"
                     :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
@@ -265,7 +263,6 @@
                 </div>
                 <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
                   <ProjectProgressBar
-                    v-if="getValue(item2, 2, true) > 0"
                     :type="2"
                     :widths="getValue(item2, 2, true)"
                     :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
@@ -339,7 +336,7 @@ export default {
       openedCollapse: 0,
       windowWidth: window.innerWidth,
       itemsForReporting: this.$store.state.globalState.portfolioReportingData,
-      isOptimiseIndex: this.$store.state.portfolioState.optimizeStatus,
+      isOptimiseIndex: this.$store.state.globalState.optimizeStatus,
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta1: [
         [193, 125, 184, 151, 248, 183, 224, 270, 207],
@@ -461,8 +458,10 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   mounted() {
-    const startDate = moment(moment()).subtract(15, 'days').startOf('day')
-    const endDate = moment(moment()).add(1, 'M').startOf('day')
+    // const startDate = moment(moment()).subtract(15, 'days').startOf('day')
+    // const endDate = moment(moment()).add(1, 'M').startOf('day')
+    const startDate = moment('2024-01-01')
+    const endDate = moment('2024-06-01')
     this.reportingDates = [startDate.clone()]
 
     while (startDate.add(1, 'days').diff(endDate) < 0) {
@@ -478,7 +477,6 @@ export default {
       // console.log("WW:", this.windowWidth)
     },
     getValue(item, type, isChild) {
-      console.log("Item:", item)
       let result = 0
       if (isChild) {
         if (item.phases) {
@@ -492,8 +490,8 @@ export default {
               startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
             } else if (type === 1) {
-              startMoment = moment(phase.start_date_engaged, 'YYYY-MM-DD').startOf('day')
-              endMoment = moment(phase.end_date_engaged, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
+              endMoment = moment(phase.end_date_engage, 'YYYY-MM-DD').startOf('day')
             } else if (type === 2) {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
@@ -525,6 +523,7 @@ export default {
         const duration = moment.duration(endMoment.diff(startMoment))
         result = duration.asDays() * 25
       }
+      console.log("ItemValue:", item.title, "ReturnValue:", result, "isChild:", isChild, "Type:", type)
       return result
     },
     getStartPadding(item, type, isChild) {
@@ -571,10 +570,11 @@ export default {
         const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
         result = duration * 25
       }
+      console.log("ItemPadding:", item.title, "ResultPadding:", result, "isChild:", isChild, "Type:", type)
       return result
     },
     onOptimiseIndex() {
-      this.isOptimiseIndex = this.$store.state.portfolioState.optimizeStatus
+      this.isOptimiseIndex = this.$store.state.globalState.optimizeStatus
       return this.isOptimiseIndex
     },
     randomTen(val1, val2) {

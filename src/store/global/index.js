@@ -43,6 +43,8 @@ const weekNumbersArr = betweenMonths => {
 export default {
   namespaced: true,
   state: {
+    optimizeStatus: 'origin',
+    optimizeStates: 'initial',
     globalData: [],
     globalData1: [],
     projectReportingData: {},
@@ -127,6 +129,12 @@ export default {
     },
     SELECT_WIN_RATE(state, payload) {
       state.selectedWinRate = payload
+    },
+    UPDATE_OPTIMIZE_STATUES(state, value) {
+      state.optimizeStatus = value
+    },
+    UPDATE_OPTIMIZE_STATES(state, value) {
+      state.optimizeStates = value
     },
     TOGGLE_CREATE_NEW_PROGRAM_DRAWER(state, payload) {
       const u1 = !state.openCreateNewProgramDrawer
@@ -356,6 +364,10 @@ export default {
       state.portfolioDemandData = payload.portData.demand
       state.portfolioReportingData = payload.portData.reporting
       state.portfolioControlData = payload.portData.control
+    },
+    GET_OPTIMIZED_DATA(state, payload) {
+      state.portfolioReportingData = payload
+      state.optimizeStates = 'preview'
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id
@@ -883,6 +895,21 @@ export default {
           .catch(err => {
             console.log('error deleting subproject ---->', err)
             Vue.$toast.error('Failed to delete subproject.')
+            reject(err)
+          })
+      })
+    },
+    get_optimized_data(data, params) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/optimize', params.data)
+          .then(response => {
+            const optimizeData = response.data
+            this.commit('globalState/GET_OPTIMIZED_DATA', optimizeData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting optimized data ---->', err)
+            Vue.$toast.error('Failed to get optimized data.')
             reject(err)
           })
       })

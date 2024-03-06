@@ -756,19 +756,19 @@ export default {
       if (value === 'accept') {
         this.updateIndex = false
         this.$store.optimiseState = 'optimise'
-        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
       } else if (value === 'reject') {
         this.updateIndex = false
-        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'origin')
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
         this.$store.optimiseState = 'origin'
       } else if (value === 'origin') {
         this.$store.optimiseState = 'origin'
-        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'origin')
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
         this.originIndex = !this.originIndex
       } else if (value === 'optimise') {
         this.$store.optimiseState = 'optimise'
         this.originIndex = !this.originIndex
-        this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
       }
     },
     onClickCPSelectBtn(url, value) {

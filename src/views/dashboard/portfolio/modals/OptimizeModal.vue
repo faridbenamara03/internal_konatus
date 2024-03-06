@@ -257,7 +257,7 @@ export default {
       isOngoingProject: false,
       isWinRate: false,
       isOtherOption: false,
-      isStatus: this.$store.state.portfolioState.optimizeStates,
+      isStatus: this.$store.state.globalState.optimizeStates,
       affectProjects: this.$store.state.portfolioState.changeProjects
     }
   },
@@ -267,13 +267,13 @@ export default {
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
-      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
+      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATES', 'initial')
     },
     async handleStart() {
-      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'pending')
-      this.isStatus = this.$store.state.portfolioState.optimizeStates
+      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATES', 'pending')
+      this.isStatus = this.$store.state.globalState.optimizeStates
       const navObj = this.$store.state.globalState.selectedNavObj
-      await this.$store.dispatch('portfolioState/get_optimized_data', {
+      await this.$store.dispatch('globalState/get_optimized_data', {
         data: {
           selectedPriority: this.selectedPriority,
           isOngoingProject: this.isOngoingProject,
@@ -285,14 +285,14 @@ export default {
           type: navObj.type
         }
       })
-      this.isStatus = this.$store.state.portfolioState.optimizeStates
+      this.isStatus = this.$store.state.globalState.optimizeStates
     },
     handlePreview() {
       // this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
-      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATES', 'initial')
-      this.$store.commit('portfolioState/UPDATE_OPTIMIZE_STATUES', 'optimise')
-      this.isStatus = this.$store.state.portfolioState.optimizeStates
+      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATES', 'initial')
+      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+      this.isStatus = this.$store.state.globalState.optimizeStates
       this.$refs['my-modal'].hide()
     },
   },
