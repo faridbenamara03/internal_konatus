@@ -10,6 +10,7 @@ import { computed } from '@vue/composition-api'
 export const resolveVerticalNavMenuItemComponent = item => {
   if (item.header) return 'vertical-nav-menu-header'
   if (item.children) return 'vertical-nav-menu-group'
+  if (item.type === 'portfolio' || item.type === 'program') return 'vertical-nav-menu-group'
   if (item.search) return 'vertical-nav-menu-search'
   return 'vertical-nav-menu-link'
 }

@@ -1227,7 +1227,6 @@ export default {
   },
   methods: {
     async handleDeleteItem(item, type) {
-      console.log('handleDeleteItem=> item:', item, 'type:', type)
       try {
         // Show confirmation dialog and wait for user action
         const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
@@ -1260,6 +1259,7 @@ export default {
               break
           }
           // After deletion, refresh data based on the current navigation selection
+          await this.$store.dispatch('globalState/load_org_data')
           const data = this.$store.state.globalState.selectedNavObj
           await this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
         }

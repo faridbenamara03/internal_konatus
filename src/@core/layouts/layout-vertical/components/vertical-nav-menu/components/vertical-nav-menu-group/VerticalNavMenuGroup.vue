@@ -1,6 +1,6 @@
 <template>
   <li
-    v-if="canViewVerticalNavMenuGroup(item) && (item.hasOwnProperty('isoperation') ? item.isoperation === isActive : true)"
+    v-if="item.hasOwnProperty('isoperation') ? item.isoperation === isActive : true"
     class="nav-item has-sub"
     :class="{
       'open': isOpen,

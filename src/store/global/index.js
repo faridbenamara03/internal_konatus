@@ -469,7 +469,13 @@ export default {
       state.globalOrganizationTeamData.push(orgData)
     },
     LOAD_ORG_DATA(state, orgData) {
-      state.globalOrganizationData.push(orgData)
+      if (state.globalOrganizationData.length === 0) {
+        state.globalOrganizationData.push(orgData)
+      } else {
+        const newObject = { ...state.globalOrganizationData }
+        newObject[0] = orgData
+        state.globalOrganizationData = newObject
+      }
     },
     LOAD_NAV_DATA(state, globalAllData) {
       state.globalOrganizationData = globalAllData.navData

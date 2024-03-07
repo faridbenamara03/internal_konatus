@@ -617,11 +617,8 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("INITD:", data, "OTYPE:", this.otype)
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
-      console.log("Inited:", initData)
       if (initData === undefined) {
-        console.log("Selected:", initData)
         this.step1.portfolio = this.$store.state.globalState.selectedNavObj
         if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') this.otype = 'portfolio'
         if (this.$store.state.globalState.selectedNavObj.type === 'program') this.otype = 'program'
@@ -786,12 +783,12 @@ export default {
           }
         })
       }
+      await this.$store.dispatch('globalState/load_org_data')
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
       })
       // this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')
-      await this.$store.dispatch('globalState/load_org_data')
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)
