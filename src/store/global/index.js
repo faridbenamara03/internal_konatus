@@ -66,6 +66,7 @@ export default {
     projectElementPhaseData: [],
     portfolioDemandData: [],
     portfolioReportingData: [],
+    tempReportingData: [],
     portfolioControlData: [],
     allPhaseData: [],
     allPhaseTitleData: [],
@@ -130,8 +131,19 @@ export default {
     SELECT_WIN_RATE(state, payload) {
       state.selectedWinRate = payload
     },
+    GET_OPTIMIZED_DATA(state, payload) {
+      state.tempReportingData = state.portfolioReportingData
+      state.portfolioReportingData = payload
+      state.optimizedData = payload
+      state.optimizeStates = 'preview'
+    },
     UPDATE_OPTIMIZE_STATUES(state, value) {
       state.optimizeStatus = value
+      if (value === 'origin') {
+        state.portfolioReportingData = state.tempReportingData
+      } else if (value === 'optimize') {
+        state.portfolioReportingData = state.optimizeData
+      }
     },
     UPDATE_OPTIMIZE_STATES(state, value) {
       state.optimizeStates = value
@@ -363,12 +375,8 @@ export default {
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand
       state.portfolioReportingData = payload.portData.reporting
+      state.tempReportingData = state.portfolioReportingData
       state.portfolioControlData = payload.portData.control
-    },
-    GET_OPTIMIZED_DATA(state, payload) {
-      console.log("PPPPP:", payload)
-      state.portfolioReportingData = payload
-      state.optimizeStates = 'preview'
     },
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id
@@ -904,9 +912,11 @@ export default {
       return new Promise((resolve, reject) => {
         axios.post('https://api.konatus.site/v1/api/optimize', params.data)
           .then(response => {
-            const optimizeData = response.data
-            this.commit('globalState/GET_OPTIMIZED_DATA', optimizeData)
-            resolve()
+            setTimeout(() => {
+              const optimizeData = response.data
+              this.commit('globalState/GET_OPTIMIZED_DATA', optimizeData)
+              resolve()
+            }, 60000)
           })
           .catch(err => {
             console.log('error getting optimized data ---->', err)
