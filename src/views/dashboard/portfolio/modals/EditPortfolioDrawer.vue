@@ -270,6 +270,7 @@ export default {
         portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
       }
       await this.$store.dispatch('globalState/delete_portfolio', { payloads })
+      await this.$store.commit('globalState/load_org_data')
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
