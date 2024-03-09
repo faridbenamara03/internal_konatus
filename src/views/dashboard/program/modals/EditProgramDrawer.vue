@@ -626,6 +626,13 @@ export default {
       this.step5.head_architect = initData.architectHead || ''
       this.step5.program_director = initData.programDirector || ''
       this.step5.project_manager = initData.projectManager || ''
+      this.step3.customer_ex = initData.customerEx || 0
+      this.step3.roi = initData.roi || 0
+      this.step3.sales_ex = initData.salesEx || 0
+      this.step3.scoring = initData.scoring || 0
+      this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadLine] || ''
+      this.step4.phase_start_date = initData.phase1startdate
+      this.step4.phase_end_date = initData.phase4enddate
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
@@ -696,7 +703,6 @@ export default {
         default:
           break
       }
-      console.log("ExId:", this.externalId)
       if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
         let type = ''
         switch (this.otype) {
@@ -794,6 +800,7 @@ export default {
         this.$toast.error('Please select correct project.')
         return
       }
+      this.step3.n_deadline = this.nDeadlineOptions.indexOf(this.step3.n_deadline)
       if (this.otype === 'program' && this.step1.program !== '') {
         await this.$store.dispatch('globalState/update_program', {
           data: {
