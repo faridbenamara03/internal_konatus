@@ -714,6 +714,7 @@ export default {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.navType)
       this.navType = this.$store.state.globalState.selectedNavObj.type
+      this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
       console.log("NAVTYPE:", this.navType)
     },
     onResize() {
