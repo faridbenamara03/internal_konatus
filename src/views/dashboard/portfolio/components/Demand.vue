@@ -1032,9 +1032,9 @@ export default {
           let realEstimated = 0
           let authorized = 0
           let spent = 0
-          if (t.children) {
+          if (t.children.length > 0) {
             t.children.map(t1 => {
-              if (t1.children) {
+              if (t1.children.length > 0) {
                 t1.children.map(t2 => {
                   engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
                   demand += parseInt(t2.demand ? t2.demand : 0, 10)
@@ -1044,25 +1044,20 @@ export default {
                   return null
                 })
               } else {
-                engaged += t1.engaged
-                demand += t1.demand
-                realEstimated += t1.realEstimated
-                authorized += t1.authorized
-                spent += t1.spent
+                engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+                demand += parseInt(t1.demand ? t1.demand : 0, 10)
+                realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+                authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
+                spent += parseInt(t1.spent ? t1.spent : 0, 10)
               }
-              engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-              demand += parseInt(t1.demand ? t1.demand : 0, 10)
-              realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-              authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
-              spent += parseInt(t1.spent ? t1.spent : 0, 10)
               return null
             })
           } else {
-            engaged = t.engaged
-            demand = t.demand
-            realEstimated = t.realEstimated
-            authorized = t.authorized
-            spent = t.spent
+            engaged = parseInt(t.engaged ? t.engaged : 0, 10)
+            demand = parseInt(t.demand ? t.demand : 0, 10)
+            realEstimated = parseInt(t.realEstimated ? t.realEstimated : 0, 10)
+            authorized = parseInt(t.authorized ? t.authorized : 0, 10)
+            spent = parseInt(t.spent ? t.spent : 0, 10)
           }
           const nd = { ...t }
           nd.engaged = engaged

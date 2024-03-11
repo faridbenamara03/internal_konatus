@@ -620,7 +620,7 @@ export default {
       this.step5.sponsor = initData.sponsor || ''
       this.step5.head_product_portfolio = initData.portfolioHead || ''
       this.step5.product_manager = initData.productManager || ''
-      this.step5.product_line = initData.product_line || ''
+      this.step5.product_line = initData.productLine || ''
       this.step5.head_program_direction = initData.directionHead || ''
       this.step5.architect = initData.architect || ''
       this.step5.head_architect = initData.architectHead || ''
@@ -630,9 +630,10 @@ export default {
       this.step3.roi = initData.roi || 0
       this.step3.sales_ex = initData.salesEx || 0
       this.step3.scoring = initData.scoring || 0
-      this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadLine] || ''
+      this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadLine - 1] || ''
       this.step4.phase_start_date = initData.phase1startdate
       this.step4.phase_end_date = initData.phase4enddate
+      this.step5.winrate = initData.winrate || 0
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
       const allPjs = this.getAllProjects()
@@ -784,6 +785,7 @@ export default {
     },
     async handleSave() {
       this.step2.priority = this.priorityOptions.indexOf(this.step2.priority) + 1
+      this.step3.n_deadline = this.nDeadlineOptions.indexOf(this.step3.n_deadline) + 1
       if (this.step2.deadline === null || this.step2.deadline === 0) {
         this.$toast.error('Please select correct deadline.')
         return
@@ -800,7 +802,6 @@ export default {
         this.$toast.error('Please select correct project.')
         return
       }
-      this.step3.n_deadline = this.nDeadlineOptions.indexOf(this.step3.n_deadline)
       if (this.otype === 'program' && this.step1.program !== '') {
         await this.$store.dispatch('globalState/update_program', {
           data: {

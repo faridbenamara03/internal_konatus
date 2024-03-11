@@ -640,6 +640,23 @@ export default {
         // this.step2.quote = initData.quote
         this.step2.authorized = initData.authorized || 0
         this.step2.realestimated = initData.realestimated || 0
+        this.step5.sponsor = initData.sponsor || ''
+        this.step5.head_product_portfolio = initData.portfolioHead || ''
+        this.step5.product_manager = initData.productManager || ''
+        this.step5.product_line = initData.productLine || ''
+        this.step5.head_program_direction = initData.directionHead || ''
+        this.step5.architect = initData.architect || ''
+        this.step5.head_architect = initData.architectHead || ''
+        this.step5.program_director = initData.programDirector || ''
+        this.step5.project_manager = initData.projectManager || ''
+        this.step3.customer_ex = initData.customerEx || 0
+        this.step3.roi = initData.roi || 0
+        this.step3.sales_ex = initData.salesEx || 0
+        this.step3.scoring = initData.scoring || 0
+        this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadLine - 1] || ''
+        this.step4.phase_start_date = initData.phase1startdate
+        this.step4.phase_end_date = initData.phase4enddate
+        this.step5.winrate = initData.winrate || 0
         const allPts = this.getAllPorts()
         const allPgs = this.getAllProgs()
         const allPjs = this.getAllProjects()
@@ -719,6 +736,7 @@ export default {
     },
     async handleSave() {
       this.step2.priority = this.priorityOptions.indexOf(this.step2.priority) + 1
+      this.step3.n_deadline = this.nDeadlineOptions.indexOf(this.step3.n_deadline) + 1
       const newProgramData = {
         step1: this.step1,
         step2: this.step2,
