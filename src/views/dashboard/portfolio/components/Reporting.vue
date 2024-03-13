@@ -763,12 +763,12 @@ export default {
             endMoment = moment(item.end_date_demand, 'YYYY-MM-DD').startOf('day')
             break
           case 1:
-            startMoment = moment(item.start_date_engaged, 'YYYY-MM-DD').startOf('day')
-            endMoment = moment(item.end_date_engaged, 'YYYY-MM-DD').startOf('day')
+            startMoment = moment(item.start_date_engage, 'YYYY-MM-DD').startOf('day')
+            endMoment = moment(item.end_date_engage, 'YYYY-MM-DD').startOf('day')
             break
           case 2:
-            startMoment = moment(item.start_date_reel, 'YYYY-MM-DD').startOf('day')
-            endMoment = moment(item.end_date_reel, 'YYYY-MM-DD').startOf('day')
+            startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+            endMoment = moment(item.end_date_estimated, 'YYYY-MM-DD').startOf('day')
             break
           default:
             break
@@ -794,7 +794,7 @@ export default {
             if (type === 0) {
               startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
             } else if (type === 1) {
-              startMoment = moment(phase.start_date_engaged, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
             } else if (type === 2) {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
@@ -814,10 +814,10 @@ export default {
             startMoment = moment(item.start_date_demand, 'YYYY-MM-DD')
             break
           case 1:
-            startMoment = moment(item.start_date_engaged, 'YYYY-MM-DD')
+            startMoment = moment(item.start_date_engage, 'YYYY-MM-DD')
             break
           case 2:
-            startMoment = moment(item.start_date_reel, 'YYYY-MM-DD')
+            startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD')
             break
           default:
             break

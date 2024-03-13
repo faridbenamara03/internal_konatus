@@ -281,10 +281,10 @@ export default {
           id: data.id, portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
         }
         await this.$store.dispatch('globalState/delete_portfolio', { payloads })
-        await this.$store.dispatch('globalState/load_org_data')
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
           data
         })
+        await this.$store.dispatch('globalState/load_org_data')
         await this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
       }
     },
