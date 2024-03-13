@@ -170,7 +170,6 @@
       </b-button>
       <b-button
         class="ml-1 w-50"
-        :disabled="!edited"
         variant="primary"
         @click="handleDelete"
       >
@@ -266,16 +265,28 @@ export default {
       return pts
     },
     async handleDelete() {
-      const payloads = {
-        portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
-      }
-      await this.$store.dispatch('globalState/delete_portfolio', { payloads })
-      await this.$store.commit('globalState/load_org_data')
-      const data = this.$store.state.globalState.selectedNavObj
-      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
-        data
+      const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
+          title: 'Please Confirm',
+          size: 'sm',
+          okVariant: 'primary',
+          okTitle: 'Yes',
+          cancelTitle: 'No',
+          cancelVariant: 'outline-secondary',
+          hideHeaderClose: false,
+          centered: true,
       })
-      await this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
+      if (value) {
+        const data = this.$store.state.globalState.selectedNavObj
+        const payloads = {
+          id: data.id, portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
+        }
+        await this.$store.dispatch('globalState/delete_portfolio', { payloads })
+        await this.$store.dispatch('globalState/load_org_data')
+        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+          data
+        })
+        await this.$store.commit('globalState/TOGGLE_EDIT_PORTFOLIO_DRAWER')
+      }
     },
     async handleSave() {
       await this.$store.dispatch('globalState/update_portfolio', {
