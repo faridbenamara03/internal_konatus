@@ -178,7 +178,7 @@
                         outlined
                       />
                       <b-form-datepicker
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
@@ -215,7 +215,7 @@
                         {{ priorities[item1[ft] - 1] }}
                       </div>
                       <div
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -364,7 +364,7 @@
                             outlined
                           />
                           <b-form-datepicker
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                             v-model="item2[ft]"
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
@@ -401,7 +401,7 @@
                             {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -542,7 +542,7 @@
                                 outlined
                               />
                               <b-form-datepicker
-                                v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                                v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                                 v-model="item3[ft]"
                                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                               />
@@ -579,7 +579,7 @@
                                 {{ priorities[item3[ft] - 1] }}
                               </div>
                               <div
-                                v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                                v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -669,7 +669,7 @@
                 :style="`min-width:200px`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
@@ -795,7 +795,7 @@
                         outlined
                       />
                       <b-form-datepicker
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
@@ -832,7 +832,7 @@
                         {{ priorities[item1[ft] - 1] }}
                       </div>
                       <div
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -973,7 +973,7 @@
                             outlined
                           />
                           <b-form-datepicker
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                             v-model="item2[ft]"
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
@@ -1010,7 +1010,7 @@
                             {{ priorities[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
