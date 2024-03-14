@@ -111,30 +111,84 @@
                     :style="`min-width:200px`"
                   >
                     <div v-if="demandTableEditable">
-                      <div
-                        v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
                       <v-select
-                        v-else-if="ft === 'priority'"
+                        v-if="ft === 'priority'"
                         v-model="item1[ft]"
                         :options="priorities"
                         outlined
                       />
-                      <b-form-input
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                      <v-select
+                        v-else-if="ft === 'portfolioHead'"
                         v-model="item1[ft]"
-                        style="text-align:end"
+                        :options="headProductPortOptions"
+                        outlined
                       />
-                      <b-form-input
-                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                      <v-select
+                        v-else-if="ft === 'productLine'"
                         v-model="item1[ft]"
-                        style="text-align:end"
+                        :options="productLineOptions"
+                        outlined
                       />
-                      <b-input-group v-else>
+                      <v-select
+                        v-else-if="ft === 'projectManager'"
+                        v-model="item1[ft]"
+                        :options="projectManagerOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'sponsor'"
+                        v-model="item1[ft]"
+                        :options="sponsorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'architectHead'"
+                        v-model="item1[ft]"
+                        :options="headProgramArchitectOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'programDirector'"
+                        v-model="item1[ft]"
+                        :options="programDirectorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'directionHead'"
+                        v-model="item1[ft]"
+                        :options="headProgramDirectorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'natureOfDeadline'"
+                        v-model="item1[ft]"
+                        :options="nDeadlineOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'architect'"
+                        v-model="item1[ft]"
+                        :options="architectOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'productManager'"
+                        v-model="item1[ft]"
+                        :options="productManagerOptions"
+                        outlined
+                      />
+                      <b-form-datepicker
+                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-model="item1[ft]"
+                        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                      />
+                      <div
+                        v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                      >
+                        {{ dateFormat(item1[ft]) }}
+                      </div>
+                      <b-input-group
+                        v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -146,6 +200,11 @@
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
+                      <b-form-input
+                        v-else
+                        v-model="item1[ft]"
+                        style="text-align:end"
+                      />
                     </div>
                     <div v-else>
                       <div
@@ -238,31 +297,84 @@
                         :style="`min-width:200px`"
                       >
                         <div v-if="demandTableEditable">
-                          <div
-                            v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
-                            class="mr-1"
-                            style="margin-top:6px;"
-                          >
-                            {{ formatCurrency(item2[ft]) }}
-                          </div>
                           <v-select
-                            v-else-if="ft === 'priority'"
+                            v-if="ft === 'priority'"
                             v-model="item2[ft]"
                             :options="priorities"
                             outlined
                           />
-                          <b-form-input
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                          <v-select
+                            v-else-if="ft === 'portfolioHead'"
                             v-model="item2[ft]"
-                            style="text-align:end"
+                            :options="headProductPortOptions"
+                            outlined
                           />
-                          <!-- <b-input-group v-else-if="ft === 'authorized' || ft === 'winrate' || ft === 'prev_engaged' || ft === 'quote_engaged' || ft === 'value' || ft === 'demand' || ft === 'budget' || ft === 'description' || ft === 'architect' || ft === 'product_manager'"> -->
-                          <b-form-input
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                          <v-select
+                            v-else-if="ft === 'productLine'"
                             v-model="item2[ft]"
-                            style="text-align:end"
+                            :options="productLineOptions"
+                            outlined
                           />
-                          <b-input-group v-else>
+                          <v-select
+                            v-else-if="ft === 'projectManager'"
+                            v-model="item2[ft]"
+                            :options="projectManagerOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'sponsor'"
+                            v-model="item2[ft]"
+                            :options="sponsorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'architectHead'"
+                            v-model="item2[ft]"
+                            :options="headProgramArchitectOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'programDirector'"
+                            v-model="item2[ft]"
+                            :options="programDirectorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'directionHead'"
+                            v-model="item2[ft]"
+                            :options="headProgramDirectorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'architect'"
+                            v-model="item2[ft]"
+                            :options="architectOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'natureOfDeadline'"
+                            v-model="item2[ft]"
+                            :options="nDeadlineOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'productManager'"
+                            v-model="item2[ft]"
+                            :options="productManagerOptions"
+                            outlined
+                          />
+                          <b-form-datepicker
+                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-model="item2[ft]"
+                            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                          />
+                          <div
+                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                          >
+                            {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <b-input-group
+                            v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -274,6 +386,11 @@
                               </b-input-group-text>
                             </b-input-group-append>
                           </b-input-group>
+                          <b-form-input
+                            v-else
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
                         </div>
                         <div v-else>
                           <div
@@ -358,30 +475,84 @@
                             :style="`min-width:200px`"
                           >
                             <div v-if="demandTableEditable">
-                              <div
-                                v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
-                                class="mr-1"
-                                style="margin-top:6px;"
-                              >
-                                {{ formatCurrency(item3[ft]) }}
-                              </div>
                               <v-select
-                                v-else-if="ft === 'priority'"
+                                v-if="ft === 'priority'"
                                 v-model="item3[ft]"
                                 :options="priorities"
                                 outlined
                               />
-                              <b-form-input
-                                v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                              <v-select
+                                v-else-if="ft === 'portfolioHead'"
                                 v-model="item3[ft]"
-                                style="text-align:end"
+                                :options="headProductPortOptions"
+                                outlined
                               />
-                              <b-form-input
-                                v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                              <v-select
+                                v-else-if="ft === 'productLine'"
                                 v-model="item3[ft]"
-                                style="text-align:end"
+                                :options="productLineOptions"
+                                outlined
                               />
-                              <b-input-group v-else>
+                              <v-select
+                                v-else-if="ft === 'projectManager'"
+                                v-model="item3[ft]"
+                                :options="projectManagerOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'sponsor'"
+                                v-model="item3[ft]"
+                                :options="sponsorOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'architectHead'"
+                                v-model="item3[ft]"
+                                :options="headProgramArchitectOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'programDirector'"
+                                v-model="item3[ft]"
+                                :options="programDirectorOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'directionHead'"
+                                v-model="item3[ft]"
+                                :options="headProgramDirectorOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'architect'"
+                                v-model="item3[ft]"
+                                :options="architectOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'productManager'"
+                                v-model="item3[ft]"
+                                :options="productManagerOptions"
+                                outlined
+                              />
+                              <v-select
+                                v-else-if="ft === 'natureOfDeadline'"
+                                v-model="item3[ft]"
+                                :options="nDeadlineOptions"
+                                outlined
+                              />
+                              <b-form-datepicker
+                                v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                                v-model="item3[ft]"
+                                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                              />
+                              <div
+                                v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                              >
+                                {{ dateFormat(item3[ft]) }}
+                              </div>
+                              <b-input-group
+                                v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
                                 <b-form-input
                                   v-model="item3[ft]"
                                   type="number"
@@ -393,6 +564,11 @@
                                   </b-input-group-text>
                                 </b-input-group-append>
                               </b-input-group>
+                              <b-form-input
+                                v-else
+                                v-model="item1[ft]"
+                                style="text-align:end"
+                              />
                             </div>
                             <div v-else>
                               <div
@@ -414,7 +590,7 @@
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
-                                {{ item[ft] }}
+                                {{ item3[ft] }}
                               </div>
                               <div
                                 v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
@@ -552,30 +728,84 @@
                     :style="`min-width:200px`"
                   >
                     <div v-if="demandTableEditable">
-                      <div
-                        v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
-                        class="mr-1"
-                        style="margin-top:6px;"
-                      >
-                        {{ formatCurrency(item1[ft]) }}
-                      </div>
                       <v-select
-                        v-else-if="ft === 'priority'"
+                        v-if="ft === 'priority'"
                         v-model="item1[ft]"
                         :options="priorities"
                         outlined
                       />
-                      <b-form-input
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                      <v-select
+                        v-else-if="ft === 'portfolioHead'"
                         v-model="item1[ft]"
-                        style="text-align:end"
+                        :options="headProductPortOptions"
+                        outlined
                       />
-                      <b-form-input
-                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                      <v-select
+                        v-else-if="ft === 'productLine'"
                         v-model="item1[ft]"
-                        style="text-align:end"
+                        :options="productLineOptions"
+                        outlined
                       />
-                      <b-input-group v-else>
+                      <v-select
+                        v-else-if="ft === 'projectManager'"
+                        v-model="item1[ft]"
+                        :options="projectManagerOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'sponsor'"
+                        v-model="item1[ft]"
+                        :options="sponsorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'architectHead'"
+                        v-model="item1[ft]"
+                        :options="headProgramArchitectOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'programDirector'"
+                        v-model="item1[ft]"
+                        :options="programDirectorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'directionHead'"
+                        v-model="item1[ft]"
+                        :options="headProgramDirectorOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'architect'"
+                        v-model="item1[ft]"
+                        :options="architectOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'productManager'"
+                        v-model="item1[ft]"
+                        :options="productManagerOptions"
+                        outlined
+                      />
+                      <v-select
+                        v-else-if="ft === 'natureOfDeadline'"
+                        v-model="item1[ft]"
+                        :options="nDeadlineOptions"
+                        outlined
+                      />
+                      <b-form-datepicker
+                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-model="item1[ft]"
+                        :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                      />
+                      <div
+                        v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                      >
+                        {{ dateFormat(item1[ft]) }}
+                      </div>
+                      <b-input-group
+                        v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -587,6 +817,11 @@
                           </b-input-group-text>
                         </b-input-group-append>
                       </b-input-group>
+                      <b-form-input
+                        v-else
+                        v-model="item1[ft]"
+                        style="text-align:end"
+                      />
                     </div>
                     <div v-else>
                       <div
@@ -671,30 +906,84 @@
                         :style="`min-width:200px`"
                       >
                         <div v-if="demandTableEditable">
-                          <div
-                            v-if="ft === 'demand' || ft === 'engaged' || ft === 'realestimated' || ft === 'spent' || ft === 'phase' || ft === 'head_program_diretion' || ft === 'program_director' || ft === 'project_manager'"
-                            class="mr-1"
-                            style="margin-top:6px;"
-                          >
-                            {{ formatCurrency(item2[ft]) }}
-                          </div>
                           <v-select
-                            v-else-if="ft === 'priority'"
+                            v-if="ft === 'priority'"
                             v-model="item2[ft]"
                             :options="priorities"
                             outlined
                           />
-                          <b-form-input
-                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
+                          <v-select
+                            v-else-if="ft === 'portfolioHead'"
                             v-model="item2[ft]"
-                            style="text-align:end"
+                            :options="headProductPortOptions"
+                            outlined
                           />
-                          <b-form-input
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                          <v-select
+                            v-else-if="ft === 'productLine'"
                             v-model="item2[ft]"
-                            style="text-align:end"
+                            :options="productLineOptions"
+                            outlined
                           />
-                          <b-input-group v-else>
+                          <v-select
+                            v-else-if="ft === 'projectManager'"
+                            v-model="item2[ft]"
+                            :options="projectManagerOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'sponsor'"
+                            v-model="item2[ft]"
+                            :options="sponsorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'architectHead'"
+                            v-model="item2[ft]"
+                            :options="headProgramArchitectOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'programDirector'"
+                            v-model="item2[ft]"
+                            :options="programDirectorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'directionHead'"
+                            v-model="item2[ft]"
+                            :options="headProgramDirectorOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'architect'"
+                            v-model="item2[ft]"
+                            :options="architectOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'productManager'"
+                            v-model="item2[ft]"
+                            :options="productManagerOptions"
+                            outlined
+                          />
+                          <v-select
+                            v-else-if="ft === 'natureOfDeadline'"
+                            v-model="item2[ft]"
+                            :options="nDeadlineOptions"
+                            outlined
+                          />
+                          <b-form-datepicker
+                            v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-model="item2[ft]"
+                            :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                          />
+                          <div
+                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                          >
+                            {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <b-input-group
+                            v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -706,6 +995,11 @@
                               </b-input-group-text>
                             </b-input-group-append>
                           </b-input-group>
+                          <b-form-input
+                            v-else
+                            v-model="item2[ft]"
+                            style="text-align:end"
+                          />
                         </div>
                         <div v-else>
                           <div
@@ -722,15 +1016,15 @@
                           >
                             {{ dateFormat(item2[ft]) }}
                           </div>
-                          <div
+                          <!-- <div
                             v-else-if="ft === 'winrate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
                             {{ getSelectedWinRate }}
-                          </div>
+                          </div> -->
                           <div
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -887,7 +1181,7 @@
 
 <script>
 import {
-  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BInputGroup, BInputGroupAppend, BInputGroupText
+  BButton, BCard, BFormInput, BRow, BCol, BProgress, BProgressBar, BInputGroup, BInputGroupAppend, BInputGroupText, BFormDatepicker
 } from 'bootstrap-vue'
 import moment from 'moment'
 import Drawer from "vue-simple-drawer"
@@ -914,7 +1208,8 @@ export default {
     Drawer,
     BudgetDrawer,
     EditProgramDrawer,
-    CreateNewProgramDrawer
+    CreateNewProgramDrawer,
+    BFormDatepicker
   },
   props: {
     data: {
@@ -942,6 +1237,14 @@ export default {
       openedPj: 0,
       openedPg: 0,
       priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
+      headProductPortOptions: this.$store.state.globalState.hproductportfolios,
+      productManagerOptions: this.$store.state.globalState.productmanagers,
+      headProgramArchitectOptions: this.$store.state.globalState.hprogramarchitects,
+      architectOptions: this.$store.state.globalState.architects,
+      headProgramDirectorOptions: this.$store.state.globalState.hprogramdirectors,
+      programDirectorOptions: this.$store.state.globalState.programdirectors,
+      projectManagerOptions: this.$store.state.globalState.projectmanagers,
       chartOptions: {
         chart: {
           type: 'bar',
