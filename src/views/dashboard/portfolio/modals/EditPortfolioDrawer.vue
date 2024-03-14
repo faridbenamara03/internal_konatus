@@ -25,7 +25,7 @@
           @input="onEdit"
         />
       </div>
-      <!-- <div class="d-flex justify-content-between select-box">
+      <div class="d-flex justify-content-between select-box">
         <div style="width:48%">
           <div class="select-group--sub mb-0">
             <div class="select-box">
@@ -60,103 +60,6 @@
           type="number"
           @input="onEdit"
         />
-      </div> -->
-    </div>
-    <div
-      class="select-group"
-      style="padding-top: 0px"
-    >
-      <div class="notice-box">
-        <feather-icon
-          icon="DollarSignIcon"
-          size="20"
-        />
-        <h5>budget</h5>
-      </div>
-      <div class="select-box">
-        <label>Portfolio</label>
-        <v-select
-          v-model="portfolio"
-          :options="getAllPorts"
-          placeholder="Select Portfolio"
-          outlined
-        />
-      </div>
-      <div class="select-group--sub">
-        <div class="select-box">
-          <label>Period start</label>
-          <div class="d-flex">
-            <v-select
-              v-model="period_start_year"
-              :options="years"
-              class="mr-1"
-              :placeholder="years[0]"
-              outlined
-            />
-            <v-select
-              v-model="period_start_month"
-              :options="months"
-              :placeholder="months[0]"
-              outlined
-            />
-          </div>
-        </div>
-        <div class="divider" />
-        <div class="select-box">
-          <label>Period End</label>
-          <div class="d-flex">
-            <v-select
-              v-model="period_end_year"
-              :options="years"
-              class="mr-1"
-              :placeholder="years[0]"
-              outlined
-            />
-            <v-select
-              v-model="period_end_month"
-              :options="months"
-              :placeholder="months[0]"
-              outlined
-            />
-          </div>
-        </div>
-      </div>
-      <div class="select-box d-flex justify-content-center">
-        <label class="notice">Period duration: 12 months</label>
-      </div>
-      <div class="select-box">
-        <label>Budget</label>
-        <b-input-group>
-          <!-- <v-select
-            v-model="currency"
-            :options="['EUR', 'USD']"
-            placeholder="unit"
-            outlined
-          /> -->
-          <b-form-input
-            v-model="budget"
-            placeholder="300"
-            @input="onEdit"
-          />
-          <b-button
-            variant="primary"
-            @click="handleAdd"
-          >
-            Add
-          </b-button>
-        </b-input-group>
-      </div>
-      <div class="select-box">
-        <span v-if="inputedBudgets.length > 0" >
-          Budgets:
-        </span>
-        <span v-for="(item, index) of inputedBudgets"
-          :key="index">
-          <div class="d-flex">
-            <label>{{item.amount}}</label>
-            <label>{{item.currency === 'USD' ? '$' : '€'}}</label>
-          </div>
-        </span>
       </div>
     </div>
     <div class="d-flex">
@@ -181,7 +84,8 @@
 
 <script>
 import {
-  BButton, BFormInput, BInputGroup
+  BButton, BFormInput, BFormDatepicker
+  //  BInputGroup
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 
@@ -189,8 +93,8 @@ export default {
   components: {
     BButton,
     BFormInput,
-    // BFormDatepicker,
-    BInputGroup,
+    BFormDatepicker,
+    // BInputGroup,
     vSelect,
   },
   props: {

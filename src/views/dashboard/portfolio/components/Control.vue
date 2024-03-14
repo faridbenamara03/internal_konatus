@@ -4,7 +4,7 @@
       <div style="width:100%;background-color:#1A2239;height:40px" />
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
-          {{ data.title }}
+          {{ data === null ? '' : data.title }}
         </div>
         <div class="part2 mr-2">
           <div
@@ -53,109 +53,113 @@
         </div>
       </div>
       <div
-        v-for="(item, index) in data.children"
-        :key="index"
+        v-if="data !== null"
       >
         <div
-          class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
-          :class="{'inner-sdw': index === 0}"
+          v-for="(item, index) in data.children"
+          :key="index"
         >
           <div
-            class="part1 portf-uppercase"
-            style="cursor:pointer"
-            @click="onCollapseCLick(index)"
-          >
-            <feather-icon
-              v-if="item.children"
-              :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-              size="16"
-              class="mr-1"
-            />
-            {{ item.title }}
-          </div>
-          <div class="part2 mr-2">
-            <div
-              v-for="(ft, fi) in c_fields"
-              :key="fi"
-              class="data-child mr-1"
-              :style="`width:${100 / c_fields.length}%`"
-            >
-              <span v-if="ft === 'priority'">{{ priorityOptions[item[ft] - 1] }}</span>
-              <span v-else-if="ft === 'next_gate'">{{ dateFormat(item[ft]) }}</span>
-              <span v-else-if="ft === 'value'">{{ item[ft] }}</span>
-              <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
-            </div>
-          </div>
-          <div
-            v-for="(item, index1) in teams"
-            :key="index1"
-            :style="`width:${collapsedT.indexOf(index1) > -1 ? 120 : 400}px;text-align:center;`"
-            class="mr-1 ml-1"
-          >
-            <div style="display:flex;justify-content:space-between;">
-              <template v-if="collapsedT.indexOf(index1) > -1">
-                <div style="width:100%;text-align:center">
-                  {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
-                </div>
-              </template>
-              <template v-else>
-                <div
-                  v-for="(item1, jndex) in team_fields"
-                  :key="jndex"
-                  style="width:25%;text-align:center"
-                >
-                  {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
-                </div>
-              </template>
-            </div>
-          </div>
-        </div>
-        <div v-if="opened === index">
-          <div
-            v-for="(item1, index1) in item.children"
-            :key="index1"
+            class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
+            :class="{'inner-sdw': index === 0}"
           >
             <div
-              class="portf-row portf-table-row font-14 border-bottom-dm"
-              :class="{'inner-sdw': index1 === 0}"
+              class="part1 portf-uppercase"
+              style="cursor:pointer"
+              @click="onCollapseCLick(index)"
             >
-              <div class="part1 portf-bold pl-2">
-                {{ item1.title }}
-              </div>
-              <div class="part2 mr-2">
-                <div
-                  v-for="(ft, fi) in c_fields"
-                  :key="fi"
-                  class="data-child mr-1"
-                  :style="`width:${100 / c_fields.length}%`"
-                >
-                  <span v-if="ft === 'priority'">{{ priorityOptions[item1[ft] - 1] }}</span>
-                  <span v-else-if="ft === 'next_gate'">{{ dateFormat(item1[ft]) }}</span>
-                  <span v-else-if="ft === 'value'">{{ item1[ft] }}</span>
-                  <span v-else>{{ item1[ft] ? formatCurrency(item1[ft]) : '' }}</span>
-                </div>
-              </div>
+              <feather-icon
+                v-if="item.children"
+                :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                size="16"
+                class="mr-1"
+              />
+              {{ item.title }}
+            </div>
+            <div class="part2 mr-2">
               <div
-                v-for="(item, tndex) in teams"
-                :key="tndex"
-                :style="`width:${collapsedT.indexOf(tndex) > -1 ? 120 : 400}px;text-align:center;`"
-                class="mr-1 ml-1"
+                v-for="(ft, fi) in c_fields"
+                :key="fi"
+                class="data-child mr-1"
+                :style="`width:${100 / c_fields.length}%`"
               >
-                <div style="display:flex;justify-content:space-between;">
-                  <template v-if="collapsedT.indexOf(tndex) > -1">
-                    <div style="width:100%;text-align:center">
-                      {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
-                    </div>
-                  </template>
-                  <template v-else>
-                    <div
-                      v-for="(item1, jndex) in team_fields"
-                      :key="jndex"
-                      style="width:25%;text-align:center"
-                    >
-                      {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
-                    </div>
-                  </template>
+                <span v-if="ft === 'priority'">{{ priorityOptions[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'next_gate'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'value'">{{ item[ft] }}</span>
+                <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
+              </div>
+            </div>
+            <div
+              v-for="(item, index1) in teams"
+              :key="index1"
+              :style="`width:${collapsedT.indexOf(index1) > -1 ? 120 : 400}px;text-align:center;`"
+              class="mr-1 ml-1"
+            >
+              <div style="display:flex;justify-content:space-between;">
+                <template v-if="collapsedT.indexOf(index1) > -1">
+                  <div style="width:100%;text-align:center">
+                    {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
+                  </div>
+                </template>
+                <template v-else>
+                  <div
+                    v-for="(item1, jndex) in team_fields"
+                    :key="jndex"
+                    style="width:25%;text-align:center"
+                  >
+                    {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div v-if="opened === index">
+            <div
+              v-for="(item1, index1) in item.children"
+              :key="index1"
+            >
+              <div
+                class="portf-row portf-table-row font-14 border-bottom-dm"
+                :class="{'inner-sdw': index1 === 0}"
+              >
+                <div class="part1 portf-bold pl-2">
+                  {{ item1.title }}
+                </div>
+                <div class="part2 mr-2">
+                  <div
+                    v-for="(ft, fi) in c_fields"
+                    :key="fi"
+                    class="data-child mr-1"
+                    :style="`width:${100 / c_fields.length}%`"
+                  >
+                    <span v-if="ft === 'priority'">{{ priorityOptions[item1[ft] - 1] }}</span>
+                    <span v-else-if="ft === 'next_gate'">{{ dateFormat(item1[ft]) }}</span>
+                    <span v-else-if="ft === 'value'">{{ item1[ft] }}</span>
+                    <span v-else>{{ item1[ft] ? formatCurrency(item1[ft]) : '' }}</span>
+                  </div>
+                </div>
+                <div
+                  v-for="(item, tndex) in teams"
+                  :key="tndex"
+                  :style="`width:${collapsedT.indexOf(tndex) > -1 ? 120 : 400}px;text-align:center;`"
+                  class="mr-1 ml-1"
+                >
+                  <div style="display:flex;justify-content:space-between;">
+                    <template v-if="collapsedT.indexOf(tndex) > -1">
+                      <div style="width:100%;text-align:center">
+                        {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div
+                        v-for="(item1, jndex) in team_fields"
+                        :key="jndex"
+                        style="width:25%;text-align:center"
+                      >
+                        {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
+                      </div>
+                    </template>
+                  </div>
                 </div>
               </div>
             </div>
@@ -296,7 +300,7 @@ export default {
   },
   methods: {
     initializeData(data) {
-      const temp = data.children
+      const temp = data !== null ? data.children : []
       const tempTeams = []
       const tempTeamData1 = []
       const tempTeamData = []

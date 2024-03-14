@@ -38,7 +38,7 @@
               @click="onCollapseClick(index)"
             >
               <feather-icon
-                v-if="item.children"
+                v-if="item.children.length > 0"
                 :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -1025,6 +1025,7 @@ export default {
       return this.$store.state.portfolioState.demandTableEditable
     },
     c_data() {
+      if (this.data === null) return []
       if (this.data.type === 'portfolio' && this.data.children) {
         const ndt = this.data.children.map(t => {
           let engaged = 0

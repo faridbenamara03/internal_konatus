@@ -10,39 +10,43 @@
           style="margin-top:128px;"
         >
           <p class="m-0 text-uppercase">
-            {{ data.title }}
+            {{ data === null ? '' : data.title }}
           </p>
         </div>
         <div
-          v-for="(item1, index1) in data.children"
-          :key="index1"
+          v-if="data !== null"
         >
           <div
-            class="report-block--head"
-            style="cursor:pointer"
-            @click="onCollapseClick(index1)"
+            v-for="(item1, index1) in data.children"
+            :key="index1"
           >
-            <feather-icon
-              v-if="item1.children"
-              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-              size="16"
-              class="mr-1"
-            />
-            <p class="ml-1 m-0 text-overflow-ellipse">
-              {{ item1.title }}
-            </p>
-          </div>
-          <template v-if="item1.phases">
             <div
-              v-for="(item2, index2) in item1.phases"
-              :key="index2"
-              class="report-block-child"
+              class="report-block--head"
+              style="cursor:pointer"
+              @click="onCollapseClick(index1)"
             >
-              <p class="m-0 text-uppercase text-overflow-ellipse">
-                {{ item2.id }} <span style="color:white">({{ item2.progress }})</span>
+              <feather-icon
+                v-if="item1.children"
+                :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                size="16"
+                class="mr-1"
+              />
+              <p class="ml-1 m-0 text-overflow-ellipse">
+                {{ item1.title }}
               </p>
             </div>
-          </template>
+            <template v-if="item1.phases">
+              <div
+                v-for="(item2, index2) in item1.phases"
+                :key="index2"
+                class="report-block-child"
+              >
+                <p class="m-0 text-uppercase text-overflow-ellipse">
+                  {{ item2.id }} <span style="color:white">({{ item2.progress }})</span>
+                </p>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
     </div>

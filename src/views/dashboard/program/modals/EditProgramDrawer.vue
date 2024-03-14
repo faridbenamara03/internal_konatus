@@ -140,7 +140,7 @@
             <label>Sub Project(Optional)</label>
             <div v-if="this.otype === 'subproject'">
               <b-form-input
-                v-model="subProjectTitle"
+                v-model="subprojectTitle"
                 type="text"
                 placeholder="Enter SubProject name"
               />
@@ -605,6 +605,7 @@ export default {
   methods: {
     async initializeData(data) {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
+      console.log('initData:', initData)
       this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
       this.step2.description = initData.description || ''
@@ -653,7 +654,7 @@ export default {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
         if (programs.length > 0) {
-          this.step1.program = programs[0].title
+          [this.step1.program] = programs
         }
         this.step1.projectId = data.id || 0
         const projects = allPjs.filter(pj => pj.id === initData.id)
@@ -666,12 +667,12 @@ export default {
         this.step1.programId = initData.progid
         const programs = allPgs.filter(pg => pg.id === initData.progid)
         if (programs.length > 0) {
-          this.step1.program = programs[0].title
+          [this.step1.program] = programs
         }
         this.step1.projectId = initData.projid
         const projects = allPjs.filter(pj => pj.id === initData.projid)
         if (projects.length > 0) {
-          this.step1.project = projects[0].title
+          [this.step1.project] = projects
         }
         this.step1.subprojectId = initData.id
         this.step1.subproject = initData.title
@@ -842,7 +843,7 @@ export default {
             step5: this.step5,
             externalSystems: this.externalSystems,
             id: this.step1.subprojectId,
-            subprojectTitle: this.subProjectTitle,
+            subprojectTitle: this.subprojectTitle,
             type: 'subproject'
           }
         })
