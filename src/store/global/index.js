@@ -175,6 +175,10 @@ export default {
       console.log(data)
       Vue.$toast.success('Portfolio created successfully.')
     },
+    ADD_PORTFOLIO_BUDGET(state, data) {
+      console.log(data)
+      Vue.$toast.success('Budget successfully added to Portfolio.')
+    },
     CREATE_NEW_PROJECT(state, data) {
       console.log(data)
       const u1 = !state.openCreateNewProgramDrawer
@@ -910,6 +914,21 @@ export default {
           .catch(err => {
             console.log('error deleting subproject ---->', err)
             Vue.$toast.error('Failed to delete subproject.')
+            reject(err)
+          })
+      })
+    },
+    add_portfolio_budget(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/portfolio/add_budget', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/ADD_PORTFOLIO_BUDGET', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error adding budget to portfolio ---->', err)
+            Vue.$toast.error('Failed to add budget to portfolio.')
             reject(err)
           })
       })

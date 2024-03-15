@@ -34,7 +34,6 @@
                 :id="`start_date-datepicker`"
                 v-model="startDate"
                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                :max="endDate ? endDate : null"
                 @input="onEdit"
               />
             </div>
@@ -47,7 +46,6 @@
               :id="`end_date-datepicker`"
               v-model="endDate"
               :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              :min="startDate ? startDate : null"
               @input="onEdit"
             />
           </div>
@@ -79,6 +77,56 @@
         <feather-icon icon="TrashIcon" />&nbsp;&nbsp;<span>Delete</span>
       </b-button>
     </div>
+    <h3 class="modal-title mb-1 mt-3">
+      <!-- Edit {{ selectedType }} -->
+      Add Budget
+    </h3>
+    <div
+      class="select-group"
+      style="padding-top: 0px"
+    >
+      <div class="d-flex justify-content-between select-box">
+        <div style="width:48%">
+          <div class="select-group--sub mb-0">
+            <div class="select-box">
+              <label>Budget Start Date</label>
+              <b-form-datepicker
+                :id="`start_budget_date-datepicker`"
+                v-model="budget_startDate"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+                @input="onEdit"
+              />
+            </div>
+          </div>
+        </div>
+        <div style="width:48%">
+          <div class="select-box">
+            <label>Budget End Date</label>
+            <b-form-datepicker
+              :id="`end_budget_date-datepicker`"
+              v-model="budget_endDate"
+              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              @input="onEdit"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="select-box">
+        <label>Portfolio Budget</label>
+        <b-form-input
+          v-model="newPortfolioBudget"
+          type="number"
+          @input="onEdit"
+        />
+      </div>
+      <b-button
+        class="w-100"
+        variant="primary"
+        @click="handleAdd"
+      >
+        Add Budget
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -107,6 +155,9 @@ export default {
       inputedBudgets: [],
       startDate: "2023-01-13",
       endDate: "2023-04-30",
+      budget_startDate: "2024-01-01",
+      budget_endDate: "2024-12-31",
+      newPortfolioBudget: 0,
       priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
@@ -156,13 +207,16 @@ export default {
         if (ports.length > 0) this.portfolioName = ports[0].title
       }
     },
-    handleAdd() {
-      const item = {
-        currency: this.currency,
-        amount: this.budget
+    async handleAdd() {
+      const data = this.$store.state.globalState.selectedNavObj
+      const payloads = {
+        id: data.id,
+        startDate: this.budget_startDate,
+        endDate: this.budget_endDate,
+        portfolioBudget: this.newPortfolioBudget
       }
-      this.inputedBudgets.push(item)
-      this.budget = 0
+      await this.$store.dispatch('globalState/add_portfolio_budget', { payloads })
+      this.newPortfolioBudget = 0
     },
     getAllPorts() {
       const pts = Array.from(this.$store.state.globalState.allPortData)
