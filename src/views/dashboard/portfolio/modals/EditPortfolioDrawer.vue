@@ -25,40 +25,6 @@
           @input="onEdit"
         />
       </div>
-      <div class="d-flex justify-content-between select-box">
-        <div style="width:48%">
-          <div class="select-group--sub mb-0">
-            <div class="select-box">
-              <label>Start Date</label>
-              <b-form-datepicker
-                :id="`start_date-datepicker`"
-                v-model="startDate"
-                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-                @input="onEdit"
-              />
-            </div>
-          </div>
-        </div>
-        <div style="width:48%">
-          <div class="select-box">
-            <label>End Date</label>
-            <b-form-datepicker
-              :id="`end_date-datepicker`"
-              v-model="endDate"
-              :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
-              @input="onEdit"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="select-box">
-        <label>Portfolio Budget</label>
-        <b-form-input
-          v-model="portfolioBudget"
-          type="number"
-          @input="onEdit"
-        />
-      </div>
     </div>
     <div class="d-flex">
       <b-button
@@ -152,9 +118,6 @@ export default {
       portfolioBudget: this.$store.state.globalState.selectedNavObj?.budget,
       edited: false,
       parentOrganization: "Konatus Industries",
-      inputedBudgets: [],
-      startDate: "2023-01-13",
-      endDate: "2023-04-30",
       budget_startDate: "2024-01-01",
       budget_endDate: "2024-12-31",
       newPortfolioBudget: 0,
@@ -236,7 +199,7 @@ export default {
       if (value) {
         const data = this.$store.state.globalState.selectedNavObj
         const payloads = {
-          id: data.id, portfolio: this.portfolioName, portfolioBudget: this.portfolioBudget, startDate: this.startDate, endDate: this.endDate
+          id: data.id
         }
         await this.$store.dispatch('globalState/delete_portfolio', { payloads })
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
@@ -251,10 +214,7 @@ export default {
         data: {
           id: this.$store.state.globalState.selectedNavObj.type === 'portfolio' ? this.$store.state.globalState.selectedNavObj.id : this.$store.state.globalState.selectedNavObj.portfolioId,
           parentOrganization: this.parentOrganization,
-          portfolioName: this.portfolioName,
-          portfolioBudget: this.portfolioBudget,
-          startDate: this.startDate,
-          endDate: this.endDate
+          portfolioName: this.portfolioName
         }
       })
       await this.$store.commit('globalState/load_org_data')
