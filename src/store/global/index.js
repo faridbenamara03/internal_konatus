@@ -922,7 +922,7 @@ export default {
               const optimizeData = response.data
               this.commit('globalState/GET_OPTIMIZED_DATA', optimizeData)
               resolve()
-            }, 60000)
+            }, 10000)
           })
           .catch(err => {
             console.log('error getting optimized data ---->', err)
