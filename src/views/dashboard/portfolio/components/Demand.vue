@@ -54,7 +54,7 @@
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
@@ -222,7 +222,7 @@
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <div
-                        v-else-if="ft === 'winrate'"
+                        v-else-if="ft === 'winrate' || ft === 'currentPhase'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -408,7 +408,7 @@
                             {{ dateFormat(item2[ft]) }}
                           </div>
                           <div
-                            v-else-if="ft === 'winrate'"
+                            v-else-if="ft === 'winrate' || ft === 'currentPhase'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -586,7 +586,7 @@
                                 {{ dateFormat(item3[ft]) }}
                               </div>
                               <div
-                                v-else-if="ft === 'winrate'"
+                                v-else-if="ft === 'winrate' || ft === 'currentPhase'"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -670,7 +670,7 @@
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
@@ -839,7 +839,7 @@
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <div
-                        v-else-if="ft === 'winrate'"
+                        v-else-if="ft === 'winrate' || ft === 'currentPhase'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -1024,7 +1024,7 @@
                             {{ getSelectedWinRate }}
                           </div> -->
                           <div
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate'"
+                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate' || ft === 'currentPhase'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >

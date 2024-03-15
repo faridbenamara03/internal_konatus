@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("Init:", data)
+      console.log("Init:", this.$store.state.globalState.selectedNavObj, data)
       if (this.$store.state.globalState.selectedNavObj.type === 'portfolio') {
         this.portfolioName = this.$store.state.globalState.selectedNavObj.title
       } else {
