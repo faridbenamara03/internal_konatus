@@ -296,6 +296,7 @@ export default {
       } else {
         this.selected = this.selected.filter(item => item.indexOf('enddate') <= 0)
       }
+      this.selected = this.selected.filter((value, index, array) => array.indexOf(value) === index)
       this.$emit('columnChange', this.selected)
       this.$refs['my-modal'].hide()
     },

@@ -178,17 +178,17 @@
                         outlined
                       />
                       <b-form-datepicker
-                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate' || ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
                       <div
-                        v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                        v-else-if="ft === 'nextphase'"
                       >
-                        {{ dateFormat(item1[ft]) }}
+                        {{ dateFormat(item1[ft])}}
                       </div>
                       <b-input-group
-                        v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
+                        v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -364,17 +364,17 @@
                             outlined
                           />
                           <b-form-datepicker
-                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                             v-model="item2[ft]"
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
                           <div
-                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                            v-else-if="ft === 'nextphase'"
                           >
                             {{ dateFormat(item2[ft]) }}
                           </div>
                           <b-input-group
-                            v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
+                            v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
@@ -542,17 +542,17 @@
                                 outlined
                               />
                               <b-form-datepicker
-                                v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                                v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                                 v-model="item3[ft]"
                                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                               />
                               <div
-                                v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                                v-else-if="ft === 'nextphase'"
                               >
                                 {{ dateFormat(item3[ft]) }}
                               </div>
                               <b-input-group
-                                v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
+                                v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
                                 <b-form-input
                                   v-model="item3[ft]"
                                   type="number"
@@ -795,17 +795,17 @@
                         outlined
                       />
                       <b-form-datepicker
-                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                        v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
                       <div
-                        v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                        v-else-if="ft === 'nextphase'"
                       >
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <b-input-group
-                        v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
+                        v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
                         <b-form-input
                           v-model="item1[ft]"
                           type="number"
@@ -973,17 +973,17 @@
                             outlined
                           />
                           <b-form-datepicker
-                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
+                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate' || ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate'"
                             v-model="item2[ft]"
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
                           <div
-                            v-else-if="ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                            v-else-if="ft === 'nextphase'"
                           >
                             {{ dateFormat(item2[ft]) }}
                           </div>
                           <b-input-group
-                            v-else-if="ft === 'demand' || ft === 'engaged' || ft === 'realEstimated' || ft === 'spent' || ft === 'value' || ft === 'authorized' ">
+                            v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
                             <b-form-input
                               v-model="item2[ft]"
                               type="number"
