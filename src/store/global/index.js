@@ -303,6 +303,9 @@ export default {
     DELETE_SUBPROJECT() {
       Vue.$toast.success('SubProject Deleted Successfully!')
     },
+    DELETE_FAILED() {
+      Vue.$toast.warning(`Sorry, you can't delete this element which has children`)
+    },
     HANDLE_TEAM_DEMAND_UPDATE() {
       Vue.$toast.success('Updated Successfully!')
     },

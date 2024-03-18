@@ -1541,8 +1541,8 @@ export default {
         if (value) {
           // If user confirms deletion, handle it based on the type
           if (item.children && item.children.length > 0) {
-            Vue.$toast.warning(`Sorry, you can't delete this element which has children`)
-            return 
+            await this.$store.commit('globalState/DELETE_FAILED')
+            return
           }
           switch (type) {
             case 'portfolio':
