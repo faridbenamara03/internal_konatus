@@ -612,12 +612,12 @@ export default {
       this.step2.priority = this.priorityOptions[initData.priority - 1] || 0
       this.step2.deadline = initData.deadline || 0
       this.step2.next_phase = initData.next_gate || 0
-      this.step2.spent = initData.spent || 0
+      this.step2.spent = 0
       this.step2.value = initData.value || 0
-      this.step2.engaged = initData.engaged || 0
+      this.step2.engaged = 0
       this.step2.demand = initData.demand || 0
       this.step2.authorized = initData.authorized || 0
-      this.step2.realestimated = initData.realestimated || 0
+      this.step2.realestimated = 0
       this.step5.sponsor = initData.sponsor || ''
       this.step5.head_product_portfolio = initData.portfolioHead || ''
       this.step5.product_manager = initData.productManager || ''
