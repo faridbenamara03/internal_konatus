@@ -58,6 +58,7 @@ export default {
     selectedNavObj: {},
     natureDeadLines: [],
     optimiseState: 'origin',
+    demandTableEditable: false,
     externalSystemData: [],
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
@@ -309,6 +310,9 @@ export default {
     HANDLE_TEAM_DEMAND_UPDATE() {
       Vue.$toast.success('Updated Successfully!')
     },
+    UPDATE_DEMAND_TABLE_EDITABLE(state) {
+      state.demandTableEditable = !state.demandTableEditable
+    },
     UPDATE_TEAM_REPORT_DATA(state) {
       setTimeout(() => {
         state.reportingData = {
@@ -375,6 +379,9 @@ export default {
       state.requestedElement = reArr
       // .todo axios request
       // dispatch('sumit_team_request_quote')
+    },
+    SAVE_UPDATED_TABLE(state, data) {
+      console.log(data)
     },
     SAVE_SELECTED_NAV_DATA(state, payload) {
       console.log("PNV:", payload.navData, "PPD:", payload.portData)
@@ -494,7 +501,8 @@ export default {
       state.globalData1.push(globalAllData.orgData1)
     },
     UPDATE_PROJECT_DEMAND_TABLE_EDITABLE(state, data) {
-      state.projectDemandEditableData = data
+      // state.projectDemandEditableData = data
+      console.log(data)
       state.projectDemandTableEditable = !state.projectDemandTableEditable
     },
     UPDATE_PROJECT_REPORTING_TABLE_EDITABLE(state, data) {
@@ -568,6 +576,16 @@ export default {
         }).catch(err => {
           console.log('error getting orgnaizations units data ---->', err)
           Vue.$toast.error('Failed to load orgnaizations data.')
+        })
+    },
+    save_updated_table(commit, payload) {
+      axios.post('https://api.konatus.site/v1/api/save_table', payload).then(response => {
+        // axios.post('http://localhost/konatus-me/public/api/unit/create', payload).then(response => {
+          const newData = response.data
+          this.commit('globalState/SAVE_UPDATED_TABLE', newData)
+        }).catch(err => {
+          console.log('error saving updated table --->', err)
+          Vue.$toast.error('Failed to save updated table.')
         })
     },
     create_new_unit(commit, payload) {
@@ -841,16 +859,16 @@ export default {
           })
       })
     },
-    get_project_demand_editable() {
-      axios.get('https://api.konatus.site/v1/api/project/demand/editable').then(response => {
-      // axios.post('http://localhost/konatus-me/public/api/project/demand/editable').then(response => {
-        const newData = response.data
-        this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
-      }).catch(err => {
-        console.log('error loading project demand editable --->', err)
-        Vue.$toast.error('Failed to load project demand editable data.')
-      })
-    },
+    // get_project_demand_editable() {
+    //   axios.get('https://api.konatus.site/v1/api/project/demand/editable').then(response => {
+    //   // axios.post('http://localhost/konatus-me/public/api/project/demand/editable').then(response => {
+    //     const newData = response.data
+    //     this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
+    //   }).catch(err => {
+    //     console.log('error loading project demand editable --->', err)
+    //     Vue.$toast.error('Failed to load project demand editable data.')
+    //   })
+    // },
     get_project_reporting_editable() {
       axios.get('https://api.konatus.site/v1/api/project/reporting/editable').then(response => {
       // axios.post('http://localhost/konatus-me/public/api/project/reporting/editable').then(response => {

@@ -581,7 +581,8 @@ export default {
       }
     },
     onDemandTableEditableClick() {
-      this.$store.dispatch('globalState/get_project_demand_editable')
+      // this.$store.dispatch('globalState/get_project_demand_editable')
+      this.$store.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE')
     },
     onReportingTableEditableClick() {
       this.$store.dispatch('globalState/get_project_reporting_editable')

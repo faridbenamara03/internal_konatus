@@ -1325,7 +1325,7 @@ export default {
       return this.fields.slice(1, this.fields.length - 1)
     },
     demandTableEditable() {
-      return this.$store.state.portfolioState.demandTableEditable
+      return this.$store.state.globalState.demandTableEditable
     },
     c_data() {
       if (this.data === null) return []

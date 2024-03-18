@@ -743,8 +743,12 @@ export default {
       this.activeColumns = columns
     },
     onDemandTableEditableClick() {
-      // this.$store.dispatch('globalState/get_project_demand_editable')
-      this.$store.commit('portfolioState/UPDATE_DEMAND_TABLE_EDITABLE')
+      const { demandTableEditable } = this.$store.state.globalState
+      if (demandTableEditable) {
+        const portDemands = this.$store.state.globalState.portfolioDemandData
+        this.$store.dispatch('globalState/save_updated_table', { data: portDemands })
+      }
+      this.$store.commit('globalState/UPDATE_DEMAND_TABLE_EDITABLE')
     },
     onReportingTableEditableClick() {
       this.$store.dispatch('globalState/get_project_reporting_editable')
