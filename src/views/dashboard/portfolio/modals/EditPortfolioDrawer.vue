@@ -198,6 +198,10 @@ export default {
       })
       if (value) {
         const data = this.$store.state.globalState.selectedNavObj
+        if (data.children && data.children.length > 0) {
+            await this.$store.commit('globalState/DELETE_FAILED')
+            return
+          }
         const payloads = {
           id: data.id
         }
