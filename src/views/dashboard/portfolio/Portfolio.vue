@@ -742,11 +742,15 @@ export default {
       this.fields = temp
       this.activeColumns = columns
     },
-    onDemandTableEditableClick() {
+    async onDemandTableEditableClick() {
       const { demandTableEditable } = this.$store.state.globalState
       if (demandTableEditable) {
         const portDemands = this.$store.state.globalState.portfolioDemandData
-        this.$store.dispatch('globalState/save_updated_table', { data: portDemands })
+        await this.$store.dispatch('globalState/save_updated_table', { data: portDemands })
+        // const data = this.$store.state.globalState.selectedNavObj
+        // await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        //   data
+        // })
       }
       this.$store.commit('globalState/UPDATE_DEMAND_TABLE_EDITABLE')
     },

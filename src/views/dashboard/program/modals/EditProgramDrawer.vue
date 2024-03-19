@@ -23,7 +23,7 @@
             />
           </div>
           <div class="w-50 pl-1">
-            <label>Activity ID</label>
+            <label>System ID</label>
             <div class="d-flex">
               <b-form-input
                 v-model="externalId"
@@ -631,7 +631,7 @@ export default {
       this.step3.roi = initData.roi || 0
       this.step3.sales_ex = initData.salesEx || 0
       this.step3.scoring = initData.scoring || 0
-      this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadLine - 1] || ''
+      this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadline - 1] || ''
       this.step4.phase_start_date = initData.phase1startdate
       this.step4.phase_end_date = initData.phase4enddate
       this.step5.winrate = initData.winrate || 0

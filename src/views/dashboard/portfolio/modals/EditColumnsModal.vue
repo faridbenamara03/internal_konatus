@@ -233,7 +233,7 @@ export default {
         76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
       options3: [
         { text: 'Deadline', value: 'deadline' },
-        { text: 'Nature of deadline', value: 'natureOfDeadline' },
+        { text: 'Nature of deadline', value: 'natDeadline' },
         { text: 'Customer Ex', value: 'customerEx' },
         { text: 'Sales Ex', value: 'salesEx' },
         { text: 'Scoring', value: 'scoring' },

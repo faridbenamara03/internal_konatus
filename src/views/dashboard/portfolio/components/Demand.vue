@@ -53,6 +53,7 @@
                 :style="`min-width:200px`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'natDeadline'">{{ nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
@@ -160,7 +161,7 @@
                         outlined
                       />
                       <v-select
-                        v-else-if="ft === 'natureOfDeadline'"
+                        v-else-if="ft === 'natDeadline'"
                         v-model="item1[ft]"
                         :options="nDeadlineOptions"
                         outlined
@@ -186,6 +187,11 @@
                         v-else-if="ft === 'nextphase'"
                       >
                         {{ dateFormat(item1[ft])}}
+                      </div>
+                      <div
+                        v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                      >
+                        {{  item1[ft] }}
                       </div>
                       <b-input-group
                         v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
@@ -213,6 +219,13 @@
                         style="margin-top:6px;"
                       >
                         {{ priorities[item1[ft] - 1] }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'natDeadline'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -352,7 +365,7 @@
                             outlined
                           />
                           <v-select
-                            v-else-if="ft === 'natureOfDeadline'"
+                            v-else-if="ft === 'natDeadline'"
                             v-model="item2[ft]"
                             :options="nDeadlineOptions"
                             outlined
@@ -372,6 +385,11 @@
                             v-else-if="ft === 'nextphase'"
                           >
                             {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                          >
+                            {{  item2[ft] }}
                           </div>
                           <b-input-group
                             v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
@@ -399,6 +417,13 @@
                             style="margin-top:6px;"
                           >
                             {{ priorities[item2[ft] - 1] }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'natDeadline'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ nDeadlineOptions[item1[ft] -1] }}
                           </div>
                           <div
                             v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -536,7 +561,7 @@
                                 outlined
                               />
                               <v-select
-                                v-else-if="ft === 'natureOfDeadline'"
+                                v-else-if="ft === 'natDeadline'"
                                 v-model="item3[ft]"
                                 :options="nDeadlineOptions"
                                 outlined
@@ -550,6 +575,11 @@
                                 v-else-if="ft === 'nextphase'"
                               >
                                 {{ dateFormat(item3[ft]) }}
+                              </div>
+                              <div
+                                v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                              >
+                                {{  item3[ft] }}
                               </div>
                               <b-input-group
                                 v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
@@ -577,6 +607,13 @@
                                 style="margin-top:6px;"
                               >
                                 {{ priorities[item3[ft] - 1] }}
+                              </div>
+                              <div
+                                v-else-if="ft === 'natDeadline'"
+                                class="mr-1"
+                                style="margin-top:6px;"
+                              >
+                                {{ nDeadlineOptions[item1[ft] - 1] }}
                               </div>
                               <div
                                 v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -669,6 +706,7 @@
                 :style="`min-width:200px`"
               >
                 <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'natDeadline'">{{ nDeadlineOptions[item[ft] -1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
@@ -789,7 +827,7 @@
                         outlined
                       />
                       <v-select
-                        v-else-if="ft === 'natureOfDeadline'"
+                        v-else-if="ft === 'natDeadline'"
                         v-model="item1[ft]"
                         :options="nDeadlineOptions"
                         outlined
@@ -803,6 +841,11 @@
                         v-else-if="ft === 'nextphase'"
                       >
                         {{ dateFormat(item1[ft]) }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                      >
+                        {{  item1[ft] }}
                       </div>
                       <b-input-group
                         v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
@@ -830,6 +873,13 @@
                         style="margin-top:6px;"
                       >
                         {{ priorities[item1[ft] - 1] }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'natDeadline'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{ nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -967,7 +1017,7 @@
                             outlined
                           />
                           <v-select
-                            v-else-if="ft === 'natureOfDeadline'"
+                            v-else-if="ft === 'natDeadline'"
                             v-model="item2[ft]"
                             :options="nDeadlineOptions"
                             outlined
@@ -981,6 +1031,11 @@
                             v-else-if="ft === 'nextphase'"
                           >
                             {{ dateFormat(item2[ft]) }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                          >
+                            {{  item2[ft] }}
                           </div>
                           <b-input-group
                             v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized' ">
@@ -1008,6 +1063,13 @@
                             style="margin-top:6px;"
                           >
                             {{ priorities[item2[ft] - 1] }}
+                          </div>
+                          <div
+                            v-else-if="ft === 'natDeadline'"
+                            class="mr-1"
+                            style="margin-top:6px;"
+                          >
+                            {{ nDeadlineOptions[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -1336,6 +1398,10 @@ export default {
           let realEstimated = 0
           let authorized = 0
           let spent = 0
+          let customerEx = 0
+          let salesEx = 0
+          let scoring = 0
+          let roi = 0
           if (t.children.length > 0) {
             t.children.map(t1 => {
               if (t1.children.length > 0) {
@@ -1345,6 +1411,10 @@ export default {
                   realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
                   authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
                   spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                  customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                  salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                  scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                  roi += parseInt(t2.roi ? t2.roi : 0, 10)
                   return null
                 })
               } else {
@@ -1353,6 +1423,10 @@ export default {
                 realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
                 authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
                 spent += parseInt(t1.spent ? t1.spent : 0, 10)
+                customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
+                salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
+                scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
+                roi += parseInt(t1.roi ? t1.roi : 0, 10)
               }
               return null
             })
@@ -1362,6 +1436,10 @@ export default {
             realEstimated = parseInt(t.realEstimated ? t.realEstimated : 0, 10)
             authorized = parseInt(t.authorized ? t.authorized : 0, 10)
             spent = parseInt(t.spent ? t.spent : 0, 10)
+            customerEx += parseInt(t.customerEx ? t.customerEx : 0, 10)
+            salesEx += parseInt(t.salesEx ? t.salesEx : 0, 10)
+            scoring += parseInt(t.scoring ? t.scoring : 0, 10)
+            roi += parseInt(t.roi ? t.roi : 0, 10)
           }
           const nd = { ...t }
           nd.engaged = engaged
@@ -1369,6 +1447,10 @@ export default {
           nd.realEstimated = realEstimated
           nd.authorized = authorized
           nd.spent = spent
+          nd.customerEx = customerEx
+          nd.salesEx = salesEx
+          nd.scoring = scoring
+          nd.roi = roi
           return nd
         })
         return ndt
@@ -1379,6 +1461,10 @@ export default {
         let realEstimated = 0
         let authorized = 0
         let spent = 0
+        let customerEx = 0
+        let salesEx = 0
+        let scoring = 0
+        let roi = 0
         if (t.children && t.children.length > 0) {
           const updatedT1s = []
           t.children.map(t1 => {
@@ -1388,7 +1474,10 @@ export default {
             let t1RealEstimated = 0
             let t1Authorized = 0
             let t1Spent = 0
-
+            let t1customerEx = 0
+            let t1salesEx = 0
+            let t1scoring = 0
+            let t1roi = 0
             if (t1.children && t1.children.length > 0) {
               const updatedT2s = []
               t1.children.map(t2 => {
@@ -1399,22 +1488,38 @@ export default {
                   let t2RealEstimated = 0
                   let t2Authorized = 0
                   let t2Spent = 0
+                  let t2customerEx = 0
+                  let t2salesEx = 0
+                  let t2scoring = 0
+                  let t2roi = 0
                   t2.children.map(t3 => {
                     engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     realEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
                     authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
                     spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    roi += parseInt(t3.roi ? t3.roi : 0, 10)
                     t2Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     t2Demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     t2RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
                     t2Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
                     t2Spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t2customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    t2salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    t2scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    t2roi += parseInt(t3.roi ? t3.roi : 0, 10)
                     t1Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     t1Demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     t1RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
                     t1Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
                     t1Spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t1customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    t1salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    t1scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    t1roi += parseInt(t3.roi ? t3.roi : 0, 10)
                     return null
                   })
                   updatedT2.engaged = t2Engaged
@@ -1422,17 +1527,29 @@ export default {
                   updatedT2.realEstimated = t2RealEstimated
                   updatedT2.authorized = t2Authorized
                   updatedT2.spent = t2Spent
+                  updatedT2.customerEx = t2customerEx
+                  updatedT2.salesEx = t2salesEx
+                  updatedT2.scoring = t2scoring
+                  updatedT2.roi = t2roi
                 } else {
                   engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
                   demand += parseInt(t2.demand ? t2.demand : 0, 10)
                   realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
                   authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
                   spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                  customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                  salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                  scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                  roi += parseInt(t2.roi ? t2.roi : 0, 10)
                   t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
                   t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
                   t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
                   t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
                   t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                  t1customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                  t1salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                  t1scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                  t1roi += parseInt(t2.roi ? t2.roi : 0, 10)
                 }
                 updatedT2s.push(updatedT2)
                 return null
@@ -1442,6 +1559,10 @@ export default {
               updatedT1.realEstimated = t1RealEstimated
               updatedT1.authorized = t1Authorized
               updatedT1.spent = t1Spent
+              updatedT1.customerEx = t1customerEx
+              updatedT1.salesEx = t1salesEx
+              updatedT1.scoring = t1scoring
+              updatedT1.roi = t1roi
               updatedT1.children = updatedT2s
             } else {
               engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
@@ -1449,6 +1570,10 @@ export default {
               realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
               authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
               spent += parseInt(t1.spent ? t1.spent : 0, 10)
+              customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
+              salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
+              scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
+              roi += parseInt(t1.roi ? t1.roi : 0, 10)
             }
             updatedT1s.push(updatedT1)
             return null
@@ -1459,6 +1584,10 @@ export default {
           nd.realEstimated = realEstimated
           nd.authorized = authorized
           nd.spent = spent
+          nd.customerEx = customerEx
+          nd.salesEx = salesEx
+          nd.scoring = scoring
+          nd.roi = roi
           nd.children = updatedT1s
           return nd
         }
