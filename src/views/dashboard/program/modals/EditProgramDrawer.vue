@@ -254,12 +254,18 @@
           />
         </div>
         <div class="select-box">
-          <label>Next Phase</label>
-          <b-form-input
-            id="program_nextphase"
-            v-model="step2.next_phase"
-            :disabled="true"
+          <div
+            v-if="otype === 'program' || otype === 'portfolio' || otype === 'company'"
           />
+          <div
+            v-else
+          >
+            <label>Current Phase</label>
+            <b-form-input
+              id="program_nextphase"
+              v-model="step2.next_phase"
+            />
+          </div>
         </div>
       </div>
     </div>
