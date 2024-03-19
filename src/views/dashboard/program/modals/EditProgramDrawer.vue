@@ -579,7 +579,13 @@ export default {
       },
       step4: {
         phase_start_date: null,
-        phase_end_date: null
+        phase_end_date: null,
+        phase_1_end_date: null,
+        phase_2_start_date: null,
+        phase_2_end_date: null,
+        phase_3_start_date: null,
+        phase_3_end_date: null,
+        phase_4_start_date: null,
       },
       step5: {
         head_product_portfolio: null,
@@ -640,6 +646,12 @@ export default {
       this.step3.n_deadline = this.nDeadlineOptions[initData.natDeadline - 1] || ''
       this.step4.phase_start_date = initData.phase1startdate
       this.step4.phase_end_date = initData.phase4enddate
+      this.step4.phase_2_start_date = initData.phase2startdate
+      this.step4.phase_3_start_date = initData.phase3startdate
+      this.step4.phase_4_start_date = initData.phase4startdate
+      this.step4.phase_1_end_date = initData.phase1enddate
+      this.step4.phase_2_end_date = initData.phase2enddate
+      this.step4.phase_3_end_date = initData.phase3enddate
       this.step5.winrate = initData.winrate || 0
       const allPts = this.getAllPorts()
       const allPgs = this.getAllProgs()
