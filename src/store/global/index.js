@@ -57,6 +57,7 @@ export default {
     selectedNavId: '',
     selectedNavObj: {},
     natureDeadLines: [],
+    natureDeadLineSelectOptions: [],
     optimiseState: 'origin',
     demandTableEditable: false,
     externalSystemData: [],
@@ -216,6 +217,18 @@ export default {
     },
     LOAD_ALL_NATURE_DEADLINE(state, data) {
       state.natureDeadLines = data
+      let index = 1
+      const tempArray = []
+      data.forEach(t => {
+        const temp = {
+          label: t,
+          value: index
+        }
+        tempArray.push(temp)
+        index += 1
+      })
+      console.log('tempArray:', tempArray)
+      state.natureDeadLineSelectOptions = tempArray
     },
     LOAD_ALL_OPTION_DATAS(state, data) {
       if (data === undefined) return

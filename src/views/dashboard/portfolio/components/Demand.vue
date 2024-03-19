@@ -56,7 +56,7 @@
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
-                <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -115,7 +115,9 @@
                       <v-select
                         v-if="ft === 'priority'"
                         v-model="item1[ft]"
-                        :options="priorities"
+                        :options="prioritieSelect"
+                        label="label"
+                        :reduce="option => option.value"
                         outlined
                       />
                       <v-select
@@ -163,7 +165,9 @@
                       <v-select
                         v-else-if="ft === 'natDeadline'"
                         v-model="item1[ft]"
-                        :options="nDeadlineOptions"
+                        :options="nDeadlineSelectOptions"
+                        label="label"
+                        :reduce="option => option.value"
                         outlined
                       />
                       <v-select
@@ -242,7 +246,7 @@
                         {{ item1[ft] }}
                       </div>
                       <div
-                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                        v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -312,8 +316,10 @@
                         <div v-if="demandTableEditable">
                           <v-select
                             v-if="ft === 'priority'"
-                            v-model="item2[ft]"
-                            :options="priorities"
+                            v-model="item1[ft]"
+                            :options="prioritieSelect"
+                            label="label"
+                            :reduce="option => option.value"
                             outlined
                           />
                           <v-select
@@ -367,7 +373,9 @@
                           <v-select
                             v-else-if="ft === 'natDeadline'"
                             v-model="item2[ft]"
-                            :options="nDeadlineOptions"
+                            :options="nDeadlineSelectOptions"
+                            label="label"
+                            :reduce="option => option.value"
                             outlined
                           />
                           <v-select
@@ -440,7 +448,7 @@
                             {{ item2[ft] }}
                           </div>
                           <div
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                            v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -502,8 +510,10 @@
                             <div v-if="demandTableEditable">
                               <v-select
                                 v-if="ft === 'priority'"
-                                v-model="item3[ft]"
-                                :options="priorities"
+                                v-model="item1[ft]"
+                                :options="prioritieSelect"
+                                label="label"
+                                :reduce="option => option.value"
                                 outlined
                               />
                               <v-select
@@ -563,7 +573,9 @@
                               <v-select
                                 v-else-if="ft === 'natDeadline'"
                                 v-model="item3[ft]"
-                                :options="nDeadlineOptions"
+                                :options="nDeadlineSelectOptions"
+                                label="label"
+                                :reduce="option => option.value"
                                 outlined
                               />
                               <b-form-datepicker
@@ -630,7 +642,7 @@
                                 {{ item3[ft] }}
                               </div>
                               <div
-                                v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                                v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -709,7 +721,7 @@
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
-                <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -769,7 +781,9 @@
                       <v-select
                         v-if="ft === 'priority'"
                         v-model="item1[ft]"
-                        :options="priorities"
+                        :options="prioritieSelect"
+                        label="label"
+                        :reduce="option => option.value"
                         outlined
                       />
                       <v-select
@@ -829,7 +843,9 @@
                       <v-select
                         v-else-if="ft === 'natDeadline'"
                         v-model="item1[ft]"
-                        :options="nDeadlineOptions"
+                        :options="nDeadlineSelectOptions"
+                        label="label"
+                        :reduce="option => option.value"
                         outlined
                       />
                       <b-form-datepicker
@@ -896,7 +912,7 @@
                         {{ item1[ft] }}
                       </div>
                       <div
-                        v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                        v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -958,8 +974,10 @@
                         <div v-if="demandTableEditable">
                           <v-select
                             v-if="ft === 'priority'"
-                            v-model="item2[ft]"
-                            :options="priorities"
+                            v-model="item1[ft]"
+                            :options="prioritieSelect"
+                            label="label"
+                            :reduce="option => option.value"
                             outlined
                           />
                           <v-select
@@ -1019,7 +1037,9 @@
                           <v-select
                             v-else-if="ft === 'natDeadline'"
                             v-model="item2[ft]"
-                            :options="nDeadlineOptions"
+                            :options="nDeadlineSelectOptions"
+                            label="label"
+                            :reduce="option => option.value"
                             outlined
                           />
                           <b-form-datepicker
@@ -1086,7 +1106,7 @@
                             {{ getSelectedWinRate }}
                           </div> -->
                           <div
-                            v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate' || ft === 'currentPhase'"
+                            v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate' || ft === 'currentPhase'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -1299,7 +1319,15 @@ export default {
       openedPj: 0,
       openedPg: 0,
       priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      prioritieSelect: [
+        { label: 'Highest', value: 1 },
+        { label: 'High', value: 2 },
+        { label: 'Medium', value: 3 },
+        { label: 'Low', value: 4 },
+        { label: 'Lowest', value: 5 },
+      ],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
+      nDeadlineSelectOptions: this.$store.state.globalState.natureDeadLineSelectOptions,
       headProductPortOptions: this.$store.state.globalState.hproductportfolios,
       productManagerOptions: this.$store.state.globalState.productmanagers,
       headProgramArchitectOptions: this.$store.state.globalState.hprogramarchitects,
@@ -1465,6 +1493,7 @@ export default {
         let salesEx = 0
         let scoring = 0
         let roi = 0
+        // let priority = ''
         if (t.children && t.children.length > 0) {
           const updatedT1s = []
           t.children.map(t1 => {
@@ -1478,6 +1507,7 @@ export default {
             let t1salesEx = 0
             let t1scoring = 0
             let t1roi = 0
+            // let t1priority = ''
             if (t1.children && t1.children.length > 0) {
               const updatedT2s = []
               t1.children.map(t2 => {
@@ -1492,6 +1522,7 @@ export default {
                   let t2salesEx = 0
                   let t2scoring = 0
                   let t2roi = 0
+                  // let t2priority = ''
                   t2.children.map(t3 => {
                     engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     demand += parseInt(t3.demand ? t3.demand : 0, 10)
@@ -1593,6 +1624,7 @@ export default {
         }
         return t
       })
+      console.log("NNDD:", ndt)
       return ndt
     },
     c_totalBudget() {
