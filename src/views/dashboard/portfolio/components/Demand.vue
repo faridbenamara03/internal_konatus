@@ -52,8 +52,8 @@
                 class="data-child mr-1 pr-1"
                 :style="`min-width:200px`"
               >
-                <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'natDeadline'">{{ nDeadlineOptions[item[ft] - 1] }}</span>
+                <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorities[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
@@ -218,14 +218,14 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ priorities[item1[ft] - 1] }}
+                        {{ typeof(item1[ft]) === "string" ? item1[ft] : priorities[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'natDeadline'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ nDeadlineOptions[item1[ft] - 1] }}
+                        {{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -416,14 +416,14 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ priorities[item2[ft] - 1] }}
+                            {{ typeof(item2[ft]) === "string" ? item2[ft] : priorities[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'natDeadline'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ nDeadlineOptions[item1[ft] -1] }}
+                            {{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -606,14 +606,14 @@
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
-                                {{ priorities[item3[ft] - 1] }}
+                                {{ typeof(item3[ft]) === "string" ? item3[ft] : priorities[item3[ft] - 1] }}
                               </div>
                               <div
                                 v-else-if="ft === 'natDeadline'"
                                 class="mr-1"
                                 style="margin-top:6px;"
                               >
-                                {{ nDeadlineOptions[item1[ft] - 1] }}
+                                {{ typeof(item3[ft]) === "string" ? item3[ft] : nDeadlineOptions[item3[ft] - 1] }}
                               </div>
                               <div
                                 v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -705,8 +705,8 @@
                 class="data-child mr-1 pr-1"
                 :style="`min-width:200px`"
               >
-                <span v-if="ft === 'priority'">{{ priorities[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'natDeadline'">{{ nDeadlineOptions[item[ft] -1] }}</span>
+                <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorities[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
@@ -872,14 +872,14 @@
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ priorities[item1[ft] - 1] }}
+                        {{ typeof(item1[ft]) === "string" ? item1[ft] : priorities[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'natDeadline'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
-                        {{ nDeadlineOptions[item1[ft] - 1] }}
+                        {{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
                         v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"
@@ -1062,14 +1062,14 @@
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ priorities[item2[ft] - 1] }}
+                            {{ typeof(item2[ft]) === "string" ? item2[ft] : priorities[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'natDeadline'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
-                            {{ nDeadlineOptions[item2[ft] - 1] }}
+                            {{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}
                           </div>
                           <div
                             v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'"

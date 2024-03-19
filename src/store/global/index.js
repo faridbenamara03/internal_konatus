@@ -582,6 +582,7 @@ export default {
       axios.post('https://api.konatus.site/v1/api/save_table', payload).then(response => {
         // axios.post('http://localhost/konatus-me/public/api/unit/create', payload).then(response => {
           const newData = response.data
+          // this.commit('globalState/SAVE_UPDATED_TABLE', payload.data)
           this.commit('globalState/SAVE_UPDATED_TABLE', newData)
         }).catch(err => {
           console.log('error saving updated table --->', err)
