@@ -747,12 +747,12 @@ export default {
       if (demandTableEditable) {
         const portDemands = this.$store.state.globalState.portfolioDemandData
         await this.$store.dispatch('globalState/save_updated_table', { data: portDemands })
-        // const data = this.$store.state.globalState.selectedNavObj
-        // await this.$store.dispatch('globalState/get_from_selected_nav_id', {
-        //   data
-        // })
       }
-      this.$store.commit('globalState/UPDATE_DEMAND_TABLE_EDITABLE')
+      await this.$store.commit('globalState/UPDATE_DEMAND_TABLE_EDITABLE')
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
     },
     onReportingTableEditableClick() {
       this.$store.dispatch('globalState/get_project_reporting_editable')
