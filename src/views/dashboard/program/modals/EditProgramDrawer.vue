@@ -307,7 +307,7 @@
             class="slider"
             type="range"
             min="0"
-            max="10"
+            max="100"
           />
         </div>
         <div class="select-box">
@@ -318,7 +318,7 @@
             class="slider"
             type="range"
             min="0"
-            max="10"
+            max="100"
           />
         </div>
       </div>
@@ -331,7 +331,7 @@
             class="slider"
             type="range"
             min="0"
-            max="10"
+            max="100"
           />
         </div>
         <div class="select-box m-0" />
