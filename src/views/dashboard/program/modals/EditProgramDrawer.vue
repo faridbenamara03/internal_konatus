@@ -623,7 +623,7 @@ export default {
       this.step2.description = initData.description || ''
       this.step2.priority = this.priorityOptions[initData.priority - 1] || 0
       this.step2.deadline = initData.deadline || 0
-      this.step2.next_phase = initData.next_gate || 0
+      this.step2.next_phase = initData.currentPhase || 0
       this.step2.spent = 0
       this.step2.value = initData.value || 0
       this.step2.engaged = 0

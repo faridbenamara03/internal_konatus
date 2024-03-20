@@ -56,7 +56,7 @@
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
-                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -246,7 +246,7 @@
                         {{ item1[ft] }}
                       </div>
                       <div
-                        v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                        v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -448,7 +448,7 @@
                             {{ item2[ft] }}
                           </div>
                           <div
-                            v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                            v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'  || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -642,7 +642,7 @@
                                 {{ item3[ft] }}
                               </div>
                               <div
-                                v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                                v-else-if="ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi' || ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -721,7 +721,7 @@
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft === 'phase1startdate' || ft == 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
-                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi' || ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -912,7 +912,7 @@
                         {{ item1[ft] }}
                       </div>
                       <div
-                        v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
+                        v-else-if="ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi' || ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -1106,7 +1106,7 @@
                             {{ getSelectedWinRate }}
                           </div> -->
                           <div
-                            v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate' || ft === 'currentPhase'"
+                            v-else-if="ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi' || ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'winrate' || ft === 'currentPhase'"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -1419,68 +1419,81 @@ export default {
     },
     c_data() {
       if (this.data === null) return []
+      console.log("DDD:", this.data)
       if (this.data.type === 'portfolio' && this.data.children) {
-        const ndt = this.data.children.map(t => {
-          let engaged = 0
-          let demand = 0
-          let realEstimated = 0
-          let authorized = 0
-          let spent = 0
-          let customerEx = 0
-          let salesEx = 0
-          let scoring = 0
-          let roi = 0
-          if (t.children.length > 0) {
-            t.children.map(t1 => {
-              if (t1.children.length > 0) {
-                t1.children.map(t2 => {
-                  engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
-                  demand += parseInt(t2.demand ? t2.demand : 0, 10)
-                  realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
-                  authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
-                  spent += parseInt(t2.spent ? t2.spent : 0, 10)
-                  customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
-                  salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
-                  scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
-                  roi += parseInt(t2.roi ? t2.roi : 0, 10)
+        // const updatedPrograms = []
+        const ndt = this.data.children.map(program => {
+          let programEngaged = 0
+          let programDemand = 0
+          let programRealEstimated = 0
+          let programAuthorized = 0
+          let programSpent = 0
+          let programCustomerEx = 0
+          let programSalesEx = 0
+          let programScoring = 0
+          let programRoi = 0
+          // const updatedProgram = { ...program }
+          // const updatedProjects = []
+          if (program.children && program.children.length > 0) {
+            program.children.map(project => {
+              // const updatedProject = { ...project }
+              // let projectEngaged = updatedProject.engaged
+              // let projectDemand = updatedProject.demand
+              // let projectRealeEstimated = updatedProject.realEstimated
+              // let projectAuthorized = updatedProject.authorized
+              // let projectSpent = updatedProject.spent
+              // let projectCustomerEx = updatedProject.customerEx
+              // let projectSalesEx = updatedProject.salesEx
+              // let projectScoring = updatedProject.scoring
+              // let projectRoi = updatedProject.roi
+              if (project.children.length > 0) {
+                project.children.map(subproject => {
+                  programEngaged += parseInt(subproject.engaged ? subproject.engaged : 0, 10)
+                  programDemand += parseInt(subproject.demand ? subproject.demand : 0, 10)
+                  programRealEstimated += parseInt(subproject.realEstimated ? subproject.realEstimated : 0, 10)
+                  programAuthorized += parseInt(subproject.authorized ? subproject.authorized : 0, 10)
+                  programSpent += parseInt(subproject.spent ? subproject.spent : 0, 10)
+                  programCustomerEx += parseInt(subproject.customerEx ? subproject.customerEx : 0, 10)
+                  programSalesEx += parseInt(subproject.salesEx ? subproject.salesEx : 0, 10)
+                  programScoring += parseInt(subproject.scoring ? subproject.scoring : 0, 10)
+                  programRoi += parseInt(subproject.roi ? subproject.roi : 0, 10)
                   return null
                 })
-              } else {
-                engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-                demand += parseInt(t1.demand ? t1.demand : 0, 10)
-                realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-                authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
-                spent += parseInt(t1.spent ? t1.spent : 0, 10)
-                customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
-                salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
-                scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
-                roi += parseInt(t1.roi ? t1.roi : 0, 10)
               }
+              programEngaged += parseInt(project.engaged ? project.engaged : 0, 10)
+              programDemand += parseInt(project.demand ? project.demand : 0, 10)
+              programRealEstimated += parseInt(project.realEstimated ? project.realEstimated : 0, 10)
+              programAuthorized += parseInt(project.authorized ? project.authorized : 0, 10)
+              programSpent += parseInt(project.spent ? project.spent : 0, 10)
+              programCustomerEx += parseInt(project.customerEx ? project.customerEx : 0, 10)
+              programSalesEx += parseInt(project.salesEx ? project.salesEx : 0, 10)
+              programScoring += parseInt(project.scoring ? project.scoring : 0, 10)
+              programRoi += parseInt(project.roi ? project.roi : 0, 10)
               return null
             })
-          } else {
-            engaged = parseInt(t.engaged ? t.engaged : 0, 10)
-            demand = parseInt(t.demand ? t.demand : 0, 10)
-            realEstimated = parseInt(t.realEstimated ? t.realEstimated : 0, 10)
-            authorized = parseInt(t.authorized ? t.authorized : 0, 10)
-            spent = parseInt(t.spent ? t.spent : 0, 10)
-            customerEx += parseInt(t.customerEx ? t.customerEx : 0, 10)
-            salesEx += parseInt(t.salesEx ? t.salesEx : 0, 10)
-            scoring += parseInt(t.scoring ? t.scoring : 0, 10)
-            roi += parseInt(t.roi ? t.roi : 0, 10)
           }
-          const nd = { ...t }
-          nd.engaged = engaged
-          nd.demand = demand
-          nd.realEstimated = realEstimated
-          nd.authorized = authorized
-          nd.spent = spent
-          nd.customerEx = customerEx
-          nd.salesEx = salesEx
-          nd.scoring = scoring
-          nd.roi = roi
+          // programEngaged = parseInt(program.engaged ? program.engaged : 0, 10)
+          // programDemand = parseInt(program.demand ? program.demand : 0, 10)
+          // programRealEstimated = parseInt(program.realEstimated ? program.realEstimated : 0, 10)
+          // programAuthorized = parseInt(program.authorized ? program.authorized : 0, 10)
+          // programSpent = parseInt(program.spent ? program.spent : 0, 10)
+          // programCustomerEx += parseInt(program.customerEx ? program.customerEx : 0, 10)
+          // programSalesEx += parseInt(program.salesEx ? program.salesEx : 0, 10)
+          // programScoring += parseInt(program.scoring ? program.scoring : 0, 10)
+          // programRoi += parseInt(program.roi ? program.roi : 0, 10)
+          const nd = { ...program }
+          nd.engaged = programEngaged
+          nd.demand = programDemand
+          nd.realEstimated = programRealEstimated
+          nd.authorized = programAuthorized
+          nd.spent = programSpent
+          nd.customerEx = programCustomerEx
+          nd.salesEx = programSalesEx
+          nd.scoring = programScoring
+          nd.roi = programRoi
           return nd
         })
+        console.log("NPDD:", ndt)
         return ndt
       }
       const ndt = this.data.children.map(t => {
@@ -1562,26 +1575,25 @@ export default {
                   updatedT2.salesEx = t2salesEx
                   updatedT2.scoring = t2scoring
                   updatedT2.roi = t2roi
-                } else {
-                  engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
-                  demand += parseInt(t2.demand ? t2.demand : 0, 10)
-                  realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
-                  authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
-                  spent += parseInt(t2.spent ? t2.spent : 0, 10)
-                  customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
-                  salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
-                  scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
-                  roi += parseInt(t2.roi ? t2.roi : 0, 10)
-                  t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
-                  t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
-                  t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
-                  t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
-                  t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
-                  t1customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
-                  t1salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
-                  t1scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
-                  t1roi += parseInt(t2.roi ? t2.roi : 0, 10)
                 }
+                engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                roi += parseInt(t2.roi ? t2.roi : 0, 10)
+                t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                t1customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                t1salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                t1scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                t1roi += parseInt(t2.roi ? t2.roi : 0, 10)
                 updatedT2s.push(updatedT2)
                 return null
               })
@@ -1594,18 +1606,17 @@ export default {
               updatedT1.salesEx = t1salesEx
               updatedT1.scoring = t1scoring
               updatedT1.roi = t1roi
-              updatedT1.children = updatedT2s
-            } else {
-              engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-              demand += parseInt(t1.demand ? t1.demand : 0, 10)
-              realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-              authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
-              spent += parseInt(t1.spent ? t1.spent : 0, 10)
-              customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
-              salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
-              scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
-              roi += parseInt(t1.roi ? t1.roi : 0, 10)
+              // updatedT1.children = updatedT2s
             }
+            // engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+            // demand += parseInt(t1.demand ? t1.demand : 0, 10)
+            // realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+            // authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
+            // spent += parseInt(t1.spent ? t1.spent : 0, 10)
+            // customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
+            // salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
+            // scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
+            // roi += parseInt(t1.roi ? t1.roi : 0, 10)
             updatedT1s.push(updatedT1)
             return null
           })
