@@ -311,6 +311,7 @@
           <Control
             :data="controlData"
             :table-title="tableTitle"
+            :fields="fields"
           />
         </b-tab>
         <template #tabs-end>
@@ -632,7 +633,6 @@ export default {
       return this.$store.state.globalState.portfolioControlData
     },
     reportingData() {
-      console.log('ReportingData:', this.$store.state.globalState.portfolioReportingData)
       return this.$store.state.globalState.portfolioReportingData
     }
   },

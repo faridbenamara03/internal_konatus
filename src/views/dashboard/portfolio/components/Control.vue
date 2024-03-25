@@ -4,7 +4,7 @@
       <div style="width:100%;background-color:#1A2239;height:40px" />
       <div class="portf-row portf-bold portf-table-header portf-uppercase">
         <div class="part1">
-          {{ data === null ? '' : data.title }}
+          {{ data === null ? c_navobj.title : data.title === '' || data.title === null || data.title === undefined ? c_navobj.title : data.title }}
         </div>
         <div class="part2 mr-2">
           <div
@@ -56,7 +56,7 @@
         v-if="data !== null"
       >
         <div
-          v-for="(item, index) in data.children"
+          v-for="(item, index) in c_data"
           :key="index"
         >
           <div
@@ -264,6 +264,10 @@ export default {
     controlData: {
       type: Array,
       default: () => [],
+    },
+    fields: {
+      type: Array,
+      default: () => [],
     }
   },
   data() {
@@ -273,7 +277,7 @@ export default {
       priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       // c_fields: ['priority', 'value', 'budget', 'next_gate'],
-      c_fields: ['priority', 'value', 'budget'],
+      // fields: ['priority', 'value', 'demand'],
       team_fields: ['mgt & study', 'dev', 'test', 'total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [],
@@ -298,8 +302,201 @@ export default {
           },
       },
   },
+  computed: {
+    c_data() {
+      // console.log("CCC:", this.data)
+      if (this.data === null) return []
+      if (this.data.type === 'portfolio' && this.data.children) {
+        const ndt = this.data.children.map(program => {
+          let programEngaged = 0
+          let programDemand = 0
+          let programRealEstimated = 0
+          let programAuthorized = 0
+          let programSpent = 0
+          let programCustomerEx = 0
+          let programSalesEx = 0
+          let programScoring = 0
+          let programRoi = 0
+          if (program.children && program.children.length > 0) {
+            program.children.map(project => {
+              if (project.children.length > 0) {
+                project.children.map(subproject => {
+                  programEngaged += parseInt(subproject.engaged ? subproject.engaged : 0, 10)
+                  programDemand += parseInt(subproject.demand ? subproject.demand : 0, 10)
+                  programRealEstimated += parseInt(subproject.realEstimated ? subproject.realEstimated : 0, 10)
+                  programAuthorized += parseInt(subproject.authorized ? subproject.authorized : 0, 10)
+                  programSpent += parseInt(subproject.spent ? subproject.spent : 0, 10)
+                  programCustomerEx += parseInt(subproject.customerEx ? subproject.customerEx : 0, 10)
+                  programSalesEx += parseInt(subproject.salesEx ? subproject.salesEx : 0, 10)
+                  programScoring += parseInt(subproject.scoring ? subproject.scoring : 0, 10)
+                  programRoi += parseInt(subproject.roi ? subproject.roi : 0, 10)
+                  return null
+                })
+              }
+              programEngaged += parseInt(project.engaged ? project.engaged : 0, 10)
+              programDemand += parseInt(project.demand ? project.demand : 0, 10)
+              programRealEstimated += parseInt(project.realEstimated ? project.realEstimated : 0, 10)
+              programAuthorized += parseInt(project.authorized ? project.authorized : 0, 10)
+              programSpent += parseInt(project.spent ? project.spent : 0, 10)
+              programCustomerEx += parseInt(project.customerEx ? project.customerEx : 0, 10)
+              programSalesEx += parseInt(project.salesEx ? project.salesEx : 0, 10)
+              programScoring += parseInt(project.scoring ? project.scoring : 0, 10)
+              programRoi += parseInt(project.roi ? project.roi : 0, 10)
+              return null
+            })
+          }
+          const nd = { ...program }
+          nd.engaged = programEngaged
+          nd.demand = programDemand
+          nd.realEstimated = programRealEstimated
+          nd.authorized = programAuthorized
+          nd.spent = programSpent
+          nd.customerEx = programCustomerEx
+          nd.salesEx = programSalesEx
+          nd.scoring = programScoring
+          nd.roi = programRoi
+          return nd
+        })
+        return ndt
+      }
+      const ndt = this.data.children.map(t => {
+        let engaged = 0
+        let demand = 0
+        let realEstimated = 0
+        let authorized = 0
+        let spent = 0
+        let customerEx = 0
+        let salesEx = 0
+        let scoring = 0
+        let roi = 0
+        if (t.children && t.children.length > 0) {
+          const updatedT1s = []
+          t.children.map(t1 => {
+            const updatedT1 = { ...t1 }
+            let t1Engaged = 0
+            let t1Demand = 0
+            let t1RealEstimated = 0
+            let t1Authorized = 0
+            let t1Spent = 0
+            let t1customerEx = 0
+            let t1salesEx = 0
+            let t1scoring = 0
+            let t1roi = 0
+            if (t1.children && t1.children.length > 0) {
+              const updatedT2s = []
+              t1.children.map(t2 => {
+                const updatedT2 = { ...t2 }
+                if (t2.children && t2.children.length > 0) {
+                  let t2Engaged = 0
+                  let t2Demand = 0
+                  let t2RealEstimated = 0
+                  let t2Authorized = 0
+                  let t2Spent = 0
+                  let t2customerEx = 0
+                  let t2salesEx = 0
+                  let t2scoring = 0
+                  let t2roi = 0
+                  t2.children.map(t3 => {
+                    engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    realEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    t2Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    t2Demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    t2RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    t2Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    t2Spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t2customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    t2salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    t2scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    t2roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    t1Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
+                    t1Demand += parseInt(t3.demand ? t3.demand : 0, 10)
+                    t1RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
+                    t1Authorized += parseInt(t3.authorized ? t3.authorized : 0, 10)
+                    t1Spent += parseInt(t3.spent ? t3.spent : 0, 10)
+                    t1customerEx += parseInt(t3.customerEx ? t3.customerEx : 0, 10)
+                    t1salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
+                    t1scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
+                    t1roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    return null
+                  })
+                  updatedT2.engaged = t2Engaged
+                  updatedT2.demand = t2Demand
+                  updatedT2.realEstimated = t2RealEstimated
+                  updatedT2.authorized = t2Authorized
+                  updatedT2.spent = t2Spent
+                  updatedT2.customerEx = t2customerEx
+                  updatedT2.salesEx = t2salesEx
+                  updatedT2.scoring = t2scoring
+                  updatedT2.roi = t2roi
+                }
+                engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                roi += parseInt(t2.roi ? t2.roi : 0, 10)
+                t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
+                t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
+                t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
+                t1Authorized += parseInt(t2.authorized ? t2.authorized : 0, 10)
+                t1Spent += parseInt(t2.spent ? t2.spent : 0, 10)
+                t1customerEx += parseInt(t2.customerEx ? t2.customerEx : 0, 10)
+                t1salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
+                t1scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
+                t1roi += parseInt(t2.roi ? t2.roi : 0, 10)
+                updatedT2s.push(updatedT2)
+                return null
+              })
+              updatedT1.engaged = t1Engaged
+              updatedT1.demand = t1Demand
+              updatedT1.realEstimated = t1RealEstimated
+              updatedT1.authorized = t1Authorized
+              updatedT1.spent = t1Spent
+              updatedT1.customerEx = t1customerEx
+              updatedT1.salesEx = t1salesEx
+              updatedT1.scoring = t1scoring
+              updatedT1.roi = t1roi
+            }
+            updatedT1s.push(updatedT1)
+            return null
+          })
+          const nd = { ...t }
+          nd.engaged = engaged
+          nd.demand = demand
+          nd.realEstimated = realEstimated
+          nd.authorized = authorized
+          nd.spent = spent
+          nd.customerEx = customerEx
+          nd.salesEx = salesEx
+          nd.scoring = scoring
+          nd.roi = roi
+          nd.children = updatedT1s
+          return nd
+        }
+        return t
+      })
+      return ndt
+    },
+    c_navobj() {
+      return this.$store.state.globalState.selectedNavObj
+    },
+    c_fields() {
+      return this.fields.slice(1, this.fields.length - 1)
+    },
+  },
   methods: {
     initializeData(data) {
+      // console.log("CInitData:", data)
       const temp = data !== null ? data.children : []
       const tempTeams = []
       const tempTeamData1 = []
@@ -340,6 +537,7 @@ export default {
       this.teams = tempTeams
       this.teamD1 = tempTeamData
       this.teamD = tempTeamData1
+      // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
     },
     onTeamCollapse(i) {
       const index = this.collapsedT.findIndex(x => x === i)

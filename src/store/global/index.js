@@ -227,7 +227,6 @@ export default {
         tempArray.push(temp)
         index += 1
       })
-      console.log('tempArray:', tempArray)
       state.natureDeadLineSelectOptions = tempArray
     },
     LOAD_ALL_OPTION_DATAS(state, data) {

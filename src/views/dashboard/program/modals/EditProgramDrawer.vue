@@ -617,7 +617,6 @@ export default {
   methods: {
     async initializeData(data) {
       const initData = data === undefined ? this.$store.state.globalState.selectedProgramObject : data
-      console.log('initData:', initData)
       this.otype = initData.type
       this.step1.portfolioId = initData.portfolioid || 0
       this.step2.description = initData.description || ''

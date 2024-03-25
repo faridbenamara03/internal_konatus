@@ -1419,7 +1419,6 @@ export default {
     },
     c_data() {
       if (this.data === null) return []
-      console.log("DDD:", this.data)
       if (this.data.type === 'portfolio' && this.data.children) {
         // const updatedPrograms = []
         const ndt = this.data.children.map(program => {
@@ -1493,7 +1492,6 @@ export default {
           nd.roi = programRoi
           return nd
         })
-        console.log("NPDD:", ndt)
         return ndt
       }
       const ndt = this.data.children.map(t => {
@@ -1635,7 +1633,6 @@ export default {
         }
         return t
       })
-      console.log("NNDD:", ndt)
       return ndt
     },
     c_totalBudget() {
