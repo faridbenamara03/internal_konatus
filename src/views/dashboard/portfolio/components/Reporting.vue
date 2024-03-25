@@ -744,11 +744,11 @@ export default {
             }
             const duration = moment.duration(endMoment.diff(startMoment))
             if (duration.asDays() === 0) {
-              result.push(18)
-              totalWidth += 18
+              result.push(24)
+              totalWidth += 24
             } else {
-              totalWidth += duration.asDays() * 18
-              result.push(duration.asDays() * 18)
+              totalWidth += duration.asDays() * 24
+              result.push(duration.asDays() * 24)
             }
             if (totalWidth > 1800) return result
             phIndex += 1
@@ -775,9 +775,9 @@ export default {
         }
         const duration = moment.duration(endMoment.diff(startMoment))
         if (duration.asDays() === 0) {
-          result = 18
+          result = 24
         } else {
-          result = duration.asDays() * 18
+          result = duration.asDays() * 24
         }
       }
       return result
@@ -804,8 +804,9 @@ export default {
           const pStartMoment = moment.min(pstarts)
           const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
           const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : 0
-          const pd = duration * 18
+          const pd = duration * 24
           result = pd
+          console.log("Padding1:", result)
         }
       } else {
         let startMoment
@@ -824,7 +825,7 @@ export default {
         }
         const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
         const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
-        result = duration * 18
+        result = duration * 24
       }
       return result
     },
