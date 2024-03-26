@@ -18,7 +18,7 @@
                 icon="ZapIcon"
                 size="16"
               />&nbsp;
-              <span>Currently viewing the proposed optimised state of the data</span>
+              <span>Currently viewing the proposed optimized state of the data</span>
             </div>
           </div>
           <div>
@@ -103,7 +103,7 @@
               </b-button>
             </div>
             <div v-if="tabIndex === 1">
-              <b-button
+              <!-- <b-button
                 v-if="reportingState === 'plan'"
                 class="mr-1"
                 variant="primary"
@@ -134,7 +134,7 @@
                   size="16"
                 />&nbsp;
                 Recalculate
-              </b-button>
+              </b-button> -->
               <b-button
                 v-if="updateIndex === true && reportingState === 'plan' && !reportingTableEditable"
                 class="ml-1"
@@ -175,13 +175,13 @@
                 v-if="updateIndex === true && reportingState === 'plan' && !originIndex && !reportingTableEditable"
                 class="ml-1"
                 variant="primary"
-                @click="onClickAction('optimise')"
+                @click="onClickAction('optimize')"
               >
                 <feather-icon
                   icon="UpdateIcon"
                   size="16"
                 />&nbsp;
-                <span>Show optimised</span>
+                <span>Show optimized</span>
               </b-button>
               <!-- <b-button
                 v-b-modal.portfolio-reporting-plan-update
@@ -217,7 +217,7 @@
                 />&nbsp;
                 <span>Export</span>
               </b-button>
-              <b-button
+              <!-- <b-button
                 v-if="!reportingTableEditable"
                 v-b-modal.modal-edit-column
                 class="ml-1"
@@ -228,7 +228,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit Columns</span>
-              </b-button>
+              </b-button> -->
             </div>
             <div v-if="(tabIndex === 2)">
               <b-button
@@ -763,20 +763,20 @@ export default {
     onClickAction(value) {
       if (value === 'accept') {
         this.updateIndex = false
-        this.$store.optimiseState = 'optimise'
-        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+        this.$store.optimizeStatus = 'optimize'
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimize')
       } else if (value === 'reject') {
         this.updateIndex = false
         this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
-        this.$store.optimiseState = 'origin'
+        this.$store.optimizeStatus = 'origin'
       } else if (value === 'origin') {
-        this.$store.optimiseState = 'origin'
+        this.$store.optimizeStatus = 'origin'
         this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
         this.originIndex = !this.originIndex
-      } else if (value === 'optimise') {
-        this.$store.optimiseState = 'optimise'
+      } else if (value === 'optimize') {
+        this.$store.optimizeStatus = 'optimize'
         this.originIndex = !this.originIndex
-        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+        this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimize')
       }
     },
     onClickCPSelectBtn(url, value) {

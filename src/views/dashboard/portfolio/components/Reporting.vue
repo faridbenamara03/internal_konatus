@@ -10,10 +10,10 @@
           style="margin-top:50px;"
         >
           <p class="m-0 text-uppercase">
-            {{ itemsForReporting.title }}
+            {{ itemsForReporting === undefined || itemsFormReporting === null ? '' : itemsForReporting.title }}
           </p>
         </div>
-        <div v-if="navType === 'portfolio'">
+        <div v-if="itemsForReporting !== undefined && navType === 'portfolio'">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -46,7 +46,7 @@
             </template>
           </div>
         </div>
-        <div v-else-if="navType === 'company'">
+        <div v-else-if="itemsForReporting !== undefined && navType === 'company'">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -176,13 +176,13 @@
             </p>
           </div>
         </div>
-        <div v-if="navType === 'portfolio'">
+        <div v-if="itemsForReporting !== undefined && navType === 'portfolio'">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
           >
             <div
-              v-if="onOptimiseIndex() === 'optimise'"
+              v-if="onOptimiseIndex() === 'optimize'"
               class="w-100"
               style="height:77px"
             >
@@ -217,7 +217,7 @@
                 </div>
               </b-card>
             </div>
-            <template v-if="onOptimiseIndex() === 'optimise' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimiseIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -329,17 +329,17 @@
 
           </div>
         </div>
-        <div v-else-if="navType === 'company'">
+        <div v-else-if="itemsForReporting !== undefined && navType === 'company'">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
           >
             <div
-              v-if="onOptimiseIndex() === 'optimise'"
+              v-if="onOptimiseIndex() === 'optimize'"
               class="w-100"
               style="height:77px"
             />
-            <template v-if="onOptimiseIndex() === 'optimise' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimiseIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -379,7 +379,7 @@
                     </div>
                   </b-card>
                 </div>
-                <template v-if="onOptimiseIndex() === 'optimise' && item2 !== undefined && item2.children && childCollapse === index2">
+                <template v-if="onOptimiseIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
@@ -566,8 +566,7 @@ export default {
       childCollapse: 1,
       navType: 'portfolio',
       windowWidth: window.innerWidth,
-      itemsForReporting: this.$store.state.globalState.portfolioReportingData,
-      isOptimiseIndex: this.$store.state.globalState.optimizeStatus,
+      itemsForReporting: [],
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
       dta1: [
         [193, 125, 184, 151, 248, 183, 224, 270, 207],
@@ -623,6 +622,12 @@ export default {
     }
   },
   computed: {
+    isOptimiseIndex() {
+      return this.$store.state.globalState.optimizeStatus
+    },
+    // itemsForReporting() {
+    //   return this.$store.state.globalState.portfolioReportingData
+    // },
     da1() {
       const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2] + this.paddingV[0][0]
       const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2] + this.paddingV[1][0]
@@ -715,7 +720,7 @@ export default {
       console.log("INITD:", data, "OTYPE:", this.navType)
       this.navType = this.$store.state.globalState.selectedNavObj.type
       this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
-      console.log("NAVTYPE:", this.navType)
+      // console.log("NAVTYPE:", this.navType)
     },
     onResize() {
       this.windowWidth = window.innerWidth
@@ -806,7 +811,6 @@ export default {
           const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : 0
           const pd = duration * 24
           result = pd
-          console.log("Padding1:", result)
         }
       } else {
         let startMoment

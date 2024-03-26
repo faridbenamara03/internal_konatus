@@ -291,7 +291,7 @@ export default {
       // this.$emit('columnChange', this.selected)
       this.$emit('toggleUpdate')
       this.$store.commit('globalState/UPDATE_OPTIMIZE_STATES', 'initial')
-      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimise')
+      this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimize')
       this.isStatus = this.$store.state.globalState.optimizeStates
       this.$refs['my-modal'].hide()
     },

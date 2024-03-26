@@ -58,7 +58,7 @@ export default {
     selectedNavObj: {},
     natureDeadLines: [],
     natureDeadLineSelectOptions: [],
-    optimiseState: 'origin',
+    optimizeState: 'origin',
     demandTableEditable: false,
     externalSystemData: [],
     globalOrganizationData: [],
@@ -144,7 +144,7 @@ export default {
       if (value === 'origin') {
         state.portfolioReportingData = state.tempReportingData
       } else if (value === 'optimize') {
-        state.portfolioReportingData = state.optimizeData
+        state.portfolioReportingData = state.optimizedData
       }
     },
     UPDATE_OPTIMIZE_STATES(state, value) {
@@ -975,7 +975,7 @@ export default {
               const optimizeData = response.data
               this.commit('globalState/GET_OPTIMIZED_DATA', optimizeData)
               resolve()
-            }, 10000)
+            }, 10)
           })
           .catch(err => {
             console.log('error getting optimized data ---->', err)
