@@ -512,7 +512,7 @@
   >
     <ReportingCostVue
       :data="itemsForReporting"
-      :fields="fields"
+      :fields="costfields"
     />
   </div>
 </template>
@@ -554,7 +554,7 @@ export default {
       type: String,
       default: () => ""
     },
-    fields: {
+    costfields: {
       type: Array,
       default: () => [],
     },
@@ -724,7 +724,6 @@ export default {
     },
     onResize() {
       this.windowWidth = window.innerWidth
-      // console.log("WW:", this.windowWidth)
     },
     getValue(item, type, isChild) {
       let result = 0

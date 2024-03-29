@@ -12,7 +12,7 @@
           <div style="flex:6" class="border-right pr-2 pl-2">
             <div class="border-bottom">
               <div class="row-custom boldTxt">
-                <div class="dataitem dataTitleItem d-flex">
+                <div class="dataitem dataTitleItem d-flex portf-uppercase">
                   <div class="mr-1" style="cursor:pointer"
                     v-on:click="onCollapseHandle(index, computedOpenState.openState)">
                     <div v-if="index === computedOpenState.index && computedOpenState.openState === 'none'">
@@ -27,7 +27,7 @@
               </div>
               <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
                 :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-                <div class="dataitem dataSubTitleItem">
+                <div class="dataitem dataSubTitleItem ">
                   <feather-icon :style="`color:${colorArr[jndex]}`" :icon="`${iconArr[jndex]}`" class="mr-1" />{{
                     item1.title
                   }}
@@ -35,9 +35,14 @@
               </div>
             </div>
           </div>
-          <div v-for="(item2, i) in c_fields" :key="i" style="flex:3" class="border-right">
+          <div
+            v-for="(item2, i) in c_fields"
+            :key="i"
+            style="flex:3;"
+            class="border-right"
+          >
             <div v-if="index === 0" class="row-custom">
-              <div class="dataitem">{{ item2 }}</div>
+              <div class="dataitem portf-uppercase">{{ item2 }}</div>
             </div>
             <div v-else class="row-custom"></div>
             <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"

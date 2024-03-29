@@ -217,9 +217,9 @@
                 />&nbsp;
                 <span>Export</span>
               </b-button>
-              <!-- <b-button
+              <b-button
                 v-if="!reportingTableEditable"
-                v-b-modal.modal-edit-column
+                v-b-modal.modal-edit-column-cost
                 class="ml-1"
                 variant="primary"
               >
@@ -228,7 +228,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit Columns</span>
-              </b-button> -->
+              </b-button>
             </div>
             <div v-if="(tabIndex === 2)">
               <b-button
@@ -294,7 +294,7 @@
             :data="reportingData"
             :otype="selectedNavType"
             :reporting-state="reportingState"
-            :fields="fields"
+            :costfields="costfields"
             @update-clicked="handleToggleUpdateHide"
           />
           <TableEditable
@@ -474,6 +474,10 @@
       :checked-data="activeColumns"
       @columnChange="columnChange"
     />
+    <edit-columns-cost-modal
+      :checked-data="activeCostColumns"
+      @columnChange="costColumnChange"
+    />
   </b-card>
   <div v-else>
     <Welcome />
@@ -495,6 +499,7 @@ import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
 import CreateDrawer from './modals/CreateDrawer.vue'
 import EditColumnsModal from './modals/EditColumnsModal.vue'
+import EditColumnsCostModal from './modals/EditColumnsCostModal.vue'
 import OptimizeModal from './modals/OptimizeModal.vue'
 import CreateNewPortfolioDrawer from './modals/CreateNewPortfolioDrawer.vue'
 import EditPortfolioDrawer from './modals/EditPortfolioDrawer.vue'
@@ -515,6 +520,7 @@ export default {
     Reporting,
     Control,
     EditColumnsModal,
+    EditColumnsCostModal,
     OptimizeModal,
     MonthPicker,
     BFormInput,
@@ -539,8 +545,10 @@ export default {
   data() {
     return {
       activeColumns: ['priority', 'demand', 'deadline'],
+      activeCostColumns: ['priority', 'value', 'demand'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
+      costfields: [],
       tabIndex: 0,
       isChartView: false,
       popoverShow: false,
@@ -641,8 +649,12 @@ export default {
     // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
     // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     this.fields = [...this.defaultFields]
+    this.costfields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {
       this.fields.splice(idx + 1, 0, column)
+    })
+    this.activeCostColumns.forEach((column, idx) => {
+      this.costfields.splice(idx + 1, 0, column)
     })
   },
   methods: {
@@ -741,6 +753,14 @@ export default {
       })
       this.fields = temp
       this.activeColumns = columns
+    },
+    costColumnChange(columns) {
+      const temp = [...this.defaultFields]
+      columns.forEach((column, idx) => {
+        temp.splice(idx + 1, 0, column)
+      })
+      this.costfields = temp
+      this.activeCostColumns = columns
     },
     async onDemandTableEditableClick() {
       const { demandTableEditable } = this.$store.state.globalState
