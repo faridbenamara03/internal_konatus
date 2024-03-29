@@ -1,17 +1,29 @@
 <template>
   <div style="overflow-x:auto">
-    <div class="portf-control-view">
-      <div style="width:100%;background-color:#1A2239;height:40px" />
-      <div class="portf-row portf-bold portf-table-header portf-uppercase">
-        <div class="part1">
+    <div class="portf-demand-view">
+      <div
+        style="background-color:#1A2239;height:40px"
+        :style="`min-width: ${200 * c_fields.length}px`"
+      />
+      <div
+        class="portf-row portf-bold portf-table-header portf-uppercase"
+        :style="`min-width: ${200 * c_fields.length}px`"
+      >
+        <div
+          class="part1"
+          :style="`min-width: 200px`"
+        >
           {{ data === null ? c_navobj.title : data.title === '' || data.title === null || data.title === undefined ? c_navobj.title : data.title }}
         </div>
-        <div class="part2 mr-2">
+        <div
+          class="part2 mr-2"
+          :style="`min-width: ${150 * c_fields.length}px`"
+        >
           <div
             v-for="(ft, fi) in c_fields"
             :key="fi"
             class="data-child mr-1 portf-uppercase"
-            :style="`width:${100 / c_fields.length}%`"
+            :style="`min-width:150px`"
           >
             {{ ft }}
           </div>
@@ -62,11 +74,13 @@
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
             :class="{'inner-sdw': index === 0}"
+            :style="`min-width: ${200 * c_fields.length}px`"
           >
             <div
               class="part1 portf-uppercase"
               style="cursor:pointer"
               @click="onCollapseCLick(index)"
+              :style="`min-width: 200px`"
             >
               <feather-icon
                 v-if="item.children"
@@ -76,17 +90,20 @@
               />
               {{ item.title }}
             </div>
-            <div class="part2 mr-2">
+            <div
+              class="part2 mr-2"
+              :style="`min-width: ${150 * c_fields.length}px`"
+            >
               <div
                 v-for="(ft, fi) in c_fields"
                 :key="fi"
                 class="data-child mr-1"
-                :style="`width:${100 / c_fields.length}%`"
+                :style="`min-width:150px`"
               >
                 <span v-if="ft === 'priority'">{{ priorityOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'next_gate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'value'">{{ item[ft] }}</span>
-                <span v-else>{{ item[ft] ? formatCurrency(item[ft]) : '' }}</span>
+                <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item[ft]) }}</span>
+                <span v-else>{{ item[ft] }}</span>
               </div>
             </div>
             <div
@@ -121,21 +138,28 @@
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
                 :class="{'inner-sdw': index1 === 0}"
+                :style="`min-width: ${200 * c_fields.length}px`"
               >
-                <div class="part1 portf-bold pl-2">
+                <div
+                  class="part1 portf-bold pl-2"
+                  :style="`min-width: 200px`"
+                >
                   {{ item1.title }}
                 </div>
-                <div class="part2 mr-2">
+                <div
+                  class="part2 mr-2"
+                  :style="`min-width: ${150 * c_fields.length}px`"
+                >
                   <div
                     v-for="(ft, fi) in c_fields"
                     :key="fi"
                     class="data-child mr-1"
-                    :style="`width:${100 / c_fields.length}%`"
+                    :style="`min-width: 150px`"
                   >
                     <span v-if="ft === 'priority'">{{ priorityOptions[item1[ft] - 1] }}</span>
                     <span v-else-if="ft === 'next_gate'">{{ dateFormat(item1[ft]) }}</span>
-                    <span v-else-if="ft === 'value'">{{ item1[ft] }}</span>
-                    <span v-else>{{ item1[ft] ? formatCurrency(item1[ft]) : '' }}</span>
+                    <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item1[ft]) }}</span>
+                    <span v-else>{{ item1[ft] }}</span>
                   </div>
                 </div>
                 <div
@@ -306,7 +330,7 @@ export default {
     c_data() {
       // console.log("CCC:", this.data)
       if (this.data === null) return []
-      if (this.data.type === 'portfolio' && this.data.children) {
+      if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
         const ndt = this.data.children.map(program => {
           let programEngaged = 0
           let programDemand = 0
@@ -491,7 +515,51 @@ export default {
       return this.$store.state.globalState.selectedNavObj
     },
     c_fields() {
-      return this.fields.slice(1, this.fields.length - 1)
+      let tempFields = this.fields.slice(1, this.fields.length - 1)
+      if (this.data === null) return tempFields
+      if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
+        this.data.children.map(program => {
+          if (program.children && program.children.length > 0) {
+            program.children.map(project => {
+              if (project.children.length > 0) {
+                project.children.map(subproject => {
+                  if (subproject.job_names !== undefined) tempFields = tempFields.concat(subproject.job_names)
+                  return null
+                })
+              }
+              if (project.job_names !== undefined) tempFields = tempFields.concat(project.job_names)
+              return null
+            })
+          }
+          if (program.job_names !== undefined) tempFields = tempFields.concat(program.job_names)
+          return null
+        })
+      } else if (this.data.type === 'company' && this.data.children && this.data.children.length > 0) {
+        this.data.children.map(portfolio => {
+          if (portfolio.children && portfolio.children.length > 0) {
+            portfolio.children.map(program => {
+              if (program.children.length > 0) {
+                program.children.map(project => {
+                  if (project.children.length > 0) {
+                    project.children.map(subproject => {
+                      if (subproject.job_names !== undefined) tempFields = tempFields.concat(subproject.job_names)
+                      return null
+                    })
+                  }
+                  if (project.job_names !== undefined) tempFields = tempFields.concat(project.job_names)
+                  return null
+                })
+              }
+              if (program.job_names !== undefined) tempFields = tempFields.concat(program.job_names)
+              return null
+            })
+          }
+          return null
+        })
+      }
+      tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
+      tempFields.push('total')
+      return tempFields
     },
   },
   methods: {
