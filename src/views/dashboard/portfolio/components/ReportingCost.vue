@@ -7,30 +7,35 @@
       </b-button>
     </div> -->
     <div class="border-top border-bottom">
-      <div v-if="data !== null">
-        <div v-for="(item, index) in data.children" :key="index" class="d-flex">
-          <div style="flex:6" class="border-right pr-2 pl-2">
+      <div v-if="data !== null && data.type === 'portfolio'">
+        <div
+          v-for="(item, index) in data.children"
+          :key="index"
+          class="d-flex"
+        >
+          <div
+            style="flex:6"
+            class="border-right pr-2 pl-2"
+          >
             <div class="border-bottom">
               <div class="row-custom boldTxt">
                 <div class="dataitem dataTitleItem d-flex portf-uppercase">
-                  <div class="mr-1" style="cursor:pointer"
-                    v-on:click="onCollapseHandle(index, computedOpenState.openState)">
-                    <div v-if="index === computedOpenState.index && computedOpenState.openState === 'none'">
-                      <feather-icon icon="ChevronRightIcon" />
-                    </div>
-                    <div v-else>
-                      <feather-icon icon="ChevronDownIcon" />
-                    </div>
-                  </div>
                   {{ item.title }}
                 </div>
               </div>
-              <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-                :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
+              <div
+                v-for="(item1, jndex) in item.children"
+                :key="jndex"
+                class="row-custom boldTxt"
+                :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+              >
                 <div class="dataitem dataSubTitleItem ">
-                  <feather-icon :style="`color:${colorArr[jndex]}`" :icon="`${iconArr[jndex]}`" class="mr-1" />{{
-                    item1.title
-                  }}
+                  <!-- <feather-icon
+                    :style="`color:${colorArr[jndex]}`"
+                    :icon="`${iconArr[jndex]}`"
+                    class="mr-1"
+                  /> -->
+                  {{ item1.title }}
                 </div>
               </div>
             </div>
@@ -41,13 +46,27 @@
             style="flex:3;"
             class="border-right"
           >
-            <div v-if="index === 0" class="row-custom">
-              <div class="dataitem portf-uppercase">{{ item2 }}</div>
+            <div
+              v-if="index === 0"
+              class="row-custom"
+            >
+              <div class="dataitem portf-uppercase">
+                {{ item2 }}
+              </div>
             </div>
-            <div v-else class="row-custom"></div>
-            <div v-for="(item1, jndex) in item.children" :key="jndex" class="row-custom boldTxt"
-              :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'">
-              <div class="dataitem"> {{ item2 === 'priority' ? priorities[item1[item2] - 1] : item2 === 'deadline' || item2 === 'phase1startdate' || item2 == 'phase1enddate' || item2 === 'phase2startdate' || item2 == 'phase2enddate' || item2 === 'phase3startdate' || item2 == 'phase3enddate' || item2 === 'phase4startdate' || item2 == 'phase4enddate' ? dateFormat(item1[item2]) : item2 === 'architect' || item2 === 'portfolioHead' || item2 === 'productManager' || item2 === 'directionHead' || item2 === 'programDirector' || item2 === 'projectManager' || item2 === 'architectHead' || item2 === 'sponsor' || item2 === 'productLine' ? item1[item2] : formatCurrency(item1[item2]) }}</div>
+            <div
+              v-else
+              class="row-custom"
+            />
+            <div
+              v-for="(item1, jndex) in item.children"
+              :key="jndex"
+              class="row-custom boldTxt"
+              :style="'display:' + index === computedOpenState.index ? computedOpenState.openState : 'flex'"
+            >
+              <div class="dataitem">
+                {{ item2 === 'priority' ? priorities[item1[item2] - 1] : item2 === 'cost compare' || item2 === 'time compare' || item2 === 'accomplishment' ? "%" + item1[item2] : formatCurrency(item1[item2]) }}
+              </div>
             </div>
           </div>
           <!-- <div style="flex:3" class="border-right">
@@ -80,6 +99,75 @@
               <div class="dataitem">{{ item1.realEstimated }}</div>
             </div>
           </div> -->
+        </div>
+      </div>
+      <div v-else-if="data !== null && data.type === 'company'">
+        <div
+          v-for="(item, index) in data.children"
+          :key="index"
+        >
+          <div
+            v-for="(item1, index1) in item.children"
+            :key="index1"
+            class="d-flex"
+          >
+            <div
+              style="flex:6"
+              class="border-right pr-2 pl-2"
+            >
+              <div class="border-bottom">
+                <div class="row-custom boldTxt">
+                  <div class="dataitem dataTitleItem d-flex portf-uppercase">
+                    {{ item1.title }}
+                  </div>
+                </div>
+                <div
+                  v-for="(item2, jndex) in item1.children"
+                  :key="jndex"
+                  class="row-custom boldTxt"
+                  :style="'display:' + index1 === computedOpenState.index ? computedOpenState.openState : 'flex'"
+                >
+                  <div class="dataitem dataSubTitleItem ">
+                    <!-- <feather-icon
+                      :style="`color:${colorArr[jndex]}`"
+                      :icon="`${iconArr[jndex]}`"
+                      class="mr-1"
+                    /> -->
+                    {{ item2.title }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              v-for="(item3, i) in c_fields"
+              :key="i"
+              style="flex:3;"
+              class="border-right"
+            >
+              <div
+                v-if="index === 0 && index1 === 0"
+                class="row-custom"
+              >
+                <div class="dataitem portf-uppercase">
+                  {{ item3 }}
+                </div>
+              </div>
+              <div
+                v-else
+                class="row-custom"
+              />
+              <div
+                v-for="(item2, kndex) in item1.children"
+                :key="kndex"
+                class="row-custom boldTxt"
+                :style="'display:' + index1 === computedOpenState.index ? computedOpenState.openState : 'flex'"
+              >
+                <div class="dataitem">
+                  {{ item3 === 'priority' ? priorities[item2[item3] - 1] : item3 === 'cost compare' || item3 === 'time compare' || item3 === 'accomplishment' ? "%" + item2[item3] : formatCurrency(item2[item3]) }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

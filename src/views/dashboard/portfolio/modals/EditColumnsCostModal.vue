@@ -119,7 +119,7 @@ export default {
         { text: 'Spent', value: 'spent' },
         { text: 'Earn Value UTD', value: 'earn value' },
         { text: '% lin (vs cost ) compare to engaged', value: 'cost compare' },
-        { text: '% accomplissement UTD ', value: 'accomplissement' },
+        { text: '% accomplishment UTD ', value: 'accomplishment' },
         { text: '% lin (vs time) compare to engaged', value: 'time compare' },
       ],
       keyOptions: [
