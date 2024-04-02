@@ -3,11 +3,11 @@
     <div class="portf-demand-view">
       <div
         style="background-color:#1A2239;height:40px"
-        :style="`min-width: ${200 * c_fields.length}px`"
+        :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
       />
       <div
         class="portf-row portf-bold portf-table-header portf-uppercase"
-        :style="`min-width: ${200 * c_fields.length}px`"
+        :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
       >
         <div
           class="part1"
@@ -17,7 +17,7 @@
         </div>
         <div
           class="part2 mr-2"
-          :style="`min-width: ${150 * c_fields.length}px`"
+          :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
         >
           <div
             v-for="(ft, fi) in c_fields"
@@ -27,40 +27,41 @@
           >
             {{ ft }}
           </div>
-        </div>
-        <div
-          v-for="(item, index) in teams"
-          :key="index"
-          :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`"
-          class="mr-1 ml-1"
-        >
           <div
-            style="position:relative;top:-43px;height:0px;cursor:pointer"
-            @click="onTeamCollapse(index)"
+            v-for="(item, index) in job_fields"
+            :key="index"
+            :style="`min-width:150px`"
+            class="data-child mr-1 portf-uppercase"
           >
-            <feather-icon
-              style="margin-top:-3px"
-              :icon="`${collapsedT.indexOf(index) > -1 ? 'PlusIcon' : 'MinusIcon'}`"
-              size="16"
-            />
-            {{ item }}
-          </div>
-          <div :style="`position:relative;top:-20px;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
-          <div style="display:flex;justify-content:space-between;">
-            <template v-if="collapsedT.indexOf(index) > -1">
-              <div style="width:100%;text-align:center">
-                total
-              </div>
-            </template>
-            <template v-else>
-              <div
-                v-for="(item1, jndex) in team_fields"
-                :key="jndex"
-                style="width:25%;text-align:center"
-              >
-                {{ item1 }}
-              </div>
-            </template>
+            <div
+              style="position:relative;top:-43px;height:0px;cursor:pointer;text-align:center;"
+            >
+              <!-- @click="onTeamCollapse(index)" -->
+              <!-- <feather-icon
+                style="margin-top:-3px"
+                :icon="`${collapsedT.indexOf(index) > -1 ? 'PlusIcon' : 'MinusIcon'}`"
+                size="16"
+              /> -->
+              {{ item }}
+            </div>
+            <div :style="`position:relative;top:-20px;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
+            <div style="text-align:center;">
+              total
+              <!-- <template v-if="collapsedT.indexOf(index) > -1">
+                <div style="width:100%;text-align:center">
+                  total
+                </div>
+              </template>
+              <template v-else>
+                <div
+                  v-for="(item1, jndex) in team_fields"
+                  :key="jndex"
+                  style="width:25%;text-align:center"
+                >
+                  {{ item1 }}
+                </div>
+              </template> -->
+            </div>
           </div>
         </div>
       </div>
@@ -74,13 +75,13 @@
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
             :class="{'inner-sdw': index === 0}"
-            :style="`min-width: ${200 * c_fields.length}px`"
+            :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
           >
             <div
               class="part1 portf-uppercase"
               style="cursor:pointer"
-              @click="onCollapseCLick(index)"
               :style="`min-width: 200px`"
+              @click="onCollapseCLick(index)"
             >
               <feather-icon
                 v-if="item.children"
@@ -92,7 +93,7 @@
             </div>
             <div
               class="part2 mr-2"
-              :style="`min-width: ${150 * c_fields.length}px`"
+              :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
             >
               <div
                 v-for="(ft, fi) in c_fields"
@@ -105,28 +106,29 @@
                 <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item[ft]) }}</span>
                 <span v-else>{{ item[ft] }}</span>
               </div>
-            </div>
-            <div
-              v-for="(item, index1) in teams"
-              :key="index1"
-              :style="`width:${collapsedT.indexOf(index1) > -1 ? 120 : 400}px;text-align:center;`"
-              class="mr-1 ml-1"
-            >
-              <div style="display:flex;justify-content:space-between;">
-                <template v-if="collapsedT.indexOf(index1) > -1">
-                  <div style="width:100%;text-align:center">
-                    {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
-                  </div>
-                </template>
-                <template v-else>
-                  <div
-                    v-for="(item1, jndex) in team_fields"
-                    :key="jndex"
-                    style="width:25%;text-align:center"
-                  >
-                    {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
-                  </div>
-                </template>
+              <div
+                v-for="(jtem, index1) in job_fields"
+                :key="index1"
+                :style="`min-width:150px`"
+                class="data-child mr-1"
+              >
+                <div style="text-align: center">
+                  <!-- <template v-if="collapsedT.indexOf(index1) > -1">
+                    <div style="width:100%;text-align:center">
+                      {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div
+                      v-for="(item1, jndex) in team_fields"
+                      :key="jndex"
+                      style="width:25%;text-align:center"
+                    >
+                      {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
+                    </div>
+                  </template> -->
+                  {{ item[jtem] }}
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +140,7 @@
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
                 :class="{'inner-sdw': index1 === 0}"
-                :style="`min-width: ${200 * c_fields.length}px`"
+                :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
               >
                 <div
                   class="part1 portf-bold pl-2"
@@ -148,7 +150,7 @@
                 </div>
                 <div
                   class="part2 mr-2"
-                  :style="`min-width: ${150 * c_fields.length}px`"
+                  :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
                 >
                   <div
                     v-for="(ft, fi) in c_fields"
@@ -161,28 +163,29 @@
                     <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item1[ft]) }}</span>
                     <span v-else>{{ item1[ft] }}</span>
                   </div>
-                </div>
-                <div
-                  v-for="(item, tndex) in teams"
-                  :key="tndex"
-                  :style="`width:${collapsedT.indexOf(tndex) > -1 ? 120 : 400}px;text-align:center;`"
-                  class="mr-1 ml-1"
-                >
-                  <div style="display:flex;justify-content:space-between;">
-                    <template v-if="collapsedT.indexOf(tndex) > -1">
-                      <div style="width:100%;text-align:center">
-                        {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
-                      </div>
-                    </template>
-                    <template v-else>
-                      <div
-                        v-for="(item1, jndex) in team_fields"
-                        :key="jndex"
-                        style="width:25%;text-align:center"
-                      >
-                        {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
-                      </div>
-                    </template>
+                  <div
+                    v-for="(jtem, tndex) in job_fields"
+                    :key="tndex"
+                    :style="`min-width:150px`"
+                    class="data-child mr-1"
+                  >
+                    <div style="text-align:center;">
+                      <!-- <template v-if="collapsedT.indexOf(tndex) > -1">
+                        <div style="width:100%;text-align:center">
+                          {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
+                        </div>
+                      </template>
+                      <template v-else>
+                        <div
+                          v-for="(item1, jndex) in team_fields"
+                          :key="jndex"
+                          style="width:25%;text-align:center"
+                        >
+                          {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
+                        </div>
+                      </template> -->
+                      {{ item1[jtem] }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -302,11 +305,12 @@ export default {
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       // c_fields: ['priority', 'value', 'budget', 'next_gate'],
       // fields: ['priority', 'value', 'demand'],
-      team_fields: ['mgt & study', 'dev', 'test', 'total'],
+      // team_fields: ['mgt & study', 'dev', 'test', 'total'],
+      job_fields: ['total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       teamD1: [],
       teamD: [],
-      teams: [],
+      jobs: [],
       percentD: [
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
         [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
@@ -317,14 +321,6 @@ export default {
       ]
       // percentD: []
     }
-  },
-  watch: {
-      data: {
-          immediate: true,
-          handler(newVal) {
-            this.initializeData(newVal) // ??
-          },
-      },
   },
   computed: {
     c_data() {
@@ -515,8 +511,63 @@ export default {
       return this.$store.state.globalState.selectedNavObj
     },
     c_fields() {
-      let tempFields = this.fields.slice(1, this.fields.length - 1)
-      if (this.data === null) return tempFields
+      const tempFields = this.fields.slice(1, this.fields.length - 1)
+      return tempFields
+    },
+  },
+  watch: {
+      data: {
+          immediate: true,
+          handler(newVal) {
+            this.initializeData(newVal) // ??
+          },
+      },
+  },
+  methods: {
+    initializeData(data) {
+      console.log("CInitData:", data)
+      // const temp = data !== null ? data.children : []
+      // const tempTeams = []
+      // const tempTeamData1 = []
+      // const tempTeamData = []
+      // for (let i = 0; i < temp.length; i += 1) {
+      //   const item = temp[i]
+      //   const tempData = []
+      //   if (item.assignee !== undefined && item.assignee.length > 0) {
+      //     const tempAssignee = item.assignee
+      //     for (let j = 0; j < tempAssignee.length; j += 1) {
+      //       const assignee = tempAssignee[j]
+      //       if (!tempTeams.includes(assignee.title)) {
+      //         tempTeams.push(assignee.title)
+      //       }
+      //       tempData.push(assignee.data)
+      //     }
+      //   }
+      //   tempTeamData.push(tempData)
+      //   const tempData1 = []
+      //   if (item.children !== undefined && item.children.length > 0) {
+      //     for (let j = 0; j < item.children.length; j += 1) {
+      //       const tempChildren = item.children[j]
+      //       const tempChildrenData = []
+      //       if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
+      //         for (let k = 0; k < tempChildren.assignee.length; k += 1) {
+      //           const assignee = tempChildren.assignee[k]
+      //           if (!tempTeams.includes(assignee.title)) {
+      //             tempTeams.push(assignee.title)
+      //           }
+      //           tempChildrenData.push(assignee.data)
+      //         }
+      //       }
+      //       tempData1.push(tempChildrenData)
+      //     }
+      //   }
+      //   tempTeamData1.push(tempData1)
+      // }
+      // this.teams = tempTeams
+      // this.teamD1 = tempTeamData
+      // this.teamD = tempTeamData1
+      let tempFields = []
+      if (this.data === null) return
       if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
         this.data.children.map(program => {
           if (program.children && program.children.length > 0) {
@@ -558,54 +609,8 @@ export default {
         })
       }
       tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
-      tempFields.push('total')
-      return tempFields
-    },
-  },
-  methods: {
-    initializeData(data) {
-      // console.log("CInitData:", data)
-      const temp = data !== null ? data.children : []
-      const tempTeams = []
-      const tempTeamData1 = []
-      const tempTeamData = []
-      for (let i = 0; i < temp.length; i += 1) {
-        const item = temp[i]
-        const tempData = []
-        if (item.assignee !== undefined && item.assignee.length > 0) {
-          const tempAssignee = item.assignee
-          for (let j = 0; j < tempAssignee.length; j += 1) {
-            const assignee = tempAssignee[j]
-            if (!tempTeams.includes(assignee.title)) {
-              tempTeams.push(assignee.title)
-            }
-            tempData.push(assignee.data)
-          }
-        }
-        tempTeamData.push(tempData)
-        const tempData1 = []
-        if (item.children !== undefined && item.children.length > 0) {
-          for (let j = 0; j < item.children.length; j += 1) {
-            const tempChildren = item.children[j]
-            const tempChildrenData = []
-            if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
-              for (let k = 0; k < tempChildren.assignee.length; k += 1) {
-                const assignee = tempChildren.assignee[k]
-                if (!tempTeams.includes(assignee.title)) {
-                  tempTeams.push(assignee.title)
-                }
-                tempChildrenData.push(assignee.data)
-              }
-            }
-            tempData1.push(tempChildrenData)
-          }
-        }
-        tempTeamData1.push(tempData1)
-      }
-      this.teams = tempTeams
-      this.teamD1 = tempTeamData
-      this.teamD = tempTeamData1
       // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
+      this.job_fields = tempFields
     },
     onTeamCollapse(i) {
       const index = this.collapsedT.findIndex(x => x === i)
