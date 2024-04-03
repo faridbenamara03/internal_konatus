@@ -101,10 +101,12 @@
                 class="data-child mr-1"
                 :style="`min-width:150px`"
               >
-                <span v-if="ft === 'priority'">{{ priorityOptions[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'next_gate'">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item[ft]) }}</span>
-                <span v-else>{{ item[ft] }}</span>
+                <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorityOptions[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
+                <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item[ft] }}</span>
+                <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
               <div
                 v-for="(jtem, index1) in job_fields"
@@ -158,10 +160,12 @@
                     class="data-child mr-1"
                     :style="`min-width: 150px`"
                   >
-                    <span v-if="ft === 'priority'">{{ priorityOptions[item1[ft] - 1] }}</span>
-                    <span v-else-if="ft === 'next_gate'">{{ dateFormat(item1[ft]) }}</span>
-                    <span v-else-if="ft === 'demand' || ft === 'value' || ft === 'authorized'">{{ formatCurrency(item1[ft]) }}</span>
-                    <span v-else>{{ item1[ft] }}</span>
+                    <span v-if="ft === 'priority'">{{ typeof(item1[ft]) === "string" ? item1[ft] : priorityOptions[item1[ft] - 1] }}</span>
+                    <span v-else-if="ft === 'natDeadline'">{{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}</span>
+                    <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item1[ft]) }}</span>
+                    <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item1[ft] }}</span>
+                    <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item1[ft] }}</span>
+                    <span v-else>{{ formatCurrency(item[ft]) }}</span>
                   </div>
                   <div
                     v-for="(jtem, tndex) in job_fields"
@@ -308,6 +312,7 @@ export default {
       // team_fields: ['mgt & study', 'dev', 'test', 'total'],
       job_fields: ['total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
+      nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       teamD1: [],
       teamD: [],
       jobs: [],
