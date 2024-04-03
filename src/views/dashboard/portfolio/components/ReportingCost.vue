@@ -253,10 +253,11 @@ export default {
       return moment(new Date(date)).format('MM-DD-YYYY')
     },
     formatCurrency(value) {
+      if (value === undefined || value === null) return 0
       return new Intl.NumberFormat(undefined, {
         style: 'currency',
-        currency: 'USD',
-      }).format(value).replace(',', '.')
+        currency: 'EUR',
+      }).format(value)
     },
     rowClass(item, type) {
       const colorClass = 'table-success'
