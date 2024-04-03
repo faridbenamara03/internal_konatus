@@ -121,22 +121,9 @@
             step="1"
             :disabled="!isWinRate"
           />
-        </div>
-        <div class="checkbox-slider-group">
-          <b-form-checkbox
-            v-model="isProject"
-            class="custom-control-primary mb-1"
-          >
-            Potential Project
-          </b-form-checkbox>
           <b-form-input
-            v-model="projectRange"
-            class="slider"
-            type="range"
-            min="0"
-            max="100"
-            step="1"
-            :disabled="!isProject"
+            v-model="winRateRange"
+            :disabled="!isWinRate"
           />
         </div>
       </div>

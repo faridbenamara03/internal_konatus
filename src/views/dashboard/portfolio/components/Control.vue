@@ -3,11 +3,11 @@
     <div class="portf-demand-view">
       <div
         style="background-color:#1A2239;height:40px"
-        :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
+        :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
       />
       <div
         class="portf-row portf-bold portf-table-header portf-uppercase"
-        :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
+        :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
       >
         <div
           class="part1"
@@ -17,7 +17,7 @@
         </div>
         <div
           class="part2 mr-2"
-          :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
+          :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
         >
           <div
             v-for="(ft, fi) in c_fields"
@@ -30,18 +30,18 @@
           <div
             v-for="(item, index) in job_fields"
             :key="index"
-            :style="`min-width:150px`"
+            :style="`min-width:180px`"
             class="data-child mr-1 portf-uppercase"
           >
             <div
               style="position:relative;top:-43px;height:0px;cursor:pointer;text-align:center;"
             >
               <!-- @click="onTeamCollapse(index)" -->
-              <!-- <feather-icon
+              <feather-icon
                 style="margin-top:-3px"
-                :icon="`${collapsedT.indexOf(index) > -1 ? 'PlusIcon' : 'MinusIcon'}`"
+                :icon="'PlusIcon'"
                 size="16"
-              /> -->
+              />
               {{ item }}
             </div>
             <div :style="`position:relative;top:-20px;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
@@ -75,7 +75,7 @@
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
             :class="{'inner-sdw': index === 0}"
-            :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
+            :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
           >
             <div
               class="part1 portf-uppercase"
@@ -93,7 +93,7 @@
             </div>
             <div
               class="part2 mr-2"
-              :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
+              :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
             >
               <div
                 v-for="(ft, fi) in c_fields"
@@ -111,7 +111,7 @@
               <div
                 v-for="(jtem, index1) in job_fields"
                 :key="index1"
-                :style="`min-width:150px`"
+                :style="`min-width:180px`"
                 class="data-child mr-1"
               >
                 <div style="text-align: center">
@@ -142,7 +142,7 @@
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
                 :class="{'inner-sdw': index1 === 0}"
-                :style="`min-width: ${500 + 150 * c_fields.length + 150 * job_fields.length}px`"
+                :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
               >
                 <div
                   class="part1 portf-bold pl-2"
@@ -152,7 +152,7 @@
                 </div>
                 <div
                   class="part2 mr-2"
-                  :style="`min-width: ${150 * c_fields.length + 150 * job_fields.length}px`"
+                  :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
                 >
                   <div
                     v-for="(ft, fi) in c_fields"
@@ -165,12 +165,12 @@
                     <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item1[ft]) }}</span>
                     <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item1[ft] }}</span>
                     <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item1[ft] }}</span>
-                    <span v-else>{{ formatCurrency(item[ft]) }}</span>
+                    <span v-else>{{ formatCurrency(item1[ft]) }}</span>
                   </div>
                   <div
                     v-for="(jtem, tndex) in job_fields"
                     :key="tndex"
-                    :style="`min-width:150px`"
+                    :style="`min-width:180px`"
                     class="data-child mr-1"
                   >
                     <div style="text-align:center;">
@@ -230,7 +230,7 @@
         <div
           v-for="(item, index) in teams"
           :key="index"
-          :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 400}px;text-align:center;`"
+          :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 550}px;text-align:center;`"
           class="mr-1 ml-1"
         >
           <div style="display:flex;justify-content:space-between;">
@@ -342,6 +342,7 @@ export default {
           let programSalesEx = 0
           let programScoring = 0
           let programRoi = 0
+          const programJobs = []
           if (program.children && program.children.length > 0) {
             program.children.map(project => {
               if (project.children.length > 0) {
@@ -355,9 +356,21 @@ export default {
                   programSalesEx += parseInt(subproject.salesEx ? subproject.salesEx : 0, 10)
                   programScoring += parseInt(subproject.scoring ? subproject.scoring : 0, 10)
                   programRoi += parseInt(subproject.roi ? subproject.roi : 0, 10)
+                  this.job_fields.map(jobField => {
+                    if (subproject[jobField] === null || subproject[jobField] === undefined) return null
+                    if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(subproject[jobField], 10)
+                    else programJobs[jobField] += parseInt(subproject[jobField], 10)
+                    return null
+                  })
                   return null
                 })
               }
+              this.job_fields.map(jobField => {
+                if (project[jobField] === null || project[jobField] === undefined) return null
+                if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(project[jobField], 10)
+                else programJobs[jobField] += parseInt(project[jobField], 10)
+                return null
+              })
               programEngaged += parseInt(project.engaged ? project.engaged : 0, 10)
               programDemand += parseInt(project.demand ? project.demand : 0, 10)
               programRealEstimated += parseInt(project.realEstimated ? project.realEstimated : 0, 10)
@@ -370,6 +383,12 @@ export default {
               return null
             })
           }
+          this.job_fields.map(jobField => {
+            if (program[jobField] === null || program[jobField] === undefined) return null
+            if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(program[jobField], 10)
+            else programJobs[jobField] += parseInt(program[jobField], 10)
+            return null
+          })
           const nd = { ...program }
           nd.engaged = programEngaged
           nd.demand = programDemand
@@ -380,6 +399,10 @@ export default {
           nd.salesEx = programSalesEx
           nd.scoring = programScoring
           nd.roi = programRoi
+          this.job_fields.map(jobField => {
+            nd[jobField] = programJobs[jobField]
+            return null
+          })
           return nd
         })
         return ndt
@@ -394,6 +417,7 @@ export default {
         let salesEx = 0
         let scoring = 0
         let roi = 0
+        // let priority = ''
         if (t.children && t.children.length > 0) {
           const updatedT1s = []
           t.children.map(t1 => {
@@ -407,6 +431,8 @@ export default {
             let t1salesEx = 0
             let t1scoring = 0
             let t1roi = 0
+            const t1Jobs = []
+            // let t1priority = ''
             if (t1.children && t1.children.length > 0) {
               const updatedT2s = []
               t1.children.map(t2 => {
@@ -421,6 +447,7 @@ export default {
                   let t2salesEx = 0
                   let t2scoring = 0
                   let t2roi = 0
+                  // let t2priority = ''
                   t2.children.map(t3 => {
                     engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     demand += parseInt(t3.demand ? t3.demand : 0, 10)
@@ -449,6 +476,12 @@ export default {
                     t1salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
                     t1scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
                     t1roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    this.job_fields.map(jobField => {
+                      if (t3[jobField] === null || t3[jobField] === undefined) return null
+                      if (t1Jobs[jobField] === null || t1Jobs[jobField] === undefined) t1Jobs[jobField] = parseInt(t3[jobField], 10)
+                      else t1Jobs[jobField] += parseInt(t3[jobField], 10)
+                      return null
+                    })
                     return null
                   })
                   updatedT2.engaged = t2Engaged
@@ -461,6 +494,12 @@ export default {
                   updatedT2.scoring = t2scoring
                   updatedT2.roi = t2roi
                 }
+                this.job_fields.map(jobField => {
+                  if (t2[jobField] === null || t2[jobField] === undefined) return null
+                  if (t1Jobs[jobField] === null || t1Jobs[jobField] === undefined) t1Jobs[jobField] = parseInt(t2[jobField], 10)
+                  else t1Jobs[jobField] += parseInt(t2[jobField], 10)
+                  return null
+                })
                 engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
                 demand += parseInt(t2.demand ? t2.demand : 0, 10)
                 realEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
@@ -482,6 +521,12 @@ export default {
                 updatedT2s.push(updatedT2)
                 return null
               })
+              this.job_fields.map(jobField => {
+                if (t1[jobField] === null || t1[jobField] === undefined) return null
+                if (t1Jobs[jobField] === null || t1Jobs[jobField] === undefined) t1Jobs[jobField] = parseInt(t1[jobField], 10)
+                else t1Jobs[jobField] += parseInt(t1[jobField], 10)
+                return null
+              })
               updatedT1.engaged = t1Engaged
               updatedT1.demand = t1Demand
               updatedT1.realEstimated = t1RealEstimated
@@ -491,7 +536,21 @@ export default {
               updatedT1.salesEx = t1salesEx
               updatedT1.scoring = t1scoring
               updatedT1.roi = t1roi
+              this.job_fields.map(jobField => {
+                updatedT1[jobField] = t1Jobs[jobField]
+                return null
+              })
+              // updatedT1.children = updatedT2s
             }
+            // engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
+            // demand += parseInt(t1.demand ? t1.demand : 0, 10)
+            // realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
+            // authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
+            // spent += parseInt(t1.spent ? t1.spent : 0, 10)
+            // customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
+            // salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
+            // scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
+            // roi += parseInt(t1.roi ? t1.roi : 0, 10)
             updatedT1s.push(updatedT1)
             return null
           })
@@ -505,6 +564,15 @@ export default {
           nd.salesEx = salesEx
           nd.scoring = scoring
           nd.roi = roi
+          this.job_fields.map(jobField => {
+            let job = 0
+            updatedT1s.map(updatedT1 => {
+              job += updatedT1[jobField]
+              return null
+            })
+            nd[jobField] = job
+            return null
+          })
           nd.children = updatedT1s
           return nd
         }
@@ -633,9 +701,11 @@ export default {
       }
     },
     dateFormat(date) {
-      return moment(new Date(date)).format('MM-DD-YYYY')
+      if (date) return moment(new Date(date)).format('MM-DD-YYYY')
+      return null
     },
     formatCurrency(value) {
+      if (value === undefined || value === null) return 0
       return new Intl.NumberFormat(undefined, {
         style: 'currency',
         currency: 'EUR',
