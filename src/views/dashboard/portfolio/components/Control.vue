@@ -197,19 +197,26 @@
           </div>
         </div>
       </div>
-      <div class="portf-row portf-bold portf-table-header portf-uppercase">
+      <div
+        class="portf-row portf-bold portf-table-header portf-uppercase"
+        :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
+      >
         <div
           class="part1"
           style="color:#66ffff"
+          :style="`min-width: 200px`"
         >
           Total Team Capacity
         </div>
-        <div class="part2 mr-2">
+        <div
+          class="part2 mr-2"
+          :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
+        >
           <div
             v-for="(ft, fi) in c_fields"
             :key="fi"
             class="data-child mr-1 portf-uppercase"
-            :style="`width:${100 / c_fields.length}%`"
+            :style="`min-width:150px`"
           >
             <div
               class="d-flex"
@@ -226,8 +233,19 @@
               </div>
             </div>
           </div>
+          <div
+            v-for="(jtem, index1) in job_fields"
+            :key="index1"
+            :style="`min-width:180px`"
+            class="data-child mr-1"
+          >
+            <div style="text-align: center">
+                <!-- <span :style="`color: hsl(${170 - (percentD[index][jndex] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][jndex] }}%</span> -->
+              <span :style="`color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span>
+            </div>
+          </div>
         </div>
-        <div
+        <!-- <div
           v-for="(item, index) in teams"
           :key="index"
           :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 550}px;text-align:center;`"
@@ -249,7 +267,7 @@
               </div>
             </template>
           </div>
-        </div>
+        </div> -->
       </div>
       <b-pagination
         :total-rows="140"
@@ -313,18 +331,11 @@ export default {
       job_fields: ['total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
+
       teamD1: [],
       teamD: [],
       jobs: [],
-      percentD: [
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-        [parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10), parseInt(Math.random() * 200, 10)],
-      ]
-      // percentD: []
+      percentD: []
     }
   },
   computed: {
@@ -684,6 +695,73 @@ export default {
       tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
       // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
       this.job_fields = tempFields
+      tempFields.map(jobField => {
+        let jobPercent = 0.0
+        const percentT = "percent_"
+        const percentAttr = percentT.concat(jobField)
+        if (this.data.type === 'portfolio') {
+          if (this.data.children && this.data.children.length > 0) {
+            this.data.children.map(program => {
+              if (program.children && program.children.length > 0) {
+                program.children.map(project => {
+                  if (project.children && project.children.length > 0) {
+                    project.children.map(subproject => {
+                      if (subproject[percentAttr] !== null && subproject[percentAttr] !== undefined) {
+                        jobPercent += parseFloat(subproject[percentAttr])
+                      }
+                      return null
+                    })
+                  }
+                  if (project[percentAttr] !== null && project[percentAttr] !== undefined) {
+                    jobPercent += parseFloat(project[percentAttr])
+                  }
+                  return null
+                })
+              }
+              if (program[percentAttr] !== null && program[percentAttr] !== undefined) {
+                jobPercent += parseFloat(program[percentAttr])
+              }
+              return null
+            })
+          }
+          this.percentD[jobField] = parseFloat(jobPercent).toFixed(2)
+        } else if (this.data.type === 'company') {
+          if (this.data.children && this.data.children.length > 0) {
+            this.data.children.map(portfolio => {
+              if (portfolio.children && portfolio.children.length > 0) {
+                portfolio.children.map(program => {
+                  if (program.children && program.children.length > 0) {
+                    program.children.map(project => {
+                      if (project.children && project.children.length > 0) {
+                        project.children.map(subproject => {
+                          if (subproject[percentAttr] !== null && subproject[percentAttr] !== undefined) {
+                            jobPercent += parseFloat(subproject[percentAttr])
+                          }
+                          return null
+                        })
+                      }
+                      if (project[percentAttr] !== null && project[percentAttr] !== undefined) {
+                        jobPercent += parseFloat(project[percentAttr])
+                      }
+                      return null
+                    })
+                  }
+                  if (program[percentAttr] !== null && program[percentAttr] !== undefined) {
+                    jobPercent += parseFloat(program[percentAttr])
+                  }
+                  return null
+                })
+              }
+              if (portfolio[percentAttr] !== null && portfolio[percentAttr] !== undefined) {
+                jobPercent += parseFloat(portfolio[percentAttr])
+              }
+              return null
+            })
+          }
+          this.percentD[jobField] = parseFloat(jobPercent).toFixed(2)
+        }
+        return null
+      })
     },
     onTeamCollapse(i) {
       const index = this.collapsedT.findIndex(x => x === i)
