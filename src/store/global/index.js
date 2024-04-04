@@ -88,6 +88,8 @@ export default {
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
+    selectedFromDate: moment(`2024-01-01`),
+    selectedToDate: moment(`2024-12-31`),
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),
@@ -138,6 +140,16 @@ export default {
       state.portfolioReportingData = payload
       state.optimizedData = payload
       state.optimizeStates = 'preview'
+    },
+    UPDATE_SELECTED_FROM_DATE(state, payload) {
+      const fromDate = payload.from
+      state.selectedFromDate = fromDate !== null || fromDate !== undefined ? moment(fromDate) : moment(`${new Date().getFullYear()}-01-01`)
+      console.log('fromD:', state.selectedFromDate.toString(), 'payload:', payload)
+    },
+    UPDATE_SELECTED_TO_DATE(state, payload) {
+      const toDate = payload.to
+      state.selectedToDate = toDate !== null || toDate !== undefined ? moment(toDate) : moment(`${new Date().getFullYear()}-12-31`)
+      console.log('toD:', state.selectedToDate.toString(), 'payload:', payload)
     },
     UPDATE_OPTIMIZE_STATUES(state, value) {
       state.optimizeStatus = value

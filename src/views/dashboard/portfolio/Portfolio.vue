@@ -295,6 +295,7 @@
             :otype="selectedNavType"
             :reporting-state="reportingState"
             :costfields="costfields"
+            :selectedmonth="selectedMonth"
             @update-clicked="handleToggleUpdateHide"
           />
           <TableEditable
@@ -552,7 +553,7 @@ export default {
       tabIndex: 0,
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 2} / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
       open: false,
@@ -726,14 +727,18 @@ export default {
       return isEmpty(data)
     },
     onRangeFromChange(value) {
+      console.log('from:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
       this.selectedMonth = this.rangeArray.join(' - ')
+      this.$store.commit('globalState/UPDATE_SELECTED_FROM_DATE', value)
     },
     onRangeToChange(value) {
+      console.log('to:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')
+      this.$store.commit('globalState/UPDATE_SELECTED_TO_DATE', value)
     },
     handleChangeViewMode(mode) {
       const urlArr = this.$route.path.split('/')

@@ -218,7 +218,7 @@
             class="data-child mr-1 portf-uppercase"
             :style="`min-width:150px`"
           >
-            <div
+            <!-- <div
               class="d-flex"
               style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;"
             >
@@ -231,7 +231,7 @@
                   style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;"
                 />
               </div>
-            </div>
+            </div> -->
           </div>
           <div
             v-for="(jtem, index1) in job_fields"

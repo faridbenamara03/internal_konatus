@@ -568,6 +568,8 @@ export default {
       windowWidth: window.innerWidth,
       itemsForReporting: [],
       // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
+      startGraphDate: moment('2024-01-01'),
+      endGraphDate: moment('2024-12-31'),
       dta1: [
         [193, 125, 184, 151, 248, 183, 224, 270, 207],
         [110, 179, 125, 238, 229, 193, 232, 210, 250],
@@ -704,20 +706,33 @@ export default {
   mounted() {
     // const startDate = moment(moment()).subtract(15, 'days').startOf('day')
     // const endDate = moment(moment()).add(1, 'M').startOf('day')
-    const startDate = moment('2024-01-01')
-    const endDate = moment('2024-06-01')
-    this.reportingDates = [startDate.clone()]
+    // const startDate = moment('2024-01-01')
+    // const endDate = moment('2024-12-31')
+    // this.reportingDates = [startDate.clone()]
 
-    while (startDate.add(1, 'days').diff(endDate) < 0) {
-      this.reportingDates.push(startDate.clone())
-    }
+    // while (startDate.add(1, 'days').diff(endDate) < 0) {
+    //   this.reportingDates.push(startDate.clone())
+    // }
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize)
     })
   },
   methods: {
     initializeData(data) {
-      console.log("INITD:", data, "OTYPE:", this.navType)
+      console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedFromDate)
+      this.startGraphData = this.$store.state.globalState.selectedFromDate
+      this.endGraphData = this.$store.state.globalState.selectedToDate
+      const tempStartDate = this.startGraphData.clone()
+      this.reportingDates = [tempStartDate.clone()]
+
+      while (tempStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
+        this.reportingDates.push(tempStartDate.clone())
+      }
+      // this.reportingDates = [this.startGraphData.clone()]
+
+      // while (reportStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
+      //   this.reportingDates.push(this.startGraphData.clone())
+      // }
       this.navType = this.$store.state.globalState.selectedNavObj.type
       this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
       // console.log("NAVTYPE:", this.navType)
@@ -746,6 +761,8 @@ export default {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
+            if (startMoment < this.startGraphData) startMoment = this.startGraphData
+            if (endMoment > this.endGraphData) endMoment = this.endGraphData
             const duration = moment.duration(endMoment.diff(startMoment))
             if (duration.asDays() === 0) {
               result.push(24)
@@ -777,6 +794,8 @@ export default {
           default:
             break
         }
+        if (startMoment < this.startGraphData) startMoment = this.startGraphData
+        if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
         if (duration.asDays() === 0) {
           result = 24
