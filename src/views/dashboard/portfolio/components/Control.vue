@@ -115,20 +115,6 @@
                 class="data-child mr-1"
               >
                 <div style="text-align: center">
-                  <!-- <template v-if="collapsedT.indexOf(index1) > -1">
-                    <div style="width:100%;text-align:center">
-                      {{ teamD1[index].length > 0 ? teamD1[index][index1][3] : null }}
-                    </div>
-                  </template>
-                  <template v-else>
-                    <div
-                      v-for="(item1, jndex) in team_fields"
-                      :key="jndex"
-                      style="width:25%;text-align:center"
-                    >
-                      {{ teamD1[index].length > 0 ? teamD1[index][index1][jndex] : null }}
-                    </div>
-                  </template> -->
                   {{ item[jtem] }}
                 </div>
               </div>
@@ -218,56 +204,18 @@
             class="data-child mr-1 portf-uppercase"
             :style="`min-width:150px`"
           >
-            <!-- <div
-              class="d-flex"
-              style="height:100%;width:100%;border:1px solid grey;border-radius:5px;justify-content:space-between;"
-            >
-              <div style="font-size:12px;color:#FFFFFF80;padding:2px 8px;">
-                Info
-              </div>
-              <div>
-                <feather-icon
-                  icon="PlusIcon"
-                  style="color:#FFFFFF80;margin-bottom:2px;margin-right:8px;"
-                />
-              </div>
-            </div> -->
+            <span> </span>
           </div>
           <div
             v-for="(jtem, index1) in job_fields"
             :key="index1"
-            :style="`min-width:180px`"
+            :style="`min-width:180px;text-align:center`"
             class="data-child mr-1"
           >
-            <div style="text-align: center">
-                <!-- <span :style="`color: hsl(${170 - (percentD[index][jndex] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][jndex] }}%</span> -->
-              <span :style="`color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span>
-            </div>
+            <span :style="`text-align: center;color: ${capD[jtem] <= 100 ? 'rgb(55, 255, 0)' : capD[jtem] > 100 && capD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ capD[jtem] }}</span>
+            /<span :style="`text-align: center;color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span>
           </div>
         </div>
-        <!-- <div
-          v-for="(item, index) in teams"
-          :key="index"
-          :style="`width:${collapsedT.indexOf(index) > -1 ? 120 : 550}px;text-align:center;`"
-          class="mr-1 ml-1"
-        >
-          <div style="display:flex;justify-content:space-between;">
-            <template v-if="collapsedT.indexOf(index) > -1">
-              <div style="width:100%;text-align:center">
-                <span :style="`color: hsl(${170 - (percentD[index][3] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][3] }}%</span>
-              </div>
-            </template>
-            <template v-else>
-              <div
-                v-for="(item1, jndex) in team_fields"
-                :key="jndex"
-                style="width:25%;text-align:center"
-              >
-                <span :style="`color: hsl(${170 - (percentD[index][jndex] / 200 * 170)}, 100%, 50%)`">{{ percentD[index][jndex] }}%</span>
-              </div>
-            </template>
-          </div>
-        </div> -->
       </div>
       <b-pagination
         :total-rows="140"
@@ -324,6 +272,7 @@ export default {
       collapsedT: [],
       opened: 0,
       priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      // capsData: [],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       // c_fields: ['priority', 'value', 'budget', 'next_gate'],
       // fields: ['priority', 'value', 'demand'],
@@ -335,7 +284,8 @@ export default {
       teamD1: [],
       teamD: [],
       jobs: [],
-      percentD: []
+      percentD: [],
+      capD: [],
     }
   },
   computed: {
@@ -610,47 +560,8 @@ export default {
   methods: {
     initializeData(data) {
       console.log("CInitData:", data)
-      // const temp = data !== null ? data.children : []
-      // const tempTeams = []
-      // const tempTeamData1 = []
-      // const tempTeamData = []
-      // for (let i = 0; i < temp.length; i += 1) {
-      //   const item = temp[i]
-      //   const tempData = []
-      //   if (item.assignee !== undefined && item.assignee.length > 0) {
-      //     const tempAssignee = item.assignee
-      //     for (let j = 0; j < tempAssignee.length; j += 1) {
-      //       const assignee = tempAssignee[j]
-      //       if (!tempTeams.includes(assignee.title)) {
-      //         tempTeams.push(assignee.title)
-      //       }
-      //       tempData.push(assignee.data)
-      //     }
-      //   }
-      //   tempTeamData.push(tempData)
-      //   const tempData1 = []
-      //   if (item.children !== undefined && item.children.length > 0) {
-      //     for (let j = 0; j < item.children.length; j += 1) {
-      //       const tempChildren = item.children[j]
-      //       const tempChildrenData = []
-      //       if (tempChildren.assignee !== undefined && tempChildren.assignee.length > 0) {
-      //         for (let k = 0; k < tempChildren.assignee.length; k += 1) {
-      //           const assignee = tempChildren.assignee[k]
-      //           if (!tempTeams.includes(assignee.title)) {
-      //             tempTeams.push(assignee.title)
-      //           }
-      //           tempChildrenData.push(assignee.data)
-      //         }
-      //       }
-      //       tempData1.push(tempChildrenData)
-      //     }
-      //   }
-      //   tempTeamData1.push(tempData1)
-      // }
-      // this.teams = tempTeams
-      // this.teamD1 = tempTeamData
-      // this.teamD = tempTeamData1
       let tempFields = []
+      console.log("CInit:", this.data)
       if (this.data === null) return
       if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
         this.data.children.map(program => {
@@ -695,71 +606,11 @@ export default {
       tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
       // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
       this.job_fields = tempFields
+      const totalCap = this.data.capacity
       tempFields.map(jobField => {
-        let jobPercent = 0.0
-        const percentT = "percent_"
-        const percentAttr = percentT.concat(jobField)
-        if (this.data.type === 'portfolio') {
-          if (this.data.children && this.data.children.length > 0) {
-            this.data.children.map(program => {
-              if (program.children && program.children.length > 0) {
-                program.children.map(project => {
-                  if (project.children && project.children.length > 0) {
-                    project.children.map(subproject => {
-                      if (subproject[percentAttr] !== null && subproject[percentAttr] !== undefined) {
-                        jobPercent += parseFloat(subproject[percentAttr])
-                      }
-                      return null
-                    })
-                  }
-                  if (project[percentAttr] !== null && project[percentAttr] !== undefined) {
-                    jobPercent += parseFloat(project[percentAttr])
-                  }
-                  return null
-                })
-              }
-              if (program[percentAttr] !== null && program[percentAttr] !== undefined) {
-                jobPercent += parseFloat(program[percentAttr])
-              }
-              return null
-            })
-          }
-          this.percentD[jobField] = parseFloat(jobPercent).toFixed(2)
-        } else if (this.data.type === 'company') {
-          if (this.data.children && this.data.children.length > 0) {
-            this.data.children.map(portfolio => {
-              if (portfolio.children && portfolio.children.length > 0) {
-                portfolio.children.map(program => {
-                  if (program.children && program.children.length > 0) {
-                    program.children.map(project => {
-                      if (project.children && project.children.length > 0) {
-                        project.children.map(subproject => {
-                          if (subproject[percentAttr] !== null && subproject[percentAttr] !== undefined) {
-                            jobPercent += parseFloat(subproject[percentAttr])
-                          }
-                          return null
-                        })
-                      }
-                      if (project[percentAttr] !== null && project[percentAttr] !== undefined) {
-                        jobPercent += parseFloat(project[percentAttr])
-                      }
-                      return null
-                    })
-                  }
-                  if (program[percentAttr] !== null && program[percentAttr] !== undefined) {
-                    jobPercent += parseFloat(program[percentAttr])
-                  }
-                  return null
-                })
-              }
-              if (portfolio[percentAttr] !== null && portfolio[percentAttr] !== undefined) {
-                jobPercent += parseFloat(portfolio[percentAttr])
-              }
-              return null
-            })
-          }
-          this.percentD[jobField] = parseFloat(jobPercent).toFixed(2)
-        }
+        const temp = totalCap.filter(value => value.job_name.toUpperCase() === jobField.toUpperCase())
+        this.percentD[jobField] = temp !== null || temp !== undefined ? temp[0].percent : 0.0
+        this.capD[jobField] = temp !== null || temp !== undefined ? temp[0].total : 0
         return null
       })
     },

@@ -23,12 +23,6 @@
               style="cursor:pointer"
               @click="onCollapseClick(index1)"
             >
-              <feather-icon
-                v-if="item1 !== undefined && item1.children"
-                :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-                size="16"
-                class="mr-1"
-              />
               <p class="m-0 text-uppercase text-overflow-ellipse">
                 {{ item1.title }}
               </p>
@@ -37,11 +31,32 @@
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
-                class="report-block-child"
               >
-                <p class="m-0 text-uppercase text-overflow-ellipse">
-                  {{ item2.title }}
-                </p>
+                <div
+                  class="report-block-child"
+                  @click="onChildCollapseClick(index2)"
+                >
+                  <feather-icon
+                    v-if="item2 !== undefined && item2.children"
+                    :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                    size="16"
+                    class="mr-1"
+                  />
+                  <p class="m-0 text-uppercase text-overflow-ellipse">
+                    {{ item2.title }}
+                  </p>
+                </div>
+                <template v-if="item2 !== undefined && item2.children && childCollapse === index2">
+                  <div
+                    v-for="(item3, index3) in item2.children"
+                    :key="index3"
+                    class="report-block-child"
+                  >
+                    <p class="m-0 ml-2 text-uppercase text-overflow-ellipse">
+                      {{ item3.title }}
+                    </p>
+                  </div>
+                </template>
               </div>
             </template>
           </div>
@@ -90,12 +105,34 @@
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
-                    class="report-block-child"
-                    style="height:77px"
                   >
-                    <p class="ml-1 text-uppercase text-overflow-ellipse">
-                      {{ item3.title }}
-                    </p>
+                    <div
+                      class="report-block-child"
+                      style="height:77px"
+                      @click="onSubChildCollapseClick(index3)"
+                    >
+                      <feather-icon
+                        v-if="item2 !== undefined && item2.children"
+                        :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                        size="16"
+                        class="mr-1"
+                      />
+                      <p class="ml-1 text-uppercase text-overflow-ellipse">
+                        {{ item3.title }}
+                      </p>
+                    </div>
+                    <template v-if="item3 !== undefined && item3.children && subChildCollapse === index3">
+                      <div
+                        v-for="(item4, index4) in item3.children"
+                        :key="index4"
+                        class="report-block-child"
+                        style="height:77px"
+                      >
+                        <p class="ml-2 text-uppercase text-overflow-ellipse">
+                          {{ item4.title }}
+                        </p>
+                      </div>
+                    </template>
                   </div>
                 </template>
               </div>
@@ -221,36 +258,75 @@
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
-                style="height:51px"
-                class="w-100"
               >
-                <b-card
-                  no-body
-                  class="d-flex flex-column justify-content-around"
-                  style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                <div
+                  style="height:51px"
+                  class="w-100"
                 >
-                  <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
-                    <ProjectProgressBar
-                      :type="0"
-                      :widths="getValue(item2, 0, true)"
-                      :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
-                    />
+                  <b-card
+                    no-body
+                    class="d-flex flex-column justify-content-around"
+                    style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                  >
+                    <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
+                      <ProjectProgressBar
+                        :type="0"
+                        :widths="getValue(item2, 0, true)"
+                        :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
+                      />
+                    </div>
+                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                      <ProjectProgressBar
+                        :type="1"
+                        :widths="getValue(item2, 2, true)"
+                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                      />
+                    </div>
+                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                      <ProjectProgressBar
+                        :type="2"
+                        :widths="getValue(item2, 2, true)"
+                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                      />
+                    </div>
+                  </b-card>
+                </div>
+                <template v-if="onOptimiseIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
+                  <div
+                    v-for="(item3, index3) in item2.children"
+                    :key="index3"
+                    style="height:51px"
+                    class="w-100"
+                  >
+                    <b-card
+                      no-body
+                      class="d-flex flex-column justify-content-around"
+                      style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                    >
+                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                        <ProjectProgressBar
+                          :type="0"
+                          :widths="getValue(item3, 0, true)"
+                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                        />
+                      </div>
+                      <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                        <ProjectProgressBar
+                          :type="1"
+                          :widths="getValue(item3, 1, true)"
+                          :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                        />
+                      </div>
+                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                        <ProjectProgressBar
+                          :type="2"
+                          :widths="getValue(item3, 2, true)"
+                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                        />
+                      </div>
+                    </b-card>
                   </div>
-                  <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
-                    <ProjectProgressBar
-                      :type="1"
-                      :widths="getValue(item2, 2, true)"
-                      :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
-                    />
-                  </div>
-                  <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
-                    <ProjectProgressBar
-                      :type="2"
-                      :widths="getValue(item2, 2, true)"
-                      :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
-                    />
-                  </div>
-                </b-card>
+                </template>
               </div>
             </template>
 
@@ -294,36 +370,75 @@
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
-                style="height:51px"
-                class="w-100"
               >
-                <b-card
-                  no-body
-                  class="d-flex flex-column justify-content-around"
-                  style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                <div
+                  style="height:51px"
+                  class="w-100"
                 >
-                  <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
-                    <ProjectProgressBar
-                      :type="0"
-                      :widths="getValue(item2, 0, true)"
-                      :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
-                    />
+                  <b-card
+                    no-body
+                    class="d-flex flex-column justify-content-around"
+                    style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                  >
+                    <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
+                      <ProjectProgressBar
+                        :type="0"
+                        :widths="getValue(item2, 0, true)"
+                        :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
+                      />
+                    </div>
+                    <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
+                      <ProjectProgressBar
+                        :type="1"
+                        :widths="getValue(item2, 1, true)"
+                        :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
+                      />
+                    </div>
+                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                      <ProjectProgressBar
+                        :type="2"
+                        :widths="getValue(item2, 2, true)"
+                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                      />
+                    </div>
+                  </b-card>
+                </div>
+                <template v-if="onOptimiseIndex() === 'origin' && item2 !== undefined && item2.children && childCollapse === index2">
+                  <div
+                    v-for="(item3, index3) in item2.children"
+                    :key="index3"
+                    style="height:51px"
+                    class="w-100"
+                  >
+                    <b-card
+                      no-body
+                      class="d-flex flex-column justify-content-around"
+                      style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                    >
+                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                        <ProjectProgressBar
+                          :type="0"
+                          :widths="getValue(item3, 0, true)"
+                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                        />
+                      </div>
+                      <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                        <ProjectProgressBar
+                          :type="1"
+                          :widths="getValue(item3, 1, true)"
+                          :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                        />
+                      </div>
+                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                        <ProjectProgressBar
+                          :type="2"
+                          :widths="getValue(item3, 2, true)"
+                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                        />
+                      </div>
+                    </b-card>
                   </div>
-                  <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
-                    <ProjectProgressBar
-                      :type="1"
-                      :widths="getValue(item2, 1, true)"
-                      :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
-                    />
-                  </div>
-                  <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
-                    <ProjectProgressBar
-                      :type="2"
-                      :widths="getValue(item2, 2, true)"
-                      :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
-                    />
-                  </div>
-                </b-card>
+                </template>
               </div>
             </template>
 
@@ -383,36 +498,75 @@
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
-                    style="height:77px"
-                    class="w-100"
                   >
-                    <b-card
-                      no-body
-                      class="d-flex flex-column justify-content-around"
-                      style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                    <div
+                      style="height:77px"
+                      class="w-100"
                     >
-                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
-                        <ProjectProgressBar
-                          :type="0"
-                          :widths="getValue(item3, 0, true)"
-                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
-                        />
+                      <b-card
+                        no-body
+                        class="d-flex flex-column justify-content-around"
+                        style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                      >
+                        <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                          <ProjectProgressBar
+                            :type="0"
+                            :widths="getValue(item3, 0, true)"
+                            :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                          />
+                        </div>
+                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                          <ProjectProgressBar
+                            :type="1"
+                            :widths="getValue(item3, 2, true)"
+                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                          />
+                        </div>
+                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                          <ProjectProgressBar
+                            :type="2"
+                            :widths="getValue(item3, 2, true)"
+                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                          />
+                        </div>
+                      </b-card>
+                    </div>
+                    <template v-if="onOptimiseIndex() === 'optimize' && item3 !== undefined && item3.children && subChildCollapse === index3">
+                      <div
+                        v-for="(item4, index4) in item3.children"
+                        :key="index4"
+                        style="height:77px"
+                        class="w-100"
+                      >
+                        <b-card
+                          no-body
+                          class="d-flex flex-column justify-content-around"
+                          style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                        >
+                          <div :style="`padding-left:${getStartPadding(item4, 0, true)}px`">
+                            <ProjectProgressBar
+                              :type="0"
+                              :widths="getValue(item4, 0, true)"
+                              :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
+                            />
+                          </div>
+                          <div :style="`padding-left:${getStartPadding(item4, 1, true)}px`">
+                            <ProjectProgressBar
+                              :type="1"
+                              :widths="getValue(item4, 1, true)"
+                              :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
+                            />
+                          </div>
+                          <div :style="`padding-left:${getStartPadding(item4, 2, true)}px`">
+                            <ProjectProgressBar
+                              :type="2"
+                              :widths="getValue(item4, 2, true)"
+                              :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
+                            />
+                          </div>
+                        </b-card>
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
-                        <ProjectProgressBar
-                          :type="1"
-                          :widths="getValue(item3, 2, true)"
-                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
-                        />
-                      </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
-                        <ProjectProgressBar
-                          :type="2"
-                          :widths="getValue(item3, 2, true)"
-                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
-                        />
-                      </div>
-                    </b-card>
+                    </template>
                   </div>
                 </template>
               </div>
@@ -466,36 +620,75 @@
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
-                    style="height:77px"
-                    class="w-100"
                   >
-                    <b-card
-                      no-body
-                      class="d-flex flex-column justify-content-around"
-                      style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                    <div
+                      style="height:77px"
+                      class="w-100"
                     >
-                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
-                        <ProjectProgressBar
-                          :type="0"
-                          :widths="getValue(item3, 0, true)"
-                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
-                        />
+                      <b-card
+                        no-body
+                        class="d-flex flex-column justify-content-around"
+                        style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                      >
+                        <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                          <ProjectProgressBar
+                            :type="0"
+                            :widths="getValue(item3, 0, true)"
+                            :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                          />
+                        </div>
+                        <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                          <ProjectProgressBar
+                            :type="1"
+                            :widths="getValue(item3, 1, true)"
+                            :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                          />
+                        </div>
+                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                          <ProjectProgressBar
+                            :type="2"
+                            :widths="getValue(item3, 2, true)"
+                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                          />
+                        </div>
+                      </b-card>
+                    </div>
+                    <template v-if="onOptimiseIndex() === 'origin' && item3 !== undefined && item3.children && subChildCollapse === index3">
+                      <div
+                        v-for="(item4, index4) in item3.children"
+                        :key="index4"
+                        style="height:77px"
+                        class="w-100"
+                      >
+                        <b-card
+                          no-body
+                          class="d-flex flex-column justify-content-around"
+                          style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                        >
+                          <div :style="`padding-left:${getStartPadding(item4, 0, true)}px`">
+                            <ProjectProgressBar
+                              :type="0"
+                              :widths="getValue(item4, 0, true)"
+                              :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
+                            />
+                          </div>
+                          <div :style="`padding-left:${getStartPadding(item4, 1, true)}px`">
+                            <ProjectProgressBar
+                              :type="1"
+                              :widths="getValue(item4, 1, true)"
+                              :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
+                            />
+                          </div>
+                          <div :style="`padding-left:${getStartPadding(item4, 2, true)}px`">
+                            <ProjectProgressBar
+                              :type="2"
+                              :widths="getValue(item4, 2, true)"
+                              :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
+                            />
+                          </div>
+                        </b-card>
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
-                        <ProjectProgressBar
-                          :type="1"
-                          :widths="getValue(item3, 1, true)"
-                          :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
-                        />
-                      </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
-                        <ProjectProgressBar
-                          :type="2"
-                          :widths="getValue(item3, 2, true)"
-                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
-                        />
-                      </div>
-                    </b-card>
+                    </template>
                   </div>
                 </template>
               </div>
@@ -564,6 +757,7 @@ export default {
       reportingDates: [],
       openedCollapse: 0,
       childCollapse: 1,
+      subChildCollapse: 0,
       navType: 'portfolio',
       windowWidth: window.innerWidth,
       itemsForReporting: [],
@@ -871,6 +1065,10 @@ export default {
     onChildCollapseClick(index) {
       if (this.childCollapse === index) this.childCollapse = -1
       else this.childCollapse = index
+    },
+    onSubChildCollapseClick(index) {
+      if (this.subChildCollapse === index) this.subChildCollapse = -1
+      else this.subChildCollapse = index
     },
     isToday(date) {
       return moment().isSame(date, 'day')
