@@ -212,46 +212,25 @@
             :style="`min-width:180px;text-align:center`"
             class="data-child mr-1"
           >
-            <span :style="`text-align: center;color: ${capD[jtem] <= 100 ? 'rgb(55, 255, 0)' : capD[jtem] > 100 && capD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ capD[jtem] }}</span>
-            /<span :style="`text-align: center;color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span>
+            <!-- <span :style="`text-align: center;color: ${capD[jtem] <= 100 ? 'rgb(55, 255, 0)' : capD[jtem] > 100 && capD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ capD[jtem] }}</span>
+            /<span :style="`text-align: center;color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span> -->
+            <span :style="`text-align: center;color: ${percentD[jtem] < 80 ? 'blue' : percentD[jtem] >= 80 && percentD[jtem] < 100 ? 'green' : percentD[jtem] >=100 && percentD[jtem] < 120 ? 'yellow' : percentD[jtem] >= 120 && percentD[jtem] < 140 ? 'red' : 'purple'}`">{{ capD[jtem] }}/{{ percentD[jtem] }}%</span>
           </div>
         </div>
       </div>
-      <b-pagination
-        :total-rows="140"
-        :per-page="10"
-        first-number
-        last-number
-        class="mb-1 mt-2"
-        prev-class="prev-item"
-        next-class="next-item"
-      >
-        <template #prev-text>
-          <feather-icon
-            icon="ChevronLeftIcon"
-            size="18"
-          />
-        </template>
-        <template #next-text>
-          <feather-icon
-            icon="ChevronRightIcon"
-            size="18"
-          />
-        </template>
-      </b-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  BPagination
-} from 'bootstrap-vue'
+// import {
+//   BPagination
+// } from 'bootstrap-vue'
 import moment from 'moment'
 
 export default {
   components: {
-    BPagination
+    // BPagination
   },
   props: {
     data: {

@@ -244,12 +244,12 @@
                     :width2="397 - getStartPadding(item1, 1, false)"
                   />
                 </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
+                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
                   <ProgramProgressBar
-                    v-if="getValue(item1, 1, false) > 0"
+                    v-if="getValue(item1, 2, false) > 0"
                     :type="2"
-                    :width1="getValue(item1, 1, false)"
-                    :width2="397 - getStartPadding(item1, 1, false)"
+                    :width1="getValue(item1, 2, false)"
+                    :width2="397 - getStartPadding(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -275,11 +275,11 @@
                         :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
                       />
                     </div>
-                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                    <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
                       <ProjectProgressBar
                         :type="1"
-                        :widths="getValue(item2, 2, true)"
-                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                        :widths="getValue(item2, 1, true)"
+                        :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
                       />
                     </div>
                     <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
@@ -484,12 +484,12 @@
                         :width2="397 - getStartPadding(item2, 1, false)"
                       />
                     </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 1, false) > 0"
+                        v-if="getValue(item2, 2, false) > 0"
                         :type="2"
-                        :width1="getValue(item2, 1, false)"
-                        :width2="397 - getStartPadding(item2, 1, false)"
+                        :width1="getValue(item2, 2, false)"
+                        :width2="397 - getStartPadding(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -515,11 +515,11 @@
                             :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
                           />
                         </div>
-                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                        <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
                           <ProjectProgressBar
                             :type="1"
-                            :widths="getValue(item3, 2, true)"
-                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                            :widths="getValue(item3, 1, true)"
+                            :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
                           />
                         </div>
                         <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
@@ -714,25 +714,17 @@
 import {
   BButton,
   BCard,
-  // BListGroup,
-  // BListGroupItem,
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
 import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
 import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
 import UpdateConfirmModal from '../modals/UpdateConfirmModal.vue'
-// import AppCollapse from '@core/components/app-collapse/AppCollapse.vue'
-// import AppCollapseItem from '@core/components/app-collapse/AppCollapseItem.vue'
 
 export default {
   components: {
     BButton,
     BCard,
-    // AppCollapse,
-    // AppCollapseItem,
-    // BListGroup,
-    // BListGroupItem,
     ReportingCostVue,
     ProgramProgressBar,
     ProjectProgressBar,
@@ -760,61 +752,9 @@ export default {
       subChildCollapse: 0,
       navType: 'portfolio',
       windowWidth: window.innerWidth,
-      itemsForReporting: [],
-      // fieldForDemand: ['BUDGET demand', 'BUDGET engaged ', 'Real Estimated'],
+      itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
-      dta1: [
-        [193, 125, 184, 151, 248, 183, 224, 270, 207],
-        [110, 179, 125, 238, 229, 193, 232, 210, 250],
-        [184, 198, 188, 206, 210, 207, 219, 283, 249],
-        [181, 164, 137, 224, 188, 172, 242, 272, 208]
-      ],
-      // paddingV0: [
-      //   [107, 116, 83],
-      //   [136, 50, 114],
-      //   [75, 96, 106],
-      //   [120, 121, 63]
-      // ],
-      paddingV11: [
-        [78, 89, 80],
-        [53, 97, 88],
-        [51, 99, 77]
-      ],
-      dta0: [
-        [172, 156, 138, 216, 218, 163, 233, 261, 279],
-        [176, 145, 131, 157, 197, 164, 244, 264, 287],
-        [152, 121, 108, 172, 224, 231, 298, 257, 212],
-        [164, 178, 190, 164, 211, 195, 290, 204, 240]
-      ],
-      paddingV0: [
-        [143, 50, 129],
-        [62, 52, 95],
-        [139, 135, 53],
-        [78, 65, 87]
-      ],
-      paddingV10: [
-        [114, 59, 130],
-        [90, 57, 141],
-        [130, 58, 129]
-      ],
-      dta: [
-        [193, 125, 184, 151, 248, 183, 224, 270, 207],
-        [110, 179, 125, 238, 229, 193, 232, 210, 250],
-        [184, 198, 188, 206, 210, 207, 219, 283, 249],
-        [181, 164, 137, 224, 188, 172, 242, 272, 208]
-      ],
-      paddingV: [
-        [107, 116, 83],
-        [136, 50, 114],
-        [75, 96, 106],
-        [120, 121, 63]
-      ],
-      paddingV1: [
-        [78, 89, 80],
-        [53, 97, 88],
-        [51, 99, 77]
-      ],
     }
   },
   computed: {
@@ -824,67 +764,6 @@ export default {
     // itemsForReporting() {
     //   return this.$store.state.globalState.portfolioReportingData
     // },
-    da1() {
-      const a1 = this.dta[0][0] + this.dta[0][1] + this.dta[0][2] + this.paddingV[0][0]
-      const a2 = this.dta[1][0] + this.dta[1][1] + this.dta[1][2] + this.paddingV[1][0]
-      const a3 = this.dta[2][0] + this.dta[2][1] + this.dta[2][2] + this.paddingV[2][0]
-      const a4 = this.dta[3][0] + this.dta[3][1] + this.dta[3][2] + this.paddingV[3][0]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa1
-    },
-    da2() {
-      const a1 = this.dta[0][3] + this.dta[0][4] + this.dta[0][5] + this.paddingV[0][1]
-      const a2 = this.dta[1][3] + this.dta[1][4] + this.dta[1][5] + this.paddingV[1][1]
-      const a3 = this.dta[2][3] + this.dta[2][4] + this.dta[2][5] + this.paddingV[2][1]
-      const a4 = this.dta[3][3] + this.dta[3][4] + this.dta[3][5] + this.paddingV[3][1]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa2
-    },
-    da3() {
-      const a1 = this.dta[0][6] + this.dta[0][7] + this.dta[0][8] + this.paddingV[0][2]
-      const a2 = this.dta[1][6] + this.dta[1][7] + this.dta[1][8] + this.paddingV[1][2]
-      const a3 = this.dta[2][6] + this.dta[2][7] + this.dta[2][8] + this.paddingV[2][2]
-      const a4 = this.dta[3][6] + this.dta[3][7] + this.dta[3][8] + this.paddingV[3][2]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa3
-    },
-    paddingDa1() {
-      return this.smallest(this.paddingV[0][0], this.paddingV[1][0], this.paddingV[2][0], this.paddingV[3][0])
-    },
-    paddingDa2() {
-      return this.smallest(this.paddingV[0][1], this.paddingV[1][1], this.paddingV[2][1], this.paddingV[3][1])
-    },
-    paddingDa3() {
-      return this.smallest(this.paddingV[0][2], this.paddingV[1][2], this.paddingV[2][2], this.paddingV[3][2])
-    },
-    da10() {
-      const a1 = this.dta0[0][0] + this.dta0[0][1] + this.dta0[0][2] + this.paddingV0[0][0]
-      const a2 = this.dta0[1][0] + this.dta0[1][1] + this.dta0[1][2] + this.paddingV0[1][0]
-      const a3 = this.dta0[2][0] + this.dta0[2][1] + this.dta0[2][2] + this.paddingV0[2][0]
-      const a4 = this.dta0[3][0] + this.dta0[3][1] + this.dta0[3][2] + this.paddingV0[3][0]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa10
-    },
-    da20() {
-      const a1 = this.dta0[0][3] + this.dta0[0][4] + this.dta0[0][5] + this.paddingV0[0][1]
-      const a2 = this.dta0[1][3] + this.dta0[1][4] + this.dta0[1][5] + this.paddingV0[1][1]
-      const a3 = this.dta0[2][3] + this.dta0[2][4] + this.dta0[2][5] + this.paddingV0[2][1]
-      const a4 = this.dta0[3][3] + this.dta0[3][4] + this.dta0[3][5] + this.paddingV0[3][1]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa20
-    },
-    da30() {
-      const a1 = this.dta0[0][6] + this.dta0[0][7] + this.dta0[0][8] + this.paddingV0[0][2]
-      const a2 = this.dta0[1][6] + this.dta0[1][7] + this.dta0[1][8] + this.paddingV0[1][2]
-      const a3 = this.dta0[2][6] + this.dta0[2][7] + this.dta0[2][8] + this.paddingV0[2][2]
-      const a4 = this.dta0[3][6] + this.dta0[3][7] + this.dta0[3][8] + this.paddingV0[3][2]
-      return this.largest(a1, a2, a3, a4) + 14 * 6 - 24 - this.paddingDa30
-    },
-    paddingDa10() {
-      return this.smallest(this.paddingV0[0][0], this.paddingV0[1][0], this.paddingV0[2][0], this.paddingV0[3][0])
-    },
-    paddingDa20() {
-      return this.smallest(this.paddingV0[0][1], this.paddingV0[1][1], this.paddingV0[2][1], this.paddingV0[3][1])
-    },
-    paddingDa30() {
-      return this.smallest(this.paddingV0[0][2], this.paddingV0[1][2], this.paddingV0[2][2], this.paddingV0[3][2])
-    }
-    // return Math.random() * 100 + 200 + Math.random() * 100 + 200 + Math.random() * 100 + 200
   },
   watch: {
       data: {
@@ -898,15 +777,6 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   mounted() {
-    // const startDate = moment(moment()).subtract(15, 'days').startOf('day')
-    // const endDate = moment(moment()).add(1, 'M').startOf('day')
-    // const startDate = moment('2024-01-01')
-    // const endDate = moment('2024-12-31')
-    // this.reportingDates = [startDate.clone()]
-
-    // while (startDate.add(1, 'days').diff(endDate) < 0) {
-    //   this.reportingDates.push(startDate.clone())
-    // }
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize)
     })
@@ -922,14 +792,8 @@ export default {
       while (tempStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }
-      // this.reportingDates = [this.startGraphData.clone()]
-
-      // while (reportStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
-      //   this.reportingDates.push(this.startGraphData.clone())
-      // }
       this.navType = this.$store.state.globalState.selectedNavObj.type
       this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
-      // console.log("NAVTYPE:", this.navType)
     },
     onResize() {
       this.windowWidth = window.innerWidth
