@@ -115,7 +115,7 @@
                         v-if="item2 !== undefined && item2.children"
                         :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
-                        class="mr-1"
+                        class="ml-2 mr-1"
                       />
                       <p class="ml-1 text-uppercase text-overflow-ellipse">
                         {{ item3.title }}
@@ -219,7 +219,7 @@
             :key="index1"
           >
             <div
-              v-if="onOptimiseIndex() === 'optimize'"
+              v-if="onOptimizeIndex() === 'optimize'"
               class="w-100"
               style="height:77px"
             >
@@ -254,7 +254,7 @@
                 </div>
               </b-card>
             </div>
-            <template v-if="onOptimiseIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimizeIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -291,7 +291,7 @@
                     </div>
                   </b-card>
                 </div>
-                <template v-if="onOptimiseIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
+                <template v-if="onOptimizeIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
@@ -331,7 +331,7 @@
             </template>
 
             <div
-              v-if="onOptimiseIndex() === 'origin'"
+              v-if="onOptimizeIndex() === 'origin'"
               class="w-100"
               style="height:77px"
             >
@@ -366,7 +366,7 @@
                 </div>
               </b-card>
             </div>
-            <template v-if="onOptimiseIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimizeIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -403,7 +403,7 @@
                     </div>
                   </b-card>
                 </div>
-                <template v-if="onOptimiseIndex() === 'origin' && item2 !== undefined && item2.children && childCollapse === index2">
+                <template v-if="onOptimizeIndex() === 'origin' && item2 !== undefined && item2.children && childCollapse === index2">
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
@@ -450,11 +450,11 @@
             :key="index1"
           >
             <div
-              v-if="onOptimiseIndex() === 'optimize'"
+              v-if="onOptimizeIndex() === 'optimize'"
               class="w-100"
               style="height:77px"
             />
-            <template v-if="onOptimiseIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimizeIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -494,7 +494,7 @@
                     </div>
                   </b-card>
                 </div>
-                <template v-if="onOptimiseIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
+                <template v-if="onOptimizeIndex() === 'optimize' && item2 !== undefined && item2.children && childCollapse === index2">
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
@@ -531,7 +531,7 @@
                         </div>
                       </b-card>
                     </div>
-                    <template v-if="onOptimiseIndex() === 'optimize' && item3 !== undefined && item3.children && subChildCollapse === index3">
+                    <template v-if="onOptimizeIndex() === 'optimize' && item3 !== undefined && item3.children && subChildCollapse === index3">
                       <div
                         v-for="(item4, index4) in item3.children"
                         :key="index4"
@@ -572,11 +572,11 @@
               </div>
             </template>
             <div
-              v-if="onOptimiseIndex() === 'origin'"
+              v-if="onOptimizeIndex() === 'origin'"
               class="w-100"
               style="height:77px"
             />
-            <template v-if="onOptimiseIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
+            <template v-if="onOptimizeIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
               <div
                 v-for="(item2, index2) in item1.children"
                 :key="index2"
@@ -616,7 +616,7 @@
                     </div>
                   </b-card>
                 </div>
-                <template v-if="onOptimiseIndex() === 'origin' && item2 !== undefined && item2.children && childCollapse === index2">
+                <template v-if="onOptimizeIndex() === 'origin' && item2 !== undefined && item2.children && childCollapse === index2">
                   <div
                     v-for="(item3, index3) in item2.children"
                     :key="index3"
@@ -653,7 +653,7 @@
                         </div>
                       </b-card>
                     </div>
-                    <template v-if="onOptimiseIndex() === 'origin' && item3 !== undefined && item3.children && subChildCollapse === index3">
+                    <template v-if="onOptimizeIndex() === 'origin' && item3 !== undefined && item3.children && subChildCollapse === index3">
                       <div
                         v-for="(item4, index4) in item3.children"
                         :key="index4"
@@ -758,7 +758,7 @@ export default {
     }
   },
   computed: {
-    isOptimiseIndex() {
+    isOptimizeIndex() {
       return this.$store.state.globalState.optimizeStatus
     },
     // itemsForReporting() {
@@ -909,9 +909,9 @@ export default {
       }
       return result
     },
-    onOptimiseIndex() {
-      this.isOptimiseIndex = this.$store.state.globalState.optimizeStatus
-      return this.isOptimiseIndex
+    onOptimizeIndex() {
+      this.isOptimizeIndex = this.$store.state.globalState.optimizeStatus
+      return this.isOptimizeIndex
     },
     randomTen(val1, val2) {
       return parseInt(Math.random() * val1, 10) + val2
