@@ -36,7 +36,6 @@
             <div
               style="position:relative;top:-43px;height:0px;cursor:pointer;text-align:center;"
             >
-              <!-- @click="onTeamCollapse(index)" -->
               <feather-icon
                 style="margin-top:-3px"
                 :icon="'PlusIcon'"
@@ -47,20 +46,6 @@
             <div :style="`position:relative;top:-20px;height:4px;background-color:${colorsA[index]};border-radius:3px`" />
             <div style="text-align:center;">
               total
-              <!-- <template v-if="collapsedT.indexOf(index) > -1">
-                <div style="width:100%;text-align:center">
-                  total
-                </div>
-              </template>
-              <template v-else>
-                <div
-                  v-for="(item1, jndex) in team_fields"
-                  :key="jndex"
-                  style="width:25%;text-align:center"
-                >
-                  {{ item1 }}
-                </div>
-              </template> -->
             </div>
           </div>
         </div>
@@ -84,7 +69,7 @@
               @click="onCollapseCLick(index)"
             >
               <feather-icon
-                v-if="item.children"
+                v-if="item.children.length > 0"
                 :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -133,7 +118,14 @@
                 <div
                   class="part1 portf-bold pl-2"
                   :style="`min-width: 200px`"
+                  @click="onChildCollapseCLick(index1)"
                 >
+                    <feather-icon
+                      v-if="item1.children.length > 0"
+                      :icon="openedChild === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                      size="16"
+                      class="mr-1"
+                    />
                   {{ item1.title }}
                 </div>
                 <div
@@ -160,21 +152,108 @@
                     class="data-child mr-1"
                   >
                     <div style="text-align:center;">
-                      <!-- <template v-if="collapsedT.indexOf(tndex) > -1">
-                        <div style="width:100%;text-align:center">
-                          {{ teamD[index][index1].length > 0 ? teamD[index][index1][index][3] : null }}
-                        </div>
-                      </template>
-                      <template v-else>
-                        <div
-                          v-for="(item1, jndex) in team_fields"
-                          :key="jndex"
-                          style="width:25%;text-align:center"
-                        >
-                          {{ teamD[index][index1].length > 0 ? teamD[index][index1][tndex][jndex] : null }}
-                        </div>
-                      </template> -->
                       {{ item1[jtem] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="openedChild === index1">
+                <div
+                  v-for="(item2, index2) in item1.children"
+                  :key="index2"
+                >
+                  <div
+                    class="portf-row portf-table-row font-14 border-bottom-dm"
+                    :class="{'inner-sdw': index2 === 0}"
+                    :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
+                  >
+                    <div
+                      class="part1 portf-bold pl-2 ml-2"
+                      :style="`min-width: 200px`"
+                      @click="onSubCollapseCLick(index2)"
+                    >
+                      <feather-icon
+                        v-if="item2.children.length > 0"
+                        :icon="openedSub === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                        size="16"
+                        class="mr-1"
+                      />
+                      {{ item2.title }}
+                    </div>
+                    <div
+                      class="part2 mr-2"
+                      :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
+                    >
+                      <div
+                        v-for="(ft, fi) in c_fields"
+                        :key="fi"
+                        class="data-child mr-1"
+                        :style="`min-width: 150px`"
+                      >
+                        <span v-if="ft === 'priority'">{{ typeof(item2[ft]) === "string" ? item2[ft] : priorityOptions[item2[ft] - 1] }}</span>
+                        <span v-else-if="ft === 'natDeadline'">{{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}</span>
+                        <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item2[ft]) }}</span>
+                        <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item2[ft] }}</span>
+                        <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item2[ft] }}</span>
+                        <span v-else>{{ formatCurrency(item2[ft]) }}</span>
+                      </div>
+                      <div
+                        v-for="(jtem1, tndex1) in job_fields"
+                        :key="tndex1"
+                        :style="`min-width:180px`"
+                        class="data-child mr-1"
+                      >
+                        <div style="text-align:center;">
+                          {{ item2[jtem1] }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="openedSub === index2">
+                    <div
+                      v-for="(item3, index3) in item2.children"
+                      :key="index3"
+                    >
+                      <div
+                        class="portf-row portf-table-row font-14 border-bottom-dm"
+                        :class="{'inner-sdw': index3 === 0}"
+                        :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
+                      >
+                        <div
+                          class="part1 portf-bold pl-2 ml-3"
+                          :style="`min-width: 200px`"
+                        >
+                          {{ item3.title }}
+                        </div>
+                        <div
+                          class="part2 mr-2"
+                          :style="`min-width: ${150 * c_fields.length + 180 * job_fields.length}px`"
+                        >
+                          <div
+                            v-for="(ft, fi) in c_fields"
+                            :key="fi"
+                            class="data-child mr-1"
+                            :style="`min-width: 150px`"
+                          >
+                            <span v-if="ft === 'priority'">{{ typeof(item3[ft]) === "string" ? item3[ft] : priorityOptions[item3[ft] - 1] }}</span>
+                            <span v-else-if="ft === 'natDeadline'">{{ typeof(item3[ft]) === "string" ? item3[ft] : nDeadlineOptions[item3[ft] - 1] }}</span>
+                            <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item3[ft]) }}</span>
+                            <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item3[ft] }}</span>
+                            <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item3[ft] }}</span>
+                            <span v-else>{{ formatCurrency(item3[ft]) }}</span>
+                          </div>
+                          <div
+                            v-for="(jtem2, tndex2) in job_fields"
+                            :key="tndex2"
+                            :style="`min-width:180px`"
+                            class="data-child mr-1"
+                          >
+                            <div style="text-align:center;">
+                              {{ item3[jtem2] }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -214,7 +293,7 @@
           >
             <!-- <span :style="`text-align: center;color: ${capD[jtem] <= 100 ? 'rgb(55, 255, 0)' : capD[jtem] > 100 && capD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ capD[jtem] }}</span>
             /<span :style="`text-align: center;color: ${percentD[jtem] <= 100 ? 'rgb(55, 255, 0)' : percentD[jtem] > 100 && percentD[jtem] < 150 ? 'rgb(199, 255, 0)' : 'rgb(255, 116, 0)'}`">{{ percentD[jtem] }}%</span> -->
-            <span :style="`text-align: center;color: ${percentD[jtem] < 80 ? 'blue' : percentD[jtem] >= 80 && percentD[jtem] < 100 ? 'green' : percentD[jtem] >=100 && percentD[jtem] < 120 ? 'yellow' : percentD[jtem] >= 120 && percentD[jtem] < 140 ? 'red' : 'purple'}`">{{ capD[jtem] }}/{{ percentD[jtem] }}%</span>
+            <span :style="`text-align: center;color: ${percentD[jtem] < 80 ? 'rgb(0, 207, 232)' : percentD[jtem] >= 80 && percentD[jtem] < 100 ? 'green' : percentD[jtem] >=100 && percentD[jtem] < 120 ? 'yellow' : percentD[jtem] >= 120 && percentD[jtem] < 140 ? 'red' : 'purple'}`">{{ capD[jtem] }}/{{ percentD[jtem] }}%</span>
           </div>
         </div>
       </div>
@@ -250,6 +329,8 @@ export default {
     return {
       collapsedT: [],
       opened: 0,
+      openedChild: 0,
+      openedSub: 0,
       priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
       // capsData: [],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
@@ -605,6 +686,20 @@ export default {
         this.opened = -1
       } else {
         this.opened = index
+      }
+    },
+    onChildCollapseCLick(index) {
+      if (index === this.openedChild) {
+        this.openedChild = -1
+      } else {
+        this.openedChild = index
+      }
+    },
+    onSubCollapseCLick(index) {
+      if (index === this.openedSub) {
+        this.openedSub = -1
+      } else {
+        this.openedSub = index
       }
     },
     dateFormat(date) {

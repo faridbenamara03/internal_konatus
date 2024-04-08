@@ -37,7 +37,7 @@
                   @click="onChildCollapseClick(index2)"
                 >
                   <feather-icon
-                    v-if="item2 !== undefined && item2.children"
+                    v-if="item2 !== undefined && item2.children.length > 0"
                     :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1"
@@ -72,7 +72,7 @@
               @click="onCollapseClick(index1)"
             >
               <feather-icon
-                v-if="item1 !== undefined && item1.children"
+                v-if="item1 !== undefined && item1.children.length > 0"
                 :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -92,7 +92,7 @@
                   @click="onChildCollapseClick(index2)"
                 >
                   <feather-icon
-                    v-if="item2 !== undefined && item2.children"
+                    v-if="item2 !== undefined && item2.children.length > 0"
                     :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1"
@@ -112,10 +112,10 @@
                       @click="onSubChildCollapseClick(index3)"
                     >
                       <feather-icon
-                        v-if="item2 !== undefined && item2.children"
-                        :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                        v-if="item3 !== undefined && item3.children.length > 0"
+                        :icon="subChildCollapse === index3 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
-                        class="ml-2 mr-1"
+                        class="mr-1 ml-1"
                       />
                       <p class="ml-1 text-uppercase text-overflow-ellipse">
                         {{ item3.title }}
@@ -128,7 +128,7 @@
                         class="report-block-child"
                         style="height:77px"
                       >
-                        <p class="ml-2 text-uppercase text-overflow-ellipse">
+                        <p class="ml-3 text-uppercase text-overflow-ellipse">
                           {{ item4.title }}
                         </p>
                       </div>

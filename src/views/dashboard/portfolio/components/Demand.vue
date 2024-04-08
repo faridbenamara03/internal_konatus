@@ -61,12 +61,6 @@
               </div>
             </div>
             <div class="part3 d-flex justify-content-center" :style="`margin-left: 200px`">
-              <!-- <b-button
-                variant="flat-primary"
-                @click="toggleEditPortfolioDrawerOpen(item)"
-              >
-                <feather-icon icon="Edit2Icon" />
-              </b-button> -->
               <b-button
                 variant="flat-primary"
                 @click="handleDeleteItem(item, 'portfolio')"
@@ -97,7 +91,7 @@
                   @click="onCollapseProgramClick(index1)"
                 >
                   <feather-icon
-                    v-if="item1.children"
+                    v-if="item1.children.length > 0"
                     :icon="openedPg === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1"
@@ -294,15 +288,15 @@
                     :style="`background-color:${!selectedObject ? '#0000' : item2.id === selectedObject.id ? '#9100ff57' : '#0000'}`"
                   >
                     <div
-                      class="part1 portf-bold pl-2"
+                      class="part1 portf-bold pl-2 ml-1"
                       style="padding-top:7px"
                       @click="onCollapseProjectClick(index2)"
                     >
                       <feather-icon
-                        v-if="item2.children"
+                        v-if="item2.children.length > 0"
                         :icon="openedPj === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
-                        class="mr-1 ml-1"
+                        class="mr-1"
                       />
                       {{ item2.title }}
                     </div>
@@ -671,12 +665,6 @@
                           >
                             <feather-icon icon="Edit2Icon" />
                           </b-button>
-                          <!-- <b-button
-                            variant="flat-primary"
-                            @click="toggleCreateNewProgramDrawer(item2, 'subproject')"
-                          >
-                            <feather-icon icon="PlusIcon" />
-                          </b-button> -->
                         </div>
                       </div>
                     </div>
@@ -703,7 +691,7 @@
               @click="onCollapseClick(index)"
             >
               <feather-icon
-                v-if="item.children"
+                v-if="item.children.length > 0"
                 :icon="opened === index ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -758,15 +746,15 @@
                 :class="{ 'inner-sdw': index1 === 0 }"
               >
                 <div
-                  class="part1 portf-bold pl-2"
+                  class="part1 portf-bold pl-2 ml-1"
                   style="padding-top:7px"
                   @click="onCollapseProjectClick(index1)"
                 >
                   <feather-icon
-                    v-if="item1.children"
+                    v-if="item1.children.length > 0"
                     :icon="openedPj === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
-                    class="mr-1 ml-1"
+                    class="mr-1"
                   />
                   {{ item1.title }}
                 </div>
@@ -1135,12 +1123,6 @@
                       >
                         <feather-icon icon="Edit2Icon" />
                       </b-button>
-                      <!-- <b-button
-                        variant="flat-primary"
-                        @click="toggleCreateNewProgramDrawer(item2, 'subproject')"
-                      >
-                        <feather-icon icon="PlusIcon" />
-                      </b-button> -->
                     </div>
                   </div>
                 </div>
