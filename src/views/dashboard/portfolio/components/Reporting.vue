@@ -804,7 +804,7 @@ export default {
         if (item.phases) {
           result = []
           let phIndex = 0
-          let totalWidth = 0
+          // let totalWidth = 0
           while (phIndex < item.phases.length) {
             const phase = item.phases[phIndex]
             let startMoment = 0
@@ -824,12 +824,11 @@ export default {
             const duration = moment.duration(endMoment.diff(startMoment))
             if (duration.asDays() === 0) {
               result.push(24)
-              totalWidth += 24
+              // totalWidth += 24
             } else {
-              totalWidth += duration.asDays() * 24
+              // totalWidth += duration.asDays() * 24
               result.push(duration.asDays() * 24)
             }
-            if (totalWidth > 1800) return result
             phIndex += 1
           }
         }

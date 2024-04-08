@@ -540,7 +540,6 @@ export default {
     initializeData(data) {
       console.log("CInitData:", data)
       let tempFields = []
-      console.log("CInit:", this.data)
       if (this.data === null) return
       if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
         this.data.children.map(program => {
