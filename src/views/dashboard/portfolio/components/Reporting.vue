@@ -8,12 +8,19 @@
         <div
           class="report-block--head"
           style="margin-top:50px;"
+          @click="onParentCollapseClick()"
         >
+          <feather-icon
+            v-if="itemsForReporting.children.length > 0"
+            :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16"
+            class="mr-1"
+          />
           <p class="m-0 text-uppercase">
             {{ itemsForReporting === undefined || itemsFormReporting === null ? '' : itemsForReporting.title }}
           </p>
         </div>
-        <div v-if="itemsForReporting !== undefined && navType === 'portfolio'">
+        <div v-if="itemsForReporting !== undefined && navType === 'portfolio' && parentCollapse === true">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -23,6 +30,12 @@
               style="cursor:pointer"
               @click="onCollapseClick(index1)"
             >
+              <feather-icon
+                v-if="item1.children.length > 0"
+                :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                size="16"
+                class="mr-1"
+              />
               <p class="m-0 text-uppercase text-overflow-ellipse">
                 {{ item1.title }}
               </p>
@@ -37,7 +50,7 @@
                   @click="onChildCollapseClick(index2)"
                 >
                   <feather-icon
-                    v-if="item2 !== undefined && item2.children.length > 0"
+                    v-if="item2.children.length > 0"
                     :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1"
@@ -61,7 +74,7 @@
             </template>
           </div>
         </div>
-        <div v-else-if="itemsForReporting !== undefined && navType === 'company'">
+        <div v-else-if="itemsForReporting !== undefined && navType === 'company' && parentCollapse === true">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -72,7 +85,7 @@
               @click="onCollapseClick(index1)"
             >
               <feather-icon
-                v-if="item1 !== undefined && item1.children.length > 0"
+                v-if="item1.children.length > 0"
                 :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
@@ -92,7 +105,7 @@
                   @click="onChildCollapseClick(index2)"
                 >
                   <feather-icon
-                    v-if="item2 !== undefined && item2.children.length > 0"
+                    v-if="item2.children.length > 0"
                     :icon="childCollapse === index2 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                     size="16"
                     class="mr-1"
@@ -112,7 +125,7 @@
                       @click="onSubChildCollapseClick(index3)"
                     >
                       <feather-icon
-                        v-if="item3 !== undefined && item3.children.length > 0"
+                        v-if="item3.children.length > 0"
                         :icon="subChildCollapse === index3 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                         size="16"
                         class="mr-1 ml-1"
@@ -213,7 +226,7 @@
             </p>
           </div>
         </div>
-        <div v-if="itemsForReporting !== undefined && navType === 'portfolio'">
+        <div v-if="itemsForReporting !== undefined && navType === 'portfolio' && parentCollapse === true">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -444,7 +457,7 @@
 
           </div>
         </div>
-        <div v-else-if="itemsForReporting !== undefined && navType === 'company'">
+        <div v-else-if="itemsForReporting !== undefined && navType === 'company' && parentCollapse === true">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -750,6 +763,7 @@ export default {
       openedCollapse: 0,
       childCollapse: 1,
       subChildCollapse: 0,
+      parentCollapse: true,
       navType: 'portfolio',
       windowWidth: window.innerWidth,
       itemsForReporting: 0,
@@ -920,6 +934,9 @@ export default {
     },
     smallest(a, b, c, d) {
       return Math.min(a, b, c, d)
+    },
+    onParentCollapseClick() {
+      this.parentCollapse = !this.parentCollapse
     },
     onCollapseClick(index) {
       if (this.openedCollapse === index) this.openedCollapse = -1

@@ -785,7 +785,7 @@ export default {
     onClose() {
       this.popoverShow = false
     },
-    onClickAction(value) {
+    async onClickAction(value) {
       if (value === 'accept') {
         this.updateIndex = false
         this.$store.optimizeStatus = 'optimize'
@@ -799,6 +799,15 @@ export default {
         this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
         this.originIndex = !this.originIndex
       } else if (value === 'optimize') {
+        if (this.$store.state.globalState.tempReportingData.type !== this.$store.state.globalState.optimizedData.type) {
+          const navObj = this.$store.state.globalState.selectedNavObj
+          await this.$store.dispatch('globalState/get_optimized_data', {
+            data: {
+              portId: navObj.id,
+              type: navObj.type
+            }
+          })
+        }
         this.$store.optimizeStatus = 'optimize'
         this.originIndex = !this.originIndex
         this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'optimize')
