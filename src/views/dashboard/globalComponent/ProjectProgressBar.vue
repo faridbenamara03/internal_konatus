@@ -7,6 +7,7 @@
       <div
         v-if="width > 0"
         class="d-flex"
+        :style="`padding-left:${paddings[index] - 24 * index}px`"
       >
         <b-icon
           style="padding-bottom:2px"
@@ -102,6 +103,10 @@ export default {
     type: {
       type: Number,
       default: () => 0
+    },
+    paddings: {
+      type: Array,
+      default: () => []
     },
     widths: {
       type: Array,

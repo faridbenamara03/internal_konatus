@@ -281,24 +281,27 @@
                     class="d-flex flex-column justify-content-around"
                     style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                   >
-                    <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="0"
                         :widths="getValue(item2, 0, true)"
+                        :paddings="getStartPadding(item2, 0, true)"
                         :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
                       />
                     </div>
-                    <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="1"
                         :widths="getValue(item2, 1, true)"
+                        :paddings="getStartPadding(item2, 1, true)"
                         :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
                       />
                     </div>
-                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="2"
                         :widths="getValue(item2, 2, true)"
+                        :paddings="getStartPadding(item2, 2, true)"
                         :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
                       />
                     </div>
@@ -316,24 +319,27 @@
                       class="d-flex flex-column justify-content-around"
                       style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                     >
-                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="0"
                           :widths="getValue(item3, 0, true)"
+                          :paddings="getStartPadding(item3, 0, true)"
                           :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
                         />
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="1"
                           :widths="getValue(item3, 1, true)"
+                          :paddings="getStartPadding(item3, 1, true)"
                           :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
                         />
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="2"
                           :widths="getValue(item3, 2, true)"
+                          :paddings="getStartPadding(item3, 2, true)"
                           :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
                         />
                       </div>
@@ -393,24 +399,27 @@
                     class="d-flex flex-column justify-content-around"
                     style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                   >
-                    <div :style="`padding-left:${getStartPadding(item2, 0, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="0"
                         :widths="getValue(item2, 0, true)"
+                        :paddings="getStartPadding(item2, 0, true)"
                         :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
                       />
                     </div>
-                    <div :style="`padding-left:${getStartPadding(item2, 1, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="1"
                         :widths="getValue(item2, 1, true)"
+                        :paddings="getStartPadding(item2, 1, true)"
                         :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
                       />
                     </div>
-                    <div :style="`padding-left:${getStartPadding(item2, 2, true)}px`">
+                    <div>
                       <ProjectProgressBar
                         :type="2"
                         :widths="getValue(item2, 2, true)"
+                        :paddings="getStartPadding(item2, 2, true)"
                         :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
                       />
                     </div>
@@ -428,24 +437,27 @@
                       class="d-flex flex-column justify-content-around"
                       style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                     >
-                      <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="0"
                           :widths="getValue(item3, 0, true)"
+                          :paddings="getStartPadding(item3, 0, true)"
                           :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
                         />
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="1"
                           :widths="getValue(item3, 1, true)"
+                          :paddings="getStartPadding(item3, 1, true)"
                           :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
                         />
                       </div>
-                      <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                      <div>
                         <ProjectProgressBar
                           :type="2"
                           :widths="getValue(item3, 2, true)"
+                          :paddings="getStartPadding(item3, 2, true)"
                           :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
                         />
                       </div>
@@ -521,24 +533,27 @@
                         class="d-flex flex-column justify-content-around"
                         style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
                       >
-                        <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="0"
                             :widths="getValue(item3, 0, true)"
+                            :paddings="getStartPadding(item3, 0, true)"
                             :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
                           />
                         </div>
-                        <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="1"
                             :widths="getValue(item3, 1, true)"
+                            :paddings="getStartPadding(item3, 1, true)"
                             :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
                           />
                         </div>
-                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="2"
                             :widths="getValue(item3, 2, true)"
+                            :paddings="getStartPadding(item3, 2, true)"
                             :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
                           />
                         </div>
@@ -556,24 +571,27 @@
                           class="d-flex flex-column justify-content-around"
                           style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
                         >
-                          <div :style="`padding-left:${getStartPadding(item4, 0, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="0"
                               :widths="getValue(item4, 0, true)"
+                              :paddings="getStartPadding(item4, 0, true)"
                               :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
                             />
                           </div>
-                          <div :style="`padding-left:${getStartPadding(item4, 1, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="1"
                               :widths="getValue(item4, 1, true)"
+                              :paddings="getStartPadding(item4, 1, true)"
                               :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
                             />
                           </div>
-                          <div :style="`padding-left:${getStartPadding(item4, 2, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="2"
                               :widths="getValue(item4, 2, true)"
+                              :paddings="getStartPadding(item4, 2, true)"
                               :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
                             />
                           </div>
@@ -643,24 +661,27 @@
                         class="d-flex flex-column justify-content-around"
                         style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
                       >
-                        <div :style="`padding-left:${getStartPadding(item3, 0, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="0"
                             :widths="getValue(item3, 0, true)"
+                            :paddings="getStartPadding(item3, 0, true)"
                             :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
                           />
                         </div>
-                        <div :style="`padding-left:${getStartPadding(item3, 1, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="1"
                             :widths="getValue(item3, 1, true)"
+                            :paddings="getStartPadding(item3, 1, true)"
                             :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
                           />
                         </div>
-                        <div :style="`padding-left:${getStartPadding(item3, 2, true)}px`">
+                        <div>
                           <ProjectProgressBar
                             :type="2"
                             :widths="getValue(item3, 2, true)"
+                            :paddings="getStartPadding(item3, 2, true)"
                             :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
                           />
                         </div>
@@ -678,24 +699,27 @@
                           class="d-flex flex-column justify-content-around"
                           style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
                         >
-                          <div :style="`padding-left:${getStartPadding(item4, 0, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="0"
                               :widths="getValue(item4, 0, true)"
+                              :paddings="getStartPadding(item4, 0, true)"
                               :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
                             />
                           </div>
-                          <div :style="`padding-left:${getStartPadding(item4, 1, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="1"
                               :widths="getValue(item4, 1, true)"
+                              :paddings="getStartPadding(item4, 1, true)"
                               :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
                             />
                           </div>
-                          <div :style="`padding-left:${getStartPadding(item4, 2, true)}px`">
+                          <div>
                             <ProjectProgressBar
                               :type="2"
                               :widths="getValue(item4, 2, true)"
+                              :paddings="getStartPadding(item4, 2, true)"
                               :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
                             />
                           </div>
@@ -825,24 +849,23 @@ export default {
             let endMoment = 0
             if (type === 0) {
               startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
             } else if (type === 1) {
               startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_engage, 'YYYY-MM-DD').startOf('day')
             } else if (type === 2) {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')
               endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
+            if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            if (endMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) endMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             if (startMoment < this.startGraphData) startMoment = this.startGraphData
             if (endMoment > this.endGraphData) endMoment = this.endGraphData
             const duration = moment.duration(endMoment.diff(startMoment))
-            if (duration.asDays() === 0) {
-              result.push(24)
-              // totalWidth += 24
-            } else {
-              // totalWidth += duration.asDays() * 24
-              result.push(duration.asDays() * 24)
-            }
+            result.push(duration.asDays() * 24)
             phIndex += 1
           }
         }
@@ -865,14 +888,12 @@ export default {
           default:
             break
         }
+        if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+        if (endMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) endMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
         if (startMoment < this.startGraphData) startMoment = this.startGraphData
         if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
-        if (duration.asDays() === 0) {
-          result = 24
-        } else {
-          result = duration.asDays() * 24
-        }
+        result = (duration.asDays() + 1) * 24
       }
       return result
     },
@@ -885,21 +906,26 @@ export default {
           let startMoment
           while (phIndex < item.phases.length) {
             const phase = item.phases[phIndex]
+            let firstMoment
             if (type === 0) {
               startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')
             } else if (type === 1) {
               startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')
+              if (item.id === 9) console.log('start:', startMoment.toString(), 'first:', firstMoment.toString())
             } else if (type === 2) {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
-            pstarts.push(startMoment)
+            if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            if (firstMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
+            result = duration === 0 ? 0 : duration * 23 + 23
+            pstarts.push(result)
             phIndex += 1
           }
-          const pStartMoment = moment.min(pstarts)
-          const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-          const duration = pStartMoment > firstMoment ? (moment.duration(pStartMoment.diff(firstMoment)).asDays()) : 0
-          const pd = duration * 24
-          result = pd
+          return pstarts
         }
       } else {
         let startMoment
@@ -919,6 +945,7 @@ export default {
         const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
         const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
         result = duration * 24
+        return result
       }
       return result
     },
@@ -966,24 +993,6 @@ export default {
       this.$refs.portfolio_reporting_plan_update.hide()
     },
     onUpdate() {
-      this.dta = [
-        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
-        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
-        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
-        [this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 100), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 150), this.randomTen(100, 200), this.randomTen(100, 200), this.randomTen(100, 200)],
-      ]
-      this.paddingV = [
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-      ]
-      this.paddingV1 = [
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-        [this.randomTen(100, 50), this.randomTen(100, 50), this.randomTen(100, 50)],
-      ]
-
       this.$emit('update-clicked')
       // this.$refs.portfolio_reporting_plan_update.hide()
     }
