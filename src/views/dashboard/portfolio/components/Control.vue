@@ -350,7 +350,6 @@ export default {
   },
   computed: {
     c_data() {
-      // console.log("CCC:", this.data)
       if (this.data === null) return []
       if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
         const ndt = this.data.children.map(program => {
@@ -363,6 +362,7 @@ export default {
           let programSalesEx = 0
           let programScoring = 0
           let programRoi = 0
+          let programValue = 0
           const programJobs = []
           if (program.children && program.children.length > 0) {
             program.children.map(project => {
@@ -377,6 +377,7 @@ export default {
                   programSalesEx += parseInt(subproject.salesEx ? subproject.salesEx : 0, 10)
                   programScoring += parseInt(subproject.scoring ? subproject.scoring : 0, 10)
                   programRoi += parseInt(subproject.roi ? subproject.roi : 0, 10)
+                  programValue += parseInt(subproject.value ? subproject.value : 0, 10)
                   this.job_fields.map(jobField => {
                     if (subproject[jobField] === null || subproject[jobField] === undefined) return null
                     if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(subproject[jobField], 10)
@@ -401,6 +402,7 @@ export default {
               programSalesEx += parseInt(project.salesEx ? project.salesEx : 0, 10)
               programScoring += parseInt(project.scoring ? project.scoring : 0, 10)
               programRoi += parseInt(project.roi ? project.roi : 0, 10)
+              programValue += parseInt(project.value ? project.value : 0, 10)
               return null
             })
           }
@@ -420,6 +422,7 @@ export default {
           nd.salesEx = programSalesEx
           nd.scoring = programScoring
           nd.roi = programRoi
+          nd.value = programValue
           this.job_fields.map(jobField => {
             nd[jobField] = programJobs[jobField]
             return null
@@ -438,7 +441,7 @@ export default {
         let salesEx = 0
         let scoring = 0
         let roi = 0
-        // let priority = ''
+        let value = 0
         if (t.children && t.children.length > 0) {
           const updatedT1s = []
           t.children.map(t1 => {
@@ -452,6 +455,7 @@ export default {
             let t1salesEx = 0
             let t1scoring = 0
             let t1roi = 0
+            let t1value = 0
             const t1Jobs = []
             // let t1priority = ''
             if (t1.children && t1.children.length > 0) {
@@ -468,6 +472,7 @@ export default {
                   let t2salesEx = 0
                   let t2scoring = 0
                   let t2roi = 0
+                  let t2value = 0
                   // let t2priority = ''
                   t2.children.map(t3 => {
                     engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
@@ -479,6 +484,7 @@ export default {
                     salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
                     scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
                     roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    value += parseInt(t3.value ? t3.value : 0, 10)
                     t2Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     t2Demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     t2RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
@@ -488,6 +494,7 @@ export default {
                     t2salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
                     t2scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
                     t2roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    t2value += parseInt(t3.value ? t3.value : 0, 10)
                     t1Engaged += parseInt(t3.engaged ? t3.engaged : 0, 10)
                     t1Demand += parseInt(t3.demand ? t3.demand : 0, 10)
                     t1RealEstimated += parseInt(t3.realEstimated ? t3.realEstimated : 0, 10)
@@ -497,6 +504,7 @@ export default {
                     t1salesEx += parseInt(t3.salesEx ? t3.salesEx : 0, 10)
                     t1scoring += parseInt(t3.scoring ? t3.scoring : 0, 10)
                     t1roi += parseInt(t3.roi ? t3.roi : 0, 10)
+                    t1value += parseInt(t3.value ? t3.value : 0, 10)
                     this.job_fields.map(jobField => {
                       if (t3[jobField] === null || t3[jobField] === undefined) return null
                       if (t1Jobs[jobField] === null || t1Jobs[jobField] === undefined) t1Jobs[jobField] = parseInt(t3[jobField], 10)
@@ -514,6 +522,7 @@ export default {
                   updatedT2.salesEx = t2salesEx
                   updatedT2.scoring = t2scoring
                   updatedT2.roi = t2roi
+                  updatedT2.value = t2value
                 }
                 this.job_fields.map(jobField => {
                   if (t2[jobField] === null || t2[jobField] === undefined) return null
@@ -530,6 +539,7 @@ export default {
                 salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
                 scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
                 roi += parseInt(t2.roi ? t2.roi : 0, 10)
+                value += parseInt(t2.value ? t2.value : 0, 10)
                 t1Engaged += parseInt(t2.engaged ? t2.engaged : 0, 10)
                 t1Demand += parseInt(t2.demand ? t2.demand : 0, 10)
                 t1RealEstimated += parseInt(t2.realEstimated ? t2.realEstimated : 0, 10)
@@ -539,6 +549,7 @@ export default {
                 t1salesEx += parseInt(t2.salesEx ? t2.salesEx : 0, 10)
                 t1scoring += parseInt(t2.scoring ? t2.scoring : 0, 10)
                 t1roi += parseInt(t2.roi ? t2.roi : 0, 10)
+                t1value += parseInt(t2.value ? t2.value : 0, 10)
                 updatedT2s.push(updatedT2)
                 return null
               })
@@ -557,21 +568,12 @@ export default {
               updatedT1.salesEx = t1salesEx
               updatedT1.scoring = t1scoring
               updatedT1.roi = t1roi
+              updatedT1.value = t1value
               this.job_fields.map(jobField => {
                 updatedT1[jobField] = t1Jobs[jobField]
                 return null
               })
-              // updatedT1.children = updatedT2s
             }
-            // engaged += parseInt(t1.engaged ? t1.engaged : 0, 10)
-            // demand += parseInt(t1.demand ? t1.demand : 0, 10)
-            // realEstimated += parseInt(t1.realEstimated ? t1.realEstimated : 0, 10)
-            // authorized += parseInt(t1.authorized ? t1.authorized : 0, 10)
-            // spent += parseInt(t1.spent ? t1.spent : 0, 10)
-            // customerEx += parseInt(t1.customerEx ? t1.customerEx : 0, 10)
-            // salesEx += parseInt(t1.salesEx ? t1.salesEx : 0, 10)
-            // scoring += parseInt(t1.scoring ? t1.scoring : 0, 10)
-            // roi += parseInt(t1.roi ? t1.roi : 0, 10)
             updatedT1s.push(updatedT1)
             return null
           })
@@ -585,6 +587,7 @@ export default {
           nd.salesEx = salesEx
           nd.scoring = scoring
           nd.roi = roi
+          nd.value = value
           this.job_fields.map(jobField => {
             let job = 0
             updatedT1s.map(updatedT1 => {

@@ -799,7 +799,7 @@ export default {
         this.$store.commit('globalState/UPDATE_OPTIMIZE_STATUES', 'origin')
         this.originIndex = !this.originIndex
       } else if (value === 'optimize') {
-        if (this.$store.state.globalState.tempReportingData.type !== this.$store.state.globalState.optimizedData.type) {
+        if (this.$store.state.globalState.tempReportingData.type !== this.$store.state.globalState.optimizedData.type || this.$store.state.globalState.tempReportingData.id !== this.$store.state.globalState.optimizedData.id) {
           const navObj = this.$store.state.globalState.selectedNavObj
           await this.$store.dispatch('globalState/get_optimized_data', {
             data: {
