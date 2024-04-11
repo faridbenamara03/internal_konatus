@@ -243,26 +243,26 @@
               >
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
                   <ProgramProgressBar
-                    v-if="getValue(item1, 0, false) > 0"
                     :type="0"
                     :width1="getValue(item1, 0, false)"
-                    :width2="397 - getStartPadding(item1, 0, false)"
+                    :isStartMark="isStartMark(item1, 0, false)"
+                    :isEndMark="isEndMark(item1, 0, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
                   <ProgramProgressBar
-                    v-if="getValue(item1, 1, false) > 0"
                     :type="1"
                     :width1="getValue(item1, 1, false)"
-                    :width2="397 - getStartPadding(item1, 1, false)"
+                    :isStartMark="isStartMark(item1, 1, false)"
+                    :isEndMark="isEndMark(item1, 1, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
                   <ProgramProgressBar
-                    v-if="getValue(item1, 2, false) > 0"
                     :type="2"
                     :width1="getValue(item1, 2, false)"
-                    :width2="397 - getStartPadding(item1, 2, false)"
+                    :isStartMark="isStartMark(item1, 2, false)"
+                    :isEndMark="isEndMark(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -286,7 +286,8 @@
                         :type="0"
                         :widths="getValue(item2, 0, true)"
                         :paddings="getStartPadding(item2, 0, true)"
-                        :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
+                        :isStartMark="isStartMark(item2, 0, true)"
+                        :isEndMark="isEndMark(item2, 0, true)"
                       />
                     </div>
                     <div>
@@ -294,7 +295,8 @@
                         :type="1"
                         :widths="getValue(item2, 1, true)"
                         :paddings="getStartPadding(item2, 1, true)"
-                        :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
+                        :isStartMark="isStartMark(item2, 1, true)"
+                        :isEndMark="isEndMark(item2, 1, true)"
                       />
                     </div>
                     <div>
@@ -302,7 +304,8 @@
                         :type="2"
                         :widths="getValue(item2, 2, true)"
                         :paddings="getStartPadding(item2, 2, true)"
-                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                        :isStartMark="isStartMark(item2, 2, true)"
+                        :isEndMark="isEndMark(item2, 2, true)"
                       />
                     </div>
                   </b-card>
@@ -324,7 +327,8 @@
                           :type="0"
                           :widths="getValue(item3, 0, true)"
                           :paddings="getStartPadding(item3, 0, true)"
-                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                          :isStartMark="isStartMark(item3, 0, true)"
+                          :isEndMark="isEndMark(item3, 0, true)"
                         />
                       </div>
                       <div>
@@ -332,7 +336,8 @@
                           :type="1"
                           :widths="getValue(item3, 1, true)"
                           :paddings="getStartPadding(item3, 1, true)"
-                          :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                          :isStartMark="isStartMark(item3, 1, true)"
+                          :isEndMark="isEndMark(item3, 1, true)"
                         />
                       </div>
                       <div>
@@ -340,7 +345,8 @@
                           :type="2"
                           :widths="getValue(item3, 2, true)"
                           :paddings="getStartPadding(item3, 2, true)"
-                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                          :isStartMark="isStartMark(item3, 2, true)"
+                          :isEndMark="isEndMark(item3, 2, true)"
                         />
                       </div>
                     </b-card>
@@ -361,10 +367,10 @@
               >
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
                   <ProgramProgressBar
-                    v-if="getValue(item1, 0, false) > 0"
                     :type="0"
                     :width1="getValue(item1, 0, false)"
-                    :width2="397 - getStartPadding(item1, 0, false)"
+                    :isStartMark="isStartMark(item1, 0, false)"
+                    :isEndMark="isEndMark(item1, 0, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
@@ -372,7 +378,8 @@
                     v-if="getValue(item1, 1, false) > 0"
                     :type="1"
                     :width1="getValue(item1, 1, false)"
-                    :width2="397 - getStartPadding(item1, 1, false)"
+                    :isStartMark="isStartMark(item1, 1, false)"
+                    :isEndMark="isEndMark(item1, 1, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
@@ -380,7 +387,8 @@
                     v-if="getValue(item1, 2, false) > 0"
                     :type="2"
                     :width1="getValue(item1, 2, false)"
-                    :width2="397 - getStartPadding(item1, 2, false)"
+                    :isStartMark="isStartMark(item1, 2, false)"
+                    :isEndMark="isEndMark(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -404,7 +412,8 @@
                         :type="0"
                         :widths="getValue(item2, 0, true)"
                         :paddings="getStartPadding(item2, 0, true)"
-                        :width4="getStartPadding(item2, 0, true) > 396 ? 396 : getStartPadding(item2, 0, true)"
+                        :isStartMark="isStartMark(item2, 0, true)"
+                        :isEndMark="isEndMark(item2, 0, true)"
                       />
                     </div>
                     <div>
@@ -412,7 +421,8 @@
                         :type="1"
                         :widths="getValue(item2, 1, true)"
                         :paddings="getStartPadding(item2, 1, true)"
-                        :width4="getStartPadding(item2, 1, true) > 396 ? 396 : getStartPadding(item2, 1, true)"
+                        :isStartMark="isStartMark(item2, 1, true)"
+                        :isEndMark="isEndMark(item2, 1, true)"
                       />
                     </div>
                     <div>
@@ -420,7 +430,8 @@
                         :type="2"
                         :widths="getValue(item2, 2, true)"
                         :paddings="getStartPadding(item2, 2, true)"
-                        :width4="getStartPadding(item2, 2, true) > 396 ? 396 : getStartPadding(item2, 2, true)"
+                        :isStartMark="isStartMark(item2, 2, true)"
+                        :isEndMark="isEndMark(item2, 2, true)"
                       />
                     </div>
                   </b-card>
@@ -442,7 +453,8 @@
                           :type="0"
                           :widths="getValue(item3, 0, true)"
                           :paddings="getStartPadding(item3, 0, true)"
-                          :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                          :isStartMark="isStartMark(item3, 0, true)"
+                          :isEndMark="isEndMark(item3, 0, true)"
                         />
                       </div>
                       <div>
@@ -450,7 +462,8 @@
                           :type="1"
                           :widths="getValue(item3, 1, true)"
                           :paddings="getStartPadding(item3, 1, true)"
-                          :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                          :isStartMark="isStartMark(item3, 1, true)"
+                          :isEndMark="isEndMark(item3, 1, true)"
                         />
                       </div>
                       <div>
@@ -458,7 +471,8 @@
                           :type="2"
                           :widths="getValue(item3, 2, true)"
                           :paddings="getStartPadding(item3, 2, true)"
-                          :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                          :isStartMark="isStartMark(item3, 2, true)"
+                          :isEndMark="isEndMark(item3, 2, true)"
                         />
                       </div>
                     </b-card>
@@ -495,26 +509,26 @@
                   >
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 0, false) > 0"
                         :type="0"
                         :width1="getValue(item2, 0, false)"
-                        :width2="397 - getStartPadding(item2, 0, false)"
+                        :isStartMark="isStartMark(item2, 0, false)"
+                        :isEndMark="isEndMark(item2, 0, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 1, false) > 0"
                         :type="1"
                         :width1="getValue(item2, 1, false)"
-                        :width2="397 - getStartPadding(item2, 1, false)"
+                        :isStartMark="isStartMark(item2, 1, false)"
+                        :isEndMark="isEndMark(item2, 1, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 2, false) > 0"
                         :type="2"
                         :width1="getValue(item2, 2, false)"
-                        :width2="397 - getStartPadding(item2, 2, false)"
+                        :isStartMark="isStartMark(item2, 2, false)"
+                        :isEndMark="isEndMark(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -538,7 +552,8 @@
                             :type="0"
                             :widths="getValue(item3, 0, true)"
                             :paddings="getStartPadding(item3, 0, true)"
-                            :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                            :isStartMark="isStartMark(item3, 0, true)"
+                            :isEndMark="isEndMark(item3, 0, true)"
                           />
                         </div>
                         <div>
@@ -546,7 +561,8 @@
                             :type="1"
                             :widths="getValue(item3, 1, true)"
                             :paddings="getStartPadding(item3, 1, true)"
-                            :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                            :isStartMark="isStartMark(item3, 1, true)"
+                            :isEndMark="isEndMark(item3, 1, true)"
                           />
                         </div>
                         <div>
@@ -554,7 +570,8 @@
                             :type="2"
                             :widths="getValue(item3, 2, true)"
                             :paddings="getStartPadding(item3, 2, true)"
-                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                            :isStartMark="isStartMark(item3, 2, true)"
+                            :isEndMark="isEndMark(item3, 2, true)"
                           />
                         </div>
                       </b-card>
@@ -576,7 +593,8 @@
                               :type="0"
                               :widths="getValue(item4, 0, true)"
                               :paddings="getStartPadding(item4, 0, true)"
-                              :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
+                              :isStartMark="isStartMark(item4, 0, true)"
+                              :isEndMark="isEndMark(item4, 0, true)"
                             />
                           </div>
                           <div>
@@ -584,7 +602,8 @@
                               :type="1"
                               :widths="getValue(item4, 1, true)"
                               :paddings="getStartPadding(item4, 1, true)"
-                              :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
+                              :isStartMark="isStartMark(item4, 1, true)"
+                              :isEndMark="isEndMark(item4, 1, true)"
                             />
                           </div>
                           <div>
@@ -592,7 +611,8 @@
                               :type="2"
                               :widths="getValue(item4, 2, true)"
                               :paddings="getStartPadding(item4, 2, true)"
-                              :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
+                              :isStartMark="isStartMark(item4, 2, true)"
+                              :isEndMark="isEndMark(item4, 2, true)"
                             />
                           </div>
                         </b-card>
@@ -623,26 +643,26 @@
                   >
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 0, false) > 0"
                         :type="0"
                         :width1="getValue(item2, 0, false)"
-                        :width2="397 - getStartPadding(item2, 0, false)"
+                        :isStartMark="isStartMark(item2, 0, false)"
+                        :isEndMark="isEndMark(item2, 0, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 1, false) > 0"
                         :type="1"
                         :width1="getValue(item2, 1, false)"
-                        :width2="397 - getStartPadding(item2, 1, false)"
+                        :isStartMark="isStartMark(item2, 1, false)"
+                        :isEndMark="isEndMark(item2, 1, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
-                        v-if="getValue(item2, 2, false) > 0"
                         :type="2"
                         :width1="getValue(item2, 2, false)"
-                        :width2="397 - getStartPadding(item2, 2, false)"
+                        :isStartMark="isStartMark(item2, 2, false)"
+                        :isEndMark="isEndMark(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -666,7 +686,8 @@
                             :type="0"
                             :widths="getValue(item3, 0, true)"
                             :paddings="getStartPadding(item3, 0, true)"
-                            :width4="getStartPadding(item3, 0, true) > 396 ? 396 : getStartPadding(item3, 0, true)"
+                            :isStartMark="isStartMark(item3, 0, true)"
+                            :isEndMark="isEndMark(item3, 0, true)"
                           />
                         </div>
                         <div>
@@ -674,7 +695,8 @@
                             :type="1"
                             :widths="getValue(item3, 1, true)"
                             :paddings="getStartPadding(item3, 1, true)"
-                            :width4="getStartPadding(item3, 1, true) > 396 ? 396 : getStartPadding(item3, 1, true)"
+                            :isStartMark="isStartMark(item3, 1, true)"
+                            :isEndMark="isEndMark(item3, 1, true)"
                           />
                         </div>
                         <div>
@@ -682,7 +704,8 @@
                             :type="2"
                             :widths="getValue(item3, 2, true)"
                             :paddings="getStartPadding(item3, 2, true)"
-                            :width4="getStartPadding(item3, 2, true) > 396 ? 396 : getStartPadding(item3, 2, true)"
+                            :isStartMark="isStartMark(item3, 2, true)"
+                            :isEndMark="isEndMark(item3, 2, true)"
                           />
                         </div>
                       </b-card>
@@ -704,7 +727,8 @@
                               :type="0"
                               :widths="getValue(item4, 0, true)"
                               :paddings="getStartPadding(item4, 0, true)"
-                              :width4="getStartPadding(item4, 0, true) > 396 ? 396 : getStartPadding(item4, 0, true)"
+                              :isStartMark="isStartMark(item4, 0, true)"
+                              :isEndMark="isEndMark(item4, 0, true)"
                             />
                           </div>
                           <div>
@@ -712,7 +736,8 @@
                               :type="1"
                               :widths="getValue(item4, 1, true)"
                               :paddings="getStartPadding(item4, 1, true)"
-                              :width4="getStartPadding(item4, 1, true) > 396 ? 396 : getStartPadding(item4, 1, true)"
+                              :isStartMark="isStartMark(item4, 1, true)"
+                              :isEndMark="isEndMark(item4, 1, true)"
                             />
                           </div>
                           <div>
@@ -720,8 +745,10 @@
                               :type="2"
                               :widths="getValue(item4, 2, true)"
                               :paddings="getStartPadding(item4, 2, true)"
-                              :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)"
+                              :isStartMark="isStartMark(item4, 2, true)"
+                              :isEndMark="isEndMark(item4, 2, true)"
                             />
+                            <!-- :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)" -->
                           </div>
                         </b-card>
                       </div>
@@ -836,6 +863,98 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth
     },
+    isStartMark(item, type, isChild) {
+      let startMoment
+      if (isChild) {
+        const results = []
+        if (item.phases) {
+          let phIndex = 0
+          while (phIndex < item.phases.length) {
+            const phase = item.phases[phIndex]
+            switch (type) {
+              case 0:
+                startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+                break
+              case 1:
+                startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
+                break
+              case 2:
+                startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+                break
+              default:
+                break
+            }
+            const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD') === this.startGraphData ? moment(this.reportingDates[0], 'YYYY-MM-DD') : this.startGraphData
+            if (startMoment >= firstMoment) results.push(true)
+            results.push(false)
+            phIndex += 1
+          }
+        }
+        return results
+      }
+      switch (type) {
+        case 0:
+          startMoment = moment(item.start_date_demand, 'YYYY-MM-DD').startOf('day')
+          break
+        case 1:
+          startMoment = moment(item.start_date_engage, 'YYYY-MM-DD').startOf('day')
+          break
+        case 2:
+          startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+          break
+        default:
+          break
+      }
+      const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD') === this.startGraphData ? moment(this.reportingDates[0], 'YYYY-MM-DD') : this.startGraphData
+      if (startMoment >= firstMoment) return true
+      return false
+    },
+    isEndMark(item, type, isChild) {
+      let endMoment
+      if (isChild) {
+        const results = []
+        if (item.phases) {
+          let phIndex = 0
+          while (phIndex < item.phases.length) {
+            const phase = item.phases[phIndex]
+            switch (type) {
+              case 0:
+                endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
+                break
+              case 1:
+                endMoment = moment(phase.end_date_engage, 'YYYY-MM-DD').startOf('day')
+                break
+              case 2:
+                endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+                break
+              default:
+                break
+            }
+            const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') : this.endGraphData
+            if (endMoment >= lastMoment) results.push(false)
+            results.push(true)
+            phIndex += 1
+          }
+        }
+        return results
+      }
+      switch (type) {
+        case 0:
+          endMoment = moment(item.end_date_demand, 'YYYY-MM-DD').startOf('day')
+          break
+        case 1:
+          endMoment = moment(item.end_date_engage, 'YYYY-MM-DD').startOf('day')
+          break
+        case 2:
+          endMoment = moment(item.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+          break
+        default:
+          break
+      }
+      const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') : this.endGraphData
+      if (endMoment >= lastMoment) return false
+      return true
+    },
     getValue(item, type, isChild) {
       let result = 0
       if (isChild) {
@@ -921,7 +1040,7 @@ export default {
             if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             if (firstMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
-            result = duration === 0 ? 0 : duration * 23 + 23
+            result = duration === 0 ? 0 : duration * 24
             pstarts.push(result)
             phIndex += 1
           }

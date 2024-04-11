@@ -1,11 +1,17 @@
 <template>
   <div class="d-flex position-relative">
-    <div :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type]}`" />
+    <div
+      v-if="isStartMark === true"
+      :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type]}`"
+    />
     <div
       v-if="width1 > 0"
       :style="`width:${width1}px;height:12px;background:${colorArr[type]};`"
     />
-    <div :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`" />
+    <div
+      v-if="isEndMark === true"
+      :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`"
+    />
     <!-- <div
       v-if="width2 > 0"
       :style="`width:${width2 < 12 ? width2 : 12}px;height:15px;border-top-left-radius:10px;background:#0008;position:absolute;left:0px`"
@@ -28,10 +34,18 @@ export default {
       type: Number,
       default: () => 0
     },
-    width2: {
-      type: Number,
-      default: () => 0
+    isStartMark: {
+      type: Boolean,
+      default: () => false
+    },
+    isEndMark: {
+      type: Boolean,
+      default: () => false
     }
+    // width2: {
+    //   type: Number,
+    //   default: () => 0
+    // }
   },
   data() {
     return {

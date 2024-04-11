@@ -10,6 +10,7 @@
         :style="`padding-left:${paddings[index] - 24 * index}px`"
       >
         <b-icon
+          v-if="isStartMark[index] === true"
           style="padding-bottom:2px"
           icon="diamond-fill"
           :variant="typeArr[type]"
@@ -22,6 +23,7 @@
           />
         </div>
         <b-icon
+          v-if="isEndMark[index] === true"
           icon="triangle-fill"
           class="rotate-icon"
           :variant="typeArr[type]"
@@ -112,22 +114,30 @@ export default {
       type: Array,
       default: () => []
     },
-    width1: {
-      type: Number,
-      default: () => 0,
+    isStartMark: {
+      type: Array,
+      default: () => []
     },
-    width2: {
-      type: Number,
-      default: () => 0,
-    },
-    width3: {
-      type: Number,
-      default: () => 0,
-    },
-    width4: {
-      type: Number,
-      default: () => 0,
-    },
+    isEndMark: {
+      type: Array,
+      default: () => []
+    }
+    // width1: {
+    //   type: Number,
+    //   default: () => 0,
+    // },
+    // width2: {
+    //   type: Number,
+    //   default: () => 0,
+    // },
+    // width3: {
+    //   type: Number,
+    //   default: () => 0,
+    // },
+    // width4: {
+    //   type: Number,
+    //   default: () => 0,
+    // },
   },
   data() {
     return {
