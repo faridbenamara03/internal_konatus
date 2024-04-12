@@ -239,7 +239,7 @@ export default {
       loadRange: 0,
       valueRange: 0,
       projectRange: 0,
-      winRateRange: 0,
+      winRateRange: 100,
       selectedPriority: null,
       isOngoingProject: false,
       isWinRate: false,
