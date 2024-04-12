@@ -10,7 +10,7 @@
         :style="`padding-left:${paddings[index] - 24 * index > 0 ? paddings[index] - 24 * index : 0}px`"
       >
         <b-icon
-          v-if="isStartMark[index] === true"
+          v-if="isstartmark[index] === true"
           style="padding-bottom:2px"
           icon="diamond-fill"
           :variant="typeArr[type]"
@@ -23,7 +23,7 @@
           />
         </div>
         <b-icon
-          v-if="isEndMark[index] === true"
+          v-if="isendmark[index] === true"
           icon="triangle-fill"
           class="rotate-icon"
           :variant="typeArr[type]"
@@ -114,11 +114,11 @@ export default {
       type: Array,
       default: () => []
     },
-    isStartMark: {
+    isstartmark: {
       type: Array,
       default: () => []
     },
-    isEndMark: {
+    isendmark: {
       type: Array,
       default: () => []
     }

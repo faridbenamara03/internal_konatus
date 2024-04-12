@@ -120,12 +120,12 @@
                   :style="`min-width: 200px`"
                   @click="onChildCollapseCLick(index1)"
                 >
-                    <feather-icon
-                      v-if="item1.children.length > 0"
-                      :icon="openedChild === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-                      size="16"
-                      class="mr-1"
-                    />
+                  <feather-icon
+                    v-if="item1.children.length > 0"
+                    :icon="openedChild === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                    size="16"
+                    class="mr-1"
+                  />
                   {{ item1.title }}
                 </div>
                 <div
@@ -283,7 +283,7 @@
             class="data-child mr-1 portf-uppercase"
             :style="`min-width:150px`"
           >
-            <span> </span>
+            <span />
           </div>
           <div
             v-for="(jtem, index1) in job_fields"

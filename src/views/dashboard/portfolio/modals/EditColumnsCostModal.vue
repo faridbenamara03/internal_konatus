@@ -117,6 +117,7 @@ export default {
         { text: 'Budget Real Estimated', value: 'realEstimated' },
         { text: 'Budget Authorized', value: 'authorized' },
         { text: 'Spent', value: 'spent' },
+        { text: 'Value', value: 'value' },
         { text: 'Earn Value UTD', value: 'earn value' },
         { text: '% lin (vs cost ) compare to engaged', value: 'cost compare' },
         { text: '% accomplishment UTD ', value: 'accomplishment' },
@@ -124,7 +125,6 @@ export default {
       ],
       keyOptions: [
         { text: 'Priority', value: 'priority' },
-        { text: 'Value', value: 'value' },
         { text: 'Current Phase', value: 'currentPhase' }
       ]
     }

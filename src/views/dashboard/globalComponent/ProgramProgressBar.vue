@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex position-relative">
     <div
-      v-if="isStartMark === true"
+      v-if="isstartmark === true"
       :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type]}`"
     />
     <div
@@ -9,7 +9,7 @@
       :style="`width:${width1}px;height:12px;background:${colorArr[type]};`"
     />
     <div
-      v-if="isEndMark === true"
+      v-if="isendmark === true"
       :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`"
     />
     <!-- <div
@@ -34,11 +34,11 @@ export default {
       type: Number,
       default: () => 0
     },
-    isStartMark: {
+    isstartmark: {
       type: Boolean,
       default: () => false
     },
-    isEndMark: {
+    isendmark: {
       type: Boolean,
       default: () => false
     }

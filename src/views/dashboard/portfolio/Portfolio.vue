@@ -10,6 +10,7 @@
         <div class="action-bar d-flex justify-content-between">
           <div class="portf-bold portf-uppercase color-white">
             <span v-if="tabIndex === 0">{{ tableTitle }}</span>
+            <span v-else-if="tabIndex === 1">{{ tableTitle }}</span>
             <div
               v-if="updateIndex === true && reportingState === 'plan' && tabIndex === 1"
               style="display: flex;align-items: center;color: orange;"
@@ -546,7 +547,7 @@ export default {
   data() {
     return {
       activeColumns: ['priority', 'demand', 'deadline'],
-      activeCostColumns: ['priority', 'value', 'demand'],
+      activeCostColumns: ['engaged', 'realEstimated', 'spent', 'priority', 'currentPhase'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
       costfields: [],

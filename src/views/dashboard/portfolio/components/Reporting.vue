@@ -245,24 +245,24 @@
                   <ProgramProgressBar
                     :type="0"
                     :width1="getValue(item1, 0, false)"
-                    :isStartMark="isStartMark(item1, 0, false)"
-                    :isEndMark="isEndMark(item1, 0, false)"
+                    :isstartmark="isStartMark(item1, 0, false)"
+                    :isendmark="isEndMark(item1, 0, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
                   <ProgramProgressBar
                     :type="1"
                     :width1="getValue(item1, 1, false)"
-                    :isStartMark="isStartMark(item1, 1, false)"
-                    :isEndMark="isEndMark(item1, 1, false)"
+                    :isstartmark="isStartMark(item1, 1, false)"
+                    :isendmark="isEndMark(item1, 1, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
                   <ProgramProgressBar
                     :type="2"
                     :width1="getValue(item1, 2, false)"
-                    :isStartMark="isStartMark(item1, 2, false)"
-                    :isEndMark="isEndMark(item1, 2, false)"
+                    :isstartmark="isStartMark(item1, 2, false)"
+                    :isendmark="isEndMark(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -286,8 +286,8 @@
                         :type="0"
                         :widths="getValue(item2, 0, true)"
                         :paddings="getStartPadding(item2, 0, true)"
-                        :isStartMark="isStartMark(item2, 0, true)"
-                        :isEndMark="isEndMark(item2, 0, true)"
+                        :isstartmark="isStartMark(item2, 0, true)"
+                        :isendmark="isEndMark(item2, 0, true)"
                       />
                     </div>
                     <div>
@@ -295,8 +295,8 @@
                         :type="1"
                         :widths="getValue(item2, 1, true)"
                         :paddings="getStartPadding(item2, 1, true)"
-                        :isStartMark="isStartMark(item2, 1, true)"
-                        :isEndMark="isEndMark(item2, 1, true)"
+                        :isstartmark="isStartMark(item2, 1, true)"
+                        :isendmark="isEndMark(item2, 1, true)"
                       />
                     </div>
                     <div>
@@ -304,8 +304,8 @@
                         :type="2"
                         :widths="getValue(item2, 2, true)"
                         :paddings="getStartPadding(item2, 2, true)"
-                        :isStartMark="isStartMark(item2, 2, true)"
-                        :isEndMark="isEndMark(item2, 2, true)"
+                        :isstartmark="isStartMark(item2, 2, true)"
+                        :isendmark="isEndMark(item2, 2, true)"
                       />
                     </div>
                   </b-card>
@@ -327,8 +327,8 @@
                           :type="0"
                           :widths="getValue(item3, 0, true)"
                           :paddings="getStartPadding(item3, 0, true)"
-                          :isStartMark="isStartMark(item3, 0, true)"
-                          :isEndMark="isEndMark(item3, 0, true)"
+                          :isstartmark="isStartMark(item3, 0, true)"
+                          :isendmark="isEndMark(item3, 0, true)"
                         />
                       </div>
                       <div>
@@ -336,8 +336,8 @@
                           :type="1"
                           :widths="getValue(item3, 1, true)"
                           :paddings="getStartPadding(item3, 1, true)"
-                          :isStartMark="isStartMark(item3, 1, true)"
-                          :isEndMark="isEndMark(item3, 1, true)"
+                          :isstartmark="isStartMark(item3, 1, true)"
+                          :isendmark="isEndMark(item3, 1, true)"
                         />
                       </div>
                       <div>
@@ -345,8 +345,8 @@
                           :type="2"
                           :widths="getValue(item3, 2, true)"
                           :paddings="getStartPadding(item3, 2, true)"
-                          :isStartMark="isStartMark(item3, 2, true)"
-                          :isEndMark="isEndMark(item3, 2, true)"
+                          :isstartmark="isStartMark(item3, 2, true)"
+                          :isendmark="isEndMark(item3, 2, true)"
                         />
                       </div>
                     </b-card>
@@ -369,8 +369,8 @@
                   <ProgramProgressBar
                     :type="0"
                     :width1="getValue(item1, 0, false)"
-                    :isStartMark="isStartMark(item1, 0, false)"
-                    :isEndMark="isEndMark(item1, 0, false)"
+                    :isstartmark="isStartMark(item1, 0, false)"
+                    :isendmark="isEndMark(item1, 0, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
@@ -378,8 +378,8 @@
                     v-if="getValue(item1, 1, false) > 0"
                     :type="1"
                     :width1="getValue(item1, 1, false)"
-                    :isStartMark="isStartMark(item1, 1, false)"
-                    :isEndMark="isEndMark(item1, 1, false)"
+                    :isstartmark="isStartMark(item1, 1, false)"
+                    :isendmark="isEndMark(item1, 1, false)"
                   />
                 </div>
                 <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
@@ -387,8 +387,8 @@
                     v-if="getValue(item1, 2, false) > 0"
                     :type="2"
                     :width1="getValue(item1, 2, false)"
-                    :isStartMark="isStartMark(item1, 2, false)"
-                    :isEndMark="isEndMark(item1, 2, false)"
+                    :isstartmark="isStartMark(item1, 2, false)"
+                    :isendmark="isEndMark(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -412,8 +412,8 @@
                         :type="0"
                         :widths="getValue(item2, 0, true)"
                         :paddings="getStartPadding(item2, 0, true)"
-                        :isStartMark="isStartMark(item2, 0, true)"
-                        :isEndMark="isEndMark(item2, 0, true)"
+                        :isstartmark="isStartMark(item2, 0, true)"
+                        :isendmark="isEndMark(item2, 0, true)"
                       />
                     </div>
                     <div>
@@ -421,8 +421,8 @@
                         :type="1"
                         :widths="getValue(item2, 1, true)"
                         :paddings="getStartPadding(item2, 1, true)"
-                        :isStartMark="isStartMark(item2, 1, true)"
-                        :isEndMark="isEndMark(item2, 1, true)"
+                        :isstartmark="isStartMark(item2, 1, true)"
+                        :isendmark="isEndMark(item2, 1, true)"
                       />
                     </div>
                     <div>
@@ -430,8 +430,8 @@
                         :type="2"
                         :widths="getValue(item2, 2, true)"
                         :paddings="getStartPadding(item2, 2, true)"
-                        :isStartMark="isStartMark(item2, 2, true)"
-                        :isEndMark="isEndMark(item2, 2, true)"
+                        :isstartmark="isStartMark(item2, 2, true)"
+                        :isendmark="isEndMark(item2, 2, true)"
                       />
                     </div>
                   </b-card>
@@ -453,8 +453,8 @@
                           :type="0"
                           :widths="getValue(item3, 0, true)"
                           :paddings="getStartPadding(item3, 0, true)"
-                          :isStartMark="isStartMark(item3, 0, true)"
-                          :isEndMark="isEndMark(item3, 0, true)"
+                          :isstartmark="isStartMark(item3, 0, true)"
+                          :isendmark="isEndMark(item3, 0, true)"
                         />
                       </div>
                       <div>
@@ -462,8 +462,8 @@
                           :type="1"
                           :widths="getValue(item3, 1, true)"
                           :paddings="getStartPadding(item3, 1, true)"
-                          :isStartMark="isStartMark(item3, 1, true)"
-                          :isEndMark="isEndMark(item3, 1, true)"
+                          :isstartmark="isStartMark(item3, 1, true)"
+                          :isendmark="isEndMark(item3, 1, true)"
                         />
                       </div>
                       <div>
@@ -471,8 +471,8 @@
                           :type="2"
                           :widths="getValue(item3, 2, true)"
                           :paddings="getStartPadding(item3, 2, true)"
-                          :isStartMark="isStartMark(item3, 2, true)"
-                          :isEndMark="isEndMark(item3, 2, true)"
+                          :isstartmark="isStartMark(item3, 2, true)"
+                          :isendmark="isEndMark(item3, 2, true)"
                         />
                       </div>
                     </b-card>
@@ -511,24 +511,24 @@
                       <ProgramProgressBar
                         :type="0"
                         :width1="getValue(item2, 0, false)"
-                        :isStartMark="isStartMark(item2, 0, false)"
-                        :isEndMark="isEndMark(item2, 0, false)"
+                        :isstartmark="isStartMark(item2, 0, false)"
+                        :isendmark="isEndMark(item2, 0, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
                       <ProgramProgressBar
                         :type="1"
                         :width1="getValue(item2, 1, false)"
-                        :isStartMark="isStartMark(item2, 1, false)"
-                        :isEndMark="isEndMark(item2, 1, false)"
+                        :isstartmark="isStartMark(item2, 1, false)"
+                        :isendmark="isEndMark(item2, 1, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
                         :type="2"
                         :width1="getValue(item2, 2, false)"
-                        :isStartMark="isStartMark(item2, 2, false)"
-                        :isEndMark="isEndMark(item2, 2, false)"
+                        :isstartmark="isStartMark(item2, 2, false)"
+                        :isendmark="isEndMark(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -552,8 +552,8 @@
                             :type="0"
                             :widths="getValue(item3, 0, true)"
                             :paddings="getStartPadding(item3, 0, true)"
-                            :isStartMark="isStartMark(item3, 0, true)"
-                            :isEndMark="isEndMark(item3, 0, true)"
+                            :isstartmark="isStartMark(item3, 0, true)"
+                            :isendmark="isEndMark(item3, 0, true)"
                           />
                         </div>
                         <div>
@@ -561,8 +561,8 @@
                             :type="1"
                             :widths="getValue(item3, 1, true)"
                             :paddings="getStartPadding(item3, 1, true)"
-                            :isStartMark="isStartMark(item3, 1, true)"
-                            :isEndMark="isEndMark(item3, 1, true)"
+                            :isstartmark="isStartMark(item3, 1, true)"
+                            :isendmark="isEndMark(item3, 1, true)"
                           />
                         </div>
                         <div>
@@ -570,8 +570,8 @@
                             :type="2"
                             :widths="getValue(item3, 2, true)"
                             :paddings="getStartPadding(item3, 2, true)"
-                            :isStartMark="isStartMark(item3, 2, true)"
-                            :isEndMark="isEndMark(item3, 2, true)"
+                            :isstartmark="isStartMark(item3, 2, true)"
+                            :isendmark="isEndMark(item3, 2, true)"
                           />
                         </div>
                       </b-card>
@@ -593,8 +593,8 @@
                               :type="0"
                               :widths="getValue(item4, 0, true)"
                               :paddings="getStartPadding(item4, 0, true)"
-                              :isStartMark="isStartMark(item4, 0, true)"
-                              :isEndMark="isEndMark(item4, 0, true)"
+                              :isstartmark="isStartMark(item4, 0, true)"
+                              :isendmark="isEndMark(item4, 0, true)"
                             />
                           </div>
                           <div>
@@ -602,8 +602,8 @@
                               :type="1"
                               :widths="getValue(item4, 1, true)"
                               :paddings="getStartPadding(item4, 1, true)"
-                              :isStartMark="isStartMark(item4, 1, true)"
-                              :isEndMark="isEndMark(item4, 1, true)"
+                              :isstartmark="isStartMark(item4, 1, true)"
+                              :isendmark="isEndMark(item4, 1, true)"
                             />
                           </div>
                           <div>
@@ -611,8 +611,8 @@
                               :type="2"
                               :widths="getValue(item4, 2, true)"
                               :paddings="getStartPadding(item4, 2, true)"
-                              :isStartMark="isStartMark(item4, 2, true)"
-                              :isEndMark="isEndMark(item4, 2, true)"
+                              :isstartmark="isStartMark(item4, 2, true)"
+                              :isendmark="isEndMark(item4, 2, true)"
                             />
                           </div>
                         </b-card>
@@ -645,24 +645,24 @@
                       <ProgramProgressBar
                         :type="0"
                         :width1="getValue(item2, 0, false)"
-                        :isStartMark="isStartMark(item2, 0, false)"
-                        :isEndMark="isEndMark(item2, 0, false)"
+                        :isstartmark="isStartMark(item2, 0, false)"
+                        :isendmark="isEndMark(item2, 0, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
                       <ProgramProgressBar
                         :type="1"
                         :width1="getValue(item2, 1, false)"
-                        :isStartMark="isStartMark(item2, 1, false)"
-                        :isEndMark="isEndMark(item2, 1, false)"
+                        :isstartmark="isStartMark(item2, 1, false)"
+                        :isendmark="isEndMark(item2, 1, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
                         :type="2"
                         :width1="getValue(item2, 2, false)"
-                        :isStartMark="isStartMark(item2, 2, false)"
-                        :isEndMark="isEndMark(item2, 2, false)"
+                        :isstartmark="isStartMark(item2, 2, false)"
+                        :isendmark="isEndMark(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -686,8 +686,8 @@
                             :type="0"
                             :widths="getValue(item3, 0, true)"
                             :paddings="getStartPadding(item3, 0, true)"
-                            :isStartMark="isStartMark(item3, 0, true)"
-                            :isEndMark="isEndMark(item3, 0, true)"
+                            :isstartmark="isStartMark(item3, 0, true)"
+                            :isendmark="isEndMark(item3, 0, true)"
                           />
                         </div>
                         <div>
@@ -695,8 +695,8 @@
                             :type="1"
                             :widths="getValue(item3, 1, true)"
                             :paddings="getStartPadding(item3, 1, true)"
-                            :isStartMark="isStartMark(item3, 1, true)"
-                            :isEndMark="isEndMark(item3, 1, true)"
+                            :isstartmark="isStartMark(item3, 1, true)"
+                            :isendmark="isEndMark(item3, 1, true)"
                           />
                         </div>
                         <div>
@@ -704,8 +704,8 @@
                             :type="2"
                             :widths="getValue(item3, 2, true)"
                             :paddings="getStartPadding(item3, 2, true)"
-                            :isStartMark="isStartMark(item3, 2, true)"
-                            :isEndMark="isEndMark(item3, 2, true)"
+                            :isstartmark="isStartMark(item3, 2, true)"
+                            :isendmark="isEndMark(item3, 2, true)"
                           />
                         </div>
                       </b-card>
@@ -727,8 +727,8 @@
                               :type="0"
                               :widths="getValue(item4, 0, true)"
                               :paddings="getStartPadding(item4, 0, true)"
-                              :isStartMark="isStartMark(item4, 0, true)"
-                              :isEndMark="isEndMark(item4, 0, true)"
+                              :isstartmark="isStartMark(item4, 0, true)"
+                              :isendmark="isEndMark(item4, 0, true)"
                             />
                           </div>
                           <div>
@@ -736,8 +736,8 @@
                               :type="1"
                               :widths="getValue(item4, 1, true)"
                               :paddings="getStartPadding(item4, 1, true)"
-                              :isStartMark="isStartMark(item4, 1, true)"
-                              :isEndMark="isEndMark(item4, 1, true)"
+                              :isstartmark="isStartMark(item4, 1, true)"
+                              :isendmark="isEndMark(item4, 1, true)"
                             />
                           </div>
                           <div>
@@ -745,8 +745,8 @@
                               :type="2"
                               :widths="getValue(item4, 2, true)"
                               :paddings="getStartPadding(item4, 2, true)"
-                              :isStartMark="isStartMark(item4, 2, true)"
-                              :isEndMark="isEndMark(item4, 2, true)"
+                              :isstartmark="isStartMark(item4, 2, true)"
+                              :isendmark="isEndMark(item4, 2, true)"
                             />
                             <!-- :width4="getStartPadding(item4, 2, true) > 396 ? 396 : getStartPadding(item4, 2, true)" -->
                           </div>
