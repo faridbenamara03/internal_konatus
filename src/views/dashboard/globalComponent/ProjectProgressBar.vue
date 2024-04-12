@@ -7,7 +7,7 @@
       <div
         v-if="width > 0"
         class="d-flex"
-        :style="`padding-left:${paddings[index] - 24 * index}px`"
+        :style="`padding-left:${paddings[index] - 24 * index > 0 ? paddings[index] - 24 * index : 0}px`"
       >
         <b-icon
           v-if="isStartMark[index] === true"

@@ -1019,6 +1019,7 @@ export default {
     getStartPadding(item, type, isChild) {
       let result = 0
       if (isChild) {
+        // if (item.id === 9 && type === 1) console.log('Item:', item)
         if (item.phases) {
           const pstarts = []
           let phIndex = 0
@@ -1032,18 +1033,19 @@ export default {
             } else if (type === 1) {
               startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
               firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')
-              if (item.id === 9) console.log('start:', startMoment.toString(), 'first:', firstMoment.toString())
             } else if (type === 2) {
               startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
               firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')
             }
             if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             if (firstMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            // if (item.id === 9 && type === 1) console.log('start:', startMoment.toString('YYYY-MM-DD'), 'first:', firstMoment.toString('YYYY-MM-DD'))
             const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
             result = duration === 0 ? 0 : duration * 24
             pstarts.push(result)
             phIndex += 1
           }
+          // if (item.id === 9 && type === 1) console.log('pstart:', pstarts)
           return pstarts
         }
       } else {
