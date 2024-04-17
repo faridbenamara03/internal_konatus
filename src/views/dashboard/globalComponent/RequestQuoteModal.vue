@@ -60,6 +60,21 @@
         >
           <div class="select-group">
             <div class="select-box">
+              <label>Number of WE requested</label>
+              <b-form-input
+                v-model="item.requested_wes"
+                placeholder="0"
+              />
+            </div>
+            <div class="select-box">
+              <label>Date</label>
+              <b-form-datepicker
+                :id="`start_date-datepicker`"
+                v-model="modified_dates[idx]"
+                :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
+              />
+            </div>
+            <!-- <div class="select-box">
               <label>Number of Elementary Activity</label>
               <b-form-input
                 v-model="item.activities"
@@ -86,7 +101,7 @@
                 v-model="item.deadline"
                 placeholder="Deadline"
               />
-            </div>
+            </div> -->
           </div>
         </b-collapse>
       </div>
@@ -111,7 +126,7 @@
 
 <script>
 import {
-  BButton, BCollapse, BFormInput, BModal, VBToggle,
+  BButton, BCollapse, BFormInput, BModal, VBToggle, BFormDatepicker
 } from 'bootstrap-vue'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
@@ -124,42 +139,44 @@ export default {
     BCollapse,
     BFormInput,
     BModal,
+    BFormDatepicker
   },
   props: {
-    // data: {
-    //   type: Array,
-    //   default: () => [],
-    // },
+    data: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
       collapsed: [],
-      data: [
-        {
-          id: 1,
-          name: 'Job A'
-        },
-        {
-          id: 2,
-          name: 'Job B'
-        },
-        {
-          id: 3,
-          name: 'Job C'
-        },
-        {
-          id: 4,
-          name: 'Job D'
-        },
-        {
-          id: 5,
-          name: 'Job E'
-        },
-        {
-          id: 6,
-          name: 'Job F'
-        },
-      ]
+      modified_dates: [],
+      // data: [
+      //   {
+      //     id: 1,
+      //     name: 'Job A'
+      //   },
+      //   {
+      //     id: 2,
+      //     name: 'Job B'
+      //   },
+      //   {
+      //     id: 3,
+      //     name: 'Job C'
+      //   },
+      //   {
+      //     id: 4,
+      //     name: 'Job D'
+      //   },
+      //   {
+      //     id: 5,
+      //     name: 'Job E'
+      //   },
+      //   {
+      //     id: 6,
+      //     name: 'Job F'
+      //   },
+      // ]
     }
   },
   methods: {

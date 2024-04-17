@@ -14,7 +14,7 @@
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
-        Activity Details
+        Work Element Details
       </h5>
       <div class="modal-actions">
         <b-button variant="outline-primary">
@@ -40,7 +40,7 @@
         <div>
           <label>ACTIVITY ID</label>
           <p v-if="selectedActivityData.phase">
-            {{ selectedActivityData.phase.activityId }}
+            {{ selectedActivityData.phase.id }}
           </p>
         </div>
         <div style="display: flex">
@@ -62,7 +62,7 @@
                 /> -->
                 <v-select
                   v-model="externalSystem"
-                  :options="['SAP', 'Jira', 'Konatus']"
+                  :options="['SAP', 'Jira', 'P6']"
                   placeholder="Select External System"
                   outlined
                   multiple
@@ -222,7 +222,7 @@
         <div class="select-box">
           <label>Jobs Available</label>
           <v-select
-            :options="['Design', 'Program', 'Manage']"
+            :options="teamdata"
             placeholder="Select a job"
             outlined
           />
@@ -273,7 +273,7 @@
           inline
           @change="effortDetailShowToggle"
         >
-          Add Skillset (Optional)
+          Skillset option
         </b-form-checkbox>
       </div>
       <div class="form-group">
@@ -281,65 +281,45 @@
           <!-- <div class="col-6">
           </div> -->
           <div class="col">
-            <label>Total Load</label>
+            <label>Load</label>
             <b-form-input
-              :value="totalEffortData.tLoad"
-              readonly
+              type="number"
+              :value="loadData"
+              v-model="loadData"
+              @input="validateEffortData(loadData, 1)"
             />
           </div>
           <div class="col">
-            <label>Total Duration</label>
+            <label>Duration</label>
             <b-form-input
-              :value="totalEffortData.tDuration"
-              readonly
+              type="number"
+              :value="durationData"
+              v-model="durationData"
+              @input="validateEffortData(durationData, 2)"
             />
           </div>
           <div class="col">
-            <label>Total FTE</label>
+            <label>FTE</label>
             <b-form-input
-              :value="totalEffortData.tFte"
-              readonly
+              type="number"
+              :value="fteData"
+              v-model="fteData"
+              @input="validateEffortData(fteData, 3)"
             />
           </div>
         </div>
-        <div v-if="effortDetailShow">
-          <div
-            v-for="(t, i) in effortData"
-            :key="i"
-            class="row"
-          >
-            <div class="col-6">
-              <label>Skillset</label>
-              <v-select
-                :options="['Design Workflow', 'Program Engineering', 'Project Management']"
-                :value="t.skill"
-                v-model="externalSystem"
-                placeholder="Select skillset"
-                outlined
-                @input="effortChange('skill', i, $event)"
-              />
-            </div>
-            <!-- <div class="col">
-              <label>Load</label>
-              <b-form-input
-                :value="t.load"
-                @input="effortChange('load', i, $event)"
-              />
-            </div>
-            <div class="col">
-              <label>Duration</label>
-              <b-form-input
-                :value="t.duration"
-                @input="effortChange('duration', i, $event)"
-              />
-            </div>
-            <div class="col">
-              <label>FTE</label>
-              <b-form-input
-                :value="t.fte"
-                @input="effortChange('fte', i, $event)"
-              />
-            </div> -->
+        <div
+          v-if="effortDetailShow"
+          class="row pt-1">
+          <div class="col-6">
+            <label>Skillset</label>
+            <v-select
+              :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+              v-model="skillset"
+              placeholder="Select skillset"
+              outlined
+              @input="effortChange('skill', 0, $event)"
+            />
           </div>
         </div>
       </div>
@@ -359,8 +339,8 @@
         Save
       </b-button>
     </template>
-    <activity-split-modal :selected-activity-data="c_SelectedActivity" />
-    <activity-merge-modal :selected-activity-data="c_SelectedActivity" />
+    <!-- <activity-split-modal :selected-activity-data="c_SelectedActivity" />
+    <activity-merge-modal :selected-activity-data="c_SelectedActivity" /> -->
   </b-modal>
 </template>
 
@@ -369,13 +349,14 @@ import {
   BButton, BFormCheckbox, BFormInput, BFormTextarea, BModal
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
-import ActivitySplitModal from './ActivitySplitModal.vue'
-import ActivityMergeModal from './ActivityMergeModal.vue'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+// import ActivitySplitModal from './ActivitySplitModal.vue'
+// import ActivityMergeModal from './ActivityMergeModal.vue'
 
 export default {
   components: {
-    ActivityMergeModal,
-    ActivitySplitModal,
+    // ActivityMergeModal,
+    // ActivitySplitModal,
     BButton,
     BFormCheckbox,
     BFormInput,
@@ -401,14 +382,10 @@ export default {
       activity: {},
       show: false,
       selectedTeam: "System auto select",
-      effortData: [
-        {
-          skill: null,
-          load: null,
-          duration: null,
-          fte: null
-        }
-      ],
+      loadData: 0,
+      durationData: 0,
+      fteData: 0,
+      skillset: 0,
       effortDetailShow: true,
       externalEditable: false,
       externalSystem: ["Jira"],
@@ -448,8 +425,53 @@ export default {
     isOpen(val) {
       this.show = val
     },
+    props: {
+      immediate: true,
+      handler(newVal) {
+        this.initializeData(newVal) // ??
+      },
+    },
   },
   methods: {
+    initializeData(data) {
+      console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
+      this.loadData = this.selectedActivityData.phase.effort.load
+      this.durationData = this.selectedActivityData.phase.effort.duration
+      this.fteData = this.selectedActivityData.phase.effort.fte
+      if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
+        this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
+      }
+    },
+    validateEffortData(data, type) {
+      if (parseFloat(data) === 0 || data === null) return
+      switch (type) {
+        case 1:
+          if (parseFloat(this.fteData) !== 0 && this.fteData !== null) this.durationData = parseFloat(data) / parseFloat(this.fteData)
+          if (parseFloat(this.durationData) !== 0 && this.durationData !== null) this.fteData = parseFloat(data) / parseFloat(this.durationData)
+          break
+        case 2:
+          if (parseFloat(this.fteData) !== 0 && this.fteData !== null) this.loadData = parseFloat(data) * parseFloat(this.fteData)
+          if (parseFloat(this.loadData) !== 0 && this.loadData !== null) this.fteData = parseFloat(this.loadData) / parseFloat(data)
+          break
+        case 3:
+          if (parseFloat(this.durationData) !== 0 && this.durationData !== null) this.loadData = parseFloat(data) * parseFloat(this.durationData)
+          if (parseFloat(this.loadData) !== 0 && this.loadData !== null) this.durationData = parseFloat(this.loadData) / parseFloat(data)
+          break
+        default:
+          break
+      }
+    },
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
+    },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
     },
