@@ -54,7 +54,7 @@
               >
                 <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
-                <span v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase1enddate' || ft === 'phase2startdate' || ft == 'phase2enddate' || ft === 'phase3startdate' || ft == 'phase3enddate' || ft === 'phase4startdate' || ft == 'phase4enddate'">{{ dateFormat(item[ft]) }}</span>
+                <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item[ft]) }}</span>
                 <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item[ft] }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
@@ -177,7 +177,7 @@
                         outlined
                       />
                       <b-form-datepicker
-                        v-else-if="ft === 'deadline' || ft === 'phase1startdate' || ft === 'phase2startdate' || ft === 'phase3startdate' || ft === 'phase4startdate' || ft === 'phase4enddate' || ft === 'phase1enddate' || ft === 'phase2enddate' || ft === 'phase3enddate'"
+                        v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
