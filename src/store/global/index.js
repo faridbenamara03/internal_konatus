@@ -77,6 +77,7 @@ export default {
     allProjData: [],
     allOrgData: [],
     sponsors: [],
+    weTeamData: [],
     productlines: [],
     hproductportfolios: [],
     productmanagers: [],
@@ -317,6 +318,9 @@ export default {
     DELETE_PORTFOLIO() {
       Vue.$toast.success('Portfolio Deleted Successfully!')
     },
+    DELETE_WORK_ELEMENT() {
+      Vue.$toast.success('WorkElement Deleted Successfully!')
+    },
     DELETE_PROGRAM() {
       Vue.$toast.success('Program Deleted Successfully!')
     },
@@ -410,6 +414,26 @@ export default {
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand
+      if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
+        state.weTeamData = []
+        const pTeamData = payload.portData.demand.teams
+        pTeamData.map(pt => {
+          if (pt.phases && pt.phases.length > 0) {
+            pt.phases.map(pA => {
+              const pActivity = pA.activities
+              if (pActivity && pActivity.length > 0) {
+                pActivity.map(item => {
+                  state.weTeamData.push(item.team_name)
+                  return null
+                })
+              }
+              return null
+            })
+          }
+          return null
+        })
+        state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
+      }
       state.portfolioReportingData = payload.portData.reporting
       state.tempReportingData = state.portfolioReportingData
       state.portfolioControlData = payload.portData.control
@@ -913,6 +937,21 @@ export default {
           .catch(err => {
             console.log('error deleting portfolio ---->', err)
             Vue.$toast.error('Failed to delete portfolio.')
+            reject(err)
+          })
+      })
+    },
+    delete_work_element(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/work_element/delete', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/DELETE_WORK_ELEMENT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error deleting work element ---->', err)
+            Vue.$toast.error('Failed to delete work element.')
             reject(err)
           })
       })

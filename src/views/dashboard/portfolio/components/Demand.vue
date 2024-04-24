@@ -1670,7 +1670,6 @@ export default {
           centered: true,
         })
         if (value) {
-          // If user confirms deletion, handle it based on the type
           if (item.children && item.children.length > 0) {
             await this.$store.commit('globalState/DELETE_FAILED')
             return
@@ -1689,17 +1688,14 @@ export default {
               await this.$store.dispatch('globalState/delete_subproject', { id: item.id })
               break
             default:
-              // Handle any other cases or do nothing
               break
           }
-          // After deletion, refresh data based on the current navigation selection
           await this.$store.dispatch('globalState/load_org_data')
           const data = this.$store.state.globalState.selectedNavObj
           await this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
         }
       } catch (error) {
         console.error('Error in handleDeleteItem:', error)
-        // Optionally handle any errors, e.g., show an error message
       }
     },
     toggleCreateNewPortfolioDrawer() {

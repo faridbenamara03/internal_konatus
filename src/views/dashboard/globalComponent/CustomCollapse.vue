@@ -36,7 +36,7 @@
           class="phase-box mb-1 position-relative"
         >
           <div
-            v-if="requestedElement.indexOf(activity.activityId) > -1"
+            v-if="requestedElement.indexOf(activity.id) > -1"
             :id="`tooltip-target-${jn}`"
             b-tooltip.hover
             title="Quote requested"
@@ -62,19 +62,27 @@
                 style="width:calc(100% - 20px);cursor:pointer"
                 @click="() => handleActivityDetails(activity, team)"
               >
-                <p class="title">
+                <p
+                  class="title"
+                  :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
                   {{ activity.title }}
                 </p>
+              </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) === 0"
+                  icon="MailIcon"
+                />
               </div>
               <div style="width:20px">
                 <b-form-checkbox
                   v-model="activity.isSelected"
-                  @change="e => onCheckChange(e, activity.activityId)"
+                  @change="e => onCheckChange(e, activity.id)"
                 />
               </div>
             </div>
             <p class="muted">
-              {{ activity.activityId }}
+              {{ activity.id }}
             </p>
             <div class="d-flex">
               <div class="d-flex w-50 align-items-center">
@@ -85,6 +93,10 @@
                 <b-icon icon="door-closed" />
                 <span>{{ activity.gate }}</span>
               </div>
+              <feather-icon
+                icon="Trash2Icon"
+                @click="() => handleDeleteActivity(activity)"
+              />
             </div>
           </div>
         </div>
@@ -100,7 +112,7 @@
           :style="`position:absolute;top:${15 * jn}px;z-index:${1000 - jn};box-shadow: 0px 2px 3px #161d31;`"
         >
           <div
-            v-if="requestedElement.indexOf(activity.activityId) > -1"
+            v-if="requestedElement.indexOf(activity.id) > -1"
             :id="`tooltip-target-${jn}-1`"
             b-tooltip.hover
             title="Quote requested"
@@ -126,19 +138,27 @@
                 style="width:calc(100% - 20px);cursor:pointer"
                 @click="() => handleActivityDetails(activity, team)"
               >
-                <p class="title">
+                <p
+                 class="title"
+                 :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
                   {{ activity.title }}
                 </p>
+              </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) === 0"
+                  icon="MailIcon"
+                />
               </div>
               <div style="width:20px">
                 <b-form-checkbox
                   v-model="activity.isSelected"
-                  @change="e => onCheckChange(e, activity.activityId)"
+                  @change="e => onCheckChange(e, activity.id)"
                 />
               </div>
             </div>
             <p class="muted">
-              {{ activity.activityId }}
+              {{ activity.id }}
             </p>
             <div class="d-flex">
               <div class="d-flex w-50 align-items-center">
@@ -149,6 +169,10 @@
                 <b-icon icon="door-closed" />
                 <span>{{ activity.gate }}</span>
               </div>
+              <feather-icon
+                icon="Trash2Icon"
+                @click="() => handleDeleteActivity(activity)"
+              />
             </div>
           </div>
         </div>
@@ -219,8 +243,31 @@ export default {
     handleActivityDetails(phase, team) {
       this.$emit('openDetailActivity', phase, team)
     },
-    onCheckChange(e, activityId) {
-      this.$emit('selectActivity', e, activityId)
+    onCheckChange(e, id) {
+      this.$emit('selectActivity', e, id)
+    },
+    async handleDeleteActivity(activity) {
+      try {
+        const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
+          title: 'Please Confirm',
+          size: 'sm',
+          okVariant: 'primary',
+          okTitle: 'Yes',
+          cancelTitle: 'No',
+          cancelVariant: 'outline-secondary',
+          hideHeaderClose: false,
+          centered: true,
+        })
+        console.log('activity:', activity, 'value:', value)
+        if (value) {
+          await this.$store.dispatch('globalState/delete_work_element', { id: activity.id })
+          await this.$store.dispatch('globalState/load_org_data')
+          const data = this.$store.state.globalState.selectedNavObj
+          await this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+        }
+      } catch (error) {
+        console.error('Error in handleDeleteActivity:', error)
+      }
     },
     handleInsertNewWorkElement() {
       let teamt = ""

@@ -222,7 +222,7 @@
         <div class="select-box">
           <label>Jobs Available</label>
           <v-select
-            :options="teamdata"
+            :options="c_JobData"
             placeholder="Select a job"
             outlined
           />
@@ -251,7 +251,10 @@
           />
         </div>
       </div>
-      <div class="form-group has-switch">
+      <div
+        v-if="opt_skillset !== 0"
+        class="form-group has-switch"
+      >
         <div class="detail-box">
           <feather-icon
             icon="BarChart2Icon"
@@ -276,7 +279,10 @@
           Skillset option
         </b-form-checkbox>
       </div>
-      <div class="form-group">
+      <div
+        v-if="opt_skillset !== 0"
+        class="form-group"
+      >
         <div class="row">
           <!-- <div class="col-6">
           </div> -->
@@ -382,10 +388,12 @@ export default {
       activity: {},
       show: false,
       selectedTeam: "System auto select",
+      c_teamData: this.$store.state.globalState?.weTeamData,
       loadData: 0,
       durationData: 0,
       fteData: 0,
       skillset: 0,
+      opt_skillset: 0,
       effortDetailShow: true,
       externalEditable: false,
       externalSystem: ["Jira"],
@@ -404,7 +412,7 @@ export default {
       })
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
-    c_teamData() {
+    c_JobData() {
       const dt = ["System auto select", ...this.teamdata]
       return dt
     },
@@ -435,6 +443,14 @@ export default {
   methods: {
     initializeData(data) {
       console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
+      const orgData = this.$store.state.globalState.allOrgData
+      const { orgId } = this.$store.state.globalState.selectedNavObj
+      orgData.map(item => {
+        if (item.id === orgId) {
+          this.opt_skillset = item.opt_skillset
+        }
+        return null
+      })
       this.loadData = this.selectedActivityData.phase.effort.load
       this.durationData = this.selectedActivityData.phase.effort.duration
       this.fteData = this.selectedActivityData.phase.effort.fte
