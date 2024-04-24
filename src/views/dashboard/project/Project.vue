@@ -98,18 +98,6 @@
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button
-                v-if="reportingState === 'plan'"
-                class="mr-1"
-                variant="primary"
-                @click="onReportingTableEditableClick"
-              >
-                <feather-icon
-                  icon="EditIcon"
-                  size="16"
-                />&nbsp;
-                <span>Edit as table</span>
-              </b-button>
-              <b-button
                 v-if="!reportingTableEditable"
                 v-b-modal.project-reporting-plan-update
                 class="mr-1"
