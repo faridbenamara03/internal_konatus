@@ -95,6 +95,18 @@
                 />&nbsp;
                 <span>Request Quote</span>
               </b-button>
+              <b-button
+                v-if="!demandTableEditable"
+                :disabled="true"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EyeIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as Columns</span>
+              </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button
@@ -129,6 +141,18 @@
                   size="16"
                 />&nbsp;
                 Next Phase
+              </b-button>
+              <b-button
+                v-if="!reportingTableEditable"
+                :disabled="true"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="EyeIcon"
+                  size="16"
+                />&nbsp;
+                <span>Edit as Columns</span>
               </b-button>
               <b-button
                 v-if="reportingTableEditable"
