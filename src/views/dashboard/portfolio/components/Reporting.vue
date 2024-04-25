@@ -849,8 +849,8 @@ export default {
   methods: {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedFromDate)
-      this.startGraphData = this.$store.state.globalState.selectedFromDate
-      this.endGraphData = this.$store.state.globalState.selectedToDate
+      this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
+      this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
 

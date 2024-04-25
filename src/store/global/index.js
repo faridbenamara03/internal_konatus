@@ -89,8 +89,8 @@ export default {
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
-    selectedFromDate: moment().startOf('month').format('YYYY-MM-DD'),
-    selectedToDate: moment().endOf('month').format('YYYY-MM-DD'),
+    selectedFromDate: moment('2024-01-01'),
+    selectedToDate: moment('2024-12-31'),
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),

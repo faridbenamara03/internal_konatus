@@ -414,7 +414,7 @@ import TableEditable from './components/TableEditable.vue'
 import CreateProgramDrawer from '../program/modals/CreateNewProgramDrawer.vue'
 import Reporting from './components/Reporting.vue'
 import Control from './components/Control.vue'
-import InsertNewTaskModal from '../program/modals/insertNewTaskModal.vue'
+import InsertNewTaskModal from './modals/insertNewTaskModal.vue'
 import CreateNewPortfolioDrawer from '../portfolio/modals/CreateNewPortfolioDrawer.vue'
 import EditPortfolioDrawer from '../portfolio/modals/EditPortfolioDrawer.vue'
 
@@ -462,7 +462,7 @@ export default {
       projectElementTeamData: this.$store.state.globalState.teamsState,
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
+      selectedMonth: `01 / ${new Date().getFullYear()} - 12 / ${new Date().getFullYear()}`,
       rangeArray: [],
       arr4chart: [],
       isChartView: false,

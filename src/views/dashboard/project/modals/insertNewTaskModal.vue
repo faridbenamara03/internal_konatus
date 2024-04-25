@@ -56,7 +56,7 @@
       v-model="gate"
       class="mb-1"
       placeholder="Gate"
-      :options="['Gate1', 'Gate2', 'Gate3', 'Gate4']"
+      :options="allPhaseTitleData"
     />
     <b-form-select
       v-model="priority"
@@ -107,6 +107,7 @@ export default {
       gate: '',
       name: '',
       selectedOptions: '',
+      allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },

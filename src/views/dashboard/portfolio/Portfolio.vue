@@ -554,7 +554,7 @@ export default {
       tabIndex: 0,
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
+      selectedMonth: `01 / ${new Date().getFullYear()} - 12 / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
       open: false,
