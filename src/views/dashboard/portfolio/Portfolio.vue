@@ -554,7 +554,7 @@ export default {
       tabIndex: 0,
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 2} / ${new Date().getFullYear()}`,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
       rangeArray: [],
       reportingState: 'cost',
       open: false,
@@ -773,10 +773,6 @@ export default {
       if (demandTableEditable) {
         const portDemands = this.$store.state.globalState.portfolioDemandData
         await this.$store.dispatch('globalState/save_updated_table', { data: portDemands })
-        // const data = this.$store.state.globalState.selectedNavObj
-        // this.$store.dispatch('globalState/get_from_selected_nav_id', {
-        //   data
-        // })
       }
       await this.$store.commit('globalState/UPDATE_DEMAND_TABLE_EDITABLE')
     },

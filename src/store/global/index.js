@@ -89,8 +89,8 @@ export default {
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
-    selectedFromDate: moment(`2024-01-01`),
-    selectedToDate: moment(`2024-12-31`),
+    selectedFromDate: moment().startOf('month').format('YYYY-MM-DD'),
+    selectedToDate: moment().endOf('month').format('YYYY-MM-DD'),
     chartXAxisData: [
       '',
       moment().subtract(2, 'months').format('MM/YYYY'),
@@ -577,6 +577,7 @@ export default {
     get_from_selected_nav_id(ctx, payload) {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
+        console.log("A:")
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
@@ -586,7 +587,8 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}`
+        console.log("start:", ctx.state.selectedFromDate)
+        baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
