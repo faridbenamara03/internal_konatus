@@ -27,5 +27,11 @@
   "vue3snippets.enable-compile-vue-file-on-did-save-code": true,
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/libs/i18n",
+    "src/@core/libs/i18n",
+    "src/libs/i18n/locales",
+    "src/views/extensions/i18n"
+  ]
 }

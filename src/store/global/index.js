@@ -434,7 +434,8 @@ export default {
         })
         state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
       }
-      state.portfolioReportingData = payload.portData.reporting
+      state.portfolioReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
+      // state.portfolioReportingData = payload.portData.reporting
       state.tempReportingData = state.portfolioReportingData
       state.portfolioControlData = payload.portData.control
     },

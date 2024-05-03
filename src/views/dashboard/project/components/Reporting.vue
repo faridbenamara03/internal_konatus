@@ -1,69 +1,142 @@
 <template>
-  <div
-    v-if="reportingState === 'plan'"
-    class="report"
-  >
+  <div v-if="reportingState === 'plan'" class="report">
     <div class="reporting-side">
       <div>
-        <div
-          class="report-block--head"
-          style="margin-top:50px;"
-          @click="onParentCollapseClick()"
-        >
-          <feather-icon
-            v-if="itemsForReporting.children && itemsForReporting.children.length > 0"
-            :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          <p class="m-0 text-uppercase">
-            {{ itemsForReporting === undefined || itemsFormReporting === null ? '' : itemsForReporting.title }}
-          </p>
-        </div>
-        <div v-if="itemsForReporting !== undefined && navType === 'program' && parentCollapse === true">
+        <div v-if="itemsForReporting !== undefined && navType === 'program'">
+          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.portfolioName
+              }}
+            </p>
+          </div>
           <div
-            v-for="(item1, index1) in itemsForReporting.children"
-            :key="index1"
+            class="report-block--head"
+            style="background-color: #384056"
+            @click="onParentCollapseClick()"
           >
+            <feather-icon
+              v-if="itemsForReporting.children && itemsForReporting.children.length > 0"
+              :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
+            />
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.title
+              }}
+            </p>
+          </div>
+          <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
             <div
               class="report-block--head"
-              style="cursor:pointer"
+              style="cursor: pointer;height:77px"
               @click="onCollapseClick(index1)"
             >
               <feather-icon
-                v-if="item1.children.length > 0"
+                v-if="item1.work_elements.length > 0"
                 :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                 size="16"
                 class="mr-1"
               />
-              <p class="m-0 text-uppercase text-overflow-ellipse">
+              <p class="m-0 ml-1" style="line-height: 24px; font-size: 15px;">
                 {{ item1.title }}
               </p>
             </div>
-            <template v-if="item1 !== undefined && item1.children && openedCollapse === index1">
+            <template
+              v-if="
+                item1 !== undefined && item1.work_elements && openedCollapse === index1
+              "
+            >
               <div
-                v-for="(item2, index2) in item1.children"
+                v-for="(item2, index2) in item1.work_elements"
                 :key="index2"
                 class="report-block-child"
+                style="background-color: #212739;border-bottom: 1px solid grey;"
               >
-                <p class="m-0 text-uppercase text-overflow-ellipse">
-                  {{ item2.title }}
+                <p class="m-0 text-overflow-ellipse" style="font-size:12px">
+                  {{ item2.title }}({{ item2.acc }}%)
                 </p>
               </div>
             </template>
           </div>
         </div>
-        <div v-else-if="itemsForReporting !== undefined && navType === 'project' && parentCollapse === true">
-          <div
-            v-for="(item1, index1) in itemsForReporting.children"
-            :key="index1"
-          >
-            <div
-              class="report-block--head"
-              style="cursor:pointer;height:77px;"
-            >
-              <p class="m-0 text-uppercase text-overflow-ellipse">
-                {{ item1.title }}
+        <div
+          v-else-if=" itemsForReporting !== undefined && navType === 'project'"
+        >
+          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.portName
+              }}
+            </p>
+          </div>
+          <div class="report-block--head" style="background-color: #384056">
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.progName
+              }}
+            </p>
+          </div>
+          <div class="report-block--head" style="cursor: pointer;height:77px">
+            <p class="m-0">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.title
+              }}
+            </p>
+          </div>
+          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
+            <div class="report-block-child" style="background-color: #212739;border-bottom: 1px solid grey;">
+              <p class="m-0 text-overflow-ellipse" style="font-size:12px">
+                {{ item1.title }}({{ item1.acc }}%)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          v-else-if=" itemsForReporting !== undefined && navType === 'subproject'"
+        >
+          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.portName
+              }}
+            </p>
+          </div>
+          <div class="report-block--head" style="background-color: #384056">
+            <p class="m-0 text-uppercase">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.progName
+              }}
+            </p>
+          </div>
+          <div class="report-block--head" style="cursor: pointer;height:77px">
+            <p class="m-0">
+              {{
+                itemsForReporting === undefined || itemsFormReporting === null
+                  ? ""
+                  : itemsForReporting.title
+              }}
+            </p>
+          </div>
+          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
+            <div class="report-block-child" style="background-color: #212739;border-bottom: 1px solid grey;">
+              <p class="m-0 text-overflow-ellipse" style="font-size:12px">
+                {{ item1.title }}({{ item1.acc }}%)
               </p>
             </div>
           </div>
@@ -72,42 +145,25 @@
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
-        <div />
         <div class="reporting-content-header--badge">
           <div class="phase">
             <div class="flag" />
             Phase
           </div>
           <b-button variant="flat-dark">
-            <b-icon
-              icon="diamond-fill"
-              variant="success"
-            />
-            <b-icon
-              icon="triangle-fill"
-              class="rotate-icon"
-              variant="success"
-            />
+            <b-icon icon="diamond-fill" variant="success" />
+            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
             Milestones
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-demand"
-          >
+          <b-button variant="flat-dark" class="badge-demand">
             <b-icon icon="circle-fill" />
             Demand
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-engage"
-          >
+          <b-button variant="flat-dark" class="badge-engage">
             <b-icon icon="circle-fill" />
             Engaged
           </b-button>
-          <b-button
-            variant="flat-dark"
-            class="badge-estimate"
-          >
+          <b-button variant="flat-dark" class="badge-estimate">
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
@@ -115,25 +171,24 @@
       </div>
       <div class="reporting-content--body">
         <!-- <div
-          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 400 + 'px;top:122px;z-index:222'"
+          :style="'position:absoluteheight:calc(100% - 120px)border-right:2px #BD2020 solidleft:' + 400 + 'pxtop:122pxz-index:222'"
         >
           <div
             class="rounded-circle"
-            style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
+            style="width:6pxheight:6pxbackground-color:#BD2020position:absolutetop:-2pxleft:-2px"
           />
         </div> -->
-        <div
-          class="timeline-list"
-          :style="`width:${windowWidth / 2 }px`"
-        >
+        <div class="timeline-list" :style="`width:${windowWidth / 2}px`">
           <div
             v-for="(date, index) in reportingDates"
             :key="index"
             class="date"
-            :class="{ 'active': isToday(date) }"
+            :class="{ active: isToday(date) }"
           >
             <p
-              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
+              v-if="
+                index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true
+              "
               class="month"
             >
               {{ getMonth(date) }}
@@ -146,305 +201,367 @@
             </p>
           </div>
         </div>
-        <div v-if="itemsForReporting !== undefined && navType === 'program' && parentCollapse === true">
-          <div
-            v-for="(item1, index1) in itemsForReporting.children"
-            :key="index1"
+        <div
+          v-if="
+            itemsForReporting !== undefined &&
+            navType === 'program' &&
+            parentCollapse === true
+          "
+        >
+          <b-card
+            no-body
+            class="d-flex flex-column justify-content-around"
+            style="height:77px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
           >
-            <div
-              v-if="onOptimizeIndex() === 'optimize'"
-              class="w-100"
-              style="height:77px"
-            >
+            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 0, false)}px`">
+              <ProgramProgressBar
+                :type="0"
+                :width1="getValue(itemsForReporting, 0, false)"
+                :isstartmark="isStartMark(itemsForReporting, 0, false)"
+                :isendmark="isEndMark(itemsForReporting, 0, false)"
+              />
+            </div>
+            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
+              <ProgramProgressBar
+                :type="1"
+                :width1="getValue(itemsForReporting, 1, false)"
+                :istartmark="isStartMark(itemsForReporting, 1, false)"
+                :isendmark="isEndMark(itemsForReporting, 1, false)"
+              />
+            </div>
+            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
+              <ProgramProgressBar
+                :type="2"
+                :width1="getValue(itemsForReporting, 2, false)"
+                :isstartmark="isStartMark(itemsForReporting, 2, false)"
+                :isendmark="isEndMark(itemsForReporting, 2, false)"
+              />
+            </div>
+          </b-card>
+          <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
+            <div class="w-100" style="height: 77px">
               <b-card
                 no-body
                 class="d-flex flex-column justify-content-around"
                 style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
               >
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
-                  <ProgramProgressBar
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    0,
+                    true
+                  )}px`"
+                >
+                  <ProjectProgressBar
                     :type="0"
-                    :width1="getValue(item1, 0, false)"
-                    :isstartmark="isStartMark(item1, 0, false)"
-                    :isendmark="isEndMark(item1, 0, false)"
+                    :widths="getValue(item1, 0, true)"
+                    :paddings="getStartPadding(item1, 0, true)"
+                    :isstartmark="isStartMark(item1, 0, true)"
+                    :isendmark="isEndMark(item1, 0, true)"
                   />
                 </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
-                  <ProgramProgressBar
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    1,
+                    true
+                  )}px`"
+                >
+                  <ProjectProgressBar
                     :type="1"
-                    :width1="getValue(item1, 1, false)"
-                    :isstartmark="isStartMark(item1, 1, false)"
-                    :isendmark="isEndMark(item1, 1, false)"
+                    :widths="getValue(item1, 1, true)"
+                    :paddings="getStartPadding(item1, 1, true)"
+                    :isstartmark="isStartMark(item1, 1, true)"
+                    :isendmark="isEndMark(item1, 1, true)"
                   />
                 </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
-                  <ProgramProgressBar
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    2,
+                    true
+                  )}px`"
+                >
+                  <ProjectProgressBar
                     :type="2"
-                    :width1="getValue(item1, 2, false)"
-                    :isstartmark="isStartMark(item1, 2, false)"
-                    :isendmark="isEndMark(item1, 2, false)"
+                    :widths="getValue(item1, 2, true)"
+                    :paddings="getStartPadding(item1, 2, true)"
+                    :isstartmark="isStartMark(item1, 2, true)"
+                    :isendmark="isEndMark(item1, 2, true)"
                   />
                 </div>
               </b-card>
             </div>
-            <template v-if="onOptimizeIndex() === 'optimize' && item1 !== undefined && item1.children && openedCollapse === index1">
-              <div
-                v-for="(item2, index2) in item1.children"
-                :key="index2"
-              >
-                <div
-                  style="height:51px"
-                  class="w-100"
-                >
+            <template
+              v-if="
+                item1 !== undefined && item1.work_elements && openedCollapse === index1
+              "
+            >
+              <div v-for="(item2, index2) in item1.work_elements" :key="index2">
+                <div style="height: 51px" class="w-100">
                   <b-card
                     no-body
                     class="d-flex flex-column justify-content-around"
                     style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                   >
                     <div>
-                      <ProjectProgressBar
+                      <ProgramProgressBar
                         :type="0"
-                        :widths="getValue(item2, 0, true)"
-                        :paddings="getStartPadding(item2, 0, true)"
-                        :isstartmark="isStartMark(item2, 0, true)"
-                        :isendmark="isEndMark(item2, 0, true)"
+                        :width1="getValue(item2, 0, false)"
+                        :isstartmark="isStartMark(item2, 0, false)"
+                        :isendmark="isEndMark(item2, 0, false)"
                       />
                     </div>
                     <div>
-                      <ProjectProgressBar
+                      <ProgramProgressBar
                         :type="1"
-                        :widths="getValue(item2, 1, true)"
-                        :paddings="getStartPadding(item2, 1, true)"
-                        :isstartmark="isStartMark(item2, 1, true)"
-                        :isendmark="isEndMark(item2, 1, true)"
+                        :width1="getValue(item2, 1, false)"
+                        :isstartmark="isStartMark(item2, 1, false)"
+                        :isendmark="isEndMark(item2, 1, false)"
                       />
                     </div>
                     <div>
-                      <ProjectProgressBar
+                      <ProgramProgressBar
                         :type="2"
-                        :widths="getValue(item2, 2, true)"
-                        :paddings="getStartPadding(item2, 2, true)"
-                        :isstartmark="isStartMark(item2, 2, true)"
-                        :isendmark="isEndMark(item2, 2, true)"
+                        :width1="getValue(item2, 2, false)"
+                        :isstartmark="isStartMark(item2, 2, false)"
+                        :isendmark="isEndMark(item2, 2, false)"
                       />
                     </div>
                   </b-card>
                 </div>
               </div>
             </template>
-
-            <div
-              v-if="onOptimizeIndex() === 'origin'"
-              class="w-100"
-              style="height:77px"
-            >
-              <b-card
-                no-body
-                class="d-flex flex-column justify-content-around"
-                style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
-              >
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
-                  <ProgramProgressBar
-                    :type="0"
-                    :width1="getValue(item1, 0, false)"
-                    :isstartmark="isStartMark(item1, 0, false)"
-                    :isendmark="isEndMark(item1, 0, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
-                  <ProgramProgressBar
-                    v-if="getValue(item1, 1, false) > 0"
-                    :type="1"
-                    :width1="getValue(item1, 1, false)"
-                    :isstartmark="isStartMark(item1, 1, false)"
-                    :isendmark="isEndMark(item1, 1, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
-                  <ProgramProgressBar
-                    v-if="getValue(item1, 2, false) > 0"
-                    :type="2"
-                    :width1="getValue(item1, 2, false)"
-                    :isstartmark="isStartMark(item1, 2, false)"
-                    :isendmark="isEndMark(item1, 2, false)"
-                  />
-                </div>
-              </b-card>
-            </div>
-            <template v-if="onOptimizeIndex() === 'origin' && item1 !== undefined && item1.children && openedCollapse === index1">
-              <div
-                v-for="(item2, index2) in item1.children"
-                :key="index2"
-              >
-                <div
-                  style="height:51px"
-                  class="w-100"
-                >
-                  <b-card
-                    no-body
-                    class="d-flex flex-column justify-content-around"
-                    style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
-                  >
-                    <div>
-                      <ProjectProgressBar
-                        :type="0"
-                        :widths="getValue(item2, 0, true)"
-                        :paddings="getStartPadding(item2, 0, true)"
-                        :isstartmark="isStartMark(item2, 0, true)"
-                        :isendmark="isEndMark(item2, 0, true)"
-                      />
-                    </div>
-                    <div>
-                      <ProjectProgressBar
-                        :type="1"
-                        :widths="getValue(item2, 1, true)"
-                        :paddings="getStartPadding(item2, 1, true)"
-                        :isstartmark="isStartMark(item2, 1, true)"
-                        :isendmark="isEndMark(item2, 1, true)"
-                      />
-                    </div>
-                    <div>
-                      <ProjectProgressBar
-                        :type="2"
-                        :widths="getValue(item2, 2, true)"
-                        :paddings="getStartPadding(item2, 2, true)"
-                        :isstartmark="isStartMark(item2, 2, true)"
-                        :isendmark="isEndMark(item2, 2, true)"
-                      />
-                    </div>
-                  </b-card>
-                </div>
-              </div>
-            </template>
-
           </div>
         </div>
-        <div v-else-if="itemsForReporting !== undefined && navType === 'project' && parentCollapse === true">
-          <div
-            v-for="(item1, index1) in itemsForReporting.children"
-            :key="index1"
+        <div
+          v-else-if="
+            itemsForReporting !== undefined && navType === 'project'
+          "
+        >
+          <b-card
+            no-body
+            class="d-flex flex-column justify-content-around"
+            style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
           >
             <div
-              v-if="onOptimizeIndex() === 'optimize'"
-              class="w-100"
-              style="height:77px"
-            />
-            <template v-if="onOptimizeIndex() === 'optimize' && item1 !== undefined && openedCollapse === index1">
-              <div
-                v-for="(item2, index2) in item1.children"
-                :key="index2"
-              >
-                <div
-                  style="height:77px"
-                  class="w-100"
-                >
-                  <b-card
-                    no-body
-                    class="d-flex flex-column justify-content-around"
-                    style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
-                  >
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
-                      <ProgramProgressBar
-                        :type="0"
-                        :width1="getValue(item2, 0, false)"
-                        :isstartmark="isStartMark(item2, 0, false)"
-                        :isendmark="isEndMark(item2, 0, false)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
-                      <ProgramProgressBar
-                        :type="1"
-                        :width1="getValue(item2, 1, false)"
-                        :isstartmark="isStartMark(item2, 1, false)"
-                        :isendmark="isEndMark(item2, 1, false)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
-                      <ProgramProgressBar
-                        :type="2"
-                        :width1="getValue(item2, 2, false)"
-                        :isstartmark="isStartMark(item2, 2, false)"
-                        :isendmark="isEndMark(item2, 2, false)"
-                      />
-                    </div>
-                  </b-card>
-                </div>
-              </div>
-            </template>
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                0,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="0"
+                :width1="getValue(itemsForReporting, 0, false)"
+                :isstartmark="isStartMark(itemsForReporting, 0, false)"
+                :isendmark="isEndMark(itemsForReporting, 0, false)"
+              />
+            </div>
             <div
-              v-if="onOptimizeIndex() === 'origin'"
-              class="w-100"
-              style="height:77px"
-            />
-            <template v-if="onOptimizeIndex() === 'origin' && item1 !== undefined  && openedCollapse === index1">
-              <div
-                v-for="(item2, index2) in item1.children"
-                :key="index2"
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                1,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="1"
+                :width1="getValue(itemsForReporting, 1, false)"
+                :isstartmark="isStartMark(itemsForReporting, 1, false)"
+                :isendmark="isEndMark(itemsForReporting, 1, false)"
+              />
+            </div>
+            <div
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                2,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="2"
+                :width1="getValue(itemsForReporting, 2, false)"
+                :isstartmark="isStartMark(itemsForReporting, 2, false)"
+                :isendmark="isEndMark(itemsForReporting, 2, false)"
+              />
+            </div>
+          </b-card>
+          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
+            <div style="height: 51px" class="w-100">
+              <b-card
+                no-body
+                class="d-flex flex-column justify-content-around"
+                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
               >
                 <div
-                  style="height:77px"
-                  class="w-100"
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    0,
+                    false
+                  )}px`"
                 >
-                  <b-card
-                    no-body
-                    class="d-flex flex-column justify-content-around"
-                    style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
-                  >
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
-                      <ProgramProgressBar
-                        :type="0"
-                        :width1="getValue(item2, 0, false)"
-                        :isstartmark="isStartMark(item2, 0, false)"
-                        :isendmark="isEndMark(item2, 0, false)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
-                      <ProgramProgressBar
-                        :type="1"
-                        :width1="getValue(item2, 1, false)"
-                        :isstartmark="isStartMark(item2, 1, false)"
-                        :isendmark="isEndMark(item2, 1, false)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
-                      <ProgramProgressBar
-                        :type="2"
-                        :width1="getValue(item2, 2, false)"
-                        :isstartmark="isStartMark(item2, 2, false)"
-                        :isendmark="isEndMark(item2, 2, false)"
-                      />
-                    </div>
-                  </b-card>
+                  <ProgramProgressBar
+                    :type="0"
+                    :width1="getValue(item1, 0, false)"
+                    :isstartmark="isStartMark(item1, 0, false)"
+                    :isendmark="isEndMark(item1, 0, false)"
+                  />
                 </div>
-              </div>
-            </template>
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    1,
+                    false
+                  )}px`"
+                >
+                  <ProgramProgressBar
+                    :type="1"
+                    :width1="getValue(item1, 1, false)"
+                    :isstartmark="isStartMark(item1, 1, false)"
+                    :isendmark="isEndMark(item1, 1, false)"
+                  />
+                </div>
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    2,
+                    false
+                  )}px`"
+                >
+                  <ProgramProgressBar
+                    :type="2"
+                    :width1="getValue(item1, 2, false)"
+                    :isstartmark="isStartMark(item1, 2, false)"
+                    :isendmark="isEndMark(item1, 2, false)"
+                  />
+                </div>
+              </b-card>
+            </div>
+          </div>
+        </div>
+        <div
+          v-else-if="
+            itemsForReporting !== undefined && navType === 'subproject'
+          "
+        >
+          <b-card
+            no-body
+            class="d-flex flex-column justify-content-around"
+            style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
+          >
+            <div
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                0,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="0"
+                :width1="getValue(itemsForReporting, 0, false)"
+                :isstartmark="isStartMark(itemsForReporting, 0, false)"
+                :isendmark="isEndMark(itemsForReporting, 0, false)"
+              />
+            </div>
+            <div
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                1,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="1"
+                :width1="getValue(itemsForReporting, 1, false)"
+                :isstartmark="isStartMark(itemsForReporting, 1, false)"
+                :isendmark="isEndMark(itemsForReporting, 1, false)"
+              />
+            </div>
+            <div
+              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                itemsForReporting,
+                2,
+                false
+              )}px`"
+            >
+              <ProgramProgressBar
+                :type="2"
+                :width1="getValue(itemsForReporting, 2, false)"
+                :isstartmark="isStartMark(itemsForReporting, 2, false)"
+                :isendmark="isEndMark(itemsForReporting, 2, false)"
+              />
+            </div>
+          </b-card>
+          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
+            <div style="height: 51px" class="w-100">
+              <b-card
+                no-body
+                class="d-flex flex-column justify-content-around"
+                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+              >
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    0,
+                    false
+                  )}px`"
+                >
+                  <ProgramProgressBar
+                    :type="0"
+                    :width1="getValue(item1, 0, false)"
+                    :isstartmark="isStartMark(item1, 0, false)"
+                    :isendmark="isEndMark(item1, 0, false)"
+                  />
+                </div>
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    1,
+                    false
+                  )}px`"
+                >
+                  <ProgramProgressBar
+                    :type="1"
+                    :width1="getValue(item1, 1, false)"
+                    :isstartmark="isStartMark(item1, 1, false)"
+                    :isendmark="isEndMark(item1, 1, false)"
+                  />
+                </div>
+                <div
+                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                    item1,
+                    2,
+                    false
+                  )}px`"
+                >
+                  <ProgramProgressBar
+                    :type="2"
+                    :width1="getValue(item1, 2, false)"
+                    :isstartmark="isStartMark(item1, 2, false)"
+                    :isendmark="isEndMark(item1, 2, false)"
+                  />
+                </div>
+              </b-card>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <update-confirm-modal @onUpdate="onUpdate" />
   </div>
-  <div
-    v-else-if="reportingState === 'cost'"
-    style="width:100%"
-  >
-    <ReportingCostVue
-      :data="itemsForReporting"
-      :fields="costfields"
-    />
+  <div v-else-if="reportingState === 'cost'" style="width: 100%">
+    <ReportingCostVue :data="itemsForReporting" :fields="costfields" />
   </div>
 </template>
 
 <script>
-import {
-  BButton,
-  BCard,
-} from 'bootstrap-vue'
-import moment from 'moment'
-import ReportingCostVue from './ReportingCost.vue'
-import ProgramProgressBar from '../../globalComponent/ProgramProgressBar.vue'
-import ProjectProgressBar from '../../globalComponent/ProjectProgressBar.vue'
-import UpdateConfirmModal from '../modals/UpdateConfirmModal.vue'
+import { BButton, BCard } from "bootstrap-vue"
+import moment from "moment"
+import ReportingCostVue from "./ReportingCost.vue"
+import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
+import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
+import UpdateConfirmModal from "../modals/UpdateConfirmModal.vue"
 
 export default {
   components: {
@@ -453,16 +570,16 @@ export default {
     ReportingCostVue,
     ProgramProgressBar,
     ProjectProgressBar,
-    UpdateConfirmModal
+    UpdateConfirmModal,
   },
   props: {
     data: {
       type: Object,
-      default: () => { }
+      default: () => {},
     },
     reportingState: {
       type: String,
-      default: () => ""
+      default: () => "",
     },
     costfields: {
       type: Array,
@@ -476,50 +593,53 @@ export default {
       childCollapse: 1,
       subChildCollapse: 0,
       parentCollapse: true,
-      navType: 'portfolio',
+      // navType: "portfolio",
       windowWidth: window.innerWidth,
-      itemsForReporting: 0,
-      startGraphDate: moment('2024-01-01'),
-      endGraphDate: moment('2024-12-31'),
+      // itemsForReporting: 0,
+      startGraphDate: moment("2024-01-01"),
+      endGraphDate: moment("2024-12-31"),
     }
   },
   computed: {
     isOptimizeIndex() {
       return this.$store.state.globalState.optimizeStatus
     },
-    // itemsForReporting() {
-    //   return this.$store.state.globalState.portfolioReportingData
-    // },
+    itemsForReporting() {
+      return this.$store.state.globalState.portfolioReportingData
+    },
+    navType() {
+      console.log("NAVTYPE:", this.$store.state.globalState.selectedNavObj.type)
+      return this.$store.state.globalState.selectedNavObj.type
+    }
   },
   watch: {
-      data: {
-          immediate: true,
-          handler(newVal) {
-            this.initializeData(newVal) // ??
-          },
+    data: {
+      immediate: true,
+      handler(newVal) {
+        this.initializeData(newVal) // ??
       },
+    },
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.onResize)
+    window.removeEventListener("resize", this.onResize)
   },
   mounted() {
     this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
+      window.addEventListener("resize", this.onResize)
     })
   },
   methods: {
     initializeData(data) {
-      console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedFromDate)
+      console.log("INITD:", data, "st:", this.$store.state.globalState.selectedFromDate)
       this.startGraphData = this.$store.state.globalState.selectedFromDate
       this.endGraphData = this.$store.state.globalState.selectedToDate
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
 
-      while (tempStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
+      while (tempStartDate.add(1, "days").diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }
-      this.navType = this.$store.state.globalState.selectedNavObj.type
-      this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
+      // this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
     },
     onResize() {
       this.windowWidth = window.innerWidth
@@ -534,18 +654,24 @@ export default {
             const phase = item.phases[phIndex]
             switch (type) {
               case 0:
-                startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
+                startMoment = moment(phase.start_date_demand, "YYYY-MM-DD").startOf(
+                  "day"
+                )
                 break
               case 1:
-                startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
+                startMoment = moment(phase.start_date_engage, "YYYY-MM-DD").startOf(
+                  "day"
+                )
                 break
               case 2:
-                startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+                startMoment = moment(phase.start_date_estimated, "YYYY-MM-DD").startOf(
+                  "day"
+                )
                 break
               default:
                 break
             }
-            const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD') === this.startGraphData ? moment(this.reportingDates[0], 'YYYY-MM-DD') : this.startGraphData
+            const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD") === this.startGraphData ? moment(this.reportingDates[0], "YYYY-MM-DD") : this.startGraphData
             if (startMoment >= firstMoment) results.push(true)
             results.push(false)
             phIndex += 1
@@ -555,18 +681,18 @@ export default {
       }
       switch (type) {
         case 0:
-          startMoment = moment(item.start_date_demand, 'YYYY-MM-DD').startOf('day')
+          startMoment = moment(item.start_date_demand, "YYYY-MM-DD").startOf("day")
           break
         case 1:
-          startMoment = moment(item.start_date_engage, 'YYYY-MM-DD').startOf('day')
+          startMoment = moment(item.start_date_engage, "YYYY-MM-DD").startOf("day")
           break
         case 2:
-          startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD').startOf('day')
+          startMoment = moment(item.start_date_estimated, "YYYY-MM-DD").startOf("day")
           break
         default:
           break
       }
-      const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD') === this.startGraphData ? moment(this.reportingDates[0], 'YYYY-MM-DD') : this.startGraphData
+      const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD") === this.startGraphData ? moment(this.reportingDates[0], "YYYY-MM-DD") : this.startGraphData
       if (startMoment >= firstMoment) return true
       return false
     },
@@ -580,18 +706,18 @@ export default {
             const phase = item.phases[phIndex]
             switch (type) {
               case 0:
-                endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
+                endMoment = moment(phase.end_date_demand, "YYYY-MM-DD").startOf("day")
                 break
               case 1:
-                endMoment = moment(phase.end_date_engage, 'YYYY-MM-DD').startOf('day')
+                endMoment = moment(phase.end_date_engage, "YYYY-MM-DD").startOf("day")
                 break
               case 2:
-                endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+                endMoment = moment(phase.end_date_estimated, "YYYY-MM-DD").startOf("day")
                 break
               default:
                 break
             }
-            const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') : this.endGraphData
+            const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], "YYYY-MM-DD") === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], "YYYY-MM-DD") : this.endGraphData
             if (endMoment >= lastMoment) results.push(false)
             results.push(true)
             phIndex += 1
@@ -601,18 +727,18 @@ export default {
       }
       switch (type) {
         case 0:
-          endMoment = moment(item.end_date_demand, 'YYYY-MM-DD').startOf('day')
+          endMoment = moment(item.end_date_demand, "YYYY-MM-DD").startOf("day")
           break
         case 1:
-          endMoment = moment(item.end_date_engage, 'YYYY-MM-DD').startOf('day')
+          endMoment = moment(item.end_date_engage, "YYYY-MM-DD").startOf("day")
           break
         case 2:
-          endMoment = moment(item.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+          endMoment = moment(item.end_date_estimated, "YYYY-MM-DD").startOf("day")
           break
         default:
           break
       }
-      const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], 'YYYY-MM-DD') : this.endGraphData
+      const lastMoment = moment(this.reportingDates[this.reportingDates.length - 1], "YYYY-MM-DD") === this.endGraphData ? moment(this.reportingDates[this.reportingDates.length - 1], "YYYY-MM-DD") : this.endGraphData
       if (endMoment >= lastMoment) return false
       return true
     },
@@ -628,20 +754,26 @@ export default {
             let startMoment = 0
             let endMoment = 0
             if (type === 0) {
-              startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
-              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')
-              endMoment = moment(phase.end_date_demand, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_demand, "YYYY-MM-DD").startOf("day")
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_demand, "YYYY-MM-DD").startOf("day")) {
+                startMoment = moment(item.phases[phIndex - 1].end_date_demand, "YYYY-MM-DD").startOf("day")
+              }
+              endMoment = moment(phase.end_date_demand, "YYYY-MM-DD").startOf("day")
             } else if (type === 1) {
-              startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
-              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')
-              endMoment = moment(phase.end_date_engage, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_engage, "YYYY-MM-DD").startOf("day")
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_engage, "YYYY-MM-DD").startOf("day")) {
+                startMoment = moment(item.phases[phIndex - 1].end_date_engage, "YYYY-MM-DD").startOf("day")
+              }
+              endMoment = moment(phase.end_date_engage, "YYYY-MM-DD").startOf("day")
             } else if (type === 2) {
-              startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
-              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')) startMoment = moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')
-              endMoment = moment(phase.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_estimated, "YYYY-MM-DD").startOf("day")
+              if (phIndex !== 0 && startMoment < moment(item.phases[phIndex - 1].end_date_estimated, "YYYY-MM-DD").startOf("day")) {
+                startMoment = moment(item.phases[phIndex - 1].end_date_estimated, "YYYY-MM-DD").startOf("day")
+              }
+              endMoment = moment(phase.end_date_estimated, "YYYY-MM-DD").startOf("day")
             }
-            if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-            if (endMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) endMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            if (startMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) startMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+            if (endMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) endMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
             if (startMoment < this.startGraphData) startMoment = this.startGraphData
             if (endMoment > this.endGraphData) endMoment = this.endGraphData
             const duration = moment.duration(endMoment.diff(startMoment))
@@ -654,22 +786,22 @@ export default {
         let endMoment = 0
         switch (type) {
           case 0:
-            startMoment = moment(item.start_date_demand, 'YYYY-MM-DD').startOf('day')
-            endMoment = moment(item.end_date_demand, 'YYYY-MM-DD').startOf('day')
+            startMoment = moment(item.start_date_demand, "YYYY-MM-DD").startOf("day")
+            endMoment = moment(item.end_date_demand, "YYYY-MM-DD").startOf("day")
             break
           case 1:
-            startMoment = moment(item.start_date_engage, 'YYYY-MM-DD').startOf('day')
-            endMoment = moment(item.end_date_engage, 'YYYY-MM-DD').startOf('day')
+            startMoment = moment(item.start_date_engage, "YYYY-MM-DD").startOf("day")
+            endMoment = moment(item.end_date_engage, "YYYY-MM-DD").startOf("day")
             break
           case 2:
-            startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD').startOf('day')
-            endMoment = moment(item.end_date_estimated, 'YYYY-MM-DD').startOf('day')
+            startMoment = moment(item.start_date_estimated, "YYYY-MM-DD").startOf("day")
+            endMoment = moment(item.end_date_estimated, "YYYY-MM-DD").startOf("day")
             break
           default:
             break
         }
-        if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-        if (endMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) endMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+        if (startMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) startMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+        if (endMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) endMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
         if (startMoment < this.startGraphData) startMoment = this.startGraphData
         if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
@@ -689,19 +821,19 @@ export default {
             const phase = item.phases[phIndex]
             let firstMoment
             if (type === 0) {
-              startMoment = moment(phase.start_date_demand, 'YYYY-MM-DD').startOf('day')
-              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_demand, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_demand, "YYYY-MM-DD").startOf("day")
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], "YYYY-MM-DD") : moment(item.phases[phIndex - 1].end_date_demand, "YYYY-MM-DD").startOf("day")
             } else if (type === 1) {
-              startMoment = moment(phase.start_date_engage, 'YYYY-MM-DD').startOf('day')
-              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_engage, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_engage, "YYYY-MM-DD").startOf("day")
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], "YYYY-MM-DD") : moment(item.phases[phIndex - 1].end_date_engage, "YYYY-MM-DD").startOf("day")
             } else if (type === 2) {
-              startMoment = moment(phase.start_date_estimated, 'YYYY-MM-DD').startOf('day')
-              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], 'YYYY-MM-DD') : moment(item.phases[phIndex - 1].end_date_estimated, 'YYYY-MM-DD').startOf('day')
+              startMoment = moment(phase.start_date_estimated, "YYYY-MM-DD").startOf("day")
+              firstMoment = phIndex === 0 ? moment(this.reportingDates[0], "YYYY-MM-DD") : moment(item.phases[phIndex - 1].end_date_estimated, "YYYY-MM-DD").startOf("day")
             }
-            if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-            if (firstMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
+            if (startMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) startMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+            if (firstMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
             // if (item.id === 9 && type === 1) console.log('start:', startMoment.toString('YYYY-MM-DD'), 'first:', firstMoment.toString('YYYY-MM-DD'))
-            const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
+            const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
             result = duration === 0 ? 0 : duration * 24
             pstarts.push(result)
             phIndex += 1
@@ -713,19 +845,19 @@ export default {
         let startMoment
         switch (type) {
           case 0:
-            startMoment = moment(item.start_date_demand, 'YYYY-MM-DD')
+            startMoment = moment(item.start_date_demand, "YYYY-MM-DD")
             break
           case 1:
-            startMoment = moment(item.start_date_engage, 'YYYY-MM-DD')
+            startMoment = moment(item.start_date_engage, "YYYY-MM-DD")
             break
           case 2:
-            startMoment = moment(item.start_date_estimated, 'YYYY-MM-DD')
+            startMoment = moment(item.start_date_estimated, "YYYY-MM-DD")
             break
           default:
             break
         }
-        const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
-        const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
+        const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+        const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
         result = duration * 24
         return result
       }
@@ -760,24 +892,24 @@ export default {
       else this.subChildCollapse = index
     },
     isToday(date) {
-      return moment().isSame(date, 'day')
+      return moment().isSame(date, "day")
     },
     getWeek(date) {
-      return date.format('dd').substring(0, 1)
+      return date.format("dd").substring(0, 1)
     },
     getDay(date) {
-      return date.format('D')
+      return date.format("D")
     },
     getMonth(date) {
-      return date.format('MMM YYYY')
+      return date.format("MMM YYYY")
     },
     hideModal() {
       this.$refs.portfolio_reporting_plan_update.hide()
     },
     onUpdate() {
-      this.$emit('update-clicked')
+      this.$emit("update-clicked")
       // this.$refs.portfolio_reporting_plan_update.hide()
-    }
+    },
   },
 }
 </script>
@@ -787,4 +919,5 @@ export default {
 
 .rotate-icon {
   transform: rotate(180deg);
-}</style>
+}
+</style>
