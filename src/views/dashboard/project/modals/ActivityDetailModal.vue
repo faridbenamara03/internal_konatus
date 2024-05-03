@@ -184,6 +184,17 @@
         </div>
       </div>
       <div class="form-group">
+        <div class="select-box">
+          <label>Activity</label>
+          <v-select
+            :options="activityList"
+            placeholder="Select Task"
+            outlined
+            multiple
+          />
+        </div>
+      </div>
+      <div class="form-group">
         <b-button
           variant="outline-primary"
         >
@@ -195,17 +206,6 @@
         >
           Edit Phase
         </b-button>
-      </div>
-      <div class="form-group">
-        <div class="select-box">
-          <label>Activity</label>
-          <v-select
-            :options="activityList"
-            placeholder="Select Task"
-            outlined
-            multiple
-          />
-        </div>
       </div>
       <div class="form-group">
         <div class="detail-box">
@@ -251,10 +251,7 @@
           />
         </div>
       </div>
-      <div
-        v-if="opt_skillset !== 0"
-        class="form-group has-switch"
-      >
+      <div class="form-group has-switch">
         <div class="detail-box">
           <feather-icon
             icon="BarChart2Icon"
@@ -279,15 +276,12 @@
           Skillset option
         </b-form-checkbox>
       </div>
-      <div
-        v-if="opt_skillset !== 0"
-        class="form-group"
-      >
+      <div class="form-group">
         <div class="row">
           <!-- <div class="col-6">
           </div> -->
           <div class="col">
-            <label>Load</label>
+            <label>Total Load</label>
             <b-form-input
               type="number"
               :value="loadData"
@@ -296,7 +290,7 @@
             />
           </div>
           <div class="col">
-            <label>Duration</label>
+            <label>Total Duration</label>
             <b-form-input
               type="number"
               :value="durationData"
@@ -305,7 +299,7 @@
             />
           </div>
           <div class="col">
-            <label>FTE</label>
+            <label>Total FTE</label>
             <b-form-input
               type="number"
               :value="fteData"
@@ -314,8 +308,79 @@
             />
           </div>
         </div>
+        <div class="row">
+          <!-- <div class="col-6">
+          </div> -->
+          <div class="col">
+            <label>Load(Demand)</label>
+            <b-form-input
+              type="number"
+              :value="loadDemandData"
+              v-model="loadDemandData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>Duration(Demand)</label>
+            <b-form-input
+              type="number"
+              :value="durationDemandData"
+              v-model="durationDemandData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>FTE(Demand)</label>
+            <b-form-input
+              type="number"
+              :value="fteDemandData"
+              v-model="fteDemandData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>%acc Rest to do(Estimated)</label>
+            <b-form-input
+              type="number"
+              :value="accEstimateDate"
+              v-model="accEstimateDate"
+              :disabled="true"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-6">
+          </div> -->
+          <div class="col">
+            <label>Load(Real/Estimated)</label>
+            <b-form-input
+              type="number"
+              :value="loadEstimatedData"
+              v-model="loadEstimatedData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>Duration(Real/Estimated)</label>
+            <b-form-input
+              type="number"
+              :value="durationEstimateData"
+              v-model="durationEstimatData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>FTE(Real/Estimated)</label>
+            <b-form-input
+              type="number"
+              :value="fteEstimateData"
+              v-model="fteEstimateData"
+              :disabled="true"
+            />
+          </div>
+        </div>
         <div
-          v-if="effortDetailShow"
+          v-if="opt_skillset !== 0 && effortDetailShow"
           class="row pt-1">
           <div class="col-6">
             <label>Skillset</label>
@@ -392,6 +457,13 @@ export default {
       loadData: 0,
       durationData: 0,
       fteData: 0,
+      loadDemandData: 0,
+      durationDemandData: 0,
+      fteDemandData: 0,
+      loadEstimateData: 0,
+      durationEstimateData: 0,
+      fteEstimateDate: 0,
+      accEstimateData: 0,
       skillset: 0,
       opt_skillset: 0,
       effortDetailShow: true,
@@ -454,6 +526,13 @@ export default {
       this.loadData = this.selectedActivityData.phase.effort.load
       this.durationData = this.selectedActivityData.phase.effort.duration
       this.fteData = this.selectedActivityData.phase.effort.fte
+      this.loadDemandData = this.selectedActivityData.phase.effort.loadDemand
+      this.durationDemandData = this.selectedActivityData.phase.effort.durationDemand
+      this.fteDemandData = this.selectedActivityData.phase.effort.fteDemand
+      this.accEstimateData = this.selectedActivityData.phase.effort.accEstimated
+      this.loadEstimateData = this.selectedActivityData.phase.effort.loadEstimated
+      this.durationEstimateData = this.selectedActivityData.phase.effort.durationEstimated
+      this.fteEstimateData = this.selectedActivityData.phase.effort.fteEstimateDemand
       if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
         this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       }

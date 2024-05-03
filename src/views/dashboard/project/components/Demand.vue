@@ -1,5 +1,13 @@
 <template>
-  <div class="project-demand-view">
+  <div class="project-demand-view w-100">
+    <div class="d-flex justify-content-end">
+      <b-button
+        class="ml-1 mt-2"
+        variant="primary"
+      >
+        <span>Link a project</span>
+      </b-button>
+    </div>
     <div
       v-if="tabState === 'team'"
       style="padding: 40px 15px"
@@ -93,6 +101,9 @@
 </template>
 
 <script>
+import {
+  BButton
+} from 'bootstrap-vue'
 import { isEmpty } from "@/views/utils"
 import ActivityDetailModal from '../modals/ActivityDetailModal.vue'
 import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
@@ -100,7 +111,8 @@ import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
 export default {
   components: {
     ActivityDetailModal,
-    CustomCollapse
+    CustomCollapse,
+    BButton
   },
   props: {
     teamData: {

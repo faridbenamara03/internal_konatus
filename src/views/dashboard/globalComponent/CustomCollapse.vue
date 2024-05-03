@@ -74,6 +74,20 @@
                   icon="MailIcon"
                 />
               </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
+                  style="color: #7167E8"
+                  icon="ClockIcon"
+                />
+              </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) === 100"
+                  style="color: #686D7C"
+                  icon="CheckCircleIcon"
+                />
+              </div>
               <div style="width:20px">
                 <b-form-checkbox
                   v-model="activity.isSelected"
@@ -139,8 +153,8 @@
                 @click="() => handleActivityDetails(activity, team)"
               >
                 <p
-                 class="title"
-                 :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
+                  class="title"
+                  :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
                   {{ activity.title }}
                 </p>
               </div>
@@ -148,6 +162,20 @@
                 <feather-icon
                   v-if="parseInt(activity.acc) === 0"
                   icon="MailIcon"
+                />
+              </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
+                  style="color: #7167E8"
+                  icon="ClockIcon"
+                />
+              </div>
+              <div>
+                <feather-icon
+                  v-if="parseInt(activity.acc) === 100"
+                  style="color: #686D7C"
+                  icon="CheckCircleIcon"
                 />
               </div>
               <div style="width:20px">
