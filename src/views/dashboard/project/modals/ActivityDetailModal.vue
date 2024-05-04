@@ -315,7 +315,6 @@
             <label>Load(Demand)</label>
             <b-form-input
               type="number"
-              :value="loadDemandData"
               v-model="loadDemandData"
               :disabled="true"
             />
@@ -324,7 +323,6 @@
             <label>Duration(Demand)</label>
             <b-form-input
               type="number"
-              :value="durationDemandData"
               v-model="durationDemandData"
               :disabled="true"
             />
@@ -333,7 +331,6 @@
             <label>FTE(Demand)</label>
             <b-form-input
               type="number"
-              :value="fteDemandData"
               v-model="fteDemandData"
               :disabled="true"
             />
@@ -342,8 +339,7 @@
             <label>%acc Rest to do(Estimated)</label>
             <b-form-input
               type="number"
-              :value="accEstimateDate"
-              v-model="accEstimateDate"
+              v-model="accEstimateData"
               :disabled="true"
             />
           </div>
@@ -355,8 +351,7 @@
             <label>Load(Real/Estimated)</label>
             <b-form-input
               type="number"
-              :value="loadEstimatedData"
-              v-model="loadEstimatedData"
+              v-model="loadEstimateData"
               :disabled="true"
             />
           </div>
@@ -364,8 +359,7 @@
             <label>Duration(Real/Estimated)</label>
             <b-form-input
               type="number"
-              :value="durationEstimateData"
-              v-model="durationEstimatData"
+              v-model="durationEstimateData"
               :disabled="true"
             />
           </div>
@@ -373,7 +367,6 @@
             <label>FTE(Real/Estimated)</label>
             <b-form-input
               type="number"
-              :value="fteEstimateData"
               v-model="fteEstimateData"
               :disabled="true"
             />
@@ -462,7 +455,7 @@ export default {
       fteDemandData: 0,
       loadEstimateData: 0,
       durationEstimateData: 0,
-      fteEstimateDate: 0,
+      fteEstimateData: 0,
       accEstimateData: 0,
       skillset: 0,
       opt_skillset: 0,
@@ -485,8 +478,8 @@ export default {
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     c_JobData() {
-      const dt = ["System auto select", ...this.teamdata]
-      return dt
+      console.log("jobData:", this.$store.state.globalState.weJobData)
+      return this.$store.state.globalState.weJobData
     },
     c_SelectedActivity() {
       console.log("selectedActivityData:", this.selectedActivityData)
@@ -505,7 +498,7 @@ export default {
     isOpen(val) {
       this.show = val
     },
-    props: {
+    selectedActivityData: {
       immediate: true,
       handler(newVal) {
         this.initializeData(newVal) // ??
@@ -523,16 +516,16 @@ export default {
         }
         return null
       })
-      this.loadData = this.selectedActivityData.phase.effort.load
-      this.durationData = this.selectedActivityData.phase.effort.duration
-      this.fteData = this.selectedActivityData.phase.effort.fte
-      this.loadDemandData = this.selectedActivityData.phase.effort.loadDemand
-      this.durationDemandData = this.selectedActivityData.phase.effort.durationDemand
-      this.fteDemandData = this.selectedActivityData.phase.effort.fteDemand
-      this.accEstimateData = this.selectedActivityData.phase.effort.accEstimated
-      this.loadEstimateData = this.selectedActivityData.phase.effort.loadEstimated
-      this.durationEstimateData = this.selectedActivityData.phase.effort.durationEstimated
-      this.fteEstimateData = this.selectedActivityData.phase.effort.fteEstimateDemand
+      this.loadData = this.selectedActivityData.phase.effort.load_engage
+      this.durationData = this.selectedActivityData.phase.effort.duration_engage
+      this.fteData = this.selectedActivityData.phase.effort.fte_engage
+      this.loadDemandData = this.selectedActivityData.phase.effort.load_demand
+      this.durationDemandData = this.selectedActivityData.phase.effort.duration_demand
+      this.fteDemandData = this.selectedActivityData.phase.effort.fte_demand
+      this.accEstimateData = this.selectedActivityData.phase.effort.acc
+      this.loadEstimateData = this.selectedActivityData.phase.effort.load_estimated
+      this.durationEstimateData = this.selectedActivityData.phase.effort.duration_estimated
+      this.fteEstimateData = this.selectedActivityData.phase.effort.fte_estimated
       if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
         this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       }

@@ -78,6 +78,7 @@ export default {
     allOrgData: [],
     sponsors: [],
     weTeamData: [],
+    weJobData: [],
     productlines: [],
     hproductportfolios: [],
     productmanagers: [],
@@ -416,6 +417,7 @@ export default {
       state.portfolioDemandData = payload.portData.demand
       if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
         state.weTeamData = []
+        state.weJobData = []
         const pTeamData = payload.portData.demand.teams
         pTeamData.map(pt => {
           if (pt.phases && pt.phases.length > 0) {
@@ -424,6 +426,7 @@ export default {
               if (pActivity && pActivity.length > 0) {
                 pActivity.map(item => {
                   state.weTeamData.push(item.team_name)
+                  state.weJobData.push(item.job_name)
                   return null
                 })
               }
@@ -433,6 +436,7 @@ export default {
           return null
         })
         state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
+        state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
       }
       state.portfolioReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
       // state.portfolioReportingData = payload.portData.reporting
