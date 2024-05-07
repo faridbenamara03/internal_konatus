@@ -38,7 +38,7 @@
             <div>
               <label>ACTIVITY ID</label>
               <p v-if="selectedActivityData.phase">
-                {{ selectedActivityData.phase.activityId }}
+                {{ selectedActivityData.phase.id }}
               </p>
             </div>
             <div style="display: flex">
@@ -718,7 +718,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Save
+        Split
       </b-button>
     </template>
   </b-modal>
@@ -774,23 +774,11 @@ export default {
       newActivityId2: Vue.faker().internet.ip(),
       effortData1: [
         {
-          skill: "Design",
-          load: 26,
-          duration: 40,
-          fte: 56
-        },
-        {
-          skill: "Management",
-          load: 43,
-          duration: 25,
-          fte: 34
-        },
-        {
-          skill: "Engineering",
-          load: 43,
-          duration: 45,
-          fte: 34
-        },
+          skill: null,
+          load: null,
+          duration: null,
+          fte: null
+        }
       ],
       effortData2: [
         {

@@ -314,7 +314,7 @@ export default {
   },
   data() {
     return {
-      priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorities: this.$store.state.globalState.priorityOptions,
       colorArr: ['darkgreen', 'darkred', 'darkcyan'],
       iconArr: ['ArrowUpIcon', 'ArrowDownIcon', 'MinusIcon'],
       collapseOpen: { index: 0, openState: 'flex' },

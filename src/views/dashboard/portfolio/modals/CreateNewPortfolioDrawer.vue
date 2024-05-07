@@ -101,7 +101,7 @@ export default {
       period_end_month: null,
       inputedBudgets: [],
       budget: 0,
-      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       currency: 'unit',
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],

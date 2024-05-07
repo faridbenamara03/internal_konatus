@@ -121,7 +121,7 @@ export default {
       budget_startDate: "2024-01-01",
       budget_endDate: "2024-12-31",
       newPortfolioBudget: 0,
-      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       years: ['2022', '2023', '2024', '2025'],
       currency: 'unit',

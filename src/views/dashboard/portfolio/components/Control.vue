@@ -331,7 +331,7 @@ export default {
       opened: 0,
       openedChild: 0,
       openedSub: 0,
-      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       // capsData: [],
       // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
       // c_fields: ['priority', 'value', 'budget', 'next_gate'],

@@ -189,6 +189,7 @@
           <v-select
             :options="activityList"
             placeholder="Select Task"
+            menu-props="auto"
             outlined
             multiple
           />
@@ -197,15 +198,47 @@
       <div class="form-group">
         <b-button
           variant="outline-primary"
+          @click="onClickEditPriorityBtn()"
         >
           Edit Priority
         </b-button>
         &nbsp;&nbsp;
         <b-button
           variant="outline-primary"
+          @click="onClickEditPhaseBtn()"
         >
           Edit Phase
         </b-button>
+      </div>
+      <div
+        v-if="showEditPriority === true"
+        class="form-group"
+      >
+        <div class="select-box">
+          <label>Priority</label>
+          <v-select
+            v-model="selectedPriority"
+            :options="priorityOptions"
+            placeholder="Select Priority"
+            menu-props="auto"
+            outlined
+          />
+        </div>
+      </div>
+      <div
+        v-if="showEditPhase === true"
+        class="form-group"
+      >
+        <div class="select-box">
+          <label>Phase</label>
+          <v-select
+            v-model="selectedPhase"
+            :options="phaseList"
+            placeholder="Select Phase"
+            menu-props="auto"
+            outlined
+          />
+        </div>
       </div>
       <div class="form-group">
         <div class="detail-box">
@@ -222,8 +255,9 @@
         <div class="select-box">
           <label>Jobs Available</label>
           <v-select
-            :options="c_JobData"
             v-model="selectedJob"
+            :options="c_JobData"
+            menu-props="auto"
             placeholder="Select a job"
             outlined
           />
@@ -246,6 +280,7 @@
           <v-select
             v-model="selectedTeam"
             :options="c_teamData"
+            menu-props="auto"
             placeholder="Select Team"
             outlined
             @input="teamSelectHandle"
@@ -337,10 +372,18 @@
             />
           </div>
           <div class="col">
-            <label>%acc Rest to do(Estimated)</label>
+            <label>%acc</label>
             <b-form-input
               type="number"
-              v-model="accEstimateData"
+              v-model="accData"
+              :disabled="true"
+            />
+          </div>
+          <div class="col">
+            <label>Rest To Do</label>
+            <b-form-input
+              type="number"
+              v-model="restToDoData"
               :disabled="true"
             />
           </div>
@@ -381,6 +424,7 @@
             <v-select
               :options="['Design Workflow', 'Program Engineering', 'Project Management']"
               v-model="skillset"
+              menu-props="auto"
               placeholder="Select skillset"
               outlined
               @input="effortChange('skill', 0, $event)"
@@ -404,8 +448,8 @@
         Save
       </b-button>
     </template>
-    <!-- <activity-split-modal :selected-activity-data="c_SelectedActivity" />
-    <activity-merge-modal :selected-activity-data="c_SelectedActivity" /> -->
+    <activity-split-modal :selected-activity-data="c_SelectedActivity" />
+    <activity-merge-modal :selected-activity-data="c_SelectedActivity" />
   </b-modal>
 </template>
 
@@ -415,13 +459,13 @@ import {
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
-// import ActivitySplitModal from './ActivitySplitModal.vue'
-// import ActivityMergeModal from './ActivityMergeModal.vue'
+import ActivitySplitModal from './ActivitySplitModal.vue'
+import ActivityMergeModal from './ActivityMergeModal.vue'
 
 export default {
   components: {
-    // ActivityMergeModal,
-    // ActivitySplitModal,
+    ActivityMergeModal,
+    ActivitySplitModal,
     BButton,
     BFormCheckbox,
     BFormInput,
@@ -448,6 +492,10 @@ export default {
       show: false,
       selectedTeam: "System auto select",
       selectedJob: " ",
+      selectedPriority: "",
+      selectedPhase: "",
+      priorityOptions: this.$store.state.globalState.priorityOptions,
+      phaseList: this.$store.state.globalState.allPhaseTitleData,
       c_teamData: this.$store.state.globalState?.weTeamData,
       loadData: 0,
       durationData: 0,
@@ -458,13 +506,16 @@ export default {
       loadEstimateData: 0,
       durationEstimateData: 0,
       fteEstimateData: 0,
-      accEstimateData: 0,
+      accData: 0,
+      restToDoData: 0,
       skillset: 0,
       opt_skillset: 0,
       effortDetailShow: true,
       externalEditable: false,
       externalSystem: ["Jira"],
-      externalId: "JR-12345"
+      externalId: "JR-12345",
+      showEditPriority: false,
+      showEditPhase: false
     }
   },
   computed: {
@@ -480,11 +531,9 @@ export default {
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     c_JobData() {
-      console.log("jobData:", this.$store.state.globalState.weJobData)
       return this.$store.state.globalState.weJobData
     },
     c_SelectedActivity() {
-      console.log("selectedActivityData:", this.selectedActivityData)
       return this.selectedActivityData
     },
     activityList() {
@@ -506,6 +555,12 @@ export default {
         this.initializeData(newVal) // ??
       },
     },
+    selectedJob: {
+      immediate: true,
+      handler(newVal) {
+        this.jobSelectHandle(newVal) // ??
+      },
+    },
   },
   methods: {
     initializeData(data) {
@@ -524,30 +579,57 @@ export default {
       this.loadDemandData = this.selectedActivityData.phase.effort.load_demand
       this.durationDemandData = this.selectedActivityData.phase.effort.duration_demand
       this.fteDemandData = this.selectedActivityData.phase.effort.fte_demand
-      this.accEstimateData = this.selectedActivityData.phase.effort.acc
+      this.accData = this.selectedActivityData.phase.acc
       this.loadEstimateData = this.selectedActivityData.phase.effort.load_estimated
+      this.restToDoData = (1 - this.accData) * this.loadEstimateData
       this.durationEstimateData = this.selectedActivityData.phase.effort.duration_estimated
       this.fteEstimateData = this.selectedActivityData.phase.effort.fte_estimated
       this.selectedJob = this.selectedActivityData.phase.job_name
       this.selectedTeam = this.selectedActivityData.phase.team_name
+      this.selectedPriority = this.priorityOptions[this.selectedActivityData.phase.priority - 1]
       if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
         this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       }
     },
+    onClickEditPriorityBtn() {
+      this.showEditPriority = !this.showEditPriority
+    },
+    onClickEditPhaseBtn() {
+      this.showEditPhase = !this.showEditPhase
+    },
+    jobSelectHandle(data) {
+      const globalTeams = this.$store.state.globalState.globalOrganizationTeamData[0]
+      const tempTeamData = []
+      if (globalTeams.children && globalTeams.children.length > 0) {
+        globalTeams.children.map(item => {
+          if (item.title === data) {
+            if (item.children && item.children.length > 0) {
+              item.children.map(t => {
+                tempTeamData.push(t.title)
+                return null
+              })
+            }
+          }
+          return null
+        })
+      }
+      this.c_teamData = tempTeamData
+      this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
+    },
     validateEffortData(data, type) {
-      if (parseFloat(data) === 0 || data === null) return
+      if (parseFloat(data) === 0 || data === '' || data === null || data === undefined || Number.isNaN(data)) return
       switch (type) {
         case 1:
-          if (parseFloat(this.fteData) !== 0 && this.fteData !== null) this.durationData = parseFloat(data) / parseFloat(this.fteData)
-          if (parseFloat(this.durationData) !== 0 && this.durationData !== null) this.fteData = parseFloat(data) / parseFloat(this.durationData)
+          if (parseFloat(this.fteData) !== 0 && this.fteData !== '' && this.fteData !== null && this.fteData !== undefined && !Number.isNaN(this.fteData)) this.durationData = parseFloat(data) / parseFloat(this.fteData)
+          if (parseFloat(this.durationData) !== 0 && this.durationData !== '' && this.durationData !== null && this.durationData !== undefined && !Number.isNaN(this.durationData)) this.fteData = parseFloat(data) / parseFloat(this.durationData)
           break
         case 2:
-          if (parseFloat(this.fteData) !== 0 && this.fteData !== null) this.loadData = parseFloat(data) * parseFloat(this.fteData)
-          if (parseFloat(this.loadData) !== 0 && this.loadData !== null) this.fteData = parseFloat(this.loadData) / parseFloat(data)
+          if (parseFloat(this.fteData) !== 0 && this.fteData !== '' && this.fteData !== null && this.fteData !== undefined && !Number.isNaN(this.fteData)) this.loadData = parseFloat(data) * parseFloat(this.fteData)
+          if (parseFloat(this.loadData) !== 0 && this.loadData !== '' && this.loadData !== null && this.loadData !== undefined && !Number.isNaN(this.loadData)) this.fteData = parseFloat(this.loadData) / parseFloat(data)
           break
         case 3:
-          if (parseFloat(this.durationData) !== 0 && this.durationData !== null) this.loadData = parseFloat(data) * parseFloat(this.durationData)
-          if (parseFloat(this.loadData) !== 0 && this.loadData !== null) this.durationData = parseFloat(this.loadData) / parseFloat(data)
+          if (parseFloat(this.durationData) !== 0 && this.durationData !== '' && this.durationData !== null && this.durationData !== undefined && !Number.isNaN(this.durationData)) this.loadData = parseFloat(data) * parseFloat(this.durationData)
+          if (parseFloat(this.loadData) !== 0 && this.loadData !== '' && this.loadData !== null && this.loadData !== undefined && !Number.isNaN(this.loadData)) this.durationData = parseFloat(this.loadData) / parseFloat(data)
           break
         default:
           break

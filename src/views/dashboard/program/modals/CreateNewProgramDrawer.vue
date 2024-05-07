@@ -527,7 +527,7 @@ export default {
   },
   data() {
     return {
-      priorityOptions: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
       sponsorOptons: this.$store.state.globalState.sponsors,
       productLineOptions: this.$store.state.globalState.productlines,

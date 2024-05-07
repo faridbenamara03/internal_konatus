@@ -109,6 +109,8 @@
               </b-button>
               <b-button
                 v-if="!demandTableEditable"
+                v-b-modal.modal-link-project
+                :disabled="selectedWorkElement.length === 0"
                 class="ml-1"
                 variant="primary"
               >
@@ -419,6 +421,10 @@
       :data="projectElementTeamData"
       @onSubmit="handleRequestQuote"
     />
+    <modal-link-project
+      :data="selectedWorkElement"
+      @onSubmit="handleLinkProject"
+    />
     <import-modal />
     <import-loader-modal />
     <InsertNewTaskModal />
@@ -442,6 +448,7 @@ import { MonthPicker } from 'vue-month-picker'
 import { isEmpty } from "@/views/utils"
 import Drawer from "vue-simple-drawer"
 import ModalRequestQuote from '../globalComponent/RequestQuoteModal.vue'
+import ModalLinkProject from '../globalComponent/LinkProjectModal.vue'
 import ImportModal from './modals/ImportModal.vue'
 import ImportLoaderModal from './modals/ImportLoaderModal.vue'
 import Demand from './components/Demand.vue'
@@ -468,6 +475,7 @@ export default {
     ImportModal,
     ImportLoaderModal,
     ModalRequestQuote,
+    ModalLinkProject,
     Drawer,
     CreateProgramDrawer,
     MonthPicker,
@@ -545,6 +553,7 @@ export default {
   },
   computed: {
     selectedWorkElement() {
+      console.log("selectedWorkElement:", this.$store.state.globalState.selectedWorkElement)
       return this.$store.state.globalState.selectedWorkElement
     },
     openCreateNewProjectDrawer() {
@@ -661,6 +670,9 @@ export default {
     },
     handleRequestQuote(res) {
       console.log(res)
+    },
+    handleLinkProject(res) {
+      console.log("Res:", res)
     },
     handleDemandState(tabState) {
       this.demandTabState = tabState

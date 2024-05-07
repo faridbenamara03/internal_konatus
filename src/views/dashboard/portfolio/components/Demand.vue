@@ -1300,7 +1300,7 @@ export default {
       opened: 0,
       openedPj: 0,
       openedPg: 0,
-      priorities: ['Highest', 'High', 'Medium', 'Low', 'Lowest'],
+      priorities: this.$store.state.globalState.priorityOptions,
       prioritieSelect: [
         { label: 'Highest', value: 1 },
         { label: 'High', value: 2 },

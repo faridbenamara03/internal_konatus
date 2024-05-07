@@ -629,7 +629,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Save
+        Merge
       </b-button>
     </template>
   </b-modal>
@@ -766,11 +766,26 @@ export default {
     },
     toMergeList() {
       const arr = []
-      this.$store.state.globalState.teamsState[0].phases[2].activities.flat().forEach(t => {
-        if (this.selectedActivityData.phase.activityId !== t.activityId) {
-          arr.push(t.activityId)
-        }
-      })
+      // this.$store.state.globalState.portfolioDemandData.teams[0].phases[2].activities.flat().forEach(t => {
+      //   if (this.selectedActivityData.phase.id !== t.id) {
+      //     arr.push(t.id)
+      //   }
+      // })
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase.id !== a.id) {
+                    arr.push(a.id)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
       return arr
     },
     c_TeamTitle() {
@@ -860,7 +875,23 @@ export default {
       }
     },
     onActivitySelect(selectedActivityId) {
-      const selectedActivity = this.$store.state.globalState.teamsState[0].phases[2].activities.flat().find(t => t.activityId === selectedActivityId)
+      // const selectedActivity = this.$store.state.globalState.teamsState[0].phases[2].activities.flat().find(t => t.activityId === selectedActivityId)
+      let selectedActivity = {}
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (selectedActivityId === a.id) {
+                    selectedActivity = a
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
       this.toMerge = selectedActivity
       const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
       const mergedDuration = this.merged.effort.duration + selectedActivity.effort.duration

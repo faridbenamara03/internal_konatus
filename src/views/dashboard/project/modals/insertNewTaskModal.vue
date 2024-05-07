@@ -60,7 +60,7 @@
     />
     <b-form-select
       v-model="priority"
-      :options="['Highest', 'High', 'Low', 'Lowest']"
+      :options="priorityOptions"
     />
   </b-modal>
 </template>
@@ -108,6 +108,7 @@ export default {
       name: '',
       selectedOptions: '',
       allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },

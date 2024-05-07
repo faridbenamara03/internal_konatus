@@ -87,6 +87,7 @@ export default {
     hprogramdirectors: [],
     projectmanagers: [],
     programdirectors: [],
+    priorityOptions: [],
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
@@ -252,6 +253,10 @@ export default {
       state.architects = data.architect.filter((value, index, array) => array.indexOf(value) === index)
       state.programdirectors = data.programdirector.filter((value, index, array) => array.indexOf(value) === index)
       state.projectmanagers = data.projectmanager.filter((value, index, array) => array.indexOf(value) === index)
+      // state.priorityOptions = data.priorities
+      data.priorities.forEach(t => {
+        state.priorityOptions.push(t.prior_label)
+      })
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       let phaseData = data
@@ -400,6 +405,9 @@ export default {
     },
     TEAM_PHASE_SELECT_ALL(state, team) {
       console.log(state, team)
+    },
+    SUBMIT_LINK_PROJECT(state) {
+      console.log(state)
     },
     SUBMIT_TEAM_REQUEST_QUOTE(state) {
       const reArr = [...state.selectedWorkElement]
@@ -582,7 +590,6 @@ export default {
     get_from_selected_nav_id(ctx, payload) {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
-        console.log("A:")
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
@@ -592,7 +599,6 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        console.log("start:", ctx.state.selectedFromDate)
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }

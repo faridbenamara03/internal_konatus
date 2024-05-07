@@ -92,7 +92,7 @@
       <div class="flex-1">
         <v-select
           v-model="selectedPriority"
-          :options="['Highest', 'High', 'Low', 'Lowest']"
+          :options="priorityOptions"
           placeholder="Select Priority"
           outlined
           class="mb-2"
@@ -231,6 +231,7 @@ export default {
         { text: 'Engaged', value: 'engaged' },
         { text: 'Quote', value: 'quote' },
       ],
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       isPriority: true,
       isLoad: true,
       isValue: false,
