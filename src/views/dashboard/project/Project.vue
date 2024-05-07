@@ -267,7 +267,10 @@
         >
           <Reporting
             v-if="!reportingTableEditable"
+            :data="reportingData"
+            :otype="selectedNavType"
             :reporting-state="reportingState"
+            :selectedmonth="selectedMonth"
           />
           <TableEditable
             v-if="reportingTableEditable"
@@ -505,7 +508,8 @@ export default {
       projectElementTeamData: this.$store.state.globalState.teamsState,
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
-      selectedMonth: `01 / ${new Date().getFullYear()} - 12 / ${new Date().getFullYear()}`,
+      // selectedMonth: `01 / ${new Date().getFullYear()} - 12 / ${new Date().getFullYear()}`,
+      selectedMonth: `${this.$store.state.globalState.selectedFromDate.month() + 1} / ${this.$store.state.globalState.selectedFromDate.year()} - ${this.$store.state.globalState.selectedToDate.month()} / ${this.$store.state.globalState.selectedToDate.year()}`,
       rangeArray: [],
       arr4chart: [],
       isChartView: false,
@@ -553,7 +557,6 @@ export default {
   },
   computed: {
     selectedWorkElement() {
-      console.log("selectedWorkElement:", this.$store.state.globalState.selectedWorkElement)
       return this.$store.state.globalState.selectedWorkElement
     },
     openCreateNewProjectDrawer() {
@@ -626,25 +629,18 @@ export default {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
     onRangeFromChange(value) {
+      console.log('from:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
-      this.arr4chart[0] = `${value.year}-${value.monthIndex}-15`
       this.selectedMonth = this.rangeArray.join(' - ')
-      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-        const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
-        this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
-      }
+      this.$store.commit('globalState/UPDATE_SELECTED_FROM_DATE', value)
     },
     onRangeToChange(value) {
+      console.log('to:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
-      this.arr4chart[1] = `${value.year}-${value.monthIndex}-15`
       this.selectedMonth = this.rangeArray.join(' - ')
-      // if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-      //   const betweenMonths = this.getBetweenMonthsArr(this.arr4chart[0], this.arr4chart[1])
-      //   this.$store.commit('globalState/ON_RANGE_CHANGE', betweenMonths)
-      //   this.popoverShow = false
-      // }
+      this.$store.commit('globalState/UPDATE_SELECTED_TO_DATE', value)
     },
     getBetweenMonthsArr(startD, endD) {
       const startDate = moment(startD)

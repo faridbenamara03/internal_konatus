@@ -14,7 +14,7 @@
           </div>
           <div
             class="report-block--head"
-            style="background-color: #384056"
+            style="background-color: #384056;height:77px"
             @click="onParentCollapseClick()"
           >
             <feather-icon
@@ -55,12 +55,15 @@
               <div
                 v-for="(item2, index2) in item1.work_elements"
                 :key="index2"
-                class="report-block-child"
-                style="background-color: #212739;border-bottom: 1px solid grey;"
+                class="report-block-child d-flex justify-content-between"
+                style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
               >
                 <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                   {{ item2.title }}({{ item2.acc }}%)
                 </p>
+                <b-button style="height: 40px;padding:0px">
+                  manual update
+                </b-button>
               </div>
             </template>
           </div>
@@ -77,7 +80,7 @@
               }}
             </p>
           </div>
-          <div class="report-block--head" style="background-color: #384056">
+          <div class="report-block--head" style="background-color: #384056;height:77px">
             <p class="m-0 text-uppercase">
               {{
                 itemsForReporting === undefined || itemsFormReporting === null
@@ -96,10 +99,13 @@
             </p>
           </div>
           <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div class="report-block-child" style="background-color: #212739;border-bottom: 1px solid grey;">
+            <div class="report-block-child d-flex justify-content-between" style="background-color: #212739;border-bottom: 1px solid grey;height:51px">
               <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                 {{ item1.title }}({{ item1.acc }}%)
               </p>
+              <b-button style="height: 40px;padding:0px">
+                manual update
+              </b-button>
             </div>
           </div>
         </div>
@@ -115,7 +121,7 @@
               }}
             </p>
           </div>
-          <div class="report-block--head" style="background-color: #384056">
+          <div class="report-block--head" style="background-color: #384056;height:77px">
             <p class="m-0 text-uppercase">
               {{
                 itemsForReporting === undefined || itemsFormReporting === null
@@ -134,10 +140,13 @@
             </p>
           </div>
           <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div class="report-block-child" style="background-color: #212739;border-bottom: 1px solid grey;">
+            <div class="report-block-child d-flex justify-content-between" style="background-color: #212739;border-bottom: 1px solid grey;height:51px">
               <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                 {{ item1.title }}({{ item1.acc }}%)
               </p>
+              <b-button style="height: 40px;padding:0px">
+                manual update
+              </b-button>
             </div>
           </div>
         </div>
@@ -213,7 +222,7 @@
             class="d-flex flex-column justify-content-around"
             style="height:77px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
           >
-            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 0, false)}px`">
+            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 0, false)}px`">
               <ProgramProgressBar
                 :type="0"
                 :width1="getValue(itemsForReporting, 0, false)"
@@ -221,7 +230,7 @@
                 :isendmark="isEndMark(itemsForReporting, 0, false)"
               />
             </div>
-            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
+            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
               <ProgramProgressBar
                 :type="1"
                 :width1="getValue(itemsForReporting, 1, false)"
@@ -229,7 +238,7 @@
                 :isendmark="isEndMark(itemsForReporting, 1, false)"
               />
             </div>
-            <div :style="`margin-bottom:5pxpadding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
+            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
               <ProgramProgressBar
                 :type="2"
                 :width1="getValue(itemsForReporting, 2, false)"
@@ -246,7 +255,7 @@
                 style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
               >
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     0,
                     true
@@ -261,7 +270,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     1,
                     true
@@ -276,7 +285,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     2,
                     true
@@ -304,7 +313,7 @@
                     class="d-flex flex-column justify-content-around"
                     style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
                   >
-                    <div>
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
                       <ProgramProgressBar
                         :type="0"
                         :width1="getValue(item2, 0, false)"
@@ -312,7 +321,7 @@
                         :isendmark="isEndMark(item2, 0, false)"
                       />
                     </div>
-                    <div>
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
                       <ProgramProgressBar
                         :type="1"
                         :width1="getValue(item2, 1, false)"
@@ -320,7 +329,7 @@
                         :isendmark="isEndMark(item2, 1, false)"
                       />
                     </div>
-                    <div>
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
                       <ProgramProgressBar
                         :type="2"
                         :width1="getValue(item2, 2, false)"
@@ -345,45 +354,48 @@
             style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
           >
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 0,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="0"
-                :width1="getValue(itemsForReporting, 0, false)"
-                :isstartmark="isStartMark(itemsForReporting, 0, false)"
-                :isendmark="isEndMark(itemsForReporting, 0, false)"
+                :widths="getValue(itemsForReporting, 0, true)"
+                :paddings="getStartPadding(itemsForReporting, 0, true)"
+                :isstartmark="isStartMark(itemsForReporting, 0, true)"
+                :isendmark="isEndMark(itemsForReporting, 0, true)"
               />
             </div>
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 1,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="1"
-                :width1="getValue(itemsForReporting, 1, false)"
-                :isstartmark="isStartMark(itemsForReporting, 1, false)"
-                :isendmark="isEndMark(itemsForReporting, 1, false)"
+                :widths="getValue(itemsForReporting, 1, true)"
+                :paddings="getStartPadding(itemsForReporting, 1, true)"
+                :isstartmark="isStartMark(itemsForReporting, 1, true)"
+                :isendmark="isEndMark(itemsForReporting, 1, true)"
               />
             </div>
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 2,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="2"
-                :width1="getValue(itemsForReporting, 2, false)"
-                :isstartmark="isStartMark(itemsForReporting, 2, false)"
-                :isendmark="isEndMark(itemsForReporting, 2, false)"
+                :widths="getValue(itemsForReporting, 2, true)"
+                :paddings="getStartPadding(itemsForReporting, 2, true)"
+                :isstartmark="isStartMark(itemsForReporting, 2, true)"
+                :isendmark="isEndMark(itemsForReporting, 2, true)"
               />
             </div>
           </b-card>
@@ -395,7 +407,7 @@
                 style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
               >
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     0,
                     false
@@ -409,7 +421,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     1,
                     false
@@ -423,7 +435,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     2,
                     false
@@ -451,45 +463,48 @@
             style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
           >
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 0,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="0"
-                :width1="getValue(itemsForReporting, 0, false)"
-                :isstartmark="isStartMark(itemsForReporting, 0, false)"
-                :isendmark="isEndMark(itemsForReporting, 0, false)"
+                :widths="getValue(itemsForReporting, 0, true)"
+                :paddings="getStartPadding(itemsForReporting, 0, true)"
+                :isstartmark="isStartMark(itemsForReporting, 0, true)"
+                :isendmark="isEndMark(itemsForReporting, 0, true)"
               />
             </div>
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 1,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="1"
-                :width1="getValue(itemsForReporting, 1, false)"
-                :isstartmark="isStartMark(itemsForReporting, 1, false)"
-                :isendmark="isEndMark(itemsForReporting, 1, false)"
+                :widths="getValue(itemsForReporting, 1, true)"
+                :paddings="getStartPadding(itemsForReporting, 1, true)"
+                :isstartmark="isStartMark(itemsForReporting, 1, true)"
+                :isendmark="isEndMark(itemsForReporting, 1, true)"
               />
             </div>
             <div
-              :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+              :style="`margin-bottom:5px;padding-left:${getStartPadding(
                 itemsForReporting,
                 2,
                 false
               )}px`"
             >
-              <ProgramProgressBar
+              <ProjectProgressBar
                 :type="2"
-                :width1="getValue(itemsForReporting, 2, false)"
-                :isstartmark="isStartMark(itemsForReporting, 2, false)"
-                :isendmark="isEndMark(itemsForReporting, 2, false)"
+                :widths="getValue(itemsForReporting, 2, true)"
+                :paddings="getStartPadding(itemsForReporting, 2, true)"
+                :isstartmark="isStartMark(itemsForReporting, 2, true)"
+                :isendmark="isEndMark(itemsForReporting, 2, true)"
               />
             </div>
           </b-card>
@@ -501,7 +516,7 @@
                 style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
               >
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     0,
                     false
@@ -515,7 +530,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     1,
                     false
@@ -529,7 +544,7 @@
                   />
                 </div>
                 <div
-                  :style="`margin-bottom:5pxpadding-left:${getStartPadding(
+                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
                     item1,
                     2,
                     false
@@ -593,23 +608,16 @@ export default {
       childCollapse: 1,
       subChildCollapse: 0,
       parentCollapse: true,
-      // navType: "portfolio",
+      navType: 'portfolio',
       windowWidth: window.innerWidth,
-      // itemsForReporting: 0,
-      startGraphDate: moment("2024-01-01"),
-      endGraphDate: moment("2024-12-31"),
+      itemsForReporting: 0,
+      startGraphDate: moment('2024-01-01'),
+      endGraphDate: moment('2024-12-31'),
     }
   },
   computed: {
     isOptimizeIndex() {
       return this.$store.state.globalState.optimizeStatus
-    },
-    itemsForReporting() {
-      return this.$store.state.globalState.portfolioReportingData
-    },
-    navType() {
-      console.log("NAVTYPE:", this.$store.state.globalState.selectedNavObj.type)
-      return this.$store.state.globalState.selectedNavObj.type
     }
   },
   watch: {
@@ -630,16 +638,17 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("INITD:", data, "st:", this.$store.state.globalState.selectedFromDate)
-      this.startGraphData = this.$store.state.globalState.selectedFromDate
-      this.endGraphData = this.$store.state.globalState.selectedToDate
+      console.log("INITD:", data, "st:", this.$store.state.globalState.selectedToDate.toString())
+      this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
+      this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
 
-      while (tempStartDate.add(1, "days").diff(this.endGraphData) < 0) {
+      while (tempStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }
-      // this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
+      this.navType = this.$store.state.globalState.selectedNavObj.type
+      this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
     },
     onResize() {
       this.windowWidth = window.innerWidth
@@ -806,6 +815,7 @@ export default {
         if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
         result = (duration.asDays() + 1) * 24
+        if (item.id === 14) console.log("VST:", startMoment, "VEND:", endMoment, "Vduration:", duration)
       }
       return result
     },
@@ -859,6 +869,7 @@ export default {
         const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
         const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
         result = duration * 24
+        if (item.id === 14) console.log("PST:", startMoment, "PEND:", firstMoment, "Pduration:", result)
         return result
       }
       return result

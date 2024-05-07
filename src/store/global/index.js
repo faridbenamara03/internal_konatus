@@ -145,12 +145,10 @@ export default {
       state.optimizeStates = 'preview'
     },
     UPDATE_SELECTED_FROM_DATE(state, payload) {
-      const fromDate = payload.from
-      state.selectedFromDate = fromDate !== null || fromDate !== undefined ? moment(fromDate) : moment(`${new Date().getFullYear()}-01-01`)
+      state.selectedFromDate = payload.from !== null || payload.from !== undefined ? moment(payload.from) : moment(`${new Date().getFullYear()}-01-01`)
     },
     UPDATE_SELECTED_TO_DATE(state, payload) {
-      const toDate = payload.to
-      state.selectedToDate = toDate !== null || toDate !== undefined ? moment(toDate) : moment(`${new Date().getFullYear()}-12-31`)
+      state.selectedToDate = payload.to !== null || payload.to !== undefined ? moment(payload.to) : moment(`${new Date().getFullYear()}-12-31`)
     },
     UPDATE_OPTIMIZE_STATUES(state, value) {
       state.optimizeStatus = value
