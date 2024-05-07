@@ -223,6 +223,7 @@
           <label>Jobs Available</label>
           <v-select
             :options="c_JobData"
+            v-model="selectedJob"
             placeholder="Select a job"
             outlined
           />
@@ -446,6 +447,7 @@ export default {
       activity: {},
       show: false,
       selectedTeam: "System auto select",
+      selectedJob: " ",
       c_teamData: this.$store.state.globalState?.weTeamData,
       loadData: 0,
       durationData: 0,
@@ -526,6 +528,8 @@ export default {
       this.loadEstimateData = this.selectedActivityData.phase.effort.load_estimated
       this.durationEstimateData = this.selectedActivityData.phase.effort.duration_estimated
       this.fteEstimateData = this.selectedActivityData.phase.effort.fte_estimated
+      this.selectedJob = this.selectedActivityData.phase.job_name
+      this.selectedTeam = this.selectedActivityData.phase.team_name
       if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
         this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       }

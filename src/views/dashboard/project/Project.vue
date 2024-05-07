@@ -107,6 +107,17 @@
                 />&nbsp;
                 <span>Edit as Columns</span>
               </b-button>
+              <b-button
+                v-if="!demandTableEditable"
+                class="ml-1"
+                variant="primary"
+              >
+                <feather-icon
+                  icon="Link2Icon"
+                  size="16"
+                />&nbsp;
+                <span>Link a project</span>
+              </b-button>
             </div>
             <div v-if="(tabIndex === 1)">
               <b-button
