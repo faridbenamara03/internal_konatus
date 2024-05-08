@@ -179,14 +179,14 @@
         </div>
       </div>
       <div class="reporting-content--body">
-        <!-- <div
-          :style="'position:absoluteheight:calc(100% - 120px)border-right:2px #BD2020 solidleft:' + 400 + 'pxtop:122pxz-index:222'"
+        <div
+          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 400 + 'px;top:122px;z-index:222'"
         >
           <div
             class="rounded-circle"
-            style="width:6pxheight:6pxbackground-color:#BD2020position:absolutetop:-2pxleft:-2px"
+            style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
           />
-        </div> -->
+        </div>
         <div class="timeline-list" :style="`width:${windowWidth / 2}px`">
           <div
             v-for="(date, index) in reportingDates"
@@ -228,6 +228,7 @@
                 :width1="getValue(itemsForReporting, 0, false)"
                 :isstartmark="isStartMark(itemsForReporting, 0, false)"
                 :isendmark="isEndMark(itemsForReporting, 0, false)"
+                :width2="getStartPadding(itemsForReporting, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, false)"
               />
             </div>
             <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
@@ -236,6 +237,7 @@
                 :width1="getValue(itemsForReporting, 1, false)"
                 :istartmark="isStartMark(itemsForReporting, 1, false)"
                 :isendmark="isEndMark(itemsForReporting, 1, false)"
+                :width2="getStartPadding(itemsForReporting, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, false)"
               />
             </div>
             <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
@@ -244,6 +246,7 @@
                 :width1="getValue(itemsForReporting, 2, false)"
                 :isstartmark="isStartMark(itemsForReporting, 2, false)"
                 :isendmark="isEndMark(itemsForReporting, 2, false)"
+                :width2="getStartPadding(itemsForReporting, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, false)"
               />
             </div>
           </b-card>
@@ -267,6 +270,7 @@
                     :paddings="getStartPadding(item1, 0, true)"
                     :isstartmark="isStartMark(item1, 0, true)"
                     :isendmark="isEndMark(item1, 0, true)"
+                    :width4="getStartPadding(item1, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, true)"
                   />
                 </div>
                 <div
@@ -282,6 +286,7 @@
                     :paddings="getStartPadding(item1, 1, true)"
                     :isstartmark="isStartMark(item1, 1, true)"
                     :isendmark="isEndMark(item1, 1, true)"
+                    :width4="getStartPadding(item1, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, true)"
                   />
                 </div>
                 <div
@@ -297,6 +302,7 @@
                     :paddings="getStartPadding(item1, 2, true)"
                     :isstartmark="isStartMark(item1, 2, true)"
                     :isendmark="isEndMark(item1, 2, true)"
+                    :width4="getStartPadding(item1, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, true)"
                   />
                 </div>
               </b-card>
@@ -319,6 +325,7 @@
                         :width1="getValue(item2, 0, false)"
                         :isstartmark="isStartMark(item2, 0, false)"
                         :isendmark="isEndMark(item2, 0, false)"
+                        :width2="getStartPadding(item2, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 0, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
@@ -327,6 +334,7 @@
                         :width1="getValue(item2, 1, false)"
                         :isstartmark="isStartMark(item2, 1, false)"
                         :isendmark="isEndMark(item2, 1, false)"
+                        :width2="getStartPadding(item2, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 1, false)"
                       />
                     </div>
                     <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
@@ -335,6 +343,7 @@
                         :width1="getValue(item2, 2, false)"
                         :isstartmark="isStartMark(item2, 2, false)"
                         :isendmark="isEndMark(item2, 2, false)"
+                        :width2="getStartPadding(item2, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -366,6 +375,7 @@
                 :paddings="getStartPadding(itemsForReporting, 0, true)"
                 :isstartmark="isStartMark(itemsForReporting, 0, true)"
                 :isendmark="isEndMark(itemsForReporting, 0, true)"
+                :width4="getStartPadding(itemsForReporting, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, true)"
               />
             </div>
             <div
@@ -381,6 +391,7 @@
                 :paddings="getStartPadding(itemsForReporting, 1, true)"
                 :isstartmark="isStartMark(itemsForReporting, 1, true)"
                 :isendmark="isEndMark(itemsForReporting, 1, true)"
+                :width4="getStartPadding(itemsForReporting, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, true)"
               />
             </div>
             <div
@@ -396,6 +407,7 @@
                 :paddings="getStartPadding(itemsForReporting, 2, true)"
                 :isstartmark="isStartMark(itemsForReporting, 2, true)"
                 :isendmark="isEndMark(itemsForReporting, 2, true)"
+                :width4="getStartPadding(itemsForReporting, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 2, true)"
               />
             </div>
           </b-card>
@@ -418,6 +430,7 @@
                     :width1="getValue(item1, 0, false)"
                     :isstartmark="isStartMark(item1, 0, false)"
                     :isendmark="isEndMark(item1, 0, false)"
+                    :width2="getStartPadding(item1, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
                   />
                 </div>
                 <div
@@ -432,6 +445,7 @@
                     :width1="getValue(item1, 1, false)"
                     :isstartmark="isStartMark(item1, 1, false)"
                     :isendmark="isEndMark(item1, 1, false)"
+                    :width2="getStartPadding(item1, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, false)"
                   />
                 </div>
                 <div
@@ -446,6 +460,7 @@
                     :width1="getValue(item1, 2, false)"
                     :isstartmark="isStartMark(item1, 2, false)"
                     :isendmark="isEndMark(item1, 2, false)"
+                    :width2="getStartPadding(item1, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -475,6 +490,7 @@
                 :paddings="getStartPadding(itemsForReporting, 0, true)"
                 :isstartmark="isStartMark(itemsForReporting, 0, true)"
                 :isendmark="isEndMark(itemsForReporting, 0, true)"
+                :width4="getStartPadding(itemsForReporting, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, true)"
               />
             </div>
             <div
@@ -490,6 +506,7 @@
                 :paddings="getStartPadding(itemsForReporting, 1, true)"
                 :isstartmark="isStartMark(itemsForReporting, 1, true)"
                 :isendmark="isEndMark(itemsForReporting, 1, true)"
+                :width4="getStartPadding(itemsForReporting, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, true)"
               />
             </div>
             <div
@@ -505,6 +522,7 @@
                 :paddings="getStartPadding(itemsForReporting, 2, true)"
                 :isstartmark="isStartMark(itemsForReporting, 2, true)"
                 :isendmark="isEndMark(itemsForReporting, 2, true)"
+                :width4="getStartPadding(itemsForReporting, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 2, true)"
               />
             </div>
           </b-card>
@@ -527,6 +545,7 @@
                     :width1="getValue(item1, 0, false)"
                     :isstartmark="isStartMark(item1, 0, false)"
                     :isendmark="isEndMark(item1, 0, false)"
+                    :width2="getStartPadding(item1, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
                   />
                 </div>
                 <div
@@ -541,6 +560,7 @@
                     :width1="getValue(item1, 1, false)"
                     :isstartmark="isStartMark(item1, 1, false)"
                     :isendmark="isEndMark(item1, 1, false)"
+                    :width2="getStartPadding(item1, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
                   />
                 </div>
                 <div
@@ -555,6 +575,7 @@
                     :width1="getValue(item1, 2, false)"
                     :isstartmark="isStartMark(item1, 2, false)"
                     :isendmark="isEndMark(item1, 2, false)"
+                    :width2="getStartPadding(item1, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, false)"
                   />
                 </div>
               </b-card>
@@ -818,6 +839,12 @@ export default {
         if (item.id === 14) console.log("VST:", startMoment, "VEND:", endMoment, "Vduration:", duration)
       }
       return result
+    },
+    getTodayValue() {
+      const startMoment = moment()
+      const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+      const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
+      return duration === 0 ? 0 : duration * 24
     },
     getStartPadding(item, type, isChild) {
       let result = 0

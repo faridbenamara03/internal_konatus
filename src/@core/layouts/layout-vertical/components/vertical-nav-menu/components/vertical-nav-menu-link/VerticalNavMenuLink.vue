@@ -91,6 +91,13 @@ export default {
         const currentUrl = this.$router.history.current.path
         // if (baseUrl === currentUrl || currentUrl.indexOf('/project') > 0) return
         if (baseUrl === currentUrl) return
+        if (currentUrl.indexOf('reporting-plan') > 0) {
+          baseUrl = `${baseUrl}/reporting-plan`
+        } else if (currentUrl.indexOf('reporting-cost') > 0) {
+          baseUrl = `${baseUrl}/reporting-cost`
+        } else if (currentUrl.indexOf('control') > 0) {
+          baseUrl = `${baseUrl}/control`
+        }
         this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
         this.$router.push(baseUrl)
       }

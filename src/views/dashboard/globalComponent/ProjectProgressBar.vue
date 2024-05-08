@@ -87,10 +87,10 @@
         :variant="typeArr[type]"
       />
     </div> -->
-    <!-- <div
+    <div
       v-if="width4 > 0"
       :style="`background-color:#0008;width:${width4}px;height:14px;position:absolute;left:0px;top:-1px`"
-    /> -->
+    />
   </div>
 </template>
 
