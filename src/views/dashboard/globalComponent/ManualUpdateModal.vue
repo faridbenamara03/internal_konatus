@@ -1,0 +1,223 @@
+<template>
+  <b-modal
+    id="modal-manual-update"
+    ref="my-modal"
+    title="Update Work Element"
+    centered
+    no-fade
+    hide-backdrop
+    static
+  >
+    <!-- Modal Header -->
+    <template #modal-header>
+      <h5 class="modal-title">
+        Update Work Element
+      </h5>
+      <div class="modal-actions">
+        <b-button
+          variant="outline-primary"
+          @click="hideModal"
+        >
+          <feather-icon
+            icon="XIcon"
+            size="18"
+          />
+        </b-button>
+      </div>
+    </template>
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <label>Load E</label>
+          <b-form-input
+            v-model="loadEngageData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+        <div class="col">
+          <label>Fte E</label>
+          <b-form-input
+            v-model="fteEngageData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+        <div class="col">
+          <label>Spent</label>
+          <b-form-input
+            v-model="fteData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>Load R/E</label>
+          <b-form-input
+            v-model="loadEstimatedData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+        <div class="col">
+          <label>Fte R</label>
+          <b-form-input
+            v-model="fteEstimatedData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+        <div class="col">
+          <label>% acc R/E</label>
+          <b-form-input
+            v-model="accEstimatedData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+        <div class="col">
+          <label>Rest To Do R/E</label>
+          <b-form-input
+            v-model="restEstimatedData"
+            type="number"
+            :disabled="true"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>Load R/E</label>
+          <b-form-input
+            v-model="loadNewEstimatedData"
+            type="number"
+          />
+        </div>
+        <div class="col">
+          <label>Fte R/E</label>
+          <b-form-input
+            v-model="fteNewEstimatedData"
+            type="number"
+          />
+        </div>
+        <div class="col">
+          <label>% acc R/E</label>
+          <b-form-input
+            v-model="accNewEstimatedData"
+            type="number"
+          />
+        </div>
+        <div class="col">
+          <label>Rest To Do R/E</label>
+          <b-form-input
+            v-model="restNewEstimatedData"
+            type="number"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- Modal Footer -->
+    <template #modal-footer>
+      <b-button
+        variant="outline-primary"
+        @click="hideModal"
+      >
+        Cancel
+      </b-button>
+      <b-button
+        variant="primary"
+        @click="handleSave"
+      >
+        Link
+      </b-button>
+    </template>
+  </b-modal>
+</template>
+
+<script>
+import {
+  BButton,
+  BFormInput
+} from 'bootstrap-vue'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+
+export default {
+  components: {
+    BButton,
+    BFormInput
+  },
+  props: {
+    selectedWE: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      loadEstimatedData: 0,
+      fteEstimatedData: 0,
+      loadEngageData: 0,
+      fteEngageDate: 0,
+      spentData: 0,
+      loadNewEstimatedData: 0,
+      fteNewEstimatedData: 0,
+      accEstimatedData: 0,
+      accNewEstimatedData: 0,
+      restEstimatedData: 0,
+      restNewEstimatedData: 0,
+    }
+  },
+  watch: {
+      selectedWE: {
+          immediate: true,
+          handler(newVal) {
+            this.initializeData(newVal) // ??
+          },
+      },
+  },
+  methods: {
+    initializeData(newWE) {
+      this.loadEngageData = newWE.effort.load_engage
+      this.loadEstimatedData = newWE.effort.load_estimated
+      this.spentData = newWE.spent
+      this.fteEngageData = newWE.effort.fte_engage
+      this.fteEstimatedData = newWE.effort.fte_estimated
+      this.accEstimatedData = newWE.acc
+      this.restEstimatedData = this.loadEstimatedData * (1 - this.accEstimatedData)
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    },
+    async handleSave() {
+      const payloads = {
+        we_id: this.selectedWE.id,
+        load_estimated: this.loadNewEstimatedData,
+        fte_estimated: this.fteNewEstimatedData,
+        acc: this.accNewEstimatedData,
+        rest_estimated: this.restNewEstimatedData
+      }
+      this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
+      // await this.$store.dispatch('globalState/submit_manual_update, payloads)
+      this.showToast('success', 'Success Update Work Element.')
+      this.$refs['my-modal'].hide()
+    },
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+@import '@core/scss/vue/pages/dashboard-portfolio.scss';
+@import '@core/scss/vue/pages/dashboard-project.scss';
+</style>

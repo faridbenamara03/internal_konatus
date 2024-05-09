@@ -1,5 +1,8 @@
 <template>
-  <div v-if="reportingState === 'plan'" class="report">
+  <div
+    v-if="reportingState === 'plan'"
+    class="report"
+  >
     <div class="reporting-side">
       <div>
         <div v-if="itemsForReporting !== undefined && navType === 'program'">
@@ -61,7 +64,11 @@
                 <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                   {{ item2.title }}({{ item2.acc }}%)
                 </p>
-                <b-button style="height: 40px;padding:0px">
+                <b-button
+                  v-b-modal.modal-manual-update
+                  style="height: 40px;padding:0px"
+                  @click="handleSelectWe(item2)"
+                >
                   manual update
                 </b-button>
               </div>
@@ -103,7 +110,11 @@
               <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                 {{ item1.title }}({{ item1.acc }}%)
               </p>
-              <b-button style="height: 40px;padding:0px">
+              <b-button
+                v-b-modal.modal-manual-update
+                style="height: 40px;padding:0px"
+                @click="handleSelectWe(item1)"
+              >
                 manual update
               </b-button>
             </div>
@@ -144,7 +155,11 @@
               <p class="m-0 text-overflow-ellipse" style="font-size:12px">
                 {{ item1.title }}({{ item1.acc }}%)
               </p>
-              <b-button style="height: 40px;padding:0px">
+              <b-button
+                v-b-modal.modal-manual-update
+                style="height: 40px;padding:0px"
+                @click="handleSelectWe(item1)"
+              >
                 manual update
               </b-button>
             </div>
@@ -180,7 +195,7 @@
       </div>
       <div class="reporting-content--body">
         <div
-          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + 400 + 'px;top:122px;z-index:222'"
+          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + getTodayValue() + 'px;top:122px;z-index:222'"
         >
           <div
             class="rounded-circle"
@@ -585,6 +600,10 @@
       </div>
     </div>
     <update-confirm-modal @onUpdate="onUpdate" />
+    <manual-update-modal
+      @selectedWE="selectedWE"
+      @onSubmit="handleManualUpdate"
+    />
   </div>
   <div v-else-if="reportingState === 'cost'" style="width: 100%">
     <ReportingCostVue :data="itemsForReporting" :fields="costfields" />
@@ -598,6 +617,7 @@ import ReportingCostVue from "./ReportingCost.vue"
 import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
 import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
 import UpdateConfirmModal from "../modals/UpdateConfirmModal.vue"
+import ManualUpdateModal from "../../globalComponent/ManualUpdateModal.vue"
 
 export default {
   components: {
@@ -607,6 +627,7 @@ export default {
     ProgramProgressBar,
     ProjectProgressBar,
     UpdateConfirmModal,
+    ManualUpdateModal
   },
   props: {
     data: {
@@ -634,6 +655,7 @@ export default {
       itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
+      selectedWE: 0,
     }
   },
   computed: {
@@ -725,6 +747,14 @@ export default {
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD") === this.startGraphData ? moment(this.reportingDates[0], "YYYY-MM-DD") : this.startGraphData
       if (startMoment >= firstMoment) return true
       return false
+    },
+    handleSelectWe(we) {
+      this.selectedWE = we
+      console.log('selectedWeID:', we.id)
+      this.$store.commit('globalState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
+    },
+    handleManualUpdate(res) {
+      console.log("ManualUpdated:", res)
     },
     isEndMark(item, type, isChild) {
       let endMoment
@@ -844,7 +874,8 @@ export default {
       const startMoment = moment()
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
-      return duration === 0 ? 0 : duration * 24
+      console.log("start:", startMoment.toString(), "first:", firstMoment.toString(), "duration:", duration === 0 ? 0 : duration * 24)
+      return duration === 0 ? 0 : parseInt(duration * 24, 10)
     },
     getStartPadding(item, type, isChild) {
       let result = 0

@@ -57,38 +57,38 @@
             :style="`background:${cardBarColorArr[index]}`"
           />
           <div class="phase-box--content">
-            <div class="d-flex">
+            <div class="d-flex" style="width: 100%; justify-content: space-between;">
               <div
-                style="width:calc(100% - 20px);cursor:pointer"
+                style="cursor:pointer"
                 @click="() => handleActivityDetails(activity, team)"
               >
                 <p
                   class="title"
-                  :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
+                  :style="`color:${parseInt(activity.acc) === 100 ? 'gray' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
                   {{ activity.title }}
                 </p>
               </div>
-              <div>
-                <feather-icon
-                  v-if="parseInt(activity.acc) === 0"
-                  icon="MailIcon"
-                />
-              </div>
-              <div>
+              <div style="position: relative;top: -3px;">
+                  <feather-icon
+                    v-if="parseInt(activity.acc) === 0"
+                    icon="MailIcon"
+                  />
+                </div>
+              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
                   style="color: #7167E8"
                   icon="ClockIcon"
                 />
               </div>
-              <div>
+              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) === 100"
                   style="color: #686D7C"
                   icon="CheckCircleIcon"
                 />
               </div>
-              <div style="width:20px">
+              <div style="width:20px;">
                 <b-form-checkbox
                   v-model="activity.isSelected"
                   @change="e => onCheckChange(e, activity.id)"
@@ -147,38 +147,38 @@
             :style="`background:${cardBarColorArr[index]}`"
           />
           <div class="phase-box--content">
-            <div class="d-flex">
+            <div class="d-flex" style="width: 100%; justify-content: space-between;">
               <div
-                style="width:calc(100% - 20px);cursor:pointer"
+                style="cursor:pointer"
                 @click="() => handleActivityDetails(activity, team)"
               >
                 <p
                   class="title"
-                  :style="`color:${parseInt(activity.acc) === 100 ? 'rgba(2, 249, 0)' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
+                  :style="`color:${parseInt(activity.acc) === 100 ? 'gray' : parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100 ? '#66ffff' : '#ffffff'}`">
                   {{ activity.title }}
                 </p>
               </div>
-              <div>
-                <feather-icon
-                  v-if="parseInt(activity.acc) === 0"
-                  icon="MailIcon"
-                />
-              </div>
-              <div>
+              <div style="position: relative;top: -3px;">
+                  <feather-icon
+                    v-if="parseInt(activity.acc) === 0"
+                    icon="MailIcon"
+                  />
+                </div>
+              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
                   style="color: #7167E8"
                   icon="ClockIcon"
                 />
               </div>
-              <div>
+              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) === 100"
                   style="color: #686D7C"
                   icon="CheckCircleIcon"
                 />
               </div>
-              <div style="width:20px">
+              <div style="width:20px;">
                 <b-form-checkbox
                   v-model="activity.isSelected"
                   @change="e => onCheckChange(e, activity.id)"

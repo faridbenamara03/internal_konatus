@@ -56,6 +56,7 @@ export default {
     projectReportingEditableData: [],
     selectedNavId: '',
     selectedNavObj: {},
+    selectedWE: 0,
     natureDeadLines: [],
     natureDeadLineSelectOptions: [],
     optimizeState: 'origin',
@@ -404,6 +405,9 @@ export default {
     TEAM_PHASE_SELECT_ALL(state, team) {
       console.log(state, team)
     },
+    SUBMIT_MANUAL_UPDATE(state) {
+      console.log(state)
+    },
     SUBMIT_LINK_PROJECT(state) {
       console.log(state)
     },
@@ -425,22 +429,24 @@ export default {
         state.weTeamData = []
         state.weJobData = []
         const pTeamData = payload.portData.demand.teams
-        pTeamData.map(pt => {
-          if (pt.phases && pt.phases.length > 0) {
-            pt.phases.map(pA => {
-              const pActivity = pA.activities
-              if (pActivity && pActivity.length > 0) {
-                pActivity.map(item => {
-                  state.weTeamData.push(item.team_name)
-                  state.weJobData.push(item.job_name)
-                  return null
-                })
-              }
-              return null
-            })
-          }
-          return null
-        })
+        if (pTeamData && pTeamData !== undefined) {
+          pTeamData.map(pt => {
+            if (pt.phases && pt.phases.length > 0) {
+              pt.phases.map(pA => {
+                const pActivity = pA.activities
+                if (pActivity && pActivity.length > 0) {
+                  pActivity.map(item => {
+                    state.weTeamData.push(item.team_name)
+                    state.weJobData.push(item.job_name)
+                    return null
+                  })
+                }
+                return null
+              })
+            }
+            return null
+          })
+        }
         state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
         state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
       }
@@ -571,6 +577,9 @@ export default {
         state.projectElementTeamData = []
         state.projectElementPhaseData = []
       }, 1000)
+    },
+    SELECT_WORK_ELEMENT_TO_UPDATE(state, selectedWE) {
+      state.selectedWE = selectedWE
     },
     WOEK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity

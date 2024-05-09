@@ -5,21 +5,33 @@
       :style="`width:12px;height:15px;border-top-left-radius:10px;background:${colorArr[type]}`"
     />
     <div
-      v-if="width1 > 0 && width1 > 0"
+      v-if="width1 > 0"
       :style="`width:${width1}px;height:12px;background:${colorArr[type]};`"
     />
     <div
       v-if="isendmark === true && width1 > 0"
       :style="`width:12px;height:15px;border-top-right-radius:10px;background:${colorArr[type]}`"
     />
+    <!-- <div
+      v-if="isstartmark === true && width2 > 0"
+      :style="`width:12px;height:15px;border-top-left-radius:10px;background:#0008;position:absolute;left:0px`"
+    >
+      <div
+        :style="`width:${width2}px;height:12px;background:#0008;position:absolute;left:12px`"
+      />
+    </div>
     <div
-      v-if="width2 > 0"
-      :style="`width:${width2 < 12 ? width2 : 12}px;height:15px;border-top-left-radius:10px;background:#0008;position:absolute;left:0px`"
+      v-else-if="isstartmark === false && width2 > 0"
+      :style="`width:${width2}px;height:12px;background:#0008;position:absolute;left:0px`"
     />
     <div
-      v-if="width2 > 12"
-      :style="`background-color:#0008;width:${width2 - 12}px;height:12px;position:absolute;left:12px;`"
+      v-if="isendmark === true && isstartmark === true && width2 > 0"
+      :style="`width:12px;height:15px;border-top-right-radius:10px;background:#0008;position:absolute;left:${width2 + 12}px`"
     />
+    <div
+      v-if="isendmark === true && isstartmark === false && width2 > 0"
+      :style="`width:12px;height:15px;border-top-right-radius:10px;background:#0008;position:absolute;left:${width2}px`"
+    /> -->
   </div>
 </template>
 
@@ -41,11 +53,11 @@ export default {
     isendmark: {
       type: Boolean,
       default: () => false
+    },
+    width2: {
+      type: Number,
+      default: () => 0
     }
-    // width2: {
-    //   type: Number,
-    //   default: () => 0
-    // }
   },
   data() {
     return {

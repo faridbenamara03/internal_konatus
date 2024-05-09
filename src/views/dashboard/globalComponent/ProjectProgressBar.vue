@@ -87,10 +87,17 @@
         :variant="typeArr[type]"
       />
     </div> -->
-    <div
-      v-if="width4 > 0"
-      :style="`background-color:#0008;width:${width4}px;height:14px;position:absolute;left:0px;top:-1px`"
+    <!-- <div
+      v-if="totalWidth > width4"
+      :style="`background-color:#0008;width:${width4}px;height:14px;position:absolute;left:${paddings[0]}px;top:-1px`"
     />
+    <div
+      v-else
+      :style="`background-color:#0008;width:${totalWidth - paddings[0]}px;height:14px;position:absolute;left:${paddings[0]}px;top:-1px`"
+    /> -->
+    <!-- <div
+      :style="`background-color:#0008;width:${realWidth}px;height:14px;position:absolute;left:${realPadding}px;top:-1px`"
+    /> -->
   </div>
 </template>
 
@@ -121,29 +128,39 @@ export default {
     isendmark: {
       type: Array,
       default: () => []
-    }
-    // width1: {
-    //   type: Number,
-    //   default: () => 0,
-    // },
-    // width2: {
-    //   type: Number,
-    //   default: () => 0,
-    // },
-    // width3: {
-    //   type: Number,
-    //   default: () => 0,
-    // },
-    // width4: {
-    //   type: Number,
-    //   default: () => 0,
-    // },
+    },
+    width4: {
+      type: Number,
+      default: () => 0,
+    },
   },
   data() {
     return {
       typeArr: ['danger', 'success', 'info'],
       colorArr: ['#ea5455', '#28c76f', '#00cfe8']
     }
+  },
+  computed: {
+    totalWidth() {
+      let temp = 0
+      this.widths.map(w => {
+        temp += w
+        return null
+      })
+      this.paddings.map(p => {
+        temp += p
+        return null
+      })
+      console.log("totalWidth:", temp, "width4:", this.width4, "padding0:", this.paddings[0])
+      console.log("realWidth:", temp > this.width4 ? this.width4 - this.paddings[0] : temp - 2 * this.paddings[0])
+      return temp
+    },
+    // realWidth() {
+
+    // },
+    // realPadding() {
+
+    // }
   }
 }
 </script>
