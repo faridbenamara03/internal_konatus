@@ -101,7 +101,7 @@
             <div class="d-flex">
               <div class="d-flex w-50 align-items-center">
                 <feather-icon icon="BarChartIcon" />
-                <span>{{ activity.priority }}</span>
+                <span>{{ priorityOptions[activity.priority - 1] }}</span>
               </div>
               <div class="d-flex w-50 align-items-center">
                 <b-icon icon="door-closed" />
@@ -191,7 +191,7 @@
             <div class="d-flex">
               <div class="d-flex w-50 align-items-center">
                 <feather-icon icon="BarChartIcon" />
-                <span>{{ activity.priority }}</span>
+                <span>{{ priorityOptions[activity.priority - 1] }}</span>
               </div>
               <div class="d-flex w-50 align-items-center">
                 <b-icon icon="door-closed" />
@@ -250,6 +250,7 @@ export default {
   },
   data() {
     return {
+      priorityOptions: this.$store.state.globalState.priorityOptions,
       cardBarColorArr: [
         '#D68232', '#FFEA2C', '#d63232', '#28C76F', '#00CFE8', '#6610F2'
       ],

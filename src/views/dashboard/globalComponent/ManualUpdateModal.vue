@@ -140,7 +140,7 @@ import {
   BButton,
   BFormInput
 } from 'bootstrap-vue'
-import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+// import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
@@ -197,22 +197,22 @@ export default {
         acc: this.accNewEstimatedData,
         rest_todo_estimated: this.restNewEstimatedData
       }
-      this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
-      // await this.$store.dispatch('globalState/submit_manual_update, payloads)
-      this.showToast('success', 'Success Update Work Element.')
+      // this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
+      await this.$store.dispatch('globalState/submit_manual_update', payloads)
+      // this.showToast('success', 'Success Update Work Element.')
       this.$refs['my-modal'].hide()
     },
-    showToast(variant, title) {
-      this.$toast({
-        component: ToastificationContent,
-        props: {
-          title,
-          icon: 'BellIcon',
-          text: null,
-          variant,
-        },
-      })
-    },
+    // showToast(variant, title) {
+    //   this.$toast({
+    //     component: ToastificationContent,
+    //     props: {
+    //       title,
+    //       icon: 'BellIcon',
+    //       text: null,
+    //       variant,
+    //     },
+    //   })
+    // },
   },
 }
 </script>

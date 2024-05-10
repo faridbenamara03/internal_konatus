@@ -217,6 +217,10 @@ export default {
       Vue.$toast.success('Portfolio updated successfully.')
       console.log(data)
     },
+    WORK_ELEMENT_MANUAL_UPDATE(state, data) {
+      Vue.$toast.success('Work Element Updated successfully.')
+      console.log(data)
+    },
     UPDATE_SUBPROJECT(state, data) {
       Vue.$toast.success('SubProject updated successfully.')
       console.log(data)
@@ -845,6 +849,21 @@ export default {
           .catch(err => {
             console.log('error getting all organization data ---->', err)
             Vue.$toast.error('Failed to get all organization data.')
+            reject(err)
+          })
+      })
+    },
+    submit_manual_update(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/work_element/update', payload)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/WORK_ELEMENT_MANUAL_UPDAE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error updating workelement---->', err)
+            Vue.$toast.error('Failed to update workelement.')
             reject(err)
           })
       })
