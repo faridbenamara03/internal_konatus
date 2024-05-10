@@ -432,7 +432,7 @@ export default {
       if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
         state.weTeamData = []
         state.weJobData = []
-        const pTeamData = payload.portData.demand.teams
+        const pTeamData = payload.portData.demand !== null && payload.portData.demand !== undefined ? payload.portData.demand.teams : []
         if (pTeamData && pTeamData !== undefined) {
           pTeamData.map(pt => {
             if (pt.phases && pt.phases.length > 0) {

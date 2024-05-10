@@ -4,40 +4,42 @@
       v-if="tabState === 'job'"
       style="padding: 40px 15px"
     >
-      <div
-        v-for="(team, index) in teamData"
-        :key="index"
-      >
+      <div v-if="teamData.length > 0">
         <div
-          class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
-          style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
-          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
-        >
-          <feather-icon
-            :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          {{ team.title }}
-        </div>
-        <div
-          v-if="openedPhase.indexOf(index) > -1"
-          class="d-flex"
+          v-for="(team, index) in c_TeamData"
+          :key="index"
         >
           <div
-            v-for="(item1, index1) in team.phases"
-            :key="index1"
-            class="project-team no-border"
+            class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
+            style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
+            @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
           >
-            <CustomCollapse
-              :team="item1"
-              :index="index1"
-              :index0="index"
-              state="team"
-              :teamttle="team.title"
-              @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
-              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+            <feather-icon
+              :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
             />
+            {{ team.title }}
+          </div>
+          <div
+            v-if="openedPhase.indexOf(index) > -1"
+            class="d-flex"
+          >
+            <div
+              v-for="(item1, index1) in team.phases"
+              :key="index1"
+              class="project-team no-border"
+            >
+              <CustomCollapse
+                :team="item1"
+                :index="index1"
+                :index0="index"
+                state="team"
+                :teamttle="team.title"
+                @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
+                @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -46,39 +48,41 @@
       v-else-if="tabState === 'phase'"
       style="padding: 40px 15px"
     >
-      <div
-        v-for="(phase, index) in c_PhaseData"
-        :key="index"
-      >
+      <div v-if="c_PhaseData.length > 0">
         <div
-          class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
-          style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
-          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
-        >
-          <feather-icon
-            :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          phase {{ phase.id }}
-        </div>
-        <div
-          v-if="openedPhase.indexOf(index) > -1"
-          class="d-flex"
+          v-for="(phase, index) in c_PhaseData"
+          :key="index"
         >
           <div
-            v-for="(item1, index1) in phase.teams"
-            :key="index1"
-            class="project-team no-border"
+            class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
+            style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
+            @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
           >
-            <CustomCollapse
-              :team="item1"
-              :index="index1"
-              :index0="index"
-              state="phase"
-              @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
-              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+            <feather-icon
+              :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              size="16"
+              class="mr-1"
             />
+            phase {{ phase.id }}
+          </div>
+          <div
+            v-if="openedPhase.indexOf(index) > -1"
+            class="d-flex"
+          >
+            <div
+              v-for="(item1, index1) in phase.teams"
+              :key="index1"
+              class="project-team no-border"
+            >
+              <CustomCollapse
+                :team="item1"
+                :index="index1"
+                :index0="index"
+                state="phase"
+                @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
+                @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -140,6 +144,31 @@ export default {
     },
     openActivityModal() {
       return this.$store.state.globalState.activityDetailModalOpen
+    },
+    c_TeamData() {
+      const allPhases = this.$store.state.globalState.allPhaseData
+      const resultTeamData = []
+      this.teamData.forEach(t => {
+        const currentPhaseData = t.phases
+        const tempPhases = []
+        allPhases.forEach(p => {
+          let tempPhase = currentPhaseData.find(x => x.id === p.id)
+          if (tempPhase === undefined) {
+            tempPhase = {
+              id: p.id,
+              title: `Phase ${p.id}`,
+              activities: []
+            }
+            tempPhases.push(tempPhase)
+          } else {
+            tempPhases.push(tempPhase)
+          }
+        })
+        const tempTeam = { ...t }
+        tempTeam.phases = tempPhases
+        resultTeamData.push(tempTeam)
+      })
+      return resultTeamData
     },
     c_PhaseData() {
       const currentPhaseData = this.phaseData

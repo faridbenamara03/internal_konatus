@@ -649,7 +649,6 @@ export default {
     tabIndex() {
       const currentUrl = this.$router.history.current.path
       let result
-      console.log('currentUrl:', currentUrl)
       if (currentUrl.indexOf('reporting-plan') > 0) {
         result = 1
       } else if (currentUrl.indexOf('control') > 0) {
@@ -666,7 +665,6 @@ export default {
     reportingState() {
       const currentUrl = this.$router.history.current.path
       let result
-      console.log('currentUrl:', currentUrl)
       if (currentUrl.indexOf('reporting-plan') > 0) {
         result = 'plan'
       } else if (currentUrl.indexOf('reporting-cost') > 0) {

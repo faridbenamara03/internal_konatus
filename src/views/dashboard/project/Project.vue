@@ -581,10 +581,10 @@ export default {
       return this.$store.state.globalState.projectReportingEditableData
     },
     demandTeamsData() {
-      return this.$store.state.globalState.portfolioDemandData.teams
+      return this.$store.state.globalState.portfolioDemandData !== null && this.$store.state.globalState.portfolioDemandData !== undefined ? this.$store.state.globalState.portfolioDemandData.teams : []
     },
     demandPhasesData() {
-      return this.$store.state.globalState.portfolioDemandData.phases
+      return this.$store.state.globalState.portfolioDemandData !== null && this.$store.state.globalState.portfolioDemandData !== undefined ? this.$store.state.globalState.portfolioDemandData.phases : []
     },
     controlData() {
       return this.$store.state.globalState.portfolioControlData
@@ -598,18 +598,15 @@ export default {
     // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
     // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     const currentUrl = this.$router.history.current.path
-    console.log('currentUrl:', currentUrl)
     this.tabIndex = 0
     if (currentUrl.indexOf('reporting-plan') > 0) {
       this.tabIndex = 1
       this.reportingState = 'plan'
     }
     if (currentUrl.indexOf('control') > 0) {
-      console.log('control')
       this.tabIndex = 2
     }
     if (currentUrl.indexOf('reporting-cost') > 0) {
-      console.log('reporting-cost')
       this.tabIndex = 1
       this.reportingState = 'cost'
     }
