@@ -4,166 +4,74 @@
     class="report"
   >
     <div class="reporting-side">
-      <div>
-        <div v-if="itemsForReporting !== undefined && navType === 'program'">
-          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.portfolioName
-              }}
-            </p>
-          </div>
+      <div v-if="itemsForReporting !== undefined">
+        <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
+          <p class="m-0 text-uppercase">
+            {{
+              itemsForReporting === undefined || itemsFormReporting === null
+                ? ""
+                : itemsForReporting.portfolioName
+            }}
+          </p>
+        </div>
+        <div
+          class="report-block--head"
+          style="background-color: #384056;height:77px"
+          @click="onParentCollapseClick()"
+        >
+          <feather-icon
+            v-if="itemsForReporting.children && itemsForReporting.children.length > 0"
+            :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16"
+            class="mr-1"
+          />
+          <p class="m-0 text-uppercase">
+            {{
+              itemsForReporting === undefined || itemsFormReporting === null
+                ? ""
+                : itemsForReporting.title
+            }}
+          </p>
+        </div>
+        <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
           <div
             class="report-block--head"
-            style="background-color: #384056;height:77px"
-            @click="onParentCollapseClick()"
+            style="cursor: pointer;height:77px"
+            @click="onCollapseClick(index1)"
           >
             <feather-icon
-              v-if="itemsForReporting.children && itemsForReporting.children.length > 0"
-              :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+              v-if="item1.work_elements.length > 0"
+              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
               size="16"
               class="mr-1"
             />
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.title
-              }}
+            <p class="m-0 ml-1" style="line-height: 24px; font-size: 15px;">
+              {{ item1.title }}
             </p>
           </div>
-          <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
+          <template
+            v-if="
+              item1 !== undefined && item1.work_elements && openedCollapse === index1
+            "
+          >
             <div
-              class="report-block--head"
-              style="cursor: pointer;height:77px"
-              @click="onCollapseClick(index1)"
+              v-for="(item2, index2) in item1.work_elements"
+              :key="index2"
+              class="report-block-child d-flex justify-content-between"
+              style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
             >
-              <feather-icon
-                v-if="item1.work_elements.length > 0"
-                :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-                size="16"
-                class="mr-1"
-              />
-              <p class="m-0 ml-1" style="line-height: 24px; font-size: 15px;">
-                {{ item1.title }}
-              </p>
-            </div>
-            <template
-              v-if="
-                item1 !== undefined && item1.work_elements && openedCollapse === index1
-              "
-            >
-              <div
-                v-for="(item2, index2) in item1.work_elements"
-                :key="index2"
-                class="report-block-child d-flex justify-content-between"
-                style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
-              >
-                <p class="m-0 text-overflow-ellipse" style="font-size:12px">
-                  {{ item2.title }}({{ item2.acc }}%)
-                </p>
-                <b-button
-                  v-b-modal.modal-manual-update
-                  style="height: 40px;padding:0px"
-                  @click="handleSelectWe(item2)"
-                >
-                  manual update
-                </b-button>
-              </div>
-            </template>
-          </div>
-        </div>
-        <div
-          v-else-if=" itemsForReporting !== undefined && navType === 'project'"
-        >
-          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.portName
-              }}
-            </p>
-          </div>
-          <div class="report-block--head" style="background-color: #384056;height:77px">
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.progName
-              }}
-            </p>
-          </div>
-          <div class="report-block--head" style="cursor: pointer;height:77px">
-            <p class="m-0">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.title
-              }}
-            </p>
-          </div>
-          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div class="report-block-child d-flex justify-content-between" style="background-color: #212739;border-bottom: 1px solid grey;height:51px">
               <p class="m-0 text-overflow-ellipse" style="font-size:12px">
-                {{ item1.title }}({{ item1.acc }}%)
+                {{ item2.title }}({{ item2.acc }}%)
               </p>
               <b-button
                 v-b-modal.modal-manual-update
                 style="height: 40px;padding:0px"
-                @click="handleSelectWe(item1)"
+                @click="handleSelectWe(item2)"
               >
                 manual update
               </b-button>
             </div>
-          </div>
-        </div>
-        <div
-          v-else-if=" itemsForReporting !== undefined && navType === 'subproject'"
-        >
-          <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.portName
-              }}
-            </p>
-          </div>
-          <div class="report-block--head" style="background-color: #384056;height:77px">
-            <p class="m-0 text-uppercase">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.progName
-              }}
-            </p>
-          </div>
-          <div class="report-block--head" style="cursor: pointer;height:77px">
-            <p class="m-0">
-              {{
-                itemsForReporting === undefined || itemsFormReporting === null
-                  ? ""
-                  : itemsForReporting.title
-              }}
-            </p>
-          </div>
-          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div class="report-block-child d-flex justify-content-between" style="background-color: #212739;border-bottom: 1px solid grey;height:51px">
-              <p class="m-0 text-overflow-ellipse" style="font-size:12px">
-                {{ item1.title }}({{ item1.acc }}%)
-              </p>
-              <b-button
-                v-b-modal.modal-manual-update
-                style="height: 40px;padding:0px"
-                @click="handleSelectWe(item1)"
-              >
-                manual update
-              </b-button>
-            </div>
-          </div>
+          </template>
         </div>
       </div>
     </div>
@@ -225,13 +133,7 @@
             </p>
           </div>
         </div>
-        <div
-          v-if="
-            itemsForReporting !== undefined &&
-            navType === 'program' &&
-            parentCollapse === true
-          "
-        >
+        <div v-if="itemsForReporting !== undefined && parentCollapse === true">
           <b-card
             no-body
             class="d-flex flex-column justify-content-around"
@@ -365,178 +267,6 @@
                 </div>
               </div>
             </template>
-          </div>
-        </div>
-        <div
-          v-else-if="
-            itemsForReporting !== undefined && navType === 'project'
-          "
-        >
-          <b-card
-            no-body
-            class="d-flex flex-column justify-content-around"
-            style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
-          >
-            <div
-              :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                itemsForReporting,
-                0,
-                false
-              )}px`"
-            >
-              <ProjectProgressBar
-                :type="0"
-                :widths="getValue(itemsForReporting, 0, true)"
-                :paddings="getStartPadding(itemsForReporting, 0, true)"
-                :isstartmark="isStartMark(itemsForReporting, 0, true)"
-                :isendmark="isEndMark(itemsForReporting, 0, true)"
-                :width4="getStartPadding(itemsForReporting, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, true)"
-              />
-            </div>
-            <div
-              :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                itemsForReporting,
-                1,
-                false
-              )}px`"
-            >
-              <ProjectProgressBar
-                :type="1"
-                :widths="getValue(itemsForReporting, 1, true)"
-                :paddings="getStartPadding(itemsForReporting, 1, true)"
-                :isstartmark="isStartMark(itemsForReporting, 1, true)"
-                :isendmark="isEndMark(itemsForReporting, 1, true)"
-                :width4="getStartPadding(itemsForReporting, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, true)"
-              />
-            </div>
-            <div
-              :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                itemsForReporting,
-                2,
-                false
-              )}px`"
-            >
-              <ProjectProgressBar
-                :type="2"
-                :widths="getValue(itemsForReporting, 2, true)"
-                :paddings="getStartPadding(itemsForReporting, 2, true)"
-                :isstartmark="isStartMark(itemsForReporting, 2, true)"
-                :isendmark="isEndMark(itemsForReporting, 2, true)"
-                :width4="getStartPadding(itemsForReporting, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 2, true)"
-              />
-            </div>
-          </b-card>
-          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div style="height: 51px" class="w-100">
-              <b-card
-                no-body
-                class="d-flex flex-column justify-content-around"
-                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
-              >
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
-                  <ProgramProgressBar
-                    :type="0"
-                    :width1="getValue(item1, 0, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
-                  <ProgramProgressBar
-                    :type="1"
-                    :width1="getValue(item1, 1, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
-                  <ProgramProgressBar
-                    :type="2"
-                    :width1="getValue(item1, 2, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, false)"
-                  />
-                </div>
-              </b-card>
-            </div>
-          </div>
-        </div>
-        <div v-else-if="itemsForReporting !== undefined && navType === 'subproject'">
-          <b-card
-            no-body
-            class="d-flex flex-column justify-content-around"
-            style="margin-top:77px;height:76px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
-          >
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 0, false)}px`">
-              <ProjectProgressBar
-                :type="0"
-                :widths="getValue(itemsForReporting, 0, true)"
-                :paddings="getStartPadding(itemsForReporting, 0, true)"
-                :isstartmark="isStartMark(itemsForReporting, 0, true)"
-                :isendmark="isStartMark(itemsForReporting, 0, true)"
-                :width4="getStartPadding(itemsForReporting, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, true)"
-              />
-            </div>
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
-              <ProjectProgressBar
-                :type="1"
-                :widths="getValue(itemsForReporting, 1, true)"
-                :paddings="getStartPadding(itemsForReporting, 1, true)"
-                :isstartmark="isStartMark(itemsForReporting, 1, true)"
-                :isendmark="isEndMark(itemsForReporting, 1, true)"
-                :width4="getStartPadding(itemsForReporting, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, true)"
-              />
-            </div>
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
-              <ProjectProgressBar
-                :type="2"
-                :widths="getValue(itemsForReporting, 2, true)"
-                :paddings="getStartPadding(itemsForReporting, 2, true)"
-                :isstartmark="isStartMark(itemsForReporting, 2, true)"
-                :isendmark="isEndMark(itemsForReporting, 2, true)"
-                :width4="getStartPadding(itemsForReporting, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 2, true)"
-              />
-            </div>
-          </b-card>
-          <div v-for="(item1, index1) in itemsForReporting.work_elements" :key="index1">
-            <div style="height: 51px" class="w-100">
-              <b-card
-                no-body
-                class="d-flex flex-column justify-content-around"
-                style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
-              >
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, false)}px`">
-                  <ProgramProgressBar
-                    :type="0"
-                    :width1="getValue(item1, 0, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, false)}px`">
-                  <ProgramProgressBar
-                    :type="1"
-                    :width1="getValue(item1, 1, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, false)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, false)}px`">
-                  <ProgramProgressBar
-                    :type="2"
-                    :width1="getValue(item1, 2, false)"
-                    :isstartmark="false"
-                    :isendmark="false"
-                    :width2="getStartPadding(item1, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, false)"
-                  />
-                </div>
-              </b-card>
-            </div>
           </div>
         </div>
       </div>
