@@ -617,7 +617,12 @@ export default {
       this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
     },
     validateEffortData(data, type) {
-      if (parseFloat(data) === 0 || data === '' || data === null || data === undefined || Number.isNaN(data)) return
+      if (parseInt(data, 10) === 0 && parseInt(type, 10) === 3) {
+        this.showToast('warning', 'Please enter a non-zero value for FTE')
+        this.fteData = 1
+        return
+      }
+      if (data === '' || data === null || data === undefined || Number.isNaN(data)) return
       switch (type) {
         case 1:
           if (parseFloat(this.fteData) !== 0 && this.fteData !== '' && this.fteData !== null && this.fteData !== undefined && !Number.isNaN(this.fteData)) this.durationData = parseFloat(data) / parseFloat(this.fteData)
