@@ -593,6 +593,35 @@ export default {
       return this.$store.state.globalState.portfolioReportingData
     }
   },
+  mounted() {
+    // this.$store.dispatch('portfolioState/get_portfolio_demand_data', { portId: selectedNavObj.id, type: selectedNavObj.type })
+    // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
+    // this.$store.dispatch('portfolioState/get_portfolio_control_data')
+    const currentUrl = this.$router.history.current.path
+    console.log('currentUrl:', currentUrl)
+    this.tabIndex = 0
+    if (currentUrl.indexOf('reporting-plan') > 0) {
+      this.tabIndex = 1
+      this.reportingState = 'plan'
+    }
+    if (currentUrl.indexOf('control') > 0) {
+      console.log('control')
+      this.tabIndex = 2
+    }
+    if (currentUrl.indexOf('reporting-cost') > 0) {
+      console.log('reporting-cost')
+      this.tabIndex = 1
+      this.reportingState = 'cost'
+    }
+    if (currentUrl.indexOf('demand-team') > 0) {
+      this.tabIndex = 0
+      this.demandTabState = 'team'
+    }
+    if (currentUrl.indexOf('demand-phase') > 0) {
+      this.tabIndex = 0
+      this.demandTabState = 'phase'
+    }
+  },
   methods: {
     isUN(data) {
       return isEmpty(data)

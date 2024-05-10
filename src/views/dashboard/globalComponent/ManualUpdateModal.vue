@@ -46,7 +46,7 @@
         <div class="col">
           <label>Spent</label>
           <b-form-input
-            v-model="fteData"
+            v-model="spentData"
             type="number"
             :disabled="true"
           />
@@ -178,12 +178,12 @@ export default {
   },
   methods: {
     initializeData(newWE) {
-      this.loadEngageData = newWE.effort.load_engage
-      this.loadEstimatedData = newWE.effort.load_estimated
-      this.spentData = newWE.spent
-      this.fteEngageData = newWE.effort.fte_engage
-      this.fteEstimatedData = newWE.effort.fte_estimated
+      this.loadEngageData = newWE.load_engage
+      this.loadEstimatedData = newWE.load_reel
       this.accEstimatedData = newWE.acc
+      this.spentData = this.loadEstimatedData * this.accEstimatedData
+      this.fteEngageData = newWE.fte_engage
+      this.fteEstimatedData = newWE.fte_reel
       this.restEstimatedData = this.loadEstimatedData * (1 - this.accEstimatedData)
     },
     hideModal() {
@@ -195,7 +195,7 @@ export default {
         load_estimated: this.loadNewEstimatedData,
         fte_estimated: this.fteNewEstimatedData,
         acc: this.accNewEstimatedData,
-        rest_estimated: this.restNewEstimatedData
+        rest_todo_estimated: this.restNewEstimatedData
       }
       this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
       // await this.$store.dispatch('globalState/submit_manual_update, payloads)

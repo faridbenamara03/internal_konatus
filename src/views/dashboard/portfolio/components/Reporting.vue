@@ -1052,7 +1052,6 @@ export default {
       const startMoment = moment()
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
-      console.log("start:", startMoment.toString(), "first:", firstMoment.toString(), "duration:", duration === 0 ? 0 : parseInt(duration * 24, 10))
       return duration === 0 ? 0 : parseInt(duration * 24, 10)
     },
     getStartPadding(item, type, isChild) {

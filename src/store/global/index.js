@@ -405,8 +405,8 @@ export default {
     TEAM_PHASE_SELECT_ALL(state, team) {
       console.log(state, team)
     },
-    SUBMIT_MANUAL_UPDATE(state) {
-      console.log(state)
+    SUBMIT_MANUAL_UPDATE(state, payloads) {
+      console.log("submit_manual_update:", payloads, "state:", state)
     },
     SUBMIT_LINK_PROJECT(state) {
       console.log(state)
