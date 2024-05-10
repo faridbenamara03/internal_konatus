@@ -353,6 +353,7 @@ export default {
   },
   methods: {
     initializeData(data) {
+      console.log("D:", data)
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
