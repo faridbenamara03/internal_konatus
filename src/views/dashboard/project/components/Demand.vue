@@ -188,6 +188,7 @@ export default {
     c_PhaseData() {
       const currentPhaseData = this.phaseData
       const allPhases = this.$store.state.globalState.allPhaseData
+      const allJobs = this.$store.state.globalState.allJobTitleData
       const resultPhases = []
       allPhases.forEach(p => {
         let tempPhase = currentPhaseData.find(x => x.id === p.id)
@@ -197,10 +198,33 @@ export default {
             title: `Phase ${p.id}`,
             teams: []
           }
-          resultPhases.push(tempPhase)
+          allJobs.forEach(job => {
+            let tempJob = tempPhase.teams.find(x => x.title === job.title)
+            if (tempJob === undefined) {
+              tempJob = {
+                id: job.id,
+                title: job.title,
+                type: 'team',
+                activities: []
+              }
+              tempPhase.teams.push(tempJob)
+            }
+          })
         } else {
-          resultPhases.push(tempPhase)
+          allJobs.forEach(job => {
+            let tempJob = tempPhase.teams.find(x => x.title === job.title)
+            if (tempJob === undefined) {
+              tempJob = {
+                id: job.id,
+                title: job.title,
+                type: 'team',
+                activities: []
+              }
+              tempPhase.teams.push(tempJob)
+            }
+          })
         }
+        resultPhases.push(tempPhase)
       })
       console.log('result:', resultPhases)
       return resultPhases
