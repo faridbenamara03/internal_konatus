@@ -430,7 +430,7 @@ export default {
           })
           return nd
         })
-      } else {
+      } else if (this.data.type === 'company' && this.data.children) {
         ndt = this.data.children.map(t => {
           let engaged = 0
           let demand = 0
