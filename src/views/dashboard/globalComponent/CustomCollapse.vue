@@ -287,7 +287,6 @@ export default {
           hideHeaderClose: false,
           centered: true,
         })
-        console.log('activity:', activity, 'value:', value)
         if (value) {
           await this.$store.dispatch('globalState/delete_work_element', { id: activity.id })
           await this.$store.dispatch('globalState/load_org_data')

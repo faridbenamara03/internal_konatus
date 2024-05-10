@@ -353,7 +353,6 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("INITD:", data, "st:", this.$store.state.globalState.selectedToDate.toString())
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
@@ -549,7 +548,6 @@ export default {
     getStartPadding(item, type, isChild) {
       let result = 0
       if (isChild) {
-        // if (item.id === 9 && type === 1) console.log('Item:', item)
         if (item.phases) {
           const pstarts = []
           let phIndex = 0
@@ -569,13 +567,11 @@ export default {
             }
             if (startMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) startMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
             if (firstMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
-            // if (item.id === 9 && type === 1) console.log('start:', startMoment.toString('YYYY-MM-DD'), 'first:', firstMoment.toString('YYYY-MM-DD'))
             const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
             result = duration === 0 ? 0 : duration * 24
             pstarts.push(result)
             phIndex += 1
           }
-          // if (item.id === 9 && type === 1) console.log('pstart:', pstarts)
           return pstarts
         }
       } else {
