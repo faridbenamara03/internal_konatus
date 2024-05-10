@@ -5,7 +5,10 @@
   >
     <div class="reporting-side">
       <div v-if="itemsForReporting !== undefined">
-        <div class="report-block--head" style="margin-top: 50px;background-color: #384056">
+        <div
+          class="report-block--head"
+          style="margin-top: 50px;background-color: #384056"
+        >
           <p class="m-0 text-uppercase">
             {{
               itemsForReporting === undefined || itemsFormReporting === null
@@ -33,7 +36,10 @@
             }}
           </p>
         </div>
-        <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
+        <div
+          v-for="(item1, index1) in itemsForReporting.children"
+          :key="index1"
+        >
           <div
             class="report-block--head"
             style="cursor: pointer;height:77px"
@@ -45,22 +51,24 @@
               size="16"
               class="mr-1"
             />
-            <p class="m-0 ml-1" style="line-height: 24px; font-size: 15px;">
+            <p
+              class="m-0 ml-1"
+              style="line-height: 24px; font-size: 15px;"
+            >
               {{ item1.title }}
             </p>
           </div>
-          <template
-            v-if="
-              item1 !== undefined && item1.work_elements && openedCollapse === index1
-            "
-          >
+          <template v-if="item1 !== undefined && item1.work_elements && openedCollapse === index1">
             <div
               v-for="(item2, index2) in item1.work_elements"
               :key="index2"
               class="report-block-child d-flex justify-content-between"
               style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
             >
-              <p class="m-0 text-overflow-ellipse" style="font-size:12px">
+              <p
+                class="m-0 text-overflow-ellipse"
+                style="font-size:12px"
+              >
                 {{ item2.title }}({{ item2.acc }}%)
               </p>
               <b-button
@@ -83,34 +91,51 @@
             Phase
           </div>
           <b-button variant="flat-dark">
-            <b-icon icon="diamond-fill" variant="success" />
-            <b-icon icon="triangle-fill" class="rotate-icon" variant="success" />
+            <b-icon
+              icon="diamond-fill"
+              variant="success"
+            />
+            <b-icon
+              icon="triangle-fill"
+              class="rotate-icon"
+              variant="success"
+            />
             Milestones
           </b-button>
-          <b-button variant="flat-dark" class="badge-demand">
+          <b-button
+            variant="flat-dark"
+            class="badge-demand"
+          >
             <b-icon icon="circle-fill" />
             Demand
           </b-button>
-          <b-button variant="flat-dark" class="badge-engage">
+          <b-button
+            variant="flat-dark"
+            class="badge-engage"
+          >
             <b-icon icon="circle-fill" />
             Engaged
           </b-button>
-          <b-button variant="flat-dark" class="badge-estimate">
+          <b-button
+            variant="flat-dark"
+            class="badge-estimate"
+          >
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
         </div>
       </div>
       <div class="reporting-content--body">
-        <div
-          :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + getTodayValue() + 'px;top:122px;z-index:222'"
-        >
+        <div :style="'position:absolute;height:calc(100% - 120px);border-right:2px #BD2020 solid;left:' + getTodayValue() + 'px;top:122px;z-index:222'">
           <div
             class="rounded-circle"
             style="width:6px;height:6px;background-color:#BD2020;position:absolute;top:-2px;left:-2px"
           />
         </div>
-        <div class="timeline-list" :style="`width:${windowWidth / 2}px`">
+        <div
+          class="timeline-list"
+          :style="`width:${windowWidth / 2}px`"
+        >
           <div
             v-for="(date, index) in reportingDates"
             :key="index"
@@ -118,9 +143,7 @@
             :class="{ active: isToday(date) }"
           >
             <p
-              v-if="
-                index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true
-              "
+              v-if="index > 0 ? getMonth(date) != getMonth(reportingDates[index - 1]) : true"
               class="month"
             >
               {{ getMonth(date) }}

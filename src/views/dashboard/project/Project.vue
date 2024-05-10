@@ -247,7 +247,7 @@
         <b-tab
           title="Demand"
           :class="{'border-0': !demandTeamsData.length}"
-          @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-team')"
+          @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-job')"
         >
           <Demand
             v-if="!demandTableEditable"
@@ -364,10 +364,10 @@
             >
               <b-button
                 variant="outline-primary"
-                :style="`background:${demandTabState === 'team' ? '#473ca3' : '#fff0'}`"
-                @click="handleDemandState('team')"
+                :style="`background:${demandTabState === 'job' ? '#473ca3' : '#fff0'}`"
+                @click="handleDemandState('job')"
               >
-                Team
+                Job
               </b-button>
               <b-button
                 variant="outline-primary"
@@ -504,7 +504,7 @@ export default {
       tabIndex: 0,
       openActivityModal: false,
       selectedActivity: {},
-      demandTabState: 'team',
+      demandTabState: 'job',
       projectElementTeamData: this.$store.state.globalState.teamsState,
       projectElementPhaseData: this.$store.state.globalState.phaseState,
       popoverShow: false,
@@ -613,9 +613,9 @@ export default {
       this.tabIndex = 1
       this.reportingState = 'cost'
     }
-    if (currentUrl.indexOf('demand-team') > 0) {
+    if (currentUrl.indexOf('demand-job') > 0) {
       this.tabIndex = 0
-      this.demandTabState = 'team'
+      this.demandTabState = 'job'
     }
     if (currentUrl.indexOf('demand-phase') > 0) {
       this.tabIndex = 0
@@ -702,7 +702,7 @@ export default {
     handleDemandState(tabState) {
       this.demandTabState = tabState
       const urlArr = this.$route.path.split('/')
-      const urls = ['demand-team', 'demand-phase']
+      const urls = ['demand-job', 'demand-phase']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
         const baseUrl = urlArr.join('/').concat(`/demand-${tabState}`)
@@ -719,7 +719,7 @@ export default {
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
-      const urls = ['demand-team', 'demand-phase', 'reporting-cost', 'reporting-plan', 'control']
+      const urls = ['demand-job', 'demand-phase', 'reporting-cost', 'reporting-plan', 'control']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
         const baseUrl = urlArr.join('/').concat(`/${url}`)

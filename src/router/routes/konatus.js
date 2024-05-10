@@ -5,8 +5,8 @@ export default [
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
-    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/project/:projectId/demand-team',
-    name: 'project-demand-team-view',
+    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/project/:projectId/demand-job',
+    name: 'project-demand-job-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
@@ -35,8 +35,8 @@ export default [
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
-    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/project/:projectId/subproject/:subprojectId/demand-team',
-    name: 'project-demand-team-view',
+    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/project/:projectId/subproject/:subprojectId/demand-job',
+    name: 'project-demand-job-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
@@ -65,8 +65,8 @@ export default [
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {
-    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-team',
-    name: 'program-demand-table-view',
+    path: '/organization/:orgId/portfolio/:portfolioId/program/:programId/demand-job',
+    name: 'program-demand-job-view',
     component: () => import('@/views/dashboard/project/Project.vue'),
   },
   {

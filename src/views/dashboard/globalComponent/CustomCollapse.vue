@@ -112,6 +112,9 @@
                 @click="() => handleDeleteActivity(activity)"
               />
             </div>
+            <div class="d-flex" style="width: 95%; justify-content: end;">
+              <p>{{ activity.team_label }}</p>
+            </div>
           </div>
         </div>
       </template>
@@ -201,6 +204,9 @@
                 icon="Trash2Icon"
                 @click="() => handleDeleteActivity(activity)"
               />
+            </div>
+            <div class="d-flex" style="width: 95%; justify-content: end;">
+              <p>{{ activity.team_label }}</p>
             </div>
           </div>
         </div>

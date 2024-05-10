@@ -1,7 +1,7 @@
 <template>
   <div class="project-demand-view w-100">
     <div
-      v-if="tabState === 'team'"
+      v-if="tabState === 'job'"
       style="padding: 40px 15px"
     >
       <div
@@ -47,7 +47,7 @@
       style="padding: 40px 15px"
     >
       <div
-        v-for="(phase, index) in phaseData"
+        v-for="(phase, index) in c_PhaseData"
         :key="index"
       >
         <div
@@ -141,6 +141,26 @@ export default {
     openActivityModal() {
       return this.$store.state.globalState.activityDetailModalOpen
     },
+    c_PhaseData() {
+      const currentPhaseData = this.phaseData
+      const allPhases = this.$store.state.globalState.allPhaseData
+      const resultPhases = []
+      allPhases.forEach(p => {
+        let tempPhase = currentPhaseData.find(x => x.id === p.id)
+        if (tempPhase === undefined) {
+          tempPhase = {
+            id: p.id,
+            title: `Phase ${p.id}`,
+            teams: []
+          }
+          resultPhases.push(tempPhase)
+        } else {
+          resultPhases.push(tempPhase)
+        }
+      })
+      console.log('result:', resultPhases)
+      return resultPhases
+    }
   },
   methods: {
     handleSelectActivity(e, activityId) {
