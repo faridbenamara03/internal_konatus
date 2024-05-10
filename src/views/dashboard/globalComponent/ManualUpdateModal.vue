@@ -129,7 +129,7 @@
         variant="primary"
         @click="handleSave"
       >
-        Link
+        Update
       </b-button>
     </template>
   </b-modal>
