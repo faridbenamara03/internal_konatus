@@ -246,7 +246,6 @@
         </div> -->
         <b-tab
           title="Demand"
-          :class="{'border-0': !demandTeamsData.length}"
           @click="onClickCPSelectBtn(demandTabState === 'phase' ? 'demand-phase' : 'demand-job')"
         >
           <Demand

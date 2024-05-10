@@ -46,7 +46,7 @@
             @click="onCollapseClick(index1)"
           >
             <feather-icon
-              v-if="item1.work_elements.length > 0"
+              v-if="item1.work_elements !== undefined && item1.work_elements.length > 0"
               :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
               size="16"
               class="mr-1"
@@ -210,7 +210,7 @@
                     :paddings="getStartPadding(item1, 0, true)"
                     :isstartmark="isStartMark(item1, 0, true)"
                     :isendmark="isEndMark(item1, 0, true)"
-                    :width4="getStartPadding(item1, 0, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, true)"
+                    :width4="getStartPadding(item1, 0, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, true)[0]"
                   />
                 </div>
                 <div
@@ -226,7 +226,7 @@
                     :paddings="getStartPadding(item1, 1, true)"
                     :isstartmark="isStartMark(item1, 1, true)"
                     :isendmark="isEndMark(item1, 1, true)"
-                    :width4="getStartPadding(item1, 1, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, true)"
+                    :width4="getStartPadding(item1, 1, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, true)[0]"
                   />
                 </div>
                 <div
@@ -242,7 +242,7 @@
                     :paddings="getStartPadding(item1, 2, true)"
                     :isstartmark="isStartMark(item1, 2, true)"
                     :isendmark="isEndMark(item1, 2, true)"
-                    :width4="getStartPadding(item1, 2, true) > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, true)"
+                    :width4="getStartPadding(item1, 2, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, true)[0]"
                   />
                 </div>
               </b-card>
@@ -350,7 +350,7 @@ export default {
       itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
-      selectedWE: 0,
+      selectedWE: {},
     }
   },
   computed: {

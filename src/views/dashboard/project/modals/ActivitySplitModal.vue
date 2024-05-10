@@ -99,14 +99,14 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="selectedActivityData.phase.title" />
+              <b-form-input :value="weTitle" />
             </div>
           </div>
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
               <b-form-textarea
-                :value="selectedActivityData.phase.description"
+                :value="weDescription"
                 rows="5"
               />
             </div>
@@ -229,28 +229,30 @@
               </p>
             </div>
           </div>
-          <div
-            v-for="(item, index) in selectedActivityData.phase.dependency"
-            :key="index"
-            class="shadow rounded d-flex"
-            style="padding:10px;justify-content:space-between;"
-          >
-            <div class="d-flex">
-              <div
-                class="bg-warning"
-                style="width:8px;height:22px;border-radius:2px;margin-right:8px"
-              />
-              <feather-icon
-                icon="LinkIcon"
-                style="margin-top:4px;margin-right:8px"
-              />
-              <i>{{ item }}</i>
-            </div>
+          <div v-if="selectedActivityData.phase !== undefined">
             <div
-              style="cursor:pointer"
-              @click="handleDependencyDelete(index)"
+              v-for="(item, index) in selectedActivityData.phase.dependency"
+              :key="index"
+              class="shadow rounded d-flex"
+              style="padding:10px;justify-content:space-between;"
             >
-              <feather-icon icon="TrashIcon" />
+              <div class="d-flex">
+                <div
+                  class="bg-warning"
+                  style="width:8px;height:22px;border-radius:2px;margin-right:8px"
+                />
+                <feather-icon
+                  icon="LinkIcon"
+                  style="margin-top:4px;margin-right:8px"
+                />
+                <i>{{ item }}</i>
+              </div>
+              <div
+                style="cursor:pointer"
+                @click="handleDependencyDelete(index)"
+              >
+                <feather-icon icon="TrashIcon" />
+              </div>
             </div>
           </div>
         </div>
@@ -749,7 +751,9 @@ export default {
     isOpen: Boolean,
   },
   data() {
-    const { load, duration, fte } = this.selectedActivityData.phase.effort
+    const load = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
+    const duration = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
+    const fte = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
     const load1 = parseInt(load / 2, 10)
     const duration1 = parseInt(duration / 2, 10)
     const fte1 = parseInt(fte / 2, 10)
@@ -808,67 +812,81 @@ export default {
     }
   },
   computed: {
+    weTitle() {
+      return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
+    },
+    weDescription() {
+      return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
+    },
     totalEffortData1() {
       let load = 0
       let duration = 0
       let fte = 0
-      this.effortData1.forEach(t => {
-        load += parseInt(t.load ? t.load : 0, 10)
-        duration += parseInt(t.duration ? t.duration : 0, 10)
-        fte += parseInt(t.fte ? t.fte : 0, 10)
-      })
+      if (this.effortData1 !== undefined) {
+        this.effortData1.forEach(t => {
+          load += parseInt(t.load ? t.load : 0, 10)
+          duration += parseInt(t.duration ? t.duration : 0, 10)
+          fte += parseInt(t.fte ? t.fte : 0, 10)
+        })
+      }
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     totalEffortData2() {
       let load = 0
       let duration = 0
       let fte = 0
-      this.effortData2.forEach(t => {
-        load += parseInt(t.load ? t.load : 0, 10)
-        duration += parseInt(t.duration ? t.duration : 0, 10)
-        fte += parseInt(t.fte ? t.fte : 0, 10)
-      })
+      if (this.effortData2 !== undefined) {
+        this.effortData2.forEach(t => {
+          load += parseInt(t.load ? t.load : 0, 10)
+          duration += parseInt(t.duration ? t.duration : 0, 10)
+          fte += parseInt(t.fte ? t.fte : 0, 10)
+        })
+      }
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     totalEffortData3() {
       let load = 0
       let duration = 0
       let fte = 0
-      this.effortData3.forEach(t => {
-        load += parseInt(t.load ? t.load : 0, 10)
-        duration += parseInt(t.duration ? t.duration : 0, 10)
-        fte += parseInt(t.fte ? t.fte : 0, 10)
-      })
+      if (this.effortData2 !== undefined) {
+        this.effortData3.forEach(t => {
+          load += parseInt(t.load ? t.load : 0, 10)
+          duration += parseInt(t.duration ? t.duration : 0, 10)
+          fte += parseInt(t.fte ? t.fte : 0, 10)
+        })
+      }
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     title1Valid() {
-      return this.title1.length > 0
+      return this.title1 !== undefined && this.title1.length > 0
     },
     description1Valid() {
-      return this.description1.length > 0
+      return this.description1 !== undefined && this.description1.length > 0
     },
     title2Valid() {
-      return this.title2.length > 0
+      return this.title2 !== undefined && this.title2.length > 0
     },
     description2Valid() {
-      return this.description2.length > 0
+      return this.description2 !== undefined && this.description2.length > 0
     },
     c_TeamTitle() {
-      return this.selectedActivityData.team.title
+      return this.selectedActivityData.team !== undefined ? this.selectedActivityData.team.title : ''
     },
     effortData3() {
       const dt = JSON.parse(JSON.stringify(this.effortData1))
       const data = []
-      dt.forEach(t => {
-        const d = { ...t }
-        const exist = this.effortData2.find(t1 => t1.skill === t.skill)
-        if (exist) {
-          d.load = (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10)) < 0 ? 0 : (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10))
-          d.duration = (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10)) < 0 ? 0 : (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10))
-          d.fte = (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10)) < 0 ? 0 : (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10))
-        }
-        if (d.load + d.duration + d.fte > 0) data.push(d)
-      })
+      if (dt !== undefined) {
+        dt.forEach(t => {
+          const d = { ...t }
+          const exist = this.effortData2.find(t1 => t1.skill === t.skill)
+          if (exist) {
+            d.load = (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10)) < 0 ? 0 : (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10))
+            d.duration = (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10)) < 0 ? 0 : (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10))
+            d.fte = (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10)) < 0 ? 0 : (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10))
+          }
+          if (d.load + d.duration + d.fte > 0) data.push(d)
+        })
+      }
       return data
     }
   },
@@ -976,7 +994,7 @@ export default {
       }
     },
     handleDependencyDelete(index) {
-      const dt = this.selectedActivityData.phase.dependency
+      const dt = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.dependency : []
       dt.splice(index, 1)
     }
   },

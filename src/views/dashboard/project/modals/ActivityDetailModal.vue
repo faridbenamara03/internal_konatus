@@ -130,14 +130,14 @@
       <div class="form-group">
         <div class="select-box">
           <label>Title</label>
-          <b-form-input v-model="selectedActivityData.phase.title" />
+          <b-form-input v-model="weTitle" />
         </div>
       </div>
       <div class="form-group">
         <div class="select-box">
           <label>Description</label>
           <b-form-textarea
-            v-model="selectedActivityData.phase.description"
+            v-model="weDescription"
             rows="5"
           />
         </div>
@@ -508,6 +508,8 @@ export default {
       fteEstimateData: 0,
       accData: 0,
       restToDoData: 0,
+      weTitle: '',
+      weDescription: '',
       skillset: 0,
       opt_skillset: 0,
       effortDetailShow: true,
@@ -573,6 +575,8 @@ export default {
         }
         return null
       })
+      this.weTitle = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
+      this.weDescription = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
       this.loadData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
       this.durationData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
       this.fteData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
@@ -600,7 +604,7 @@ export default {
     jobSelectHandle(data) {
       const globalTeams = this.$store.state.globalState.globalOrganizationTeamData[0]
       const tempTeamData = []
-      if (globalTeams.children && globalTeams.children.length > 0) {
+      if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
         globalTeams.children.map(item => {
           if (item.title === data) {
             if (item.children && item.children.length > 0) {

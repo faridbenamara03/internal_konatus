@@ -149,7 +149,7 @@ export default {
   },
   props: {
     selectedWE: {
-      type: Object,
+      type: Object || Number,
       default: () => {},
     },
   },

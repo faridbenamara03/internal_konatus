@@ -21,7 +21,7 @@
         >
           <div
             v-for="(ft, fi) in c_fields"
-            :key="fi"
+            :key="`c_field_1_${fi}`"
             class="data-child mr-1 portf-uppercase"
             :style="`min-width:150px`"
           >
@@ -29,7 +29,7 @@
           </div>
           <div
             v-for="(item, index) in job_fields"
-            :key="index"
+            :key="`job_field_1_${index}`"
             :style="`min-width:180px`"
             class="data-child mr-1 portf-uppercase"
           >
@@ -55,7 +55,7 @@
       >
         <div
           v-for="(item, index) in c_data"
-          :key="index"
+          :key="`c_data_1_${index}`"
         >
           <div
             class="portf-row portf-bold portf-sub-header portf-table-row color-white row-header-bg border-btm-lgt"
@@ -82,7 +82,7 @@
             >
               <div
                 v-for="(ft, fi) in c_fields"
-                :key="fi"
+                :key="`c_field_2_${fi}`"
                 class="data-child mr-1"
                 :style="`min-width:150px`"
               >
@@ -95,7 +95,7 @@
               </div>
               <div
                 v-for="(jtem, index1) in job_fields"
-                :key="index1"
+                :key="`job_field_2_${index1}`"
                 :style="`min-width:180px`"
                 class="data-child mr-1"
               >
@@ -108,7 +108,7 @@
           <div v-if="opened === index">
             <div
               v-for="(item1, index1) in item.children"
-              :key="index1"
+              :key="`item_children_${index1}`"
             >
               <div
                 class="portf-row portf-table-row font-14 border-bottom-dm"
@@ -134,7 +134,7 @@
                 >
                   <div
                     v-for="(ft, fi) in c_fields"
-                    :key="fi"
+                    :key="`c_field_3_${fi}`"
                     class="data-child mr-1"
                     :style="`min-width: 150px`"
                   >
@@ -147,7 +147,7 @@
                   </div>
                   <div
                     v-for="(jtem, tndex) in job_fields"
-                    :key="tndex"
+                    :key="`job_field_3_${tndex}`"
                     :style="`min-width:180px`"
                     class="data-child mr-1"
                   >
@@ -160,7 +160,7 @@
               <div v-if="openedChild === index1">
                 <div
                   v-for="(item2, index2) in item1.children"
-                  :key="index2"
+                  :key="`item1_children_${index2}`"
                 >
                   <div
                     class="portf-row portf-table-row font-14 border-bottom-dm"
@@ -186,7 +186,7 @@
                     >
                       <div
                         v-for="(ft, fi) in c_fields"
-                        :key="fi"
+                        :key="`c_field_4_${fi}`"
                         class="data-child mr-1"
                         :style="`min-width: 150px`"
                       >
@@ -199,7 +199,7 @@
                       </div>
                       <div
                         v-for="(jtem1, tndex1) in job_fields"
-                        :key="tndex1"
+                        :key="`job_field_4_${tndex1}`"
                         :style="`min-width:180px`"
                         class="data-child mr-1"
                       >
@@ -212,7 +212,7 @@
                   <div v-if="openedSub === index2">
                     <div
                       v-for="(item3, index3) in item2.children"
-                      :key="index3"
+                      :key="`item2_children_${index3}`"
                     >
                       <div
                         class="portf-row portf-table-row font-14 border-bottom-dm"
@@ -231,7 +231,7 @@
                         >
                           <div
                             v-for="(ft, fi) in c_fields"
-                            :key="fi"
+                            :key="`c_field_5_${fi}`"
                             class="data-child mr-1"
                             :style="`min-width: 150px`"
                           >
@@ -244,7 +244,7 @@
                           </div>
                           <div
                             v-for="(jtem2, tndex2) in job_fields"
-                            :key="tndex2"
+                            :key="`job_field_5_${tndex2}`"
                             :style="`min-width:180px`"
                             class="data-child mr-1"
                           >
@@ -279,7 +279,7 @@
         >
           <div
             v-for="(ft, fi) in c_fields"
-            :key="fi"
+            :key="`c_field_6_${fi}`"
             class="data-child mr-1 portf-uppercase"
             :style="`min-width:150px`"
           >
@@ -287,7 +287,7 @@
           </div>
           <div
             v-for="(jtem, index1) in job_fields"
-            :key="index1"
+            :key="`job_field_6_${index1}`"
             :style="`min-width:180px;text-align:center`"
             class="data-child mr-1"
           >
@@ -313,7 +313,7 @@ export default {
   },
   props: {
     data: {
-      type: Array,
+      type: Array || Object,
       default: () => [],
     },
     controlData: {

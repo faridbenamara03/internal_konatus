@@ -99,14 +99,14 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="selectedActivityData.phase.title" />
+              <b-form-input :value="weTitle" />
             </div>
           </div>
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
               <b-form-textarea
-                :value="selectedActivityData.phase.description"
+                :value="weDescription"
                 rows="5"
               />
             </div>
@@ -711,6 +711,12 @@ export default {
     }
   },
   computed: {
+    weTitle() {
+      return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
+    },
+    weDescription() {
+      return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
+    },
     totalEffortData1() {
       let load = 0
       let duration = 0
@@ -777,7 +783,7 @@ export default {
             t.phases.forEach(p => {
               if (p.activities && p.activities.length > 0) {
                 p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase.id !== a.id) {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id) {
                     arr.push(a.id)
                   }
                 })
