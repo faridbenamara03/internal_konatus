@@ -573,23 +573,23 @@ export default {
         }
         return null
       })
-      this.loadData = this.selectedActivityData.phase.effort.load_engage
-      this.durationData = this.selectedActivityData.phase.effort.duration_engage
-      this.fteData = this.selectedActivityData.phase.effort.fte_engage
-      this.loadDemandData = this.selectedActivityData.phase.effort.load_demand
-      this.durationDemandData = this.selectedActivityData.phase.effort.duration_demand
-      this.fteDemandData = this.selectedActivityData.phase.effort.fte_demand
-      this.accData = this.selectedActivityData.phase.acc
-      this.loadEstimateData = this.selectedActivityData.phase.effort.load_estimated
+      this.loadData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
+      this.durationData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
+      this.fteData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
+      this.loadDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
+      this.durationDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
+      this.fteDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
+      this.accData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
+      this.loadEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
       this.restToDoData = (1 - this.accData) * this.loadEstimateData
-      this.durationEstimateData = this.selectedActivityData.phase.effort.duration_estimated
-      this.fteEstimateData = this.selectedActivityData.phase.effort.fte_estimated
-      this.selectedJob = this.selectedActivityData.phase.job_name
-      this.selectedTeam = this.selectedActivityData.phase.team_name
-      this.selectedPriority = this.priorityOptions[this.selectedActivityData.phase.priority - 1]
-      if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
-        this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
-      }
+      this.durationEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
+      this.fteEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
+      this.selectedJob = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.job_name : 0
+      this.selectedTeam = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.team_name : 0
+      this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
+      // if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
+      //   this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
+      // }
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority

@@ -72,6 +72,7 @@ export default {
     tempReportingData: [],
     portfolioControlData: [],
     allPhaseData: [],
+    allJobTitleData: [],
     allPhaseTitleData: [],
     allPortData: [],
     allProgData: [],
@@ -548,6 +549,9 @@ export default {
     },
     LOAD_ORG_TEAM_DATA(state, orgData) {
       state.globalOrganizationTeamData.push(orgData)
+      state.globalOrganizationTeamData[0].children.forEach(job => {
+        state.allJobTitleData.push(job)
+      })
     },
     LOAD_ORG_DATA(state, orgData) {
       if (state.globalOrganizationData.length === 0) {

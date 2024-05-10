@@ -598,25 +598,16 @@ export default {
     // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
     // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     const currentUrl = this.$router.history.current.path
-    this.tabIndex = 0
     if (currentUrl.indexOf('reporting-plan') > 0) {
       this.tabIndex = 1
       this.reportingState = 'plan'
-    }
-    if (currentUrl.indexOf('control') > 0) {
+    } else if (currentUrl.indexOf('control') > 0) {
       this.tabIndex = 2
-    }
-    if (currentUrl.indexOf('reporting-cost') > 0) {
+    } else if (currentUrl.indexOf('reporting-cost') > 0) {
       this.tabIndex = 1
       this.reportingState = 'cost'
-    }
-    if (currentUrl.indexOf('demand-job') > 0) {
+    } else {
       this.tabIndex = 0
-      this.demandTabState = 'job'
-    }
-    if (currentUrl.indexOf('demand-phase') > 0) {
-      this.tabIndex = 0
-      this.demandTabState = 'phase'
     }
   },
   methods: {

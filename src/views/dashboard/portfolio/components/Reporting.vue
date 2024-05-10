@@ -191,6 +191,14 @@
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
+          <b-form-spinbutton
+            id="sb-days"
+            v-model="currentInterval"
+            :formatter-fn="handleZoomInterval"
+            min="0"
+            max="5"
+            wrap
+          />
         </div>
       </div>
       <div class="reporting-content--body">
@@ -809,7 +817,8 @@
 <script>
 import {
   BButton,
-  BCard,
+  BFormSpinbutton,
+  BCard
 } from 'bootstrap-vue'
 import moment from 'moment'
 import ReportingCostVue from './ReportingCost.vue'
@@ -821,6 +830,7 @@ export default {
   components: {
     BButton,
     BCard,
+    BFormSpinbutton,
     ReportingCostVue,
     ProgramProgressBar,
     ProjectProgressBar,
@@ -852,6 +862,8 @@ export default {
       itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
+      currentInterval: 0,
+      zoomIntervals: ['1 days', '2 days', '5 days', '10 days', '20 days', '30 days']
     }
   },
   computed: {
@@ -1048,6 +1060,9 @@ export default {
       }
       return result
     },
+    handleZoomInterval(value) {
+      return this.zoomIntervals[value]
+    },
     getTodayValue() {
       const startMoment = moment()
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
@@ -1159,7 +1174,6 @@ export default {
 
 <style lang="scss">
 @import "@core/scss/vue/pages/dashboard-portfolio.scss";
-
 .rotate-icon {
   transform: rotate(180deg);
 }</style>

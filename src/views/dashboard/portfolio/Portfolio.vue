@@ -551,13 +551,13 @@ export default {
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: [],
       costfields: [],
-      // tabIndex: 0,
+      tabIndex: 0,
+      reportingState: 'cost',
       isChartView: false,
       popoverShow: false,
       // selectedMonth: `01 / ${new Date().getFullYear()} - 12 / ${new Date().getFullYear()}`,
       selectedMonth: `${this.$store.state.globalState.selectedFromDate.month() + 1} / ${this.$store.state.globalState.selectedFromDate.year()} - ${this.$store.state.globalState.selectedToDate.month()} / ${this.$store.state.globalState.selectedToDate.year()}`,
       rangeArray: [],
-      // reportingState: 'cost',
       open: false,
       openEditProgramDrawer: false,
       updateIndex: false,
@@ -645,34 +645,6 @@ export default {
     },
     reportingData() {
       return this.$store.state.globalState.portfolioReportingData
-    },
-    tabIndex() {
-      const currentUrl = this.$router.history.current.path
-      let result
-      if (currentUrl.indexOf('reporting-plan') > 0) {
-        result = 1
-      } else if (currentUrl.indexOf('control') > 0) {
-        console.log('control')
-        result = 2
-      } else if (currentUrl.indexOf('reporting-cost') > 0) {
-        console.log('reporting-cost')
-        result = 1
-      } else {
-        result = 0
-      }
-      return result
-    },
-    reportingState() {
-      const currentUrl = this.$router.history.current.path
-      let result
-      if (currentUrl.indexOf('reporting-plan') > 0) {
-        result = 'plan'
-      } else if (currentUrl.indexOf('reporting-cost') > 0) {
-        result = 'cost'
-      } else {
-        result = 'cost'
-      }
-      return result
     }
   },
   mounted() {
@@ -687,6 +659,20 @@ export default {
     this.activeCostColumns.forEach((column, idx) => {
       this.costfields.splice(idx + 1, 0, column)
     })
+    const currentUrl = this.$router.history.current.path
+    console.log('currentUrl:', currentUrl)
+    if (currentUrl.indexOf('reporting-plan') > 0) {
+      this.tabIndex = 1
+      this.reportingState = 'plan'
+    } else if (currentUrl.indexOf('control') > 0) {
+      this.tabIndex = 2
+    } else if (currentUrl.indexOf('reporting-cost') > 0) {
+      this.tabIndex = 1
+      this.reportingState = 'cost'
+    } else {
+      this.tabIndex = 0
+    }
+    console.log('tabIndex:', this.tabIndex)
   },
   methods: {
     async handleDone() {
@@ -757,14 +743,12 @@ export default {
       return isEmpty(data)
     },
     onRangeFromChange(value) {
-      console.log('from:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
       this.selectedMonth = this.rangeArray.join(' - ')
       this.$store.commit('globalState/UPDATE_SELECTED_FROM_DATE', value)
     },
     onRangeToChange(value) {
-      console.log('to:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')

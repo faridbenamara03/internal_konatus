@@ -147,8 +147,23 @@ export default {
     },
     c_TeamData() {
       const allPhases = this.$store.state.globalState.allPhaseData
-      const resultTeamData = []
-      this.teamData.forEach(t => {
+      const allJobs = this.$store.state.globalState.allJobTitleData
+      let resultJobData = []
+      allJobs.forEach(job => {
+        let tempJob = this.teamData.find(x => x.title === job.title)
+        if (tempJob === undefined) {
+          tempJob = {
+            id: job.id,
+            title: job.title,
+            type: 'team',
+            phases: []
+          }
+          resultJobData.push(tempJob)
+        } else {
+          resultJobData.push(tempJob)
+        }
+      })
+      resultJobData = resultJobData.map(t => {
         const currentPhaseData = t.phases
         const tempPhases = []
         allPhases.forEach(p => {
@@ -166,9 +181,9 @@ export default {
         })
         const tempTeam = { ...t }
         tempTeam.phases = tempPhases
-        resultTeamData.push(tempTeam)
+        return tempTeam
       })
-      return resultTeamData
+      return resultJobData
     },
     c_PhaseData() {
       const currentPhaseData = this.phaseData
