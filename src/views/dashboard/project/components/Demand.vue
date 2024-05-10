@@ -60,7 +60,7 @@
             size="16"
             class="mr-1"
           />
-          phase {{ index + 1 }}
+          phase {{ phase.id }}
         </div>
         <div
           v-if="openedPhase.indexOf(index) > -1"
