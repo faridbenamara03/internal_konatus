@@ -69,12 +69,6 @@
                 </p>
               </div>
               <div style="position: relative;top: -3px;">
-                  <feather-icon
-                    v-if="parseInt(activity.acc) === 0"
-                    icon="MailIcon"
-                  />
-                </div>
-              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
                   style="color: #7167E8"
@@ -88,11 +82,17 @@
                   icon="CheckCircleIcon"
                 />
               </div>
-              <div style="width:20px;">
-                <b-form-checkbox
-                  v-model="activity.isSelected"
-                  @change="e => onCheckChange(e, activity.id)"
+              <div class="d-flex">
+                <feather-icon
+                  v-if="parseInt(activity.acc) !== 100"
+                  icon="MailIcon"
                 />
+                <div style="width:20px;">
+                  <b-form-checkbox
+                    v-model="activity.isSelected"
+                    @change="e => onCheckChange(e, activity.id)"
+                  />
+                </div>
               </div>
             </div>
             <p class="muted">
@@ -162,12 +162,6 @@
                 </p>
               </div>
               <div style="position: relative;top: -3px;">
-                  <feather-icon
-                    v-if="parseInt(activity.acc) === 0"
-                    icon="MailIcon"
-                  />
-                </div>
-              <div style="position: relative;top: -3px;">
                 <feather-icon
                   v-if="parseInt(activity.acc) > 0 && parseInt(activity.acc) < 100"
                   style="color: #7167E8"
@@ -181,11 +175,17 @@
                   icon="CheckCircleIcon"
                 />
               </div>
-              <div style="width:20px;">
-                <b-form-checkbox
-                  v-model="activity.isSelected"
-                  @change="e => onCheckChange(e, activity.id)"
+              <div class="d-flex">
+                <feather-icon
+                  v-if="parseInt(activity.acc) !== 100"
+                  icon="MailIcon"
                 />
+                <div style="width:20px;">
+                  <b-form-checkbox
+                    v-model="activity.isSelected"
+                    @change="e => onCheckChange(e, activity.id)"
+                  />
+                </div>
               </div>
             </div>
             <p class="muted">

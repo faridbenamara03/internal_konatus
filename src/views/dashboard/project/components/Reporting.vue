@@ -169,7 +169,7 @@
                 :width1="getValue(itemsForReporting, 0, false)"
                 :isstartmark="isStartMark(itemsForReporting, 0, false)"
                 :isendmark="isEndMark(itemsForReporting, 0, false)"
-                :width2="getStartPadding(itemsForReporting, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, false)"
+                :width2="0"
               />
             </div>
             <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
@@ -178,7 +178,7 @@
                 :width1="getValue(itemsForReporting, 1, false)"
                 :istartmark="isStartMark(itemsForReporting, 1, false)"
                 :isendmark="isEndMark(itemsForReporting, 1, false)"
-                :width2="getStartPadding(itemsForReporting, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 1, false)"
+                :width2="0"
               />
             </div>
             <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
@@ -187,63 +187,51 @@
                 :width1="getValue(itemsForReporting, 2, false)"
                 :isstartmark="isStartMark(itemsForReporting, 2, false)"
                 :isendmark="isEndMark(itemsForReporting, 2, false)"
-                :width2="getStartPadding(itemsForReporting, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(itemsForReporting, 0, false)"
+                :width2="0"
               />
             </div>
           </b-card>
-          <div v-for="(item1, index1) in itemsForReporting.children" :key="index1">
-            <div class="w-100" style="height: 77px">
+          <div
+            v-for="(item1, index1) in itemsForReporting.children"
+            :key="index1"
+          >
+            <div
+              class="w-100"
+              style="height: 77px"
+            >
               <b-card
                 no-body
                 class="d-flex flex-column justify-content-around"
                 style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
               >
-                <div
-                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                    item1,
-                    0,
-                    true
-                  )}px`"
-                >
+                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, true )}px`">
                   <ProjectProgressBar
                     :type="0"
                     :widths="getValue(item1, 0, true)"
                     :paddings="getStartPadding(item1, 0, true)"
                     :isstartmark="isStartMark(item1, 0, true)"
                     :isendmark="isEndMark(item1, 0, true)"
-                    :width4="getStartPadding(item1, 0, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 0, true)[0]"
+                    :width4="getStartPadding(item1, 0, true)"
                   />
                 </div>
-                <div
-                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                    item1,
-                    1,
-                    true
-                  )}px`"
-                >
+                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, true )}px`">
                   <ProjectProgressBar
                     :type="1"
                     :widths="getValue(item1, 1, true)"
                     :paddings="getStartPadding(item1, 1, true)"
                     :isstartmark="isStartMark(item1, 1, true)"
                     :isendmark="isEndMark(item1, 1, true)"
-                    :width4="getStartPadding(item1, 1, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 1, true)[0]"
+                    :width4="getStartPadding(item1, 1, true)"
                   />
                 </div>
-                <div
-                  :style="`margin-bottom:5px;padding-left:${getStartPadding(
-                    item1,
-                    2,
-                    true
-                  )}px`"
-                >
+                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, true)}px`">
                   <ProjectProgressBar
                     :type="2"
                     :widths="getValue(item1, 2, true)"
                     :paddings="getStartPadding(item1, 2, true)"
                     :isstartmark="isStartMark(item1, 2, true)"
                     :isendmark="isEndMark(item1, 2, true)"
-                    :width4="getStartPadding(item1, 2, true)[0] > getTodayValue() ? getTodayValue() : getStartPadding(item1, 2, true)[0]"
+                    :width4="getStartPadding(item1, 2, true)"
                   />
                 </div>
               </b-card>
@@ -253,38 +241,44 @@
                 item1 !== undefined && item1.work_elements && openedCollapse === index1
               "
             >
-              <div v-for="(item2, index2) in item1.work_elements" :key="index2">
-                <div style="height: 51px" class="w-100">
+              <div
+                v-for="(item2, index2) in item1.work_elements"
+                :key="index2"
+              >
+                <div
+                  class="w-100"
+                  style="height: 51px"
+                >
                   <b-card
                     no-body
                     class="d-flex flex-column justify-content-around"
-                    style="height:50px;padding:1px 10px 1px 3px;width:fit-content;"
+                    :style="`height:50px;padding:1px 10px 1px 3px;width:fit-content;left:${getPadding(item2)}px`"
                   >
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)}px`">
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)-getPadding(item2)}px`">
                       <ProgramProgressBar
                         :type="0"
                         :width1="getValue(item2, 0, false)"
                         :isstartmark="false"
                         :isendmark="false"
-                        :width2="getStartPadding(item2, 0, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 0, false)"
+                        :width2="getStartPadding(item2, 0, false)"
                       />
                     </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)}px`">
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)-getPadding(item2)}px`">
                       <ProgramProgressBar
                         :type="1"
                         :width1="getValue(item2, 1, false)"
                         :isstartmark="false"
                         :isendmark="false"
-                        :width2="getStartPadding(item2, 1, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 1, false)"
+                        :width2="getStartPadding(item2, 1, false)"
                       />
                     </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)}px`">
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)-getPadding(item2)}px`">
                       <ProgramProgressBar
                         :type="2"
                         :width1="getValue(item2, 2, false)"
                         :isstartmark="false"
                         :isendmark="false"
-                        :width2="getStartPadding(item2, 2, false) > getTodayValue() ? getTodayValue() : getStartPadding(item2, 2, false)"
+                        :width2="getStartPadding(item2, 2, false)"
                       />
                     </div>
                   </b-card>
@@ -301,8 +295,13 @@
       @onSubmit="handleManualUpdate"
     />
   </div>
-  <div v-else-if="reportingState === 'cost'" style="width: 100%">
-    <ReportingCostVue :data="itemsForReporting" :fields="costfields" />
+  <div
+    v-else-if="reportingState === 'cost'"
+    style="width: 100%">
+    <ReportingCostVue
+      :data="itemsForReporting"
+      :fields="costfields"
+    />
   </div>
 </template>
 
@@ -570,6 +569,13 @@ export default {
       const startMoment = moment('2024-01-02')
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
+      return duration === 0 ? 0 : parseInt(duration * 24, 10)
+    },
+    getPadding(item) {
+      const mDates = [moment(item.start_date_demand), moment(item.start_date_engage), moment(item.start_date_reel)]
+      const firstDate = moment.min(mDates)
+      const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
+      const duration = firstDate > firstMoment ? moment.duration(firstDate.diff(firstMoment)).asDays() : 0
       return duration === 0 ? 0 : parseInt(duration * 24, 10)
     },
     getStartPadding(item, type, isChild) {

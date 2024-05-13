@@ -319,29 +319,35 @@
           <div class="col">
             <label>Total Load</label>
             <b-form-input
+              v-model="loadData"
               type="number"
               :value="loadData"
-              v-model="loadData"
-              @input="validateEffortData(loadData, 1)"
             />
           </div>
           <div class="col">
             <label>Total Duration</label>
             <b-form-input
+              v-model="durationData"
               type="number"
               :value="durationData"
-              v-model="durationData"
-              @input="validateEffortData(durationData, 2)"
             />
           </div>
           <div class="col">
             <label>Total FTE</label>
             <b-form-input
+              v-model="fteData"
               type="number"
               :value="fteData"
-              v-model="fteData"
-              @input="validateEffortData(fteData, 3)"
             />
+          </div>
+          <div class="col">
+            <b-button
+              style="margin-top:20px"
+              variant="primary"
+              @click="handleCalculate"
+            >
+              Calculate
+            </b-button>
           </div>
         </div>
         <div class="row">
@@ -350,40 +356,40 @@
           <div class="col">
             <label>Load(Demand)</label>
             <b-form-input
-              type="number"
               v-model="loadDemandData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>Duration(Demand)</label>
             <b-form-input
-              type="number"
               v-model="durationDemandData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>FTE(Demand)</label>
             <b-form-input
-              type="number"
               v-model="fteDemandData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>%acc</label>
             <b-form-input
-              type="number"
               v-model="accData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>Rest To Do</label>
             <b-form-input
-              type="number"
               v-model="restToDoData"
+              type="number"
               :disabled="true"
             />
           </div>
@@ -394,36 +400,37 @@
           <div class="col">
             <label>Load(Real/Estimated)</label>
             <b-form-input
-              type="number"
               v-model="loadEstimateData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>Duration(Real/Estimated)</label>
             <b-form-input
-              type="number"
               v-model="durationEstimateData"
+              type="number"
               :disabled="true"
             />
           </div>
           <div class="col">
             <label>FTE(Real/Estimated)</label>
             <b-form-input
-              type="number"
               v-model="fteEstimateData"
+              type="number"
               :disabled="true"
             />
           </div>
         </div>
         <div
           v-if="opt_skillset !== 0 && effortDetailShow"
-          class="row pt-1">
+          class="row pt-1"
+        >
           <div class="col-6">
             <label>Skillset</label>
             <v-select
-              :options="['Design Workflow', 'Program Engineering', 'Project Management']"
               v-model="skillset"
+              :options="['Design Workflow', 'Program Engineering', 'Project Management']"
               menu-props="auto"
               placeholder="Select skillset"
               outlined
@@ -444,6 +451,7 @@
       <b-button
         variant="primary"
         @click="handleSave"
+        :disabled="!isValid"
       >
         Save
       </b-button>
@@ -507,6 +515,7 @@ export default {
       durationEstimateData: 0,
       fteEstimateData: 0,
       accData: 0,
+      isValid: false,
       restToDoData: 0,
       weTitle: '',
       weDescription: '',
@@ -619,6 +628,16 @@ export default {
       }
       this.c_teamData = tempTeamData
       this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
+    },
+    handleCalculate() {
+      if (this.fteData !== '' && this.fteData !== 0 && this.durationData !== '' && this.loadData !== '') {
+        if (this.loadData === this.durationData * this.fteData) {
+          this.showTest('success', 'All values are valid')
+          this.isValid = true
+        }
+      } else {
+        this.isValid = false
+      }
     },
     validateEffortData(data, type) {
       if (parseInt(data, 10) === 0 && parseInt(type, 10) === 3) {
