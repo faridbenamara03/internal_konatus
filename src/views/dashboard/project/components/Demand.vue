@@ -172,7 +172,7 @@ export default {
           if (tempPhase === undefined) {
             tempPhase = {
               id: p.id,
-              title: `Phase ${p.id}`,
+              title: `Phase${p.id}`,
               activities: []
             }
             tempPhases.push(tempPhase)
@@ -196,7 +196,7 @@ export default {
         if (tempPhase === undefined) {
           tempPhase = {
             id: p.id,
-            title: `Phase ${p.id}`,
+            title: `Phase${p.id}`,
             teams: []
           }
           allJobs.forEach(job => {

@@ -307,6 +307,7 @@
           :checked="effortDetailShow"
           switch
           inline
+          :disabled="opt_skillset === 0"
           @change="effortDetailShowToggle"
         >
           Skillset option
@@ -450,10 +451,10 @@
       </b-button>
       <b-button
         variant="primary"
-        @click="handleSave"
         :disabled="!isValid"
+        @click="handleSave"
       >
-        Save
+        Update
       </b-button>
     </template>
     <activity-split-modal :selected-activity-data="c_SelectedActivity" />
@@ -631,11 +632,15 @@ export default {
     },
     handleCalculate() {
       if (this.fteData !== '' && this.fteData !== 0 && this.durationData !== '' && this.loadData !== '') {
-        if (this.loadData === this.durationData * this.fteData) {
-          this.showTest('success', 'All values are valid')
+        if (parseFloat(this.loadData) === parseFloat(this.durationData) * parseFloat(this.fteData)) {
+          this.showToast('success', 'All values are valid')
           this.isValid = true
+        } else {
+          this.showToast('warning', 'Please enter valid values')
+          this.isValid = false
         }
       } else {
+        this.showToast('warning', 'Please enter valid values')
         this.isValid = false
       }
     },
@@ -681,7 +686,23 @@ export default {
       this.$emit('hideModal')
     },
     handleSave() {
-      this.$store.commit('globalState/HANDLE_ACTIVITY_DETAIL_SAVE', this.selectedActivityData.phase)
+      // this.$store.commit('globalState/HANDLE_ACTIVITY_DETAIL_SAVE', this.selectedActivityData.phase)
+      const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
+      const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
+      const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
+      const payloads = {
+        we_id: this.selectedActivityData.phase?.id,
+        detail_mode: true,
+        name: this.weTitle,
+        job_id: jobId,
+        phase_id: phaseId,
+        team_id: this.selectedTeam,
+        priority: priorityIndex,
+        load_engage: this.loadData,
+        duration_engage: this.durationData,
+        fte_engage: this.fteData
+      }
+      this.$store.dispatch('globalState/submit_manual_update', payloads)
       this.$emit('hideModal')
     },
     teamSelectHandle(value) {

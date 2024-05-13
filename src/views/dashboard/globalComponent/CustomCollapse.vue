@@ -304,14 +304,10 @@ export default {
       }
     },
     handleInsertNewWorkElement() {
-      let teamt = ""
-      if (!this.teamttle) {
-        teamt = this.team.title
-      } else {
-        teamt = this.teamttle
-      }
+      console.log("pht:", this.team.title)
       this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
-        index0: this.index0, index: this.index, state: this.state, team: teamt
+        job: this.teamttle,
+        phase: this.team.title
       })
     }
   }

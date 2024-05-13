@@ -593,8 +593,8 @@ export default {
       state.selectedWorkElement = checkedActivity
     },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {
-      state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
-      state.parentTeamTitle = data.team
+      // state.parentIndexForInsertElement = { index0: data.index0, index: data.index, state: data.state }
+      state.parentTeamTitle = data
     },
     INSERT_NEW_TASK(state, data) {
       console.log(data)
