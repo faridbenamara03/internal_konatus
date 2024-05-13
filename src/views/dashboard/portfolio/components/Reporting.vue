@@ -1064,7 +1064,8 @@ export default {
       return this.zoomIntervals[value]
     },
     getTodayValue() {
-      const startMoment = moment()
+      // const startMoment = moment()
+      const startMoment = moment('2024-01-01')
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
       return duration === 0 ? 0 : parseInt(duration * 24, 10)

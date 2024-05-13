@@ -68,6 +68,7 @@
               <p
                 class="m-0 text-overflow-ellipse"
                 style="font-size:12px"
+                :style="`color:${parseInt(item2.acc) === 100 ? 'gray' : parseInt(item2.acc) > 0 && parseInt(item2.acc) < 100 ? '#66ffff' : '#ffffff'}`"
               >
                 {{ item2.title }}({{ item2.acc }}%)
               </p>
@@ -445,6 +446,7 @@ export default {
     },
     handleSelectWe(we) {
       this.selectedWE = we
+      console.log("selectedWE:", we)
       this.$store.commit('globalState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
     },
     handleManualUpdate(res) {
@@ -564,7 +566,8 @@ export default {
       return result
     },
     getTodayValue() {
-      const startMoment = moment()
+      // const startMoment = moment()
+      const startMoment = moment('2024-01-02')
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
       return duration === 0 ? 0 : parseInt(duration * 24, 10)

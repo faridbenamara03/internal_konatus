@@ -88,6 +88,7 @@
       </div>
     </div>
     <activity-detail-modal
+      v-if="c_SelectedActivity !== undefined"
       :is-open="openActivityModal"
       :selected-activity-data="c_SelectedActivity"
       :teamdata="teamarr"

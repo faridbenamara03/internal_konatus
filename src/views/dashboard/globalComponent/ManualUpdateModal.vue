@@ -7,6 +7,7 @@
     no-fade
     hide-backdrop
     static
+    size="lg"
   >
     <!-- Modal Header -->
     <template #modal-header>
@@ -92,6 +93,7 @@
           <b-form-input
             v-model="loadNewEstimatedData"
             type="number"
+            @input="handleChange"
           />
         </div>
         <div class="col">
@@ -99,6 +101,7 @@
           <b-form-input
             v-model="fteNewEstimatedData"
             type="number"
+            @input="handleChange"
           />
         </div>
         <div class="col">
@@ -106,6 +109,7 @@
           <b-form-input
             v-model="accNewEstimatedData"
             type="number"
+            @input="handleChange"
           />
         </div>
         <div class="col">
@@ -113,7 +117,17 @@
           <b-form-input
             v-model="restNewEstimatedData"
             type="number"
+            @input="handleChange"
           />
+        </div>
+        <div class="col">
+          <b-button
+            style="margin-top:20px"
+            variant="primary"
+            @click="handleCalculate"
+          >
+            Calculate
+          </b-button>
         </div>
       </div>
     </div>
@@ -127,6 +141,7 @@
       </b-button>
       <b-button
         variant="primary"
+        :disabled="!isValid"
         @click="handleSave"
       >
         Update
@@ -140,7 +155,7 @@ import {
   BButton,
   BFormInput
 } from 'bootstrap-vue'
-// import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
@@ -166,6 +181,7 @@ export default {
       accNewEstimatedData: 0,
       restEstimatedData: 0,
       restNewEstimatedData: 0,
+      isValid: false,
     }
   },
   watch: {
@@ -202,17 +218,34 @@ export default {
       // this.showToast('success', 'Success Update Work Element.')
       this.$refs['my-modal'].hide()
     },
-    // showToast(variant, title) {
-    //   this.$toast({
-    //     component: ToastificationContent,
-    //     props: {
-    //       title,
-    //       icon: 'BellIcon',
-    //       text: null,
-    //       variant,
-    //     },
-    //   })
-    // },
+    handleCalculate() {
+      if (this.accNewEstimatedData === 0) {
+        this.showToast('warning', 'Inputed Values are not valid, please try again')
+        this.isValid = false
+      } else if (parseFloat(this.loadNewEstimatedData) === parseFloat(this.spentData) / parseFloat(this.accNewEstimatedData)
+      && parseFloat(this.loadNewEstimatedData) === parseFloat(this.spentData) + parseFloat(this.restNewEstimatedData)
+      && parseFloat(this.restNewEstimatedData) === parseFloat(this.loadNewEstimatedData) * (1 - parseFloat(this.accNewEstimatedData))) {
+        this.showToast('success', 'All Values are valid, ready to Update now')
+        this.isValid = true
+      } else {
+        this.showToast('warning', 'Inputed Values are not valid, please try again')
+        this.isValid = false
+      }
+    },
+    handleChange() {
+      this.isValid = false
+    },
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
+    },
   },
 }
 </script>
