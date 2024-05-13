@@ -862,7 +862,7 @@ export default {
         axios.post('https://api.konatus.site/v1/api/work_element/update', payload)
           .then(response => {
             const newData = response.data
-            this.commit('globalState/WORK_ELEMENT_MANUAL_UPDAE', newData)
+            this.commit('globalState/WORK_ELEMENT_MANUAL_UPDATE', newData)
             resolve()
           })
           .catch(err => {
