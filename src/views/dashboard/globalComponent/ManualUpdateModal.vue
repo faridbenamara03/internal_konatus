@@ -208,6 +208,7 @@ export default {
     async handleSave() {
       const payloads = {
         we_id: this.selectedWE.id,
+        detail_mode: false,
         load_estimated: this.loadNewEstimatedData,
         fte_estimated: this.fteNewEstimatedData,
         acc: this.accNewEstimatedData,
