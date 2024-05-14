@@ -319,7 +319,7 @@ export default {
         this.fteEstimatedData = this.fteNewEstimatedData
         this.spentData = this.spentNewEstimatedData
         this.accEstimatedData = this.isAcc === 2 ? this.accNewEstimatedData : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData)) * 100
-        this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 10)))
+        this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 100)))
         this.isValid = true
       }
     },
