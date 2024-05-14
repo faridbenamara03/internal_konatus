@@ -153,6 +153,14 @@
           <label>Start Date R/E</label>
           <b-form-input
             v-model="startDateEstimated"
+            type="date"
+          />
+        </div>
+        <div class="col">
+          <label>Duration Date R/E</label>
+          <b-form-input
+            v-model="durationEstimated"
+            :disabled="true"
           />
         </div>
         <div class="col">
@@ -183,7 +191,7 @@
       </b-button>
       <b-button
         variant="primary"
-        :disabled="!isValid"
+        :disabled="!isValid || !isDateValid"
         @click="handleSave"
       >
         Update
@@ -197,6 +205,7 @@ import {
   BButton,
   BFormInput
 } from 'bootstrap-vue'
+import moment from "moment"
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -217,6 +226,7 @@ export default {
       loadEngageData: 0,
       fteEngageDate: 0,
       spentData: 0,
+      durationEstimated: 0,
       isAcc: 0,
       spentNewEstimatedData: 0,
       fteNewEstimatedData: 0,
@@ -227,6 +237,7 @@ export default {
       startDateEstimated: '',
       endDateEstimated: '',
       isValid: false,
+      isDateValid: false
     }
   },
   watch: {
@@ -246,6 +257,7 @@ export default {
       this.fteEngageData = newWE.fte_engage
       this.fteEstimatedData = newWE.fte_reel
       this.restEstimatedData = this.loadEstimatedData * (1 - (parseFloat(this.accEstimatedData) / 100.0))
+      this.durationEstimated = this.loadEstimatedData / this.fteEstimatedData
     },
     hideModal() {
       this.$refs['my-modal'].hide()
@@ -258,7 +270,10 @@ export default {
         detail_mode: false,
         load_estimated: loadNewEstimatedData,
         acc: this.accNewEstimatedData,
-        rest_todo_estimated: this.restNewEstimatedData
+        rest_todo_estimated: this.restNewEstimatedData,
+        start_date_reel: this.startDateEstimated,
+        end_date_reel: this.endDateEstimated,
+        duration_date_reel: this.durationDateEstimated
       }
       if (this.fteNewEstimatedData !== '') {
         payloads.fte_estimated = this.fteNewEstimatedData
@@ -269,7 +284,14 @@ export default {
       this.$refs['my-modal'].hide()
     },
     handleCalculateDate() {
-
+      console.log("CDD:")
+      if (this.startDateEstimated === '' || this.endDateEstimated === '') {
+        this.showToast('warning', 'Invalid Date')
+        this.isDateValid = true
+      } else {
+        this.durationDateEstimated = moment.duration(this.startDateEstimated.diff(this.endDateEstimated)).asDays()
+        this.isDateValid = true
+      }
     },
     handleChangeAccORest(type) {
       this.isValid = false
@@ -293,6 +315,11 @@ export default {
         this.isValid = false
       } else {
         this.showToast('success', 'All Values are valid, ready to Update now')
+        this.loadEstimatedData = this.isAcc === 2 ? this.spentNewEstimatedData / (this.accNewEstimatedData / 100.0) : this.spentNewEstimatedData - this.restNewEstimatedData
+        this.fteEstimatedData = this.fteNewEstimatedData
+        this.spentData = this.spentNewEstimatedData
+        this.accEstimatedData = this.accNewEstimatedData
+        this.restEstimatedData = this.restNewEstimatedData
         this.isValid = true
       }
     },

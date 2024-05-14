@@ -254,31 +254,31 @@
                     class="d-flex flex-column justify-content-around"
                     :style="`height:50px;padding:1px 10px 1px 3px;width:fit-content;left:${getPadding(item2)}px`"
                   >
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false)-getPadding(item2)}px`">
-                      <ProgramProgressBar
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false) > getPadding(item2) ? getStartPadding(item2, 0, false) - getPadding(item2) : 0}px`">
+                      <WeProgressBar
                         :type="0"
                         :width1="getValue(item2, 0, false)"
-                        :isstartmark="false"
-                        :isendmark="false"
                         :width2="getStartPadding(item2, 0, false)"
+                        :width3="getTodayValue()"
+                        :width4="getPadding(item2)"
                       />
                     </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false)-getPadding(item2)}px`">
-                      <ProgramProgressBar
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false) > getPadding(item2) ? getStartPadding(item2, 1, false) - getPadding(item2) : 0}px`">
+                      <WeProgressBar
                         :type="1"
                         :width1="getValue(item2, 1, false)"
-                        :isstartmark="false"
-                        :isendmark="false"
                         :width2="getStartPadding(item2, 1, false)"
+                        :width3="getTodayValue()"
+                        :width4="getPadding(item2)"
                       />
                     </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false)-getPadding(item2)}px`">
-                      <ProgramProgressBar
+                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false) > getPadding(item2) ? getStartPadding(item2, 2, false) - getPadding(item2) : 0}px`">
+                      <WeProgressBar
                         :type="2"
                         :width1="getValue(item2, 2, false)"
-                        :isstartmark="false"
-                        :isendmark="false"
                         :width2="getStartPadding(item2, 2, false)"
+                        :width3="getTodayValue()"
+                        :width4="getPadding(item2)"
                       />
                     </div>
                   </b-card>
@@ -311,6 +311,7 @@ import moment from "moment"
 import ReportingCostVue from "./ReportingCost.vue"
 import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
 import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
+import WeProgressBar from "../../globalComponent/WeProgressBar.vue"
 import UpdateConfirmModal from "../modals/UpdateConfirmModal.vue"
 import ManualUpdateModal from "../../globalComponent/ManualUpdateModal.vue"
 
@@ -321,6 +322,7 @@ export default {
     ReportingCostVue,
     ProgramProgressBar,
     ProjectProgressBar,
+    WeProgressBar,
     UpdateConfirmModal,
     ManualUpdateModal
   },
@@ -445,7 +447,7 @@ export default {
     },
     handleSelectWe(we) {
       this.selectedWE = we
-      console.log("selectedWE:", we)
+      // console.log("selectedWE:", we)
       this.$store.commit('globalState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
     },
     handleManualUpdate(res) {
@@ -566,23 +568,27 @@ export default {
     },
     getTodayValue() {
       // const startMoment = moment()
-      const startMoment = moment('2024-01-02')
+      const startMoment = moment('2024-01-04')
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
-      return duration === 0 ? 0 : parseInt(duration * 24, 10)
+      const result = duration === 0 ? 0 : parseInt(duration * 24, 10)
+      // console.log("getTodayValue", result)
+      return result
     },
     getPadding(item) {
-      const mDates = [moment(item.start_date_demand), moment(item.start_date_engage), moment(item.start_date_reel)]
+      const mDates = [moment(item.start_date_demand), moment(item.start_date_engage), moment(item.start_date_estimated)]
       const firstDate = moment.min(mDates)
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = firstDate > firstMoment ? moment.duration(firstDate.diff(firstMoment)).asDays() : 0
-      return duration === 0 ? 0 : parseInt(duration * 24, 10)
+      const result = duration === 0 ? 0 : parseInt(duration * 24, 10)
+      // if (item.id === 35) console.log("getPadding", result, "Item:", item)
+      return result
     },
     getStartPadding(item, type, isChild) {
       let result = 0
       if (isChild) {
         if (item.phases) {
-          const pstarts = []
+          const pStarts = []
           let phIndex = 0
           let startMoment
           while (phIndex < item.phases.length) {
@@ -602,10 +608,10 @@ export default {
             if (firstMoment < moment(this.reportingDates[0], "YYYY-MM-DD")) firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
             const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
             result = duration === 0 ? 0 : duration * 24
-            pstarts.push(result)
+            pStarts.push(result)
             phIndex += 1
           }
-          return pstarts
+          return pStarts
         }
       } else {
         let startMoment
@@ -625,6 +631,7 @@ export default {
         const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
         const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
         result = duration * 24
+        // if (item.id === 35) console.log("getStartPadding:", result, "Item:", item, "Type:", type)
         return result
       }
       return result
