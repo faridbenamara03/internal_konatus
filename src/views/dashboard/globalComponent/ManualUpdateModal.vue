@@ -114,8 +114,8 @@
             @input="handleChangeAccORest(1)"
           />
           <b-form-text
-            class="muted"
             id="input-live-help"
+            class="muted"
             style="font-size:10px"
           >
             Input only one
@@ -131,8 +131,8 @@
             @input="handleChangeAccORest(2)"
           />
           <b-form-text
-            class="muted"
             id="input-live-help"
+            class="muted"
             style="font-size:10px"
           >
             Input only one
@@ -315,11 +315,11 @@ export default {
         this.isValid = false
       } else {
         this.showToast('success', 'All Values are valid, ready to Update now')
-        this.loadEstimatedData = this.isAcc === 2 ? this.spentNewEstimatedData / (this.accNewEstimatedData / 100.0) : this.spentNewEstimatedData - this.restNewEstimatedData
+        this.loadEstimatedData = this.isAcc === 2 ? parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0) : parseFloat(this.spentNewEstimatedData) + parseFloat(this.restNewEstimatedData)
         this.fteEstimatedData = this.fteNewEstimatedData
         this.spentData = this.spentNewEstimatedData
-        this.accEstimatedData = this.accNewEstimatedData
-        this.restEstimatedData = this.restNewEstimatedData
+        this.accEstimatedData = this.isAcc === 2 ? this.accNewEstimatedData : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData)) * 100
+        this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 10)))
         this.isValid = true
       }
     },

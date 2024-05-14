@@ -50,22 +50,15 @@
                 v-if="!externalEditable"
                 style="font-size: 14px; color: #898989;text-transform:none"
               >
-                External System: {{ externalSystem ? externalSystem[0] : "" }}
+                External System: {{ exSystemString !== '' ?  externalSystem : "" }}
               </label>
               <div v-else>
-                <!-- <v-select
-                  v-model="externalSystem"
-                  style="margin-bottom: 3px"
-                  :options="['Jira', 'SAP']"
-                  placeholder="Select External System"
-                  outlined
-                /> -->
                 <v-select
                   v-model="externalSystem"
-                  :options="['SAP', 'Jira', 'P6']"
+                  :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
                   placeholder="Select External System"
                   outlined
-                  multiple
+                  @input="updateExternalID"
                 />
               </div>
             </div>
@@ -315,8 +308,15 @@
       </div>
       <div class="form-group">
         <div class="row">
-          <!-- <div class="col-6">
-          </div> -->
+          <div class="col">
+            <b-button
+              style="margin-top:20px"
+              variant="primary"
+              @click="handleCalculate"
+            >
+              Calculate
+            </b-button>
+          </div>
           <div class="col">
             <label>Total Load</label>
             <b-form-input
@@ -340,15 +340,6 @@
               type="number"
               :value="fteData"
             />
-          </div>
-          <div class="col">
-            <b-button
-              style="margin-top:20px"
-              variant="primary"
-              @click="handleCalculate"
-            >
-              Calculate
-            </b-button>
           </div>
         </div>
         <div class="row">
@@ -523,9 +514,11 @@ export default {
       skillset: 0,
       opt_skillset: 0,
       effortDetailShow: true,
+      externalSystems: [],
+      externalSystem: "Jira",
+      externalId: "JIRA-",
+      exSystemString: '',
       externalEditable: false,
-      externalSystem: ["Jira"],
-      externalId: "JR-12345",
       showEditPriority: false,
       showEditPhase: false
     }
@@ -604,6 +597,23 @@ export default {
       // if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
       //   this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       // }
+      const otype = this.$store.state.globalState.selectedNavObj.type
+      let extype = ''
+      switch (otype) {
+        case 'program':
+          extype = 'PROG'
+          break
+        case 'project':
+          extype = 'PROJ'
+          break
+        case 'subproject':
+          extype = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      const value = this.externalSystem
+      this.externalId = `${value.toUpperCase()}-${extype}-`
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -613,7 +623,7 @@ export default {
     },
     jobSelectHandle(data) {
       const globalTeams = this.$store.state.globalState.globalOrganizationTeamData[0]
-      const tempTeamData = []
+      const tempTeamData = ['auto selection']
       if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
         globalTeams.children.map(item => {
           if (item.title === data) {
@@ -631,7 +641,7 @@ export default {
       this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
     },
     handleCalculate() {
-      if (this.fteData !== '' && this.fteData !== 0 && this.durationData !== '' && this.loadData !== '') {
+      if (this.fteData !== '' && this.durationData !== '' && this.loadData !== '') {
         if (parseFloat(this.loadData) === parseFloat(this.durationData) * parseFloat(this.fteData)) {
           this.showToast('success', 'All values are valid')
           this.isValid = true
@@ -639,6 +649,15 @@ export default {
           this.showToast('warning', 'Please enter valid values')
           this.isValid = false
         }
+      } else if (this.fteData !== '' && this.durationData !== '' && this.loadData === '') {
+        this.loadData = parseFloat(this.durationData) * parseFloat(this.fteData)
+        this.isValid = true
+      } else if (this.loadData !== '' && this.durationData !== '' && this.durationData !== 0 && this.fteData === '') {
+        this.fteData = parseFloat(this.loadData) / parseFloat(this.durationData)
+        this.isValid = true
+      } else if (this.loadData !== '' && this.fteData !== '' && this.fteData !== 0 && this.durationData === '') {
+        this.durationData = parseFloat(this.loadData) / parseFloat(this.fteData)
+        this.isValid = true
       } else {
         this.showToast('warning', 'Please enter valid values')
         this.isValid = false
@@ -679,8 +698,34 @@ export default {
         },
       })
     },
+    handleAddExternal() {
+      this.externalSystems.push(this.externalId)
+      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+      this.exSystemString = this.externalSystems.toString()
+    },
+    updateExternalID() {
+      let type = ''
+      switch (this.otype) {
+        case 'program':
+          type = 'PROG'
+          break
+        case 'project':
+          type = 'PROJ'
+          break
+        case 'subproject':
+          type = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      const value = this.externalSystem
+      this.externalId = `${value.toUpperCase()}-${type}-`
+    },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
+      this.externalSystems.push(this.externalSystem)
+      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+      this.exSystemString = this.externalSystems.toString()
     },
     hideModal() {
       this.$emit('hideModal')

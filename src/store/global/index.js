@@ -431,7 +431,7 @@ export default {
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand
       if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
-        state.weTeamData = []
+        state.weTeamData = ['auto selection']
         state.weJobData = []
         const pTeamData = payload.portData.demand !== null && payload.portData.demand !== undefined ? payload.portData.demand.teams : []
         if (pTeamData && pTeamData !== undefined) {
