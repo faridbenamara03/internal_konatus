@@ -82,6 +82,7 @@ export default {
     sponsors: [],
     weTeamData: [],
     weJobData: [],
+    selectedActivityParents: [],
     productlines: [],
     hproductportfolios: [],
     productmanagers: [],
@@ -272,6 +273,9 @@ export default {
         pTitleData.push(t.title)
       })
       state.allPhaseTitleData = pTitleData
+    },
+    HANDLE_GET_PARENTS_WE(state, data) {
+      state.selectedActivityParents = data
     },
     LOAD_EXTERNAL_SYSTEMS(state, data) {
       state.externalSystemData = data
@@ -972,6 +976,54 @@ export default {
           .catch(err => {
             console.log('error creating new task ---->', err)
             Vue.$toast.error('Failed to create new task.')
+            reject(err)
+          })
+      })
+    },
+    handle_activity_split(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/split', payload)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/HANDLE_ACTIVITY_SPLIT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error split work element---->', err)
+            Vue.$toast.error('Failed to split work element.')
+            reject(err)
+          })
+      })
+    },
+    handle_activity_merge(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/merge', payload)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/HANDLE_ACTIVITY_MERGE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error split work element---->', err)
+            Vue.$toast.error('Failed to split work element.')
+            reject(err)
+          })
+      })
+    },
+    get_parents_we(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/parent', payload)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/HANDLE_GET_PARENTS_WE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error get parents for work element---->', err)
+            Vue.$toast.error('Failed to get parents for work element.')
             reject(err)
           })
       })

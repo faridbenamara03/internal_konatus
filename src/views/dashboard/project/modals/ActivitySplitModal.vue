@@ -130,80 +130,102 @@
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="totalEffortData1.tLoad"
+                  :value="loadEngage"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="totalEffortData1.tDuration"
+                  :value="durationEngage"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="totalEffortData1.tFte"
+                  :value="fteEngage"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  :value="loadDemand"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  :value="durationDemand"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  :value="fteDemand"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  :value="accData"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  :value="(1 - parseFloat(accData) / 100) * loadEstimated"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(R/E)</label>
+                <b-form-input
+                  :value="loadEstimated"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(R/E)</label>
+                <b-form-input
+                  :value="durationEstimated"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(R/E)</label>
+                <b-form-input
+                  :value="fteEstimated"
                   readonly
                 />
               </div>
             </div>
             <div
-              v-for="(t, i) in effortData1"
-              :key="i"
-              class="row"
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
             >
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input
-                  :value="t.skill"
-                  readonly
-                />
-                <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select skillset" outlined @input="effortChange1('skill', i, $event)" /> -->
-              </div>
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  :value="t.load"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  :value="t.duration"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  :value="t.fte"
-                  readonly
+                <v-select
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
+                  placeholder="Select skillset"
+                  outlined
+                  @input="effortChange('skill', 0, $event)"
                 />
               </div>
             </div>
           </div>
-          <!-- <div class="form-group">
-            <div class="select-group p-0">
-              <div class="select-group--sub">
-                <div class="select-box mb-0">
-                  <label>Load</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.load" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>Duration</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.duration" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>FTE</label>
-                  <b-form-input :value="selectedActivityData.phase.effort.fte" />
-                </div>
-              </div>
-            </div>
-          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
@@ -262,14 +284,8 @@
               Splited
             </b-badge>
           </div>
-          <div class="form-group header d-flex justify-content-between">
-            <div>
-              <label>ACTIVITY ID</label>
-              <p v-if="selectedActivityData.phase">
-                {{ newActivityId1 }}
-              </p>
-            </div>
-            <div style="display: flex">
+          <div class="form-group header d-flex justify-content-end">
+            <div style="display: flex; justify-content: end;">
               <div>
                 <div style="text-align: end;">
                   <label
@@ -368,96 +384,115 @@
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
-              <feather-icon
+              <!-- <feather-icon
                 icon="PlusIcon"
                 size="18"
                 style="cursor:pointer"
                 @click="onEffortAdd2"
-              />
+              /> -->
             </div>
           </div>
           <div class="form-group">
             <div class="row">
-              <!-- <div class="col-6">
-              </div> -->
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="totalEffortData2.tLoad"
-                  readonly
+                  v-model="loadEngage1"
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="totalEffortData2.tDuration"
-                  readonly
+                  v-model="durationEngage1"
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="totalEffortData2.tFte"
+                  v-model="fteEngage1"
+                  type="number"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  :value="loadDemand1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  :value="durationDemand1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  :value="fteDemand1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  :value="accData1"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  :value="(1 - parseFloat(accData1) / 100) * loadEstimated1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Load(R/E)</label>
+                <b-form-input
+                  :value="loadEstimated1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(R/E)</label>
+                <b-form-input
+                  :value="durationEstimated1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(R/E)</label>
+                <b-form-input
+                  :value="fteEstimated1"
                   readonly
                 />
               </div>
             </div>
             <div
-              v-for="(t, i) in effortData2"
-              :key="i"
-              class="row"
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
             >
               <div class="col-6">
                 <label>Skillset</label>
                 <v-select
-                  :options="['Design', 'Engineering', 'Management']"
-                  :value="t.skill"
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
                   placeholder="Select skillset"
                   outlined
-                  @input="effortChange2('skill', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  :value="t.load"
-                  @input="effortChange2('load', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  :value="t.duration"
-                  @input="effortChange2('duration', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  :value="t.fte"
-                  @input="effortChange2('fte', i, $event)"
+                  @input="effortChange('skill1', 0, $event)"
                 />
               </div>
             </div>
           </div>
-          <!-- <div class="form-group">
-            <div class="select-group p-0">
-              <div class="select-group--sub">
-                <div class="select-box mb-0">
-                  <label>Load</label>
-                  <b-form-input :value="load1" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>Duration</label>
-                  <b-form-input :value="duration1" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>FTE</label>
-                  <b-form-input :value="fte1" />
-                </div>
-              </div>
-            </div>
-          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
@@ -490,14 +525,8 @@
               Splited
             </b-badge>
           </div>
-          <div class="form-group header d-flex justify-content-between">
-            <div>
-              <label>ACTIVITY ID</label>
-              <p v-if="selectedActivityData.phase">
-                {{ newActivityId2 }}
-              </p>
-            </div>
-            <div style="display: flex">
+          <div class="form-group header d-flex justify-content-end">
+            <div style="display: flex;justify-content: end;">
               <div>
                 <div style="text-align: end;">
                   <label
@@ -601,85 +630,105 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <!-- <div class="col-6">
-              </div> -->
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="totalEffortData3.tLoad"
-                  readonly
+                  v-model="loadEngage2"
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="totalEffortData3.tDuration"
-                  readonly
+                  v-model="durationEngage2"
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="totalEffortData3.tFte"
+                  v-model="fteEngage2"
+                  type="number"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  :value="loadDemand2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  :value="durationDemand2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  :value="fteDemand2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  :value="accData2"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  :value="(1 - parseFloat(accData2) / 100) * loadEstimated2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Load(R/E)</label>
+                <b-form-input
+                  :value="loadEstimated2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(R/E)</label>
+                <b-form-input
+                  :value="durationEstimated2"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(R/E)</label>
+                <b-form-input
+                  :value="fteEstimated2"
                   readonly
                 />
               </div>
             </div>
             <div
-              v-for="(t, i) in effortData3"
-              :key="i"
-              class="row"
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
             >
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input
-                  :value="t.skill"
-                  readonly
-                />
-                <!-- <v-select :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select skillset" outlined @input="effortChange3('skill', i, $event)" /> -->
-              </div>
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  :value="t.load"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  :value="t.duration"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  :value="t.fte"
-                  readonly
+                <v-select
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
+                  placeholder="Select skillset"
+                  outlined
+                  @input="effortChange('skill2', 0, $event)"
                 />
               </div>
             </div>
           </div>
-          <!-- <div class="form-group">
-            <div class="select-group p-0">
-              <div class="select-group--sub">
-                <div class="select-box mb-0">
-                  <label>Load</label>
-                  <b-form-input :value="load2" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>Duration</label>
-                  <b-form-input :value="duration2" />
-                </div>
-                <div class="select-box mb-0">
-                  <label>FTE</label>
-                  <b-form-input :value="fte2" />
-                </div>
-              </div>
-            </div>
-          </div> -->
           <div class="form-group">
             <div class="select-box">
               <label>Epic</label>
@@ -727,7 +776,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import {
   BBadge, BButton, BFormInput, BFormTextarea, BModal, BFormInvalidFeedback
 } from 'bootstrap-vue'
@@ -751,15 +799,6 @@ export default {
     isOpen: Boolean,
   },
   data() {
-    const load = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
-    const duration = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
-    const fte = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
-    const load1 = parseInt(load / 2, 10)
-    const duration1 = parseInt(duration / 2, 10)
-    const fte1 = parseInt(fte / 2, 10)
-    const load2 = load - load1
-    const duration2 = duration - duration1
-    const fte2 = fte - fte1
     return {
       activity: {},
       show: false,
@@ -768,14 +807,39 @@ export default {
       description1: '',
       title2: '',
       description2: '',
-      load1,
-      duration1,
-      fte1,
-      load2,
-      duration2,
-      fte2,
-      newActivityId1: Vue.faker().internet.ip(),
-      newActivityId2: Vue.faker().internet.ip(),
+      loadEngage: 0,
+      durationEngage: 0,
+      fteEngage: 0,
+      loadEngage1: 0,
+      durationEngage1: 0,
+      fteEngage1: 0,
+      loadEngage2: 0,
+      durationEngage2: 0,
+      fteEngage2: 0,
+      accData: 0,
+      accData1: 0,
+      accData2: 0,
+      loadDemand: 0,
+      durationDemand: 0,
+      fteDemand: 0,
+      loadDemand1: 0,
+      durationDemand1: 0,
+      fteDemand1: 0,
+      loadDemand2: 0,
+      durationDemand2: 0,
+      fteDemand2: 0,
+      loadEstimated: 0,
+      durationEstimated: 0,
+      fteEstimated: 0,
+      loadEstimated1: 0,
+      durationEstimated1: 0,
+      fteEstimated1: 0,
+      loadEstimated2: 0,
+      durationEstimated2: 0,
+      fteEstimated2: 0,
+      opt_skillset: 0,
+      newActivityId1: Math.ceil(Math.random() * 1000000),
+      newActivityId2: Math.ceil(Math.random() * 1000000),
       effortData1: [
         {
           skill: null,
@@ -857,18 +921,6 @@ export default {
       }
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
-    title1Valid() {
-      return this.title1 !== undefined && this.title1.length > 0
-    },
-    description1Valid() {
-      return this.description1 !== undefined && this.description1.length > 0
-    },
-    title2Valid() {
-      return this.title2 !== undefined && this.title2.length > 0
-    },
-    description2Valid() {
-      return this.description2 !== undefined && this.description2.length > 0
-    },
     c_TeamTitle() {
       return this.selectedActivityData.team !== undefined ? this.selectedActivityData.team.title : ''
     },
@@ -888,14 +940,81 @@ export default {
         })
       }
       return data
+    },
+    title1Valid() {
+      return this.title1 !== undefined && this.title1 !== ''
+    },
+    title2Valid() {
+      return this.title2 !== undefined && this.title2 !== ''
+    },
+    description1Valid() {
+      return this.description1 !== undefined && this.description1 !== ''
+    },
+    description2Valid() {
+      return this.description2 !== undefined && this.description2 !== ''
     }
   },
   watch: {
     isOpen(val) {
       this.show = val
     },
+    selectedActivityData: {
+      immediate: true,
+      handler(newVal) {
+        this.initializeData(newVal) // ??
+      }
+    },
+    data: {
+      immediate: true,
+      handler(newVal) {
+        console.log("newData:", newVal)
+      }
+    }
   },
   methods: {
+    initializeData(newVal) {
+      console.log("SD:", newVal)
+      const orgData = this.$store.state.globalState.allOrgData
+      const { orgId } = this.$store.state.globalState.selectedNavObj
+      orgData.map(item => {
+        if (item.id === orgId) {
+          this.opt_skillset = item.opt_skillset
+        }
+        return null
+      })
+      this.loadEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
+      this.durationEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
+      this.fteEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
+      this.loadDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
+      this.durationDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
+      this.fteDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
+      this.loadEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
+      this.durationEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
+      this.fteEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
+      this.accData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
+      this.accData1 = parseInt(this.accData / 2, 10)
+      this.accData2 = this.accData - this.accData1
+      this.loadEngage1 = parseInt(this.loadEngage / 2, 10)
+      this.durationEngage1 = parseInt(this.durationEngage / 2, 10)
+      this.fteEngage1 = parseInt(this.fteEngage / 2, 10)
+      this.loadEngage2 = this.loadEngage - this.loadEngage1
+      this.durationEngage2 = this.durationEngage - this.durationEngage1
+      this.fteEngage2 = this.fteEngage - this.fteEngage1
+
+      this.loadDemand1 = parseInt(this.loadDemand / 2, 10)
+      this.durationDemand1 = parseInt(this.durationDemand / 2, 10)
+      this.fteDemand1 = parseInt(this.fteDemand / 2, 10)
+      this.loadDemand2 = this.loadDemand - this.loadDemand1
+      this.durationDemand2 = this.durationDemand - this.durationDemand1
+      this.fteDemand2 = this.fteDemand - this.fteDemand1
+
+      this.loadEstimated1 = parseInt(this.loadEstimated / 2, 10)
+      this.durationEstimated1 = parseInt(this.durationEstimated / 2, 10)
+      this.fteEstimated1 = parseInt(this.fteEstimated / 2, 10)
+      this.loadEstimated2 = this.loadEstimated - this.loadEstimated1
+      this.durationEstimated2 = this.durationEstimated - this.durationEstimated1
+      this.fteEstimated2 = this.fteEstimated - this.fteEstimated1
+    },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
     },
@@ -952,43 +1071,72 @@ export default {
     },
     hideModal() {
       this.$refs['my-modal'].hide()
-      this.newActivityId1 = Vue.faker().internet.ip()
-      this.newActivityId2 = Vue.faker().internet.ip()
+      this.newActivityId1 = Math.ceil(Math.random() * 1000000)
+      this.newActivityId2 = Math.ceil(Math.random() * 1000000)
     },
-    handleSave() {
-      const parN = Vue.faker().random.uuid
+    async handleSave() {
+      const progId = this.selectedActivityData.phase.projectId
       if (this.title1Valid && this.description1Valid && this.title2Valid && this.description2Valid) {
+        const priorityIndex = this.selectedActivityData.phase.priority
+        const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedActivityData.phase.job_name).id
+        const phaseId = this.selectedActivityData.phase.gate
+        const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedActivityData.phase.team_name)
+        let teamId = 0
+        if (teams !== undefined) teamId = teams.id
         const newA1 = { ...this.selectedActivityData.phase }
         const newA2 = { ...this.selectedActivityData.phase }
         newA1.title = this.title1
-        newA1.parent = parN
         newA1.description = this.description1
         newA1.effort = {
-          load: this.load1, duration: this.duration1, fte: this.fte1
+          load_engage: this.loadEngage1,
+          duration_engage: this.durationEngage1,
+          fte_engage: this.fteEngage1,
+          load_demand: this.loadDemand1,
+          duration_demand: this.durationDemand1,
+          fte_demand: this.fteDemand1,
+          load_reel: this.loadEstimated1,
+          duration_reel: this.durationEstimated1,
+          fte_reel: this.fteEstimated1,
         }
-        newA1.activityId = this.newActivityId1
+        newA1.acc = this.accData1
+        newA2.acc = this.accData2
         newA2.title = this.title2
         newA2.description = this.description2
-        newA2.parent = parN
         newA2.effort = {
-          load: this.load2, duration: this.duration2, fte: this.fte2
+          load_engage: this.loadEngage2,
+          duration_engage: this.durationEngage2,
+          fte_engage: this.fteEngage2,
+          load_demand: this.loadDemand2,
+          duration_demand: this.durationDemand2,
+          fte_demand: this.fteDemand2,
+          load_reel: this.loadEstimated2,
+          duration_reel: this.durationEstimated2,
+          fte_reel: this.fteEstimated2,
         }
-        newA2.activityId = this.newActivityId2
-        const data = {
-          teamTitle: this.c_TeamTitle,
-          phase: this.selectedActivityData.phase,
+        const payloads = {
+          weID: this.selectedActivityData.phase.id,
+          priorityIndex,
+          jobId,
+          phaseId,
+          teamId,
+          progId,
           newA1,
           newA2
         }
-        this.$store.commit('globalState/HANDLE_ACTIVITY_SPLIT', data)
+        // this.$store.commit('globalState/HANDLE_ACTIVITY_SPLIT', data)
         this.$refs['my-modal'].hide()
         this.description1 = ''
         this.title1 = ''
         this.description2 = ''
         this.title2 = ''
-        this.newActivityId1 = Vue.faker().internet.ip()
-        this.newActivityId2 = Vue.faker().internet.ip()
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
+        await this.$store.dispatch('globalState/handle_activity_split', payloads)
+        await this.$store.dispatch('globalState/load_org_data')
+        const data = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+          data
+        })
+      this.$emit('hideModal')
       } else {
         this.$toast.warning('Input invalid!')
       }

@@ -181,6 +181,7 @@
           <label>Activity</label>
           <v-select
             :options="activityList"
+            v-model="selectedParents"
             placeholder="Select Task"
             menu-props="auto"
             outlined
@@ -350,7 +351,7 @@
             <b-form-input
               v-model="loadDemandData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -358,7 +359,7 @@
             <b-form-input
               v-model="durationDemandData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -366,7 +367,7 @@
             <b-form-input
               v-model="fteDemandData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -374,7 +375,7 @@
             <b-form-input
               v-model="accData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -382,7 +383,7 @@
             <b-form-input
               v-model="restToDoData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
         </div>
@@ -394,7 +395,7 @@
             <b-form-input
               v-model="loadEstimateData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -402,7 +403,7 @@
             <b-form-input
               v-model="durationEstimateData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
           <div class="col">
@@ -410,7 +411,7 @@
             <b-form-input
               v-model="fteEstimateData"
               type="number"
-              :disabled="true"
+              readonly
             />
           </div>
         </div>
@@ -520,7 +521,8 @@ export default {
       exSystemString: '',
       externalEditable: false,
       showEditPriority: false,
-      showEditPhase: false
+      showEditPhase: false,
+      selectedParents: []
     }
   },
   computed: {
@@ -542,12 +544,38 @@ export default {
       return this.selectedActivityData
     },
     activityList() {
-      const activityArray = []
-      const teamState = this.$store.state.globalState?.teamsState
-      if (teamState) {
-        teamState.map(t => t.phases?.map(t1 => t1.activities?.map(t3 => activityArray.push(t3.activityId.concat("-").concat(t3.title)))))
+      const titleArr = []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
       }
-      return activityArray
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      return titleArr
     }
   },
   watch: {
@@ -566,9 +594,15 @@ export default {
         this.jobSelectHandle(newVal) // ??
       },
     },
+    '$store.globalState.selectedActivityParents': {
+      immediate: true,
+      handler(newVal) {
+        this.selectedParents = newVal
+      }
+    }
   },
   methods: {
-    initializeData(data) {
+    async initializeData(data) {
       console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
       const orgData = this.$store.state.globalState.allOrgData
       const { orgId } = this.$store.state.globalState.selectedNavObj
@@ -578,6 +612,9 @@ export default {
         }
         return null
       })
+      if (this.selectedActivityData.phase !== undefined) {
+        await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
+      }
       this.isValid = false
       this.weTitle = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
       this.weDescription = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
@@ -589,7 +626,7 @@ export default {
       this.fteDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
       this.accData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
       this.loadEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
-      this.restToDoData = (1 - this.accData) * this.loadEstimateData
+      this.restToDoData = (1 - parseFloat(this.accData) / 100) * this.loadEstimateData
       this.durationEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
       this.fteEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
       this.selectedJob = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.job_name : 0
@@ -738,6 +775,22 @@ export default {
       const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
       const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
       const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
+      let selectedParentIDs = []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  const selected = this.selectedParents.includes(a.title) ? a.id : -1
+                  if (selected > 0) selectedParentIDs.push(selected)
+                })
+              }
+            })
+          }
+        })
+      }
+      selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
       let teamId = 0
       if (teams !== undefined) teamId = teams.id
       const payloads = {
@@ -751,7 +804,8 @@ export default {
         load_engage: this.loadData,
         duration_engage: this.durationData,
         description: this.weDescription,
-        fte_engage: this.fteData
+        fte_engage: this.fteData,
+        parents: selectedParentIDs
       }
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       await this.$store.dispatch('globalState/load_org_data')

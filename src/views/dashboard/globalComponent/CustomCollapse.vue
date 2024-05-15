@@ -304,7 +304,6 @@ export default {
       }
     },
     handleInsertNewWorkElement() {
-      console.log("pht:", this.team.title, "jt:", this.teamttle)
       this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
         job: this.teamttle,
         phase: this.team.title

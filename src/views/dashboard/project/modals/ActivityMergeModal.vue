@@ -38,7 +38,7 @@
             <div>
               <label>ACTIVITY ID</label>
               <p v-if="selectedActivityData.phase">
-                {{ selectedActivityData.phase.activityId }}
+                {{ selectedActivityData.phase.id }}
               </p>
             </div>
             <div style="display: flex">
@@ -108,6 +108,7 @@
               <b-form-textarea
                 :value="weDescription"
                 rows="5"
+                readonly
               />
             </div>
           </div>
@@ -120,74 +121,119 @@
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
-              <feather-icon
+              <!-- <feather-icon
                 icon="PlusIcon"
                 size="18"
                 style="cursor:pointer"
                 @click="onEffortAdd1"
-              />
+              /> -->
             </div>
           </div>
           <div class="form-group">
             <div class="row">
-              <!-- <div class="col-6">
-              </div> -->
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="totalEffortData1.tLoad"
+                  :value="loadEngage1"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="totalEffortData1.tDuration"
+                  :value="durationEngage1"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="totalEffortData1.tFte"
+                  :value="fteEngage1"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  v-model="loadDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  v-model="durationDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  v-model="fteDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  v-model="accData1"
+                  type="number"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  v-model="restData1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Load(R/E)</label>
+                <b-form-input
+                  v-model="loadEstimated1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(R/E)</label>
+                <b-form-input
+                  v-model="durationEstimated1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(R/E)</label>
+                <b-form-input
+                  v-model="fteEstimated1"
+                  type="number"
                   readonly
                 />
               </div>
             </div>
             <div
-              v-for="(t, i) in effortData1"
-              :key="i"
-              class="row"
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
             >
               <div class="col-6">
                 <label>Skillset</label>
                 <v-select
-                  :options="['Design', 'Engineering', 'Management']"
-                  :value="t.skill"
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
                   placeholder="Select skillset"
                   outlined
-                  @input="effortChange1('skill', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  :value="t.load"
-                  @input="effortChange1('load', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  :value="t.duration"
-                  @input="effortChange1('duration', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  :value="t.fte"
-                  @input="effortChange1('fte', i, $event)"
+                  @input="effortChange('skill1', 0, $event)"
                 />
               </div>
             </div>
@@ -228,7 +274,7 @@
             <div>
               <label>ACTIVITY ID</label>
               <p v-if="selectedActivityData.phase">
-                {{ toMerge ? toMerge.activityId : '' }}
+                {{ toMerge ? toMerge.id : '' }}
               </p>
             </div>
             <div
@@ -279,14 +325,14 @@
             </div>
           </div>
           <div
-            v-if="this.toMerge === null"
+            v-if="toMerge === null"
             class="form-group"
           >
             <div class="select-box">
               <label>Search activity</label>
               <v-select
                 v-model="selectedActivity"
-                :options="this.toMergeList"
+                :options="toMergeList"
                 placeholder="Select an activity"
                 outlined
                 @input="onActivitySelect"
@@ -308,15 +354,16 @@
             <div class="form-group">
               <div class="select-box">
                 <label>Title</label>
-                <b-form-input :value="this.toMerge.title" />
+                <b-form-input :value="toMerge.title" />
               </div>
             </div>
             <div class="form-group">
               <div class="select-box">
                 <label>Description</label>
                 <b-form-textarea
-                  :value="this.toMerge.description"
+                  :value="toMerge.description"
                   rows="5"
+                  readonly
                 />
               </div>
             </div>
@@ -329,12 +376,12 @@
                 <p class="px-1 m-0 text-uppercase">
                   effort
                 </p>
-                <feather-icon
+                <!-- <feather-icon
                   icon="PlusIcon"
                   size="18"
                   style="cursor:pointer"
                   @click="onEffortAdd2"
-                />
+                /> -->
               </div>
             </div>
             <div class="form-group">
@@ -344,59 +391,106 @@
                 <div class="col">
                   <label>Total Load</label>
                   <b-form-input
-                    :value="totalEffortData2.tLoad"
+                    :value="loadEngage2"
                     readonly
                   />
                 </div>
                 <div class="col">
                   <label>Total Duration</label>
                   <b-form-input
-                    :value="totalEffortData2.tDuration"
+                    :value="durationEngage2"
                     readonly
                   />
                 </div>
                 <div class="col">
                   <label>Total FTE</label>
                   <b-form-input
-                    :value="totalEffortData2.tFte"
+                    :value="fteEngage2"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>Load(Demand)</label>
+                  <b-form-input
+                    v-model="loadDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Duration(Demand)</label>
+                  <b-form-input
+                    v-model="durationDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>FTE(Demand)</label>
+                  <b-form-input
+                    v-model="fteDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>%acc</label>
+                  <b-form-input
+                    v-model="accData2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>Rest To Do</label>
+                  <b-form-input
+                    v-model="restData2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Load(R/E)</label>
+                  <b-form-input
+                    v-model="loadEstimated2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Duration(R/E)</label>
+                  <b-form-input
+                    v-model="durationEstimated2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>FTE(R/E)</label>
+                  <b-form-input
+                    v-model="fteEstimated2"
+                    type="number"
                     readonly
                   />
                 </div>
               </div>
               <div
-                v-for="(t, i) in effortData2"
-                :key="i"
-                class="row"
+                v-if="opt_skillset !== 0"
+                class="row pt-1"
               >
                 <div class="col-6">
                   <label>Skillset</label>
                   <v-select
-                    :options="['Design', 'Engineering', 'Management']"
-                    :value="t.skill"
+                    v-model="skillset"
+                    :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                    menu-props="auto"
                     placeholder="Select skillset"
                     outlined
-                    @input="effortChange2('skill', i, $event)"
-                  />
-                </div>
-                <div class="col">
-                  <label>Load</label>
-                  <b-form-input
-                    :value="t.load"
-                    @input="effortChange2('load', i, $event)"
-                  />
-                </div>
-                <div class="col">
-                  <label>Duration</label>
-                  <b-form-input
-                    :value="t.duration"
-                    @input="effortChange2('duration', i, $event)"
-                  />
-                </div>
-                <div class="col">
-                  <label>FTE</label>
-                  <b-form-input
-                    :value="t.fte"
-                    @input="effortChange2('fte', i, $event)"
+                    @input="effortChange('skill2', 0, $event)"
                   />
                 </div>
               </div>
@@ -434,13 +528,7 @@
               Merged
             </b-badge>
           </div>
-          <div class="form-group header d-flex justify-content-between">
-            <div>
-              <label>ACTIVITY ID</label>
-              <p v-if="selectedActivityData.phase">
-                {{ merged.activityId }}
-              </p>
-            </div>
+          <div class="form-group header d-flex justify-content-end">
             <div style="display: flex">
               <div>
                 <div style="text-align: end;">
@@ -525,66 +613,109 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <!-- <div class="col-6">
-              </div> -->
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="totalEffortData3.tLoad"
+                  :value="loadEngage"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="totalEffortData3.tDuration"
+                  :value="durationEngage"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="totalEffortData3.tFte"
+                  :value="fteEngage"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  v-model="loadDemand"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  v-model="durationDemand"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  v-model="fteDemand"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  v-model="accData"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  v-model="restData"
+                  type="number"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Real/Estimated)</label>
+                <b-form-input
+                  v-model="loadEstimated"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Real/Estimated)</label>
+                <b-form-input
+                  v-model="durationEstimated"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Real/Estimated)</label>
+                <b-form-input
+                  v-model="fteEstimated"
+                  type="number"
                   readonly
                 />
               </div>
             </div>
             <div
-              v-for="(t, i) in effortData3"
-              :key="i"
-              class="row"
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
             >
               <div class="col-6">
                 <label>Skillset</label>
-                <b-form-input
-                  readonly
-                  :value="t.skill"
-                />
-                <!-- <v-select readonly :options="['Design', 'Engineering', 'Management']" :value="t.skill"
-                  placeholder="Select skillset" outlined @input="effortChange3('skill', i, $event)" /> -->
-              </div>
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  readonly
-                  :value="t.load"
-                  @input="effortChange3('load', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  readonly
-                  :value="t.duration"
-                  @input="effortChange3('duration', i, $event)"
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  readonly
-                  :value="t.fte"
-                  @input="effortChange3('fte', i, $event)"
+                <v-select
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
+                  placeholder="Select skillset"
+                  outlined
+                  @input="effortChange('skill', 0, $event)"
                 />
               </div>
             </div>
@@ -636,7 +767,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import {
   BBadge, BButton, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
@@ -665,32 +795,11 @@ export default {
   data() {
     return {
       activity: {},
+      weArray: [],
       show: false,
       selectedActivity: null,
       selectedEpic: null,
       toMerge: null,
-      effortData1: [
-        {
-          skill: "Design",
-          load: 15,
-          duration: 23,
-          fte: 56
-        }
-      ],
-      effortData2: [
-        {
-          skill: "Design",
-          load: 45,
-          duration: 22,
-          fte: 14
-        },
-        {
-          skill: "Engineering",
-          load: 41,
-          duration: 21,
-          fte: 17
-        },
-      ],
       externalEditable1: false,
       externalSystem1: "Jira",
       externalId1: "JR-12345",
@@ -700,14 +809,34 @@ export default {
       externalEditable3: false,
       externalSystem3: "Jira",
       externalId3: "JR-12345",
-      // effortData3: [
-      //   {
-      //     skill: null,
-      //     load: null,
-      //     duration: null,
-      //     fte: null
-      //   }
-      // ],
+      loadDemand: 0,
+      loadDemand1: 0,
+      loadDemand2: 0,
+      loadEngage: 0,
+      loadEngage1: 0,
+      loadEngage2: 0,
+      loadEstimated: 0,
+      loadEstimated1: 0,
+      loadEstimated2: 0,
+      durationDemand: 0,
+      durationDemand1: 0,
+      durationDemand2: 0,
+      durationEngage: 0,
+      durationEngage1: 0,
+      durationEngage2: 0,
+      durationEstimated: 0,
+      durationEstimated1: 0,
+      durationEstimated2: 0,
+      fteDemand: 0,
+      fteDemand1: 0,
+      fteDemand2: 0,
+      fteEngage: 0,
+      fteEngage1: 0,
+      fteEngage2: 0,
+      fteEstimated: 0,
+      fteEstimated1: 0,
+      fteEstimated2: 0,
+      opt_skillset: 0
     }
   },
   computed: {
@@ -768,15 +897,10 @@ export default {
       return rd
     },
     merged() {
-      return { ...this.selectedActivityData.phase, activityId: Vue.faker().internet.ip() }
+      return { ...this.selectedActivityData.phase }
     },
     toMergeList() {
-      const arr = []
-      // this.$store.state.globalState.portfolioDemandData.teams[0].phases[2].activities.flat().forEach(t => {
-      //   if (this.selectedActivityData.phase.id !== t.id) {
-      //     arr.push(t.id)
-      //   }
-      // })
+      const titleArr = []
       if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
         this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
           if (t.phases && t.phases.length > 0) {
@@ -784,7 +908,7 @@ export default {
               if (p.activities && p.activities.length > 0) {
                 p.activities.forEach(a => {
                   if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id) {
-                    arr.push(a.id)
+                    titleArr.push(a.title)
                   }
                 })
               }
@@ -792,7 +916,7 @@ export default {
           }
         })
       }
-      return arr
+      return titleArr
     },
     c_TeamTitle() {
       return this.selectedActivityData.team.title
@@ -802,8 +926,37 @@ export default {
     isOpen(val) {
       this.show = val
     },
+    selectedActivityData: {
+      immediate: true,
+      handler(newVal) {
+        this.initializeData(newVal) // ??
+      }
+    },
   },
   methods: {
+    initializeData(newVal) {
+      console.log("SD:", newVal)
+      const orgData = this.$store.state.globalState.allOrgData
+      const { orgId } = this.$store.state.globalState.selectedNavObj
+      orgData.map(item => {
+        if (item.id === orgId) {
+          this.opt_skillset = item.opt_skillset
+        }
+        return null
+      })
+      this.loadEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
+      this.durationEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
+      this.fteEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
+      this.loadDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
+      this.durationDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
+      this.fteDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
+      this.loadEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
+      this.durationEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
+      this.fteEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
+      this.accData1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
+      this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
+      this.toMerge = null
+    },
     handleExternalEdit1() {
       this.externalEditable1 = !this.externalEditable1
     },
@@ -861,27 +1014,42 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
       this.toMerge = null
-      this.merged.activityId = Vue.faker().internet.ip()
     },
-    handleSave() {
+    async handleSave() {
       if (this.toMerge === null) {
         this.$toast.warning('Please Select toMerge Activity!')
       } else {
-        const data = {
-          toMergeId1: this.selectedActivityData.phase.activityId,
-          toMergeId2: this.toMerge.activityId,
+        const progId = this.selectedActivityData.phase.projectId
+        const priorityIndex = this.selectedActivityData.phase.priority
+        const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedActivityData.phase.job_name).id
+        const phaseId = this.selectedActivityData.phase.gate
+        const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedActivityData.phase.team_name)
+        let teamId = 0
+        if (teams !== undefined) teamId = teams.id
+        const payloads = {
+          toMergeId1: this.selectedActivityData.phase.id,
+          toMergeId2: this.toMerge.id,
           merged: this.merged,
-          teamTitle: this.c_TeamTitle
+          acc: this.accData,
+          priorityIndex,
+          jobId,
+          phaseId,
+          teamId,
+          progId,
         }
-        this.$store.commit('globalState/HANDLE_ACTIVITY_MERGE', data)
+        // this.$store.commit('globalState/HANDLE_ACTIVITY_MERGE', data)
+        await this.$store.dispatch('globalState/handle_activity_merge', payloads)
+        await this.$store.dispatch('globalState/load_org_data')
+        const data = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+          data
+        })
         this.toMerge = null
-        this.merged.activityId = Vue.faker().internet.ip()
         this.$refs['my-modal'].hide()
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
       }
     },
     onActivitySelect(selectedActivityId) {
-      // const selectedActivity = this.$store.state.globalState.teamsState[0].phases[2].activities.flat().find(t => t.activityId === selectedActivityId)
       let selectedActivity = {}
       if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
         this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
@@ -889,7 +1057,7 @@ export default {
             t.phases.forEach(p => {
               if (p.activities && p.activities.length > 0) {
                 p.activities.forEach(a => {
-                  if (selectedActivityId === a.id) {
+                  if (selectedActivityId === a.title) {
                     selectedActivity = a
                   }
                 })
@@ -899,11 +1067,39 @@ export default {
         })
       }
       this.toMerge = selectedActivity
-      const mergedLoad = this.merged.effort.load + selectedActivity.effort.load
-      const mergedDuration = this.merged.effort.duration + selectedActivity.effort.duration
-      const mergedFte = this.merged.effort.fte + selectedActivity.effort.fte
-      const effort = { load: mergedLoad, duration: mergedDuration, fte: mergedFte }
-      this.merged.effort = effort
+      this.loadDemand2 = selectedActivity.effort.load_demand
+      this.loadEngage2 = selectedActivity.effort.load_engage
+      this.loadEstimated2 = selectedActivity.effort.load_estimated
+      this.durationDemand2 = selectedActivity.effort.duration_demand
+      this.durationEngage2 = selectedActivity.effort.duration_engage
+      this.durationEstimated2 = selectedActivity.effort.duration_estimated
+      this.fteDemand2 = selectedActivity.effort.fte_demand
+      this.fteEngage2 = selectedActivity.effort.fte_engage
+      this.fteEstimated2 = selectedActivity.effort.fte_estimated
+      this.accData2 = selectedActivity.acc
+      this.restData2 = (1 - (parseFloat(this.accData2) / 100)) * parseFloat(this.loadEstimated2)
+      this.loadDemand = parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)
+      this.loadEngage = parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)
+      this.loadEstimated = parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)
+      this.durationDemand = parseFloat(this.durationDemand1) + parseFloat(this.durationDemand2)
+      this.durationEngage = parseFloat(this.durationEngage1) + parseFloat(this.durationEngage2)
+      this.durationEstimated = parseFloat(this.durationEstimated1) + parseFloat(this.durationEstimated2)
+      this.fteDemand = parseFloat(this.fteDemand1) + parseFloat(this.fteDemand2)
+      this.fteEngage = parseFloat(this.fteEngage1) + parseFloat(this.fteEngage2)
+      this.fteEstimated = parseFloat(this.fteEstimated1) + parseFloat(this.fteEstimated2)
+      this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
+      this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
+      this.merged.effort = {
+        load_demand: this.loadDemand,
+        load_engage: this.loadEngage,
+        load_reel: this.loadEstimated,
+        duration_demand: this.durationDemand,
+        duration_engage: this.durationEngage,
+        duration_reel: this.durationEstimated,
+        fte_demand: this.fteDemand,
+        fte_engage: this.fteEngage,
+        fte_reel: this.fteEstimated
+      }
       // this.merged.title = ''
       this.merged.title = this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
       this.merged.description = this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
