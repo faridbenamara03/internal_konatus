@@ -50,7 +50,7 @@
                 v-if="!externalEditable"
                 style="font-size: 14px; color: #898989;text-transform:none"
               >
-                External System: {{ exSystemString !== '' ?  externalSystem : "" }}
+                External System: {{ externalSystem}}
               </label>
               <div v-else>
                 <v-select
@@ -578,6 +578,7 @@ export default {
         }
         return null
       })
+      this.isValid = false
       this.weTitle = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
       this.weDescription = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
       this.loadData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
@@ -594,6 +595,7 @@ export default {
       this.selectedJob = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.job_name : 0
       this.selectedTeam = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.team_name : 0
       this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
+      this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       // if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
       //   this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
       // }
@@ -730,24 +732,33 @@ export default {
     hideModal() {
       this.$emit('hideModal')
     },
-    handleSave() {
+    async handleSave() {
       // this.$store.commit('globalState/HANDLE_ACTIVITY_DETAIL_SAVE', this.selectedActivityData.phase)
-      const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
+      const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority) + 1
       const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
-      const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
+      const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
+      const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
+      let teamId = 0
+      if (teams !== undefined) teamId = teams.id
       const payloads = {
         we_id: this.selectedActivityData.phase?.id,
         detail_mode: true,
         name: this.weTitle,
-        job_id: jobId,
-        phase_id: phaseId,
-        team_id: this.selectedTeam,
-        priority: priorityIndex,
+        job_id: jobId < 0 ? 1 : jobId,
+        phase_id: phaseId < 0 ? 1 : phaseId,
+        team_id: teamId < 0 ? 1 : teamId,
+        priority: priorityIndex < 0 ? 1 : priorityIndex,
         load_engage: this.loadData,
         duration_engage: this.durationData,
+        description: this.weDescription,
         fte_engage: this.fteData
       }
-      this.$store.dispatch('globalState/submit_manual_update', payloads)
+      await this.$store.dispatch('globalState/submit_manual_update', payloads)
+      await this.$store.dispatch('globalState/load_org_data')
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
       this.$emit('hideModal')
     },
     teamSelectHandle(value) {

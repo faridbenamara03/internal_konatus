@@ -250,6 +250,7 @@ export default {
   },
   methods: {
     initializeData(newWE) {
+      console.log("IMan:", newWE)
       this.loadEngageData = newWE.load_engage
       this.loadEstimatedData = newWE.load_reel
       this.accEstimatedData = newWE.acc
@@ -258,6 +259,16 @@ export default {
       this.fteEstimatedData = newWE.fte_reel
       this.restEstimatedData = this.loadEstimatedData * (1 - (parseFloat(this.accEstimatedData) / 100.0))
       this.durationEstimated = this.loadEstimatedData / this.fteEstimatedData
+      this.spentNewEstimatedData = 0
+      this.fteNewEstimatedData = 0
+      this.restNewEstimatedData = 0
+      this.accNewEstimatedData = 0
+      this.startDateEstimated = ''
+      this.durationEstimated = 0
+      this.endDateEstimated = ''
+      this.isAcc = 0
+      this.isValid = false
+      this.isDateValid = false
     },
     hideModal() {
       this.$refs['my-modal'].hide()
@@ -281,6 +292,11 @@ export default {
       // this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       // this.showToast('success', 'Success Update Work Element.')
+      await this.$store.dispatch('globalState/load_org_data')
+      const data = this.$store.state.globalState.selectedNavObj
+      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        data
+      })
       this.$refs['my-modal'].hide()
     },
     handleCalculateDate() {

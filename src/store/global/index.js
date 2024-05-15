@@ -74,6 +74,7 @@ export default {
     allPhaseData: [],
     allJobTitleData: [],
     allPhaseTitleData: [],
+    allTeamTitleData: [],
     allPortData: [],
     allProgData: [],
     allProjData: [],
@@ -415,6 +416,7 @@ export default {
     },
     SUBMIT_LINK_PROJECT(state) {
       console.log(state)
+      Vue.$toast.success('Link Projects successfully.')
     },
     SUBMIT_TEAM_REQUEST_QUOTE(state) {
       const reArr = [...state.selectedWorkElement]
@@ -546,6 +548,15 @@ export default {
     },
     LOAD_ORG_UNIT_DATA(state, orgData) {
       state.globalOrganizationUnitData.push(orgData)
+      console.log('org:', state.globalOrganizationUnitData)
+      state.globalOrganizationUnitData[0].children.forEach(unit => {
+        unit.children.forEach(team => {
+          state.allTeamTitleData.push({
+            id: team.id,
+            title: team.title
+          })
+        })
+      })
     },
     LOAD_ORG_TEAM_DATA(state, orgData) {
       state.globalOrganizationTeamData.push(orgData)
@@ -929,6 +940,22 @@ export default {
           .catch(err => {
             console.log('error updating program ---->', err)
             Vue.$toast.error('Failed to update progam.')
+            reject(err)
+          })
+      })
+    },
+    submit_link_project(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/link', payload)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/SUBMIT_LINK_PROJECT', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error linking project ---->', err)
+            Vue.$toast.error('Failed to link project.')
             reject(err)
           })
       })

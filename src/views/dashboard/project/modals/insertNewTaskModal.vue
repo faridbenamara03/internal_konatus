@@ -119,6 +119,9 @@ export default {
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },
+        { label: 'Devops', value: 'Devops' },
+        { label: 'Primavera', value: 'Primavera' },
+        { label: 'Deviprop', value: 'Deviprop' }
       ]
     }
   },
@@ -140,21 +143,16 @@ export default {
     }
   },
   watch: {
-      data: {
+      '$store.state.globalState.parentTeamTitle': {
           immediate: true,
-          handler(newVal) {
-            this.initializeData(newVal) // ??
+          handler(newValue) {
+            this.selectedJob = newValue?.job
+            this.selectedPhase = newValue?.phase
           },
       },
   },
   methods: {
-    initializeData(data) {
-      console.log("ID:", data)
-      console.log("TT:", this.$store.state.globalState.parentTeamTitle)
-      this.selectedJob = this.$store.state.globalState.parentTeamTitle?.job
-      this.selectedPhase = this.$store.state.globalState.parentTeamTitle?.phase
-    },
-    handleOk(e) {
+    async handleOk(e) {
       if (isEmpty(this.name) || isEmpty(this.selectedJob) || isEmpty(this.selectedPhase) || isEmpty(this.selectedPriority)) {
         e.preventDefault()
         this.$toast.warning('Value is invalid!')
@@ -163,15 +161,21 @@ export default {
         const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
         const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
         const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
-        this.$store.dispatch('globalState/insert_new_task', {
+        const data = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/insert_new_task', {
           priority: priorityIndex !== -1 ? priorityIndex + 1 : 1,
           name: this.name,
           job_id: jobId,
           phase: phaseId !== -1 ? phaseId + 1 : 0,
+          progId: data.id,
           exsystem: this.selectedOptionsString
         })
         this.taskId = ''
         this.gate = ''
+        await this.$store.dispatch('globalState/load_org_data')
+        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+          data
+        })
       }
     }
   }

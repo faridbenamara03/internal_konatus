@@ -104,9 +104,15 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
-    handleSave() {
-      this.$store.commit('globalState/SUBMIT_LINK_PROJECT')
-      this.showToast('success', 'Success Link Projects.')
+    async handleSave() {
+      // this.$store.commit('globalState/SUBMIT_LINK_PROJECT')
+      // console.log("wes:", this.data, "selectedProjects", this.selectedProjects)
+      const payloads = {
+        selected_wes: this.data,
+        selected_projects: this.selectedProjects
+      }
+      await this.$store.dispatch('globalState/submit_link_project', payloads)
+      // this.showToast('success', 'Success Link Projects.')
       this.$refs['my-modal'].hide()
     },
     showToast(variant, title) {
