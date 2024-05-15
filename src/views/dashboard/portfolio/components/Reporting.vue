@@ -156,7 +156,15 @@
     </div>
     <div class="reporting-content">
       <div class="reporting-content--header">
-        <div />
+        <b-form-spinbutton
+          id="sb-days"
+          v-model="currentInterval"
+          :formatter-fn="handleZoomInterval"
+          style="height:25px;width:200px;"
+          min="0"
+          max="3"
+          wrap
+        />
         <div class="reporting-content-header--badge">
           <b-button variant="flat-dark">
             <b-icon
@@ -191,14 +199,6 @@
             <b-icon icon="circle-fill" />
             Real Estimated
           </b-button>
-          <b-form-spinbutton
-            id="sb-days"
-            v-model="currentInterval"
-            :formatter-fn="handleZoomInterval"
-            min="0"
-            max="5"
-            wrap
-          />
         </div>
       </div>
       <div class="reporting-content--body">
@@ -862,8 +862,12 @@ export default {
       itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
+      // zoomIntervals: ['1 days', '2 days', '5 days', '10 days', '20 days', '30 days'],
+      // zoomIntervalNumbers: [1, 2, 5, 10, 20, 30]
       currentInterval: 0,
-      zoomIntervals: ['1 days', '2 days', '5 days', '10 days', '20 days', '30 days']
+      zoomIntervals: ['1 days', '2 days', '5 days', '10 days'],
+      zoomIntervalNumbers: [1, 2, 5, 10],
+      selectedInterval: 1,
     }
   },
   computed: {
@@ -881,6 +885,12 @@ export default {
             this.initializeData(newVal) // ??
           },
       },
+      currentInterval: {
+        immediate: true,
+          handler(newVal) {
+            this.initializeData(newVal)
+          },
+      },
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
@@ -893,12 +903,13 @@ export default {
   methods: {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedToDate.toString())
+      this.selectedInterval = typeof data === 'number' && data !== undefined ? this.zoomIntervalNumbers[data] : 1
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
 
-      while (tempStartDate.add(1, 'days').diff(this.endGraphData) < 0) {
+      while (tempStartDate.add(this.selectedInterval, 'days').diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }
       this.navType = this.$store.state.globalState.selectedNavObj.type
@@ -1028,7 +1039,7 @@ export default {
             if (startMoment < this.startGraphData) startMoment = this.startGraphData
             if (endMoment > this.endGraphData) endMoment = this.endGraphData
             const duration = moment.duration(endMoment.diff(startMoment))
-            result.push(duration.asDays() * 24)
+            result.push((duration.asDays() * 24) / this.selectedInterval)
             phIndex += 1
           }
         }
@@ -1056,7 +1067,7 @@ export default {
         if (startMoment < this.startGraphData) startMoment = this.startGraphData
         if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
-        result = (duration.asDays() + 1) * 24
+        result = ((duration.asDays() + 1) * 24) / this.selectedInterval
       }
       return result
     },
@@ -1064,11 +1075,10 @@ export default {
       return this.zoomIntervals[value]
     },
     getTodayValue() {
-      // const startMoment = moment()
-      const startMoment = moment('2024-01-01')
+      const startMoment = moment()
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
-      return duration === 0 ? 0 : parseInt(duration * 24, 10)
+      return duration === 0 ? 0 : parseInt((duration * 24) / this.selectedInterval, 10)
     },
     getStartPadding(item, type, isChild) {
       let result = 0
@@ -1094,7 +1104,7 @@ export default {
             if (startMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) startMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             if (firstMoment < moment(this.reportingDates[0], 'YYYY-MM-DD')) firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
             const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
-            result = duration === 0 ? 0 : duration * 24
+            result = duration === 0 ? 0 : (duration * 24) / this.selectedInterval
             pstarts.push(result)
             phIndex += 1
           }
@@ -1117,7 +1127,7 @@ export default {
         }
         const firstMoment = moment(this.reportingDates[0], 'YYYY-MM-DD')
         const duration = startMoment > firstMoment ? (moment.duration(startMoment.diff(firstMoment)).asDays()) : 0
-        result = duration * 24
+        result = (duration * 24) / this.selectedInterval
         return result
       }
       return result
