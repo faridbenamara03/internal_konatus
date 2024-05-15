@@ -865,8 +865,8 @@ export default {
       // zoomIntervals: ['1 days', '2 days', '5 days', '10 days', '20 days', '30 days'],
       // zoomIntervalNumbers: [1, 2, 5, 10, 20, 30]
       currentInterval: 0,
-      zoomIntervals: ['1 days', '2 days', '5 days', '10 days'],
-      zoomIntervalNumbers: [1, 2, 5, 10],
+      zoomIntervals: ['1 days', '2 days', '7 days', '30 days'],
+      zoomIntervalNumbers: [1, 2, 7, 30],
       selectedInterval: 1,
     }
   },
@@ -904,11 +904,15 @@ export default {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedToDate.toString())
       this.selectedInterval = typeof data === 'number' && data !== undefined ? this.zoomIntervalNumbers[data] : 1
+      if (this.$store.state.globalState.isDateUpdated) {
+        this.selectedInterval = 1
+        this.currentInterval = 0
+        this.$store.commit('globalState/RESTORE_DATE_UPDATED')
+      }
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
-
       while (tempStartDate.add(this.selectedInterval, 'days').diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }

@@ -81,6 +81,7 @@ export default {
     allOrgData: [],
     sponsors: [],
     weTeamData: [],
+    isDateUpdated: false,
     weJobData: [],
     selectedActivityParents: [],
     productlines: [],
@@ -318,6 +319,9 @@ export default {
     UPDATE_PROJECT_REPORTING_DATA() {
       Vue.$toast.success('Updated Successfully.')
     },
+    RESTORE_DATE_UPDATED(state) {
+      state.isDateUpdated = false
+    },
     HANDLE_ACTIVITY_DETAIL_SAVE(state, activity) {
       console.log(state)
       console.log(activity)
@@ -436,6 +440,7 @@ export default {
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
       state.portfolioDemandData = payload.portData.demand
+      state.isDateUpdated = payload.dateUpdated
       if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
         state.weTeamData = ['auto selection']
         state.weJobData = []
@@ -622,7 +627,7 @@ export default {
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
-          const resData = { navData: payload.data.nav, portData: response.data }
+          const resData = { navData: payload.data.nav, portData: response.data, dateUpdated: true }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting portfolio data ---->', err)
@@ -631,7 +636,7 @@ export default {
       } else {
         baseUrl = `https://api.konatus.site/v1/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
-          const resData = { navData: payload.data, portData: response.data }
+          const resData = { navData: payload.data, portData: response.data, dateUpdated: false }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting portfolio data ---->', err)
