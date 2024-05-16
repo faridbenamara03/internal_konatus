@@ -84,6 +84,7 @@ export default {
     selectedZoomInterval: 0,
     weJobData: [],
     selectedActivityParents: [],
+    selectedActivityParents2: [],
     productlines: [],
     hproductportfolios: [],
     productmanagers: [],
@@ -277,6 +278,9 @@ export default {
     },
     HANDLE_GET_PARENTS_WE(state, data) {
       state.selectedActivityParents = data
+    },
+    HANDLE_GET_PARENTS_WE_2(state, data) {
+      state.selectedActivityParents2 = data
     },
     LOAD_EXTERNAL_SYSTEMS(state, data) {
       state.externalSystemData = data
@@ -1023,6 +1027,22 @@ export default {
           .then(response => {
             const newData = response.data
             this.commit('globalState/HANDLE_GET_PARENTS_WE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error get parents for work element---->', err)
+            Vue.$toast.error('Failed to get parents for work element.')
+            reject(err)
+          })
+      })
+    },
+    get_parents_we_2(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/parent', payload)
+        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/HANDLE_GET_PARENTS_WE_2', newData)
             resolve()
           })
           .catch(err => {

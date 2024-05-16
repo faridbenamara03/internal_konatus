@@ -53,10 +53,10 @@
                   <div v-else>
                     <v-select
                       v-model="externalSystem1"
-                      style="margin-bottom: 3px"
-                      :options="['Jira', 'SAP']"
+                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
                       placeholder="Select External System"
                       outlined
+                      @input="updateExternalID(1)"
                     />
                   </div>
                 </div>
@@ -75,7 +75,7 @@
               </div>
               <div
                 style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit1"
+                @click="handleExternalEdit(1)"
               >
                 <feather-icon
                   :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'"
@@ -121,32 +121,26 @@
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
-              <!-- <feather-icon
-                icon="PlusIcon"
-                size="18"
-                style="cursor:pointer"
-                @click="onEffortAdd1"
-              /> -->
             </div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <label>Total Load</label>
+                <label>Load</label>
                 <b-form-input
                   :value="loadEngage1"
                   readonly
                 />
               </div>
               <div class="col">
-                <label>Total Duration</label>
+                <label>Duration</label>
                 <b-form-input
                   :value="durationEngage1"
                   readonly
                 />
               </div>
               <div class="col">
-                <label>Total FTE</label>
+                <label>FTE</label>
                 <b-form-input
                   :value="fteEngage1"
                   readonly
@@ -178,24 +172,8 @@
                   readonly
                 />
               </div>
-              <div class="col">
-                <label>%acc</label>
-                <b-form-input
-                  v-model="accData1"
-                  type="number"
-                  readonly
-                />
-              </div>
             </div>
             <div class="row">
-              <div class="col">
-                <label>Rest To Do</label>
-                <b-form-input
-                  v-model="restData1"
-                  type="number"
-                  readonly
-                />
-              </div>
               <div class="col">
                 <label>Load(R/E)</label>
                 <b-form-input
@@ -205,9 +183,25 @@
                 />
               </div>
               <div class="col">
-                <label>Duration(R/E)</label>
+                <label>Spent</label>
                 <b-form-input
-                  v-model="durationEstimated1"
+                  :value="parseFloat(loadEstimated1) - parseFloat(restData1)"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  v-model="accData1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  v-model="restData1"
                   type="number"
                   readonly
                 />
@@ -239,28 +233,75 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="detail-box">
+              <feather-icon
+                icon="CompassIcon"
+                size="18"
+              />
+              <p class="pl-1 m-0 text-uppercase">
+                Dependency
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="select-box">
-              <label>Epic</label>
+              <label>Activity</label>
               <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
+                v-model="selectedParents1"
+                :options="activityList1"
+                placeholder="Select Task"
+                menu-props="auto"
                 outlined
+                multiple
+                :disabled="true"
               />
             </div>
           </div>
-          <div class="form-group d-flex justify-content-end">
-            <b-button variant="outline-primary">
-              <feather-icon icon="PlusIcon" />
-              <span class="pl-1">Add dependency</span>
+          <div class="form-group">
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPriorityBtn(1)"
+            >
+              Edit Priority
+            </b-button>
+            &nbsp;&nbsp;
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPhaseBtn(1)"
+            >
+              Edit Phase
             </b-button>
           </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <custom-icon name="hexahedron" />
-              <p class="pl-1 m-0 text-uppercase">
-                Dependencies
-              </p>
+          <div
+            v-if="showEditPriority1 === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Priority</label>
+              <v-select
+                v-model="selectedPriority1"
+                :options="priorityOptions"
+                placeholder="Select Priority"
+                menu-props="auto"
+                outlined
+                :disabled="true"
+              />
+            </div>
+          </div>
+          <div
+            v-if="showEditPhase1 === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Phase</label>
+              <v-select
+                v-model="selectedPhase1"
+                :options="phaseList"
+                placeholder="Select Phase"
+                menu-props="auto"
+                outlined
+                :disabled="true"
+              />
             </div>
           </div>
         </div>
@@ -292,10 +333,10 @@
                   <div v-else>
                     <v-select
                       v-model="externalSystem2"
-                      style="margin-bottom: 3px"
-                      :options="['Jira', 'SAP']"
+                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
                       placeholder="Select External System"
                       outlined
+                      @input="updateExternalID(2)"
                     />
                   </div>
                 </div>
@@ -314,7 +355,7 @@
               </div>
               <div
                 style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit2"
+                @click="handleExternalEdit(2)"
               >
                 <feather-icon
                   :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'"
@@ -376,12 +417,6 @@
                 <p class="px-1 m-0 text-uppercase">
                   effort
                 </p>
-                <!-- <feather-icon
-                  icon="PlusIcon"
-                  size="18"
-                  style="cursor:pointer"
-                  @click="onEffortAdd2"
-                /> -->
               </div>
             </div>
             <div class="form-group">
@@ -389,21 +424,21 @@
                 <!-- <div class="col-6">
                 </div> -->
                 <div class="col">
-                  <label>Total Load</label>
+                  <label>Load</label>
                   <b-form-input
                     :value="loadEngage2"
                     readonly
                   />
                 </div>
                 <div class="col">
-                  <label>Total Duration</label>
+                  <label>Duration</label>
                   <b-form-input
                     :value="durationEngage2"
                     readonly
                   />
                 </div>
                 <div class="col">
-                  <label>Total FTE</label>
+                  <label>FTE</label>
                   <b-form-input
                     :value="fteEngage2"
                     readonly
@@ -435,24 +470,8 @@
                     readonly
                   />
                 </div>
-                <div class="col">
-                  <label>%acc</label>
-                  <b-form-input
-                    v-model="accData2"
-                    type="number"
-                    readonly
-                  />
-                </div>
               </div>
               <div class="row">
-                <div class="col">
-                  <label>Rest To Do</label>
-                  <b-form-input
-                    v-model="restData2"
-                    type="number"
-                    readonly
-                  />
-                </div>
                 <div class="col">
                   <label>Load(R/E)</label>
                   <b-form-input
@@ -462,9 +481,24 @@
                   />
                 </div>
                 <div class="col">
-                  <label>Duration(R/E)</label>
+                  <label>Spent</label>
                   <b-form-input
-                    v-model="durationEstimated2"
+                    :value="parseFloat(loadEstimated2) - parseFloat(restData2)"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>%acc</label>
+                  <b-form-input
+                    v-model="accData2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Rest To Do</label>
+                  <b-form-input
+                    v-model="restData2"
                     type="number"
                     readonly
                   />
@@ -496,28 +530,75 @@
               </div>
             </div>
             <div class="form-group">
+              <div class="detail-box">
+                <feather-icon
+                  icon="CompassIcon"
+                  size="18"
+                />
+                <p class="pl-1 m-0 text-uppercase">
+                  Dependency
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
               <div class="select-box">
-                <label>Epic</label>
+                <label>Activity</label>
                 <v-select
-                  v-model="selectedEpic"
-                  :options="['Epic A', 'Epic B']"
-                  placeholder="Select Epic"
+                  v-model="selectedParents2"
+                  :options="activityList2"
+                  placeholder="Select Task"
+                  menu-props="auto"
                   outlined
+                  multiple
+                  :disabled="true"
                 />
               </div>
             </div>
-            <div class="form-group d-flex justify-content-end">
-              <b-button variant="outline-primary">
-                <feather-icon icon="PlusIcon" />
-                <span class="pl-1">Add dependency</span>
+            <div class="form-group">
+              <b-button
+                variant="outline-primary"
+                @click="onClickEditPriorityBtn(2)"
+              >
+                Edit Priority
+              </b-button>
+              &nbsp;&nbsp;
+              <b-button
+                variant="outline-primary"
+                @click="onClickEditPhaseBtn(2)"
+              >
+                Edit Phase
               </b-button>
             </div>
-            <div class="form-group">
-              <div class="detail-box">
-                <custom-icon name="hexahedron" />
-                <p class="pl-1 m-0 text-uppercase">
-                  Dependencies
-                </p>
+            <div
+              v-if="showEditPriority2 === true"
+              class="form-group"
+            >
+              <div class="select-box">
+                <label>Priority</label>
+                <v-select
+                  v-model="selectedPriority2"
+                  :options="priorityOptions"
+                  placeholder="Select Priority"
+                  menu-props="auto"
+                  outlined
+                  :disabled="true"
+                />
+              </div>
+            </div>
+            <div
+              v-if="showEditPhase2 === true"
+              class="form-group"
+            >
+              <div class="select-box">
+                <label>Phase</label>
+                <v-select
+                  v-model="selectedPhase2"
+                  :options="phaseList"
+                  placeholder="Select Phase"
+                  menu-props="auto"
+                  outlined
+                  :disabled="true"
+                />
               </div>
             </div>
           </div>
@@ -533,40 +614,40 @@
               <div>
                 <div style="text-align: end;">
                   <label
-                    v-if="!externalEditable3"
+                    v-if="!externalEditable"
                     style="font-size: 14px; color: #898989;text-transform:none"
                   >
-                    External System: {{ externalSystem3 }}
+                    External System: {{ externalSystem }}
                   </label>
                   <div v-else>
                     <v-select
-                      v-model="externalSystem3"
-                      style="margin-bottom: 3px"
-                      :options="['Jira', 'SAP']"
+                      v-model="externalSystem"
+                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
                       placeholder="Select External System"
                       outlined
+                      @input="updateExternalID(0)"
                     />
                   </div>
                 </div>
                 <p
-                  v-if="!externalEditable3"
+                  v-if="!externalEditable"
                   style="color: #bbbbbb;font-size: 16px;"
                 >
-                  External Activity Id: {{ externalId3 }}
+                  External Activity Id: {{ externalId }}
                 </p>
                 <div v-else>
                   <b-form-input
-                    v-model="externalId3"
+                    v-model="externalId"
                     placeholder="Input External Activity Id"
                   />
                 </div>
               </div>
               <div
                 style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit3"
+                @click="handleExternalEdit(0)"
               >
                 <feather-icon
-                  :icon="externalEditable3 ? 'SaveIcon' : 'Edit3Icon'"
+                  :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
                   style="color: #7367f0"
                   size="20"
                 />
@@ -608,7 +689,6 @@
               <p class="px-1 m-0 text-uppercase">
                 effort
               </p>
-              <!-- <feather-icon icon="PlusIcon" size="18" style="cursor:pointer" @click="onEffortAdd3" /> -->
             </div>
           </div>
           <div class="form-group">
@@ -633,6 +713,15 @@
                   :value="fteEngage"
                   readonly
                 />
+              </div>
+              <div class="col">
+                <b-button
+                  style="margin-top:20px"
+                  variant="primary"
+                  @click="handleCalculate"
+                >
+                  Calculate
+                </b-button>
               </div>
             </div>
             <div class="row">
@@ -660,6 +749,23 @@
                   readonly
                 />
               </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Real/Estimated)</label>
+                <b-form-input
+                  v-model="loadEstimated"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Spent</label>
+                <b-form-input
+                  :value="parseFloat(loadEstimated) - parseFloat(restData)"
+                  readonly
+                />
+              </div>
               <div class="col">
                 <label>%acc</label>
                 <b-form-input
@@ -672,24 +778,6 @@
                 <label>Rest To Do</label>
                 <b-form-input
                   v-model="restData"
-                  type="number"
-                  readonly
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label>Load(Real/Estimated)</label>
-                <b-form-input
-                  v-model="loadEstimated"
-                  type="number"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Duration(Real/Estimated)</label>
-                <b-form-input
-                  v-model="durationEstimated"
                   type="number"
                   readonly
                 />
@@ -721,28 +809,72 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="detail-box">
+              <feather-icon
+                icon="CompassIcon"
+                size="18"
+              />
+              <p class="pl-1 m-0 text-uppercase">
+                Dependency
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="select-box">
-              <label>Epic</label>
+              <label>Activity</label>
               <v-select
-                v-model="selectedEpic"
-                :options="['Epic A', 'Epic B']"
-                placeholder="Select Epic"
+                v-model="selectedParents"
+                :options="activityList"
+                placeholder="Select Task"
+                menu-props="auto"
+                outlined
+                multiple
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPriorityBtn(0)"
+            >
+              Edit Priority
+            </b-button>
+            &nbsp;&nbsp;
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPhaseBtn(0)"
+            >
+              Edit Phase
+            </b-button>
+          </div>
+          <div
+            v-if="showEditPriority === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Priority</label>
+              <v-select
+                v-model="selectedPriority"
+                :options="priorityOptions"
+                placeholder="Select Priority"
+                menu-props="auto"
                 outlined
               />
             </div>
           </div>
-          <div class="form-group d-flex justify-content-end">
-            <b-button variant="outline-primary">
-              <feather-icon icon="PlusIcon" />
-              <span class="pl-1">Add dependency</span>
-            </b-button>
-          </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <custom-icon name="hexahedron" />
-              <p class="pl-1 m-0 text-uppercase">
-                Dependencies
-              </p>
+          <div
+            v-if="showEditPhase === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Phase</label>
+              <v-select
+                v-model="selectedPhase"
+                :options="phaseList"
+                placeholder="Select Phase"
+                menu-props="auto"
+                outlined
+              />
             </div>
           </div>
         </div>
@@ -771,6 +903,7 @@ import {
   BBadge, BButton, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
   components: {
@@ -800,15 +933,6 @@ export default {
       selectedActivity: null,
       selectedEpic: null,
       toMerge: null,
-      externalEditable1: false,
-      externalSystem1: "Jira",
-      externalId1: "JR-12345",
-      externalEditable2: false,
-      externalSystem2: "Jira",
-      externalId2: "JR-12345",
-      externalEditable3: false,
-      externalSystem3: "Jira",
-      externalId3: "JR-12345",
       loadDemand: 0,
       loadDemand1: 0,
       loadDemand2: 0,
@@ -836,7 +960,40 @@ export default {
       fteEstimated: 0,
       fteEstimated1: 0,
       fteEstimated2: 0,
-      opt_skillset: 0
+      opt_skillset: 0,
+      priorityOptions: this.$store.state.globalState.priorityOptions,
+      phaseList: this.$store.state.globalState.allPhaseTitleData,
+      isValid: false,
+      selectedPriority: "",
+      selectedPhase: "",
+      selectedPriority1: "",
+      selectedPhase1: "",
+      selectedPriority2: "",
+      selectedPhase2: "",
+      showEditPriority: false,
+      showEditPhase: false,
+      selectedParents: [],
+      showEditPriority1: false,
+      showEditPhase1: false,
+      selectedParents1: [],
+      showEditPriority2: false,
+      showEditPhase2: false,
+      selectedParents2: [],
+      externalSystems: [],
+      externalSystem: "Jira",
+      externalId: "JIRA-",
+      exSystemString: '',
+      externalEditable: false,
+      externalSystems1: [],
+      externalSystem1: "Jira",
+      externalId1: "JIRA-",
+      exSystemString1: '',
+      externalEditable1: false,
+      externalSystems2: [],
+      externalSystem2: "Jira",
+      externalId2: "JIRA-",
+      exSystemString2: '',
+      externalEditable2: false
     }
   },
   computed: {
@@ -845,6 +1002,81 @@ export default {
     },
     weDescription() {
       return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
+    },
+    activityList1() {
+      const titleArr = []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      return titleArr
+    },
+    activityList2() {
+      const titleArr = []
+      if (this.toMerged === null || this.toMerged === undefined) return []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId === a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId !== a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      return titleArr
+    },
+    activityList() {
+      const titleArr = []
+      titleArr.push(this.activityList1)
+      titleArr.push(this.activityList2)
+      return titleArr
     },
     totalEffortData1() {
       let load = 0
@@ -932,9 +1164,23 @@ export default {
         this.initializeData(newVal) // ??
       }
     },
+    '$store.globalState.selectedActivityParents': {
+      immediate: true,
+      handler(newVal) {
+        this.selectedParents1 = newVal
+        this.selectedParents.push(newVal)
+      }
+    },
+    '$store.globalState.selectedActivityParents2': {
+      immediate: true,
+      handler(newVal) {
+        this.selectedParents2 = newVal
+        this.selectedParents.push(newVal)
+      }
+    }
   },
   methods: {
-    initializeData(newVal) {
+    async initializeData(newVal) {
       console.log("SD:", newVal)
       const orgData = this.$store.state.globalState.allOrgData
       const { orgId } = this.$store.state.globalState.selectedNavObj
@@ -944,6 +1190,9 @@ export default {
         }
         return null
       })
+      if (this.selectedActivityData.phase !== undefined) {
+        await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
+      }
       this.loadEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
       this.durationEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
       this.fteEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
@@ -955,16 +1204,28 @@ export default {
       this.fteEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
       this.accData1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
       this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
+      this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
+      this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       this.toMerge = null
-    },
-    handleExternalEdit1() {
-      this.externalEditable1 = !this.externalEditable1
-    },
-    handleExternalEdit2() {
-      this.externalEditable2 = !this.externalEditable2
-    },
-    handleExternalEdit3() {
-      this.externalEditable3 = !this.externalEditable3
+      const otype = this.$store.state.globalState.selectedNavObj.type
+      let extype = ''
+      switch (otype) {
+        case 'program':
+          extype = 'PROG'
+          break
+        case 'project':
+          extype = 'PROJ'
+          break
+        case 'subproject':
+          extype = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      const value = this.externalSystem
+      this.externalId = `${value.toUpperCase()}-${extype}-`
+      this.externalId1 = `${value.toUpperCase()}-${extype}-`
+      this.externalId2 = `${value.toUpperCase()}-${extype}-`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1020,24 +1281,39 @@ export default {
         this.$toast.warning('Please Select toMerge Activity!')
       } else {
         const progId = this.selectedActivityData.phase.projectId
-        const priorityIndex = this.selectedActivityData.phase.priority
         const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedActivityData.phase.job_name).id
-        const phaseId = this.selectedActivityData.phase.gate
         const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedActivityData.phase.team_name)
+        this.merged.priority = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority) + 1
+        this.merged.phase = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
+        let selectedParentIDs = []
+        if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+          this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+            if (t.phases && t.phases.length > 0) {
+              t.phases.forEach(p => {
+                if (p.activities && p.activities.length > 0) {
+                  p.activities.forEach(a => {
+                    const selected = this.selectedParents.includes(a.title) ? a.id : -1
+                    if (selected > 0) selectedParentIDs.push(selected)
+                  })
+                }
+              })
+            }
+          })
+        }
+        selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
+        this.merged.parents = this.selectedParentIDs
         let teamId = 0
         if (teams !== undefined) teamId = teams.id
+        const toMergedId1 = this.selectedActivityData.phase.id
+        const toMergedId2 = this.toMerge.id
         const payloads = {
-          toMergeId1: this.selectedActivityData.phase.id,
-          toMergeId2: this.toMerge.id,
+          toMergedId1,
+          toMergedId2,
           merged: this.merged,
-          acc: this.accData,
-          priorityIndex,
-          jobId,
-          phaseId,
-          teamId,
-          progId,
+          job_id: jobId < 0 ? 1 : jobId,
+          team_id: teamId < 0 ? 1 : teamId,
+          progId
         }
-        // this.$store.commit('globalState/HANDLE_ACTIVITY_MERGE', data)
         await this.$store.dispatch('globalState/handle_activity_merge', payloads)
         await this.$store.dispatch('globalState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
@@ -1049,7 +1325,7 @@ export default {
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
       }
     },
-    onActivitySelect(selectedActivityId) {
+    async onActivitySelect(selectedActivityId) {
       let selectedActivity = {}
       if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
         this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
@@ -1067,6 +1343,9 @@ export default {
         })
       }
       this.toMerge = selectedActivity
+      if (this.toMerge !== undefined) {
+        await this.$store.dispatch('globalState/get_parents_we_2', { id: this.toMerge.id })
+      }
       this.loadDemand2 = selectedActivity.effort.load_demand
       this.loadEngage2 = selectedActivity.effort.load_engage
       this.loadEstimated2 = selectedActivity.effort.load_estimated
@@ -1089,6 +1368,8 @@ export default {
       this.fteEstimated = parseFloat(this.fteEstimated1) + parseFloat(this.fteEstimated2)
       this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
       this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
+      this.selectedPriority2 = selectedActivity !== undefined ? this.priorityOptions[selectedActivity.priority - 1] : 0
+      this.selectedPhase2 = selectedActivity !== undefined ? this.$store.state.globalState.allPhaseTitleData[selectedActivity.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       this.merged.effort = {
         load_demand: this.loadDemand,
         load_engage: this.loadEngage,
@@ -1100,11 +1381,135 @@ export default {
         fte_engage: this.fteEngage,
         fte_reel: this.fteEstimated
       }
+      this.merged.acc = this.accData
       // this.merged.title = ''
-      this.merged.title = this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
-      this.merged.description = this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
-    }
-  },
+      this.merged.title = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
+      ? selectedActivity.title : this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
+      this.merged.description = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
+      ? selectedActivity.description : this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
+    },
+    handleCalculate() {
+      if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
+        if (parseFloat(this.loadEngage) === parseFloat(this.durationEngage) * parseFloat(this.fteEngage)) {
+          this.showToast('success', 'All values of Merged are valid')
+          this.isValid = true
+        } else {
+          this.showToast('warning', 'Please enter valid values for Merged')
+          this.isValid = false
+        }
+      } else if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage === '') {
+        this.loadEngage = parseFloat(this.durationEngage) * parseFloat(this.fteEngage)
+        this.isValid = true
+      } else if (this.loadEngage !== '' && this.durationEngage !== '' && this.durationEngage !== 0 && this.fteEngage === '') {
+        this.fteEngage = parseFloat(this.loadEngage) / parseFloat(this.durationEngage)
+        this.isValid = true
+      } else if (this.loadEngage !== '' && this.fteEngage !== '' && this.fteEngage !== 0 && this.durationEngage === '') {
+        this.durationEngage = parseFloat(this.loadEngag2) / parseFloat(this.fteEngage)
+        this.isValid = true
+      } else {
+        this.showToast('warning', 'Please enter valid values for Merged')
+        this.isValid = false
+      }
+    },
+    updateExternalID(index) {
+      let type = ''
+      switch (this.$store.state.globalState.SelectedNavObj.type) {
+        case 'program':
+          type = 'PROG'
+          break
+        case 'project':
+          type = 'PROJ'
+          break
+        case 'subproject':
+          type = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      let value = 0
+      switch (index) {
+        case 0:
+          value = this.externalSystem
+          this.externalId = `${value.toUpperCase()}-${type}-`
+          break
+        case 1:
+          value = this.externalSystem1
+          this.externalId1 = `${value.toUpperCase()}-${type}-`
+          break
+        case 2:
+          value = this.externalSystem2
+          this.externalId2 = `${value.toUpperCase()}-${type}-`
+          break
+        default:
+          break
+      }
+    },
+    handleExternalEdit(type) {
+      switch (type) {
+        case 0:
+          this.externalEditable = !this.externalEditable
+          this.externalSystems.push(this.externalSystem)
+          this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
+          this.exSystemString = this.externalSystems.toString()
+          break
+        case 1:
+          this.externalEditable1 = !this.externalEditable1
+          this.externalSystems1.push(this.externalSystem1)
+          this.externalSystems1 = this.externalSystems1.filter((value, index, array) => array.indexOf(value) === index)
+          this.exSystemString1 = this.externalSystems1.toString()
+          break
+        case 2:
+          this.externalEditable2 = !this.externalEditable2
+          this.externalSystems2.push(this.externalSystem2)
+          this.externalSystems2 = this.externalSystems2.filter((value, index, array) => array.indexOf(value) === index)
+          this.exSystemString2 = this.externalSystems2.toString()
+          break
+        default:
+          break
+      }
+    },
+    onClickEditPriorityBtn(value) {
+      switch (value) {
+        case 0:
+          this.showEditPriority = !this.showEditPriority
+          break
+        case 1:
+          this.showEditPriority1 = !this.showEditPriority1
+          break
+        case 2:
+          this.showEditPriority2 = !this.showEditPriority2
+          break
+        default:
+          break
+      }
+    },
+    showToast(variant, title) {
+      this.$toast({
+        component: ToastificationContent,
+        props: {
+          title,
+          icon: 'BellIcon',
+          text: null,
+          variant,
+        },
+      })
+    },
+    onClickEditPhaseBtn(value) {
+      switch (value) {
+        case 0:
+          this.showEditPhase = !this.showEditPhase
+          break
+        case 1:
+          this.showEditPhase1 = !this.showEditPhase1
+          break
+        case 2:
+          this.showEditPhase2 = !this.showEditPhase2
+          break
+        default:
+          break
+      }
+    },
+  }
 }
 </script>
 

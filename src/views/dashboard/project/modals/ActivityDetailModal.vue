@@ -50,7 +50,7 @@
                 v-if="!externalEditable"
                 style="font-size: 14px; color: #898989;text-transform:none"
               >
-                External System: {{ externalSystem}}
+                External System: {{ externalSystem }}
               </label>
               <div v-else>
                 <v-select
@@ -135,36 +135,6 @@
           />
         </div>
       </div>
-      <!-- <div class="form-group">
-        <div class="detail-box">
-          <feather-icon icon="CompassIcon" size="18" />
-          <p class="pl-1 m-0 text-uppercase">
-            Predecessor
-          </p>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="select-box">
-          <label>Program</label>
-          <v-select
-            :options="['Quadruped robot', 'Micro robot observation NBC', 'Handling robot', 'Power & programming station']"
-            placeholder="Select Program" outlined />
-        </div>
-        <div class="select-box">
-          <label>Project</label>
-          <v-select :options="['New Format', 'Enhanced motricity', 'Enhanced autonomy', 'Dual sourcing for Quadruped']"
-            placeholder="Select Project" outlined />
-        </div>
-        <div class="select-box">
-          <label>Subproject</label>
-          <v-select :options="['Template', 'System programming', 'Checking', 'Illustration']"
-            placeholder="Select skillset" outlined />
-        </div>
-        <div class="select-box">
-          <label>Task</label>
-          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
-        </div>
-      </div> -->
       <div class="form-group">
         <div class="detail-box">
           <feather-icon
@@ -180,8 +150,8 @@
         <div class="select-box">
           <label>Activity</label>
           <v-select
-            :options="activityList"
             v-model="selectedParents"
+            :options="activityList"
             placeholder="Select Task"
             menu-props="auto"
             outlined
@@ -737,14 +707,9 @@ export default {
         },
       })
     },
-    handleAddExternal() {
-      this.externalSystems.push(this.externalId)
-      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
-      this.exSystemString = this.externalSystems.toString()
-    },
     updateExternalID() {
       let type = ''
-      switch (this.otype) {
+      switch (this.$store.state.globalState.SelectedNavObj.type) {
         case 'program':
           type = 'PROG'
           break
