@@ -1363,9 +1363,9 @@ export default {
       this.durationDemand = parseFloat(this.durationDemand1) + parseFloat(this.durationDemand2)
       this.durationEngage = parseFloat(this.durationEngage1) + parseFloat(this.durationEngage2)
       this.durationEstimated = parseFloat(this.durationEstimated1) + parseFloat(this.durationEstimated2)
-      this.fteDemand = parseFloat(this.fteDemand1) + parseFloat(this.fteDemand2)
-      this.fteEngage = parseFloat(this.fteEngage1) + parseFloat(this.fteEngage2)
-      this.fteEstimated = parseFloat(this.fteEstimated1) + parseFloat(this.fteEstimated2)
+      this.fteDemand = (parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)) / (parseFloat(this.loadDemand1) / parseFloat(this.fteDemand1) + parseFloat(this.loadDemand2) / parseFloat(this.fteDemand2))
+      this.fteEngage = (parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)) / (parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1) + parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2))
+      this.fteEstimated = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) / (parseFloat(this.loadEstimated1) / parseFloat(this.fteEstimated1) + parseFloat(this.loadEstimated2) / parseFloat(this.fteEstimated2))
       this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
       this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
       this.selectedPriority2 = selectedActivity !== undefined ? this.priorityOptions[selectedActivity.priority - 1] : 0
@@ -1383,7 +1383,7 @@ export default {
       }
       this.merged.acc = this.accData
       // this.merged.title = ''
-      this.merged.title = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
+      this.merged.title = this.selectedActivityData.phase.title === null || this.selectedActivityData.phase.title === undefined
       ? selectedActivity.title : this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
       this.merged.description = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
       ? selectedActivity.description : this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description

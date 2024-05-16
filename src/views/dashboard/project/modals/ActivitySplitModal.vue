@@ -999,13 +999,13 @@ export default {
       exSystemString: '',
       externalEditable: false,
       externalSystems1: [],
-      externalSystem1: "Jira",
-      externalId1: "JIRA-",
+      externalSystem1: "",
+      externalId1: "",
       exSystemString1: '',
       externalEditable1: false,
       externalSystems2: [],
-      externalSystem2: "Jira",
-      externalId2: "JIRA-",
+      externalSystem2: "",
+      externalId2: "",
       exSystemString2: '',
       externalEditable2: false,
     }
@@ -1174,26 +1174,29 @@ export default {
       this.accData2 = this.accData - this.accData1
       this.loadEngage1 = parseInt(this.loadEngage / 2, 10)
       this.durationEngage1 = parseInt(this.durationEngage / 2, 10)
-      this.fteEngage1 = parseInt(this.fteEngage / 2, 10)
+      this.fteEngage1 = this.fteEngage
       this.loadEngage2 = this.loadEngage - this.loadEngage1
       this.durationEngage2 = this.durationEngage - this.durationEngage1
-      this.fteEngage2 = this.fteEngage - this.fteEngage1
+      this.fteEngage2 = this.fteEngage
       this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
-
+      this.selectedPriority1 = this.selectedPriority
+      this.selectedPriority2 = this.selectedPriority
+      this.selectedPhase1 = this.selectedPhase
+      this.selectedPhase2 = this.selectedPhase
       this.loadDemand1 = parseInt(this.loadDemand / 2, 10)
       this.durationDemand1 = parseInt(this.durationDemand / 2, 10)
-      this.fteDemand1 = parseInt(this.fteDemand / 2, 10)
+      this.fteDemand1 = this.fteDemand
       this.loadDemand2 = this.loadDemand - this.loadDemand1
       this.durationDemand2 = this.durationDemand - this.durationDemand1
-      this.fteDemand2 = this.fteDemand - this.fteDemand1
+      this.fteDemand2 = this.fteDemand
 
       this.loadEstimated1 = parseInt(this.loadEstimated / 2, 10)
       this.durationEstimated1 = parseInt(this.durationEstimated / 2, 10)
-      this.fteEstimated1 = parseInt(this.fteEstimated / 2, 10)
+      this.fteEstimated1 = this.fteEstimated
       this.loadEstimated2 = this.loadEstimated - this.loadEstimated1
       this.durationEstimated2 = this.durationEstimated - this.durationEstimated1
-      this.fteEstimated2 = this.fteEstimated - this.fteEstimated1
+      this.fteEstimated2 = this.fteEstimated
 
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
@@ -1212,8 +1215,6 @@ export default {
       }
       const value = this.externalSystem
       this.externalId = `${value.toUpperCase()}-${extype}-`
-      this.externalId1 = `${value.toUpperCase()}-${extype}-`
-      this.externalId2 = `${value.toUpperCase()}-${extype}-`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
