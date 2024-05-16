@@ -250,7 +250,6 @@ export default {
   },
   methods: {
     initializeData(newWE) {
-      console.log("IMan:", newWE)
       this.loadEngageData = newWE.load_engage
       this.loadEstimatedData = newWE.load_reel
       this.accEstimatedData = newWE.acc

@@ -163,7 +163,7 @@
           style="height:25px;width:200px;"
           min="0"
           max="3"
-          wrap
+          :wrap="false"
         />
         <div class="reporting-content-header--badge">
           <b-button variant="flat-dark">
@@ -862,8 +862,6 @@ export default {
       itemsForReporting: 0,
       startGraphDate: moment('2024-01-01'),
       endGraphDate: moment('2024-12-31'),
-      // zoomIntervals: ['1 days', '2 days', '5 days', '10 days', '20 days', '30 days'],
-      // zoomIntervalNumbers: [1, 2, 5, 10, 20, 30]
       currentInterval: 0,
       zoomIntervals: ['1 days', '2 days', '7 days', '30 days'],
       zoomIntervalNumbers: [1, 2, 7, 30],
@@ -874,15 +872,12 @@ export default {
     isOptimizeIndex() {
       return this.$store.state.globalState.optimizeStatus
     },
-    // itemsForReporting() {
-    //   return this.$store.state.globalState.portfolioReportingData
-    // },
   },
   watch: {
       data: {
           immediate: true,
           handler(newVal) {
-            this.initializeData(newVal) // ??
+            this.initializeData(newVal)
           },
       },
       currentInterval: {
@@ -903,12 +898,7 @@ export default {
   methods: {
     initializeData(data) {
       console.log("INITD:", data, "OTYPE:", this.navType, 'st:', this.$store.state.globalState.selectedToDate.toString())
-      this.selectedInterval = typeof data === 'number' && data !== undefined ? this.zoomIntervalNumbers[data] : 1
-      if (this.$store.state.globalState.isDateUpdated) {
-        this.selectedInterval = 1
-        this.currentInterval = 0
-        this.$store.commit('globalState/RESTORE_DATE_UPDATED')
-      }
+      this.selectedInterval = typeof data === 'number' && data !== undefined && data !== null ? this.zoomIntervalNumbers[data] : this.zoomIntervalNumbers[this.$store.state.globalState.selectedZoomInterval]
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
@@ -1076,6 +1066,10 @@ export default {
       return result
     },
     handleZoomInterval(value) {
+      console.log("handle_portfolio:", value)
+      if (value > 0) {
+        this.$store.commit('globalState/SET_ZOOM_INTERVAL', value)
+      }
       return this.zoomIntervals[value]
     },
     getTodayValue() {

@@ -93,7 +93,7 @@
           style="height:25px;width:200px;"
           min="0"
           max="3"
-          wrap
+          :wrap="false"
         />
         <div class="reporting-content-header--badge justify-content-end">
           <div class="phase">
@@ -399,12 +399,7 @@ export default {
   methods: {
     initializeData(data) {
       console.log("D:", data)
-      this.selectedInterval = typeof data === 'number' && data !== undefined ? this.zoomIntervalNumbers[data] : 1
-      if (this.$store.state.globalState.isDateUpdated) {
-        this.selectedInterval = 1
-        this.currentInterval = 0
-        this.$store.commit('globalState/RESTORE_DATE_UPDATED')
-      }
+      this.selectedInterval = typeof data === 'number' && data !== undefined && data !== null ? this.zoomIntervalNumbers[data] : this.zoomIntervalNumbers[this.$store.state.globalState.selectedZoomInterval]
       this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
@@ -608,6 +603,10 @@ export default {
       return result
     },
     handleZoomInterval(value) {
+      console.log("handle_project:", value)
+      if (value > 0) {
+        this.$store.commit('globalState/SET_ZOOM_INTERVAL', value)
+      }
       return this.zoomIntervals[value]
     },
     getStartPadding(item, type, isChild) {
