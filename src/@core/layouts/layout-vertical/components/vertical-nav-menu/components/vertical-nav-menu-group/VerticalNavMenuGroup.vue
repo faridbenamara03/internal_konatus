@@ -132,7 +132,9 @@ export default {
       let baseUrl = ''
       const currentUrl = this.$router.history.current.path
       if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
-        this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+        // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+        console.log("selectedNav:", data)
+        this.$store.dispatch('teamState/get_from_selected_nav_id', { data })
         if (data.type === 'unit') {
           baseUrl = `/organization-unit/unit/${data.id}`
           if (baseUrl === currentUrl) return

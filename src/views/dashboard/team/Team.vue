@@ -345,8 +345,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('teamState/get_team_demand_data')
-    this.$store.dispatch('teamState/get_team_reporting_data')
+    // this.$store.dispatch('teamState/get_team_demand_data')
+    // this.$store.dispatch('teamState/get_team_reporting_data')
   },
   methods: {
     onClickCPSelectBtn(url, value) {

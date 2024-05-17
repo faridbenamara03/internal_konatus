@@ -76,7 +76,8 @@ export default {
   methods: {
     onNavItemClick(data) {
       if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
-        this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+        // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
+        this.$store.dispatch('teamState/get_from_selected_nav_id', { data })
       } else {
         let baseUrl = ''
         if (data.type === 'portfolo') {

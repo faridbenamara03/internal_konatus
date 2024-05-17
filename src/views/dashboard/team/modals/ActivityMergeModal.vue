@@ -1,8 +1,8 @@
 <template>
   <b-modal
-    id="modal-activity-split"
+    id="modal-activity-merge"
     ref="my-modal"
-    title="Split Activity"
+    title="Merge Activity"
     centered
     no-fade
     hide-backdrop
@@ -12,7 +12,7 @@
     <!-- Modal Header -->
     <template #modal-header>
       <h5 class="modal-title">
-        Split Activity
+        Merge Activity
       </h5>
       <div class="modal-actions">
         <b-button
@@ -28,10 +28,10 @@
     </template>
     <div class="activity-modal--body">
       <div class="activity-split-view">
-        <div class="split-box flex-3">
+        <div class="split-box flex-2">
           <div class="d-flex justify-content-end mb-1">
             <b-badge variant="danger">
-              To split
+              To merge
             </b-badge>
           </div>
           <div class="form-group header d-flex justify-content-between">
@@ -41,6 +41,575 @@
                 {{ selectedActivityData.phase.id }}
               </p>
             </div>
+            <div style="display: flex">
+              <div>
+                <div style="text-align: end;">
+                  <label
+                    v-if="!externalEditable1"
+                    style="font-size: 14px; color: #898989;text-transform:none"
+                  >
+                    External System: {{ externalSystem1 }}
+                  </label>
+                  <div v-else>
+                    <v-select
+                      v-model="externalSystem1"
+                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+                      placeholder="Select External System"
+                      outlined
+                      @input="updateExternalID(1)"
+                    />
+                  </div>
+                </div>
+                <p
+                  v-if="!externalEditable1"
+                  style="color: #bbbbbb;font-size: 16px;"
+                >
+                  External Activity Id: {{ externalId1 }}
+                </p>
+                <div v-else>
+                  <b-form-input
+                    v-model="externalId1"
+                    placeholder="Input External Activity Id"
+                  />
+                </div>
+              </div>
+              <div
+                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+                @click="handleExternalEdit(1)"
+              >
+                <feather-icon
+                  :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="detail-box">
+              <feather-icon
+                icon="AlignLeftIcon"
+                size="18"
+              />
+              <p class="pl-1 m-0 text-uppercase">
+                Details
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="select-box">
+              <label>Title</label>
+              <b-form-input :value="weTitle" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="select-box">
+              <label>Description</label>
+              <b-form-textarea
+                :value="weDescription"
+                rows="5"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="form-group has-switch">
+            <div class="detail-box">
+              <feather-icon
+                icon="BarChart2Icon"
+                size="18"
+              />
+              <p class="px-1 m-0 text-uppercase">
+                effort
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label>Load</label>
+                <b-form-input
+                  :value="loadEngage1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration</label>
+                <b-form-input
+                  :value="durationEngage1"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE</label>
+                <b-form-input
+                  :value="fteEngage1"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(Demand)</label>
+                <b-form-input
+                  v-model="loadDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Duration(Demand)</label>
+                <b-form-input
+                  v-model="durationDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(Demand)</label>
+                <b-form-input
+                  v-model="fteDemand1"
+                  type="number"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Load(R/E)</label>
+                <b-form-input
+                  v-model="loadEstimated1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Spent</label>
+                <b-form-input
+                  :value="parseFloat(loadEstimated1) - parseFloat(restData1)"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>%acc</label>
+                <b-form-input
+                  v-model="accData1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>Rest To Do</label>
+                <b-form-input
+                  v-model="restData1"
+                  type="number"
+                  readonly
+                />
+              </div>
+              <div class="col">
+                <label>FTE(R/E)</label>
+                <b-form-input
+                  v-model="fteEstimated1"
+                  type="number"
+                  readonly
+                />
+              </div>
+            </div>
+            <div
+              v-if="opt_skillset !== 0"
+              class="row pt-1"
+            >
+              <div class="col-6">
+                <label>Skillset</label>
+                <v-select
+                  v-model="skillset"
+                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                  menu-props="auto"
+                  placeholder="Select skillset"
+                  outlined
+                  @input="effortChange('skill1', 0, $event)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="detail-box">
+              <feather-icon
+                icon="CompassIcon"
+                size="18"
+              />
+              <p class="pl-1 m-0 text-uppercase">
+                Dependency
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="select-box">
+              <label>Activity</label>
+              <v-select
+                v-model="selectedParents1"
+                :options="activityList1"
+                placeholder="Select Task"
+                menu-props="auto"
+                outlined
+                multiple
+                :disabled="true"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPriorityBtn(1)"
+            >
+              Edit Priority
+            </b-button>
+            &nbsp;&nbsp;
+            <b-button
+              variant="outline-primary"
+              @click="onClickEditPhaseBtn(1)"
+            >
+              Edit Phase
+            </b-button>
+          </div>
+          <div
+            v-if="showEditPriority1 === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Priority</label>
+              <v-select
+                v-model="selectedPriority1"
+                :options="priorityOptions"
+                placeholder="Select Priority"
+                menu-props="auto"
+                outlined
+                :disabled="true"
+              />
+            </div>
+          </div>
+          <div
+            v-if="showEditPhase1 === true"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Phase</label>
+              <v-select
+                v-model="selectedPhase1"
+                :options="phaseList"
+                placeholder="Select Phase"
+                menu-props="auto"
+                outlined
+                :disabled="true"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="split-box flex-2">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="danger">
+              To merge
+            </b-badge>
+          </div>
+          <div class="form-group header d-flex justify-content-between">
+            <div>
+              <label>ACTIVITY ID</label>
+              <p v-if="selectedActivityData.phase">
+                {{ toMerge ? toMerge.id : '' }}
+              </p>
+            </div>
+            <div
+              v-if="toMerge"
+              style="display: flex"
+            >
+              <div>
+                <div style="text-align: end;">
+                  <label
+                    v-if="!externalEditable2"
+                    style="font-size: 14px; color: #898989;text-transform:none"
+                  >
+                    External System: {{ externalSystem2 }}
+                  </label>
+                  <div v-else>
+                    <v-select
+                      v-model="externalSystem2"
+                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+                      placeholder="Select External System"
+                      outlined
+                      @input="updateExternalID(2)"
+                    />
+                  </div>
+                </div>
+                <p
+                  v-if="!externalEditable2"
+                  style="color: #bbbbbb;font-size: 16px;"
+                >
+                  External Activity Id: {{ externalId2 }}
+                </p>
+                <div v-else>
+                  <b-form-input
+                    v-model="externalId2"
+                    placeholder="Input External Activity Id"
+                  />
+                </div>
+              </div>
+              <div
+                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
+                @click="handleExternalEdit(2)"
+              >
+                <feather-icon
+                  :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="toMerge === null"
+            class="form-group"
+          >
+            <div class="select-box">
+              <label>Search activity</label>
+              <v-select
+                v-model="selectedActivity"
+                :options="toMergeList"
+                placeholder="Select an activity"
+                outlined
+                @input="onActivitySelect"
+              />
+            </div>
+          </div>
+          <div v-else>
+            <div class="form-group">
+              <div class="detail-box">
+                <feather-icon
+                  icon="AlignLeftIcon"
+                  size="18"
+                />
+                <p class="pl-1 m-0 text-uppercase">
+                  Details
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="select-box">
+                <label>Title</label>
+                <b-form-input :value="toMerge.title" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="select-box">
+                <label>Description</label>
+                <b-form-textarea
+                  :value="toMerge.description"
+                  rows="5"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="form-group has-switch">
+              <div class="detail-box">
+                <feather-icon
+                  icon="BarChart2Icon"
+                  size="18"
+                />
+                <p class="px-1 m-0 text-uppercase">
+                  effort
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <!-- <div class="col-6">
+                </div> -->
+                <div class="col">
+                  <label>Load</label>
+                  <b-form-input
+                    :value="loadEngage2"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Duration</label>
+                  <b-form-input
+                    :value="durationEngage2"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>FTE</label>
+                  <b-form-input
+                    :value="fteEngage2"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>Load(Demand)</label>
+                  <b-form-input
+                    v-model="loadDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Duration(Demand)</label>
+                  <b-form-input
+                    v-model="durationDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>FTE(Demand)</label>
+                  <b-form-input
+                    v-model="fteDemand2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>Load(R/E)</label>
+                  <b-form-input
+                    v-model="loadEstimated2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Spent</label>
+                  <b-form-input
+                    :value="parseFloat(loadEstimated2) - parseFloat(restData2)"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>%acc</label>
+                  <b-form-input
+                    v-model="accData2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>Rest To Do</label>
+                  <b-form-input
+                    v-model="restData2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+                <div class="col">
+                  <label>FTE(R/E)</label>
+                  <b-form-input
+                    v-model="fteEstimated2"
+                    type="number"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div
+                v-if="opt_skillset !== 0"
+                class="row pt-1"
+              >
+                <div class="col-6">
+                  <label>Skillset</label>
+                  <v-select
+                    v-model="skillset"
+                    :options="['Design Workflow', 'Program Engineering', 'Project Management']"
+                    menu-props="auto"
+                    placeholder="Select skillset"
+                    outlined
+                    @input="effortChange('skill2', 0, $event)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="detail-box">
+                <feather-icon
+                  icon="CompassIcon"
+                  size="18"
+                />
+                <p class="pl-1 m-0 text-uppercase">
+                  Dependency
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="select-box">
+                <label>Activity</label>
+                <v-select
+                  v-model="selectedParents2"
+                  :options="activityList2"
+                  placeholder="Select Task"
+                  menu-props="auto"
+                  outlined
+                  multiple
+                  :disabled="true"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <b-button
+                variant="outline-primary"
+                @click="onClickEditPriorityBtn(2)"
+              >
+                Edit Priority
+              </b-button>
+              &nbsp;&nbsp;
+              <b-button
+                variant="outline-primary"
+                @click="onClickEditPhaseBtn(2)"
+              >
+                Edit Phase
+              </b-button>
+            </div>
+            <div
+              v-if="showEditPriority2 === true"
+              class="form-group"
+            >
+              <div class="select-box">
+                <label>Priority</label>
+                <v-select
+                  v-model="selectedPriority2"
+                  :options="priorityOptions"
+                  placeholder="Select Priority"
+                  menu-props="auto"
+                  outlined
+                  :disabled="true"
+                />
+              </div>
+            </div>
+            <div
+              v-if="showEditPhase2 === true"
+              class="form-group"
+            >
+              <div class="select-box">
+                <label>Phase</label>
+                <v-select
+                  v-model="selectedPhase2"
+                  :options="phaseList"
+                  placeholder="Select Phase"
+                  menu-props="auto"
+                  outlined
+                  :disabled="true"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-box flex-3">
+          <div class="d-flex justify-content-end mb-1">
+            <b-badge variant="success">
+              Merged
+            </b-badge>
+          </div>
+          <div class="form-group header d-flex justify-content-end">
             <div style="display: flex">
               <div>
                 <div style="text-align: end;">
@@ -75,7 +644,7 @@
               </div>
               <div
                 style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit"
+                @click="handleExternalEdit(0)"
               >
                 <feather-icon
                   :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
@@ -99,14 +668,14 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="weTitle" />
+              <b-form-input :value="merged.title" />
             </div>
           </div>
           <div class="form-group">
             <div class="select-box">
               <label>Description</label>
               <b-form-textarea
-                :value="weDescription"
+                :value="merged.description"
                 rows="5"
               />
             </div>
@@ -124,8 +693,6 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <!-- <div class="col-6">
-              </div> -->
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
@@ -147,63 +714,79 @@
                   readonly
                 />
               </div>
+              <div class="col">
+                <b-button
+                  style="margin-top:20px"
+                  variant="primary"
+                  @click="handleCalculate"
+                >
+                  Calculate
+                </b-button>
+              </div>
             </div>
             <div class="row">
               <div class="col">
                 <label>Load(Demand)</label>
                 <b-form-input
-                  :value="loadDemand"
+                  v-model="loadDemand"
+                  type="number"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Duration(Demand)</label>
                 <b-form-input
-                  :value="durationDemand"
+                  v-model="durationDemand"
+                  type="number"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>FTE(Demand)</label>
                 <b-form-input
-                  :value="fteDemand"
+                  v-model="fteDemand"
+                  type="number"
                   readonly
                 />
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <label>Load(R/E)</label>
+                <label>Load(Real/Estimated)</label>
                 <b-form-input
-                  :value="loadEstimated"
+                  v-model="loadEstimated"
+                  type="number"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Spent</label>
                 <b-form-input
-                  :value="parseFloat(loadEstimated) - (1 - parseFloat(accData) / 100) * parseFloat(loadEstimated)"
+                  :value="parseFloat(loadEstimated) - parseFloat(restData)"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>%acc</label>
                 <b-form-input
-                  :value="accData"
+                  v-model="accData"
+                  type="number"
                   readonly
                 />
               </div>
               <div class="col">
                 <label>Rest To Do</label>
                 <b-form-input
-                  :value="(1 - parseFloat(accData) / 100) * parseFloat(loadEstimated)"
+                  v-model="restData"
+                  type="number"
                   readonly
                 />
               </div>
               <div class="col">
-                <label>FTE(R/E)</label>
+                <label>FTE(Real/Estimated)</label>
                 <b-form-input
-                  :value="fteEstimated"
+                  v-model="fteEstimated"
+                  type="number"
                   readonly
                 />
               </div>
@@ -295,582 +878,6 @@
             </div>
           </div>
         </div>
-        <div class="split-box flex-2">
-          <div class="d-flex justify-content-end mb-1">
-            <b-badge variant="success">
-              Splited
-            </b-badge>
-          </div>
-          <div class="form-group header d-flex justify-content-end">
-            <div style="display: flex">
-              <div>
-                <div style="text-align: end;">
-                  <label
-                    v-if="!externalEditable1"
-                    style="font-size: 14px; color: #898989;text-transform:none"
-                  >
-                    External System: {{ externalSystem1 }}
-                  </label>
-                  <div v-else>
-                    <v-select
-                      v-model="externalSystem1"
-                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                      placeholder="Select External System"
-                      outlined
-                      @input="updateExternalID(1)"
-                    />
-                  </div>
-                </div>
-                <p
-                  v-if="!externalEditable1"
-                  style="color: #bbbbbb;font-size: 16px;"
-                >
-                  External Activity Id: {{ externalId1 }}
-                </p>
-                <div v-else>
-                  <b-form-input
-                    v-model="externalId1"
-                    placeholder="Input External Activity Id"
-                  />
-                </div>
-              </div>
-              <div
-                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit(1)"
-              >
-                <feather-icon
-                  :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
-                Details
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Title</label>
-              <b-form-input
-                id="input-title1"
-                v-model="title1"
-                aria-describedby="input-title1-feedback"
-                :state="title1Valid"
-              />
-              <b-form-invalid-feedback
-                id="input-title1-feedback"
-                style="float:left"
-              >
-                Add a new title
-              </b-form-invalid-feedback>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Description</label>
-              <b-form-textarea
-                id="input-description1"
-                v-model="description1"
-                aria-describedby="input-description1-feedback"
-                :state="description1Valid"
-                rows="5"
-              />
-              <b-form-invalid-feedback
-                id="input-description1-feedback"
-                style="float:left"
-              >
-                Add a new description
-              </b-form-invalid-feedback>
-            </div>
-          </div>
-          <div class="form-group has-switch">
-            <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
-              <p class="px-1 m-0 text-uppercase">
-                effort
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  v-model="loadEngage1"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  v-model="durationEngage1"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  v-model="fteEngage1"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <b-button
-                  style="margin-top:20px"
-                  variant="primary"
-                  @click="handleCalculate(1)"
-                >
-                  Calculate
-                </b-button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label>Load(Demand)</label>
-                <b-form-input
-                  :value="loadDemand1"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Duration(Demand)</label>
-                <b-form-input
-                  :value="durationDemand1"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE(Demand)</label>
-                <b-form-input
-                  :value="fteDemand1"
-                  readonly
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label>Load(R/E)</label>
-                <b-form-input
-                  :value="loadEstimated1"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Spent</label>
-                <b-form-input
-                  :value="parseFloat(loadEstimated1) - (1 - parseFloat(accData1) / 100) * parseFloat(loadEstimated1)"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>%acc</label>
-                <b-form-input
-                  :value="accData1"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Rest To Do</label>
-                <b-form-input
-                  :value="(1 - parseFloat(accData1) / 100) * parseFloat(loadEstimated1)"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE(R/E)</label>
-                <b-form-input
-                  :value="fteEstimated1"
-                  readonly
-                />
-              </div>
-            </div>
-            <div
-              v-if="opt_skillset !== 0"
-              class="row pt-1"
-            >
-              <div class="col-6">
-                <label>Skillset</label>
-                <v-select
-                  v-model="skillset"
-                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
-                  menu-props="auto"
-                  placeholder="Select skillset"
-                  outlined
-                  @input="effortChange('skill1', 0, $event)"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <feather-icon
-                icon="CompassIcon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
-                Dependency
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Activity</label>
-              <v-select
-                v-model="selectedParents1"
-                :options="activityList"
-                placeholder="Select Task"
-                menu-props="auto"
-                outlined
-                multiple
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <b-button
-              variant="outline-primary"
-              @click="onClickEditPriorityBtn(1)"
-            >
-              Edit Priority
-            </b-button>
-            &nbsp;&nbsp;
-            <b-button
-              variant="outline-primary"
-              @click="onClickEditPhaseBtn(1)"
-            >
-              Edit Phase
-            </b-button>
-          </div>
-          <div
-            v-if="showEditPriority1 === true"
-            class="form-group"
-          >
-            <div class="select-box">
-              <label>Priority</label>
-              <v-select
-                v-model="selectedPriority1"
-                :options="priorityOptions"
-                placeholder="Select Priority"
-                menu-props="auto"
-                outlined
-              />
-            </div>
-          </div>
-          <div
-            v-if="showEditPhase1 === true"
-            class="form-group"
-          >
-            <div class="select-box">
-              <label>Phase</label>
-              <v-select
-                v-model="selectedPhase1"
-                :options="phaseList"
-                placeholder="Select Phase"
-                menu-props="auto"
-                outlined
-              />
-            </div>
-          </div>
-        </div>
-        <div class="split-box flex-2">
-          <div class="d-flex justify-content-end mb-1">
-            <b-badge variant="success">
-              Splited
-            </b-badge>
-          </div>
-          <div class="form-group header d-flex justify-content-end">
-            <div style="display: flex">
-              <div>
-                <div style="text-align: end;">
-                  <label
-                    v-if="!externalEditable2"
-                    style="font-size: 14px; color: #898989;text-transform:none"
-                  >
-                    External System: {{ externalSystem2 }}
-                  </label>
-                  <div v-else>
-                    <v-select
-                      v-model="externalSystem2"
-                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                      placeholder="Select External System"
-                      outlined
-                      @input="updateExternalID(2)"
-                    />
-                  </div>
-                </div>
-                <p
-                  v-if="!externalEditable2"
-                  style="color: #bbbbbb;font-size: 16px;"
-                >
-                  External Activity Id: {{ externalId2 }}
-                </p>
-                <div v-else>
-                  <b-form-input
-                    v-model="externalId2"
-                    placeholder="Input External Activity Id"
-                  />
-                </div>
-              </div>
-              <div
-                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit(2)"
-              >
-                <feather-icon
-                  :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <feather-icon
-                icon="AlignLeftIcon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
-                Details
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Title</label>
-              <b-form-input
-                id="input-title2"
-                v-model="title2"
-                aria-describedby="input-title2-feedback"
-                :state="title2Valid"
-              />
-              <b-form-invalid-feedback
-                id="input-title2-feedback"
-                style="float:left"
-              >
-                Add a new title
-              </b-form-invalid-feedback>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Description</label>
-              <b-form-textarea
-                id="input-description2"
-                v-model="description2"
-                aria-describedby="input-description2-feedback"
-                :state="description2Valid"
-                rows="5"
-              />
-              <b-form-invalid-feedback
-                id="input-description2 -feedback"
-                style="float:left"
-              >
-                Add a new description
-              </b-form-invalid-feedback>
-            </div>
-          </div>
-          <div class="form-group has-switch">
-            <div class="detail-box">
-              <feather-icon
-                icon="BarChart2Icon"
-                size="18"
-              />
-              <p class="px-1 m-0 text-uppercase">
-                effort
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
-                <label>Load</label>
-                <b-form-input
-                  v-model="loadEngage2"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <label>Duration</label>
-                <b-form-input
-                  v-model="durationEngage2"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <label>FTE</label>
-                <b-form-input
-                  v-model="fteEngage2"
-                  type="number"
-                />
-              </div>
-              <div class="col">
-                <b-button
-                  style="margin-top:20px"
-                  variant="primary"
-                  @click="handleCalculate(2)"
-                >
-                  Calculate
-                </b-button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label>Load(Demand)</label>
-                <b-form-input
-                  :value="loadDemand2"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Duration(Demand)</label>
-                <b-form-input
-                  :value="durationDemand2"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE(Demand)</label>
-                <b-form-input
-                  :value="fteDemand2"
-                  readonly
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <label>Load(R/E)</label>
-                <b-form-input
-                  :value="loadEstimated2"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Spent</label>
-                <b-form-input
-                  :value="parseFloat(loadEstimated2) - (1 - parseFloat(accData2) / 100) * parseFloat(loadEstimated2)"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>%acc</label>
-                <b-form-input
-                  :value="accData2"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>Rest To Do</label>
-                <b-form-input
-                  :value="(1 - parseFloat(accData2) / 100) * parseFloat(loadEstimated2)"
-                  readonly
-                />
-              </div>
-              <div class="col">
-                <label>FTE(R/E)</label>
-                <b-form-input
-                  :value="fteEstimated2"
-                  readonly
-                />
-              </div>
-            </div>
-            <div
-              v-if="opt_skillset !== 0"
-              class="row pt-1"
-            >
-              <div class="col-6">
-                <label>Skillset</label>
-                <v-select
-                  v-model="skillset"
-                  :options="['Design Workflow', 'Program Engineering', 'Project Management']"
-                  menu-props="auto"
-                  placeholder="Select skillset"
-                  outlined
-                  @input="effortChange('skill2', 0, $event)"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="detail-box">
-              <feather-icon
-                icon="CompassIcon"
-                size="18"
-              />
-              <p class="pl-1 m-0 text-uppercase">
-                Dependency
-              </p>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="select-box">
-              <label>Activity</label>
-              <v-select
-                v-model="selectedParents2"
-                :options="activityList"
-                placeholder="Select Task"
-                menu-props="auto"
-                outlined
-                multiple
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <b-button
-              variant="outline-primary"
-              @click="onClickEditPriorityBtn(2)"
-            >
-              Edit Priority
-            </b-button>
-            &nbsp;&nbsp;
-            <b-button
-              variant="outline-primary"
-              @click="onClickEditPhaseBtn(2)"
-            >
-              Edit Phase
-            </b-button>
-          </div>
-          <div
-            v-if="showEditPriority2 === true"
-            class="form-group"
-          >
-            <div class="select-box">
-              <label>Priority</label>
-              <v-select
-                v-model="selectedPriority2"
-                :options="priorityOptions"
-                placeholder="Select Priority"
-                menu-props="auto"
-                outlined
-              />
-            </div>
-          </div>
-          <div
-            v-if="showEditPhase2 === true"
-            class="form-group"
-          >
-            <div class="select-box">
-              <label>Phase</label>
-              <v-select
-                v-model="selectedPhase2"
-                :options="phaseList"
-                placeholder="Select Phase"
-                menu-props="auto"
-                outlined
-              />
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- Modal Footer -->
@@ -883,10 +890,9 @@
       </b-button>
       <b-button
         variant="primary"
-        :disabled="!isFirstValid || !isSecondValid"
         @click="handleSave"
       >
-        Split
+        Merge
       </b-button>
     </template>
   </b-modal>
@@ -894,7 +900,7 @@
 
 <script>
 import {
-  BBadge, BButton, BFormInput, BFormTextarea, BModal, BFormInvalidFeedback
+  BBadge, BButton, BFormInput, BFormTextarea, BModal,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
@@ -906,7 +912,6 @@ export default {
     BFormInput,
     BFormTextarea,
     BModal,
-    BFormInvalidFeedback,
     vSelect,
   },
   props: {
@@ -915,69 +920,50 @@ export default {
       default: () => { },
     },
     isOpen: Boolean,
+    team_data: {
+      type: Object,
+      default: () => { }
+    }
   },
   data() {
     return {
       activity: {},
+      weArray: [],
       show: false,
+      selectedActivity: null,
       selectedEpic: null,
-      title1: '',
-      description1: '',
-      title2: '',
-      description2: '',
-      loadEngage: 0,
-      durationEngage: 0,
-      fteEngage: 0,
-      loadEngage1: 0,
-      durationEngage1: 0,
-      fteEngage1: 0,
-      loadEngage2: 0,
-      durationEngage2: 0,
-      fteEngage2: 0,
-      accData: 0,
-      accData1: 0,
-      accData2: 0,
+      toMerge: null,
       loadDemand: 0,
-      durationDemand: 0,
-      fteDemand: 0,
       loadDemand1: 0,
-      durationDemand1: 0,
-      fteDemand1: 0,
       loadDemand2: 0,
-      durationDemand2: 0,
-      fteDemand2: 0,
+      loadEngage: 0,
+      loadEngage1: 0,
+      loadEngage2: 0,
       loadEstimated: 0,
-      durationEstimated: 0,
-      fteEstimated: 0,
       loadEstimated1: 0,
-      durationEstimated1: 0,
-      fteEstimated1: 0,
       loadEstimated2: 0,
+      durationDemand: 0,
+      durationDemand1: 0,
+      durationDemand2: 0,
+      durationEngage: 0,
+      durationEngage1: 0,
+      durationEngage2: 0,
+      durationEstimated: 0,
+      durationEstimated1: 0,
       durationEstimated2: 0,
+      fteDemand: 0,
+      fteDemand1: 0,
+      fteDemand2: 0,
+      fteEngage: 0,
+      fteEngage1: 0,
+      fteEngage2: 0,
+      fteEstimated: 0,
+      fteEstimated1: 0,
       fteEstimated2: 0,
       opt_skillset: 0,
-      newActivityId1: Math.ceil(Math.random() * 1000000),
-      newActivityId2: Math.ceil(Math.random() * 1000000),
-      effortData1: [
-        {
-          skill: null,
-          load: null,
-          duration: null,
-          fte: null
-        }
-      ],
-      effortData2: [
-        {
-          skill: null,
-          load: null,
-          duration: null,
-          fte: null
-        }
-      ],
       priorityOptions: this.$store.state.globalState.priorityOptions,
       phaseList: this.$store.state.globalState.allPhaseTitleData,
-      isSecondValid: false,
-      isFirstValid: false,
+      isValid: false,
       selectedPriority: "",
       selectedPhase: "",
       selectedPriority1: "",
@@ -999,15 +985,15 @@ export default {
       exSystemString: '',
       externalEditable: false,
       externalSystems1: [],
-      externalSystem1: "",
-      externalId1: "",
+      externalSystem1: "Jira",
+      externalId1: "JIRA-",
       exSystemString1: '',
       externalEditable1: false,
       externalSystems2: [],
-      externalSystem2: "",
-      externalId2: "",
+      externalSystem2: "Jira",
+      externalId2: "JIRA-",
       exSystemString2: '',
-      externalEditable2: false,
+      externalEditable2: false
     }
   },
   computed: {
@@ -1017,7 +1003,7 @@ export default {
     weDescription() {
       return this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
     },
-    activityList() {
+    activityList1() {
       const titleArr = []
       if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
         this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
@@ -1051,76 +1037,121 @@ export default {
       }
       return titleArr
     },
+    activityList2() {
+      const titleArr = []
+      if (this.toMerged === null || this.toMerged === undefined) return []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId === a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId !== a.projectId) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      return titleArr
+    },
+    activityList() {
+      const titleArr = []
+      titleArr.push(this.activityList1)
+      titleArr.push(this.activityList2)
+      return titleArr
+    },
     totalEffortData1() {
       let load = 0
       let duration = 0
       let fte = 0
-      if (this.effortData1 !== undefined) {
-        this.effortData1.forEach(t => {
-          load += parseInt(t.load ? t.load : 0, 10)
-          duration += parseInt(t.duration ? t.duration : 0, 10)
-          fte += parseInt(t.fte ? t.fte : 0, 10)
-        })
-      }
+      this.effortData1.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     totalEffortData2() {
       let load = 0
       let duration = 0
       let fte = 0
-      if (this.effortData2 !== undefined) {
-        this.effortData2.forEach(t => {
-          load += parseInt(t.load ? t.load : 0, 10)
-          duration += parseInt(t.duration ? t.duration : 0, 10)
-          fte += parseInt(t.fte ? t.fte : 0, 10)
-        })
-      }
+      this.effortData2.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     totalEffortData3() {
       let load = 0
       let duration = 0
       let fte = 0
-      if (this.effortData2 !== undefined) {
-        this.effortData3.forEach(t => {
-          load += parseInt(t.load ? t.load : 0, 10)
-          duration += parseInt(t.duration ? t.duration : 0, 10)
-          fte += parseInt(t.fte ? t.fte : 0, 10)
-        })
-      }
+      this.effortData3.forEach(t => {
+        load += parseInt(t.load ? t.load : 0, 10)
+        duration += parseInt(t.duration ? t.duration : 0, 10)
+        fte += parseInt(t.fte ? t.fte : 0, 10)
+      })
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
-    c_TeamTitle() {
-      return this.selectedActivityData.team !== undefined ? this.selectedActivityData.team.title : ''
-    },
     effortData3() {
-      const dt = JSON.parse(JSON.stringify(this.effortData1))
-      const data = []
-      if (dt !== undefined) {
-        dt.forEach(t => {
-          const d = { ...t }
-          const exist = this.effortData2.find(t1 => t1.skill === t.skill)
-          if (exist) {
-            d.load = (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10)) < 0 ? 0 : (parseInt(t.load ? t.load : 0, 10) - parseInt(exist.load ? exist.load : 0, 10))
-            d.duration = (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10)) < 0 ? 0 : (parseInt(t.duration ? t.duration : 0, 10) - parseInt(exist.duration ? exist.duration : 0, 10))
-            d.fte = (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10)) < 0 ? 0 : (parseInt(t.fte ? t.fte : 0, 10) - parseInt(exist.fte ? exist.fte : 0, 10))
+      const d1 = JSON.parse(JSON.stringify(this.effortData1))
+      const d2 = JSON.parse(JSON.stringify(this.effortData2))
+      const data = [...d1, ...d2]
+      const rd = []
+      data.forEach(t => {
+        const ad = rd.find(t1 => t1.skill === t.skill)
+        if (ad) {
+          ad.load = parseInt(t.load ? t.load : 0, 10) + parseInt(ad.load ? ad.load : 0, 10)
+          ad.duration = parseInt(t.duration ? t.duration : 0, 10) + parseInt(ad.duration ? ad.duration : 0, 10)
+          ad.fte = parseInt(t.fte ? t.fte : 0, 10) + parseInt(ad.fte ? ad.fte : 0, 10)
+        } else {
+          rd.push(t)
+        }
+      })
+      return rd
+    },
+    merged() {
+      return { ...this.selectedActivityData.phase }
+    },
+    toMergeList() {
+      const titleArr = []
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id) {
+                    titleArr.push(a.title)
+                  }
+                })
+              }
+            })
           }
-          if (d.load + d.duration + d.fte > 0) data.push(d)
         })
       }
-      return data
+      return titleArr
     },
-    title1Valid() {
-      return this.title1 !== undefined && this.title1 !== ''
-    },
-    title2Valid() {
-      return this.title2 !== undefined && this.title2 !== ''
-    },
-    description1Valid() {
-      return this.description1 !== undefined && this.description1 !== ''
-    },
-    description2Valid() {
-      return this.description2 !== undefined && this.description2 !== ''
+    c_TeamTitle() {
+      return this.selectedActivityData.team.title
     }
   },
   watch: {
@@ -1133,16 +1164,18 @@ export default {
         this.initializeData(newVal) // ??
       }
     },
-    data: {
-      immediate: true,
-      handler(newVal) {
-        console.log("newData:", newVal)
-      }
-    },
     '$store.globalState.selectedActivityParents': {
       immediate: true,
       handler(newVal) {
-        this.selectedParents = newVal
+        this.selectedParents1 = newVal
+        this.selectedParents.push(newVal)
+      }
+    },
+    '$store.globalState.selectedActivityParents2': {
+      immediate: true,
+      handler(newVal) {
+        this.selectedParents2 = newVal
+        this.selectedParents.push(newVal)
       }
     }
   },
@@ -1160,44 +1193,20 @@ export default {
       if (this.selectedActivityData.phase !== undefined) {
         await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
       }
-      this.loadEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
-      this.durationEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
-      this.fteEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
-      this.loadDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
-      this.durationDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
-      this.fteDemand = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
-      this.loadEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
-      this.durationEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
-      this.fteEstimated = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
-      this.accData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
-      this.accData1 = this.accData
-      this.accData2 = this.accData
-      this.loadEngage1 = parseInt(this.loadEngage / 2, 10)
-      this.durationEngage1 = parseInt(this.durationEngage / 2, 10)
-      this.fteEngage1 = this.fteEngage
-      this.loadEngage2 = this.loadEngage - this.loadEngage1
-      this.durationEngage2 = this.durationEngage - this.durationEngage1
-      this.fteEngage2 = this.fteEngage
-      this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
-      this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
-      this.selectedPriority1 = this.selectedPriority
-      this.selectedPriority2 = this.selectedPriority
-      this.selectedPhase1 = this.selectedPhase
-      this.selectedPhase2 = this.selectedPhase
-      this.loadDemand1 = parseInt(this.loadDemand / 2, 10)
-      this.durationDemand1 = parseInt(this.durationDemand / 2, 10)
-      this.fteDemand1 = this.fteDemand
-      this.loadDemand2 = this.loadDemand - this.loadDemand1
-      this.durationDemand2 = this.durationDemand - this.durationDemand1
-      this.fteDemand2 = this.fteDemand
-
-      this.loadEstimated1 = parseInt(this.loadEstimated / 2, 10)
-      this.durationEstimated1 = parseInt(this.durationEstimated / 2, 10)
-      this.fteEstimated1 = this.fteEstimated
-      this.loadEstimated2 = this.loadEstimated - this.loadEstimated1
-      this.durationEstimated2 = this.durationEstimated - this.durationEstimated1
-      this.fteEstimated2 = this.fteEstimated
-
+      this.loadEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
+      this.durationEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
+      this.fteEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
+      this.loadDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
+      this.durationDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
+      this.fteDemand1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
+      this.loadEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
+      this.durationEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
+      this.fteEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
+      this.accData1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
+      this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
+      this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
+      this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
+      this.toMerge = null
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
       switch (otype) {
@@ -1215,6 +1224,8 @@ export default {
       }
       const value = this.externalSystem
       this.externalId = `${value.toUpperCase()}-${extype}-`
+      this.externalId1 = `${value.toUpperCase()}-${extype}-`
+      this.externalId2 = `${value.toUpperCase()}-${extype}-`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1263,129 +1274,141 @@ export default {
     },
     hideModal() {
       this.$refs['my-modal'].hide()
-      this.newActivityId1 = Math.ceil(Math.random() * 1000000)
-      this.newActivityId2 = Math.ceil(Math.random() * 1000000)
+      this.toMerge = null
     },
     async handleSave() {
-      const progId = this.selectedActivityData.phase.projectId
-      if (this.title1Valid && this.description1Valid && this.title2Valid && this.description2Valid) {
-        const priority1 = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority1) + 1
-        const priority2 = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority2) + 1
+      if (this.toMerge === null) {
+        this.$toast.warning('Please Select toMerge Activity!')
+      } else {
+        const progId = this.selectedActivityData.phase.projectId
         const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedActivityData.phase.job_name).id
-        const phaseId1 = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase1) + 1
-        const phaseId2 = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase2) + 1
         const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedActivityData.phase.team_name)
+        this.merged.priority = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority) + 1
+        this.merged.phase = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
+        let selectedParentIDs = []
+        if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+          this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+            if (t.phases && t.phases.length > 0) {
+              t.phases.forEach(p => {
+                if (p.activities && p.activities.length > 0) {
+                  p.activities.forEach(a => {
+                    const selected = this.selectedParents.includes(a.title) ? a.id : -1
+                    if (selected > 0) selectedParentIDs.push(selected)
+                  })
+                }
+              })
+            }
+          })
+        }
+        selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
+        this.merged.parents = this.selectedParentIDs
         let teamId = 0
         if (teams !== undefined) teamId = teams.id
-        const newA1 = { ...this.selectedActivityData.phase }
-        const newA2 = { ...this.selectedActivityData.phase }
-        newA1.title = this.title1
-        newA1.description = this.description1
-        newA1.priority = priority1
-        newA1.phase = phaseId1
-        newA1.effort = {
-          load_engage: this.loadEngage1,
-          duration_engage: this.durationEngage1,
-          fte_engage: this.fteEngage1,
-          load_demand: this.loadDemand1,
-          duration_demand: this.durationDemand1,
-          fte_demand: this.fteDemand1,
-          load_reel: this.loadEstimated1,
-          duration_reel: this.durationEstimated1,
-          fte_reel: this.fteEstimated1,
-        }
-        newA1.acc = this.accData1
-        newA2.acc = this.accData2
-        newA2.title = this.title2
-        newA2.description = this.description2
-        newA2.priority = priority2
-        newA2.phase = phaseId2
-        newA2.effort = {
-          load_engage: this.loadEngage2,
-          duration_engage: this.durationEngage2,
-          fte_engage: this.fteEngage2,
-          load_demand: this.loadDemand2,
-          duration_demand: this.durationDemand2,
-          fte_demand: this.fteDemand2,
-          load_reel: this.loadEstimated2,
-          duration_reel: this.durationEstimated2,
-          fte_reel: this.fteEstimated2,
-        }
+        const toMergedId1 = this.selectedActivityData.phase.id
+        const toMergedId2 = this.toMerge.id
         const payloads = {
-          weID: this.selectedActivityData.phase.id,
-          jobId,
-          teamId,
-          progId,
-          newA1,
-          newA2
+          toMergedId1,
+          toMergedId2,
+          merged: this.merged,
+          job_id: jobId < 0 ? 1 : jobId,
+          team_id: teamId < 0 ? 1 : teamId,
+          progId
         }
-        // this.$store.commit('globalState/HANDLE_ACTIVITY_SPLIT', data)
-        this.$refs['my-modal'].hide()
-        this.description1 = ''
-        this.title1 = ''
-        this.description2 = ''
-        this.title2 = ''
-        this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
-        await this.$store.dispatch('globalState/handle_activity_split', payloads)
+        await this.$store.dispatch('globalState/handle_activity_merge', payloads)
         await this.$store.dispatch('globalState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
           data
         })
-      this.$emit('hideModal')
-      } else {
-        this.$toast.warning('Input invalid!')
+        this.toMerge = null
+        this.$refs['my-modal'].hide()
+        this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
       }
     },
-    handleDependencyDelete(index) {
-      const dt = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.dependency : []
-      dt.splice(index, 1)
+    async onActivitySelect(selectedActivityId) {
+      let selectedActivity = {}
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+          if (t.phases && t.phases.length > 0) {
+            t.phases.forEach(p => {
+              if (p.activities && p.activities.length > 0) {
+                p.activities.forEach(a => {
+                  if (selectedActivityId === a.title) {
+                    selectedActivity = a
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+      this.toMerge = selectedActivity
+      if (this.toMerge !== undefined) {
+        await this.$store.dispatch('globalState/get_parents_we_2', { id: this.toMerge.id })
+      }
+      this.loadDemand2 = selectedActivity.effort.load_demand
+      this.loadEngage2 = selectedActivity.effort.load_engage
+      this.loadEstimated2 = selectedActivity.effort.load_estimated
+      this.durationDemand2 = selectedActivity.effort.duration_demand
+      this.durationEngage2 = selectedActivity.effort.duration_engage
+      this.durationEstimated2 = selectedActivity.effort.duration_estimated
+      this.fteDemand2 = selectedActivity.effort.fte_demand
+      this.fteEngage2 = selectedActivity.effort.fte_engage
+      this.fteEstimated2 = selectedActivity.effort.fte_estimated
+      this.accData2 = selectedActivity.acc
+      this.restData2 = (1 - (parseFloat(this.accData2) / 100)) * parseFloat(this.loadEstimated2)
+      this.loadDemand = parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)
+      this.loadEngage = parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)
+      this.loadEstimated = parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)
+      this.durationDemand = parseFloat(this.durationDemand1) + parseFloat(this.durationDemand2)
+      this.durationEngage = parseFloat(this.durationEngage1) + parseFloat(this.durationEngage2)
+      this.durationEstimated = parseFloat(this.durationEstimated1) + parseFloat(this.durationEstimated2)
+      this.fteDemand = (parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)) / (parseFloat(this.loadDemand1) / parseFloat(this.fteDemand1) + parseFloat(this.loadDemand2) / parseFloat(this.fteDemand2))
+      this.fteEngage = (parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)) / (parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1) + parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2))
+      this.fteEstimated = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) / (parseFloat(this.loadEstimated1) / parseFloat(this.fteEstimated1) + parseFloat(this.loadEstimated2) / parseFloat(this.fteEstimated2))
+      this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
+      this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
+      this.selectedPriority2 = selectedActivity !== undefined ? this.priorityOptions[selectedActivity.priority - 1] : 0
+      this.selectedPhase2 = selectedActivity !== undefined ? this.$store.state.globalState.allPhaseTitleData[selectedActivity.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
+      this.merged.effort = {
+        load_demand: this.loadDemand,
+        load_engage: this.loadEngage,
+        load_reel: this.loadEstimated,
+        duration_demand: this.durationDemand,
+        duration_engage: this.durationEngage,
+        duration_reel: this.durationEstimated,
+        fte_demand: this.fteDemand,
+        fte_engage: this.fteEngage,
+        fte_reel: this.fteEstimated
+      }
+      this.merged.acc = this.accData
+      // this.merged.title = ''
+      this.merged.title = this.selectedActivityData.phase.title === null || this.selectedActivityData.phase.title === undefined
+      ? selectedActivity.title : this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
+      this.merged.description = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
+      ? selectedActivity.description : this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
     },
-    handleCalculate(value) {
-      if (value === 1) {
-        if (this.fteEngage1 !== '' && this.durationEngage1 !== '' && this.loadEngage1 !== '') {
-          if (parseFloat(this.loadEngage1) === parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)) {
-            this.showToast('success', 'All values of First Splited are valid')
-            this.isFirstValid = true
-          } else {
-            this.showToast('warning', 'Please enter valid values for First Splited')
-            this.isFirstValid = false
-          }
-        } else if (this.fteEngage1 !== '' && this.durationEngage1 !== '' && this.loadEngage1 === '') {
-          this.loadEngage1 = parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)
-          this.isFirstValid = true
-        } else if (this.loadEngage1 !== '' && this.durationEngage1 !== '' && this.durationEngage1 !== 0 && this.fteEngage1 === '') {
-          this.fteEngage1 = parseFloat(this.loadData) / parseFloat(this.durationData)
-          this.isFirstValid = true
-        } else if (this.loadEngage1 !== '' && this.fteEngage1 !== '' && this.fteEngage1 !== 0 && this.durationEngage1 === '') {
-          this.durationEngage1 = parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1)
-          this.isFirstValid = true
+    handleCalculate() {
+      if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
+        if (parseFloat(this.loadEngage) === parseFloat(this.durationEngage) * parseFloat(this.fteEngage)) {
+          this.showToast('success', 'All values of Merged are valid')
+          this.isValid = true
         } else {
-          this.showToast('warning', 'Please enter valid values for First Splited')
-          this.isFirstValid = false
+          this.showToast('warning', 'Please enter valid values for Merged')
+          this.isValid = false
         }
-      } else if (value === 2) {
-        if (this.fteEngage2 !== '' && this.durationEngage2 !== '' && this.loadEngage2 !== '') {
-          if (parseFloat(this.loadEngage2) === parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)) {
-            this.showToast('success', 'All values of Second Splited are valid')
-            this.isSecondValid = true
-          } else {
-            this.showToast('warning', 'Please enter valid values for Second Splited')
-            this.isSecondValid = false
-          }
-        } else if (this.fteEngage2 !== '' && this.durationEngage2 !== '' && this.loadEngage2 === '') {
-          this.loadEngage2 = parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)
-          this.isSecondValid = true
-        } else if (this.loadEngage2 !== '' && this.durationEngage2 !== '' && this.durationEngage2 !== 0 && this.fteEngage2 === '') {
-          this.fteEngage2 = parseFloat(this.loadEngage2) / parseFloat(this.durationEngage2)
-          this.isSecondValid = true
-        } else if (this.loadEngage2 !== '' && this.fteEngage2 !== '' && this.fteEngage2 !== 0 && this.durationEngage2 === '') {
-          this.durationEngage2 = parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2)
-          this.isSecondValid = true
-        } else {
-          this.showToast('warning', 'Please enter valid values for Second Splited')
-          this.isSecondValid = false
-        }
+      } else if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage === '') {
+        this.loadEngage = parseFloat(this.durationEngage) * parseFloat(this.fteEngage)
+        this.isValid = true
+      } else if (this.loadEngage !== '' && this.durationEngage !== '' && this.durationEngage !== 0 && this.fteEngage === '') {
+        this.fteEngage = parseFloat(this.loadEngage) / parseFloat(this.durationEngage)
+        this.isValid = true
+      } else if (this.loadEngage !== '' && this.fteEngage !== '' && this.fteEngage !== 0 && this.durationEngage === '') {
+        this.durationEngage = parseFloat(this.loadEngag2) / parseFloat(this.fteEngage)
+        this.isValid = true
+      } else {
+        this.showToast('warning', 'Please enter valid values for Merged')
+        this.isValid = false
       }
     },
     updateExternalID(index) {
@@ -1486,7 +1509,7 @@ export default {
           break
       }
     },
-  },
+  }
 }
 </script>
 
