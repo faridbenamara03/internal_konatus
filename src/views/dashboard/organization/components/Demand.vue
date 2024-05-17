@@ -11,7 +11,6 @@
       >
         <div
           class="part1"
-          :style="`min-width: 200px`"
         >
           {{ data === null ? c_navobj.title : data.title === '' || data.title === null || data.title === undefined ? c_navobj.title : data.title }}
         </div>
@@ -168,7 +167,7 @@
                     :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
                   >
                     <div
-                      class="part1 portf-bold pl-2 ml-2"
+                      class="part1 portf-bold pl-2"
                       :style="`min-width: 200px`"
                       @click="onSubCollapseCLick(index2)"
                     >
@@ -332,15 +331,9 @@ export default {
       openedChild: 0,
       openedSub: 0,
       priorityOptions: this.$store.state.globalState.priorityOptions,
-      // capsData: [],
-      // c_fields: ['priority', 'value', 'budget', 'engaged', 'quote', 'demand', 'realEstimated', 'authorised', 'spent', 'next_gate'],
-      // c_fields: ['priority', 'value', 'budget', 'next_gate'],
-      // fields: ['priority', 'value', 'demand'],
-      // team_fields: ['mgt & study', 'dev', 'test', 'total'],
       job_fields: ['total'],
       colorsA: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
       nDeadlineOptions: this.$store.state.globalState.natureDeadLines,
-
       teamD1: [],
       teamD: [],
       jobs: [],
@@ -352,85 +345,7 @@ export default {
     c_data() {
       if (this.data === null) return []
       let ndt = []
-      if (this.data.type === 'portfolio' && this.data.children) {
-        ndt = this.data.children.map(program => {
-          let programEngaged = 0
-          let programDemand = 0
-          let programRealEstimated = 0
-          let programAuthorized = 0
-          let programSpent = 0
-          let programCustomerEx = 0
-          let programSalesEx = 0
-          let programScoring = 0
-          let programRoi = 0
-          let programValue = 0
-          const programJobs = []
-          if (program.children && program.children.length > 0) {
-            program.children.map(project => {
-              if (project.children.length > 0) {
-                project.children.map(subproject => {
-                  programEngaged += parseInt(subproject.engaged ? subproject.engaged : 0, 10)
-                  programDemand += parseInt(subproject.demand ? subproject.demand : 0, 10)
-                  programRealEstimated += parseInt(subproject.realEstimated ? subproject.realEstimated : 0, 10)
-                  programAuthorized += parseInt(subproject.authorized ? subproject.authorized : 0, 10)
-                  programSpent += parseInt(subproject.spent ? subproject.spent : 0, 10)
-                  programCustomerEx += parseInt(subproject.customerEx ? subproject.customerEx : 0, 10)
-                  programSalesEx += parseInt(subproject.salesEx ? subproject.salesEx : 0, 10)
-                  programScoring += parseInt(subproject.scoring ? subproject.scoring : 0, 10)
-                  programRoi += parseInt(subproject.roi ? subproject.roi : 0, 10)
-                  programValue += parseInt(subproject.value ? subproject.value : 0, 10)
-                  this.job_fields.map(jobField => {
-                    if (subproject[jobField] === null || subproject[jobField] === undefined) return null
-                    if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(subproject[jobField], 10)
-                    else programJobs[jobField] += parseInt(subproject[jobField], 10)
-                    return null
-                  })
-                  return null
-                })
-              }
-              this.job_fields.map(jobField => {
-                if (project[jobField] === null || project[jobField] === undefined) return null
-                if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(project[jobField], 10)
-                else programJobs[jobField] += parseInt(project[jobField], 10)
-                return null
-              })
-              programEngaged += parseInt(project.engaged ? project.engaged : 0, 10)
-              programDemand += parseInt(project.demand ? project.demand : 0, 10)
-              programRealEstimated += parseInt(project.realEstimated ? project.realEstimated : 0, 10)
-              programAuthorized += parseInt(project.authorized ? project.authorized : 0, 10)
-              programSpent += parseInt(project.spent ? project.spent : 0, 10)
-              programCustomerEx += parseInt(project.customerEx ? project.customerEx : 0, 10)
-              programSalesEx += parseInt(project.salesEx ? project.salesEx : 0, 10)
-              programScoring += parseInt(project.scoring ? project.scoring : 0, 10)
-              programRoi += parseInt(project.roi ? project.roi : 0, 10)
-              programValue += parseInt(project.value ? project.value : 0, 10)
-              return null
-            })
-          }
-          this.job_fields.map(jobField => {
-            if (program[jobField] === null || program[jobField] === undefined) return null
-            if (programJobs[jobField] === null || programJobs[jobField] === undefined) programJobs[jobField] = parseInt(program[jobField], 10)
-            else programJobs[jobField] += parseInt(program[jobField], 10)
-            return null
-          })
-          const nd = { ...program }
-          nd.engaged = programEngaged
-          nd.demand = programDemand
-          nd.realEstimated = programRealEstimated
-          nd.authorized = programAuthorized
-          nd.spent = programSpent
-          nd.customerEx = programCustomerEx
-          nd.salesEx = programSalesEx
-          nd.scoring = programScoring
-          nd.roi = programRoi
-          nd.value = programValue
-          this.job_fields.map(jobField => {
-            nd[jobField] = programJobs[jobField]
-            return null
-          })
-          return nd
-        })
-      } else if (this.data.type === 'company' && this.data.children) {
+      if ((this.data.type === 'unit' || this.data.type === 'organization') && this.data.children) {
         ndt = this.data.children.map(t => {
           let engaged = 0
           let demand = 0
@@ -606,7 +521,7 @@ export default {
       return ndt
     },
     c_navobj() {
-      return this.$store.state.globalState.selectedNavObj
+      return this.$store.state.teamState.selectedNavObj
     },
     c_fields() {
       const tempFields = this.fields.slice(1, this.fields.length - 1)
@@ -626,7 +541,7 @@ export default {
       console.log("CInitData:", data)
       let tempFields = []
       if (this.data === null) return
-      if (this.data.type === 'portfolio' && this.data.children && this.data.children.length > 0) {
+      if (this.data.type === 'unit' && this.data.children && this.data.children.length > 0) {
         this.data.children.map(program => {
           if (program.children && program.children.length > 0) {
             program.children.map(project => {
@@ -643,7 +558,7 @@ export default {
           if (program.job_names !== undefined) tempFields = tempFields.concat(program.job_names)
           return null
         })
-      } else if (this.data.type === 'company' && this.data.children && this.data.children.length > 0) {
+      } else if (this.data.type === 'organization' && this.data.children && this.data.children.length > 0) {
         this.data.children.map(portfolio => {
           if (portfolio.children && portfolio.children.length > 0) {
             portfolio.children.map(program => {
@@ -667,7 +582,6 @@ export default {
         })
       }
       tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
-      // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
       this.job_fields = tempFields
       const totalCap = this.data.capacity
       tempFields.map(jobField => {
@@ -716,14 +630,7 @@ export default {
         style: 'currency',
         currency: 'EUR',
       }).format(value)
-    },
-    // rowClass(item, type) {
-    //   const colorClass = 'table-success'
-    //   if (!item || type !== 'row') { return }
-
-    //   // eslint-disable-next-line consistent-return
-    //   if (item.title === 'total') { return colorClass }
-    // },
+    }
   }
 }
 </script>

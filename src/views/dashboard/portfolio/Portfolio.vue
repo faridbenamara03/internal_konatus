@@ -648,9 +648,6 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch('portfolioState/get_portfolio_demand_data', { portId: selectedNavObj.id, type: selectedNavObj.type })
-    // this.$store.dispatch('portfolioState/get_portfolio_reporting_data')
-    // this.$store.dispatch('portfolioState/get_portfolio_control_data')
     this.fields = [...this.defaultFields]
     this.costfields = [...this.defaultFields]
     this.activeColumns.forEach((column, idx) => {

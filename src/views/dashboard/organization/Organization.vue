@@ -162,7 +162,10 @@
           :class="{ 'has-default-card-bg': !isChartView }"
           @click="onClickCPSelectBtn('demand')"
         >
-          <Demand />
+          <Demand
+            :data="c_demand_data"
+            :fields="fields"
+          />
         </b-tab>
         <b-tab
           id="reporting"
@@ -353,63 +356,7 @@ export default {
       activeTab: 'demand',
       reportingState: 'cost',
       rangeDate: [],
-      items: [
-        {
-          name: 'Quadruped robot',
-          priority: 'Highest',
-          budget: '1100',
-          deadline: '06/01/2021',
-          children: [
-            {
-              name: 'New format',
-              priority: 'High',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Enhanced motricity',
-              priority: 'Highest',
-              budget: '240',
-              deadline: '03/28/2021',
-            },
-            {
-              name: 'Enhanced authonomy',
-              priority: 'Highest',
-              budget: '350',
-              deadline: '06/01/2021',
-            },
-            {
-              name: 'Dual sourcing for Q',
-              priority: 'Lowest',
-              budget: '150',
-              deadline: '12/31/2021',
-            },
-          ],
-        },
-        {
-          name: 'micro robot observation nbc',
-          priority: 'High',
-          budget: '13633.69',
-          deadline: '05/20/2018',
-        },
-        {
-          name: 'handling robot',
-          priority: 'Low',
-          budget: '13076.28',
-          deadline: '03/24/2018',
-        },
-        {
-          name: 'power and programing station',
-          priority: 'Lowest',
-          budget: '12336.17',
-          deadline: '12/03/2017',
-        },
-        {
-          name: 'total',
-          budget: '40146.14',
-        }
-      ],
-      activeColumns: ['budget_team', 'budget_engaged', 'real_estimated'],
+      activeColumns: ['priority', 'currentPhase', 'next_gate'],
       defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
       fields: ['priority', 'budget', 'deadline'],
       fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
@@ -424,6 +371,15 @@ export default {
     openCreateNewUnitDrawer() {
       return this.$store.state.globalState.openCreateNewUnitDrawer
     },
+    c_demand_data() {
+      return this.$store.state.teamState.teamDemandData
+    },
+    c_reporting_data() {
+      return this.$store.state.teamState.teamReportingData
+    },
+    c_control_data() {
+      return this.$store.state.teamState.teamControlData
+    }
   },
   mounted() {
     this.triggerTabChange('control-table')

@@ -11,7 +11,6 @@
       >
         <div
           class="part1"
-          :style="`min-width: 200px`"
         >
           {{ data === null ? c_navobj.title : data.title === '' || data.title === null || data.title === undefined ? c_navobj.title : data.title }}
         </div>
@@ -168,7 +167,7 @@
                     :style="`min-width: ${550 + 150 * c_fields.length + 180 * job_fields.length}px`"
                   >
                     <div
-                      class="part1 portf-bold pl-2 ml-2"
+                      class="part1 portf-bold pl-2"
                       :style="`min-width: 200px`"
                       @click="onSubCollapseCLick(index2)"
                     >
