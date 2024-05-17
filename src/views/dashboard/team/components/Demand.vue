@@ -120,6 +120,7 @@ import moment from 'moment'
 import { isEmpty } from '@/views/utils'
 import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
 import ActivityDetailModal from '../../project/modals/ActivityDetailModal.vue'
+// import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
 
 export default {
   components: {

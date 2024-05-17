@@ -762,7 +762,7 @@
               <div class="col">
                 <label>Spent</label>
                 <b-form-input
-                  :value="parseFloat(loadEstimated) - parseFloat(restData)"
+                  :value="spentData"
                   readonly
                 />
               </div>
@@ -961,6 +961,7 @@ export default {
       fteEstimated1: 0,
       fteEstimated2: 0,
       opt_skillset: 0,
+      spentData: 0,
       priorityOptions: this.$store.state.globalState.priorityOptions,
       phaseList: this.$store.state.globalState.allPhaseTitleData,
       isValid: false,
@@ -1366,8 +1367,9 @@ export default {
       this.fteDemand = (parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)) / (parseFloat(this.loadDemand1) / parseFloat(this.fteDemand1) + parseFloat(this.loadDemand2) / parseFloat(this.fteDemand2))
       this.fteEngage = (parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)) / (parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1) + parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2))
       this.fteEstimated = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) / (parseFloat(this.loadEstimated1) / parseFloat(this.fteEstimated1) + parseFloat(this.loadEstimated2) / parseFloat(this.fteEstimated2))
-      this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
-      this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
+      this.spentData = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) - (parseFloat(this.restData1) + parseFloat(this.restData2))
+      this.restData = parseFloat(this.loadEstimated) - parseFloat(this.spentData)
+      this.accData = (parseFloat(this.spentData) / parseFloat(this.loadEstimated)) * 100
       this.selectedPriority2 = selectedActivity !== undefined ? this.priorityOptions[selectedActivity.priority - 1] : 0
       this.selectedPhase2 = selectedActivity !== undefined ? this.$store.state.globalState.allPhaseTitleData[selectedActivity.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       this.merged.effort = {
