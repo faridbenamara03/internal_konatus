@@ -266,7 +266,6 @@
 import { BButton, BCard, BFormSpinbutton } from "bootstrap-vue"
 import moment from "moment"
 import ReportingCostVue from "./ReportingCost.vue"
-// import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
 import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
 import WeProgressBar from "../../globalComponent/WeProgressBar.vue"
 import ManualUpdateModal from "../../globalComponent/ManualUpdateModal.vue"
@@ -277,7 +276,6 @@ export default {
     BCard,
     BFormSpinbutton,
     ReportingCostVue,
-    // ProgramProgressBar,
     ProjectProgressBar,
     WeProgressBar,
     ManualUpdateModal
@@ -344,7 +342,7 @@ export default {
   },
   methods: {
     initializeData(data) {
-      console.log("D:", data)
+      console.log("TeamD:", data)
       this.selectedInterval = typeof data === 'number' && data !== undefined && data !== null ? this.zoomIntervalNumbers[data] : this.zoomIntervalNumbers[this.$store.state.teamState.selectedZoomInterval]
       this.startGraphData = moment(this.$store.state.teamState.selectedFromDate)
       this.endGraphData = moment(this.$store.state.teamState.selectedToDate)

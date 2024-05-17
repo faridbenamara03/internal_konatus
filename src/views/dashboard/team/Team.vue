@@ -156,7 +156,7 @@
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
         >
           <Reporting
-            :data="reportingData"
+            :data="c_team_reporting_data"
             :reporting-state="reportingState"
             :selectedmonth="selectedMonth"
           />
@@ -212,15 +212,15 @@
                         @input="onRangeToChange"
                       />
                     </div>
-                    <div>
-                      <b-button
-                        style="width: 100%"
-                        variant="primary"
-                        @click="handleDone"
-                      >
-                        Done
-                      </b-button>
-                    </div>
+                  </div>
+                  <div>
+                    <b-button
+                      style="width: 100%"
+                      variant="primary"
+                      @click="handleDone"
+                    >
+                      Done
+                    </b-button>
                   </div>
                 </b-popover>
               </div>
