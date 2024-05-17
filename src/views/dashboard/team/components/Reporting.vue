@@ -528,7 +528,7 @@ export default {
         if (startMoment < this.startGraphData) startMoment = this.startGraphData
         if (endMoment > this.endGraphData) endMoment = this.endGraphData
         const duration = moment.duration(endMoment.diff(startMoment))
-        result = ((duration.asDays() + 1) * 24) / this.selectedInterval
+        result = ((duration.asDays()) * 24) / this.selectedInterval
       }
       return result
     },
