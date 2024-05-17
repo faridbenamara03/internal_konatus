@@ -110,29 +110,13 @@ export default {
             projects: []
           }
           allProjects.forEach(project => {
-            let tempProject = tempPhase.projects.find(x => x.id === project.id)
-            if (tempProject === undefined) {
-              tempProject = {
-                id: project.id,
-                title: project.title,
-                type: 'project',
-                activities: []
-              }
-              tempPhase.projects.push(tempProject)
-            }
+            const tempProject = tempPhase.projects.find(x => x.id === project.id)
+            if (tempProject !== undefined) tempPhase.projects.push(tempProject)
           })
         } else {
           allProjects.forEach(project => {
-            let tempProject = tempPhase.projects.find(x => x.id === project.id)
-            if (tempProject === undefined) {
-              tempProject = {
-                id: project.id,
-                title: project.title,
-                type: 'projects',
-                activities: []
-              }
-              tempPhase.projects.push(tempProject)
-            }
+            const tempProject = tempPhase.projects.find(x => x.id === project.id)
+            if (tempProject !== undefined) tempPhase.projects.push(tempProject)
           })
         }
         resultPhases.push(tempPhase)
@@ -179,6 +163,13 @@ export default {
     taskDetailMethod(activity) {
       this.taskDetail = { phase: activity }
       this.$store.commit('globalState/OPEN_ACTIVITY_DETAIL_MODAL')
+    },
+    onPhaseTitleClick(exist, index) {
+      if (exist > -1 && this.openedPhase.length > 1) {
+        this.openedPhase.splice(exist, 1)
+      } else {
+        this.openedPhase.push(index)
+      }
     }
   },
 }
