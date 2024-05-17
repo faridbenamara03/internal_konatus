@@ -64,7 +64,7 @@ export default {
     externalSystemData: [],
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
-    globalOrganizationTeamData: [],
+    globalOrganizationJobData: [],
     projectElementTeamData: [],
     projectElementPhaseData: [],
     portfolioDemandData: [],
@@ -85,6 +85,7 @@ export default {
     weJobData: [],
     selectedActivityParents: [],
     selectedActivityParents2: [],
+    unitOrTeamsIndex: 'units',
     productlines: [],
     hproductportfolios: [],
     productmanagers: [],
@@ -130,6 +131,9 @@ export default {
     TOGGLE_CREATE_NEW_UNIT_DRAWER(state) {
       const u2 = !state.openCreateNewUnitDrawer
       state.openCreateNewUnitDrawer = u2
+    },
+    Unit_Teams_UPDATE(state, index) {
+      state.unitOrTeamsIndex = index
     },
     TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER(state) {
       const u1 = !state.openCreateNewPortfolioDrawer
@@ -560,7 +564,6 @@ export default {
     },
     LOAD_ORG_UNIT_DATA(state, orgData) {
       state.globalOrganizationUnitData.push(orgData)
-      console.log('org:', state.globalOrganizationUnitData)
       state.globalOrganizationUnitData[0].children.forEach(unit => {
         unit.children.forEach(team => {
           state.allTeamTitleData.push({
@@ -570,9 +573,9 @@ export default {
         })
       })
     },
-    LOAD_ORG_TEAM_DATA(state, orgData) {
-      state.globalOrganizationTeamData.push(orgData)
-      state.globalOrganizationTeamData[0].children.forEach(job => {
+    LOAD_ORG_JOB_DATA(state, orgData) {
+      state.globalOrganizationJobData.push(orgData)
+      state.globalOrganizationJobData[0].children.forEach(job => {
         state.allJobTitleData.push(job)
       })
     },
@@ -666,10 +669,10 @@ export default {
         })
     },
     load_org_team_data() {
-      axios.get('https://api.konatus.site/v1/api/menu/organization_teams').then(response => {
+      axios.get('https://api.konatus.site/v1/api/menu/organization_jobs').then(response => {
       // axios.get('http://localhost/konatus-me/public/api/menu/organization_teams').then(response => {
-          const globalOrgTeamData = response.data
-          this.commit('globalState/LOAD_ORG_TEAM_DATA', globalOrgTeamData)
+          const globalOrgJobData = response.data
+          this.commit('globalState/LOAD_ORG_JOB_DATA', globalOrgJobData)
         }).catch(err => {
           console.log('error getting orgnaizations units data ---->', err)
           Vue.$toast.error('Failed to load orgnaizations data.')
@@ -1052,16 +1055,6 @@ export default {
           })
       })
     },
-    // get_project_demand_editable() {
-    //   axios.get('https://api.konatus.site/v1/api/project/demand/editable').then(response => {
-    //   // axios.post('http://localhost/konatus-me/public/api/project/demand/editable').then(response => {
-    //     const newData = response.data
-    //     this.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE', newData)
-    //   }).catch(err => {
-    //     console.log('error loading project demand editable --->', err)
-    //     Vue.$toast.error('Failed to load project demand editable data.')
-    //   })
-    // },
     get_project_reporting_editable() {
       axios.get('https://api.konatus.site/v1/api/project/reporting/editable').then(response => {
       // axios.post('http://localhost/konatus-me/public/api/project/reporting/editable').then(response => {

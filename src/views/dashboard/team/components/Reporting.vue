@@ -18,25 +18,6 @@
           </p>
         </div>
         <div
-          class="report-block--head"
-          style="background-color: #384056;height:77px"
-          @click="onParentCollapseClick()"
-        >
-          <feather-icon
-            v-if="itemsForReporting.children && itemsForReporting.children.length > 0"
-            :icon="parentCollapse === true ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-            size="16"
-            class="mr-1"
-          />
-          <p class="m-0 text-uppercase">
-            {{
-              itemsForReporting === undefined || itemsFormReporting === null
-                ? ""
-                : itemsForReporting.title
-            }}
-          </p>
-        </div>
-        <div
           v-for="(item1, index1) in itemsForReporting.children"
           :key="index1"
         >
@@ -166,40 +147,7 @@
             </p>
           </div>
         </div>
-        <div v-if="itemsForReporting !== undefined && parentCollapse === true">
-          <b-card
-            no-body
-            class="d-flex flex-column justify-content-around"
-            style="height:77px;padding:5px 10px 5px 3px;width:fit-content;margin-bottom:0!important"
-          >
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 0, false)}px`">
-              <ProgramProgressBar
-                :type="0"
-                :width1="getValue(itemsForReporting, 0, false)"
-                :isstartmark="isStartMark(itemsForReporting, 0, false)"
-                :isendmark="isEndMark(itemsForReporting, 0, false)"
-                :width2="0"
-              />
-            </div>
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 1, false)}px`">
-              <ProgramProgressBar
-                :type="1"
-                :width1="getValue(itemsForReporting, 1, false)"
-                :istartmark="isStartMark(itemsForReporting, 1, false)"
-                :isendmark="isEndMark(itemsForReporting, 1, false)"
-                :width2="0"
-              />
-            </div>
-            <div :style="`margin-bottom:5px;padding-left:${getStartPadding(itemsForReporting, 2, false)}px`">
-              <ProgramProgressBar
-                :type="2"
-                :width1="getValue(itemsForReporting, 2, false)"
-                :isstartmark="isStartMark(itemsForReporting, 2, false)"
-                :isendmark="isEndMark(itemsForReporting, 2, false)"
-                :width2="0"
-              />
-            </div>
-          </b-card>
+        <div v-if="itemsForReporting !== undefined">
           <div
             v-for="(item1, index1) in itemsForReporting.children"
             :key="index1"
@@ -318,7 +266,7 @@
 import { BButton, BCard, BFormSpinbutton } from "bootstrap-vue"
 import moment from "moment"
 import ReportingCostVue from "./ReportingCost.vue"
-import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
+// import ProgramProgressBar from "../../globalComponent/ProgramProgressBar.vue"
 import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
 import WeProgressBar from "../../globalComponent/WeProgressBar.vue"
 import ManualUpdateModal from "../../globalComponent/ManualUpdateModal.vue"
@@ -329,7 +277,7 @@ export default {
     BCard,
     BFormSpinbutton,
     ReportingCostVue,
-    ProgramProgressBar,
+    // ProgramProgressBar,
     ProjectProgressBar,
     WeProgressBar,
     ManualUpdateModal
@@ -369,7 +317,7 @@ export default {
   },
   computed: {
     isOptimizeIndex() {
-      return this.$store.state.globalState.optimizeStatus
+      return this.$store.state.teamState.optimizeStatus
     }
   },
   watch: {
@@ -397,16 +345,16 @@ export default {
   methods: {
     initializeData(data) {
       console.log("D:", data)
-      this.selectedInterval = typeof data === 'number' && data !== undefined && data !== null ? this.zoomIntervalNumbers[data] : this.zoomIntervalNumbers[this.$store.state.globalState.selectedZoomInterval]
-      this.startGraphData = moment(this.$store.state.globalState.selectedFromDate)
-      this.endGraphData = moment(this.$store.state.globalState.selectedToDate)
+      this.selectedInterval = typeof data === 'number' && data !== undefined && data !== null ? this.zoomIntervalNumbers[data] : this.zoomIntervalNumbers[this.$store.state.teamState.selectedZoomInterval]
+      this.startGraphData = moment(this.$store.state.teamState.selectedFromDate)
+      this.endGraphData = moment(this.$store.state.teamState.selectedToDate)
       const tempStartDate = this.startGraphData.clone()
       this.reportingDates = [tempStartDate.clone()]
       while (tempStartDate.add(this.selectedInterval, 'days').diff(this.endGraphData) < 0) {
         this.reportingDates.push(tempStartDate.clone())
       }
-      this.navType = this.$store.state.globalState.selectedNavObj.type
-      this.itemsForReporting = this.$store.state.globalState.portfolioReportingData
+      this.navType = this.$store.state.teamState.selectedNavObj.type
+      this.itemsForReporting = this.$store.state.teamState.teamReportingData
     },
     onResize() {
       this.windowWidth = window.innerWidth
@@ -466,7 +414,7 @@ export default {
     handleSelectWe(we) {
       this.selectedWE = we
       // console.log("selectedWE:", we)
-      this.$store.commit('globalState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
+      this.$store.commit('teamState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
     },
     handleManualUpdate(res) {
       console.log("ManualUpdated:", res)
@@ -601,9 +549,8 @@ export default {
       return result
     },
     handleZoomInterval(value) {
-      console.log("handle_project:", value)
       if (value > 0) {
-        this.$store.commit('globalState/SET_ZOOM_INTERVAL', value)
+        this.$store.commit('teamState/SET_ZOOM_INTERVAL', value)
       }
       return this.zoomIntervals[value]
     },
@@ -659,7 +606,7 @@ export default {
       return result
     },
     onOptimizeIndex() {
-      this.isOptimizeIndex = this.$store.state.globalState.optimizeStatus
+      this.isOptimizeIndex = this.$store.state.teamState.optimizeStatus
       return this.isOptimizeIndex
     },
     randomTen(val1, val2) {

@@ -156,35 +156,35 @@ export default [
     // component: () => import('@/views/welcome.vue'),
   },
 
-  // {
-  //   path: '/organization-unit',
-  //   name: 'organization-unit-view',
-  //   // component: () => import('@/views/welcome.vue'),
-  // },
+  {
+    path: '/organization-unit',
+    name: 'organization-unit-view',
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
+  },
   {
     path: '/organization-unit/unit/:unitId',
     name: 'unit-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
   },
   {
     path: '/organization-unit/unit/:unitId/demand',
     name: 'unit-demand-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
   },
   {
     path: '/organization-unit/unit/:unitId/reporting-cost',
     name: 'unit-reporting-cost-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
   },
   {
     path: '/organization-unit/unit/:unitId/reporting-plan',
     name: 'unit-reporting-plan-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
   },
   {
     path: '/organization-unit/unit/:unitId/control-table',
     name: 'unit-control-table-view',
-    component: () => import('@/views/dashboard/orgnization/Orgnization.vue'),
+    component: () => import('@/views/dashboard/organization/Organization.vue'),
   },
 
   {
@@ -215,6 +215,66 @@ export default [
   {
     path: '/organization-unit/unit/:unitId/team/:teamId/control-chart',
     name: 'team-control-chart-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId',
+    name: 'job-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/demand',
+    name: 'job-demand-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/reporting-cost',
+    name: 'job-reporting-cost-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/reporting-plan',
+    name: 'job-reporting-plan-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/control-table',
+    name: 'job-control-table-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/control-chart',
+    name: 'job-control-chart-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId',
+    name: 'job-team-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId/demand',
+    name: 'job-team-demand-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId/reporting-cost',
+    name: 'job-team-reporting-cost-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId/reporting-plan',
+    name: 'job-team-reporting-plan-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId/control-table',
+    name: 'job-team-control-table-view',
+    component: () => import('@/views/dashboard/team/Team.vue'),
+  },
+  {
+    path: '/organization-unit/job/:jobId/team/:teamId/control-chart',
+    name: 'job-team-control-chart-view',
     component: () => import('@/views/dashboard/team/Team.vue'),
   },
 ]

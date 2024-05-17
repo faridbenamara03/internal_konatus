@@ -131,16 +131,23 @@ export default {
       this.updateIsActive()
       let baseUrl = ''
       const currentUrl = this.$router.history.current.path
-      if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'organization') {
-        // this.$store.commit('globalState/SAVE_SELECTED_NAV_ID', data)
-        console.log("selectedNav:", data)
+      if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'job' || data.type === 'organization') {
+        console.log("groupData:", data)
         this.$store.dispatch('teamState/get_from_selected_nav_id', { data })
         if (data.type === 'unit') {
           baseUrl = `/organization-unit/unit/${data.id}`
           if (baseUrl === currentUrl) return
           this.$router.push(baseUrl)
+        } else if (data.type === 'job') {
+          baseUrl = `/organization-unit/job/${data.id}`
+          if (baseUrl === currentUrl) return
+          this.$router.push(baseUrl)
         } else if (data.type === 'team') {
-          baseUrl = `/organization-unit/unit/${data.parent}/team/${data.id}`
+          if (this.$store.state.globalState.unitOrTeamsIndex === "jobs") {
+            baseUrl = `/organization-unit/job/${data.jobId}/team/${data.id}`
+          } else if (this.$store.state.globalState.unitOrTeamsIndex === "units") {
+            baseUrl = `/organization-unit/unit/${data.unitId}/team/${data.id}`
+          }
           if (baseUrl === currentUrl) return
           this.$router.push(baseUrl)
         }

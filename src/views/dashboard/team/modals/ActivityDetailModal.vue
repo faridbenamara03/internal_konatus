@@ -631,10 +631,10 @@ export default {
       this.showEditPhase = !this.showEditPhase
     },
     jobSelectHandle(data) {
-      const globalTeams = this.$store.state.globalState.globalOrganizationTeamData[0]
+      const globalJobs = this.$store.state.globalState.globalOrganizationJobData[0]
       const tempTeamData = ['auto selection']
-      if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
-        globalTeams.children.map(item => {
+      if (globalJobs !== undefined && globalJobs.children && globalJobs.children.length > 0) {
+        globalJobs.children.map(item => {
           if (item.title === data) {
             if (item.children && item.children.length > 0) {
               item.children.map(t => {

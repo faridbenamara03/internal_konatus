@@ -372,7 +372,7 @@ export default {
   },
   computed: {
     c_fileds() {
-      return this.$store.state.orgnizationState.reportingColumnData ? this.$store.state.orgnizationState.reportingColumnData : ['budget_team', 'budget_engaged', 'real_estimated']
+      return this.$store.state.teamState.reportingColumnData ? this.$store.state.teamState.reportingColumnData : ['budget_team', 'budget_engaged', 'real_estimated']
     },
   },
   methods: {

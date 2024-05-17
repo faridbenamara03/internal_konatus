@@ -43,9 +43,6 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('orgnizationState/get_unit_reporting_data')
-    this.$store.dispatch('orgnizationState/get_unit_demand_data')
-    this.$store.dispatch('orgnizationState/get_unit_control_data')
   },
   methods: {
     handleToggle(state) {
@@ -66,7 +63,7 @@ export default {
         // if (unitId !== '') {
           let baseUrl = ''
           if (state) {
-            this.$store.commit('orgnizationState/Unit_Teams_UPDATE', 'unit')
+            this.$store.commit('globalState/Unit_Teams_UPDATE', 'units')
             const jobsElement = document.getElementById('jobs')
             const teamsElement = document.getElementById('teams')
             if (jobsElement) {
@@ -76,7 +73,7 @@ export default {
               teamsElement.classList.add('active')
             }
           } else {
-            this.$store.commit('orgnizationState/Unit_Teams_UPDATE', 'teams')
+            this.$store.commit('globalState/Unit_Teams_UPDATE', 'jobs')
             const jobsElement = document.getElementById('jobs')
             const teamsElement = document.getElementById('teams')
             if (jobsElement) {

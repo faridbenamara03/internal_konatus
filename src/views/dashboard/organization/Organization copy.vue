@@ -482,10 +482,10 @@ export default {
       })
       this.fields = temp
       this.activeColumns = columns
-      this.$store.commit('orgnizationState/REPORTING_COLUMN_UPDATE', columns)
+      this.$store.commit('teamState/REPORTING_COLUMN_UPDATE', columns)
     },
     handleDemandUpdate() {
-      this.$store.commit('orgnizationState/UPDATE_DATA')
+      this.$store.commit('teamState/UPDATE_DATA')
     }
   }
 }

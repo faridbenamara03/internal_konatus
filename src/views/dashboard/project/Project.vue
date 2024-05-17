@@ -645,14 +645,12 @@ export default {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PORTFOLIO_DRAWER')
     },
     onRangeFromChange(value) {
-      console.log('from:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
       this.selectedMonth = this.rangeArray.join(' - ')
       this.$store.commit('globalState/UPDATE_SELECTED_FROM_DATE', value)
     },
     onRangeToChange(value) {
-      console.log('to:', value)
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')

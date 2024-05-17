@@ -631,7 +631,7 @@ export default {
       this.showEditPhase = !this.showEditPhase
     },
     jobSelectHandle(data) {
-      const globalTeams = this.$store.state.globalState.globalOrganizationTeamData[0]
+      const globalTeams = this.$store.state.globalState.globalOrganizationJobData[0]
       const tempTeamData = ['auto selection']
       if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
         globalTeams.children.map(item => {

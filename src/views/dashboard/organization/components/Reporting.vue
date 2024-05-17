@@ -353,7 +353,7 @@
     </b-modal>
   </div>
   <div
-    v-else-if="getIndex === 'unit'"
+    v-else-if="getIndex === 'units'"
     class="unit-report-custom"
   >
     <ReportingCost
@@ -949,10 +949,10 @@ export default {
   },
   computed: {
     datt() {
-      return this.$store.state.orgnizationState.unitReportingData
+      return this.$store.state.teamState.teamReportingData
     },
     getIndex() {
-      return this.$store.state.orgnizationState.unitOrTeamsIndex
+      return this.$store.state.globalState.unitOrTeamsIndex
     }
   },
   mounted() {
@@ -983,7 +983,7 @@ export default {
       this.$refs.unit_reporting_update_modal.hide()
     },
     onUpdate() {
-      this.$store.commit('orgnizationState/UPDATE_TEAM_REPORT_DATA')
+      this.$store.commit('teamState/UPDATE_TEAM_REPORT_DATA')
       this.$refs.unit_reporting_update_modal.hide()
     }
   },

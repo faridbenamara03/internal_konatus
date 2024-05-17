@@ -137,7 +137,7 @@
       @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
     >
       <vertical-nav-menu-items
-        v-if="getIndex === 'teams'"
+        v-if="getIndex === 'jobs'"
         :items="getNavJobMenuItems"
         class="navigation navigation-main"
       />
@@ -190,13 +190,13 @@ export default {
       return data
     },
     getIndex() {
-      return this.$store.state.orgnizationState.unitOrTeamsIndex
+      return this.$store.state.globalState.unitOrTeamsIndex
     },
     getNavJobMenuItems() {
       const data = [{ search: true }]
       const globalData = []
       globalData.push(this.$store.state.globalState.globalOrganizationData[0])
-      globalData.push(this.$store.state.globalState.globalOrganizationTeamData[0])
+      globalData.push(this.$store.state.globalState.globalOrganizationJobData[0])
       data.push(...globalData.filter(Boolean))
       return data
     }

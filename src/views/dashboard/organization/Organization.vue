@@ -1,49 +1,26 @@
 <template>
-  <!-- v-if="!isUN(c_team_demand_data.phases)" -->
   <b-card
-    v-if="!isUN(c_team_demand_data.children)"
     no-body
     footer-tag="footer"
-    class="card-portfolio card-project mb-0"
+    class="card-portfolio mb-0"
   >
     <b-card-body class="p-0">
       <b-tabs v-model="tabIndex">
         <div class="action-bar justify-content-between">
+          <div />
           <div>
-            <div
-              v-if="tabIndex === 2"
-              class="justify-content-between"
-            >
-              <b-button variant="flat-primary">
-                <circle-icon
-                  size="1x"
-                  class="custom-class"
-                />
-                Real
-              </b-button>
-              <b-button variant="flat-primary">
-                <calendar-icon
-                  size="1x"
-                  class="custom-class"
-                />
-                Engaged
-              </b-button>
-              <b-button variant="flat-primary">
-                <b-icon
-                  icon="diamond-fill"
-                  style="font-size:12px;"
-                />
-                Estimated
-              </b-button>
-            </div>
-          </div>
-          <div class="d-flex action-group">
-            <!-- <b-button variant="primary">
-              <feather-icon icon="BarChartIcon" />&nbsp;
-              Priority
-            </b-button> -->
             <b-button
-              v-if="(tabIndex == 0)"
+              v-if="tabIndex === 0"
+              variant="primary"
+            >
+              <feather-icon
+                icon="ArrowDownIcon"
+                size="16"
+              />&nbsp;
+              <span>Import</span>
+            </b-button>
+            <b-button
+              v-if="tabIndex === 0"
               class="ml-1"
               variant="primary"
             >
@@ -53,17 +30,36 @@
               />&nbsp;
               <span>Export</span>
             </b-button>
-            <!-- <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
-              <span>Import</span>
+            <b-button
+              v-if="tabIndex === 1"
+              v-b-modal.modal-edit-column
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="EyeIcon"
+                size="16"
+              />&nbsp;
+              <span>Edit Columns</span>
             </b-button>
-            <b-button v-if="(tabIndex == 0)" @click="handleUpdateDemand" class="ml-1" variant="primary">
-              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
-              <span>Update</span>
+            <!-- <b-button v-if="tabIndex === 0 || tabIndex === 1" class="ml-1" variant="primary">
+              <feather-icon icon="EyeIcon" size="16" />&nbsp;
+              <span>Edit Columns</span>
             </b-button> -->
             <b-button
-              v-if="(tabIndex == 1)"
-              v-b-modal.team-reporting-plan-update
+              v-if="tabIndex === 0"
+              class="ml-1"
+              variant="primary"
+            >
+              <feather-icon
+                icon="Edit2Icon"
+                size="16"
+              />
+              <span>Edit as table</span>
+            </b-button>
+            <b-button
+              v-if="(tabIndex === 1)"
+              v-b-modal.unit-reporting-update-modal
               class="ml-1"
               variant="primary"
             >
@@ -74,7 +70,7 @@
               <span>Update</span>
             </b-button>
             <b-button
-              v-if="(tabIndex == 1)"
+              v-if="tabIndex === 1"
               class="ml-1"
               variant="primary"
             >
@@ -110,26 +106,12 @@
               <feather-icon icon="ZapIcon" size="16" />&nbsp;
               <span>Configure</span>
             </b-button> -->
-            <!-- <b-button v-if="tabIndex === 2 && !isChartView" class="ml-1" variant="primary" v-b-modal.modal-add-resource>
-              <feather-icon icon="UserPlusIcon" size="16" />&nbsp;
-              <span>Add Resource</span>
-            </b-button> -->
-            <!-- <b-button variant="flat-primary">
-              <b-icon icon="door-closed" />
-              Update
-            </b-button>
-            <b-button variant="flat-primary">
-              <feather-icon icon="ArrowRightIcon" />&nbsp;
-              Next Phase
-            </b-button> -->
           </div>
-        </div>
-        <!-- <div v-if="tabIndex === 1" class="action-bar">
-          <b-button-group>
-            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
+          <!-- <b-button-group>
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
               <b-icon icon="bar-chart-line" />
             </b-button>
-            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
               <b-icon icon="table" />
             </b-button>
           </b-button-group>
@@ -140,32 +122,61 @@
             <b-button variant="outline-primary">
               <feather-icon icon="DollarSignIcon" />
             </b-button>
+          </b-button-group> -->
+        </div>
+        <!-- <div v-if="tabIndex === 2" class="action-bar justify-content-between">
+          <b-button variant="flat-primary" @click="handleUpdate">
+            <feather-icon icon="RotateCwIcon" />
+            Update
+          </b-button>
+          <b-button-group>
+            <b-button variant="outline-primary" :class="{'active': !isChartView}" @click="handleChangeViewMode(false)">
+              <b-icon icon="bar-chart-line" />
+            </b-button>
+            <b-button variant="outline-primary" :class="{'active': isChartView}" @click="handleChangeViewMode(true)">
+              <b-icon icon="table" />
+            </b-button>
           </b-button-group>
+          <div class="d-flex action-group">
+            <div class="d-flex">
+              <div class="rounded"
+                style="background-color:#8b3b4e;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>ENGAGED</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded"
+                style="background-color:#448739;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>QUOTE</div>
+            </div>
+            <div class="d-flex">
+              <div class="ml-2 rounded"
+                style="background-color:#0a5666;height:15px;width:15px;margin-top:3px;margin-right: 3px;" />
+              <div>ESTIMATED</div>
+            </div>
+          </div>
         </div> -->
         <b-tab
+          id="demand"
           title="Demand"
+          event-key="demand"
+          :class="{ 'has-default-card-bg': !isChartView }"
           @click="onClickCPSelectBtn('demand')"
         >
-          <Demand
-            :data="c_team_demand_data"
-            :team-data="projectElementTeamData"
-          />
+          <Demand />
         </b-tab>
         <b-tab
+          id="reporting"
           title="Reporting"
+          event-key="reporting-cost"
           @click="onClickCPSelectBtn(reportingState === 'cost' ? 'reporting-cost' : 'reporting-plan')"
         >
-          <Reporting
-            :data="reportingData"
-            :reporting-state="reportingState"
-            :selectedmonth="selectedMonth"
-          />
-          <!-- <b-card-text>
-            Carrot cake dragée chocolate.
-          </b-card-text> -->
+          <Reporting :reporting-state="reportingState" />
         </b-tab>
         <b-tab
+          id="control-table"
           title="Control"
+          class="no-action-bar"
+          event-key="control-table"
           @click="onClickCPSelectBtn('control-table')"
         >
           <Control :is-chart-view="isChartView" />
@@ -178,7 +189,9 @@
                 size="16"
                 style="margin-right:3px"
               />
-              <span>Period</span>
+              <div style="white-space:nowrap">
+                Period
+              </div>
               <div class="ml-1">
                 <b-form-input
                   id="popover-manual-1"
@@ -212,15 +225,6 @@
                         @input="onRangeToChange"
                       />
                     </div>
-                    <div>
-                      <b-button
-                        style="width: 100%"
-                        variant="primary"
-                        @click="handleDone"
-                      >
-                        Done
-                      </b-button>
-                    </div>
                   </div>
                 </b-popover>
               </div>
@@ -245,7 +249,7 @@
               </b-button>
             </b-button-group>
             <b-button-group
-              v-if="(tabIndex === 1)"
+              v-if="tabIndex === 1"
               class="ml-1"
             >
               <b-button
@@ -263,9 +267,9 @@
                 Plan
               </b-button>
             </b-button-group>
-            <!-- <b-button v-if="tabIndex === 0" class="ml-1" variant="primary">
-              <feather-icon icon="MapIcon" size="16" />&nbsp;
-              <span>Show Work Element To Quote</span>
+            <!-- <b-button v-if="tabIndex === 0" v-b-modal.modal-optimize class="ml-1" variant="primary">
+              <feather-icon icon="ZapIcon" size="16" />
+              <span>Optimize</span>
             </b-button> -->
           </div>
         </template>
@@ -273,56 +277,67 @@
     </b-card-body>
     <template #footer>
       <b-button
-        v-b-modal.modal-create
         variant="primary"
+        @click="toggleCreateNewUnitDrawer"
       >
         <feather-icon icon="PlusIcon" />
       </b-button>
     </template>
     <create-modal />
-    <add-resource-modal />
+    <edit-columns-modal
+      :checked-data="activeColumns"
+      @columnChange="columnChange"
+    />
+    <optimize-modal />
+    <Drawer
+      align="right"
+      :closeable="false"
+      :mask-closable="true"
+      @close="toggleCreateNewUnitDrawer"
+    >
+      <div v-if="openCreateNewUnitDrawer">
+        <CreateNewUnitDrawer />
+      </div>
+    </Drawer>
   </b-card>
-  <div v-else>
-    <Welcome />
-  </div>
 </template>
 
 <script>
 import {
-  BButton, BCard, BCardBody, BTabs, BTab, BIcon, BButtonGroup, BPopover, BFormInput
+  BButton, BCard, BCardBody, BTabs, BTab, BFormInput, BPopover, BButtonGroup
 } from 'bootstrap-vue'
-import { CalendarIcon, CircleIcon } from 'vue-feather-icons'
+import Drawer from "vue-simple-drawer"
 import moment from 'moment'
 import ClickOutside from 'vue-click-outside'
 import { MonthPicker } from 'vue-month-picker'
 import { isEmpty } from "@/views/utils"
-import Welcome from '@/views/welcome.vue'
 import Demand from './components/Demand.vue'
-import Control from './components/Control.vue'
 import Reporting from './components/Reporting.vue'
+import Control from './components/Control.vue'
 import CreateModal from './modals/CreateModal.vue'
-import AddResourceModal from './modals/AddResourceModal.vue'
+import EditColumnsModal from './modals/EditColumnsModal.vue'
+import OptimizeModal from './modals/OptimizeModal.vue'
+import CreateNewUnitDrawer from './modals/CreateNewUnitDrawer.vue'
 
 export default {
   components: {
-    BButtonGroup,
     BButton,
+    BButtonGroup,
     BCard,
     BCardBody,
     BTabs,
     BTab,
     Demand,
-    CircleIcon,
-    CalendarIcon,
+    Reporting,
     Control,
     CreateModal,
-    AddResourceModal,
-    Reporting,
-    BIcon,
+    EditColumnsModal,
+    OptimizeModal,
     MonthPicker,
     BFormInput,
     BPopover,
-    Welcome
+    CreateNewUnitDrawer,
+    Drawer,
   },
   directives: {
     ClickOutside
@@ -335,65 +350,104 @@ export default {
   },
   data() {
     return {
+      activeTab: 'demand',
+      reportingState: 'cost',
+      rangeDate: [],
+      items: [
+        {
+          name: 'Quadruped robot',
+          priority: 'Highest',
+          budget: '1100',
+          deadline: '06/01/2021',
+          children: [
+            {
+              name: 'New format',
+              priority: 'High',
+              budget: '350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Enhanced motricity',
+              priority: 'Highest',
+              budget: '240',
+              deadline: '03/28/2021',
+            },
+            {
+              name: 'Enhanced authonomy',
+              priority: 'Highest',
+              budget: '350',
+              deadline: '06/01/2021',
+            },
+            {
+              name: 'Dual sourcing for Q',
+              priority: 'Lowest',
+              budget: '150',
+              deadline: '12/31/2021',
+            },
+          ],
+        },
+        {
+          name: 'micro robot observation nbc',
+          priority: 'High',
+          budget: '13633.69',
+          deadline: '05/20/2018',
+        },
+        {
+          name: 'handling robot',
+          priority: 'Low',
+          budget: '13076.28',
+          deadline: '03/24/2018',
+        },
+        {
+          name: 'power and programing station',
+          priority: 'Lowest',
+          budget: '12336.17',
+          deadline: '12/03/2017',
+        },
+        {
+          name: 'total',
+          budget: '40146.14',
+        }
+      ],
+      activeColumns: ['budget_team', 'budget_engaged', 'real_estimated'],
+      defaultFields: [{ key: 'show_details', thStyle: 'opacity: 0; width: 30%;' }, { key: 'actions', thStyle: 'opacity: 0; width: 17%;' }],
+      fields: ['priority', 'budget', 'deadline'],
+      fieldForDemand: ['BUDGET of team', 'BUDGET engaged', 'Budget Real Engaged'],
       tabIndex: 0,
-      openActivityModal: false,
-      selectedActivity: {},
       isChartView: false,
       popoverShow: false,
-      selectedMonth: `${moment().subtract(2, 'months').format('MM/YYYY')} - ${moment().format('MM/YYYY')}`,
-      rangeArray: [],
-      reportingState: 'cost',
-      arr4chart: [],
-      projectElementTeamData: this.$store.state.globalState.teamsState,
+      selectedMonth: `${new Date().getMonth() + 1} / ${new Date().getFullYear()} - ${new Date().getMonth() + 1} / ${new Date().getFullYear()}`,
+      rangeArray: []
     }
   },
   computed: {
-    c_team_demand_data() {
-      const teamData = this.$store.state.teamState.teamDemandData
-      if (teamData !== undefined && teamData !== null && teamData.length > 0) return teamData[0]
-      return []
+    openCreateNewUnitDrawer() {
+      return this.$store.state.globalState.openCreateNewUnitDrawer
     },
-    c_team_reporting_data() {
-      return this.$store.state.teamState.teamReportingData
-    }
   },
   mounted() {
-    // this.$store.dispatch('teamState/get_team_demand_data')
-    // this.$store.dispatch('teamState/get_team_reporting_data')
+    this.triggerTabChange('control-table')
+    this.fields = [...this.defaultFields]
+    this.activeColumns.forEach((column, idx) => {
+      this.fields.splice(idx + 1, 0, column)
+    })
   },
   methods: {
+    triggerTabChange(tabKey) {
+      this.$root.$emit('bv::toggle::tab', tabKey)
+    },
+    toggleCreateNewUnitDrawer() {
+      this.$store.commit('globalState/TOGGLE_CREATE_NEW_UNIT_DRAWER')
+    },
     onClickCPSelectBtn(url, value) {
       if (value) this.reportingState = value
       const urlArr = this.$route.path.split('/')
-      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
+      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table']
       if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
         urlArr.pop()
         this.$router.push({ path: urlArr.join('/').concat(`/${url}`) })
       } else {
         this.$router.push({ path: this.$route.path.concat(`/${url}`) })
-      }
-    },
-    // ontabchange() {
-    //   const urlArr = this.$route.path.split('/')
-    //   const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-table', 'control-chart']
-    //   if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-    //     urlArr.pop()
-    //     this.$router.push({ path: urlArr.join('/') })
-    //   }
-    // },
-    async handleDone() {
-      const navObj = this.$store.state.teamState.selectedNavObj
-      await this.$store.dispatch('teamState/get_from_selected_nav_id', {
-        data: {
-          id: navObj.id,
-          type: navObj.type,
-          nav: navObj,
-          startMonth: this.rangeArray[0],
-          endMonth: this.rangeArray[1]
-        }
-      })
-      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
-        this.popoverShow = false
       }
     },
     isUN(data) {
@@ -403,47 +457,36 @@ export default {
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[0] = v
       this.selectedMonth = this.rangeArray.join(' - ')
-      this.$store.commit('teamState/UPDATE_SELECTED_FROM_DATE', value)
     },
     onRangeToChange(value) {
       const v = `${value.monthIndex} / ${value.year}`
       this.rangeArray[1] = v
       this.selectedMonth = this.rangeArray.join(' - ')
-      this.$store.commit('teamState/UPDATE_SELECTED_TO_DATE', value)
+      if (!this.isUN(this.rangeArray[0]) && !this.isUN(this.rangeArray[1])) {
+        this.popoverShow = false
+      }
     },
     onClose() {
       this.popoverShow = false
-    },
-    getBetweenMonthsArr(startD, endD) {
-      const startDate = moment(startD)
-      const endDate = moment(endD)
-      const betweenMonths = []
-      if (startDate <= endDate) {
-        const date = startDate.startOf('month')
-        while (date < endDate.endOf('month')) {
-          betweenMonths.push(date.format('MM/YYYY'))
-          date.add(1, 'month')
-        }
-      }
-      return betweenMonths
     },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleChangeViewMode(mode) {
       this.isChartView = mode
-      const urlArr = this.$route.path.split('/')
-      const urls = ['demand', 'reporting-cost', 'reporting-plan', 'control-chart', 'control-table']
-      if (urls.indexOf(urlArr[urlArr.length - 1]) > -1) {
-        urlArr.pop()
-        this.$router.push({ path: urlArr.join('/').concat(mode ? '/control-chart' : '/control-table') })
-      } else {
-        this.$router.push({ path: this.$route.path.concat(mode ? '/control-chart' : '/control-table') })
-      }
     },
-    handleUpdateDemand() {
-      this.$store.commit('globalState/HANDLE_TEAM_DEMAND_UPDATE')
+    columnChange(columns) {
+      const temp = [...this.defaultFields]
+      columns.forEach((column, idx) => {
+        temp.splice(idx + 1, 0, column)
+      })
+      this.fields = temp
+      this.activeColumns = columns
+      this.$store.commit('teamState/REPORTING_COLUMN_UPDATE', columns)
     },
+    handleDemandUpdate() {
+      this.$store.commit('teamState/UPDATE_DATA')
+    }
   }
 }
 </script>
@@ -453,6 +496,11 @@ export default {
   position: absolute;
   left: -576px;
 }
+
+.mask {
+  background: #000 !important;
+}
+
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
-@import '@core/scss/vue/pages/dashboard-project.scss';
+@import "@core/scss/vue/pages/dashboard-project.scss";
 </style>

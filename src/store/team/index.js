@@ -14,24 +14,39 @@ export default {
     tempReportingData: [],
     teamControlData: [],
     weTeamData: [],
+    selectedFromDate: moment('2024-01-01'),
+    selectedToDate: moment('2024-12-31'),
     selectedZoomInterval: 0,
     weJobData: [],
     selectedActivityParents: [],
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     selectedWinRate: 0,
-    selectedFromDate: moment('2024-01-01'),
-    selectedToDate: moment('2024-12-31'),
     selectedWorkElement: [],
     requestedElement: [],
     parentIndexForInsertElement: {},
     activityDetailModalOpen: false,
     parentTeamTitle: '',
+    fields: ['programs', 'gate', 'next_gate'],
+    reportingColumnData: undefined,
+    total_data: [24, 45, 101, 117, 12, 101, 117, 12],
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
   },
   mutations: {
+    UPDATE_TEAM_REPORT_DATA(state) {
+      state.teamReportingData = []
+    },
+    UPDATE_DATA(state) {
+      state.teamControlData = []
+    },
+    SET_ZOOM_INTERVAL(state, payload) {
+      state.selectedZoomInterval = payload
+    },
+    REPORTING_COLUMN_UPDATE(state, columns) {
+      state.reportingColumnData = columns
+    },
     IMPORT_WBS(state, data) {
       setTimeout(() => {
         const regex = /,(?!\s*?[{["'\w])/g
@@ -51,6 +66,9 @@ export default {
     },
     WOEK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity
+    },
+    SELECT_WORK_ELEMENT_TO_UPDATE(state, selectedWE) {
+      state.selectedWE = selectedWE
     },
     GET_REPORTING_DATA(state, data) {
       state.teamReportingData = data
@@ -169,9 +187,14 @@ export default {
       state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
       state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
       state.teamReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
-      // state.portfolioReportingData = payload.portData.reporting
       state.tempReportingData = state.portfolioReportingData
       state.teamControlData = payload.portData.control
+    },
+    UPDATE_SELECTED_FROM_DATE(state, payload) {
+      state.selectedFromDate = payload.from !== null || payload.from !== undefined ? moment(payload.from) : moment(`${new Date().getFullYear()}-01-01`)
+    },
+    UPDATE_SELECTED_TO_DATE(state, payload) {
+      state.selectedToDate = payload.to !== null || payload.to !== undefined ? moment(payload.to) : moment(`${new Date().getFullYear()}-12-31`)
     },
   },
   actions: {
@@ -198,36 +221,6 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       }
-    },
-    // get_team_reporting_data() {
-    //   axios.get('https://api.konatus.site/v1/api/team/reporting').then(response => {
-    //   // axios.get('http://localhost/konatus-me/public/api/team/reporting').then(response => {
-    //     const teamReportingData = response.data
-    //     this.commit('teamState/GET_REPORTING_DATA', teamReportingData)
-    //   }).catch(err => {
-    //     console.log('error getting team reporting data ---->', err)
-    //     Vue.$toast.error('Failed to get team reporting data.')
-    //   })
-    // },
-    // get_team_demand_data() {
-    //   axios.get('https://api.konatus.site/v1/api/team/demand').then(response => {
-    //   // axios.get('http://localhost/konatus-me/public/api/team/demand').then(response => {
-    //     const teamDemandData = response.data
-    //     this.commit('teamState/GET_DEMAND_DATA', teamDemandData)
-    //   }).catch(err => {
-    //     console.log('error getting team demand data ---->', err)
-    //     Vue.$toast.error('Failed to get team demand data.')
-    //   })
-    // },
-    // insert_new_task(payload) {
-    //   axios.get('https://api.konatus.site/v1/api/team/phase/create', payload).then(response => {
-    //   // axios.get('http://localhost/konatus-me/public/api/team/phase/create').then(response => {
-    //     const newTaskData = response.data
-    //     this.commit('teamState/INSERT_NEW_TASK', newTaskData)
-    //   }).catch(err => {
-    //     console.log('error creating team new task ---->', err)
-    //     Vue.$toast.error('Failed to create team new task.')
-    //   })
-    // },
-  },
+    }
+  }
 }
