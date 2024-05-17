@@ -336,11 +336,8 @@ export default {
   },
   computed: {
     c_team_demand_data() {
-      const teamDData = this.$store.state.teamState.teamDemandData
-      console.log('teamData', teamDData, 'ID', this.$store.state.globalState.selectedNavObj.id)
-      const teamData = teamDData.filter(item => item.id === this.$store.state.globalState.selectedNavObj.id)
-      console.log('TD', teamData)
-      if (teamData.length > 0) return teamData[0]
+      const teamData = this.$store.state.teamState.teamDemandData
+      if (teamData !== undefined && teamData !== null && teamData.length > 0) return teamData[0]
       return []
     }
   },

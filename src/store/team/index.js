@@ -25,7 +25,8 @@ export default {
     selectedWorkElement: [],
     requestedElement: [],
     parentIndexForInsertElement: {},
-    parentTeamTitle: ''
+    activityDetailModalOpen: false,
+    parentTeamTitle: '',
   },
   getters: {
     loaderModalShow: state => state.loaderModalShow
@@ -41,6 +42,15 @@ export default {
         Vue.$toast.success("Imported Successfully!")
       }, 1000)
       // .todo axios request
+    },
+    HIDE_ACTIVITY_DETAIL_MODAL(state) {
+      state.activityDetailModalOpen = false
+    },
+    OPEN_ACTIVITY_DETAIL_MODAL(state) {
+      state.activityDetailModalOpen = true
+    },
+    WOEK_ELEMENT_CHECK(state, checkedActivity) {
+      state.selectedWorkElement = checkedActivity
     },
     GET_REPORTING_DATA(state, data) {
       state.teamReportingData = data
@@ -134,36 +144,34 @@ export default {
       // console.log("PNV:", payload.navData, "PPD:", payload.portData)
       state.selectedNavId = payload.navData.id
       state.selectedNavObj = payload.navData
-      state.portfolioDemandData = payload.portData.demand
-      if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
-        state.weTeamData = ['auto selection']
-        state.weJobData = []
-        const pTeamData = payload.portData.demand !== null && payload.portData.demand !== undefined ? payload.portData.demand.teams : []
-        if (pTeamData && pTeamData !== undefined) {
-          pTeamData.map(pt => {
-            if (pt.phases && pt.phases.length > 0) {
-              pt.phases.map(pA => {
-                const pActivity = pA.activities
-                if (pActivity && pActivity.length > 0) {
-                  pActivity.map(item => {
-                    state.weTeamData.push(item.team_name)
-                    state.weJobData.push(item.job_name)
-                    return null
-                  })
-                }
-                return null
-              })
-            }
-            return null
-          })
-        }
-        state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
-        state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
+      state.teamDemandData = payload.portData.demand
+      state.weTeamData = ['auto selection']
+      state.weJobData = []
+      const pTeamData = payload.portData.demand !== null && payload.portData.demand !== undefined ? payload.portData.demand.teams : []
+      if (pTeamData && pTeamData !== undefined) {
+        pTeamData.map(pt => {
+          if (pt.phases && pt.phases.length > 0) {
+            pt.phases.map(pA => {
+              const pActivity = pA.activities
+              if (pActivity && pActivity.length > 0) {
+                pActivity.map(item => {
+                  state.weTeamData.push(item.team_name)
+                  state.weJobData.push(item.job_name)
+                  return null
+                })
+              }
+              return null
+            })
+          }
+          return null
+        })
       }
-      state.portfolioReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
+      state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
+      state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
+      state.teamReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
       // state.portfolioReportingData = payload.portData.reporting
       state.tempReportingData = state.portfolioReportingData
-      state.portfolioControlData = payload.portData.control
+      state.teamControlData = payload.portData.control
     },
   },
   actions: {
@@ -173,6 +181,7 @@ export default {
         baseUrl = `https://api.konatus.site/v1/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
+          console.log("RESD:", resData)
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting team data ---->', err)
@@ -182,6 +191,7 @@ export default {
         baseUrl = `https://api.konatus.site/v1/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
+          console.log("RESD:", resData)
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting team data ---->', err)

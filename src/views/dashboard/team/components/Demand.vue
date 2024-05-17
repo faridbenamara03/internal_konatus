@@ -1,134 +1,71 @@
 <template>
-  <div class="project-demand-view">
-    <div
-      v-for="phase in data.phases"
-      :key="phase.phaseV"
-      class="project-team"
-    >
-      <div class="d-flex justify-content-between align-items-center">
-        <p class="text-capitalize m-0 team-name--text">
-          Phase {{ phase.id }}
-          <span style="color:#303952;margin-left:4px">
-            ({{ phase.time ? phase.time : 0 }} hours)
-          </span>
-        </p>
-        <b-button
-          variant="flat-primary"
-          @click="() => handleSelectAll(phase.id)"
-        >
-          Select All
-        </b-button>
-      </div>
-      <div class="collapse-card">
+  <div class="project-demand-view w-100">
+    <div v-if="c_PhaseData !== undefined && c_PhaseData.length > 0">
+      <div
+        v-for="(phase, index) in c_PhaseData"
+        :key="index"
+      >
         <div
-          v-for="(activity, idx) in phase.elements"
-          :key="idx"
-          class="phase-box my-2 position-relative"
+          class="background-theme-grey p-1 w-100 portf-uppercase color-white portf-bold mb-1"
+          style="border-top-left-radius: 7px;border-top-right-radius: 7px;cursor: pointer"
+          @click="onPhaseTitleClick(openedPhase.indexOf(index), index)"
+        >
+          <feather-icon
+            :icon="openedPhase.indexOf(index) > -1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+            size="16"
+            class="mr-1"
+          />
+          phase {{ phase.id }}
+        </div>
+        <div
+          v-if="openedPhase.indexOf(index) > -1"
+          class="d-flex"
         >
           <div
-            v-if="activity.quoted"
-            :id="`tooltip-target-${idx}`"
-            style="
-              box-sizing: border-box;
-              border-top: solid 10px #7367f0;
-              border-right: solid 10px #7367f0;
-              border-top-right-radius: 5px;
-              border-left: solid 10px transparent;
-              border-bottom: solid 10px transparent;
-              position:absolute;
-              top:0;
-              right:0;
-            "
-          />
-          <b-tooltip
-            :target="`tooltip-target-${idx}`"
-            triggers="hover"
+            v-for="(item1, index1) in phase.projects"
+            :key="index1"
+            class="project-team no-border"
           >
-            Quote requested
-          </b-tooltip>
-          <div
-            class="bar"
-            :style="{ 'background': data.color}"
-          />
-          <div class="phase-box--content">
-            <div class="d-flex">
-              <div
-                v-b-modal.task-detail-modal
-                style="width:calc(100% - 20px);cursor:pointer;"
-                @click="taskDetailMethod(activity, phase)"
-              >
-                <p
-                  v-if="isUN(activity.title)"
-                  class="title"
-                >
-                  {{ activity.activityId }}
-                </p>
-                <p
-                  v-else
-                  class="title"
-                >
-                  {{ activity.title }}
-                </p>
-              </div>
-              <div style="width:20px;">
-                <b-form-checkbox v-model="activity.isSelected" />
-              </div>
-            </div>
-            <p class="muted">
-              {{ activity.activityId }}
-            </p>
-            <div class="d-flex">
-              <div class="d-flex w-50 align-items-center">
-                <feather-icon
-                  icon="BarChartIcon"
-                />
-                <span>{{ activity.priority }}</span>
-              </div>
-              <div class="d-flex w-50 align-items-center">
-                <b-icon icon="door-closed" />
-                <span>{{ activity.gate }}</span>
-              </div>
-            </div>
+            <CustomCollapse
+              :team="item1"
+              :index="index1"
+              :index0="index"
+              state="phase"
+              @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
+              @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
+            />
           </div>
         </div>
       </div>
-      <b-button
-        v-b-modal.modal-add-new-task
-        variant="flat-secondary"
-        class="w-100"
-        @click="onInsertClick(phase.id)"
-      >
-        <feather-icon icon="PlusIcon" />
-        <span>Insert New Work Element</span>
-      </b-button>
     </div>
     <insert-new-task-modal :phase-id="phaseIdToInsert" />
     <activity-detail-modal
+      v-if="c_SelectedActivity !== undefined"
       :is-open="openActivityModal"
-      :selected-activity-data="taskDetail"
-      :teamdata="teamarr"
+      :selected-activity-data="c_SelectedActivity"
       @hideModal="hideModal"
     />
   </div>
 </template>
 
 <script>
-import {
-  BButton, BFormCheckbox, BTooltip
-} from 'bootstrap-vue'
+// import {
+//   BButton, BFormCheckbox, BTooltip
+// } from 'bootstrap-vue'
 import moment from 'moment'
 import { isEmpty } from '@/views/utils'
 import InsertNewTaskModal from '../modals/insertNewTaskModal.vue'
-import ActivityDetailModal from '../../project/modals/ActivityDetailModal.vue'
-// import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
+import ActivityDetailModal from '../modals/ActivityDetailModal.vue'
+import CustomCollapse from '../../globalComponent/CustomCollapse.vue'
 
 export default {
   components: {
-    BButton,
-    BFormCheckbox,
+    // BButton,
+    // BFormCheckbox,
     InsertNewTaskModal,
     ActivityDetailModal,
-    BTooltip
+    // BTooltip,
+    CustomCollapse
   },
   props: {
     data: {
@@ -141,30 +78,94 @@ export default {
     },
   },
   data() {
+    const openedPhase = this.data.phases.map((t, i) => i)
     return {
       selectedActivity: {},
       phaseIdToInsert: null,
       openDetailModal: false,
-      taskDetail: {}
+      taskDetail: {},
+      openedPhase,
+      checkedActivity: []
     }
   },
   computed: {
     openActivityModal() {
-      return this.$store.state.globalState.activityDetailModalOpen
+      return this.$store.state.teamState.activityDetailModalOpen
     },
-    teamarr() {
-      return this.teamData.map(team => team.title)
+    c_SelectedActivity() {
+      return this.selectedActivity
     },
+    c_PhaseData() {
+      const currentData = this.data
+      console.log("CPD:", currentData)
+      const allPhases = this.$store.state.globalState.allPhaseData
+      const allProjects = this.$store.state.globalState.allProjData
+      const resultPhases = []
+      allPhases.forEach(p => {
+        let tempPhase = currentData.phases.find(x => x.id === p.id)
+        if (tempPhase === undefined) {
+          tempPhase = {
+            id: p.id,
+            title: `Phase${p.id}`,
+            projects: []
+          }
+          allProjects.forEach(project => {
+            let tempProject = tempPhase.projects.find(x => x.id === project.id)
+            if (tempProject === undefined) {
+              tempProject = {
+                id: project.id,
+                title: project.title,
+                type: 'project',
+                activities: []
+              }
+              tempPhase.projects.push(tempProject)
+            }
+          })
+        } else {
+          allProjects.forEach(project => {
+            let tempProject = tempPhase.projects.find(x => x.id === project.id)
+            if (tempProject === undefined) {
+              tempProject = {
+                id: project.id,
+                title: project.title,
+                type: 'projects',
+                activities: []
+              }
+              tempPhase.projects.push(tempProject)
+            }
+          })
+        }
+        resultPhases.push(tempPhase)
+      })
+      console.log('result:', resultPhases)
+      return resultPhases
+    }
   },
   methods: {
     isUN(data) {
       return isEmpty(data)
+    },
+    handleActivityDetails(phase, team) {
+      console.log('handleActivityDetails', phase, team)
+      this.selectedActivity = { team, phase }
+      this.$store.commit('teamState/OPEN_ACTIVITY_DETAIL_MODAL')
+    },
+    hideModal() {
+      this.$store.commit('teamState/HIDE_ACTIVITY_DETAIL_MODAL')
     },
     getToday() {
       return `Today ${moment().format('MM/DD/YYYY')}`
     },
     handleRequestQuote(res) {
       console.log(res)
+    },
+    handleSelectActivity(e, activityId) {
+      if (e) {
+        this.checkedActivity.push(activityId)
+      } else {
+        this.checkedActivity.splice(this.checkedActivity.indexOf(activityId), 1)
+      }
+      this.$store.commit('teamState/WOEK_ELEMENT_CHECK', this.checkedActivity)
     },
     handleSelectAll(dt) {
       this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)
@@ -178,10 +179,7 @@ export default {
     taskDetailMethod(activity) {
       this.taskDetail = { phase: activity }
       this.$store.commit('globalState/OPEN_ACTIVITY_DETAIL_MODAL')
-    },
-    hideModal() {
-      this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
-    },
+    }
   },
 }
 </script>
