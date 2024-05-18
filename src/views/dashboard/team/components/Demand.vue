@@ -97,7 +97,6 @@ export default {
     },
     c_PhaseData() {
       const currentData = this.data
-      console.log("CPD:", currentData)
       const allPhases = this.$store.state.globalState.allPhaseData
       const allProjects = this.$store.state.globalState.allProjData
       const resultPhases = []
@@ -113,15 +112,9 @@ export default {
             const tempProject = tempPhase.projects.find(x => x.id === project.id)
             if (tempProject !== undefined) tempPhase.projects.push(tempProject)
           })
-        } else {
-          allProjects.forEach(project => {
-            const tempProject = tempPhase.projects.find(x => x.id === project.id)
-            if (tempProject !== undefined) tempPhase.projects.push(tempProject)
-          })
         }
         resultPhases.push(tempPhase)
       })
-      console.log('result:', resultPhases)
       return resultPhases
     }
   },
@@ -130,7 +123,6 @@ export default {
       return isEmpty(data)
     },
     handleActivityDetails(phase, team) {
-      console.log('handleActivityDetails', phase, team)
       this.selectedActivity = { team, phase }
       this.$store.commit('teamState/OPEN_ACTIVITY_DETAIL_MODAL')
     },

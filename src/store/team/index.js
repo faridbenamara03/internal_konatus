@@ -204,7 +204,6 @@ export default {
         baseUrl = `https://api.konatus.site/v1/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
-          console.log("RESD:", resData)
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting team data ---->', err)
@@ -214,7 +213,6 @@ export default {
         baseUrl = `https://api.konatus.site/v1/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
-          console.log("RESD:", resData)
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)
         }).catch(err => {
           console.log('error getting team data ---->', err)
