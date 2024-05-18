@@ -7,61 +7,67 @@
       <div v-if="itemsForReporting !== undefined">
         <div
           class="report-block--head"
-          style="margin-top: 50px;background-color: #384056"
+          style="margin-top: 50px;background-color: #384056;height:77px"
         >
           <p class="m-0 text-uppercase">
             {{
-              itemsForReporting === undefined || itemsFormReporting === null
-                ? ""
-                : itemsForReporting.portfolioName
+              navObj !== undefined ? navObj.title : ''
             }}
           </p>
         </div>
         <div
-          v-for="(item1, index1) in itemsForReporting.children"
-          :key="index1"
+          v-for="(item, index) in itemsForReporting"
+          :key="`team_reporting_program_${index}`"
         >
           <div
-            class="report-block--head"
-            style="cursor: pointer;height:77px"
-            @click="onCollapseClick(index1)"
+            v-for="(item1, index1) in item.children"
+            :key="index1"
           >
-            <feather-icon
-              v-if="item1.work_elements !== undefined && item1.work_elements.length > 0"
-              :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
-              size="16"
-              class="mr-1"
-            />
-            <p
-              class="m-0 ml-1"
-              style="line-height: 24px; font-size: 15px;"
-            >
-              {{ item1.title }}
-            </p>
-          </div>
-          <template v-if="item1 !== undefined && item1.work_elements && openedCollapse === index1">
             <div
-              v-for="(item2, index2) in item1.work_elements"
-              :key="index2"
-              class="report-block-child d-flex justify-content-between"
-              style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
+              class="report-block--head"
+              style="cursor: pointer;height:77px;padding:0;display:block"
+              @click="onCollapseClick(index1)"
             >
-              <p
-                class="m-0 text-overflow-ellipse"
-                style="font-size:12px"
-                :style="`color:${parseInt(item2.acc) === 100 ? 'gray' : parseInt(item2.acc) > 0 && parseInt(item2.acc) < 100 ? '#66ffff' : '#ffffff'}`"
-              >
-                {{ item2.title }}({{ item2.acc }}%)
-              </p>
-              <b-button
-                v-b-modal.modal-manual-update
-                style="height: 40px;padding:0px"
-                @click="handleSelectWe(item2)"
-              >
-                manual update
-              </b-button>
+              <p style="font-size: 12px;font-weight:200;"> {{ item.portfolioName }} / {{ item.title }}</p>
+              <div class="d-flex">
+                <feather-icon
+                  v-if="item1.work_elements !== undefined && item1.work_elements.length > 0"
+                  :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
+                  size="16"
+                  class="mr-1"
+                />
+                <p
+                  class="m-0 ml-1"
+                  style="line-height: 24px; font-size: 15px;"
+                >
+                  {{ item1.title }}
+                </p>
+              </div>
             </div>
-          </template>
+            <template v-if="item1 !== undefined && item1.work_elements && openedCollapse === index1">
+              <div
+                v-for="(item2, index2) in item1.work_elements"
+                :key="index2"
+                class="report-block-child d-flex justify-content-between"
+                style="background-color: #212739;border-bottom: 1px solid grey;height:51px"
+              >
+                <p
+                  class="m-0 text-overflow-ellipse"
+                  style="font-size:12px"
+                  :style="`color:${parseInt(item2.acc) === 100 ? 'gray' : parseInt(item2.acc) > 0 && parseInt(item2.acc) < 100 ? '#66ffff' : '#ffffff'}`"
+                >
+                  {{ item2.title }}({{ item2.acc }}%)
+                </p>
+                <b-button
+                  v-b-modal.modal-manual-update
+                  style="height: 40px;padding:0px"
+                  @click="handleSelectWe(item2)"
+                >
+                  manual update
+                </b-button>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -149,99 +155,104 @@
         </div>
         <div v-if="itemsForReporting !== undefined">
           <div
-            v-for="(item1, index1) in itemsForReporting.children"
-            :key="index1"
+            v-for="(item, index) in itemsForReporting"
+            :key="`team_reporting_program_${index}`"
           >
             <div
-              class="w-100"
-              style="height: 77px"
-            >
-              <b-card
-                no-body
-                class="d-flex flex-column justify-content-around"
-                style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
-              >
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, true )}px`">
-                  <ProjectProgressBar
-                    :type="0"
-                    :widths="getValue(item1, 0, true)"
-                    :paddings="getStartPadding(item1, 0, true)"
-                    :isstartmark="isStartMark(item1, 0, true)"
-                    :isendmark="isEndMark(item1, 0, true)"
-                    :width4="getStartPadding(item1, 0, true)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, true )}px`">
-                  <ProjectProgressBar
-                    :type="1"
-                    :widths="getValue(item1, 1, true)"
-                    :paddings="getStartPadding(item1, 1, true)"
-                    :isstartmark="isStartMark(item1, 1, true)"
-                    :isendmark="isEndMark(item1, 1, true)"
-                    :width4="getStartPadding(item1, 1, true)"
-                  />
-                </div>
-                <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, true)}px`">
-                  <ProjectProgressBar
-                    :type="2"
-                    :widths="getValue(item1, 2, true)"
-                    :paddings="getStartPadding(item1, 2, true)"
-                    :isstartmark="isStartMark(item1, 2, true)"
-                    :isendmark="isEndMark(item1, 2, true)"
-                    :width4="getStartPadding(item1, 2, true)"
-                  />
-                </div>
-              </b-card>
-            </div>
-            <template
-              v-if="
-                item1 !== undefined && item1.work_elements && openedCollapse === index1
-              "
+              v-for="(item1, index1) in item.children"
+              :key="index1"
             >
               <div
-                v-for="(item2, index2) in item1.work_elements"
-                :key="index2"
+                class="w-100"
+                style="height: 77px"
+              >
+                <b-card
+                  no-body
+                  class="d-flex flex-column justify-content-around"
+                  style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
+                >
+                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, true )}px`">
+                    <ProjectProgressBar
+                      :type="0"
+                      :widths="getValue(item1, 0, true)"
+                      :paddings="getStartPadding(item1, 0, true)"
+                      :isstartmark="isStartMark(item1, 0, true)"
+                      :isendmark="isEndMark(item1, 0, true)"
+                      :width4="getStartPadding(item1, 0, true)"
+                    />
+                  </div>
+                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, true )}px`">
+                    <ProjectProgressBar
+                      :type="1"
+                      :widths="getValue(item1, 1, true)"
+                      :paddings="getStartPadding(item1, 1, true)"
+                      :isstartmark="isStartMark(item1, 1, true)"
+                      :isendmark="isEndMark(item1, 1, true)"
+                      :width4="getStartPadding(item1, 1, true)"
+                    />
+                  </div>
+                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, true)}px`">
+                    <ProjectProgressBar
+                      :type="2"
+                      :widths="getValue(item1, 2, true)"
+                      :paddings="getStartPadding(item1, 2, true)"
+                      :isstartmark="isStartMark(item1, 2, true)"
+                      :isendmark="isEndMark(item1, 2, true)"
+                      :width4="getStartPadding(item1, 2, true)"
+                    />
+                  </div>
+                </b-card>
+              </div>
+              <template
+                v-if="
+                  item1 !== undefined && item1.work_elements && openedCollapse === index1
+                "
               >
                 <div
-                  class="w-100"
-                  style="height: 51px"
+                  v-for="(item2, index2) in item1.work_elements"
+                  :key="index2"
                 >
-                  <b-card
-                    no-body
-                    class="d-flex flex-column justify-content-around"
-                    :style="`height:50px;padding:1px 10px 1px 3px;width:fit-content;left:${getPadding(item2)}px`"
+                  <div
+                    class="w-100"
+                    style="height: 51px"
                   >
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false) > getPadding(item2) ? getStartPadding(item2, 0, false) - getPadding(item2) : 0}px`">
-                      <WeProgressBar
-                        :type="0"
-                        :width1="getValue(item2, 0, false)"
-                        :width2="getStartPadding(item2, 0, false)"
-                        :width3="getTodayValue()"
-                        :width4="getPadding(item2)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false) > getPadding(item2) ? getStartPadding(item2, 1, false) - getPadding(item2) : 0}px`">
-                      <WeProgressBar
-                        :type="1"
-                        :width1="getValue(item2, 1, false)"
-                        :width2="getStartPadding(item2, 1, false)"
-                        :width3="getTodayValue()"
-                        :width4="getPadding(item2)"
-                      />
-                    </div>
-                    <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false) > getPadding(item2) ? getStartPadding(item2, 2, false) - getPadding(item2) : 0}px`">
-                      <WeProgressBar
-                        :type="2"
-                        :width1="getValue(item2, 2, false)"
-                        :width2="getStartPadding(item2, 2, false)"
-                        :width3="getTodayValue()"
-                        :width4="getPadding(item2)"
-                      />
-                    </div>
-                  </b-card>
+                    <b-card
+                      no-body
+                      class="d-flex flex-column justify-content-around"
+                      :style="`height:50px;padding:1px 10px 1px 3px;width:fit-content;left:${getPadding(item2)}px`"
+                    >
+                      <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 0, false) > getPadding(item2) ? getStartPadding(item2, 0, false) - getPadding(item2) : 0}px`">
+                        <WeProgressBar
+                          :type="0"
+                          :width1="getValue(item2, 0, false)"
+                          :width2="getStartPadding(item2, 0, false)"
+                          :width3="getTodayValue()"
+                          :width4="getPadding(item2)"
+                        />
+                      </div>
+                      <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 1, false) > getPadding(item2) ? getStartPadding(item2, 1, false) - getPadding(item2) : 0}px`">
+                        <WeProgressBar
+                          :type="1"
+                          :width1="getValue(item2, 1, false)"
+                          :width2="getStartPadding(item2, 1, false)"
+                          :width3="getTodayValue()"
+                          :width4="getPadding(item2)"
+                        />
+                      </div>
+                      <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item2, 2, false) > getPadding(item2) ? getStartPadding(item2, 2, false) - getPadding(item2) : 0}px`">
+                        <WeProgressBar
+                          :type="2"
+                          :width1="getValue(item2, 2, false)"
+                          :width2="getStartPadding(item2, 2, false)"
+                          :width3="getTodayValue()"
+                          :width4="getPadding(item2)"
+                        />
+                      </div>
+                    </b-card>
+                  </div>
                 </div>
-              </div>
-            </template>
+              </template>
+            </div>
           </div>
         </div>
       </div>
@@ -311,6 +322,7 @@ export default {
       zoomIntervals: ['1 days', '2 days', '7 days', '30 days'],
       zoomIntervalNumbers: [1, 2, 7, 30],
       selectedInterval: 1,
+      navObj: 0,
     }
   },
   computed: {
@@ -352,6 +364,7 @@ export default {
         this.reportingDates.push(tempStartDate.clone())
       }
       this.navType = this.$store.state.teamState.selectedNavObj.type
+      this.navObj = this.$store.state.teamState.selectedNavObj
       this.itemsForReporting = this.$store.state.teamState.teamReportingData
     },
     onResize() {
