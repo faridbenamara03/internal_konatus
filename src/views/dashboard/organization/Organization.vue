@@ -11,16 +11,6 @@
           <div>
             <b-button
               v-if="tabIndex === 0"
-              variant="primary"
-            >
-              <feather-icon
-                icon="ArrowDownIcon"
-                size="16"
-              />&nbsp;
-              <span>Import</span>
-            </b-button>
-            <b-button
-              v-if="tabIndex === 0"
               class="ml-1"
               variant="primary"
             >
@@ -41,21 +31,6 @@
                 size="16"
               />&nbsp;
               <span>Edit Columns</span>
-            </b-button>
-            <!-- <b-button v-if="tabIndex === 0 || tabIndex === 1" class="ml-1" variant="primary">
-              <feather-icon icon="EyeIcon" size="16" />&nbsp;
-              <span>Edit Columns</span>
-            </b-button> -->
-            <b-button
-              v-if="tabIndex === 0"
-              class="ml-1"
-              variant="primary"
-            >
-              <feather-icon
-                icon="Edit2Icon"
-                size="16"
-              />
-              <span>Edit as table</span>
             </b-button>
             <b-button
               v-if="(tabIndex === 1)"
