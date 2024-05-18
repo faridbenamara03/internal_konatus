@@ -1066,7 +1066,6 @@ export default {
       return result
     },
     handleZoomInterval(value) {
-      console.log("handle_portfolio:", value)
       if (value > 0) {
         this.$store.commit('globalState/SET_ZOOM_INTERVAL', value)
       }

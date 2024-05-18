@@ -171,7 +171,7 @@
                   class="d-flex flex-column justify-content-around"
                   style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
                 >
-                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, true )}px`">
+                  <div :style="`margin-bottom:5px;`">
                     <ProjectProgressBar
                       :type="0"
                       :widths="getValue(item1, 0, true)"
@@ -181,7 +181,7 @@
                       :width4="getStartPadding(item1, 0, true)"
                     />
                   </div>
-                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 1, true )}px`">
+                  <div :style="`margin-bottom:5px;`">
                     <ProjectProgressBar
                       :type="1"
                       :widths="getValue(item1, 1, true)"
@@ -191,7 +191,7 @@
                       :width4="getStartPadding(item1, 1, true)"
                     />
                   </div>
-                  <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 2, true)}px`">
+                  <div :style="`margin-bottom:5px;`">
                     <ProjectProgressBar
                       :type="2"
                       :widths="getValue(item1, 2, true)"

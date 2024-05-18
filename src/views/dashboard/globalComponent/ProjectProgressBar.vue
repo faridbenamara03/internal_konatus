@@ -151,8 +151,6 @@ export default {
         temp += p
         return null
       })
-      console.log("totalWidth:", temp, "width4:", this.width4, "padding0:", this.paddings[0])
-      console.log("realWidth:", temp > this.width4 ? this.width4 - this.paddings[0] : temp - 2 * this.paddings[0])
       return temp
     },
     // realWidth() {
