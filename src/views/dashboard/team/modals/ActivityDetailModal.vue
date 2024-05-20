@@ -621,8 +621,31 @@ export default {
         default:
           break
       }
+      let exID = ''
       const value = this.externalSystem
-      this.externalId = `${value.toUpperCase()}-${extype}-`
+      const exData = this.selectedActivityData.phase.externalSystem
+      if (exData !== null) {
+        switch (value) {
+          case 'Jira':
+            exID = exData.jira_idprogram
+            break
+          case 'SAP':
+            exID = exData.sap_idprogram
+            break
+          case 'Devops':
+            exID = exData.devops_idprogram
+            break
+          case 'primavera':
+            exID = exData.primavera_idprogram
+            break
+          case 'Deviprop':
+            exID = exData.deviprop_idprogram
+            break
+          default:
+            break
+        }
+      }
+      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -730,8 +753,31 @@ export default {
         default:
           break
       }
+      let exID = ''
       const value = this.externalSystem
-      this.externalId = `${value.toUpperCase()}-${type}-`
+      const exData = this.selectedActivityData.phase.externalSystem
+      if (exData !== null) {
+        switch (value) {
+          case 'Jira':
+            exID = exData.jira_idprogram
+            break
+          case 'SAP':
+            exID = exData.sap_idprogram
+            break
+          case 'Devops':
+            exID = exData.devops_idprogram
+            break
+          case 'primavera':
+            exID = exData.primavera_idprogram
+            break
+          case 'Deviprop':
+            exID = exData.deviprop_idprogram
+            break
+          default:
+            break
+        }
+      }
+      this.externalId = `${value.toUpperCase()}-${type}-${exID}`
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
@@ -778,7 +824,9 @@ export default {
         duration_engage: this.durationData,
         description: this.weDescription,
         fte_engage: this.fteData,
-        parents: selectedParentIDs
+        parents: selectedParentIDs,
+        projectId: this.selectedActivityData.phase?.projectId,
+        externalSystem: this.externalId
       }
       const requotedElements = this.$store.state.globalState.selectedWorkElement
       const index = requotedElements.indexOf(this.selectedActivityData.phase.id)
