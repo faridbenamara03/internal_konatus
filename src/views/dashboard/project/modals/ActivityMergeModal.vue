@@ -1478,7 +1478,7 @@ export default {
     },
     updateExternalID(index) {
       let type = ''
-      switch (this.$store.state.globalState.SelectedNavObj.type) {
+      switch (this.$store.state.globalState.selectedNavObj.type) {
         case 'program':
           type = 'PROG'
           break
