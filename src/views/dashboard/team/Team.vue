@@ -53,14 +53,18 @@
               />&nbsp;
               <span>Export</span>
             </b-button>
-            <!-- <b-button v-if="(tabIndex == 0)" v-b-modal.modal-import class="ml-1" variant="primary">
-              <feather-icon icon="ArrowDownIcon" size="16" />&nbsp;
-              <span>Import</span>
+            <b-button
+              v-if="(tabIndex == 0)"
+              class="ml-1"
+              variant="primary"
+              @click="onDemandEditTableClick"
+            >
+              <feather-icon
+                icon="EyeIcon"
+                size="16"
+              />&nbsp;
+              <span>Edit as a Table</span>
             </b-button>
-            <b-button v-if="(tabIndex == 0)" @click="handleUpdateDemand" class="ml-1" variant="primary">
-              <feather-icon icon="RotateCwIcon" size="16" />&nbsp;
-              <span>Update</span>
-            </b-button> -->
             <b-button
               v-if="(tabIndex == 1)"
               v-b-modal.team-reporting-plan-update
@@ -83,6 +87,18 @@
                 size="16"
               />&nbsp;
               <span>Export</span>
+            </b-button>
+            <b-button
+              v-if="(tabIndex == 1)"
+              class="ml-1"
+              variant="primary"
+              @click="onReportingEditTableClick"
+            >
+              <feather-icon
+                icon="EyeIcon"
+                size="16"
+              />&nbsp;
+              <span>Edit as a Table</span>
             </b-button>
             <b-button
               v-if="tabIndex === 2"
@@ -413,6 +429,14 @@ export default {
     },
     onClose() {
       this.popoverShow = false
+    },
+    onDemandEditTableClick() {
+      const baseUrl = '/organisation-job/demand'
+      this.$router.push(baseUrl)
+    },
+    onReportingEditTableClick() {
+      const baseUrl = '/organisation-job/reporting-plan'
+      this.$router.push(baseUrl)
     },
     getBetweenMonthsArr(startD, endD) {
       const startDate = moment(startD)

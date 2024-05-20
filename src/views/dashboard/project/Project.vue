@@ -48,7 +48,7 @@
                 />&nbsp;
                 <span>Optimize</span>
               </b-button>
-              <b-button
+              <!-- <b-button
                 class="ml-1"
                 variant="primary"
                 @click="onDemandTableEditableClick"
@@ -58,7 +58,7 @@
                   size="16"
                 />&nbsp;
                 <span>Edit as table</span>
-              </b-button>
+              </b-button> -->
               <b-button
                 v-if="!demandTableEditable"
                 v-b-modal.modal-import
@@ -97,15 +97,15 @@
               </b-button>
               <b-button
                 v-if="!demandTableEditable"
-                :disabled="true"
                 class="ml-1"
                 variant="primary"
+                @click="onDemandTableEditableClick"
               >
                 <feather-icon
                   icon="EyeIcon"
                   size="16"
                 />&nbsp;
-                <span>Edit as Columns</span>
+                <span>Edit as a Table</span>
               </b-button>
               <b-button
                 v-if="!demandTableEditable"
@@ -157,15 +157,15 @@
               </b-button>
               <b-button
                 v-if="!reportingTableEditable"
-                :disabled="true"
                 class="ml-1"
                 variant="primary"
+                @click="onReportingTableEditableClick"
               >
                 <feather-icon
                   icon="EyeIcon"
                   size="16"
                 />&nbsp;
-                <span>Edit as Columns</span>
+                <span>Edit as a Table</span>
               </b-button>
               <b-button
                 v-if="reportingTableEditable"
@@ -633,10 +633,14 @@ export default {
     },
     onDemandTableEditableClick() {
       // this.$store.dispatch('globalState/get_project_demand_editable')
-      this.$store.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE')
+      // this.$store.commit('globalState/UPDATE_PROJECT_DEMAND_TABLE_EDITABLE')
+      const baseUrl = '/organisation-job/demand'
+      this.$router.push(baseUrl)
     },
     onReportingTableEditableClick() {
-      this.$store.dispatch('globalState/get_project_reporting_editable')
+      // this.$store.dispatch('globalState/get_project_reporting_editable')
+      const baseUrl = '/organisation-job/reporting-plan'
+      this.$router.push(baseUrl)
     },
     toggleCreateNewProjectDrawer() {
       this.$store.commit('globalState/TOGGLE_CREATE_NEW_PROGRAM_DRAWER')

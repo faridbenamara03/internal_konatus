@@ -654,11 +654,22 @@ export default {
         if (parseFloat(this.loadData) === parseFloat(this.durationData) * parseFloat(this.fteData)) {
           this.showToast('success', 'All values are valid')
           this.isValid = true
-        } else {
+        }
+        if (parseFloat(this.fteData) !== 0) {
+          this.durationData = parseFloat(this.loadData) / parseFloat(this.fteData)
+          this.isValid = true
+        } else if (parseFloat(this.fteData) === 0 && parseFloat(this.durationData) !== 0) {
+          this.fteData = parseFloat(this.loadData) / parseFloat(this.durationData)
+          this.isValid = true
+        } else if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) !== 0 && parseFloat(this.durationData) !== 0) {
+          this.loadData = parseFloat(this.durationData) * parseFloat(this.fteData)
+          this.isValid = true
+        } else if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) === 0 && parseFloat(this.fteData) === 0) {
           this.showToast('warning', 'Please enter valid values')
           this.isValid = false
         }
-      } else if (this.fteData !== '' && this.durationData !== '' && this.loadData === '') {
+      }
+      if (this.fteData !== '' && this.durationData !== '' && this.loadData === '') {
         this.loadData = parseFloat(this.durationData) * parseFloat(this.fteData)
         this.isValid = true
       } else if (this.loadData !== '' && this.durationData !== '' && this.durationData !== 0 && this.fteData === '') {
@@ -668,7 +679,7 @@ export default {
         this.durationData = parseFloat(this.loadData) / parseFloat(this.fteData)
         this.isValid = true
       } else {
-        this.showToast('warning', 'Please enter valid values')
+        this.showToast('warning', 'Please enter at least two values')
         this.isValid = false
       }
     },
