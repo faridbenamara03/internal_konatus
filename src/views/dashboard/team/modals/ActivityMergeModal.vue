@@ -762,7 +762,7 @@
               <div class="col">
                 <label>Spent</label>
                 <b-form-input
-                  :value="parseFloat(loadEstimated) - parseFloat(restData)"
+                  :value="spentData"
                   readonly
                 />
               </div>
@@ -961,6 +961,7 @@ export default {
       fteEstimated1: 0,
       fteEstimated2: 0,
       opt_skillset: 0,
+      spentData: 0,
       priorityOptions: this.$store.state.globalState.priorityOptions,
       phaseList: this.$store.state.globalState.allPhaseTitleData,
       isValid: false,
@@ -1222,10 +1223,33 @@ export default {
         default:
           break
       }
-      const value = this.externalSystem
-      this.externalId = `${value.toUpperCase()}-${extype}-`
-      this.externalId1 = `${value.toUpperCase()}-${extype}-`
-      this.externalId2 = `${value.toUpperCase()}-${extype}-`
+      let exID = ''
+      const value = this.externalSystem1
+      const exData = this.selectedActivityData.phase.externalSystem
+      if (exData !== null) {
+        switch (value) {
+          case 'Jira':
+            exID = exData.jira_idprogram
+            break
+          case 'SAP':
+            exID = exData.sap_idprogram
+            break
+          case 'Devops':
+            exID = exData.devops_idprogram
+            break
+          case 'primavera':
+            exID = exData.primavera_idprogram
+            break
+          case 'Deviprop':
+            exID = exData.deviprop_idprogram
+            break
+          default:
+            break
+        }
+      }
+      this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
+      this.externalId = this.externalId1
+      this.externalId2 = this.externalId1
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1366,8 +1390,9 @@ export default {
       this.fteDemand = (parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)) / (parseFloat(this.loadDemand1) / parseFloat(this.fteDemand1) + parseFloat(this.loadDemand2) / parseFloat(this.fteDemand2))
       this.fteEngage = (parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)) / (parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1) + parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2))
       this.fteEstimated = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) / (parseFloat(this.loadEstimated1) / parseFloat(this.fteEstimated1) + parseFloat(this.loadEstimated2) / parseFloat(this.fteEstimated2))
-      this.accData = parseFloat(this.accData1) + parseFloat(this.accData2)
-      this.restData = (1 - (parseFloat(this.accData) / 100)) * parseFloat(this.loadEstimated)
+      this.spentData = (parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)) - (parseFloat(this.restData1) + parseFloat(this.restData2))
+      this.restData = parseFloat(this.loadEstimated) - parseFloat(this.spentData)
+      this.accData = (parseFloat(this.spentData) / parseFloat(this.loadEstimated)) * 100
       this.selectedPriority2 = selectedActivity !== undefined ? this.priorityOptions[selectedActivity.priority - 1] : 0
       this.selectedPhase2 = selectedActivity !== undefined ? this.$store.state.globalState.allPhaseTitleData[selectedActivity.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       this.merged.effort = {
@@ -1387,6 +1412,46 @@ export default {
       ? selectedActivity.title : this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
       this.merged.description = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
       ? selectedActivity.description : this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
+      const otype = this.$store.state.globalState.selectedNavObj.type
+      let extype = ''
+      switch (otype) {
+        case 'program':
+          extype = 'PROG'
+          break
+        case 'project':
+          extype = 'PROJ'
+          break
+        case 'subproject':
+          extype = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      let exID = ''
+      const value = this.externalSystem2
+      const exData = selectedActivity.phase.externalSystem
+      if (exData !== null) {
+        switch (value) {
+          case 'Jira':
+            exID = exData.jira_idprogram
+            break
+          case 'SAP':
+            exID = exData.sap_idprogram
+            break
+          case 'Devops':
+            exID = exData.devops_idprogram
+            break
+          case 'primavera':
+            exID = exData.primavera_idprogram
+            break
+          case 'Deviprop':
+            exID = exData.deviprop_idprogram
+            break
+          default:
+            break
+        }
+      }
+      this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
     },
     handleCalculate() {
       if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
@@ -1427,18 +1492,63 @@ export default {
           break
       }
       let value = 0
+      const exData1 = this.selectedActivityData.phase.externalSystem
+      const exData2 = this.toMerge !== undefined ? this.toMerge.externalSystem : null
+      let exID = ''
       switch (index) {
         case 0:
           value = this.externalSystem
-          this.externalId = `${value.toUpperCase()}-${type}-`
+          this.externalId = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 1:
           value = this.externalSystem1
-          this.externalId1 = `${value.toUpperCase()}-${type}-`
+          if (exData1 !== null) {
+            switch (value) {
+              case 'Jira':
+                exID = exData1.jira_idprogram
+                break
+              case 'SAP':
+                exID = exData1.sap_idprogram
+                break
+              case 'Devops':
+                exID = exData1.devops_idprogram
+                break
+              case 'primavera':
+                exID = exData1.primavera_idprogram
+                break
+              case 'Deviprop1':
+                exID = exData1.deviprop_idprogram
+                break
+              default:
+                break
+            }
+          }
+          this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 2:
           value = this.externalSystem2
-          this.externalId2 = `${value.toUpperCase()}-${type}-`
+          if (exData2 !== null) {
+            switch (value) {
+              case 'Jira':
+                exID = exData2.jira_idprogram
+                break
+              case 'SAP':
+                exID = exData2.sap_idprogram
+                break
+              case 'Devops':
+                exID = exData2.devops_idprogram
+                break
+              case 'primavera':
+                exID = exData2.primavera_idprogram
+                break
+              case 'Deviprop':
+                exID = exData2.deviprop_idprogram
+                break
+              default:
+                break
+            }
+          }
+          this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
           break
         default:
           break

@@ -75,7 +75,7 @@
               </div>
               <div
                 style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit"
+                @click="handleExternalEdit(0)"
               >
                 <feather-icon
                   :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
@@ -1213,8 +1213,31 @@ export default {
         default:
           break
       }
+      let exID = ''
       const value = this.externalSystem
-      this.externalId = `${value.toUpperCase()}-${extype}-`
+      const exData = this.selectedActivityData.phase.externalSystem
+      if (exData !== null) {
+        switch (value) {
+          case 'Jira':
+            exID = exData.jira_idprogram
+            break
+          case 'SAP':
+            exID = exData.sap_idprogram
+            break
+          case 'Devops':
+            exID = exData.devops_idprogram
+            break
+          case 'primavera':
+            exID = exData.primavera_idprogram
+            break
+          case 'Deviprop':
+            exID = exData.deviprop_idprogram
+            break
+          default:
+            break
+        }
+      }
+      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1389,8 +1412,9 @@ export default {
       }
     },
     updateExternalID(index) {
+      console.log('updateEx:', index)
       let type = ''
-      switch (this.$store.state.globalState.SelectedNavObj.type) {
+      switch (this.$store.state.globalState.selectedNavObj.type) {
         case 'program':
           type = 'PROG'
           break
@@ -1404,10 +1428,33 @@ export default {
           break
       }
       let value = 0
+      const exData = this.selectedActivityData.phase.externalSystem
+      let exID = ''
       switch (index) {
         case 0:
           value = this.externalSystem
-          this.externalId = `${value.toUpperCase()}-${type}-`
+          if (exData !== null) {
+            switch (value) {
+              case 'Jira':
+                exID = exData.jira_idprogram
+                break
+              case 'SAP':
+                exID = exData.sap_idprogram
+                break
+              case 'Devops':
+                exID = exData.devops_idprogram
+                break
+              case 'primavera':
+                exID = exData.primavera_idprogram
+                break
+              case 'Deviprop':
+                exID = exData.deviprop_idprogram
+                break
+              default:
+                break
+            }
+          }
+          this.externalId = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 1:
           value = this.externalSystem1

@@ -795,8 +795,8 @@ export default {
       const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
       const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
       let selectedParentIDs = []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0 && this.selectedParents) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
+      if (this.$store.state.teamState.teamDemandData && this.$store.state.globalState.teamDemandData.length > 0 && this.selectedParents) {
+        this.$store.state.teamState.teamDemandData.forEach(t => {
           if (t.phases && t.phases.length > 0) {
             t.phases.forEach(p => {
               if (p.activities && p.activities.length > 0) {

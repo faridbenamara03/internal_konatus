@@ -657,7 +657,6 @@ export default {
       this.costfields.splice(idx + 1, 0, column)
     })
     const currentUrl = this.$router.history.current.path
-    console.log('currentUrl:', currentUrl)
     if (currentUrl.indexOf('reporting-plan') > 0) {
       this.tabIndex = 1
       this.reportingState = 'plan'
@@ -669,7 +668,6 @@ export default {
     } else {
       this.tabIndex = 0
     }
-    console.log('tabIndex:', this.tabIndex)
   },
   methods: {
     async handleDone() {
