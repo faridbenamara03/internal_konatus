@@ -88,8 +88,9 @@
                 <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorityOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'currentPhase' || ft === 'nextphase'">{{ '' }} </span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
               <div
@@ -140,7 +141,11 @@
                     <span v-if="ft === 'priority'">{{ typeof(item1[ft]) === "string" ? item1[ft] : priorityOptions[item1[ft] - 1] }}</span>
                     <span v-else-if="ft === 'natDeadline'">{{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}</span>
                     <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item1[ft]) }}</span>
-                    <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item1[ft] }}</span>
+                    <span v-else-if="ft === 'winrate'">{{ item1[ft] }}</span>
+                    <span v-else-if="ft === 'currentPhase' && item1.type === 'program'">{{ '' }}</span>
+                    <span v-else-if="ft === 'currentPhase' && item1.type !== 'program'">{{ item1[ft] }}</span>
+                    <span v-else-if="ft === 'nextphase' && item1.type !== 'program'">{{ dateFormat(item1[ft]) }}</span>
+                    <span v-else-if="ft === 'nextphase' && item1.type === 'program'">{{ '' }}</span>
                     <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item1[ft] }}</span>
                     <span v-else>{{ formatCurrency(item1[ft]) }}</span>
                   </div>
@@ -191,7 +196,7 @@
                       >
                         <span v-if="ft === 'priority'">{{ typeof(item2[ft]) === "string" ? item2[ft] : priorityOptions[item2[ft] - 1] }}</span>
                         <span v-else-if="ft === 'natDeadline'">{{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}</span>
-                        <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item2[ft]) }}</span>
+                        <span v-else-if="ft === 'deadline' || ft === 'nextphase' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item2[ft]) }}</span>
                         <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item2[ft] }}</span>
                         <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item2[ft] }}</span>
                         <span v-else>{{ formatCurrency(item2[ft]) }}</span>
@@ -236,7 +241,7 @@
                           >
                             <span v-if="ft === 'priority'">{{ typeof(item3[ft]) === "string" ? item3[ft] : priorityOptions[item3[ft] - 1] }}</span>
                             <span v-else-if="ft === 'natDeadline'">{{ typeof(item3[ft]) === "string" ? item3[ft] : nDeadlineOptions[item3[ft] - 1] }}</span>
-                            <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item3[ft]) }}</span>
+                            <span v-else-if="ft === 'deadline' || ft === 'nextphase' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item3[ft]) }}</span>
                             <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item3[ft] }}</span>
                             <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item3[ft] }}</span>
                             <span v-else>{{ formatCurrency(item3[ft]) }}</span>

@@ -67,8 +67,9 @@
                 <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate' || ft === 'currentPhase'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'currentPhase' || ft === 'nextphase'">{{ '' }} </span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -199,8 +200,8 @@
                         v-model="item1[ft]"
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
-                      <div v-else-if="ft === 'nextphase'">
-                        {{ dateFormat(item1[ft])}}
+                      <div v-else-if="ft === 'nextphase' || ft === 'currentPhase'">
+                        {{ '' }}
                       </div>
                       <div v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'">
                         {{  item1[ft] }}
@@ -239,18 +240,25 @@
                         {{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
-                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
+                        v-else-if="ft === 'next_gate' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <div
-                        v-else-if="ft === 'winrate' || ft === 'currentPhase'"
+                        v-else-if="ft === 'winrate'"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
                         {{ item1[ft] }}
+                      </div>
+                      <div
+                        v-else-if="ft === 'currentPhase' || ft === 'nextphase'"
+                        class="mr-1"
+                        style="margin-top:6px;"
+                      >
+                        {{  '' }}
                       </div>
                       <div
                         v-else-if="ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine' || ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi'"
@@ -397,12 +405,12 @@
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
                           <div
-                            v-else-if="ft === 'nextphase'"
+                            v-else-if="ft === 'nextphase' || ft === 'next_gate'"
                           >
                             {{ dateFormat(item2[ft]) }}
                           </div>
                           <div
-                            v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                            v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId' || ft === 'currentPhase'"
                           >
                             {{  item2[ft] }}
                           </div>
@@ -441,7 +449,7 @@
                             {{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
+                            v-else-if="ft === 'nextphase' || ft === 'next_gate' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                             class="mr-1"
                             style="margin-top:6px;"
                           >
@@ -591,12 +599,12 @@
                                 :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                               />
                               <div
-                                v-else-if="ft === 'nextphase'"
+                                v-else-if="ft === 'nextphase' || ft === 'next_gate'"
                               >
                                 {{ dateFormat(item3[ft]) }}
                               </div>
                               <div
-                                v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                                v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId' || ft === 'currentPhase'"
                               >
                                 {{  item3[ft] }}
                               </div>
@@ -635,7 +643,7 @@
                                 {{ typeof(item3[ft]) === "string" ? item3[ft] : nDeadlineOptions[item3[ft] - 1] }}
                               </div>
                               <div
-                                v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
+                                v-else-if="ft === 'nextphase' || ft === 'next_gate' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                                 class="mr-3"
                                 style="margin-top:6px;"
                               >
@@ -721,8 +729,9 @@
                 <span v-if="ft === 'priority'">{{ typeof(item[ft]) === "string" ? item[ft] : priorities[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'natDeadline'">{{ typeof(item[ft]) === "string" ? item[ft] : nDeadlineOptions[item[ft] - 1] }}</span>
                 <span v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0">{{ dateFormat(item[ft]) }}</span>
-                <span v-else-if="ft === 'winrate'  || ft === 'currentPhase'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'winrate'">{{ item[ft] }}</span>
                 <span v-else-if="ft === 'customerEx' || ft === 'salesEx' || ft === 'scoring' || ft === 'roi' || ft === 'description' || ft === 'architect' || ft === 'portfolioHead' || ft === 'productManager' || ft === 'directionHead' || ft === 'programDirector' || ft === 'projectManager' || ft === 'architectHead' || ft === 'sponsor' || ft === 'productLine'">{{ item[ft] }}</span>
+                <span v-else-if="ft === 'currentPhase' || ft === 'nextphase'">{{ '' }}</span>
                 <span v-else>{{ formatCurrency(item[ft]) }}</span>
               </div>
             </div>
@@ -855,12 +864,12 @@
                         :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                       />
                       <div
-                        v-else-if="ft === 'nextphase'"
+                        v-else-if="ft === 'next_gate' || ft === 'nextphase'"
                       >
                         {{ dateFormat(item1[ft]) }}
                       </div>
                       <div
-                        v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId'"
+                        v-else-if="ft === 'spent' || ft === 'engaged' || ft === 'realEstimated' || ft === 'systemId' || ft === 'currentPhase'"
                       >
                         {{  item1[ft] }}
                       </div>
@@ -899,7 +908,7 @@
                         {{ typeof(item1[ft]) === "string" ? item1[ft] : nDeadlineOptions[item1[ft] - 1] }}
                       </div>
                       <div
-                        v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
+                        v-else-if="ft === 'next_gate' || ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                         class="mr-1"
                         style="margin-top:6px;"
                       >
@@ -1049,7 +1058,7 @@
                             :date-format-options="{ year: 'numeric', month: 'numeric', day: 'numeric' }"
                           />
                           <div
-                            v-else-if="ft === 'nextphase'"
+                            v-else-if="ft === 'nextphase' || ft === 'next_gate'"
                           >
                             {{ dateFormat(item2[ft]) }}
                           </div>
@@ -1093,7 +1102,7 @@
                             {{ typeof(item2[ft]) === "string" ? item2[ft] : nDeadlineOptions[item2[ft] - 1] }}
                           </div>
                           <div
-                            v-else-if="ft === 'nextphase' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
+                            v-else-if="ft === 'nextphase' || ft === 'next_gate' || ft === 'deadline' || ft.indexOf('startdate') > 0 || ft.indexOf('enddate') > 0"
                             class="mr-1"
                             style="margin-top:6px;"
                           >

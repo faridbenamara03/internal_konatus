@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    id="modal-add-new-task"
+    id="modal-add-new-task-program"
     centered
     hide-backdrop
     content-class="shadow"
@@ -9,7 +9,7 @@
     @ok="handleOk"
   >
     <div class="mb-2">
-      <b>{{ phaseId }}</b>
+      <b>Insert Work Element</b>
     </div>
     <b-dropdown
       id="checkbox-dropdown"
@@ -36,20 +36,34 @@
         </b-form-checkbox>
       </b-dropdown-item>
     </b-dropdown>
+    <!-- <b-form-select id="input-taskId" v-model="taskId" class="mb-1" placeholder="WorK Element Id" :options="['JIRA', 'SAP']" /> -->
+    <!-- <b-form-input id="input-taskId" v-model="taskId" placeholder="WorK Element Id" class="mb-1" /> -->
+    <label>Work Element Name:</label>
     <b-form-input
-      id="input-elementId"
-      v-model="elementId"
-      placeholder="Work Element Id"
+      id="input-name"
+      v-model="name"
+      placeholder="WorK Element Name"
       class="mb-1"
     />
-    <b-form-input
-      id="input-gate"
-      v-model="gate"
-      placeholder="Gate"
-      class="mb-1"
-    />
+    <label>Job:</label>
     <b-form-select
-      v-model="priority"
+      id="select-job"
+      v-model="selectedJob"
+      class="mb-1"
+      placeholder="Select Job"
+      :options="allJobTitleData"
+    />
+    <label>Phase:</label>
+    <b-form-select
+      id="select-phase"
+      v-model="selectedPhase"
+      class="mb-1"
+      placeholder="Select Phase"
+      :options="allPhaseTitleData"
+    />
+    <label>Priority:</label>
+    <b-form-select
+      v-model="selectedPriority"
       :options="priorityOptions"
     />
   </b-modal>
@@ -69,7 +83,7 @@
 
 <script>
 import {
-  BModal, VBModal, BFormInput, BFormSelect, BDropdown, BFormCheckbox
+  BModal, VBModal, BFormInput, BFormSelect, BFormCheckbox, BDropdown
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { isEmpty } from '../../../utils'
@@ -79,29 +93,35 @@ export default {
     BModal,
     BFormInput,
     BFormSelect,
-    BDropdown,
-    BFormCheckbox
+    BFormCheckbox,
+    BDropdown
   },
   directives: {
     'b-modal': VBModal,
     Ripple,
   },
   props: {
-    phaseId: {
-      type: String
+    phaseV: {
+      type: Number
     },
   },
   data() {
     return {
       taskId: 'JIRA',
-      elementId: '',
-      priority: 'High',
       gate: '',
+      name: '',
       selectedOptions: '',
+      allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
       priorityOptions: this.$store.state.globalState.priorityOptions,
+      selectedJob: this.$store.state.globalState.parentTeamTitle?.job,
+      selectedPhase: this.$store.state.globalState.parentTeamTitle?.phase,
+      selectedPriority: '',
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },
+        { label: 'Devops', value: 'Devops' },
+        { label: 'Primavera', value: 'Primavera' },
+        { label: 'Deviprop', value: 'Deviprop' }
       ]
     }
   },
@@ -113,17 +133,49 @@ export default {
         .join('+')
       return selectedOptions
     },
+    allJobTitleData() {
+      const titleData = []
+      const allJobs = this.$store.state.globalState.allJobTitleData
+      allJobs.forEach(j => {
+        titleData.push(j.title)
+      })
+      return titleData
+    }
+  },
+  watch: {
+      '$store.state.globalState.parentTeamTitle': {
+          immediate: true,
+          handler(newValue) {
+            this.selectedJob = newValue?.job
+            this.selectedPhase = newValue?.phase
+          },
+      },
   },
   methods: {
-    handleOk(e) {
-      if (isEmpty(this.elementId) || isEmpty(this.gate)) {
+    async handleOk(e) {
+      if (isEmpty(this.name) || isEmpty(this.selectedJob) || isEmpty(this.selectedPhase) || isEmpty(this.selectedPriority)) {
         e.preventDefault()
         this.$toast.warning('Value is invalid!')
       } else {
-        this.$bvModal.hide('modal-add-new-task')
-        this.$store.dispatch('teamState/insert_new_task', { phaseId: this.phaseId, element: { elementId: this.elementId, priority: this.priority, gate: this.gate } })
-        this.elementId = ''
+        this.$bvModal.hide('modal-add-new-task-program')
+        const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
+        const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
+        const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
+        const data = this.$store.state.globalState.selectedNavObj
+        await this.$store.dispatch('globalState/insert_new_task', {
+          priority: priorityIndex !== -1 ? priorityIndex + 1 : 1,
+          name: this.name,
+          job_id: jobId,
+          phase: phaseId !== -1 ? phaseId + 1 : 0,
+          progId: data.id,
+          exsystem: this.selectedOptionsString
+        })
+        this.taskId = ''
         this.gate = ''
+        await this.$store.dispatch('teamState/load_org_data')
+        await this.$store.dispatch('teamState/get_from_selected_nav_id', {
+          data
+        })
       }
     }
   }
