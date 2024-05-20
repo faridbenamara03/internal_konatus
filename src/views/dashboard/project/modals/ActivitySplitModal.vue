@@ -1215,7 +1215,7 @@ export default {
       }
       let exID = ''
       const value = this.externalSystem
-      const exData = this.selectedActivityData.phase.externalSystem
+      const exData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
       if (exData !== null) {
         switch (value) {
           case 'Jira':
@@ -1428,7 +1428,7 @@ export default {
           break
       }
       let value = 0
-      const exData = this.selectedActivityData.phase.externalSystem
+      const exData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
       let exID = ''
       switch (index) {
         case 0:
