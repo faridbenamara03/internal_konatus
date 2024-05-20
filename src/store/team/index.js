@@ -64,7 +64,7 @@ export default {
     OPEN_ACTIVITY_DETAIL_MODAL(state) {
       state.activityDetailModalOpen = true
     },
-    WOEK_ELEMENT_CHECK(state, checkedActivity) {
+    WORK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity
     },
     SELECT_WORK_ELEMENT_TO_UPDATE(state, selectedWE) {

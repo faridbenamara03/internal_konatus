@@ -678,9 +678,6 @@ export default {
       } else if (this.loadData !== '' && this.fteData !== '' && this.fteData !== 0 && this.durationData === '') {
         this.durationData = parseFloat(this.loadData) / parseFloat(this.fteData)
         this.isValid = true
-      } else {
-        this.showToast('warning', 'Please enter at least two values')
-        this.isValid = false
       }
     },
     validateEffortData(data, type) {
@@ -720,7 +717,8 @@ export default {
     },
     updateExternalID() {
       let type = ''
-      switch (this.$store.state.globalState.SelectedNavObj.type) {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      switch (navObj.type) {
         case 'program':
           type = 'PROG'
           break
@@ -752,7 +750,7 @@ export default {
       const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
       const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
       let selectedParentIDs = []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
+      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0 && this.selectedParents) {
         this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
           if (t.phases && t.phases.length > 0) {
             t.phases.forEach(p => {
@@ -783,6 +781,13 @@ export default {
         fte_engage: this.fteData,
         parents: selectedParentIDs
       }
+      const requotedElements = this.$store.state.globalState.selectedWorkElement
+      const index = requotedElements.indexOf(this.selectedActivityData.phase.id)
+      if (index > -1) {
+        requotedElements.splice(index, 1)
+      }
+      this.$store.commit('globalState/WORK_ELEMENT_CHECK', requotedElements)
+      this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       await this.$store.dispatch('globalState/load_org_data')
       const data = this.$store.state.globalState.selectedNavObj

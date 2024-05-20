@@ -141,7 +141,7 @@ export default {
       } else {
         this.checkedActivity.splice(this.checkedActivity.indexOf(activityId), 1)
       }
-      this.$store.commit('teamState/WOEK_ELEMENT_CHECK', this.checkedActivity)
+      this.$store.commit('globalState/WORK_ELEMENT_CHECK', this.checkedActivity)
     },
     handleSelectAll(dt) {
       this.$store.commit('teamState/SELECT_ALL_PHASE_ACTS', dt)

@@ -615,7 +615,7 @@ export default {
     SELECT_WORK_ELEMENT_TO_UPDATE(state, selectedWE) {
       state.selectedWE = selectedWE
     },
-    WOEK_ELEMENT_CHECK(state, checkedActivity) {
+    WORK_ELEMENT_CHECK(state, checkedActivity) {
       state.selectedWorkElement = checkedActivity
     },
     SET_INDEX_FOR_INSERT_NEW_ELEMENT(state, data) {

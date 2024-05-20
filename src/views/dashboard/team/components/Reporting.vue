@@ -26,13 +26,11 @@
             <div
               class="report-block--head"
               style="cursor: pointer;height:77px;padding:0;display:block"
-              @click="onCollapseClick(index1)"
             >
               <p style="font-size: 12px;font-weight:200;"> {{ item.portfolioName }} / {{ item.title }}</p>
               <div class="d-flex">
                 <feather-icon
                   v-if="item1.work_elements !== undefined && item1.work_elements.length > 0"
-                  :icon="openedCollapse === index1 ? 'ChevronDownIcon' : 'ChevronRightIcon'"
                   size="16"
                   class="mr-1"
                 />
@@ -44,7 +42,7 @@
                 </p>
               </div>
             </div>
-            <template v-if="item1 !== undefined && item1.work_elements && openedCollapse === index1">
+            <template v-if="item1 !== undefined && item1.work_elements">
               <div
                 v-for="(item2, index2) in item1.work_elements"
                 :key="index2"
@@ -205,7 +203,7 @@
               </div>
               <template
                 v-if="
-                  item1 !== undefined && item1.work_elements && openedCollapse === index1
+                  item1 !== undefined && item1.work_elements
                 "
               >
                 <div
@@ -308,10 +306,6 @@ export default {
   data() {
     return {
       reportingDates: [],
-      openedCollapse: 0,
-      childCollapse: 1,
-      subChildCollapse: 0,
-      parentCollapse: true,
       navType: 'portfolio',
       windowWidth: window.innerWidth,
       itemsForReporting: 0,
@@ -628,21 +622,6 @@ export default {
     },
     smallest(a, b, c, d) {
       return Math.min(a, b, c, d)
-    },
-    onParentCollapseClick() {
-      this.parentCollapse = !this.parentCollapse
-    },
-    onCollapseClick(index) {
-      if (this.openedCollapse === index) this.openedCollapse = -1
-      else this.openedCollapse = index
-    },
-    onChildCollapseClick(index) {
-      if (this.childCollapse === index) this.childCollapse = -1
-      else this.childCollapse = index
-    },
-    onSubChildCollapseClick(index) {
-      if (this.subChildCollapse === index) this.subChildCollapse = -1
-      else this.subChildCollapse = index
     },
     isToday(date) {
       return moment().isSame(date, "day")
