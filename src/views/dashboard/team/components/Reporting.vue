@@ -24,6 +24,7 @@
             :key="index1"
           >
             <div
+              v-if="!onlyWeShow"
               class="report-block--head"
               style="cursor: pointer;height:77px;padding:0;display:block"
             >
@@ -80,6 +81,14 @@
           max="3"
           :wrap="false"
         />
+        <b-form-checkbox
+          :checked="onlyWeShow"
+          switch
+          inline
+          @change="onlyWeShowToggle"
+        >
+          Show Only WE
+        </b-form-checkbox>
         <div class="reporting-content-header--badge justify-content-end">
           <div class="phase">
             <div class="flag" />
@@ -161,6 +170,7 @@
               :key="index1"
             >
               <div
+                v-if="!onlyWeShow"
                 class="w-100"
                 style="height: 77px"
               >
@@ -272,7 +282,12 @@
 </template>
 
 <script>
-import { BButton, BCard, BFormSpinbutton } from "bootstrap-vue"
+import {
+  BButton,
+  BCard,
+  BFormCheckbox,
+  BFormSpinbutton
+} from "bootstrap-vue"
 import moment from "moment"
 import ReportingCostVue from "./ReportingCost.vue"
 import ProjectProgressBar from "../../globalComponent/ProjectProgressBar.vue"
@@ -284,6 +299,7 @@ export default {
     BButton,
     BCard,
     BFormSpinbutton,
+    BFormCheckbox,
     ReportingCostVue,
     ProjectProgressBar,
     WeProgressBar,
@@ -317,6 +333,7 @@ export default {
       zoomIntervalNumbers: [1, 2, 7, 30],
       selectedInterval: 1,
       navObj: 0,
+      onlyWeShow: false
     }
   },
   computed: {
@@ -642,6 +659,9 @@ export default {
       this.$emit("update-clicked")
       // this.$refs.portfolio_reporting_plan_update.hide()
     },
+    onlyWeShowToggle(e) {
+      this.onlyWeShow = e
+    }
   },
 }
 </script>
