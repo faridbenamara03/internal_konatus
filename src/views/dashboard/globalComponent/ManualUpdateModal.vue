@@ -298,11 +298,12 @@ export default {
       })
       this.$refs['my-modal'].hide()
     },
-    handleCalculateDate() {
-      console.log("CDD:")
-      if (this.startDateEstimated === '' || this.endDateEstimated === '') {
+    async handleCalculateDate() {
+      await this.$store.dispatch('globalState/get_end_date_estimated', { startDate: this.startDateEstimated })
+      this.endDateEstimated = this.$store.state.globalState.endDateEstimated
+      if (this.startDateEstimated === '' || this.endDateEstimated === '' || this.endDateEstimated === null) {
         this.showToast('warning', 'Invalid Date')
-        this.isDateValid = true
+        this.isDateValid = false
       } else {
         this.durationDateEstimated = moment.duration(this.startDateEstimated.diff(this.endDateEstimated)).asDays()
         this.isDateValid = true

@@ -97,6 +97,7 @@ export default {
     priorityOptions: [],
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
+    endDateEstimated: '',
     selectedWinRate: 0,
     selectedFromDate: moment('2024-01-01'),
     selectedToDate: moment('2024-12-31'),
@@ -450,7 +451,6 @@ export default {
       state.portfolioDemandData = payload.portData.demand
       if (payload.navData.type === 'program' || payload.navData.type === 'project' || payload.navData.type === 'subproject') {
         state.weTeamData = ['auto selection']
-        state.weJobData = []
         const pTeamData = payload.portData.demand !== null && payload.portData.demand !== undefined ? payload.portData.demand.teams : []
         if (pTeamData && pTeamData !== undefined) {
           pTeamData.map(pt => {
@@ -460,6 +460,21 @@ export default {
                 if (pActivity && pActivity.length > 0) {
                   pActivity.map(item => {
                     state.weTeamData.push(item.team_name)
+                    return null
+                  })
+                }
+                return null
+              })
+            }
+            return null
+          })
+          state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
+          pTeamData.map(pt => {
+            if (pt.phases && pt.phases.length > 0) {
+              pt.phases.map(pA => {
+                const pActivity = pA.activities
+                if (pActivity && pActivity.length > 0) {
+                  pActivity.map(item => {
                     state.weJobData.push(item.job_name)
                     return null
                   })
@@ -469,9 +484,8 @@ export default {
             }
             return null
           })
+          state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
         }
-        state.weTeamData = state.weTeamData.filter((value, index, array) => array.indexOf(value) === index)
-        state.weJobData = state.weJobData.filter((value, index, array) => array.indexOf(value) === index)
       }
       state.portfolioReportingData = JSON.parse(JSON.stringify(payload.portData.reporting))
       // state.portfolioReportingData = payload.portData.reporting
@@ -481,6 +495,9 @@ export default {
     SAVE_SELECTED_NAV_ID(state, navObj) {
       state.selectedNavId = navObj.id
       state.selectedNavObj = navObj
+    },
+    GET_END_DATE_ESTIMATED(state, payload) {
+      state.endDateEstimated = payload
     },
     ON_RANGE_CHANGE(state, betweenMonths) {
       state.customChartXLabel = weekNumbersArr(betweenMonths)
@@ -1168,6 +1185,23 @@ export default {
           .catch(err => {
             console.log('error getting optimized data ---->', err)
             Vue.$toast.error('Failed to get optimized data.')
+            reject(err)
+          })
+      })
+    },
+    get_end_date_estimated(data, params) {
+      return new Promise((resolve, reject) => {
+        axios.post('https://api.konatus.site/v1/api/phase/getend', params)
+          .then(response => {
+            setTimeout(() => {
+              const endDate = response.data
+              this.commit('globalState/GET_END_DATE_ESTIMATED', endDate)
+              resolve()
+            }, 10)
+          })
+          .catch(err => {
+            console.log('error getting end date estimated---->', err)
+            Vue.$toast.error('Failed to get end date estimated.')
             reject(err)
           })
       })

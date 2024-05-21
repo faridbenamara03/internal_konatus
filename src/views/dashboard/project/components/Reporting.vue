@@ -213,7 +213,6 @@
                 class="d-flex flex-column justify-content-around"
                 style="height:76px;padding:5px 10px 5px 3px;width:fit-content;"
               >
-                <!-- <div :style="`margin-bottom:5px;padding-left:${getStartPadding(item1, 0, true )}px`"> -->
                 <div :style="`margin-bottom:5px;`">
                   <ProjectProgressBar
                     :type="0"
@@ -705,7 +704,6 @@ export default {
     },
     onUpdate() {
       this.$emit("update-clicked")
-      // this.$refs.portfolio_reporting_plan_update.hide()
     },
   },
 }

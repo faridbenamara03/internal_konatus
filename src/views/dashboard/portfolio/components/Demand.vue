@@ -1381,7 +1381,7 @@ export default {
           },
         },
         xaxis: {
-          categories: ['budget', 'demand', 'quote + engaged', 'real estimated', 'authorized', 'spent'],
+          categories: ['budget', 'demand', 'engaged', 'real estimated', 'authorized', 'spent'],
           labels: {
             formatter: val => `€${val}`
           }
@@ -1672,7 +1672,7 @@ export default {
     c_series() {
       return [
         [{
-          title: 'Consumer Robots',
+          title: this.$store.state.globalState.selectedNavObj !== undefined ? this.$store.state.globalState.selectedNavObj.title : '',
           data: [this.c_totalBudget, this.c_totalDemand, this.c_totalQuote + this.c_totalEngaged, this.c_totalReal, this.c_totalAuthor, this.c_totalSpent],
         }]
       ]
