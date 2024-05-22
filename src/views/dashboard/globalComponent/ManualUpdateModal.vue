@@ -263,8 +263,8 @@ export default {
       this.fteNewEstimatedData = 0
       this.restNewEstimatedData = 0
       this.accNewEstimatedData = 0
-      this.startDateEstimated = ''
       this.durationEstimated = 0
+      this.durationDateEstimated = 0
       this.endDateEstimated = ''
       this.isAcc = 0
       this.isValid = false
@@ -353,12 +353,17 @@ export default {
           this.showToast('warning', 'Please Input non-zero for %acc R/E')
           return
         }
-        this.loadEstimatedData = this.isAcc === 2 ? parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0) : parseFloat(this.spentNewEstimatedData) + parseFloat(this.restNewEstimatedData)
-        this.fteEstimatedData = this.fteNewEstimatedData
-        this.spentData = this.spentNewEstimatedData
-        this.accEstimatedData = this.isAcc === 2 ? this.accNewEstimatedData : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData)) * 100
-        this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 100)))
-        this.isValid = true
+        try {
+          this.loadEstimatedData = this.isAcc === 2 ? parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0) : parseFloat(this.spentNewEstimatedData) + parseFloat(this.restNewEstimatedData)
+          this.fteEstimatedData = this.fteNewEstimatedData
+          this.spentData = this.spentNewEstimatedData
+          this.accEstimatedData = this.isAcc === 2 ? this.accNewEstimatedData : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData)) * 100
+          this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 100)))
+          this.isValid = true
+        } catch (e) {
+          this.showToast('warning', 'Invalid Data')
+          this.isValid = false
+        }
       }
     },
     handleChange() {
