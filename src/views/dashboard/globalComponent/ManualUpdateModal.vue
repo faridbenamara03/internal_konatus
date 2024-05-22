@@ -313,7 +313,7 @@ export default {
         const endDate = startDate.add(interval, 'days')
         this.endDateEstimated = endDate.format('MM/DD/YYYY')
       } else if (parseFloat(this.accEstimatedData) > 0) {
-        const startDate = moment(this.startDateEstimated)
+        const startDate = moment()
         const interval = (((1 - (parseFloat(this.accEstimatedData) / 100)) * parseFloat(this.loadEstimatedData)) / parseFloat(this.fteEstimatedData)) * 1.4
         const endDate = startDate.add(interval, 'days')
         this.endDateEstimated = endDate.format('MM/DD/YYYY')
