@@ -1246,8 +1246,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId1 = `${value.toUpperCase()}-${extype}-`
+        else this.externalId1 = exID
+      } else this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
       this.externalId = this.externalId1
       this.externalId2 = this.externalId1
     },
@@ -1450,8 +1451,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId2 = `${value.toUpperCase()}-${extype}-`
+        else this.externalId2 = exID
+      } else this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
     },
     handleCalculate() {
       if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
@@ -1522,8 +1524,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId1 = `${value.toUpperCase()}-${type}-`
+            else this.externalId1 = exID
+          } else this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 2:
           value = this.externalSystem2
@@ -1547,8 +1550,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId2 = `${value.toUpperCase()}-${type}-`
+            else this.externalId2 = exID
+          } else this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
           break
         default:
           break

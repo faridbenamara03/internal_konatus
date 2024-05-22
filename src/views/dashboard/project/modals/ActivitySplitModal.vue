@@ -1198,17 +1198,17 @@ export default {
       this.durationEstimated2 = this.durationEstimated - this.durationEstimated1
       this.fteEstimated2 = this.fteEstimated
 
-      const otype = this.$store.state.globalState.selectedNavObj.type
-      let extype = ''
-      switch (otype) {
+      let type = ''
+      const navObj = this.$store.state.globalState.selectedNavObj
+      switch (navObj.type) {
         case 'program':
-          extype = 'PROG'
+          type = 'PROG'
           break
         case 'project':
-          extype = 'PROJ'
+          type = 'PROJ'
           break
         case 'subproject':
-          extype = 'SUBPROJ'
+          type = 'SUBPROJ'
           break
         default:
           break
@@ -1236,8 +1236,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${type}-`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1453,8 +1454,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+            else this.externalId = exID
+          } else this.externalId = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 1:
           value = this.externalSystem1

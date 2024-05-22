@@ -644,8 +644,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${extype}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -777,8 +778,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${type}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${type}-`
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
