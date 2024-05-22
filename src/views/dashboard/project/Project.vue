@@ -110,7 +110,7 @@
               <b-button
                 v-if="!demandTableEditable"
                 v-b-modal.modal-link-project
-                :disabled="selectedWorkElement.length === 0"
+                :disabled="selectedNavObject.type !== 'project'"
                 class="ml-1"
                 variant="primary"
               >
@@ -557,6 +557,9 @@ export default {
   computed: {
     selectedWorkElement() {
       return this.$store.state.globalState.selectedWorkElement
+    },
+    selectedNavObject() {
+      return this.$store.state.globalState.selectedNavObj
     },
     openCreateNewProjectDrawer() {
       return this.$store.state.globalState.openCreateNewProjectDrawer

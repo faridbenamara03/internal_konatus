@@ -79,40 +79,58 @@ export default {
     totalProjects() {
       const projectLists = []
       const selectedNav = this.$store.state.globalState.selectedNavObj
-      if (selectedNav.type === 'program') {
-        const pOrganizations = this.$store.state.globalState.globalOrganizationData
-        if (pOrganizations && pOrganizations[0].children.length > 0) {
-          pOrganizations[0].children.forEach(portfolio => {
-            if (portfolio && portfolio.children.length > 0) {
-              portfolio.children.forEach(program => {
-                if (program && program.children.length > 0 && program.title === selectedNav.title) {
-                  program.children.forEach(project => {
-                    projectLists.push(project.title)
-                  })
-                }
-              })
-            }
-          })
-        }
-      } else if (selectedNav.type === 'project') {
-        projectLists.push(selectedNav.title)
+      if (selectedNav.type === 'project') {
+        const pAllProject = this.$store.state.globalState.allProjData
+        pAllProject.forEach(project => {
+          if (project.id !== selectedNav.id && this.selectedProjects.indexOf(project.title) < 0) projectLists.push(project.title)
+        })
       }
       return projectLists
     }
+  },
+  watch: {
+      '$store.state.globalState.selectedNavObj': {
+        immediate: true,
+        handler(newValue) {
+          const allDepends = this.$store.state.globalState.dependsProjectList
+          const parents = allDepends.filter(t => t.child_pg === newValue.id)
+          parents.forEach(parent => {
+            const foundParent = this.$store.state.globalState.allProjData.find(t => t.id === parent.parent_pg)
+            if (foundParent && this.selectedProjects.indexOf(foundParent.title) < 0) {
+              this.selectedProjects.push(foundParent.title)
+            }
+          })
+        },
+      },
+      '$store.state.globalState.dependsProjectList': {
+        immediate: true,
+        handler(newValue) {
+          const allDepends = newValue
+          const parents = allDepends.filter(t => t.child_pg === this.$store.state.globalState.selectedNavObj.id)
+          parents.forEach(parent => {
+            const foundParent = this.$store.state.globalState.allProjData.find(t => t.id === parent.parent_pg)
+            if (foundParent && this.selectedProjects.indexOf(foundParent.title) < 0) {
+              this.selectedProjects.push(foundParent.title)
+            }
+          })
+        },
+      },
   },
   methods: {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
     async handleSave() {
-      // this.$store.commit('globalState/SUBMIT_LINK_PROJECT')
-      // console.log("wes:", this.data, "selectedProjects", this.selectedProjects)
+      if (this.selectedProjects.length <= 0) {
+        this.showToast('warning', 'Please select at least 1 project')
+        return
+      }
       const payloads = {
-        selected_wes: this.data,
+        child_pg: this.$store.state.globalState.selectedNavObj.id,
         selected_projects: this.selectedProjects
       }
       await this.$store.dispatch('globalState/submit_link_project', payloads)
-      // this.showToast('success', 'Success Link Projects.')
+      await this.$store.dispatch('globalState/get_all_depends_projects')
       this.$refs['my-modal'].hide()
     },
     showToast(variant, title) {

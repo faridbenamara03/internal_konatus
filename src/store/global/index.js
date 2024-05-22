@@ -75,6 +75,7 @@ export default {
     allJobTitleData: [],
     allPhaseTitleData: [],
     allTeamTitleData: [],
+    dependsProjectList: [],
     allPortData: [],
     allProgData: [],
     allProjData: [],
@@ -270,6 +271,9 @@ export default {
       data.priorities.forEach(t => {
         state.priorityOptions.push(t.prior_label)
       })
+    },
+    LOAD_ALL_DEPENDS_DATA(state, data) {
+      state.dependsProjectList = data
     },
     LOAD_ALL_PHASE_DATA(state, data) {
       let phaseData = data
@@ -776,6 +780,21 @@ export default {
           })
       })
     },
+    get_all_depends_projects() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/depends/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_DEPENDS_DATA', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all depends data ---->', err)
+            Vue.$toast.error('Failed to get all depends data.')
+            reject(err)
+          })
+      })
+    },
     get_all_phases() {
       return new Promise((resolve, reject) => {
         axios.get('https://api.konatus.site/v1/api/phase/all')
@@ -978,8 +997,7 @@ export default {
     },
     submit_link_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('https://api.konatus.site/v1/api/phase/link', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('https://api.konatus.site/v1/api/project/link', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/SUBMIT_LINK_PROJECT', newData)
