@@ -347,7 +347,7 @@ export default {
         this.showToast('warning', 'Please input spent R/E data')
         this.isValid = false
       } else {
-        this.showToast('success', 'All Values are valid, ready to Calculate dates now')
+        this.showToast('success', 'All Values are valid')
         if (this.isAcc === 2 && parseFloat(this.accNewEstimatedData) === 0) {
           this.showToast('warning', 'Please Input non-zero for %acc R/E')
           return
