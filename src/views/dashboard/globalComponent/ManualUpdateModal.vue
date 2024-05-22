@@ -151,11 +151,24 @@
       <div class="row">
         <div class="col">
           <label>Start Date R/E</label>
-          <b-form-input
-            v-model="startDateEstimated"
-            type="date"
-            @input="updateDate($event)"
-          />
+          <b-input-group>
+            <b-form-input
+              v-model="startDateEstimated"
+              type="text"
+              placeholder="MM-DD-YYYY"
+              autocomplete="off"
+              readonly
+            ></b-form-input>
+            <b-input-group-append style="height:37px">
+              <b-form-datepicker
+                v-model="selectedStartDate"
+                button-only
+                button-variant="primary"
+                right
+                locale="en-US"
+              />
+            </b-input-group-append>
+          </b-input-group>
         </div>
         <div class="col">
           <label>Duration Date R/E</label>
@@ -204,7 +217,10 @@
 <script>
 import {
   BButton,
-  BFormInput
+  BFormInput,
+  BFormDatepicker,
+  BInputGroup,
+  BInputGroupAppend
 } from 'bootstrap-vue'
 import moment from "moment"
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
@@ -212,7 +228,10 @@ import ToastificationContent from '@core/components/toastification/Toastificatio
 export default {
   components: {
     BButton,
-    BFormInput
+    BFormInput,
+    BFormDatepicker,
+    BInputGroup,
+    BInputGroupAppend,
   },
   props: {
     selectedWE: {
@@ -235,19 +254,27 @@ export default {
       accNewEstimatedData: 0,
       restEstimatedData: 0,
       restNewEstimatedData: 0,
-      startDateEstimated: '',
+      startDateEstimated: null,
+      selectedStartDate: moment(),
       endDateEstimated: '',
       isValid: false,
-      isDateValid: false
+      isDateValid: false,
+      formattedDate: null
     }
   },
   watch: {
       selectedWE: {
-          immediate: true,
-          handler(newVal) {
-            this.initializeData(newVal) // ??
-          },
+        immediate: true,
+        handler(newVal) {
+          this.initializeData(newVal) // ??
+        },
       },
+      selectedStartDate: {
+        immediate: true,
+        handler(newVal) {
+          this.startDateEstimated = moment(newVal).format('MM-DD-YYYY')
+        },
+      }
   },
   methods: {
     initializeData(newWE) {
@@ -312,12 +339,12 @@ export default {
         const startDate = moment(this.startDateEstimated)
         const interval = (parseFloat(this.loadEstimatedData) / parseFloat(this.fteEstimatedData)) * 1.4
         const endDate = startDate.add(interval, 'days')
-        this.endDateEstimated = endDate.format('MM/DD/YYYY')
+        this.endDateEstimated = endDate.format('MM-DD-YYYY')
       } else if (parseFloat(this.accEstimatedData) > 0) {
         const startDate = moment()
         const interval = (((1 - (parseFloat(this.accEstimatedData) / 100)) * parseFloat(this.loadEstimatedData)) / parseFloat(this.fteEstimatedData)) * 1.4
         const endDate = startDate.add(interval, 'days')
-        this.endDateEstimated = endDate.format('MM/DD/YYYY')
+        this.endDateEstimated = endDate.format('MM-DD-YYYY')
       }
       if (this.startDateEstimated === '' || this.endDateEstimated === '' || this.endDateEstimated === null) {
         this.showToast('warning', 'Invalid Date')
@@ -368,9 +395,6 @@ export default {
     },
     handleChange() {
       this.isValid = false
-    },
-    updateDate(event) {
-      this.startDateEstimated = moment(event.target.value).format('MM-DD-YYYY')
     },
     showToast(variant, title) {
       this.$toast({
