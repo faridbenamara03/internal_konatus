@@ -299,10 +299,6 @@ export default {
       this.$refs['my-modal'].hide()
     },
     async handleCalculateDate() {
-      if (!this.isValid) {
-        this.showToast('warning', 'Please calculate values first.')
-        return
-      }
       if (this.startDateEstimated === null || this.startDateEstimated === undefined || this.startDateEstimated === '') {
         this.showToast('warning', 'Please select the start date.')
         return
