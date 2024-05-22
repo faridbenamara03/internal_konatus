@@ -154,6 +154,7 @@
           <b-form-input
             v-model="startDateEstimated"
             type="date"
+            @input="updateDate($event)"
           />
         </div>
         <div class="col">
@@ -362,6 +363,9 @@ export default {
     },
     handleChange() {
       this.isValid = false
+    },
+    updateDate(event) {
+      this.startDateEstimated = moment(event.target.value).format('MM-DD-YYYY')
     },
     showToast(variant, title) {
       this.$toast({
