@@ -144,7 +144,7 @@
             variant="primary"
             @click="handleCalculate"
           >
-            Calculate
+            Get Values
           </b-button>
         </div>
       </div>
@@ -159,7 +159,7 @@
         <div class="col">
           <label>Duration Date R/E</label>
           <b-form-input
-            v-model="durationEstimated"
+            v-model="durationDateEstimated"
             :disabled="true"
           />
         </div>
@@ -176,7 +176,7 @@
             variant="primary"
             @click="handleCalculateDate"
           >
-            Calculate
+            Calculate Date
           </b-button>
         </div>
       </div>
@@ -299,13 +299,34 @@ export default {
       this.$refs['my-modal'].hide()
     },
     async handleCalculateDate() {
-      await this.$store.dispatch('globalState/get_end_date_estimated', { startDate: this.startDateEstimated })
-      this.endDateEstimated = this.$store.state.globalState.endDateEstimated
+      if (!this.isValid) {
+        this.showToast('warning', 'Please calculate values first.')
+        return
+      }
+      if (this.startDateEstimated === null || this.startDateEstimated === undefined || this.startDateEstimated === '') {
+        this.showToast('warning', 'Please select the start date.')
+        return
+      }
+      if (parseFloat(this.fteEstimatedData) === 0) {
+        this.showToast('warning', 'Please Input non-zero value for FTE R/E.')
+        return
+      }
+      if (parseFloat(this.accEstimatedData) === 0) {
+        const startDate = moment(this.startDateEstimated)
+        const interval = (parseFloat(this.loadEstimatedData) / parseFloat(this.fteEstimatedData)) * 1.4
+        const endDate = startDate.add(interval, 'days')
+        this.endDateEstimated = endDate.format('MM/DD/YYYY')
+      } else if (parseFloat(this.accEstimatedData) > 0) {
+        const startDate = moment(this.startDateEstimated)
+        const interval = (((1 - (parseFloat(this.accEstimatedData) / 100)) * parseFloat(this.loadEstimatedData)) / parseFloat(this.fteEstimatedData)) * 1.4
+        const endDate = startDate.add(interval, 'days')
+        this.endDateEstimated = endDate.format('MM/DD/YYYY')
+      }
       if (this.startDateEstimated === '' || this.endDateEstimated === '' || this.endDateEstimated === null) {
         this.showToast('warning', 'Invalid Date')
         this.isDateValid = false
       } else {
-        this.durationDateEstimated = moment.duration(this.startDateEstimated.diff(this.endDateEstimated)).asDays()
+        this.durationDateEstimated = moment.duration(moment(this.endDateEstimated).diff(moment(this.startDateEstimated))).asDays()
         this.isDateValid = true
       }
     },
@@ -330,7 +351,11 @@ export default {
         this.showToast('warning', 'Please input spent R/E data')
         this.isValid = false
       } else {
-        this.showToast('success', 'All Values are valid, ready to Update now')
+        this.showToast('success', 'All Values are valid, ready to Calculate dates now')
+        if (this.isAcc === 2 && parseFloat(this.accNewEstimatedData) === 0) {
+          this.showToast('warning', 'Please Input non-zero for %acc R/E')
+          return
+        }
         this.loadEstimatedData = this.isAcc === 2 ? parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0) : parseFloat(this.spentNewEstimatedData) + parseFloat(this.restNewEstimatedData)
         this.fteEstimatedData = this.fteNewEstimatedData
         this.spentData = this.spentNewEstimatedData
