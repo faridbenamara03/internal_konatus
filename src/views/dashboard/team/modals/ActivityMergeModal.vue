@@ -1188,6 +1188,7 @@ export default {
       this.fteEstimated1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
       this.accData1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
       this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
+      this.spentData1 = parseFloat(this.loadEstimated1) - parseFloat(this.restData1)
       this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       this.selectedParents1 = []
@@ -1371,6 +1372,7 @@ export default {
       this.fteEstimated2 = selectedActivity.effort.fte_estimated
       this.accData2 = selectedActivity.acc
       this.restData2 = (1 - (parseFloat(this.accData2) / 100)) * parseFloat(this.loadEstimated2)
+      this.spentData2 = parseFloat(this.loadEstimated2) - parseFloat(this.restData2)
       this.loadDemand = parseFloat(this.loadDemand1) + parseFloat(this.loadDemand2)
       this.loadEngage = parseFloat(this.loadEngage1) + parseFloat(this.loadEngage2)
       this.loadEstimated = parseFloat(this.loadEstimated1) + parseFloat(this.loadEstimated2)

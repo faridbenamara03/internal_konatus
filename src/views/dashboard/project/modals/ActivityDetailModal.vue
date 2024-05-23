@@ -43,47 +43,46 @@
             {{ selectedActivityData.phase.id }}
           </p>
         </div>
-        <div style="display: flex">
-          <div>
-            <div style="text-align: end;">
-              <label
-                v-if="!externalEditable"
-                style="font-size: 14px; color: #898989;text-transform:none"
-              >
-                External System: {{ externalSystem }}
-              </label>
-              <div v-else>
-                <v-select
-                  v-model="externalSystem"
-                  :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                  placeholder="Select External System"
-                  outlined
-                  @input="updateExternalID"
-                />
-              </div>
-            </div>
-            <p
-              v-if="!externalEditable"
-              style="color: #bbbbbb;font-size: 16px;"
-            >
-              External Activity Id: {{ externalId }}
-            </p>
-            <div v-else>
+        <div style="display: flex;">
+          <div class="w-30">
+            <label>External System</label>
+            <v-select
+              v-model="externalSystem"
+              :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+              placeholder="Select External System"
+              outlined
+              @input="updateExternalID"
+            />
+          </div>
+          <div class="w-70 pl-1">
+            <label>System ID</label>
+            <div class="d-flex">
               <b-form-input
                 v-model="externalId"
                 placeholder="Input External Activity Id"
+                style="min-width:200px"
               />
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleUpdateExternal"
+              >
+                <feather-icon
+                  :icon="'SaveIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
+              <div
+                style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                @click="handleDeleteExternal"
+              >
+                <feather-icon
+                  :icon="'TrashIcon'"
+                  style="color: #7367f0"
+                  size="20"
+                />
+              </div>
             </div>
-          </div>
-          <div
-            style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-            @click="handleExternalEdit"
-          >
-            <feather-icon
-              :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
-              style="color: #7367f0"
-              size="20"
-            />
           </div>
         </div>
       </div>
@@ -413,7 +412,6 @@
       </b-button>
       <b-button
         variant="primary"
-        :disabled="!isValid"
         @click="handleSave"
       >
         Update
@@ -485,11 +483,9 @@ export default {
       skillset: 0,
       opt_skillset: 0,
       effortDetailShow: true,
-      externalSystems: [],
+      externalSystems: {},
+      externalId: "",
       externalSystem: "Jira",
-      externalId: "JIRA-",
-      exSystemString: '',
-      externalEditable: false,
       showEditPriority: false,
       showEditPhase: false,
       selectedParents: []
@@ -565,6 +561,7 @@ export default {
   methods: {
     async initializeData(data) {
       console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
+      await this.$store.dispatch('globalState/get_external_systems', { id: this.selectedActivityData.phase.projectId })
       const orgData = this.$store.state.globalState.allOrgData
       const { orgId } = this.$store.state.globalState.selectedNavObj
       orgData.map(item => {
@@ -600,47 +597,8 @@ export default {
           this.selectedParents.push(foundParent.title)
         }
       })
-      const otype = this.$store.state.globalState.selectedNavObj.type
-      let extype = ''
-      switch (otype) {
-        case 'program':
-          extype = 'PROG'
-          break
-        case 'project':
-          extype = 'PROJ'
-          break
-        case 'subproject':
-          extype = 'SUBPROJ'
-          break
-        default:
-          break
-      }
-      let exID = ''
-      const value = this.externalSystem
-      const exData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
-      if (exData !== null) {
-        switch (value) {
-          case 'Jira':
-            exID = exData.jira_idprogram
-            break
-          case 'SAP':
-            exID = exData.sap_idprogram
-            break
-          case 'Devops':
-            exID = exData.devops_idprogram
-            break
-          case 'primavera':
-            exID = exData.primavera_idprogram
-            break
-          case 'Deviprop':
-            exID = exData.deviprop_idprogram
-            break
-          default:
-            break
-        }
-        if (exID === null) this.externalId = `${value.toUpperCase()}-${extype}-`
-        else this.externalId = exID
-      } else this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
+      this.externalSystems = this.$store.state.globalState.externalSystemData.find(t => t.idwe === this.selectedActivityData.phase.id)
+      this.externalId = this.externalSystems !== undefined ? this.externalSystems.jira_idprogram : ""
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -733,55 +691,6 @@ export default {
         },
       })
     },
-    updateExternalID() {
-      let type = ''
-      const navObj = this.$store.state.globalState.selectedNavObj
-      switch (navObj.type) {
-        case 'program':
-          type = 'PROG'
-          break
-        case 'project':
-          type = 'PROJ'
-          break
-        case 'subproject':
-          type = 'SUBPROJ'
-          break
-        default:
-          break
-      }
-      let exID = ''
-      const value = this.externalSystem
-      const exData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
-      if (exData !== null) {
-        switch (value) {
-          case 'Jira':
-            exID = exData.jira_idprogram
-            break
-          case 'SAP':
-            exID = exData.sap_idprogram
-            break
-          case 'Devops':
-            exID = exData.devops_idprogram
-            break
-          case 'primavera':
-            exID = exData.primavera_idprogram
-            break
-          case 'Deviprop':
-            exID = exData.deviprop_idprogram
-            break
-          default:
-            break
-        }
-        if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
-        else this.externalId = exID
-      } else this.externalId = `${value.toUpperCase()}-${type}-`
-    },
-    handleExternalEdit() {
-      this.externalEditable = !this.externalEditable
-      this.externalSystems.push(this.externalSystem)
-      this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
-      this.exSystemString = this.externalSystems.toString()
-    },
     hideModal() {
       this.$emit('hideModal')
     },
@@ -813,7 +722,7 @@ export default {
         fte_engage: this.fteData,
         parents: selectedParentIDs,
         projectId: this.selectedActivityData.phase?.projectId,
-        externalSystem: this.externalId
+        externalSystems: this.externalSystems,
       }
       const requotedElements = this.$store.state.globalState.selectedWorkElement
       const index = requotedElements.indexOf(this.selectedActivityData.phase.id)
@@ -824,6 +733,7 @@ export default {
       this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       await this.$store.dispatch('globalState/load_org_data')
+      await this.$store.dispatch('globalState/get_external_systems', { id: this.selectedActivityData.phase.projectId })
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
@@ -847,6 +757,100 @@ export default {
     },
     effortDetailShowToggle(e) {
       this.effortDetailShow = e
+    },
+    updateExternalID() {
+      switch (this.externalSystem) {
+        case 'Jira':
+          this.externalId = this.externalSystems.jira_idprogram
+          break
+        case 'SAP':
+          this.externalId = this.externalSystems.sap_idprogram
+          break
+        case 'Devops':
+          this.externalId = this.externalSystems.devops_idprogram
+          break
+        case 'primavera':
+          this.externalId = this.externalSystems.primavera_idprogram
+          break
+        case 'Deviprop':
+          this.externalId = this.externalSystems.deviprop_idprogram
+          break
+        default:
+          break
+      }
+      if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
+        let type = ''
+        switch (this.$store.state.globalState.selectedNavObj.type) {
+          case 'program':
+            type = 'PROG'
+            break
+          case 'project':
+            type = 'PROJ'
+            break
+          case 'subproject':
+            type = 'SUBPROJ'
+            break
+          default:
+            break
+        }
+        const value = this.externalSystem
+        this.externalId = `${value.toUpperCase()}-${type}-`
+      }
+    },
+    handleUpdateExternal() {
+      switch (this.externalSystem) {
+        case 'Jira':
+          this.externalSystems.jira_idprogram = this.externalId
+          break
+        case 'SAP':
+          this.externalSystems.sap_idprogram = this.externalId
+          break
+        case 'Devops':
+          this.externalSystems.devops_idprogram = this.externalId
+          break
+        case 'Deviprop':
+          this.externalSystems.deviprop_idprogram = this.externalId
+          break
+        case 'primavera':
+          this.externalSystems.primavera_idprogram = this.externalId
+          break
+        default:
+          break
+      }
+    },
+    async handleDeleteExternal() {
+      const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
+        title: 'Please Confirm',
+        size: 'sm',
+        okVariant: 'primary',
+        okTitle: 'Yes',
+        cancelTitle: 'No',
+        cancelVariant: 'outline-secondary',
+        hideHeaderClose: false,
+        centered: true,
+      })
+      if (value) {
+        switch (this.externalSystem) {
+          case 'Jira':
+            this.externalSystems.jira_idprogram = ""
+            break
+          case 'SAP':
+            this.externalSystems.sap_idprogram = ""
+            break
+          case 'Devops':
+            this.externalSystems.devops_idprogram = ""
+            break
+          case 'Deviprop':
+            this.externalSystems.deviprop_idprogram = ""
+            break
+          case 'primavera':
+            this.externalSystems.primavera_idprogram = ""
+            break
+          default:
+            break
+        }
+        this.externalId = ""
+      }
     }
   },
 }

@@ -413,7 +413,6 @@
       </b-button>
       <b-button
         variant="primary"
-        :disabled="!isValid"
         @click="handleSave"
       >
         Update
