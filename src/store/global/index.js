@@ -71,6 +71,7 @@ export default {
     portfolioReportingData: [],
     tempReportingData: [],
     portfolioControlData: [],
+    allWeData: [],
     allPhaseData: [],
     allJobTitleData: [],
     allPhaseTitleData: [],
@@ -99,6 +100,7 @@ export default {
     selectedPhaseEndDate: 0,
     selectedPhaseStartDate: 0,
     endDateEstimated: '',
+    weDependsList: [],
     selectedWinRate: 0,
     selectedFromDate: moment('2024-01-01'),
     selectedToDate: moment('2024-12-31'),
@@ -271,6 +273,12 @@ export default {
       data.priorities.forEach(t => {
         state.priorityOptions.push(t.prior_label)
       })
+    },
+    LOAD_ALL_WE_DATA(state, data) {
+      state.allWeData = data
+    },
+    LOAD_ALL_WE_DEPENDS(state, data) {
+      state.weDependsList = data
     },
     LOAD_ALL_DEPENDS_DATA(state, data) {
       state.dependsProjectList = data
@@ -791,6 +799,36 @@ export default {
           .catch(err => {
             console.log('error getting all depends data ---->', err)
             Vue.$toast.error('Failed to get all depends data.')
+            reject(err)
+          })
+      })
+    },
+    get_all_we_depends() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/wedepends/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_WE_DEPENDS', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all we depends data ---->', err)
+            Vue.$toast.error('Failed to get all we depends data.')
+            reject(err)
+          })
+      })
+    },
+    get_all_workelements() {
+      return new Promise((resolve, reject) => {
+        axios.get('https://api.konatus.site/v1/api/we/all')
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_ALL_WE_DATA', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting all we data ---->', err)
+            Vue.$toast.error('Failed to get all we data.')
             reject(err)
           })
       })

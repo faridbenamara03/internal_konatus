@@ -1138,12 +1138,6 @@ export default {
       handler(newVal) {
         console.log("newData:", newVal)
       }
-    },
-    '$store.globalState.selectedActivityParents': {
-      immediate: true,
-      handler(newVal) {
-        this.selectedParents = newVal
-      }
     }
   },
   methods: {
@@ -1157,9 +1151,6 @@ export default {
         }
         return null
       })
-      if (this.selectedActivityData.phase !== undefined) {
-        await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
-      }
       this.loadEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
       this.durationEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
       this.fteEngage = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
@@ -1190,25 +1181,33 @@ export default {
       this.loadDemand2 = this.loadDemand - this.loadDemand1
       this.durationDemand2 = this.durationDemand - this.durationDemand1
       this.fteDemand2 = this.fteDemand
-
       this.loadEstimated1 = parseInt(this.loadEstimated / 2, 10)
       this.durationEstimated1 = parseInt(this.durationEstimated / 2, 10)
       this.fteEstimated1 = this.fteEstimated
       this.loadEstimated2 = this.loadEstimated - this.loadEstimated1
       this.durationEstimated2 = this.durationEstimated - this.durationEstimated1
       this.fteEstimated2 = this.fteEstimated
-
-      const otype = this.$store.state.globalState.selectedNavObj.type
-      let extype = ''
-      switch (otype) {
+      const allDepends = this.$store.state.globalState.weDependsList
+      const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
+      parents.forEach(parent => {
+        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+          this.selectedParents.push(foundParent.title)
+          this.selectedParents1.push(foundParent.title)
+          this.selectedParents2.push(foundParent.title)
+        }
+      })
+      let type = ''
+      const navObj = this.$store.state.globalState.selectedNavObj
+      switch (navObj.type) {
         case 'program':
-          extype = 'PROG'
+          type = 'PROG'
           break
         case 'project':
-          extype = 'PROJ'
+          type = 'PROJ'
           break
         case 'subproject':
-          extype = 'SUBPROJ'
+          type = 'SUBPROJ'
           break
         default:
           break
@@ -1236,8 +1235,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${type}-`
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1306,6 +1306,20 @@ export default {
         newA1.description = this.description1
         newA1.priority = priority1
         newA1.phase = phaseId1
+        let selectedParentIDs1 = []
+        this.$store.state.globalState.allWeData.forEach(a => {
+          const selected = this.selectedParents1.indexOf(a.title) > 0 ? a.id : -1
+          if (selected > 0) selectedParentIDs1.push(selected)
+        })
+        selectedParentIDs1 = selectedParentIDs1.filter((value, index, array) => array.indexOf(value) === index)
+        newA1.parents = selectedParentIDs1
+        let selectedParentIDs2 = []
+        this.$store.state.globalState.allWeData.forEach(a => {
+          const selected = this.selectedParents2.indexOf(a.title) > 0 ? a.id : -1
+          if (selected > 0) selectedParentIDs2.push(selected)
+        })
+        selectedParentIDs2 = selectedParentIDs2.filter((value, index, array) => array.indexOf(value) === index)
+        newA2.parents = selectedParentIDs2
         newA1.effort = {
           load_engage: this.loadEngage1,
           duration_engage: this.durationEngage1,
@@ -1350,12 +1364,14 @@ export default {
         this.title2 = ''
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
         await this.$store.dispatch('globalState/handle_activity_split', payloads)
-        await this.$store.dispatch('globalState/load_org_data')
+        await this.$store.dispatch('teamState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
-        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        await this.$store.dispatch('teamState/get_from_selected_nav_id', {
           data
         })
-      this.$emit('hideModal')
+        await this.$store.dispatch('globalState/get_all_we_depends')
+        await this.$store.dispatch('globalState/get_all_workelements')
+        this.$emit('hideModal')
       } else {
         this.$toast.warning('Input invalid!')
       }
@@ -1453,8 +1469,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+            else this.externalId = exID
+          } else this.externalId = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 1:
           value = this.externalSystem1

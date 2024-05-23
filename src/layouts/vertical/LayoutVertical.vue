@@ -34,6 +34,8 @@ export default {
     this.$store.dispatch('globalState/get_all_option_datas')
     this.$store.dispatch('globalState/get_all_phases')
     this.$store.dispatch('globalState/get_all_depends_projects')
+    this.$store.dispatch('globalState/get_all_we_depends')
+    this.$store.dispatch('globalState/get_all_workelements')
     this.$store.dispatch('globalState/get_all_portfolios')
     this.$store.dispatch('globalState/get_all_programs')
     this.$store.dispatch('globalState/get_all_projects')

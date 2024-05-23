@@ -1191,9 +1191,6 @@ export default {
         }
         return null
       })
-      if (this.selectedActivityData.phase !== undefined) {
-        await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
-      }
       this.loadEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
       this.durationEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
       this.fteEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
@@ -1207,6 +1204,14 @@ export default {
       this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
       this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
+      const allDepends = this.$store.state.globalState.weDependsList
+      const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
+      parents.forEach(parent => {
+        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+          this.selectedParents1.push(foundParent.title)
+        }
+      })
       this.toMerge = null
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
@@ -1246,8 +1251,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId1 = `${value.toUpperCase()}-${extype}-`
+        else this.externalId1 = exID
+      } else this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
       this.externalId = this.externalId1
       this.externalId2 = this.externalId1
     },
@@ -1310,20 +1316,10 @@ export default {
         this.merged.priority = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority) + 1
         this.merged.phase = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
         let selectedParentIDs = []
-        if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-          this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-            if (t.phases && t.phases.length > 0) {
-              t.phases.forEach(p => {
-                if (p.activities && p.activities.length > 0) {
-                  p.activities.forEach(a => {
-                    const selected = this.selectedParents.includes(a.title) ? a.id : -1
-                    if (selected > 0) selectedParentIDs.push(selected)
-                  })
-                }
-              })
-            }
-          })
-        }
+        this.$store.state.globalState.allWeData.forEach(a => {
+          const selected = this.selectedParents.indexOf(a.title) > 0 ? a.id : -1
+          if (selected > 0) selectedParentIDs.push(selected)
+        })
         selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
         this.merged.parents = this.selectedParentIDs
         let teamId = 0
@@ -1339,11 +1335,13 @@ export default {
           progId
         }
         await this.$store.dispatch('globalState/handle_activity_merge', payloads)
-        await this.$store.dispatch('globalState/load_org_data')
+        await this.$store.dispatch('teamState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
-        await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+        await this.$store.dispatch('teamState/get_from_selected_nav_id', {
           data
         })
+        await this.$store.dispatch('globalState/get_all_we_depends')
+        await this.$store.dispatch('globalState/get_all_workelements')
         this.toMerge = null
         this.$refs['my-modal'].hide()
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
@@ -1351,25 +1349,23 @@ export default {
     },
     async onActivitySelect(selectedActivityId) {
       let selectedActivity = {}
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (selectedActivityId === a.title) {
-                    selectedActivity = a
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (selectedActivityId === a.title) {
+          selectedActivity = a
+        }
+      })
       this.toMerge = selectedActivity
-      if (this.toMerge !== undefined) {
-        await this.$store.dispatch('globalState/get_parents_we_2', { id: this.toMerge.id })
-      }
+      const allDepends = this.$store.state.globalState.weDependsList
+      const parents = allDepends.filter(t => t.childid === selectedActivity.id)
+      parents.forEach(parent => {
+        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+          this.selectedParents2.push(foundParent.title)
+        }
+      })
+      this.selectedParents = []
+      this.selectedParents.push(this.selectedParents1)
+      this.selectedParents.push(this.selectedParents2)
       this.loadDemand2 = selectedActivity.effort.load_demand
       this.loadEngage2 = selectedActivity.effort.load_engage
       this.loadEstimated2 = selectedActivity.effort.load_estimated
@@ -1450,8 +1446,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId2 = `${value.toUpperCase()}-${extype}-`
+        else this.externalId2 = exID
+      } else this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
     },
     handleCalculate() {
       if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
@@ -1522,8 +1519,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId1 = `${value.toUpperCase()}-${type}-`
+            else this.externalId1 = exID
+          } else this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
           break
         case 2:
           value = this.externalSystem2
@@ -1547,8 +1545,9 @@ export default {
               default:
                 break
             }
-          }
-          this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
+            if (exID === null) this.externalId2 = `${value.toUpperCase()}-${type}-`
+            else this.externalId2 = exID
+          } else this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
           break
         default:
           break

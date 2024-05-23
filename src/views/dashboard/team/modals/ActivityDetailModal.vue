@@ -515,36 +515,16 @@ export default {
     },
     activityList() {
       const titleArr = []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
       return titleArr
     }
   },
@@ -564,12 +544,19 @@ export default {
         this.jobSelectHandle(newVal) // ??
       },
     },
-    '$store.globalState.selectedActivityParents': {
+    '$store.state.globalState.weDependsList': {
       immediate: true,
-      handler(newVal) {
-        this.selectedParents = newVal
-      }
-    }
+      handler(newValue) {
+        const allDepends = newValue
+        const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase?.id)
+        parents.forEach(parent => {
+          const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parent.parentid)
+          if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+            this.selectedParents.push(foundParent.title)
+          }
+        })
+      },
+    },
   },
   methods: {
     async initializeData(data) {
@@ -582,9 +569,6 @@ export default {
         }
         return null
       })
-      if (this.selectedActivityData.phase !== undefined) {
-        await this.$store.dispatch('globalState/get_parents_we', { id: this.selectedActivityData.phase.id })
-      }
       this.isValid = false
       this.weTitle = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
       this.weDescription = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
@@ -603,9 +587,14 @@ export default {
       this.selectedTeam = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.team_name : 0
       this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
-      // if (this.durationData === null || this.fteData === null || this.loadData === null || this.fteData === 0 || parseFloat(this.durationData) !== parseFloat(this.loadData) / parseFloat(this.fteData)) {
-      //   this.showToast('warning', 'Your Effort Data is not correct, Please remove one of the values')
-      // }
+      const allDepends = this.$store.state.globalState.weDependsList
+      const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
+      parents.forEach(parent => {
+        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+          this.selectedParents.push(foundParent.title)
+        }
+      })
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
       switch (otype) {
@@ -644,8 +633,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${extype}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${extype}-${exID}`
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -654,10 +644,10 @@ export default {
       this.showEditPhase = !this.showEditPhase
     },
     jobSelectHandle(data) {
-      const globalJobs = this.$store.state.globalState.globalOrganizationJobData[0]
+      const globalTeams = this.$store.state.globalState.globalOrganizationJobData[0]
       const tempTeamData = ['auto selection']
-      if (globalJobs !== undefined && globalJobs.children && globalJobs.children.length > 0) {
-        globalJobs.children.map(item => {
+      if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
+        globalTeams.children.map(item => {
           if (item.title === data) {
             if (item.children && item.children.length > 0) {
               item.children.map(t => {
@@ -740,7 +730,8 @@ export default {
     },
     updateExternalID() {
       let type = ''
-      switch (this.$store.state.globalState.selectedNavObj.type) {
+      const navObj = this.$store.state.globalState.selectedNavObj
+      switch (navObj.type) {
         case 'program':
           type = 'PROG'
           break
@@ -776,8 +767,9 @@ export default {
           default:
             break
         }
-      }
-      this.externalId = `${value.toUpperCase()}-${type}-${exID}`
+        if (exID === null) this.externalId = `${value.toUpperCase()}-${type}-`
+        else this.externalId = exID
+      } else this.externalId = `${value.toUpperCase()}-${type}-`
     },
     handleExternalEdit() {
       this.externalEditable = !this.externalEditable
@@ -795,20 +787,10 @@ export default {
       const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
       const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
       let selectedParentIDs = []
-      if (this.$store.state.teamState.teamDemandData && this.$store.state.globalState.teamDemandData.length > 0 && this.selectedParents) {
-        this.$store.state.teamState.teamDemandData.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  const selected = this.selectedParents.includes(a.title) ? a.id : -1
-                  if (selected > 0) selectedParentIDs.push(selected)
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        const selected = this.selectedParents.indexOf(a.title) > 0 ? a.id : -1
+        if (selected > 0) selectedParentIDs.push(selected)
+      })
       selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
       let teamId = 0
       if (teams !== undefined) teamId = teams.id
@@ -841,6 +823,7 @@ export default {
       await this.$store.dispatch('teamState/get_from_selected_nav_id', {
         data
       })
+      await this.$store.dispatch('globalState/get_all_we_depends')
       this.$emit('hideModal')
     },
     teamSelectHandle(value) {
