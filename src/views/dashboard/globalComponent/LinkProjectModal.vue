@@ -6,6 +6,7 @@
     centered
     no-fade
     hide-backdrop
+    no-close-on-backdrop
     static
   >
     <!-- Modal Header -->
