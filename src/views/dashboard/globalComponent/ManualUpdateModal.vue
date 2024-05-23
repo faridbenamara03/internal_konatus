@@ -303,8 +303,21 @@ export default {
     async handleSave() {
       const loadNewEstimatedData = this.isAcc === 1 ? parseFloat(this.restNewEstimatedData) + parseFloat(this.spentNewEstimatedData)
         : parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0)
+      const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedWE.team_name)
+      let teamId = 0
+      if (teams !== undefined) teamId = teams.id
       const payloads = {
         we_id: this.selectedWE.id,
+        description: this.selectedWE.description,
+        title: this.selectedWE.title,
+        load_engage: this.selectedWE.load_engage,
+        duration_engage: this.selectedWE.duration_engage,
+        fte_engage: this.selectedWE.fte_engage,
+        gateid: this.selectedWE.gateid,
+        priority: this.selectedWE.priority,
+        prbg_id: this.selectedWE.prbg_id,
+        jobid: this.selectedWE.jobid,
+        team_id: teamId,
         detail_mode: false,
         load_estimated: loadNewEstimatedData,
         acc: this.accNewEstimatedData,

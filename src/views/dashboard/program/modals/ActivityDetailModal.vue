@@ -38,7 +38,7 @@
     <div class="activity-modal--body">
       <div class="form-group header d-flex justify-content-between">
         <div>
-          <label>ACTIVITY ID</label>
+          <label>WE ID</label>
           <p v-if="selectedActivityData.phase">
             {{ selectedActivityData.phase.activityId }}
           </p>
@@ -71,7 +71,7 @@
             <div v-else>
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External Activity Id"
+                placeholder="Input External We Id"
               />
             </div>
           </div>

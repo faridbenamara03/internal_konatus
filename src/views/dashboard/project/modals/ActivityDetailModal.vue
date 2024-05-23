@@ -38,7 +38,7 @@
     <div class="activity-modal--body">
       <div class="form-group header d-flex justify-content-between">
         <div>
-          <label>ACTIVITY ID</label>
+          <label>WE ID</label>
           <p v-if="selectedActivityData.phase">
             {{ selectedActivityData.phase.id }}
           </p>
@@ -59,7 +59,7 @@
             <div class="d-flex">
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External Activity Id"
+                placeholder="Input External We Id"
                 style="min-width:200px"
               />
               <div
@@ -561,7 +561,9 @@ export default {
   methods: {
     async initializeData(data) {
       console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
-      await this.$store.dispatch('globalState/get_external_systems', { id: this.selectedActivityData.phase.projectId })
+      if (this.selectedActivityData.phase !== undefined) {
+        await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
+      }
       const orgData = this.$store.state.globalState.allOrgData
       const { orgId } = this.$store.state.globalState.selectedNavObj
       orgData.map(item => {
@@ -571,34 +573,55 @@ export default {
         return null
       })
       this.isValid = false
-      this.weTitle = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.title : ''
-      this.weDescription = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.description : ''
-      this.loadData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
-      this.durationData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
-      this.fteData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
-      this.loadDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_demand : 0
-      this.durationDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_demand : 0
-      this.fteDemandData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_demand : 0
-      this.accData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.acc : 0
-      this.loadEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_estimated : 0
-      this.restToDoData = (1 - parseFloat(this.accData) / 100) * this.loadEstimateData
-      this.durationEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_estimated : 0
-      this.fteEstimateData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_estimated : 0
-      this.selectedJob = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.job_name : 0
-      this.selectedTeam = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.team_name : 0
-      this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
-      this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       const allDepends = this.$store.state.globalState.weDependsList
       this.selectedParents = []
-      const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
-      parents.forEach(parent => {
-        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
-        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
-          this.selectedParents.push(foundParent.title)
+      if (this.selectedActivityData.phase !== undefined) {
+        this.weTitle = this.selectedActivityData.phase.title
+        this.weDescription = this.selectedActivityData.phase.description
+        this.loadData = this.selectedActivityData.phase.effort.load_engage
+        this.durationData = this.selectedActivityData.phase.effort.duration_engage
+        this.fteData = this.selectedActivityData.phase.effort.fte_engage
+        this.loadDemandData = this.selectedActivityData.phase.effort.load_demand
+        this.durationDemandData = this.selectedActivityData.phase.effort.duration_demand
+        this.fteDemandData = this.selectedActivityData.phase.effort.fte_demand
+        this.accData = this.selectedActivityData.phase.acc
+        this.loadEstimateData = this.selectedActivityData.phase.effort.load_estimated
+        this.restToDoData = (1 - parseFloat(this.accData) / 100) * this.loadEstimateData
+        this.durationEstimateData = this.selectedActivityData.phase.effort.duration_estimated
+        this.fteEstimateData = this.selectedActivityData.phase.effort.fte_estimated
+        this.selectedJob = this.selectedActivityData.phase.job_name
+        this.selectedTeam = this.selectedActivityData.phase.team_name
+        this.selectedPriority = this.priorityOptions[this.selectedActivityData.phase.priority - 1]
+        this.selectedPhase = this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1]
+        const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
+        parents.forEach(parent => {
+          const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+          if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+            this.selectedParents.push(foundParent.title)
+          }
+        })
+        this.externalSystems = this.$store.state.globalState.externalWeSystemData.find(t => t.idwe === this.selectedActivityData.phase.id)
+        if (this.externalSystems === undefined) {
+          this.externalSystems = {
+            driver_type: 2,
+            idprogram: this.selectedActivityData.phase.projectId,
+            idwe: this.selectedActivityData.phase.id,
+            jira_idprogram: null,
+            jira_idwe: null,
+            sap_idprogram: null,
+            sap_idwe: null,
+            deviprop_idprogram: null,
+            deviprop_idwe: null,
+            primavera_idprogram: null,
+            primavera_idwe: null,
+            devops_idprogram: null,
+            devops_idwe: null,
+            type: 2,
+            parent: null
+          }
         }
-      })
-      this.externalSystems = this.$store.state.globalState.externalSystemData.find(t => t.idwe === this.selectedActivityData.phase.id)
-      this.externalId = this.externalSystems !== undefined ? this.externalSystems.jira_idprogram : ""
+        this.externalId = this.externalSystems.jira_idprogram
+      }
     },
     onClickEditPriorityBtn() {
       this.showEditPriority = !this.showEditPriority
@@ -695,7 +718,6 @@ export default {
       this.$emit('hideModal')
     },
     async handleSave() {
-      // this.$store.commit('globalState/HANDLE_ACTIVITY_DETAIL_SAVE', this.selectedActivityData.phase)
       const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority) + 1
       const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
       const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
@@ -733,12 +755,13 @@ export default {
       this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       await this.$store.dispatch('globalState/load_org_data')
-      await this.$store.dispatch('globalState/get_external_systems', { id: this.selectedActivityData.phase.projectId })
+      await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
         data
       })
       await this.$store.dispatch('globalState/get_all_we_depends')
+      await this.$store.dispatch('globalState/get_all_workelements')
       this.$emit('hideModal')
     },
     teamSelectHandle(value) {

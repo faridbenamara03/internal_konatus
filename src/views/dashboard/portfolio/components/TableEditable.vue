@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     dateFormat(date) {
-      console.log("Date:", date)
       if (date) return moment(new Date(date)).format('MM-DD-YYYY')
       return null
     },

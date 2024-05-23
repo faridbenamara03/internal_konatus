@@ -53,6 +53,14 @@
       placeholder="Select Job"
       :options="allJobTitleData"
     />
+    <label>Team:</label>
+    <b-form-select
+      id="select-team"
+      v-model="selectedTeam"
+      class="mb-1"
+      placeholder="Select Team"
+      :options="c_teamData"
+    />
     <label>Phase:</label>
     <b-form-select
       id="select-phase"
@@ -110,6 +118,7 @@ export default {
       taskId: 'JIRA',
       gate: '',
       name: '',
+      c_teamData: this.$store.state.globalState?.weTeamData,
       selectedOptions: '',
       allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
       priorityOptions: this.$store.state.globalState.priorityOptions,
@@ -150,6 +159,12 @@ export default {
             this.selectedPhase = newValue?.phase
           },
       },
+      selectedJob: {
+        immediate: true,
+        handler(newVal) {
+          this.jobSelectHandle(newVal) // ??
+        },
+      },
   },
   methods: {
     async handleOk(e) {
@@ -161,6 +176,9 @@ export default {
         const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
         const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
         const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
+        const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
+        let teamId = 0
+        if (teams !== undefined) teamId = teams.id
         const data = this.$store.state.globalState.selectedNavObj
         await this.$store.dispatch('globalState/insert_new_task', {
           priority: priorityIndex !== -1 ? priorityIndex + 1 : 1,
@@ -168,6 +186,7 @@ export default {
           job_id: jobId,
           phase: phaseId !== -1 ? phaseId + 1 : 0,
           progId: data.id,
+          teamId,
           exsystem: this.selectedOptionsString
         })
         this.taskId = ''
@@ -177,7 +196,26 @@ export default {
           data
         })
       }
-    }
+    },
+    jobSelectHandle(data) {
+      const globalTeams = this.$store.state.globalState.globalOrganizationJobData[0]
+      const tempTeamData = ['auto selection']
+      if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
+        globalTeams.children.map(item => {
+          if (item.title === data) {
+            if (item.children && item.children.length > 0) {
+              item.children.map(t => {
+                tempTeamData.push(t.title)
+                return null
+              })
+            }
+          }
+          return null
+        })
+      }
+      this.c_teamData = tempTeamData
+      this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
+    },
   }
 }
 </script>

@@ -435,7 +435,6 @@ export default {
     },
     handleSelectWe(we) {
       this.selectedWE = we
-      // console.log("selectedWE:", we)
       this.$store.commit('teamState/SELECT_WORK_ELEMENT_TO_UPDATE', we)
     },
     handleManualUpdate(res) {
@@ -556,7 +555,6 @@ export default {
     },
     getTodayValue() {
       const startMoment = moment()
-      // const startMoment = moment('2024-01-04')
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = startMoment > firstMoment ? moment.duration(startMoment.diff(firstMoment)).asDays() : 0
       return duration === 0 ? 0 : parseInt((duration * 24) / this.selectedInterval, 10)
@@ -567,7 +565,6 @@ export default {
       const firstMoment = moment(this.reportingDates[0], "YYYY-MM-DD")
       const duration = firstDate > firstMoment ? moment.duration(firstDate.diff(firstMoment)).asDays() : 0
       const result = duration === 0 ? 0 : parseInt(duration * 24, 10) / this.selectedInterval
-      // if (item.id === 35) console.log("getPadding", result, "Item:", item)
       return result
     },
     handleZoomInterval(value) {

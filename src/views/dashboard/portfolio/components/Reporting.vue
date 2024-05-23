@@ -1080,7 +1080,6 @@ export default {
     getStartPadding(item, type, isChild) {
       let result = 0
       if (isChild) {
-        // if (item.id === 9 && type === 1) console.log('Item:', item)
         if (item.phases) {
           const pstarts = []
           let phIndex = 0

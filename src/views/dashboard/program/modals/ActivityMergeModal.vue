@@ -36,7 +36,7 @@
           </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
-              <label>ACTIVITY ID</label>
+              <label>WE ID</label>
               <p v-if="selectedActivityData.phase">
                 {{ selectedActivityData.phase.activityId }}
               </p>
@@ -69,7 +69,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId1"
-                    placeholder="Input External Activity Id"
+                    placeholder="Input External We Id"
                   />
                 </div>
               </div>
@@ -201,7 +201,7 @@
           </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
-              <label>ACTIVITY ID</label>
+              <label>WE ID</label>
               <p v-if="selectedActivityData.phase">
                 {{ toMerge ? toMerge.activityId : '' }}
               </p>
@@ -237,7 +237,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId2"
-                    placeholder="Input External Activity Id"
+                    placeholder="Input External We Id"
                   />
                 </div>
               </div>
@@ -386,7 +386,7 @@
           </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
-              <label>ACTIVITY ID</label>
+              <label>WE ID</label>
               <p v-if="selectedActivityData.phase">
                 {{ merged.activityId }}
               </p>
@@ -419,7 +419,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId3"
-                    placeholder="Input External Activity Id"
+                    placeholder="Input External We Id"
                   />
                 </div>
               </div>

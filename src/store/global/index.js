@@ -62,6 +62,9 @@ export default {
     optimizeState: 'origin',
     demandTableEditable: false,
     externalSystemData: [],
+    externalSystemData2: [],
+    externalWeSystemData: [],
+    externalWeSystemData2: [],
     globalOrganizationData: [],
     globalOrganizationUnitData: [],
     globalOrganizationJobData: [],
@@ -301,6 +304,15 @@ export default {
     },
     LOAD_EXTERNAL_SYSTEMS(state, data) {
       state.externalSystemData = data
+    },
+    LOAD_EXTERNAL_SYSTEMS2(state, data) {
+      state.externalSystemData2 = data
+    },
+    LOAD_EXTERNAL_SYSTEMS_WE(state, data) {
+      state.externalWeSystemData = data
+    },
+    LOAD_EXTERNAL_SYSTEMS2_WE(state, data) {
+      state.externalWeSystemData2 = data
     },
     LOAD_ALL_PORTFOLIO_DATA(state, data) {
       state.allPortData = data
@@ -893,6 +905,51 @@ export default {
           })
       })
     },
+    get_external_systems2(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`https://api.konatus.site/v1/api/external/get?id=${payload.id}`)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_EXTERNAL_SYSTEMS2', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting external systems2 ---->', err)
+            Vue.$toast.error('Failed to get external systems2.')
+            reject(err)
+          })
+      })
+    },
+    get_external_systems_we(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`https://api.konatus.site/v1/api/external/get_we?id=${payload.id}`)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_EXTERNAL_SYSTEMS_WE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting external systems ---->', err)
+            Vue.$toast.error('Failed to get external systems.')
+            reject(err)
+          })
+      })
+    },
+    get_external_systems2_we(commit, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`https://api.konatus.site/v1/api/external/get_we?id=${payload.id}`)
+          .then(response => {
+            const newData = response.data
+            this.commit('globalState/LOAD_EXTERNAL_SYSTEMS2_WE', newData)
+            resolve()
+          })
+          .catch(err => {
+            console.log('error getting external systems2 ---->', err)
+            Vue.$toast.error('Failed to get external systems2.')
+            reject(err)
+          })
+      })
+    },
     get_all_portfolios() {
       return new Promise((resolve, reject) => {
         axios.get('https://api.konatus.site/v1/api/portfolio/all')
@@ -1090,8 +1147,8 @@ export default {
             resolve()
           })
           .catch(err => {
-            console.log('error split work element---->', err)
-            Vue.$toast.error('Failed to split work element.')
+            console.log('error merge work element---->', err)
+            Vue.$toast.error('Failed to merge work element.')
             reject(err)
           })
       })

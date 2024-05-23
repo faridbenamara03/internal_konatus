@@ -132,7 +132,6 @@ export default {
       let baseUrl = ''
       const currentUrl = this.$router.history.current.path
       if (data.type === 'unit' || data.type === 'team' || data.type === 'user' || data.type === 'job' || data.type === 'organization') {
-        console.log("groupData:", data)
         this.$store.dispatch('teamState/get_from_selected_nav_id', { data })
         if (data.type === 'unit') {
           baseUrl = `/organization-unit/unit/${data.id}`

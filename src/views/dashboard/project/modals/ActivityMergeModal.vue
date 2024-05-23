@@ -36,52 +36,50 @@
           </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
-              <label>ACTIVITY ID</label>
+              <label>WE ID</label>
               <p v-if="selectedActivityData.phase">
                 {{ selectedActivityData.phase.id }}
               </p>
             </div>
             <div style="display: flex">
-              <div>
-                <div style="text-align: end;">
-                  <label
-                    v-if="!externalEditable1"
-                    style="font-size: 14px; color: #898989;text-transform:none"
+              <div class="w-30">
+                <label>Ex System</label>
+                <v-select
+                  v-model="externalSystem1"
+                  :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+                  placeholder="Select External System"
+                  outlined
+                  @input="updateExternalID(1)"
+                />
+              </div>
+              <div class="w-70 pl-1">
+                <label>System ID</label>
+                <div class="d-flex">
+                  <b-form-input
+                    v-model="externalId1"
+                    placeholder="Input External We Id"
+                  />
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleUpdateExternal(1)"
                   >
-                    External System: {{ externalSystem1 }}
-                  </label>
-                  <div v-else>
-                    <v-select
-                      v-model="externalSystem1"
-                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                      placeholder="Select External System"
-                      outlined
-                      @input="updateExternalID(1)"
+                    <feather-icon
+                      :icon="'SaveIcon'"
+                      style="color: #7367f0"
+                      size="20"
+                    />
+                  </div>
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleDeleteExternal(1)"
+                  >
+                    <feather-icon
+                      :icon="'TrashIcon'"
+                      style="color: #7367f0"
+                      size="20"
                     />
                   </div>
                 </div>
-                <p
-                  v-if="!externalEditable1"
-                  style="color: #bbbbbb;font-size: 16px;"
-                >
-                  External Activity Id: {{ externalId1 }}
-                </p>
-                <div v-else>
-                  <b-form-input
-                    v-model="externalId1"
-                    placeholder="Input External Activity Id"
-                  />
-                </div>
-              </div>
-              <div
-                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit(1)"
-              >
-                <feather-icon
-                  :icon="externalEditable1 ? 'SaveIcon' : 'Edit3Icon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
               </div>
             </div>
           </div>
@@ -313,7 +311,7 @@
           </div>
           <div class="form-group header d-flex justify-content-between">
             <div>
-              <label>ACTIVITY ID</label>
+              <label>WE ID</label>
               <p v-if="selectedActivityData.phase">
                 {{ toMerge ? toMerge.id : '' }}
               </p>
@@ -322,46 +320,44 @@
               v-if="toMerge"
               style="display: flex"
             >
-              <div>
-                <div style="text-align: end;">
-                  <label
-                    v-if="!externalEditable2"
-                    style="font-size: 14px; color: #898989;text-transform:none"
+              <div class="w-30">
+                <label>Ex System</label>
+                <v-select
+                  v-model="externalSystem2"
+                  :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+                  placeholder="Select External System"
+                  outlined
+                  @input="updateExternalID(2)"
+                />
+              </div>
+              <div class="w-70 pl-1">
+                <label>System ID</label>
+                <div class="d-flex">
+                  <b-form-input
+                    v-model="externalId2"
+                    placeholder="Input External We Id"
+                  />
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleUpdateExternal(2)"
                   >
-                    External System: {{ externalSystem2 }}
-                  </label>
-                  <div v-else>
-                    <v-select
-                      v-model="externalSystem2"
-                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                      placeholder="Select External System"
-                      outlined
-                      @input="updateExternalID(2)"
+                    <feather-icon
+                      :icon="'SaveIcon'"
+                      style="color: #7367f0"
+                      size="20"
+                    />
+                  </div>
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleDeleteExternal(2)"
+                  >
+                    <feather-icon
+                      :icon="'TrashIcon'"
+                      style="color: #7367f0"
+                      size="20"
                     />
                   </div>
                 </div>
-                <p
-                  v-if="!externalEditable2"
-                  style="color: #bbbbbb;font-size: 16px;"
-                >
-                  External Activity Id: {{ externalId2 }}
-                </p>
-                <div v-else>
-                  <b-form-input
-                    v-model="externalId2"
-                    placeholder="Input External Activity Id"
-                  />
-                </div>
-              </div>
-              <div
-                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit(2)"
-              >
-                <feather-icon
-                  :icon="externalEditable2 ? 'SaveIcon' : 'Edit3Icon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
               </div>
             </div>
           </div>
@@ -611,46 +607,44 @@
           </div>
           <div class="form-group header d-flex justify-content-end">
             <div style="display: flex">
-              <div>
-                <div style="text-align: end;">
-                  <label
-                    v-if="!externalEditable"
-                    style="font-size: 14px; color: #898989;text-transform:none"
+              <div class="w-30">
+                <label>Ex System</label>
+                <v-select
+                  v-model="externalSystem"
+                  :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
+                  placeholder="Select External System"
+                  outlined
+                  @input="updateExternalID(0)"
+                />
+              </div>
+              <div class="w-70 pl-1">
+                <label>System ID</label>
+                <div class="d-flex">
+                  <b-form-input
+                    v-model="externalId"
+                    placeholder="Input External We Id"
+                  />
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleUpdateExternal(0)"
                   >
-                    External System: {{ externalSystem }}
-                  </label>
-                  <div v-else>
-                    <v-select
-                      v-model="externalSystem"
-                      :options="['SAP', 'Jira', 'Devops', 'primavera', 'Deviprop']"
-                      placeholder="Select External System"
-                      outlined
-                      @input="updateExternalID(0)"
+                    <feather-icon
+                      :icon="'SaveIcon'"
+                      style="color: #7367f0"
+                      size="20"
+                    />
+                  </div>
+                  <div
+                    style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
+                    @click="handleDeleteExternal(0)"
+                  >
+                    <feather-icon
+                      :icon="'TrashIcon'"
+                      style="color: #7367f0"
+                      size="20"
                     />
                   </div>
                 </div>
-                <p
-                  v-if="!externalEditable"
-                  style="color: #bbbbbb;font-size: 16px;"
-                >
-                  External Activity Id: {{ externalId }}
-                </p>
-                <div v-else>
-                  <b-form-input
-                    v-model="externalId"
-                    placeholder="Input External Activity Id"
-                  />
-                </div>
-              </div>
-              <div
-                style="padding-top: 4px;margin-left: 5px;cursor: pointer;"
-                @click="handleExternalEdit(0)"
-              >
-                <feather-icon
-                  :icon="externalEditable ? 'SaveIcon' : 'Edit3Icon'"
-                  style="color: #7367f0"
-                  size="20"
-                />
               </div>
             </div>
           </div>
@@ -697,21 +691,21 @@
                 <label>Total Load</label>
                 <b-form-input
                   :value="loadEngage"
-                  readonly
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
                   :value="durationEngage"
-                  readonly
+                  type="number"
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
                   :value="fteEngage"
-                  readonly
+                  type="number"
                 />
               </div>
               <div class="col">
@@ -981,20 +975,14 @@ export default {
       showEditPhase2: false,
       selectedParents2: [],
       externalSystems: [],
+      externalId: "",
       externalSystem: "Jira",
-      externalId: "JIRA-",
-      exSystemString: '',
-      externalEditable: false,
       externalSystems1: [],
+      externalId1: "",
       externalSystem1: "Jira",
-      externalId1: "JIRA-",
-      exSystemString1: '',
-      externalEditable1: false,
       externalSystems2: [],
+      externalId2: "",
       externalSystem2: "Jira",
-      externalId2: "JIRA-",
-      exSystemString2: '',
-      externalEditable2: false
     }
   },
   computed: {
@@ -1006,77 +994,37 @@ export default {
     },
     activityList1() {
       const titleArr = []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
       return titleArr
     },
     activityList2() {
       const titleArr = []
       if (this.toMerged === null || this.toMerged === undefined) return []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId === a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId !== a.projectId) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId === a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId !== a.projectId) {
+          titleArr.push(a.title)
+        }
+      })
       return titleArr
     },
     activityList() {
       const titleArr = []
-      titleArr.push(this.activityList1)
-      titleArr.push(this.activityList2)
+      titleArr.push(...this.activityList1)
+      titleArr.push(...this.activityList2)
       return titleArr
     },
     totalEffortData1() {
@@ -1134,21 +1082,11 @@ export default {
     },
     toMergeList() {
       const titleArr = []
-      if (this.$store.state.globalState.portfolioDemandData.teams && this.$store.state.globalState.portfolioDemandData.teams.length > 0) {
-        this.$store.state.globalState.portfolioDemandData.teams.forEach(t => {
-          if (t.phases && t.phases.length > 0) {
-            t.phases.forEach(p => {
-              if (p.activities && p.activities.length > 0) {
-                p.activities.forEach(a => {
-                  if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id) {
-                    titleArr.push(a.title)
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
+      this.$store.state.globalState.allWeData.forEach(a => {
+        if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.id !== a.id) {
+          titleArr.push(a.title)
+        }
+      })
       return titleArr
     },
     c_TeamTitle() {
@@ -1169,6 +1107,9 @@ export default {
   methods: {
     async initializeData(newVal) {
       console.log("SD:", newVal)
+      if (this.selectedActivityData.phase !== undefined) {
+        await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
+      }
       const orgData = this.$store.state.globalState.allOrgData
       const { orgId } = this.$store.state.globalState.selectedNavObj
       orgData.map(item => {
@@ -1195,60 +1136,44 @@ export default {
       this.selectedParents2 = []
       this.selectedParents = []
       const allDepends = this.$store.state.globalState.weDependsList
-      const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
-      parents.forEach(parent => {
-        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
-        if (foundParent && this.selectedParents1.indexOf(foundParent.title) < 0) {
-          this.selectedParents1.push(foundParent.title)
-          this.selectedParents.push(foundParent.title)
+      if (this.selectedActivityData.phase !== undefined) {
+        const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
+        parents.forEach(parent => {
+          const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+          if (foundParent && this.selectedParents1.indexOf(foundParent.title) < 0) {
+            this.selectedParents1.push(foundParent.title)
+            this.selectedParents.push(foundParent.title)
+          }
+        })
+        this.selectedParents1 = this.selectedParents1.filter((value, index, array) => array.indexOf(value) === index)
+        this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
+        this.externalSystems2 = []
+        this.externalId2 = ""
+        this.externalSystems1 = this.$store.state.globalState.externalWeSystemData.find(t => t.idwe === this.selectedActivityData.phase.id)
+        if (this.externalSystems1 === undefined) {
+          this.externalSystems1 = {
+            driver_type: 2,
+            idprogram: this.selectedActivityData.phase.projectId,
+            idwe: this.selectedActivityData.phase.id,
+            jira_idprogram: null,
+            jira_idwe: null,
+            sap_idprogram: null,
+            sap_idwe: null,
+            deviprop_idprogram: null,
+            deviprop_idwe: null,
+            primavera_idprogram: null,
+            primavera_idwe: null,
+            devops_idprogram: null,
+            devops_idwe: null,
+            type: 2,
+            parent: null
+          }
         }
-      })
-      this.selectedParents1 = this.selectedParents1.filter((value, index, array) => array.indexOf(value) === index)
-      this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
-      this.toMerge = null
-      const otype = this.$store.state.globalState.selectedNavObj.type
-      let extype = ''
-      switch (otype) {
-        case 'program':
-          extype = 'PROG'
-          break
-        case 'project':
-          extype = 'PROJ'
-          break
-        case 'subproject':
-          extype = 'SUBPROJ'
-          break
-        default:
-          break
+        this.externalSystems = this.externalSystems1
+        this.externalId = this.externalSystems !== undefined ? this.externalSystems.jira_idprogram : ""
+        this.externalId1 = this.externalSystems1.jira_idprogram
       }
-      let exID = ''
-      const value = this.externalSystem1
-      const exData = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
-      if (exData !== null) {
-        switch (value) {
-          case 'Jira':
-            exID = exData.jira_idprogram
-            break
-          case 'SAP':
-            exID = exData.sap_idprogram
-            break
-          case 'Devops':
-            exID = exData.devops_idprogram
-            break
-          case 'primavera':
-            exID = exData.primavera_idprogram
-            break
-          case 'Deviprop':
-            exID = exData.deviprop_idprogram
-            break
-          default:
-            break
-        }
-        if (exID === null) this.externalId1 = `${value.toUpperCase()}-${extype}-`
-        else this.externalId1 = exID
-      } else this.externalId1 = `${value.toUpperCase()}-${extype}-${exID}`
-      this.externalId = this.externalId1
-      this.externalId2 = this.externalId1
+      this.toMerge = null
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1315,6 +1240,7 @@ export default {
         })
         selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
         this.merged.parents = this.selectedParentIDs
+        this.merged.externalSystems = this.externalSystems
         let teamId = 0
         if (teams !== undefined) teamId = teams.id
         const toMergedId1 = this.selectedActivityData.phase.id
@@ -1335,6 +1261,7 @@ export default {
         })
         await this.$store.dispatch('globalState/get_all_we_depends')
         await this.$store.dispatch('globalState/get_all_workelements')
+        await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
         this.toMerge = null
         this.$refs['my-modal'].hide()
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
@@ -1349,19 +1276,20 @@ export default {
       })
       this.toMerge = selectedActivity
       const allDepends = this.$store.state.globalState.weDependsList
-      const parents = allDepends.filter(t => t.childid === selectedActivity.id)
-      parents.forEach(parent => {
-        const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
-        if (foundParent && this.selectedParents2.indexOf(foundParent.title) < 0) {
-          this.selectedParents2.push(foundParent.title)
-        }
-      })
-      this.selectedParents2 = this.selectedParents2.filter((value, index, array) => array.indexOf(value) === index)
+      if (selectedActivity !== undefined) {
+        const parents = allDepends.filter(t => t.childid === selectedActivity.id)
+        parents.forEach(parent => {
+          const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
+          if (foundParent && this.selectedParents2.indexOf(foundParent.title) < 0) {
+            this.selectedParents2.push(foundParent.title)
+          }
+        })
+        this.selectedParents2 = this.selectedParents2.filter((value, index, array) => array.indexOf(value) === index)
+      }
       this.selectedParents = []
       this.selectedParents.push(...this.selectedParents1)
       this.selectedParents.push(...this.selectedParents2)
       this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
-      console.log("selectedActivity:", selectedActivity)
       this.loadDemand2 = selectedActivity.effort.load_demand
       this.loadEngage2 = selectedActivity.effort.load_engage
       this.loadEstimated2 = selectedActivity.effort.load_estimated
@@ -1401,51 +1329,48 @@ export default {
       }
       this.merged.acc = this.accData
       // this.merged.title = ''
-      this.merged.title = this.selectedActivityData.phase.title === null || this.selectedActivityData.phase.title === undefined
-      ? selectedActivity.title : this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
-      this.merged.description = this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined
-      ? selectedActivity.description : this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
-      const otype = this.$store.state.globalState.selectedNavObj.type
-      let extype = ''
-      switch (otype) {
-        case 'program':
-          extype = 'PROG'
-          break
-        case 'project':
-          extype = 'PROJ'
-          break
-        case 'subproject':
-          extype = 'SUBPROJ'
-          break
-        default:
-          break
+      if (this.selectedActivityData.phase.title !== null && this.selectedActivityData.phase.title !== undefined) {
+        if (selectedActivity.title !== undefined && selectedActivity.title !== null) {
+          this.merged.title = this.selectedActivityData.phase.title.concat(' - ') + selectedActivity.title
+        } else this.merged.title = this.selectedActivityData.phase.title
+      } else if (this.selectedActivityData.phase.title === null || this.selectedActivityData.phase.title === undefined) {
+        if (selectedActivity.title !== undefined && selectedActivity.title !== null) {
+          this.merged.title = selectedActivity.title
+        } else this.merged.title = ""
       }
-      let exID = ''
-      const value = this.externalSystem2
-      const exData = selectedActivity.phase.externalSystem
-      if (exData !== null) {
-        switch (value) {
-          case 'Jira':
-            exID = exData.jira_idprogram
-            break
-          case 'SAP':
-            exID = exData.sap_idprogram
-            break
-          case 'Devops':
-            exID = exData.devops_idprogram
-            break
-          case 'primavera':
-            exID = exData.primavera_idprogram
-            break
-          case 'Deviprop':
-            exID = exData.deviprop_idprogram
-            break
-          default:
-            break
+      if (this.selectedActivityData.phase.description !== null && this.selectedActivityData.phase.description !== undefined) {
+        if (selectedActivity.description !== undefined && selectedActivity.description !== null) {
+          this.merged.description = this.selectedActivityData.phase.description.concat(' - ') + selectedActivity.description
+        } else this.merged.description = this.selectedActivityData.phase.description
+      } else if (this.selectedActivityData.phase.description === null || this.selectedActivityData.phase.description === undefined) {
+        if (selectedActivity.description !== undefined && selectedActivity.description !== null) {
+          this.merged.description = selectedActivity.description
+        } else this.merged.description = ""
+      }
+      if (selectedActivity !== undefined) {
+        await this.$store.dispatch('globalState/get_external_systems2_we', { id: selectedActivity.prog_id })
+        this.externalSystems2 = this.$store.state.globalState.externalWeSystemData2.find(t => t.idwe === selectedActivity.id)
+        if (this.externalSystems2 === undefined) {
+          this.externalSystems2 = {
+            driver_type: 2,
+            idprogram: selectedActivity.prog_id,
+            idwe: selectedActivity.id,
+            jira_idprogram: null,
+            jira_idwe: null,
+            sap_idprogram: null,
+            sap_idwe: null,
+            deviprop_idprogram: null,
+            deviprop_idwe: null,
+            primavera_idprogram: null,
+            primavera_idwe: null,
+            devops_idprogram: null,
+            devops_idwe: null,
+            type: 2,
+            parent: null
+          }
         }
-        if (exID === null) this.externalId2 = `${value.toUpperCase()}-${extype}-`
-        else this.externalId2 = exID
-      } else this.externalId2 = `${value.toUpperCase()}-${extype}-${exID}`
+        this.externalId2 = this.externalSystems2 !== undefined ? this.externalSystems2.jira_idprogram : ""
+      }
     },
     handleCalculate() {
       if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
@@ -1468,110 +1393,6 @@ export default {
       } else {
         this.showToast('warning', 'Please enter valid values for Merged')
         this.isValid = false
-      }
-    },
-    updateExternalID(index) {
-      let type = ''
-      switch (this.$store.state.globalState.selectedNavObj.type) {
-        case 'program':
-          type = 'PROG'
-          break
-        case 'project':
-          type = 'PROJ'
-          break
-        case 'subproject':
-          type = 'SUBPROJ'
-          break
-        default:
-          break
-      }
-      let value = 0
-      const exData1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.externalSystem : null
-      const exData2 = this.toMerge !== undefined ? this.toMerge.externalSystem : null
-      let exID = ''
-      switch (index) {
-        case 0:
-          value = this.externalSystem
-          this.externalId = `${value.toUpperCase()}-${type}-${exID}`
-          break
-        case 1:
-          value = this.externalSystem1
-          if (exData1 !== null) {
-            switch (value) {
-              case 'Jira':
-                exID = exData1.jira_idprogram
-                break
-              case 'SAP':
-                exID = exData1.sap_idprogram
-                break
-              case 'Devops':
-                exID = exData1.devops_idprogram
-                break
-              case 'primavera':
-                exID = exData1.primavera_idprogram
-                break
-              case 'Deviprop1':
-                exID = exData1.deviprop_idprogram
-                break
-              default:
-                break
-            }
-            if (exID === null) this.externalId1 = `${value.toUpperCase()}-${type}-`
-            else this.externalId1 = exID
-          } else this.externalId1 = `${value.toUpperCase()}-${type}-${exID}`
-          break
-        case 2:
-          value = this.externalSystem2
-          if (exData2 !== null) {
-            switch (value) {
-              case 'Jira':
-                exID = exData2.jira_idprogram
-                break
-              case 'SAP':
-                exID = exData2.sap_idprogram
-                break
-              case 'Devops':
-                exID = exData2.devops_idprogram
-                break
-              case 'primavera':
-                exID = exData2.primavera_idprogram
-                break
-              case 'Deviprop':
-                exID = exData2.deviprop_idprogram
-                break
-              default:
-                break
-            }
-            if (exID === null) this.externalId2 = `${value.toUpperCase()}-${type}-`
-            else this.externalId2 = exID
-          } else this.externalId2 = `${value.toUpperCase()}-${type}-${exID}`
-          break
-        default:
-          break
-      }
-    },
-    handleExternalEdit(type) {
-      switch (type) {
-        case 0:
-          this.externalEditable = !this.externalEditable
-          this.externalSystems.push(this.externalSystem)
-          this.externalSystems = this.externalSystems.filter((value, index, array) => array.indexOf(value) === index)
-          this.exSystemString = this.externalSystems.toString()
-          break
-        case 1:
-          this.externalEditable1 = !this.externalEditable1
-          this.externalSystems1.push(this.externalSystem1)
-          this.externalSystems1 = this.externalSystems1.filter((value, index, array) => array.indexOf(value) === index)
-          this.exSystemString1 = this.externalSystems1.toString()
-          break
-        case 2:
-          this.externalEditable2 = !this.externalEditable2
-          this.externalSystems2.push(this.externalSystem2)
-          this.externalSystems2 = this.externalSystems2.filter((value, index, array) => array.indexOf(value) === index)
-          this.exSystemString2 = this.externalSystems2.toString()
-          break
-        default:
-          break
       }
     },
     onClickEditPriorityBtn(value) {
@@ -1615,6 +1436,242 @@ export default {
           break
       }
     },
+    updateExternalID(weType) {
+      let type = ''
+      switch (this.$store.state.globalState.selectedNavObj.type) {
+        case 'program':
+          type = 'PROG'
+          break
+        case 'project':
+          type = 'PROJ'
+          break
+        case 'subproject':
+          type = 'SUBPROJ'
+          break
+        default:
+          break
+      }
+      if (weType === 0) {
+        if (this.externalSystems !== undefined) {
+          switch (this.externalSystem) {
+            case 'Jira':
+              this.externalId = this.externalSystems.jira_idprogram
+              break
+            case 'SAP':
+              this.externalId = this.externalSystems.sap_idprogram
+              break
+            case 'Devops':
+              this.externalId = this.externalSystems.devops_idprogram
+              break
+            case 'primavera':
+              this.externalId = this.externalSystems.primavera_idprogram
+              break
+            case 'Deviprop':
+              this.externalId = this.externalSystems.deviprop_idprogram
+              break
+            default:
+              break
+          }
+        }
+        if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
+          const value = this.externalSystem
+          this.externalId = `${value.toUpperCase()}-${type}-`
+        }
+      } else if (weType === 1) {
+        if (this.externalSystems1 !== undefined) {
+          switch (this.externalSystem1) {
+            case 'Jira':
+              this.externalId1 = this.externalSystems1.jira_idprogram
+              break
+            case 'SAP':
+              this.externalId1 = this.externalSystems1.sap_idprogram
+              break
+            case 'Devops':
+              this.externalId1 = this.externalSystems1.devops_idprogram
+              break
+            case 'primavera':
+              this.externalId1 = this.externalSystems1.primavera_idprogram
+              break
+            case 'Deviprop':
+              this.externalId1 = this.externalSystems1.deviprop_idprogram
+              break
+            default:
+              break
+          }
+        }
+        if (this.externalId1 === '' || this.externalId1 === null || this.externalId1 === undefined) {
+          const value = this.externalSystem1
+          this.externalId1 = `${value.toUpperCase()}-${type}-`
+        }
+      } else if (weType === 2) {
+        if (this.externalSystems2 !== undefined) {
+          switch (this.externalSystem2) {
+            case 'Jira':
+              this.externalId2 = this.externalSystems2.jira_idprogram
+              break
+            case 'SAP':
+              this.externalId2 = this.externalSystems2.sap_idprogram
+              break
+            case 'Devops':
+              this.externalId2 = this.externalSystems2.devops_idprogram
+              break
+            case 'primavera':
+              this.externalId2 = this.externalSystems2.primavera_idprogram
+              break
+            case 'Deviprop':
+              this.externalId2 = this.externalSystems2.deviprop_idprogram
+              break
+            default:
+              break
+          }
+        }
+        if (this.externalId2 === '' || this.externalId2 === null || this.externalId2 === undefined) {
+          const value = this.externalSystem2
+          this.externalId2 = `${value.toUpperCase()}-${type}-`
+        }
+      }
+    },
+    handleUpdateExternal(weType) {
+      if (weType === 0) {
+        switch (this.externalSystem) {
+          case 'Jira':
+            this.externalSystems.jira_idprogram = this.externalId
+            break
+          case 'SAP':
+            this.externalSystems.sap_idprogram = this.externalId
+            break
+          case 'Devops':
+            this.externalSystems.devops_idprogram = this.externalId
+            break
+          case 'Deviprop':
+            this.externalSystems.deviprop_idprogram = this.externalId
+            break
+          case 'primavera':
+            this.externalSystems.primavera_idprogram = this.externalId
+            break
+          default:
+            break
+        }
+      } else if (weType === 1) {
+        switch (this.externalSystem1) {
+          case 'Jira':
+            this.externalSystems1.jira_idprogram = this.externalId1
+            break
+          case 'SAP':
+            this.externalSystems1.sap_idprogram = this.externalId1
+            break
+          case 'Devops':
+            this.externalSystems1.devops_idprogram = this.externalId1
+            break
+          case 'Deviprop':
+            this.externalSystems1.deviprop_idprogram = this.externalId1
+            break
+          case 'primavera':
+            this.externalSystems1.primavera_idprogram = this.externalId1
+            break
+          default:
+            break
+        }
+      } else if (weType === 2) {
+        switch (this.externalSystem2) {
+          case 'Jira':
+            this.externalSystems2.jira_idprogram = this.externalId2
+            break
+          case 'SAP':
+            this.externalSystems2.sap_idprogram = this.externalId2
+            break
+          case 'Devops':
+            this.externalSystems2.devops_idprogram = this.externalId2
+            break
+          case 'Deviprop':
+            this.externalSystems2.deviprop_idprogram = this.externalId2
+            break
+          case 'primavera':
+            this.externalSystems2.primavera_idprogram = this.externalId2
+            break
+          default:
+            break
+        }
+      }
+    },
+    async handleDeleteExternal(weType) {
+      const value = await this.$bvModal.msgBoxConfirm('Please confirm that you want to delete this.', {
+        title: 'Please Confirm',
+        size: 'sm',
+        okVariant: 'primary',
+        okTitle: 'Yes',
+        cancelTitle: 'No',
+        cancelVariant: 'outline-secondary',
+        hideHeaderClose: false,
+        centered: true,
+      })
+      if (value) {
+        if (weType === 0) {
+          switch (this.externalSystem) {
+            case 'Jira':
+              this.externalSystems.jira_idprogram = ""
+              break
+            case 'SAP':
+              this.externalSystems.sap_idprogram = ""
+              break
+            case 'Devops':
+              this.externalSystems.devops_idprogram = ""
+              break
+            case 'Deviprop':
+              this.externalSystems.deviprop_idprogram = ""
+              break
+            case 'primavera':
+              this.externalSystems.primavera_idprogram = ""
+              break
+            default:
+              break
+          }
+          this.externalId = ""
+        } else if (weType === 1) {
+          switch (this.externalSystem1) {
+            case 'Jira':
+              this.externalSystems1.jira_idprogram = ""
+              break
+            case 'SAP':
+              this.externalSystems1.sap_idprogram = ""
+              break
+            case 'Devops':
+              this.externalSystems1.devops_idprogram = ""
+              break
+            case 'Deviprop':
+              this.externalSystems1.deviprop_idprogram = ""
+              break
+            case 'primavera':
+              this.externalSystems1.primavera_idprogram = ""
+              break
+            default:
+              break
+          }
+          this.externalId1 = ""
+        } else if (weType === 2) {
+          switch (this.externalSystem2) {
+            case 'Jira':
+              this.externalSystems2.jira_idprogram = ""
+              break
+            case 'SAP':
+              this.externalSystems2.sap_idprogram = ""
+              break
+            case 'Devops':
+              this.externalSystems2.devops_idprogram = ""
+              break
+            case 'Deviprop':
+              this.externalSystems2.deviprop_idprogram = ""
+              break
+            case 'primavera':
+              this.externalSystems2.primavera_idprogram = ""
+              break
+            default:
+              break
+          }
+          this.externalId2 = ""
+        }
+      }
+    }
   }
 }
 </script>

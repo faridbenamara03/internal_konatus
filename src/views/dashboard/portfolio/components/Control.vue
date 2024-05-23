@@ -671,7 +671,6 @@ export default {
         })
       }
       tempFields = tempFields.filter((value, index, array) => array.indexOf(value) === index)
-      // console.log("Teams:", tempTeams, "TeamD1:", tempTeamData, "TeamD:", tempTeamData1)
       this.job_fields = tempFields
       const totalCap = this.data.capacity
       tempFields.map(jobField => {
