@@ -1199,9 +1199,11 @@ export default {
         const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
         if (foundParent && this.selectedParents1.indexOf(foundParent.title) < 0) {
           this.selectedParents1.push(foundParent.title)
+          this.selectedParents.push(foundParent.title)
         }
       })
       this.selectedParents1 = this.selectedParents1.filter((value, index, array) => array.indexOf(value) === index)
+      this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
       this.toMerge = null
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
@@ -1355,8 +1357,8 @@ export default {
       })
       this.selectedParents2 = this.selectedParents2.filter((value, index, array) => array.indexOf(value) === index)
       this.selectedParents = []
-      this.selectedParents.push(this.selectedParents1)
-      this.selectedParents.push(this.selectedParents2)
+      this.selectedParents.push(...this.selectedParents1)
+      this.selectedParents.push(...this.selectedParents2)
       this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
       this.loadDemand2 = selectedActivity.effort.load_demand
       this.loadEngage2 = selectedActivity.effort.load_engage
