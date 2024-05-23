@@ -1164,20 +1164,6 @@ export default {
       handler(newVal) {
         this.initializeData(newVal) // ??
       }
-    },
-    '$store.globalState.selectedActivityParents': {
-      immediate: true,
-      handler(newVal) {
-        this.selectedParents1 = newVal
-        this.selectedParents.push(newVal)
-      }
-    },
-    '$store.globalState.selectedActivityParents2': {
-      immediate: true,
-      handler(newVal) {
-        this.selectedParents2 = newVal
-        this.selectedParents.push(newVal)
-      }
     }
   },
   methods: {
@@ -1204,14 +1190,20 @@ export default {
       this.restData1 = (1 - (parseFloat(this.accData1) / 100)) * parseFloat(this.loadEstimated1)
       this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
+      this.selectedParents1 = []
+      this.selectedParents2 = []
+      this.selectedParents = []
       const allDepends = this.$store.state.globalState.weDependsList
       const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
       parents.forEach(parent => {
         const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
-        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+        if (foundParent && this.selectedParents1.indexOf(foundParent.title) < 0) {
           this.selectedParents1.push(foundParent.title)
+          this.selectedParents.push(foundParent.title)
         }
       })
+      this.selectedParents1 = this.selectedParents1.filter((value, index, array) => array.indexOf(value) === index)
+      this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
       this.toMerge = null
       const otype = this.$store.state.globalState.selectedNavObj.type
       let extype = ''
@@ -1317,8 +1309,8 @@ export default {
         this.merged.phase = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase) + 1
         let selectedParentIDs = []
         this.$store.state.globalState.allWeData.forEach(a => {
-          const selected = this.selectedParents.indexOf(a.title) > 0 ? a.id : -1
-          if (selected > 0) selectedParentIDs.push(selected)
+          const selected = this.selectedParents.find(p => p === a.title)
+          if (selected !== undefined && selected !== null) selectedParentIDs.push(a.id)
         })
         selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
         this.merged.parents = this.selectedParentIDs
@@ -1359,13 +1351,15 @@ export default {
       const parents = allDepends.filter(t => t.childid === selectedActivity.id)
       parents.forEach(parent => {
         const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
-        if (foundParent && this.selectedParents.indexOf(foundParent.title) < 0) {
+        if (foundParent && this.selectedParents2.indexOf(foundParent.title) < 0) {
           this.selectedParents2.push(foundParent.title)
         }
       })
+      this.selectedParents2 = this.selectedParents2.filter((value, index, array) => array.indexOf(value) === index)
       this.selectedParents = []
-      this.selectedParents.push(this.selectedParents1)
-      this.selectedParents.push(this.selectedParents2)
+      this.selectedParents.push(...this.selectedParents1)
+      this.selectedParents.push(...this.selectedParents2)
+      this.selectedParents = this.selectedParents.filter((value, index, array) => array.indexOf(value) === index)
       this.loadDemand2 = selectedActivity.effort.load_demand
       this.loadEngage2 = selectedActivity.effort.load_engage
       this.loadEstimated2 = selectedActivity.effort.load_estimated

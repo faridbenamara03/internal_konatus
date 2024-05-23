@@ -508,7 +508,11 @@ export default {
       return { tLoad: load, tDuration: duration, tFte: fte }
     },
     c_JobData() {
-      return this.$store.state.globalState.weJobData
+      const resultArr = []
+      this.$store.state.globalState.allJobTitleData.forEach(j => {
+        resultArr.push(j.title)
+      })
+      return resultArr
     },
     c_SelectedActivity() {
       return this.selectedActivityData
@@ -588,6 +592,7 @@ export default {
       this.selectedPriority = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
       const allDepends = this.$store.state.globalState.weDependsList
+      this.selectedParents = []
       const parents = allDepends.filter(t => t.childid === this.selectedActivityData.phase.id)
       parents.forEach(parent => {
         const foundParent = this.$store.state.globalState.allWeData.find(t => t.id === parseInt(parent.parentid, 10))
@@ -788,8 +793,8 @@ export default {
       const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
       let selectedParentIDs = []
       this.$store.state.globalState.allWeData.forEach(a => {
-        const selected = this.selectedParents.indexOf(a.title) > 0 ? a.id : -1
-        if (selected > 0) selectedParentIDs.push(selected)
+        const selected = this.selectedParents.find(p => p === a.title)
+        if (selected !== undefined && selected !== null) selectedParentIDs.push(a.id)
       })
       selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
       let teamId = 0

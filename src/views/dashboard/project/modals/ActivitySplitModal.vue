@@ -1308,15 +1308,15 @@ export default {
         newA1.phase = phaseId1
         let selectedParentIDs1 = []
         this.$store.state.globalState.allWeData.forEach(a => {
-          const selected = this.selectedParents1.indexOf(a.title) > 0 ? a.id : -1
-          if (selected > 0) selectedParentIDs1.push(selected)
+          const selected = this.selectedParents1.find(p => p === a.title)
+          if (selected !== undefined && selected !== null) selectedParentIDs1.push(a.id)
         })
         selectedParentIDs1 = selectedParentIDs1.filter((value, index, array) => array.indexOf(value) === index)
         newA1.parents = selectedParentIDs1
         let selectedParentIDs2 = []
         this.$store.state.globalState.allWeData.forEach(a => {
-          const selected = this.selectedParents2.indexOf(a.title) > 0 ? a.id : -1
-          if (selected > 0) selectedParentIDs2.push(selected)
+          const selected = this.selectedParents2.find(p => p === a.title)
+          if (selected !== undefined && selected !== null) selectedParentIDs2.push(a.id)
         })
         selectedParentIDs2 = selectedParentIDs2.filter((value, index, array) => array.indexOf(value) === index)
         newA2.parents = selectedParentIDs2
