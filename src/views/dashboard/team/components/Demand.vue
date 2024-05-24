@@ -30,7 +30,8 @@
               :team="item1"
               :index="index1"
               :index0="index"
-              state="phase"
+              state="job"
+              :teamttle="item1.job"
               @openDetailActivity="(activity, team) => handleActivityDetails(activity, team)"
               @selectActivity="(e, activityId) => handleSelectActivity(e, activityId)"
             />
@@ -115,6 +116,7 @@ export default {
         }
         resultPhases.push(tempPhase)
       })
+      console.log('result', resultPhases)
       return resultPhases
     }
   },

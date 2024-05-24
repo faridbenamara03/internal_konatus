@@ -562,7 +562,7 @@ export default {
   methods: {
     async initializeData(data) {
       console.log("InitData:", data, "selectedData:", this.selectedActivityData, "teamData:", this.teamdata)
-      if (this.selectedActivityData.phase !== undefined) {
+      if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.projectId !== null) {
         await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       }
       const orgData = this.$store.state.globalState.allOrgData
@@ -650,7 +650,7 @@ export default {
       this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
     },
     handleCalculate() {
-      if (this.fteData !== '' && this.durationData !== '' && this.loadData !== '') {
+      if (this.fteData !== '' && !Number.isNaN(this.fteData) && !Number.isNaN(this.durationData) && !Number.isNaN(this.loadData) && this.durationData !== '' && this.loadData !== '') {
         if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) === 0 && parseFloat(this.fteData) === 0) {
           this.showToast('warning', 'Please enter valid values')
           this.isValid = false
@@ -758,7 +758,6 @@ export default {
       this.$store.commit('globalState/WORK_ELEMENT_CHECK', requotedElements)
       this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
-      await this.$store.dispatch('globalState/load_org_data')
       await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {

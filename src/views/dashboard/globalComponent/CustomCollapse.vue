@@ -305,15 +305,24 @@ export default {
     },
     async handleInsertNewWorkElement() {
       let sPhase = ''
+      let sJob = ''
+      let sProject = ''
       if (this.state === 'team') {
         sPhase = this.team.title !== null && this.team.title !== undefined ? this.team.title.toString().replace(/\s/g, '') : ""
+        sJob = this.teamttle
       } else if (this.state === 'phase') {
         sPhase = this.team.phase !== null && this.team.phase !== undefined ? this.team.phase.toString().replace(/\s/g, '') : ""
+        sJob = this.teamttle
+      } else if (this.state === 'job') {
+        sPhase = this.team.phase !== null && this.team.phase !== undefined ? this.team.phase.toString().replace(/\s/g, '') : ""
+        sJob = this.teamttle
+        sProject = this.team.title
       }
-      console.log('sphase:', sPhase, 'job:', this.teamttle)
+      console.log('sphase:', sPhase, 'job:', sJob, 'project:', sProject)
       await this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
-        job: this.teamttle,
-        phase: sPhase
+        job: sJob,
+        phase: sPhase,
+        project: sProject
       })
     }
   }

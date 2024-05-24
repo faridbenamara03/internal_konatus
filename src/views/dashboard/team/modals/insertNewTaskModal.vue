@@ -45,6 +45,14 @@
       placeholder="WorK Element Name"
       class="mb-1"
     />
+    <label>Project:</label>
+    <b-form-select
+      id="select-job"
+      v-model="selectedProject"
+      class="mb-1"
+      placeholder="Select Project"
+      :options="c_ProjectData"
+    />
     <label>Job:</label>
     <b-form-select
       id="select-job"
@@ -52,6 +60,14 @@
       class="mb-1"
       placeholder="Select Job"
       :options="allJobTitleData"
+    />
+    <label>Team:</label>
+    <b-form-select
+      id="select-team"
+      v-model="selectedTeam"
+      class="mb-1"
+      placeholder="Select Team"
+      :options="c_teamData"
     />
     <label>Phase:</label>
     <b-form-select
@@ -83,7 +99,7 @@
 
 <script>
 import {
-  BModal, VBModal, BFormInput, BFormSelect, BFormCheckbox, BDropdown
+  BModal, VBModal, BFormInput, BFormSelect, BFormCheckbox, BDropdown, BDropdownItem
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { isEmpty } from '../../../utils'
@@ -94,7 +110,8 @@ export default {
     BFormInput,
     BFormSelect,
     BFormCheckbox,
-    BDropdown
+    BDropdown,
+    BDropdownItem
   },
   directives: {
     'b-modal': VBModal,
@@ -110,12 +127,14 @@ export default {
       taskId: 'JIRA',
       gate: '',
       name: '',
+      c_teamData: this.$store.state.globalState?.weTeamData,
       selectedOptions: '',
       allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
+      selectedProject: 'project',
       priorityOptions: this.$store.state.globalState.priorityOptions,
       selectedJob: this.$store.state.globalState.parentTeamTitle?.job,
       selectedPhase: this.$store.state.globalState.parentTeamTitle?.phase,
-      selectedPriority: '',
+      selectedPriority: 'highest',
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },
@@ -140,15 +159,31 @@ export default {
         titleData.push(j.title)
       })
       return titleData
+    },
+    c_ProjectData() {
+      const titleData = []
+      const allProjects = this.$store.state.globalState.allProjData
+      allProjects.forEach(p => {
+        titleData.push(p.title)
+      })
+      return titleData
     }
   },
   watch: {
       '$store.state.globalState.parentTeamTitle': {
           immediate: true,
           handler(newValue) {
+            this.name = ''
             this.selectedJob = newValue?.job
             this.selectedPhase = newValue?.phase
+            this.selectedProject = newValue?.project
           },
+      },
+      selectedJob: {
+        immediate: true,
+        handler(newVal) {
+          this.jobSelectHandle(newVal) // ??
+        },
       },
   },
   methods: {
@@ -161,23 +196,50 @@ export default {
         const priorityIndex = this.$store.state.globalState.priorityOptions.findIndex(p => p === this.selectedPriority)
         const jobId = this.$store.state.globalState.allJobTitleData.find(job => job.title === this.selectedJob).id
         const phaseId = this.$store.state.globalState.allPhaseTitleData.findIndex(phase => phase === this.selectedPhase)
-        const data = this.$store.state.globalState.selectedNavObj
+        const teams = this.$store.state.globalState.allTeamTitleData.find(team => team.title === this.selectedTeam)
+        let teamId = 0
+        if (teams !== undefined) teamId = teams.id
+        const sProject = this.$store.state.globalState.allProjData.find(p => p.title === this.selectedProject)
+        let projId = 0
+        if (sProject !== undefined) projId = sProject.id
         await this.$store.dispatch('globalState/insert_new_task', {
           priority: priorityIndex !== -1 ? priorityIndex + 1 : 1,
           name: this.name,
           job_id: jobId,
           phase: phaseId !== -1 ? phaseId + 1 : 0,
-          progId: data.id,
+          progId: projId,
+          teamId,
           exsystem: this.selectedOptionsString
         })
         this.taskId = ''
         this.gate = ''
-        await this.$store.dispatch('teamState/load_org_data')
+        const data = this.$store.state.teamState.selectedNavObj
+        console.log('nav', data)
         await this.$store.dispatch('teamState/get_from_selected_nav_id', {
           data
         })
+        await this.$store.dispatch('globalState/get_all_workelements')
       }
-    }
+    },
+    jobSelectHandle(data) {
+      const globalTeams = this.$store.state.globalState.globalOrganizationJobData[0]
+      const tempTeamData = []
+      if (globalTeams !== undefined && globalTeams.children && globalTeams.children.length > 0) {
+        globalTeams.children.map(item => {
+          if (item.title === data) {
+            if (item.children && item.children.length > 0) {
+              item.children.map(t => {
+                tempTeamData.push(t.title)
+                return null
+              })
+            }
+          }
+          return null
+        })
+      }
+      this.c_teamData = tempTeamData
+      this.selectedTeam = tempTeamData && tempTeamData.length > 0 ? tempTeamData[0] : ""
+    },
   }
 }
 </script>

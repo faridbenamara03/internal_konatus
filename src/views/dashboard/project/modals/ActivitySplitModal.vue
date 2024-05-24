@@ -1116,7 +1116,7 @@ export default {
   methods: {
     async initializeData(newVal) {
       console.log("SD:", newVal)
-      if (this.selectedActivityData.phase !== undefined) {
+      if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.projectId !== null) {
         await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       }
       const orgData = this.$store.state.globalState.allOrgData
@@ -1331,7 +1331,6 @@ export default {
         this.title2 = ''
         this.$store.commit('globalState/HIDE_ACTIVITY_DETAIL_MODAL')
         await this.$store.dispatch('globalState/handle_activity_split', payloads)
-        await this.$store.dispatch('globalState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
           data

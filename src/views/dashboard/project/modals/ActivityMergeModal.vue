@@ -670,7 +670,7 @@
             <div class="select-box">
               <label>Description</label>
               <b-form-textarea
-                :value="merged.description"
+                v-model="merged.description"
                 rows="5"
               />
             </div>
@@ -1009,14 +1009,14 @@ export default {
     },
     activityList2() {
       const titleArr = []
-      if (this.toMerged === null || this.toMerged === undefined) return []
+      if (this.toMerge === null || this.toMerge === undefined) return []
       this.$store.state.globalState.allWeData.forEach(a => {
-        if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId === a.projectId) {
+        if (this.toMerge !== undefined && this.toMerge.id !== a.id && this.toMerge.projectId === a.projectId) {
           titleArr.push(a.title)
         }
       })
       this.$store.state.globalState.allWeData.forEach(a => {
-        if (this.toMerged !== undefined && this.toMerged.id !== a.id && this.toMerged.projectId !== a.projectId) {
+        if (this.toMerge !== undefined && this.toMerge.id !== a.id && this.toMerge.projectId !== a.projectId) {
           titleArr.push(a.title)
         }
       })
@@ -1109,7 +1109,7 @@ export default {
   methods: {
     async initializeData(newVal) {
       console.log("SD:", newVal)
-      if (this.selectedActivityData.phase !== undefined) {
+      if (this.selectedActivityData.phase !== undefined && this.selectedActivityData.phase.projectId !== null) {
         await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       }
       const orgData = this.$store.state.globalState.allOrgData
@@ -1120,6 +1120,7 @@ export default {
         }
         return null
       })
+      this.selectedActivity = null
       this.loadEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.load_engage : 0
       this.durationEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.duration_engage : 0
       this.fteEngage1 = this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.effort.fte_engage : 0
@@ -1178,6 +1179,7 @@ export default {
         this.externalId1 = this.externalSystems1.jira_idprogram
       }
       this.toMerge = null
+      this.selectedActivity = null
     },
     effortChange1(field, index, e) {
       if (field === "skill" && !e) {
@@ -1249,6 +1251,17 @@ export default {
         if (teams !== undefined) teamId = teams.id
         const toMergedId1 = this.selectedActivityData.phase.id
         const toMergedId2 = this.toMerge.id
+        this.merged.effort = {
+          load_demand: this.loadDemand,
+          load_engage: this.loadEngage,
+          load_reel: this.loadEstimated,
+          duration_demand: this.durationDemand,
+          duration_engage: this.durationEngage,
+          duration_reel: this.durationEstimated,
+          fte_demand: this.fteDemand,
+          fte_engage: this.fteEngage,
+          fte_reel: this.fteEstimated
+        }
         const payloads = {
           toMergedId1,
           toMergedId2,
@@ -1258,7 +1271,6 @@ export default {
           progId
         }
         await this.$store.dispatch('globalState/handle_activity_merge', payloads)
-        await this.$store.dispatch('globalState/load_org_data')
         const data = this.$store.state.globalState.selectedNavObj
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
           data
@@ -1351,7 +1363,7 @@ export default {
           this.merged.description = selectedActivity.description
         } else this.merged.description = ""
       }
-      if (selectedActivity !== undefined) {
+      if (selectedActivity !== undefined && selectedActivity.prog_id !== null) {
         await this.$store.dispatch('globalState/get_external_systems2_we', { id: selectedActivity.prog_id })
         this.externalSystems2 = this.$store.state.globalState.externalWeSystemData2.find(t => t.idwe === selectedActivity.id)
         if (this.externalSystems2 === undefined) {
