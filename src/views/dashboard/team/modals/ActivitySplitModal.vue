@@ -6,6 +6,7 @@
     centered
     no-fade
     hide-backdrop
+    no-close-on-backdrop
     static
     size="xl"
   >
@@ -1010,13 +1011,14 @@ export default {
     },
     activityList() {
       const titleArr = []
+      if (this.selectedActivityData.phase === undefined) return []
       this.$store.state.globalState.allWeData.forEach(a => {
-        if (this.selectedActivityData.phase.id === a.id && this.selectedActivityData.phase.projectId === a.projectId) {
+        if (this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId === a.projectId) {
           titleArr.push(a.title)
         }
       })
       this.$store.state.globalState.allWeData.forEach(a => {
-        if (this.selectedActivityData.phase.id === a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
+        if (this.selectedActivityData.phase.id !== a.id && this.selectedActivityData.phase.projectId !== a.projectId) {
           titleArr.push(a.title)
         }
       })
@@ -1182,8 +1184,8 @@ export default {
       if (this.externalSystems === undefined) {
         this.externalSystems = {
           driver_type: 2,
-          idprogram: this.selectedActivityData.phase.projectId,
-          idwe: this.selectedActivityData.phase.id,
+          idprogram: this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.projectId : 0,
+          idwe: this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.id : 0,
           jira_idprogram: null,
           jira_idwe: null,
           sap_idprogram: null,

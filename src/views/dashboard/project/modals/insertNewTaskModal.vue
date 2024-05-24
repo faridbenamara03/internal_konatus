@@ -125,7 +125,7 @@ export default {
       priorityOptions: this.$store.state.globalState.priorityOptions,
       selectedJob: this.$store.state.globalState.parentTeamTitle?.job,
       selectedPhase: this.$store.state.globalState.parentTeamTitle?.phase,
-      selectedPriority: '',
+      selectedPriority: 'highest',
       options: [
         { label: 'Jira', value: 'Jira' },
         { label: 'SAP', value: 'SAP' },

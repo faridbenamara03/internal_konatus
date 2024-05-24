@@ -304,7 +304,13 @@ export default {
       }
     },
     async handleInsertNewWorkElement() {
-      const sPhase = this.team.title !== null && this.team.title !== undefined ? this.team.title.toString().replace(/\s/g, '') : ""
+      let sPhase = ''
+      if (this.state === 'team') {
+        sPhase = this.team.title !== null && this.team.title !== undefined ? this.team.title.toString().replace(/\s/g, '') : ""
+      } else if (this.state === 'phase') {
+        sPhase = this.team.phase !== null && this.team.phase !== undefined ? this.team.phase.toString().replace(/\s/g, '') : ""
+      }
+      console.log('sphase:', sPhase, 'job:', this.teamttle)
       await this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
         job: this.teamttle,
         phase: sPhase

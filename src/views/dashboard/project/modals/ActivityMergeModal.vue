@@ -6,6 +6,7 @@
     centered
     no-fade
     hide-backdrop
+    no-close-on-backdrop
     static
     size="xl"
   >
@@ -1023,8 +1024,9 @@ export default {
     },
     activityList() {
       const titleArr = []
-      titleArr.push(...this.activityList1)
-      titleArr.push(...this.activityList2)
+      this.$store.state.globalState.allWeData.forEach(a => {
+        titleArr.push(a.title)
+      })
       return titleArr
     },
     totalEffortData1() {
@@ -1155,8 +1157,8 @@ export default {
         if (this.externalSystems1 === undefined) {
           this.externalSystems1 = {
             driver_type: 2,
-            idprogram: this.selectedActivityData.phase.projectId,
-            idwe: this.selectedActivityData.phase.id,
+            idprogram: this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.projectId : 0,
+            idwe: this.selectedActivityData.phase !== undefined ? this.selectedActivityData.phase.id : 0,
             jira_idprogram: null,
             jira_idwe: null,
             sap_idprogram: null,
