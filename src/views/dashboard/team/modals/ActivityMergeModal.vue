@@ -662,7 +662,7 @@
           <div class="form-group">
             <div class="select-box">
               <label>Title</label>
-              <b-form-input :value="merged.title" />
+              <b-form-input v-model="merged.title" />
             </div>
           </div>
           <div class="form-group">
@@ -1241,7 +1241,7 @@ export default {
           if (selected !== undefined && selected !== null) selectedParentIDs.push(a.id)
         })
         selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
-        this.merged.parents = this.selectedParentIDs
+        this.merged.parents = selectedParentIDs
         this.merged.externalSystems = this.externalSystems
         let teamId = 0
         if (teams !== undefined) teamId = teams.id
