@@ -650,9 +650,10 @@ export default {
     },
     handleCalculate() {
       if (this.fteData !== '' && this.durationData !== '' && this.loadData !== '') {
-        if (parseFloat(this.loadData) === parseFloat(this.durationData) * parseFloat(this.fteData)) {
-          this.showToast('success', 'All values are valid')
-          this.isValid = true
+        if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) === 0 && parseFloat(this.fteData) === 0) {
+          this.showToast('warning', 'Please enter valid values')
+          this.isValid = false
+          return
         }
         if (parseFloat(this.fteData) !== 0) {
           this.durationData = parseFloat(this.loadData) / parseFloat(this.fteData)
@@ -663,9 +664,10 @@ export default {
         } else if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) !== 0 && parseFloat(this.durationData) !== 0) {
           this.loadData = parseFloat(this.durationData) * parseFloat(this.fteData)
           this.isValid = true
-        } else if (parseFloat(this.loadData) === 0 && parseFloat(this.durationData) === 0 && parseFloat(this.fteData) === 0) {
-          this.showToast('warning', 'Please enter valid values')
-          this.isValid = false
+        }
+        if (parseFloat(this.loadData) === parseFloat(this.durationData) * parseFloat(this.fteData)) {
+          this.showToast('success', 'All values are valid')
+          this.isValid = true
         }
       }
       if (this.fteData !== '' && this.durationData !== '' && this.loadData === '') {

@@ -1348,48 +1348,68 @@ export default {
     },
     handleCalculate(value) {
       if (value === 1) {
-        if (this.fteEngage1 !== '' && this.durationEngage1 !== '' && this.loadEngage1 !== '') {
-          if (parseFloat(this.loadEngage1) === parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)) {
-            this.showToast('success', 'All values of First Splited are valid')
-            this.isFirstValid = true
-          } else {
-            this.showToast('warning', 'Please enter valid values for First Splited')
-            this.isFirstValid = false
+        if (this.fteEngage1 !== '' && !Number.isNaN(this.durationEngage1) && !Number.isNaN(this.loadEngage1) && !Number.isNaN(this.fteEngage1) && this.durationEngage1 !== '' && this.loadEngage1 !== '') {
+          if (parseFloat(this.loadEngage1) === 0 && parseFloat(this.durationEngage1) === 0 && parseFloat(this.fteEngage1) === 0) {
+            this.showToast('warning', 'Please enter valid values')
+            this.isValid = false
+            return
           }
-        } else if (this.fteEngage1 !== '' && this.durationEngage1 !== '' && this.loadEngage1 === '') {
+          if (parseFloat(this.fteEngage1) !== 0) {
+            this.durationEngage1 = parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1)
+            this.isValid = true
+          } else if (parseFloat(this.fteEngage1) === 0 && parseFloat(this.durationEngage1) !== 0) {
+            this.fteEngage1 = parseFloat(this.loadEngage1) / parseFloat(this.durationEngage1)
+            this.isValid = true
+          } else if (parseFloat(this.loadEngage1) === 0 && parseFloat(this.durationEngage1) !== 0 && parseFloat(this.durationEngage1) !== 0) {
+            this.loadEngage1 = parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)
+            this.isValid = true
+          }
+          if (parseFloat(this.loadEngage1) === parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)) {
+            this.showToast('success', 'All values are valid')
+            this.isValid = true
+          }
+        }
+        if (this.fteEngage1 !== '' && this.durationEngage1 !== '' && this.loadEngage1 === '') {
           this.loadEngage1 = parseFloat(this.durationEngage1) * parseFloat(this.fteEngage1)
-          this.isFirstValid = true
+          this.isValid = true
         } else if (this.loadEngage1 !== '' && this.durationEngage1 !== '' && this.durationEngage1 !== 0 && this.fteEngage1 === '') {
-          this.fteEngage1 = parseFloat(this.loadData) / parseFloat(this.durationData)
-          this.isFirstValid = true
+          this.fteEngage1 = parseFloat(this.loadEngage1) / parseFloat(this.durationEngage1)
+          this.isValid = true
         } else if (this.loadEngage1 !== '' && this.fteEngage1 !== '' && this.fteEngage1 !== 0 && this.durationEngage1 === '') {
           this.durationEngage1 = parseFloat(this.loadEngage1) / parseFloat(this.fteEngage1)
-          this.isFirstValid = true
-        } else {
-          this.showToast('warning', 'Please enter valid values for First Splited')
-          this.isFirstValid = false
+          this.isValid = true
         }
       } else if (value === 2) {
-        if (this.fteEngage2 !== '' && this.durationEngage2 !== '' && this.loadEngage2 !== '') {
-          if (parseFloat(this.loadEngage2) === parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)) {
-            this.showToast('success', 'All values of Second Splited are valid')
-            this.isSecondValid = true
-          } else {
-            this.showToast('warning', 'Please enter valid values for Second Splited')
-            this.isSecondValid = false
+        if (this.fteEngage2 !== '' && !Number.isNaN(this.durationEngage2) && !Number.isNaN(this.loadEngage2) && !Number.isNaN(this.fteEngage2) && this.durationEngage2 !== '' && this.loadEngage2 !== '') {
+          if (parseFloat(this.loadEngage2) === 0 && parseFloat(this.durationEngage2) === 0 && parseFloat(this.fteEngage2) === 0) {
+            this.showToast('warning', 'Please enter valid values')
+            this.isValid = false
+            return
           }
-        } else if (this.fteEngage2 !== '' && this.durationEngage2 !== '' && this.loadEngage2 === '') {
+          if (parseFloat(this.fteEngage2) !== 0) {
+            this.durationEngage2 = parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2)
+            this.isValid = true
+          } else if (parseFloat(this.fteEngage2) === 0 && parseFloat(this.durationEngage2) !== 0) {
+            this.fteEngage21 = parseFloat(this.loadEngage2) / parseFloat(this.durationEngage2)
+            this.isValid = true
+          } else if (parseFloat(this.loadEngage2) === 0 && parseFloat(this.durationEngage2) !== 0 && parseFloat(this.durationEngage2) !== 0) {
+            this.loadEngage2 = parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)
+            this.isValid = true
+          }
+          if (parseFloat(this.loadEngage2) === parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)) {
+            this.showToast('success', 'All values are valid')
+            this.isValid = true
+          }
+        }
+        if (this.fteEngage2 !== '' && this.durationEngage2 !== '' && this.loadEngage2 === '') {
           this.loadEngage2 = parseFloat(this.durationEngage2) * parseFloat(this.fteEngage2)
-          this.isSecondValid = true
+          this.isValid = true
         } else if (this.loadEngage2 !== '' && this.durationEngage2 !== '' && this.durationEngage2 !== 0 && this.fteEngage2 === '') {
           this.fteEngage2 = parseFloat(this.loadEngage2) / parseFloat(this.durationEngage2)
-          this.isSecondValid = true
+          this.isValid = true
         } else if (this.loadEngage2 !== '' && this.fteEngage2 !== '' && this.fteEngage2 !== 0 && this.durationEngage2 === '') {
           this.durationEngage2 = parseFloat(this.loadEngage2) / parseFloat(this.fteEngage2)
-          this.isSecondValid = true
-        } else {
-          this.showToast('warning', 'Please enter valid values for Second Splited')
-          this.isSecondValid = false
+          this.isValid = true
         }
       }
     },

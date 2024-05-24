@@ -690,21 +690,21 @@
               <div class="col">
                 <label>Total Load</label>
                 <b-form-input
-                  :value="loadEngage"
+                  v-model="loadEngage"
                   type="number"
                 />
               </div>
               <div class="col">
                 <label>Total Duration</label>
                 <b-form-input
-                  :value="durationEngage"
+                  v-model="durationEngage"
                   type="number"
                 />
               </div>
               <div class="col">
                 <label>Total FTE</label>
                 <b-form-input
-                  :value="fteEngage"
+                  v-model="fteEngage"
                   type="number"
                 />
               </div>
@@ -1375,26 +1375,36 @@ export default {
       }
     },
     handleCalculate() {
-      if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage !== '') {
-        if (parseFloat(this.loadEngage) === parseFloat(this.durationEngage) * parseFloat(this.fteEngage)) {
-          this.showToast('success', 'All values of Merged are valid')
-          this.isValid = true
-        } else {
-          this.showToast('warning', 'Please enter valid values for Merged')
+      if (this.fteEngage !== '' && !Number.isNaN(this.fteEngage) && !Number.isNaN(this.durationEngage) && !Number.isNaN(this.loadEngage) && this.durationEngage !== '' && this.loadEngage !== '') {
+        if (parseFloat(this.loadEngage) === 0 && parseFloat(this.durationEngage) === 0 && parseFloat(this.fteEngage) === 0) {
+          this.showToast('warning', 'Please enter valid values')
           this.isValid = false
+          return
         }
-      } else if (this.fteEngage !== '' && this.durationEngage !== '' && this.loadEngage === '') {
+        if (parseFloat(this.fteEngage) !== 0) {
+          this.durationEngage = parseFloat(this.loadEngage) / parseFloat(this.fteEngage)
+          this.isValid = true
+        } else if (parseFloat(this.fteEngage) === 0 && parseFloat(this.durationEngage) !== 0) {
+          this.fteEngage = parseFloat(this.loadEngage) / parseFloat(this.durationEngage)
+          this.isValid = true
+        } else if (parseFloat(this.loadEngage) === 0 && parseFloat(this.durationEngage) !== 0 && parseFloat(this.durationEngage) !== 0) {
+          this.loadEngage = parseFloat(this.durationEngage) * parseFloat(this.fteEngage)
+          this.isValid = true
+        }
+        if (parseFloat(this.loadEngage) === parseFloat(this.durationEngage) * parseFloat(this.fteEngage)) {
+          this.showToast('success', 'All values are valid')
+          this.isValid = true
+        }
+      }
+      if (this.fteEngage !== '' && this.durationEngage !== '' && (this.loadEngage === '' || Number.isNaN(this.loadEngage))) {
         this.loadEngage = parseFloat(this.durationEngage) * parseFloat(this.fteEngage)
         this.isValid = true
-      } else if (this.loadEngage !== '' && this.durationEngage !== '' && this.durationEngage !== 0 && this.fteEngage === '') {
+      } else if (this.loadEngage !== '' && this.durationEngage !== '' && this.durationEngage !== 0 && (this.fteEngage === '' || Number.isNaN(this.fteEngage))) {
         this.fteEngage = parseFloat(this.loadEngage) / parseFloat(this.durationEngage)
         this.isValid = true
-      } else if (this.loadEngage !== '' && this.fteEngage !== '' && this.fteEngage !== 0 && this.durationEngage === '') {
-        this.durationEngage = parseFloat(this.loadEngag2) / parseFloat(this.fteEngage)
+      } else if (this.loadEngage !== '' && this.fteEngage !== '' && this.fteEngage !== 0 && (this.durationEngage === '' || Number.isNaN(this.durationEngage))) {
+        this.durationEngage = parseFloat(this.loadEngage) / parseFloat(this.fteEngage)
         this.isValid = true
-      } else {
-        this.showToast('warning', 'Please enter valid values for Merged')
-        this.isValid = false
       }
     },
     onClickEditPriorityBtn(value) {
