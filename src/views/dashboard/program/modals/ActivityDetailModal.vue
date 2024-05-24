@@ -71,7 +71,7 @@
             <div v-else>
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External We Id"
+                placeholder="Input External Id"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@
         </div>
         <div class="select-box">
           <label>Task</label>
-          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Task" outlined />
+          <v-select :options="['Design temp', 'Workflow', 'Graphic design']" placeholder="Select Activity" outlined />
         </div>
       </div> -->
       <div class="form-group">
@@ -193,7 +193,7 @@
           <label>Activity</label>
           <v-select
             :options="activityList"
-            placeholder="Select Task"
+            placeholder="Select Activity"
             outlined
             multiple
           />

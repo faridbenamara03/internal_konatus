@@ -69,7 +69,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                 </div>
               </div>
@@ -270,7 +270,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId1"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                 </div>
               </div>
@@ -473,7 +473,7 @@
                 <div v-else>
                   <b-form-input
                     v-model="externalId2"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                 </div>
               </div>

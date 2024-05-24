@@ -122,10 +122,6 @@ export default {
       this.$refs['my-modal'].hide()
     },
     async handleSave() {
-      if (this.selectedProjects.length <= 0) {
-        this.showToast('warning', 'Please select at least 1 project')
-        return
-      }
       const payloads = {
         child_pg: this.$store.state.globalState.selectedNavObj.id,
         selected_projects: this.selectedProjects

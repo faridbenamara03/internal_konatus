@@ -59,7 +59,7 @@
             <div class="d-flex">
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External We Id"
+                placeholder="Input External Id"
                 style="min-width:200px"
               />
               <div
@@ -151,7 +151,7 @@
           <v-select
             v-model="selectedParents"
             :options="activityList"
-            placeholder="Select Task"
+            placeholder="Select Activity"
             menu-props="auto"
             outlined
             multiple
@@ -730,13 +730,14 @@ export default {
       selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
       let teamId = 0
       if (teams !== undefined) teamId = teams.id
+      if (this.selectedTeam === 'auto selection') teamId = 0
       const payloads = {
         we_id: this.selectedActivityData.phase?.id,
         detail_mode: true,
         name: this.weTitle,
         job_id: jobId < 0 ? 1 : jobId,
         phase_id: phaseId < 0 ? 1 : phaseId,
-        team_id: teamId < 0 ? 1 : teamId,
+        team_id: teamId < 0 ? 0 : teamId,
         priority: priorityIndex < 0 ? 1 : priorityIndex,
         load_engage: this.loadData,
         duration_engage: this.durationData,
@@ -755,9 +756,9 @@ export default {
       this.$store.commit('globalState/SUBMIT_TEAM_REQUEST_QUOTE')
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
       await this.$store.dispatch('teamState/load_org_data')
-      await this.$store.dispatch('teamState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
+      await this.$store.dispatch('globalState/get_external_systems_we', { id: this.selectedActivityData.phase.projectId })
       const data = this.$store.state.globalState.selectedNavObj
-      await this.$store.dispatch('globalState/get_from_selected_nav_id', {
+      await this.$store.dispatch('teamState/get_from_selected_nav_id', {
         data
       })
       await this.$store.dispatch('globalState/get_all_we_depends')
@@ -800,24 +801,6 @@ export default {
           break
         default:
           break
-      }
-      if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
-        let type = ''
-        switch (this.$store.state.globalState.selectedNavObj.type) {
-          case 'program':
-            type = 'PROG'
-            break
-          case 'project':
-            type = 'PROJ'
-            break
-          case 'subproject':
-            type = 'SUBPROJ'
-            break
-          default:
-            break
-        }
-        const value = this.externalSystem
-        this.externalId = `${value.toUpperCase()}-${type}-`
       }
     },
     handleUpdateExternal() {

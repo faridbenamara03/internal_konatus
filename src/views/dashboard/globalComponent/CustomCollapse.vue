@@ -303,10 +303,11 @@ export default {
         console.error('Error in handleDeleteActivity:', error)
       }
     },
-    handleInsertNewWorkElement() {
-      this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
+    async handleInsertNewWorkElement() {
+      const sPhase = this.team.title !== null && this.team.title !== undefined ? this.team.title.toString().replace(/\s/g, '') : ""
+      await this.$store.commit('globalState/SET_INDEX_FOR_INSERT_NEW_ELEMENT', {
         job: this.teamttle,
-        phase: this.team.title
+        phase: sPhase
       })
     }
   }

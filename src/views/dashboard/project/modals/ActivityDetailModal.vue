@@ -59,7 +59,7 @@
             <div class="d-flex">
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External We Id"
+                placeholder="Input External Id"
                 style="min-width:200px"
               />
               <div
@@ -151,7 +151,7 @@
           <v-select
             v-model="selectedParents"
             :options="activityList"
-            placeholder="Select Task"
+            placeholder="Select Activity"
             menu-props="auto"
             outlined
             multiple
@@ -730,6 +730,7 @@ export default {
       selectedParentIDs = selectedParentIDs.filter((value, index, array) => array.indexOf(value) === index)
       let teamId = 0
       if (teams !== undefined) teamId = teams.id
+      if (this.selectedTeam === 'auto selection') teamId = 0
       const payloads = {
         we_id: this.selectedActivityData.phase?.id,
         detail_mode: true,
@@ -800,24 +801,6 @@ export default {
           break
         default:
           break
-      }
-      if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
-        let type = ''
-        switch (this.$store.state.globalState.selectedNavObj.type) {
-          case 'program':
-            type = 'PROG'
-            break
-          case 'project':
-            type = 'PROJ'
-            break
-          case 'subproject':
-            type = 'SUBPROJ'
-            break
-          default:
-            break
-        }
-        const value = this.externalSystem
-        this.externalId = `${value.toUpperCase()}-${type}-`
       }
     },
     handleUpdateExternal() {

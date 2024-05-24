@@ -27,7 +27,7 @@
             <div class="d-flex">
               <b-form-input
                 v-model="externalId"
-                placeholder="Input External We Id"
+                placeholder="Input External Id"
               />
               <div
                 style="padding-top: 6px;margin-left: 5px;cursor: pointer;"

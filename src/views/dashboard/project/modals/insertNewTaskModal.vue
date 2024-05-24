@@ -91,7 +91,7 @@
 
 <script>
 import {
-  BModal, VBModal, BFormInput, BFormSelect, BFormCheckbox, BDropdown
+  BModal, VBModal, BFormInput, BFormSelect, BFormCheckbox, BDropdown, BDropdownItem
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { isEmpty } from '../../../utils'
@@ -102,7 +102,8 @@ export default {
     BFormInput,
     BFormSelect,
     BFormCheckbox,
-    BDropdown
+    BDropdown,
+    BDropdownItem
   },
   directives: {
     'b-modal': VBModal,
@@ -155,6 +156,7 @@ export default {
       '$store.state.globalState.parentTeamTitle': {
           immediate: true,
           handler(newValue) {
+            this.name = ''
             this.selectedJob = newValue?.job
             this.selectedPhase = newValue?.phase
           },

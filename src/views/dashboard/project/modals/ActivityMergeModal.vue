@@ -57,7 +57,7 @@
                 <div class="d-flex">
                   <b-form-input
                     v-model="externalId1"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                   <div
                     style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
@@ -247,7 +247,7 @@
               <v-select
                 v-model="selectedParents1"
                 :options="activityList1"
-                placeholder="Select Task"
+                placeholder="Select Activity"
                 menu-props="auto"
                 outlined
                 multiple
@@ -335,7 +335,7 @@
                 <div class="d-flex">
                   <b-form-input
                     v-model="externalId2"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                   <div
                     style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
@@ -542,7 +542,7 @@
                 <v-select
                   v-model="selectedParents2"
                   :options="activityList2"
-                  placeholder="Select Task"
+                  placeholder="Select Activity"
                   menu-props="auto"
                   outlined
                   multiple
@@ -622,7 +622,7 @@
                 <div class="d-flex">
                   <b-form-input
                     v-model="externalId"
-                    placeholder="Input External We Id"
+                    placeholder="Input External Id"
                   />
                   <div
                     style="padding-top: 6px;margin-left: 5px;cursor: pointer;"
@@ -819,7 +819,7 @@
               <v-select
                 v-model="selectedParents"
                 :options="activityList"
-                placeholder="Select Task"
+                placeholder="Select Activity"
                 menu-props="auto"
                 outlined
                 multiple
@@ -1437,20 +1437,6 @@ export default {
       }
     },
     updateExternalID(weType) {
-      let type = ''
-      switch (this.$store.state.globalState.selectedNavObj.type) {
-        case 'program':
-          type = 'PROG'
-          break
-        case 'project':
-          type = 'PROJ'
-          break
-        case 'subproject':
-          type = 'SUBPROJ'
-          break
-        default:
-          break
-      }
       if (weType === 0) {
         if (this.externalSystems !== undefined) {
           switch (this.externalSystem) {
@@ -1472,10 +1458,6 @@ export default {
             default:
               break
           }
-        }
-        if (this.externalId === '' || this.externalId === null || this.externalId === undefined) {
-          const value = this.externalSystem
-          this.externalId = `${value.toUpperCase()}-${type}-`
         }
       } else if (weType === 1) {
         if (this.externalSystems1 !== undefined) {
@@ -1499,10 +1481,6 @@ export default {
               break
           }
         }
-        if (this.externalId1 === '' || this.externalId1 === null || this.externalId1 === undefined) {
-          const value = this.externalSystem1
-          this.externalId1 = `${value.toUpperCase()}-${type}-`
-        }
       } else if (weType === 2) {
         if (this.externalSystems2 !== undefined) {
           switch (this.externalSystem2) {
@@ -1524,10 +1502,6 @@ export default {
             default:
               break
           }
-        }
-        if (this.externalId2 === '' || this.externalId2 === null || this.externalId2 === undefined) {
-          const value = this.externalSystem2
-          this.externalId2 = `${value.toUpperCase()}-${type}-`
         }
       }
     },
