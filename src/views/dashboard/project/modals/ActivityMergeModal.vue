@@ -1132,6 +1132,8 @@ export default {
       this.spentData1 = parseFloat(this.loadEstimated1) - parseFloat(this.restData1)
       this.selectedPriority1 = this.selectedActivityData.phase !== undefined ? this.priorityOptions[this.selectedActivityData.phase.priority - 1] : 0
       this.selectedPhase1 = this.selectedActivityData.phase !== undefined ? this.$store.state.globalState.allPhaseTitleData[this.selectedActivityData.phase.gate - 1] : this.$store.state.globalState.allPhaseTitleData[0]
+      this.selectedPriority = this.selectedPriority1
+      this.selectedPhase = this.selectedPhase1
       this.selectedParents1 = []
       this.selectedParents2 = []
       this.selectedParents = []

@@ -197,6 +197,7 @@ export default {
         await this.$store.dispatch('globalState/get_from_selected_nav_id', {
           data
         })
+        await this.$store.dispatch('globalState/get_all_workelements')
       }
     },
     jobSelectHandle(data) {
