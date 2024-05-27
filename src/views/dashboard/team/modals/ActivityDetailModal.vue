@@ -459,7 +459,7 @@ export default {
     return {
       activity: {},
       show: false,
-      selectedTeam: "System auto select",
+      selectedTeam: "auto selection",
       selectedJob: " ",
       selectedPriority: "",
       selectedPhase: "",

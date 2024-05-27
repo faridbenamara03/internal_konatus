@@ -121,6 +121,7 @@ export default {
       name: '',
       c_teamData: this.$store.state.globalState?.weTeamData,
       selectedOptions: '',
+      selectedTeam: "auto selection",
       allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
       priorityOptions: this.$store.state.globalState.priorityOptions,
       selectedJob: this.$store.state.globalState.parentTeamTitle?.job,

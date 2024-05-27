@@ -131,6 +131,7 @@ export default {
       selectedOptions: '',
       allPhaseTitleData: this.$store.state.globalState.allPhaseTitleData,
       selectedProject: 'project',
+      selectedTeam: "auto selection",
       priorityOptions: this.$store.state.globalState.priorityOptions,
       selectedJob: this.$store.state.globalState.parentTeamTitle?.job,
       selectedPhase: this.$store.state.globalState.parentTeamTitle?.phase,
