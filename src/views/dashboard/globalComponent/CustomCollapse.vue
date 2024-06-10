@@ -294,10 +294,12 @@ export default {
           centered: true,
         })
         if (value) {
-          await this.$store.dispatch('globalState/delete_work_element', { id: activity.id })
+          await this.$store.dispatch('globalState/delete_work_element', { id: activity.id, progId: activity.projectId })
           await this.$store.dispatch('globalState/load_org_data')
           const data = this.$store.state.globalState.selectedNavObj
           await this.$store.dispatch('globalState/get_from_selected_nav_id', { data })
+          await this.$store.dispatch('globalState/get_all_we_depends')
+          await this.$store.dispatch('globalState/get_all_workelements')
         }
       } catch (error) {
         console.error('Error in handleDeleteActivity:', error)
