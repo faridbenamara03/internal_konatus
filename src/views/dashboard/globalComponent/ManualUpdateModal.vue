@@ -174,15 +174,29 @@
           <label>Duration Date R/E</label>
           <b-form-input
             v-model="durationDateEstimated"
-            :disabled="true"
+            type="number"
           />
         </div>
         <div class="col">
           <label>End Date R/E</label>
-          <b-form-input
-            v-model="endDateEstimated"
-            :disabled="true"
-          />
+          <b-input-group>
+            <b-form-input
+              v-model="endDateEstimated"
+              type="text"
+              placeholder="MM-DD-YYYY"
+              autocomplete="off"
+              readonly
+            ></b-form-input>
+            <b-input-group-append style="height:37px">
+              <b-form-datepicker
+                v-model="selectedEndDate"
+                button-only
+                button-variant="primary"
+                right
+                locale="en-US"
+              />
+            </b-input-group-append>
+          </b-input-group>
         </div>
         <div class="col">
           <b-button
@@ -256,6 +270,7 @@ export default {
       restNewEstimatedData: 0,
       startDateEstimated: null,
       selectedStartDate: moment(),
+      selectedEndDate: moment(),
       endDateEstimated: '',
       isValid: false,
       isDateValid: false,
@@ -273,6 +288,12 @@ export default {
         immediate: true,
         handler(newVal) {
           this.startDateEstimated = moment(newVal).format('MM-DD-YYYY')
+        },
+      },
+      selectedEndDate: {
+        immediate: true,
+        handler(newVal) {
+          this.endDateEstimated = moment(newVal).format('MM-DD-YYYY')
         },
       }
   },
