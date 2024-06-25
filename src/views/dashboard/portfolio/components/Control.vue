@@ -595,10 +595,11 @@ export default {
             this.job_fields.map(jobField => {
               let job = 0
               updatedT1s.map(updatedT1 => {
-                job += updatedT1[jobField]
+                if (updatedT1[jobField] === undefined) return null
+                job += parseInt(updatedT1[jobField], 10)
                 return null
               })
-              nd[jobField] = job
+              nd[jobField] = Number.isInteger(job) ? job : 0
               return null
             })
             nd.children = updatedT1s

@@ -219,7 +219,6 @@
       </b-button>
       <b-button
         variant="primary"
-        :disabled="!isValid || !isDateValid"
         @click="handleSave"
       >
         Update

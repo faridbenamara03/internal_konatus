@@ -303,7 +303,7 @@ export default {
       state.selectedActivityParents2 = data
     },
     LOAD_EXTERNAL_SYSTEMS(state, data) {
-      if (data.message !== 'empty') {
+      if (data.message !== 'empty' && data.message !== 'fail') {
         state.externalSystemData = data
       }
     },
