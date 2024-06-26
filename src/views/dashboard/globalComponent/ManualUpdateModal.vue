@@ -171,7 +171,7 @@
           </b-input-group>
         </div>
         <div class="col">
-          <label>Duration Date R/E</label>
+          <label>Duration reamaining R/E</label>
           <b-form-input
             v-model="durationDateEstimated"
             type="number"
@@ -340,7 +340,7 @@ export default {
         team_id: teamId,
         detail_mode: false,
         load_estimated: loadNewEstimatedData,
-        acc: this.accNewEstimatedData,
+        acc: this.accEstimatedData,
         rest_todo_estimated: this.restNewEstimatedData,
         start_date_reel: this.startDateEstimated,
         end_date_reel: this.endDateEstimated,
@@ -368,23 +368,13 @@ export default {
         this.showToast('warning', 'Please Input non-zero value for FTE R/E.')
         return
       }
-      if (parseFloat(this.accEstimatedData) === 0) {
-        const startDate = moment(this.startDateEstimated)
-        const interval = (parseFloat(this.loadEstimatedData) / parseFloat(this.fteEstimatedData)) * 1.4
-        const endDate = startDate.add(interval, 'days')
-        this.endDateEstimated = endDate.format('MM-DD-YYYY')
-      } else if (parseFloat(this.accEstimatedData) > 0) {
-        const startDate = moment()
-        const interval = (((1 - (parseFloat(this.accEstimatedData) / 100)) * parseFloat(this.loadEstimatedData)) / parseFloat(this.fteEstimatedData)) * 1.4
-        const endDate = startDate.add(interval, 'days')
-        this.endDateEstimated = endDate.format('MM-DD-YYYY')
-      }
+      this.durationDateEstimated = this.fteEstimatedData === 0 ? 0 : parseFloat(this.restEstimatedData) / parseFloat(this.fteEstimatedData)
+      const currentDate = moment()
+      const endDate = currentDate.add(parseInt(this.durationDateEstimated, 10), 'days')
+      this.endDateEstimated = endDate.format('MM-DD-YYYY')
       if (this.startDateEstimated === '' || this.endDateEstimated === '' || this.endDateEstimated === null) {
         this.showToast('warning', 'Invalid Date')
         this.isDateValid = false
-      } else {
-        this.durationDateEstimated = moment.duration(moment(this.endDateEstimated).diff(moment(this.startDateEstimated))).asDays()
-        this.isDateValid = true
       }
     },
     handleChangeAccORest(type) {
