@@ -310,7 +310,6 @@ export default {
       this.fteNewEstimatedData = 0
       this.restNewEstimatedData = 0
       this.accNewEstimatedData = 0
-      this.durationEstimated = 0
       this.durationDateEstimated = 0
       this.endDateEstimated = ''
       this.isAcc = 0
