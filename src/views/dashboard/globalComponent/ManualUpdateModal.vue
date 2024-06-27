@@ -348,9 +348,7 @@ export default {
       if (this.fteNewEstimatedData !== '') {
         payloads.fte_estimated = this.fteNewEstimatedData
       }
-      // this.$store.commit('globalState/SUBMIT_MANUAL_UPDATE', payloads)
       await this.$store.dispatch('globalState/submit_manual_update', payloads)
-      // this.showToast('success', 'Success Update Work Element.')
       await this.$store.dispatch('globalState/load_org_data')
       const data = this.$store.state.globalState.selectedNavObj
       await this.$store.dispatch('globalState/get_from_selected_nav_id', {
