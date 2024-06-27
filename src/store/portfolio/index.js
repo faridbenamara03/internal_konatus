@@ -31,7 +31,7 @@ export default {
   actions: {
     get_optimized_data(data, params) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/optimize', params.data)
+        axios.post('http://213.165.95.153:8000/api/optimize', params.data)
           .then(response => {
             const optimizeData = response.data
             this.commit('portfolioState/GET_OPTIMIZED_DATA', optimizeData)

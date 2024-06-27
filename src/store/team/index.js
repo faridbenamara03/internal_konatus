@@ -201,7 +201,7 @@ export default {
     get_from_selected_nav_id(ctx, payload) {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
-        baseUrl = `http://localhost:8000/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
+        baseUrl = `http://213.165.95.153:8000/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)
@@ -210,7 +210,7 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        baseUrl = `http://localhost:8000/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
+        baseUrl = `http://213.165.95.153:8000/api/team/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('teamState/SAVE_SELECTED_NAV_DATA', resData)

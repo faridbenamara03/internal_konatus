@@ -631,7 +631,7 @@ export default {
     get_from_selected_nav_id(ctx, payload) {
       let baseUrl = ''
       if (payload.data.startMonth !== undefined && payload.data.endMonth !== undefined) {
-        baseUrl = `http://localhost:8000/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
+        baseUrl = `http://213.165.95.153:8000/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${payload.data.startMonth}&end=${payload.data.endMonth}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data.nav, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -640,7 +640,7 @@ export default {
           Vue.$toast.error('Failed to load portfolio data.')
         })
       } else {
-        baseUrl = `http://localhost:8000/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
+        baseUrl = `http://213.165.95.153:8000/api/portfolio/data?id=${payload.data.id}&type=${payload.data.type}&start=${moment(ctx.state.selectedFromDate).format("MM/YYYY")}&end=${moment(ctx.state.selectedToDate).format("MM/YYYY")}`
         axios.get(baseUrl).then(response => {
           const resData = { navData: payload.data, portData: response.data }
           this.commit('globalState/SAVE_SELECTED_NAV_DATA', resData)
@@ -651,7 +651,7 @@ export default {
       }
     },
     load_org_data() {
-      axios.get('http://localhost:8000/api/menu/organizations').then(response => {
+      axios.get('http://213.165.95.153:8000/api/menu/organizations').then(response => {
           const globalOrgData = response.data
           this.commit('globalState/LOAD_ORG_DATA', globalOrgData)
         }).catch(err => {
@@ -660,7 +660,7 @@ export default {
         })
     },
     load_org_unit_data() {
-      axios.get('http://localhost:8000/api/menu/organization_units').then(response => {
+      axios.get('http://213.165.95.153:8000/api/menu/organization_units').then(response => {
           const globalOrgUnitData = response.data
           this.commit('globalState/LOAD_ORG_UNIT_DATA', globalOrgUnitData)
         }).catch(err => {
@@ -669,8 +669,8 @@ export default {
         })
     },
     load_org_team_data() {
-      axios.get('http://localhost:8000/api/menu/organization_jobs').then(response => {
-      // axios.get('http://localhost/konatus-me/public/api/menu/organization_teams').then(response => {
+      axios.get('http://213.165.95.153:8000/api/menu/organization_jobs').then(response => {
+      // axios.get('http://213.165.95.153/konatus-me/public/api/menu/organization_teams').then(response => {
           const globalOrgJobData = response.data
           this.commit('globalState/LOAD_ORG_JOB_DATA', globalOrgJobData)
         }).catch(err => {
@@ -679,8 +679,8 @@ export default {
         })
     },
     save_updated_table(commit, payload) {
-      axios.post('http://localhost:8000/api/save_table', payload).then(response => {
-        // axios.post('http://localhost/konatus-me/public/api/unit/create', payload).then(response => {
+      axios.post('http://213.165.95.153:8000/api/save_table', payload).then(response => {
+        // axios.post('http://213.165.95.153/konatus-me/public/api/unit/create', payload).then(response => {
           const newData = response.data
           // this.commit('globalState/SAVE_UPDATED_TABLE', payload.data)
           this.commit('globalState/SAVE_UPDATED_TABLE', newData)
@@ -690,8 +690,8 @@ export default {
         })
     },
     create_new_unit(commit, payload) {
-      axios.post('http://localhost:8000/api/unit/create', payload).then(response => {
-      // axios.post('http://localhost/konatus-me/public/api/unit/create', payload).then(response => {
+      axios.post('http://213.165.95.153:8000/api/unit/create', payload).then(response => {
+      // axios.post('http://213.165.95.153/konatus-me/public/api/unit/create', payload).then(response => {
         const newData = response.data
         this.commit('globalState/CREATE_NEW_UNIT', newData)
       }).catch(err => {
@@ -701,7 +701,7 @@ export default {
     },
     create_new_portfolio(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/portfolio/create', payload).then(response => {
+        axios.post('http://213.165.95.153:8000/api/portfolio/create', payload).then(response => {
           const newData = response.data
           this.commit('globalState/CREATE_NEW_PORTFOLIO', newData)
           resolve()
@@ -714,8 +714,8 @@ export default {
     },
     create_new_program(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/program/create', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/program/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/program/create', payload.data)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/program/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/CREATE_NEW_PROGRAM', newData)
@@ -730,8 +730,8 @@ export default {
     },
     create_new_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/project/create', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/project/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/project/create', payload.data)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/project/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/CREATE_NEW_PROJECT', newData)
@@ -746,7 +746,7 @@ export default {
     },
     create_new_subproject(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/subproject/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/subproject/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/CREATE_NEW_PROJECT', newData)
@@ -761,7 +761,7 @@ export default {
     },
     get_all_phases() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/phase/all')
+        axios.get('http://213.165.95.153:8000/api/phase/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PHASE_DATA', newData)
@@ -776,7 +776,7 @@ export default {
     },
     get_all_option_datas() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/options/all')
+        axios.get('http://213.165.95.153:8000/api/options/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_OPTION_DATAS', newData)
@@ -791,7 +791,7 @@ export default {
     },
     get_all_nature_deadlines() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/nature/all')
+        axios.get('http://213.165.95.153:8000/api/nature/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_NATURE_DEADLINE', newData)
@@ -806,7 +806,7 @@ export default {
     },
     get_external_systems(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:8000/api/external/get?id=${payload.id}`)
+        axios.get(`http://213.165.95.153:8000/api/external/get?id=${payload.id}`)
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_EXTERNAL_SYSTEMS', newData)
@@ -821,8 +821,8 @@ export default {
     },
     get_all_portfolios() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/portfolio/all')
-        // axios.get('http://localhost/konatus-me/public/api/portfolio/all')
+        axios.get('http://213.165.95.153:8000/api/portfolio/all')
+        // axios.get('http://213.165.95.153/konatus-me/public/api/portfolio/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PORTFOLIO_DATA', newData)
@@ -837,8 +837,8 @@ export default {
     },
     get_all_programs() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/program/all')
-        // axios.get('http://localhost/konatus-me/public/api/program/all')
+        axios.get('http://213.165.95.153:8000/api/program/all')
+        // axios.get('http://213.165.95.153/konatus-me/public/api/program/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PROGRAM_DATA', newData)
@@ -853,8 +853,8 @@ export default {
     },
     get_all_projects() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/project/all')
-        // axios.get('http://localhost/konatus-me/public/api/project/all')
+        axios.get('http://213.165.95.153:8000/api/project/all')
+        // axios.get('http://213.165.95.153/konatus-me/public/api/project/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_PROJECT_DATA', newData)
@@ -869,8 +869,8 @@ export default {
     },
     get_all_organizations() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8000/api/organization/all')
-        // axios.get('http://localhost/konatus-me/public/api/organization/all')
+        axios.get('http://213.165.95.153:8000/api/organization/all')
+        // axios.get('http://213.165.95.153/konatus-me/public/api/organization/all')
           .then(response => {
             const newData = response.data
             this.commit('globalState/LOAD_ALL_ORGANIZATION_DATA', newData)
@@ -885,7 +885,7 @@ export default {
     },
     submit_manual_update(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/work_element/update', payload)
+        axios.post('http://213.165.95.153:8000/api/work_element/update', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/WORK_ELEMENT_MANUAL_UPDATE', newData)
@@ -900,7 +900,7 @@ export default {
     },
     update_portfolio(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/portfolio/update', payload.data)
+        axios.post('http://213.165.95.153:8000/api/portfolio/update', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/UPDATE_PORTFOLIO', newData)
@@ -915,7 +915,7 @@ export default {
     },
     update_subproject(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/subproject/update', payload.data)
+        axios.post('http://213.165.95.153:8000/api/subproject/update', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/UPDATE_SUBPROJECT', newData)
@@ -930,7 +930,7 @@ export default {
     },
     update_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/project/update', payload.data)
+        axios.post('http://213.165.95.153:8000/api/project/update', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/UPDATE_PROJECT', newData)
@@ -945,8 +945,8 @@ export default {
     },
     update_program(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/program/update', payload.data)
-        // axios.post('http://localhost/konatus-me/public/api/program/update', payload.data)
+        axios.post('http://213.165.95.153:8000/api/program/update', payload.data)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/program/update', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/UPDATE_PROGRAM', newData)
@@ -961,8 +961,8 @@ export default {
     },
     submit_link_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/link', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/link', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/SUBMIT_LINK_PROJECT', newData)
@@ -977,8 +977,8 @@ export default {
     },
     insert_new_task(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/create', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/create', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/INSERT_NEW_TASK', newData)
@@ -993,8 +993,8 @@ export default {
     },
     handle_activity_split(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/split', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/split', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/HANDLE_ACTIVITY_SPLIT', newData)
@@ -1009,8 +1009,8 @@ export default {
     },
     handle_activity_merge(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/merge', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/merge', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/HANDLE_ACTIVITY_MERGE', newData)
@@ -1025,8 +1025,8 @@ export default {
     },
     get_parents_we(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/parent', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/parent', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/HANDLE_GET_PARENTS_WE', newData)
@@ -1041,8 +1041,8 @@ export default {
     },
     get_parents_we_2(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/phase/parent', payload)
-        // axios.post('http://localhost/konatus-me/public/api/phase/create', payload.data)
+        axios.post('http://213.165.95.153:8000/api/phase/parent', payload)
+        // axios.post('http://213.165.95.153/konatus-me/public/api/phase/create', payload.data)
           .then(response => {
             const newData = response.data
             this.commit('globalState/HANDLE_GET_PARENTS_WE_2', newData)
@@ -1056,8 +1056,8 @@ export default {
       })
     },
     get_project_reporting_editable() {
-      axios.get('http://localhost:8000/api/project/reporting/editable').then(response => {
-      // axios.post('http://localhost/konatus-me/public/api/project/reporting/editable').then(response => {
+      axios.get('http://213.165.95.153:8000/api/project/reporting/editable').then(response => {
+      // axios.post('http://213.165.95.153/konatus-me/public/api/project/reporting/editable').then(response => {
         const newData = response.data
         this.commit('globalState/UPDATE_PROJECT_REPORTING_TABLE_EDITABLE', newData)
       }).catch(err => {
@@ -1067,7 +1067,7 @@ export default {
     },
     delete_portfolio(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/portfolio/delete', payload)
+        axios.post('http://213.165.95.153:8000/api/portfolio/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PORTFOLIO', newData)
@@ -1082,7 +1082,7 @@ export default {
     },
     delete_work_element(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/work_element/delete', payload)
+        axios.post('http://213.165.95.153:8000/api/work_element/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_WORK_ELEMENT', newData)
@@ -1097,7 +1097,7 @@ export default {
     },
     delete_program(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/program/delete', payload)
+        axios.post('http://213.165.95.153:8000/api/program/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PROGRAM', newData)
@@ -1112,7 +1112,7 @@ export default {
     },
     delete_project(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/project/delete', payload)
+        axios.post('http://213.165.95.153:8000/api/project/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_PROJECT', newData)
@@ -1127,7 +1127,7 @@ export default {
     },
     delete_subproject(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/subproject/delete', payload)
+        axios.post('http://213.165.95.153:8000/api/subproject/delete', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/DELETE_SUBPROJECT', newData)
@@ -1142,7 +1142,7 @@ export default {
     },
     add_portfolio_budget(commit, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/portfolio/add_budget', payload)
+        axios.post('http://213.165.95.153:8000/api/portfolio/add_budget', payload)
           .then(response => {
             const newData = response.data
             this.commit('globalState/ADD_PORTFOLIO_BUDGET', newData)
@@ -1157,7 +1157,7 @@ export default {
     },
     get_optimized_data(data, params) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:8000/api/optimize', params.data)
+        axios.post('http://213.165.95.153:8000/api/optimize', params.data)
           .then(response => {
             setTimeout(() => {
               const optimizeData = response.data
