@@ -280,7 +280,7 @@ export default {
       selectedWE: {
         immediate: true,
         handler(newVal) {
-          this.initializeData(newVal) 
+          this.initializeData(newVal)
         },
       },
       selectedStartDate: {
