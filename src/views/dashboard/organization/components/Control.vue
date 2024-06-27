@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <div
     style="width:100%;overflow: auto;"
@@ -84,4 +83,3 @@ export default {
   },
 }
 </script>
->>>>>>> f0631ccccfaa58e062e9d14e7658186752af59b8

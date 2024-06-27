@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <template>
   <b-card
     no-body
@@ -533,7 +532,6 @@ export default {
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 @import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
-=======
 <template>
   <b-card
     no-body
@@ -971,4 +969,3 @@ export default {
 @import '@core/scss/vue/pages/dashboard-portfolio.scss';
 @import "@core/scss/vue/pages/dashboard-project.scss";
 </style>
->>>>>>> f0631ccccfaa58e062e9d14e7658186752af59b8
