@@ -6,7 +6,7 @@
           <tr class="bg-[#303952]">
             <th class="col_team">
               <div>
-                <div>Team:</div>
+                <div>TeamKen:</div>
                 <div class="skillBase2">
                   {{ team[0].teamName }}
                 </div>
