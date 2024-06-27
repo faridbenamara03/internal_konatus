@@ -184,7 +184,7 @@ export default {
                   unit_id: item.unit_id,
                   unit_name: item.unit_name,
                   unit_cost: item.unitcost, // assuming `unitcost` exists on all items
-                  organization_id: item.organisation_id,
+                  organization_id: item.organization_id,
                   organization_name: item.organization_name,
                   teams: []// This will hold all teams under this unit
               }
@@ -208,9 +208,9 @@ export default {
 
     async fetchDataTeam() {
       try {
-        const response = await axios.get('/new-api/unit_team_job')
+        const response = await axios.get('/new-base/organisationjob/data')
         console.log("retour server", response)
-        this.team = this.groupDataByUnitId(response.data.data)
+        this.team = this.groupDataByUnitId(response.data)
         this.childrenVisible = Array(this.team.length).fill(false)
           this.isClicked = Array(this.team.length).fill(false)
         console.log("retour team modifie", this.team)
