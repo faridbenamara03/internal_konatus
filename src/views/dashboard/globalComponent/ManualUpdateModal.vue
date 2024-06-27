@@ -298,6 +298,7 @@ export default {
   },
   methods: {
     initializeData(newWE) {
+      console.log('newwe:', newWE)
       this.loadEngageData = newWE.load_engage
       this.loadEstimatedData = newWE.load_reel
       this.accEstimatedData = newWE.acc
@@ -311,6 +312,7 @@ export default {
       this.restNewEstimatedData = 0
       this.accNewEstimatedData = 0
       this.durationDateEstimated = 0
+      this.selectedStartDate = newWE.start_date_estimated !== null && newWE.start_date_estimated !== undefined ? moment(newWE.start_date_estimated) : moment()
       this.endDateEstimated = ''
       this.isAcc = 0
       this.isValid = false
@@ -404,7 +406,7 @@ export default {
           this.loadEstimatedData = this.isAcc === 2 ? parseFloat(this.spentNewEstimatedData) / (parseFloat(this.accNewEstimatedData) / 100.0) : parseFloat(this.spentNewEstimatedData) + parseFloat(this.restNewEstimatedData)
           this.fteEstimatedData = this.fteNewEstimatedData
           this.spentData = this.spentNewEstimatedData
-          this.accEstimatedData = this.isAcc === 2 ? this.accNewEstimatedData : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData)) * 100
+          this.accEstimatedData = this.isAcc === 2 ? parseFloat(this.accNewEstimatedData).toFixed(2) : (parseFloat(this.spentNewEstimatedData) / parseFloat(this.loadEstimatedData).toFixed(2)).toFixed(4) * 100
           this.restEstimatedData = this.isAcc === 1 ? this.restNewEstimatedData : (parseFloat(this.loadEstimatedData) * (1 - (parseFloat(this.accNewEstimatedData) / 100)))
           this.isValid = true
         } catch (e) {
