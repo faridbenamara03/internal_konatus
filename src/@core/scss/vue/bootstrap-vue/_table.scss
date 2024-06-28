@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // bs table
 .table {
   &.b-table {
@@ -22,3 +23,29 @@
     }
   }
 }
+=======
+// bs table
+.table {
+  &.b-table {
+    &.b-table-selectable {
+      tr {
+        outline: none;
+      }
+    }
+    > tbody {
+      .b-table-row-selected {
+        &.table-active {
+          td {
+            background-color: $table-hover-bg;
+          }
+        }
+      }
+    }
+
+    // Reason: Remove outline on focus
+    th {
+      outline: none;
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

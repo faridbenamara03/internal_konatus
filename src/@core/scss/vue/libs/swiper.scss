@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '~@core/scss/base/plugins/extensions/ext-component-swiper.scss';
 
 // set active slide thumb's opacity in gallery demo
@@ -6,3 +7,13 @@
     opacity: 1;
   }
 }
+=======
+@import '~@core/scss/base/plugins/extensions/ext-component-swiper.scss';
+
+// set active slide thumb's opacity in gallery demo
+.swiper-slide {
+  &.swiper-slide-active {
+    opacity: 1;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

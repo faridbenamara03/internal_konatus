@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .media-list {
   .media {
     padding: 1.25rem;
@@ -20,3 +21,27 @@
     border-top: 1px solid $border-color;
   }
 }
+=======
+.media-list {
+  .media {
+    padding: 1.25rem;
+    width: 100%;
+    margin-top: 0;
+    .media-left {
+      margin-right: 1rem;
+    }
+    .media-right {
+      margin-left: 1rem;
+    }
+  }
+  a.media {
+    color: $gray-600 !important;
+  }
+}
+
+.media-bordered {
+  .media:not(:first-child) {
+    border-top: 1px solid $border-color;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <b-row>
     <b-col cols="12">
@@ -28,3 +29,35 @@ export default {
   },
 }
 </script>
+=======
+<template>
+  <b-row>
+    <b-col cols="12">
+      <breadcrumb-default />
+      <breadcrumb-separator />
+      <breadcrumb-slot />
+      <breadcrumb-alignment />
+    </b-col>
+  </b-row>
+</template>
+
+<script>
+import { BRow, BCol } from 'bootstrap-vue'
+import BreadcrumbDefault from './BreadcrumbDefault.vue'
+import BreadcrumbSeparator from './BreadcrumbSeparator.vue'
+import BreadcrumbSlot from './BreadcrumbSlot.vue'
+import BreadcrumbAlignment from './BreadcrumbAlignment.vue'
+
+export default {
+  components: {
+    BRow,
+    BCol,
+
+    BreadcrumbDefault,
+    BreadcrumbSeparator,
+    BreadcrumbSlot,
+    BreadcrumbAlignment,
+  },
+}
+</script>
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

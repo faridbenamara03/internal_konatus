@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ================================================================================================
 //  File Name: colors.scss
 //  Description: Common color file to include color paletter and colors file, its qiore good to
@@ -22,3 +23,29 @@
 // ------------------------------
 @import 'core/colors/palette';
 @import 'core/colors/palette-gradient.scss';
+=======
+// ================================================================================================
+//  File Name: colors.scss
+//  Description: Common color file to include color paletter and colors file, its qiore good to
+//  have all color classes in a separate file as it's quite heavy.
+//  ----------------------------------------------------------------------------------------------
+//  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+//  Author: PIXINVENT
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+// Core
+// ------------------------------
+
+// Import variables and mixins
+@import 'bootstrap/scss/mixins/gradients';
+@import 'core/mixins/hex2rgb';
+
+//box shadow for alert's heading
+@import 'core/mixins/alert';
+
+// Color system, always load last
+// ------------------------------
+@import 'core/colors/palette';
+@import 'core/colors/palette-gradient.scss';
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

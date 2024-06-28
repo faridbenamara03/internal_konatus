@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*=========================================================================================
   File Name: progress.scss
   Description: Extended bootstrap progress bar scss.
@@ -18,3 +19,25 @@
     border-bottom-right-radius: $progress-border-radius;
   }
 }
+=======
+/*=========================================================================================
+  File Name: progress.scss
+  Description: Extended bootstrap progress bar scss.
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: PIXINVENT
+  Author URL: http://www.themeforest.net/user/pixinvent
+  ----------------------------------------------------------------------------------------
+==========================================================================================*/
+
+.progress {
+  // border radius to set for stacked bars
+  .progress-bar + .progress-bar:not(:last-child) {
+    border-radius: 0;
+  }
+  .progress-bar:last-child {
+    border-top-right-radius: $progress-border-radius;
+    border-bottom-right-radius: $progress-border-radius;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

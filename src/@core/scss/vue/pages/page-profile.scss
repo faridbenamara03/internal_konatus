@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '~@core/scss/base/pages/page-profile.scss';
 
 // profile-header
@@ -12,3 +13,19 @@
     }
   }
 }
+=======
+@import '~@core/scss/base/pages/page-profile.scss';
+
+// profile-header
+#user-profile {
+  .profile-header {
+    .profile-header-nav {
+      .navbar {
+        .navbar-toggler {
+          border: none;
+        }
+      }
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

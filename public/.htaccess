@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_URI} ^/api [NC]
@@ -10,3 +11,17 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
 </IfModule>
+=======
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/api [NC]
+RewriteRule ^(.*)$ /helpers/api.php [L]
+RewriteBase /
+RewriteCond %{REQUEST_URI} ^/zoom [NC]
+RewriteRule ^(.*)$ /helpers/webhooks/zoom.php [L]
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+</IfModule>
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

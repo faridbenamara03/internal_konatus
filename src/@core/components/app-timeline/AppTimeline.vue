@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <ul
     v-bind="$attrs"
@@ -21,3 +22,28 @@ export default {}
   margin-left: 1rem;
 }
 </style>
+=======
+<template>
+  <ul
+    v-bind="$attrs"
+    class="app-timeline"
+    v-on="$listeners"
+  >
+    <slot />
+  </ul>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss" scoped>
+.app-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  margin-left: 1rem;
+}
+</style>
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

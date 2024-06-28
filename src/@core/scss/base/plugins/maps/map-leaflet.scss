@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ================================================================================================
 //     File Name: leaflet.scss
 //     Description: Leaflet map custom scss
@@ -36,3 +37,43 @@ html[data-textdirection='rtl'] {
     }
   }
 }
+=======
+// ================================================================================================
+//     File Name: leaflet.scss
+//     Description: Leaflet map custom scss
+//     ----------------------------------------------------------------------------------------------
+//     Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+//     Author: PIXINVENT
+//     Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+.leaflet-map {
+  height: 400px;
+  z-index: 1;
+}
+
+html[data-textdirection='rtl'] {
+  .leaflet-map {
+    .leaflet-control-container {
+      .leaflet-left {
+        left: 0;
+        right: unset;
+        .leaflet-control-zoom,
+        .leaflet-control-layers {
+          margin-right: 0;
+          margin-left: 10px;
+        }
+      }
+      .leaflet-right {
+        right: 0;
+        left: unset;
+        .leaflet-control-zoom,
+        .leaflet-control-layers {
+          margin-right: 10px;
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

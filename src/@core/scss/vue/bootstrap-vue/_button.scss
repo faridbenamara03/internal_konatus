@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // reason: toggleable button has box shadow on active
 .btn-group-toggle,
 .btn-group-toggle {
@@ -8,3 +9,15 @@
     }
   }
 }
+=======
+// reason: toggleable button has box shadow on active
+.btn-group-toggle,
+.btn-group-toggle {
+  :not([class*='btn-outline-']) {
+    &.active,
+    &:active {
+      box-shadow: none;
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

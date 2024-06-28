@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vue2leaflet-map {
   height: 400px;
   z-index: 1;
@@ -18,3 +19,25 @@ html[dir='rtl'] {
     right: unset;
   }
 }
+=======
+.vue2leaflet-map {
+  height: 400px;
+  z-index: 1;
+}
+
+html[dir='rtl'] {
+  .leaflet-pane,
+  .leaflet-tile,
+  .leaflet-marker-icon,
+  .leaflet-marker-shadow,
+  .leaflet-tile-container,
+  .leaflet-pane > svg,
+  .leaflet-pane > canvas,
+  .leaflet-zoom-box,
+  .leaflet-image-layer,
+  .leaflet-layer {
+    left: 0;
+    right: unset;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ================================================================================================
 //   File Name: pallette-noui.scss
 //   Description: noui color system styles
@@ -28,3 +29,35 @@
     }
   }
 }
+=======
+// ================================================================================================
+//   File Name: pallette-noui.scss
+//   Description: noui color system styles
+//   ----------------------------------------------------------------------------------------------
+//   Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+//   Author: PIXINVENT
+//   Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+// Color palettes
+@import 'palette-variables';
+
+@each $color_name, $color in $colors {
+  @each $color_type, $color_value in $color {
+    @if $color_type == 'base' {
+      .slider-#{$color_name} {
+        background-color: rgba($color_value, 0.12);
+        .noUi-connect {
+          background: $color_value !important;
+        }
+        &.noUi-connect {
+          background: $color_value !important;
+        }
+        .noUi-handle {
+          border-color: $color_value !important;
+        }
+      }
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

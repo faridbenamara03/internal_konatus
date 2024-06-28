@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .b-form-datepicker,
 .b-form-timepicker {
   label {
@@ -22,3 +23,29 @@
     }
   }
 }
+=======
+.b-form-datepicker,
+.b-form-timepicker {
+  label {
+    line-height: 200%;
+  }
+
+  .btn {
+    &.h-auto {
+      padding: 0.375rem 0.75rem !important;
+    }
+    svg {
+      margin: 0 !important;
+    }
+  }
+  .form-control {
+    min-height: auto !important;
+  }
+  // text alignment in small
+  &.form-control-sm {
+    .form-control-sm {
+      line-height: 1.65;
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

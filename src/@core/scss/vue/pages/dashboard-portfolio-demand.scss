@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "~@core/scss/base/components/variables-dark";
 
 .portf-bold {
@@ -75,4 +76,83 @@
       }
     }
   }
+=======
+@import "~@core/scss/base/components/variables-dark";
+
+.portf-bold {
+  font-weight: bold;
+}
+.portf-sub-header-bg {
+  background-color: $theme-dark-table-active-bg;
+}
+.portf-uppercase {
+  text-transform: uppercase;
+}
+.portf-table-header {
+  font-size: 12px;
+  padding: 8px 16px;
+}
+.portf-table-row {
+  font-size: 15px;
+  padding: 16px;
+}
+.color-white {
+  color: white
+}
+.color-cyan {
+  color: #ADFFFA
+}
+.font-14 {
+  font-size: 14px !important;
+}
+.header-shadow-btm {
+  box-shadow: 0px 2px 4px 0px #00000040 inset;
+}
+.border-bottom-dm {
+  border-bottom: 1px solid $theme-dark-input-placeholder-color;
+}
+.row-header-bg {
+  background-color: $theme-dark-table-active-bg;
+}
+.border-sub-hd {
+  border-top: 1px solid $theme-dark-table-bg;
+}
+.border-btm-lgt {
+  border-bottom: 1px solid $theme-dark-table-bg;
+}
+.portf-demand-view {
+  overflow-x: auto;
+  background-color: $theme-dark-table-bg;
+  width: 100%;
+  .portf-row {
+    display: flex;
+    &.inner-sdw {
+      box-shadow: 0px 2px 4px 0px #00000040 inset;
+    }
+    .part1 {
+      width: 20%;
+      min-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .part2 {
+      display: flex;
+      width: 70%;
+      .data-child {
+        width: 300px;
+        text-align: end;
+      }
+    }
+    .part3 {
+      display: flex;
+      justify-content: end;
+      width: 10%;
+      min-width: 150px;
+        .data-child {
+        width: 30%;
+      }
+    }
+  }
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90
 }

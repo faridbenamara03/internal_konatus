@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "apps": [
     {
@@ -7,4 +8,15 @@
       "appName": "Konatus STAGE"
     }
   ]
+=======
+{
+  "apps": [
+    {
+      "serverURL": "https://konatus-be.quikfox-lab.com/parse",
+      "appId": "KONATUS-core-STAGE",
+      "masterKey": "F5d8nl7FvHZp",
+      "appName": "Konatus STAGE"
+    }
+  ]
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90
 }

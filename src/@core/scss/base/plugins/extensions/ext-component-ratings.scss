@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '../../bootstrap-extended/include'; // Bootstrap includes
 @import '../../components/include'; // Components includes
 
@@ -55,3 +56,62 @@
     }
   }
 }
+=======
+@import '../../bootstrap-extended/include'; // Bootstrap includes
+@import '../../components/include'; // Components includes
+
+.jq-ry-container:not(.multi-color-ratings) {
+  .jq-ry-normal-group {
+    i,
+    svg {
+      fill: $gray-100;
+    }
+  }
+  .jq-ry-rated-group {
+    i,
+    svg {
+      fill: $warning;
+    }
+  }
+}
+
+// Dark Layout
+.dark-layout {
+  .jq-ry-container:not(.multi-color-ratings) {
+    .jq-ry-normal-group {
+      i,
+      svg {
+        fill: $theme-dark-text-muted-color;
+      }
+    }
+  }
+}
+
+// RTL
+[data-textdirection='rtl'] {
+  .jq-ry-container:not(.multi-color-ratings) {
+    .jq-ry-normal-group {
+      i,
+      svg {
+        fill: $warning;
+      }
+    }
+    .jq-ry-rated-group {
+      i,
+      svg {
+        fill: $gray-100;
+      }
+    }
+  }
+  .dark-layout {
+    .jq-ry-container:not(.multi-color-ratings) {
+      .jq-ry-rated-group {
+        i,
+        svg {
+          fill: $theme-dark-text-muted-color;
+        }
+      }
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

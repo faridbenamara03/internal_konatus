@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Toasts
 
 .toast {
@@ -14,3 +15,21 @@
     left: 1rem;
   }
 }
+=======
+// Toasts
+
+.toast {
+  &.show {
+    z-index: 1030;
+  }
+  .close:focus {
+    outline: none;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .toast {
+    left: 1rem;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

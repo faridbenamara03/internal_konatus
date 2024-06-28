@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '~@core/scss/base/pages/page-auth.scss';
 .brand-logo {
   svg {
@@ -10,3 +11,17 @@ html[dir='rtl'] {
     transform: rotate(180deg);
   }
 }
+=======
+@import '~@core/scss/base/pages/page-auth.scss';
+.brand-logo {
+  svg {
+    height: 28px;
+    width: 40.95px;
+  }
+}
+html[dir='rtl'] {
+  svg.feather {
+    transform: rotate(180deg);
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

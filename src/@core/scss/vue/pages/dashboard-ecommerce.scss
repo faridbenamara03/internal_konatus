@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '~@core/scss/base/pages/dashboard-ecommerce.scss';
 
 .card-company-table {
@@ -8,3 +9,15 @@
     }
   }
 }
+=======
+@import '~@core/scss/base/pages/dashboard-ecommerce.scss';
+
+.card-company-table {
+  td {
+    .b-avatar.badge-light-company {
+      background-color: $body-bg;
+      margin-right: 2rem;
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

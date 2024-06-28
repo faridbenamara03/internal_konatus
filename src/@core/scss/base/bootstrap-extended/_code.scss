@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Inline code
 code {
   padding: 0.1rem 0.4rem;
@@ -12,3 +13,19 @@ pre {
     background-color: transparent !important;
   }
 }
+=======
+// Inline code
+code {
+  padding: 0.1rem 0.4rem;
+  font-size: 90%;
+  color: $code-color;
+  background-color: $kbd-bg;
+  @include border-radius($border-radius*0.5);
+}
+pre {
+  background-color: #f7f7f9;
+  code {
+    background-color: transparent !important;
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Override input's form-control style
 .b-form-spinbutton {
   &.form-control {
@@ -21,3 +22,28 @@
     }
   }
 }
+=======
+// Override input's form-control style
+.b-form-spinbutton {
+  &.form-control {
+    padding: 0;
+    &:focus,
+    &.focus {
+      border-color: $primary;
+      box-shadow: none;
+    }
+    &.is-valid,
+    &.is-invalid {
+      padding-right: calc(1.5em + 0.75rem);
+    }
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+    }
+  }
+  &.form-control-sm {
+    output > bdi {
+      height: 0.9rem;
+    }
+  }
+}
+>>>>>>> aa85b2205c988043e6b68b5c6fbf1f71671e5d90
