@@ -312,8 +312,8 @@ export default {
       this.restNewEstimatedData = 0
       this.accNewEstimatedData = 0
       this.durationDateEstimated = 0
-      this.selectedStartDate = newWE.start_date_estimated !== null && newWE.start_date_estimated !== undefined ? moment(newWE.start_date_estimated) : moment()
-      this.selectedEndDate = newWE.end_date_estimated !== null && newWE.end_date_estimated !== undefined ? moment(newWE.end_date_estimated) : moment()
+      this.selectedStartDate = newWE.start_date_estimated !== null && newWE.start_date_estimated !== undefined ? new Date(newWE.start_date_estimated) : new Date()
+      this.selectedEndDate = newWE.end_date_estimated !== null && newWE.end_date_estimated !== undefined ? new Date(newWE.end_date_estimated) : new Date()
       this.isAcc = 0
       this.isValid = false
       this.isDateValid = false
