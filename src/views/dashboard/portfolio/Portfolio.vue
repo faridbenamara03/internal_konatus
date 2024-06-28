@@ -704,7 +704,7 @@ export default {
       this.$refs.optimizeModal.$refs['my-modal'].show()
     },
     runPythonScript1() {
-      axios.get('http://localhost:8501/init')
+      axios.get('/api/init')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
@@ -714,7 +714,7 @@ export default {
       })
     },
     runPythonScript5() {
-      axios.get('http://localhost:8501/update_synch')
+      axios.get('/api/update_synch')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
@@ -725,7 +725,7 @@ export default {
     },
     runPythonScript2() {
       this.updateIndex = false
-      axios.get('http://localhost:8501/optimize')
+      axios.get('/api/optimize')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
@@ -735,7 +735,7 @@ export default {
       })
     },
     runPythonScript3() {
-      axios.get('http://localhost:8501/update_jira')
+      axios.get('/api/update_jira')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
@@ -745,7 +745,7 @@ export default {
       })
     },
     runPythonScript4() {
-      const downloadUrl = 'http://localhost:8501/download-csv'
+      const downloadUrl = '/api/download-csv'
 
       const link = document.createElement('a')
       link.href = downloadUrl

@@ -176,7 +176,7 @@ export default {
       this.$refs['my-modal'].hide()
     },
     csv() {
-    axios.get('http://localhost:8501/we-csv')
+    axios.get('/api/we-csv')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
@@ -190,7 +190,7 @@ export default {
     this.$refs['my-modal'].hide()
     },
     exportToCsv() {
-      const downloadUrl = 'http://localhost:8501/we-csv'
+      const downloadUrl = '/api/we-csv'
 
       const link = document.createElement('a')
       link.href = downloadUrl
@@ -202,7 +202,7 @@ export default {
       document.body.removeChild(link)
     },
     exportToJira() {
-    axios.get('http://localhost:8501/workelementjira')
+    axios.get('/api/workelementjira')
       .then(response => {
         console.log('Script output:', response.data.output)
         console.log('Script error:', response.data.error)
