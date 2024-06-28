@@ -15,15 +15,15 @@ module.exports = {
     port: 5000,
     proxy: {
       '/api': {
-        target: 'http://konatus.site:2301',
+        target: 'http://213.165.95.153:8501',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
-      },
+      },/*
       '/new-api': {
-      target: 'http://konatus.site:3000',
+      target: 'http://localhost:3000',
       changeOrigin: true,
       pathRewrite: { '^/new-api': '/api' }
-      },
+      },*/
       'new-base': {
         target: 'http://konatus.site:1003',
         changeOrigin: true,
