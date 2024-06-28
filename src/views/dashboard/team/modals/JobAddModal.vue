@@ -65,6 +65,10 @@ export default {
     orgaInfo: {
       type: Array,
       default: null,
+    },
+    fetchData: {
+      type: Function,
+      default: null,
     }
   },
   data() {
@@ -79,25 +83,12 @@ export default {
     async insertJob() {
       try {
         // Prepare the data for sending
-        const params = new URLSearchParams({
-          jobname: this.name,
+        const params = {
+          name: this.name,
           organization_id: this.orgaInfo[0].org_id
-        })
-
-        const response = await axios.post('', params)
-
-        // The response is automatically parsed as JSON
-        const { data } = response
-
-        // Check for a specific condition or handle generically if no 'success' element
-        // For example, let's check if there's a specific message key
-        if (data.message) {
-          console.log('Server Response:', data.message)
-          // Here, continue with any specific handling, such as updating the UI
-        } else {
-          console.error('Unexpected server response:', data)
-          // Handle unexpected response structure
         }
+        await axios.post('/new-base/job/insert', params)
+        await this.fetchData()
       } catch (error) {
         console.error('Error during job insertion:', error)
         // Handle connection errors or server response with a status code outside the 2xx range

@@ -65,7 +65,11 @@ export default {
     job: {
       type: Object,
       default: null,
-    }
+    },
+    fetchData: {
+      type: Function,
+      default: null,
+    },
   },
   data() {
     return {
@@ -83,21 +87,8 @@ export default {
           name: this.name,
           idjob: this.job.job_id
         }
-
-        const response = await axios.post('/new-base/skillset/add', params)
-
-        // The response is automatically parsed as JSON
-        const { data } = response
-
-        // Check for a specific condition or handle generically if no 'success' element
-        // For example, let's check if there's a specific message key
-        if (data.message) {
-          console.log('Server Response:', data.message)
-          // Here, continue with any specific handling, such as updating the UI
-        } else {
-          console.error('Unexpected server response:', data)
-          // Handle unexpected response structure
-        }
+        await axios.post('/new-base/skillset/add', params)
+        await this.fetchData()
       } catch (error) {
         console.error('Error during job insertion:', error)
         // Handle connection errors or server response with a status code outside the 2xx range

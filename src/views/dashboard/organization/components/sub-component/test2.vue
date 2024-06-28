@@ -52,7 +52,7 @@
           {{ unit.unit_name }}
         </div>
         <div class="number">
-          <div v-if="unit.teams.length>0 && unit.teams.length !== null">
+          <div v-if="unit.teams.length>0 && unit.teams[0].team_id !== null">
             {{ unit.teams.length }}
           </div>
           <div v-else>
@@ -84,7 +84,7 @@
           </b-button>
           <b-button
             class="blockButtonUnit"
-            @click="deleteRess()"
+            @click="deleteUnit(unit.unit_id)"
           >
             <img
               class="buttonStyleUnit"
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div
-        v-if="unit.teams.length>0"
+        v-if="unit.teams.length>0 && unit.teams[0].team_id !== null"
         class="children"
         :style="{ display: childrenVisible[index] ? 'flex' : 'none', flexDirection: 'column'}"
       >
@@ -110,7 +110,7 @@
             <b-button
               v-b-modal.modal-updateTeam
               class="blockButton"
-              @click="openUpdateTeamModal(teams)"
+              @click="openUpdateTeamModal(teams,unit)"
             >
               <img
                 class="buttonStyle"
@@ -120,7 +120,7 @@
             </b-button>
             <b-button
               class="blockButton"
-              @click="deleteRess()"
+              @click="deleteTeam(teams.team_id)"
             >
               <img
                 class="buttonStyle"
@@ -132,15 +132,22 @@
         </div>
       </div>
     </div>
-    <UnitAdd />
+    <UnitAdd
+      :orga-data="team"
+      :fetch-data-orga="fetchDataTeam"
+    />
     <UnitUpdate
       :selected-unit="selectedUnit"
+      :fetch-data-orga="fetchDataTeam"
     />
     <TeamAdd
       :selected-unit="selectedUnit"
+      :fetch-data-orga="fetchDataTeam"
     />
     <TeamUpdate
       :selected-team="selectedTeam"
+      :selected-unit="selectedUnit"
+      :fetch-data-orga="fetchDataTeam"
     />
   </div>
 </template>
@@ -184,7 +191,7 @@ export default {
                   unit_id: item.unit_id,
                   unit_name: item.unit_name,
                   unit_cost: item.unitcost, // assuming `unitcost` exists on all items
-                  organization_id: item.organisation_id,
+                  organization_id: item.organization_id,
                   organization_name: item.organization_name,
                   teams: []// This will hold all teams under this unit
               }
@@ -208,9 +215,9 @@ export default {
 
     async fetchDataTeam() {
       try {
-        const response = await axios.get('/new-api/unit_team_job')
+        const response = await axios.get('/new-base/organisationjob/data')
         console.log("retour server", response)
-        this.team = this.groupDataByUnitId(response.data.data)
+        this.team = this.groupDataByUnitId(response.data)
         this.childrenVisible = Array(this.team.length).fill(false)
           this.isClicked = Array(this.team.length).fill(false)
         console.log("retour team modifie", this.team)
@@ -229,8 +236,25 @@ export default {
     openAddTeamModal(unit) {
       this.selectedUnit = unit
     },
-    openUpdateTeamModal(team) {
+    openUpdateTeamModal(team, unit) {
       this.selectedTeam = team
+      this.selectedUnit = unit
+    },
+    async deleteTeam(teamId) {
+      try {
+        await axios.delete(`/new-base/team/delete/${teamId}`)
+        await this.fetchDataTeam()
+      } catch (error) {
+        console.error('Error fetching orga data', error)
+      }
+    },
+    async deleteUnit(unitId) {
+      try {
+        await axios.delete(`/new-base/unit/delete/${unitId}`)
+        await this.fetchDataTeam()
+      } catch (error) {
+        console.error('Error fetching orga data', error)
+      }
     },
   },
 }

@@ -63,14 +63,14 @@
               :key="skillIndex"
             >
               <div
-                v-if="skillset.skill_name && orgaInfo[0].opt_skillset == 0 "
+                v-if="skillset.skill_name && orgaInfo[0].opt_skillset == 1 "
                 class="content"
               >
                 Skill Name: {{ skillset.skill_name }}
                 <b-button
                   v-b-modal.modal-updateSkill
                   class="buttonBlock"
-                  @click="openUpdateSkillModal(skillset)"
+                  @click="openUpdateSkillModal(skillset,job)"
                 >
                   <img
                     class="logoStyleSkill"
@@ -80,7 +80,7 @@
                 </b-button>
                 <b-button
                   class="buttonBlockSkill"
-                  @click="deleteSkill(skillset.id)"
+                  @click="deleteSkill(skillset.skillset_id)"
                 >
                   <img
                     class="logoStyleSkill"
@@ -96,15 +96,21 @@
     </div>
     <JobAdd
       :orga-info="orgaInfo"
+      :fetch-data="fetchData"
     />
     <SkillAdd
       :job="selectedJob"
+      :fetch-data="fetchData"
     />
     <UpdateJob
       :job="selectedJob"
+      :fetch-data="fetchData"
+      :orga-info="orgaInfo"
     />
     <UpdateSkill
       :skill="selectSkill"
+      :fetch-data="fetchData"
+      :job="selectedJob"
     />
   </div>
 </template>
@@ -155,9 +161,9 @@ export default {
     },
     async fetchData() {
     try {
-      const response = await axios.get('/new-api/skillsets_jobs')
-      console.log("response brut", response.data.data)
-      this.groupedData = this.groupByJob(response.data.data)
+      const response = await axios.get('/new-base/skillset-job')
+      console.log("response brut", response.data)
+      this.groupedData = this.groupByJob(response.data)
       console.log("recup", this.groupedData) // Log grouped data
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -175,15 +181,15 @@ export default {
       }
       groups[item.job_id].skillsets.push({
         skill_name: item.skill_name,
-         skillset_id: item.skillset_id
+         skillset_id: item.id
       })
     })
     return Object.values(groups) // This will return an array with a single group if found
     },
     async fetchOrgaData() {
       try {
-        const response = await axios.get('/new-api/organisation')
-        this.orgaInfo = response.data.data
+        const response = await axios.get('/new-base/organisation/list')
+        this.orgaInfo = response.data
         console.log("orgaInfo", this.orgaInfo)
       } catch (error) {
         console.error('Error fetching orga data', error)
@@ -195,8 +201,25 @@ export default {
     openUpdateJobModal(job) {
       this.selectedJob = job
     },
-    openUpdateSkillModal(skill) {
+    openUpdateSkillModal(skill, job) {
       this.selectSkill = skill
+      this.selectedJob = job
+    },
+    async deleteSkill(skillId) {
+      try {
+        await axios.delete(`/new-base/skillset/delete/${skillId}`)
+        await this.fetchData()
+      } catch (error) {
+        console.error('Error fetching orga data', error)
+      }
+    },
+    async deleteJob(jobId) {
+      try {
+        await axios.delete(`/new-base/job/delete/${jobId}`)
+        await this.fetchData()
+      } catch (error) {
+        console.error('Error fetching orga data', error)
+      }
     },
   },
 }

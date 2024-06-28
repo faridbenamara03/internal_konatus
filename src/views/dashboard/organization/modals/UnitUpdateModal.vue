@@ -77,11 +77,17 @@ export default {
     selectedUnit: {
       type: Array,
       default: null,
-    }
+    },
+    fetchDataOrga: {
+      type: Function,
+      default: null,
+    },
   },
   data() {
     return {
       isOpen: false,
+      unit_cost: '',
+      name: '',
     }
   },
   methods: {
@@ -91,25 +97,13 @@ export default {
     async updateUnit() {
       try {
         // Prepare the data for sending
-        const params = new URLSearchParams({
+        const params = {
           name: this.name,
-          idjob: this.unit_cost
-        })
-
-        const response = await axios.post('', params)
-
-        // The response is automatically parsed as JSON
-        const { data } = response
-
-        // Check for a specific condition or handle generically if no 'success' element
-        // For example, let's check if there's a specific message key
-        if (data.message) {
-          console.log('Server Response:', data.message)
-          // Here, continue with any specific handling, such as updating the UI
-        } else {
-          console.error('Unexpected server response:', data)
-          // Handle unexpected response structure
+          organization_id: this.selectedUnit.organization_id,
+          h_cost_unit: this.unit_cost,
         }
+        await axios.put(`/new-base/unit/update/${this.selectedUnit.unit_id}`, params)
+        await this.fetchDataOrga()
       } catch (error) {
         console.error('Error during job insertion:', error)
         // Handle connection errors or server response with a status code outside the 2xx range
