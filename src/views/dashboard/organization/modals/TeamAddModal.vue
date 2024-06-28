@@ -49,16 +49,14 @@
           required
         />
       </b-form-group>
-
       <b-form-group
         label="Select a job"
         label-for="job"
       >
-        <b-form-input
+        <b-form-select
           id="job"
           v-model="job"
-          type="number"
-          placeholder="Enter a number"
+          :options="jobOptions"
           required
         />
       </b-form-group>
@@ -75,7 +73,7 @@
 
 <script>
 import {
- BFormGroup, BFormInput, BButton, BForm
+ BFormGroup, BFormInput, BButton, BForm, BFormSelect
 } from 'bootstrap-vue'
 import axios from 'axios'
 
@@ -85,12 +83,17 @@ export default {
     BFormInput,
     BFormGroup,
     BForm,
+    BFormSelect,
   },
   props: {
     selectedUnit: {
       type: Array,
       default: null,
-    }
+    },
+    fetchDataOrga: {
+      type: Function,
+      default: null,
+    },
   },
   data() {
     return {
@@ -98,34 +101,47 @@ export default {
       name: '',
       libelle: '',
       job: '',
+      list_job: null,
     }
   },
+  computed: {
+    jobOptions() {
+      return this.list_job ? this.list_job.map(job => ({ value: job.id, text: job.name })) : []
+    }
+  },
+  mounted() {
+    this.fetchJobList()
+  },
   methods: {
+    resetForm() {
+      this.name = ''
+      this.libelle = ''
+      this.job = ''
+    },
     closeModal() {
       this.isOpen = false
+    },
+    async fetchJobList() {
+      try {
+        const response = await axios.get('/new-base/job/list')
+        this.list_job = response.data
+        console.log("retour server", this.list_job)
+      } catch (error) {
+        console.error('Error fetching orga data', error)
+      }
     },
     async insertTeam() {
       try {
         // Prepare the data for sending
-        const params = new URLSearchParams({
+        const params = {
+          libelle: this.libelle,
           name: this.name,
-          idjob: this.unit_cost
-        })
-
-        const response = await axios.post('', params)
-
-        // The response is automatically parsed as JSON
-        const { data } = response
-
-        // Check for a specific condition or handle generically if no 'success' element
-        // For example, let's check if there's a specific message key
-        if (data.message) {
-          console.log('Server Response:', data.message)
-          // Here, continue with any specific handling, such as updating the UI
-        } else {
-          console.error('Unexpected server response:', data)
-          // Handle unexpected response structure
+          job: this.job,
+          unitid: this.selectedUnit.unit_id
         }
+        await axios.post('/new-base/team/insert', params)
+        await this.fetchDataOrga()
+       await this.resetForm()
       } catch (error) {
         console.error('Error during job insertion:', error)
         // Handle connection errors or server response with a status code outside the 2xx range
